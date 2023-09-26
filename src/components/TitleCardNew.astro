@@ -1,0 +1,78 @@
+---
+import PostMetadata from "./PostMetadata.astro";
+interface Props {
+    class: string;
+    entry: any;
+    title: string;
+    url: string;
+    pubDate: Date;
+    tags: string[];
+    categories: string[];
+    cover: string;
+    description: string;
+    words: number;
+}
+const { entry, title, url, pubDate, tags, categories, cover, description, words } = Astro.props;
+const className = Astro.props.class;
+// console.log(Astro.props);
+import ImageBox from "./misc/ImageBox.astro";
+import ButtonTag from "./control/ButtonTag.astro";
+import { Icon } from 'astro-icon/components';
+
+// tags = ['Foo', 'Bar', 'Baz', 'Qux', 'Quux'];
+
+// const cover = 'https://saicaca.github.io/vivia-preview/assets/79905307_p0.jpg';
+// cover = null;
+const hasCover = cover !== undefined && cover !== null && cover !== '';
+
+const coverWidth = "30%";
+
+const { remarkPluginFrontmatter } = await entry.render();
+
+---
+<div class:list={["card-base flex w-full rounded-[var(--radius-large)] overflow-hidden relative", className]}>
+    <div class:list={[" px-10 pt-7 pb-6 relative", {'w-full': !hasCover, "w-[calc(100%_-_var(--coverWidth))]": hasCover}]}>
+        <a href={url}
+           class="transition w-full block font-bold mb-3 text-4xl
+        text-black/90 dark:text-white/90
+        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:top-[38px] before:left-5
+        ">
+            {title}
+        </a>
+
+        <!-- metadata -->
+        <PostMetadata pubDate={pubDate} tags={tags} categories={categories} class="mb-4"></PostMetadata>
+
+        <div class="transition text-black/75 dark:text-white/75 mb-4">
+            { description }
+        </div>
+
+        <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition">
+            <div>{remarkPluginFrontmatter.words} words</div>
+            <div>|</div>
+            <div>{remarkPluginFrontmatter.minutes} minutes</div>
+        </div>
+
+    </div>
+
+    {hasCover && <a href={url}
+                    class=`group w-[var(--coverWidth)] absolute top-3 bottom-3 right-3 rounded-xl overflow-hidden`>
+        <div class="absolute z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition"></div>
+        <div class="absolute z-20 w-full h-full flex items-center justify-center ">
+            <Icon name="material-symbols:chevron-right-rounded"
+                  class="transition opacity-0 group-hover:opacity-100 text-white text-5xl"></Icon>
+        </div>
+        <ImageBox src="https://saicaca.github.io/vivia-preview/assets/79905307_p0.jpg"
+                  class="w-full h-full">
+        </ImageBox>
+    </a>}
+</div>
+
+<style lang="stylus" define:vars={{coverWidth}}>
+:root
+  --btn-enter-bg oklch(0.98 0.005 var(--hue))
+  --btn-enter-bg-dark oklch(0.2 0.02 var(--hue))
+
+</style>

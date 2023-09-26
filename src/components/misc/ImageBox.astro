@@ -1,0 +1,15 @@
+---
+interface Props {
+    id?: string
+    src: string;
+    class?: string;
+    alt?: string
+}
+const {id, src, alt} = Astro.props;
+const className = Astro.props.class;
+---
+<div class:list={[className, 'overflow-hidden relative']}>
+    <div class="transition absolute top-0 bottom-0 left-0 right-0 dark:bg-black/10 bg-opacity-50"></div>
+    <img src={src} alt={alt} class="w-full h-full object-center object-cover">
+</div>
+

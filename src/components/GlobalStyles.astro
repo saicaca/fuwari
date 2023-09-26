@@ -1,0 +1,92 @@
+---
+
+---
+
+<div>
+    <slot/>
+</div>
+
+<style is:global lang="stylus">
+
+/* utils */
+white(a)
+  rgba(255, 255, 255, a)
+
+black(a)
+  rgba(0, 0, 0, a)
+
+isOklch(c)
+  return substr(c, 0, 5) == 'oklch'
+
+oklch_fallback(c)
+  str = '' + c    // convert color value to string
+  if isOklch(str)
+    return convert(oklchToHex(str))
+  return c
+
+color_set(colors)
+  @supports (color: oklch(0 0 0))
+    :root
+      for key, value in colors
+        {key}: value[0]
+    :root.dark
+      for key, value in colors
+        if length(value) > 1
+          {key}: value[1]
+  /* provide fallback color for oklch */
+  @supports not (color: oklch(0 0 0))
+    :root
+      for key, value in colors
+        {key}: oklch_fallback(value[0])
+    :root.dark
+      for key, value in colors
+        if length(value) > 1
+          {key}: oklch_fallback(value[1])
+
+:root
+  --radius-large 16px
+
+  --banner-height-home 60vh
+  --banner-height 50vh
+
+color_set({
+  --primary: oklch(0.70 0.14 var(--hue))
+  --card-bg: white oklch(0.25 0.02 var(--hue))
+
+  --btn-content: oklch(0.55 0.12 var(--hue))
+
+  --btn-regular-bg: oklch(0.95 0.025 var(--hue)) oklch(0.38 0.04 var(--hue))
+
+  --btn-plain-bg-hover: oklch(0.95 0.025 var(--hue)) oklch(0.2 0.02 var(--hue))
+  --btn-plain-bg-active: oklch(0.98 0.01 var(--hue)) oklch(0.17 0.017 var(--hue))
+
+  --btn-card-bg-hover: oklch(0.96 0.015 var(--hue)) oklch(0.3 0.03 var(--hue))
+  --btn-card-bg-active: oklch(0.9 0.03 var(--hue)) oklch(0.35 0.035 var(--hue))
+
+  --deep-text: oklch(0.25 0.02 var(--hue))
+
+  --line-color: black(0.1) white(0.1)
+  --meta-divider: black(0.2) white(0.2)
+  --selection-bg: oklch(0.90 0.05 var(--hue)) oklch(0.40 0.08 var(--hue))
+})
+
+
+/* some global styles */
+::selection
+  background-color: var(--selection-bg)
+
+</style>
+<style is:global>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .card-base {
+        @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition;
+    }
+    h1, h2, h3, h4, h5, h6, p, a, span, li, ul, ol, blockquote, code, pre, table, th, td, strong {
+        @apply transition;
+    }
+}
+</style>

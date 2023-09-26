@@ -1,0 +1,18 @@
+---
+
+import WidgetLayout from "./WidgetLayout.astro";
+import ButtonTag from "../control/ButtonTag.astro";
+import {getTagList} from "../../utils/content-utils";
+
+const tags = await getTagList();
+
+---
+<WidgetLayout name="Tags">
+    <div class="flex gap-2 flex-wrap">
+        {tags.map(t => (
+            <ButtonTag href={`/archive/tag/${t.name}`}>
+                {t.name}
+            </ButtonTag>
+        ))}
+    </div>
+</WidgetLayout>

@@ -1,0 +1,41 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import TitleCard from "../../components/TitleCardNew.astro";
+import Pagination from "../../components/control/Pagination.astro";
+import {getPostUrlBySlug, getSortedPosts} from "../../utils/content-utils";
+import {getConfig} from "../../utils/config-utils";
+
+export async function getStaticPaths({ paginate }) {
+    // const allBlogPosts = await getCollection("posts");
+    const allBlogPosts = await getSortedPosts();
+    return paginate(allBlogPosts, { pageSize: 6 });
+}
+
+const {page} = Astro.props;
+
+// page.data.map(entry => console.log(entry));
+// console.log(page)
+
+// console.log(getConfig());
+
+---
+
+<!-- 显示当前页面。也可以使用 Astro.params.page -->
+<MainGridLayout>
+    <div class="flex flex-col gap-4 mb-4">
+        {page.data.map(entry =>
+            <TitleCard
+                entry={entry}
+                title={entry.data.title}
+                tags={entry.data.tags}
+                categories={entry.data.categories}
+                pubDate={entry.data.pubDate}
+                url={getPostUrlBySlug(entry.slug)}
+                cover={entry.data.cover}
+                description={entry.data.description}
+            ></TitleCard>
+        )}
+    </div>
+    <Pagination class="mx-auto" page={page}></Pagination>
+</MainGridLayout>

@@ -1,0 +1,16 @@
+---
+interface Props {
+    name: string;
+}
+
+const {name} = Astro.props;
+
+import BasicCard from "./BasicCard.astro";
+
+---
+
+<BasicCard >
+    <div class="p-4">
+        <div>{name}</div>
+    </div>
+</BasicCard>

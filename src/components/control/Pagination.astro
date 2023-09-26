@@ -1,0 +1,84 @@
+---
+import type { Page } from "astro";
+import { Icon } from 'astro-icon/components';
+interface Props {
+    page: Page;
+    class?: string;
+}
+
+const {page} = Astro.props;
+
+const HIDDEN = -1;
+
+const className = Astro.props.class;
+import Button from "./Button.astro";
+
+const ADJ_DIST = 2;
+const VISIBLE = ADJ_DIST * 2 + 1;
+
+// for test
+let count = 1;
+let l = page.currentPage, r = page.currentPage;
+while (0 < l - 1 && r + 1 <= page.lastPage && count + 2 <= VISIBLE) {
+    count += 2;
+    l--;
+    r++;
+}
+while (0 < l - 1 && count < VISIBLE) {
+    count++;
+    l--;
+}
+while (r + 1 <= page.lastPage && count < VISIBLE) {
+    count++;
+    r++;
+}
+
+let pages: number[] = [];
+if (l > 1)
+    pages.push(1);
+if (l == 3)
+    pages.push(2);
+if (l > 3)
+    pages.push(HIDDEN);
+for (let i = l; i <= r; i++)
+    pages.push(i);
+if (r < page.lastPage - 2)
+    pages.push(HIDDEN);
+if (r == page.lastPage - 2)
+    pages.push(page.lastPage - 1);
+if (r < page.lastPage)
+    pages.push(page.lastPage);
+
+const parts: string[] = page.url.current.split('/');
+const commonUrl: string = parts.slice(0, -1).join('/') + '/';
+---
+
+<div class:list={[className, "flex flex-row gap-3 justify-center"]}>
+    <a href={page.url.prev}>
+        <Button isIcon card iconName="material-symbols:chevron-left-rounded" class="text-[var(--primary)]" iconSize={28}
+                disabled = {page.url.prev == undefined}
+        ></Button>
+    </a>
+    <div class="bg-[var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 font-bold">
+        {pages.map((p) => {
+            if (p == HIDDEN)
+                return <Icon name="material-symbols:more-horiz" class="mx-1"/>;
+            if (p == page.currentPage)
+                return <div class="h-[44px] w-[44px] rounded-lg bg-[var(--primary)] flex items-center justify-center
+                    font-bold text-white dark:text-black/70"
+                >
+                    {p}
+                </div>
+            return <a href={commonUrl + p}>
+                <Button card iconName="material-symbols:chevron-left-rounded" height="44px" width="44px">
+                    {p}
+                </Button>
+            </a>
+        })}
+    </div>
+    <a href={page.url.next}>
+        <Button isIcon card iconName="material-symbols:chevron-right-rounded" class="text-[var(--primary)]" iconSize={28}
+                disabled = {page.url.next == undefined}
+        ></Button>
+    </a>
+</div>

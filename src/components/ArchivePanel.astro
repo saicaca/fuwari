@@ -1,0 +1,121 @@
+---
+interface Props {
+    keyword: string;
+    tags: string[];
+    categories: string[];
+}
+const { keyword, tags, categories} = Astro.props;
+
+import Button from "./control/Button.astro";
+import {getPostUrlBySlug, getSortedPosts} from "../utils/content-utils";
+
+let posts = await getSortedPosts()
+
+if (Array.isArray(tags) && tags.length > 0) {
+    posts = posts.filter(post =>
+        Array.isArray(post.data.tags) && post.data.tags.some(tag => tags.includes(tag))
+    );
+}
+
+if (Array.isArray(categories) && categories.length > 0) {
+    posts = posts.filter(post =>
+        Array.isArray(post.data.categories) && post.data.categories.some(category => categories.includes(category))
+    );
+}
+
+const groups = function () {
+    const groupedPosts = posts.reduce((grouped, post) => {
+        const year = post.data.pubDate.getFullYear()
+        if (!grouped[year]) {
+            grouped[year] = []
+        }
+        grouped[year].push(post)
+        return grouped
+    }, {})
+
+    // convert the object to an array
+    const groupedPostsArray = Object.keys(groupedPosts).map(key => ({
+        year: key,
+        posts: groupedPosts[key]
+    }))
+
+    // sort years by latest first
+    groupedPostsArray.sort((a, b) => b.year - a.year)
+    return groupedPostsArray;
+}();
+
+function formatDate(date: Date) {
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${month}-${day}`;
+}
+
+
+// console.log(groups)
+
+
+---
+
+<div class="card-base px-8 py-6">
+    {
+        groups.map(group => (
+                <div>
+                    <div class="flex flex-row w-full items-center h-[60px]">
+                        <div class="w-[10%] transition text-2xl font-bold text-right text-black/75 dark:text-white/75">{group.year}</div>
+                        <div class="w-[10%]">
+                            <div class="h-3 w-3 bg-none rounded-full outline outline-[var(--primary)] mx-auto -outline-offset-[2px] z-50 outline-3"></div>
+                        </div>
+                        <div class="w-[80%] transition text-left text-black/50 dark:text-white/50">{group.posts.length} Articles</div>
+                    </div>
+                    {group.posts.map(post => (
+                            <a href={getPostUrlBySlug(post.slug)} class="group">
+                                <Button light height="40px" class="w-full hover:text-[initial]">
+                                    <div class="flex flex-row justify-start items-center h-full">
+                                        <!-- date -->
+                                        <div class="w-[10%] transition text-sm text-right text-black/50 dark:text-white/50">{formatDate(post.data.pubDate)}</div>
+                                        <!-- dot and line -->
+                                        <div class="w-[10%] relative dash-line h-full flex items-center">
+                                            <div class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
+                                            bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
+                                            outline outline-4 z-50
+                                            outline-[var(--card-bg)]
+                                            group-hover:outline-[var(--btn-plain-bg-hover)]
+                                            group-active:outline-[var(--btn-plain-bg-active)]
+                                            "
+                                            ></div>
+                                        </div>
+                                        <!-- post title -->
+                                        <div class="max-w-[65%] w-[65%] transition text-left font-bold">
+                                            <div class="group-hover:ml-1 transition-all group-hover:text-[var(--primary)]
+                                            text-black/80 dark:text-white/80 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden">
+                                                {post.data.title}
+                                            </div>
+                                        </div>
+                                        <!-- tag list -->
+                                        <div class="w-[15%] text-left text-sm transition
+                                        whitespace-nowrap overflow-ellipsis overflow-hidden
+                                        text-black/30 dark:text-white/30"
+                                        >#Test #Markdown</div>
+                                    </div>
+                                </Button>
+                            </a>
+                    ))}
+                </div>
+        ))
+    }
+</div>
+
+<style>
+    @tailwind components;
+    @tailwind utilities;
+
+    @layer components {
+        .dash-line {
+        }
+        .dash-line::before {
+            content: "";
+            @apply w-[10%] h-full absolute -top-1/2 left-[calc(50%_-_1px)] -top-[50%] border-l-[2px]
+            border-dashed pointer-events-none border-[var(--line-color)] transition
+        }
+    }
+</style>

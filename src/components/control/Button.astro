@@ -1,0 +1,77 @@
+---
+interface Props {
+    id?: string;
+    isIcon?: boolean;
+    iconName?: string;
+    width?: string;
+    height?: string;
+    regular?: boolean;
+    light?: boolean
+    card?: boolean;
+    iconSize?: number,
+    class?: string
+    disabled?: boolean
+}
+const props = Astro.props;
+const {
+    id,
+    isIcon = false,
+    iconName,
+    width,
+    height = '44px',
+    regular,
+    light,
+    iconSize = 24,
+    card,
+    disabled = false,
+} = Astro.props;
+const className = Astro.props.class;
+import { Icon } from 'astro-icon/components';
+---
+
+<button id={id}
+        disabled={disabled}
+    class:list={[
+    className,
+    `
+    rounded-lg
+    transition
+    h-[var(--height)]
+    `,
+    {
+        'w-[var(--width)]': width,
+        'w-[var(--height)]': isIcon,
+
+        'bg-none': light,
+        'hover:bg-[var(--btn-plain-bg-hover)]': light,
+        'active:bg-[var(--btn-plain-bg-active)]': light,
+        'text-neutral-900': light,
+        'hover:text-[var(--primary)]': light,
+
+        'dark:text-neutral-300': light || regular,
+        'dark:hover:text-[var(--primary)]': light,
+
+        'bg-[var(--btn-regular-bg)]': regular,
+        'hover:bg-[oklch(0.9_0.05_var(--hue))]': regular,
+        'active:bg-[oklch(0.85_0.08_var(--hue))]': regular,
+        'text-[var(--btn-content)]': regular,
+
+        'dark:bg-[oklch(0.38_0.04_var(--hue))]': regular,
+        'dark:hover:bg-[oklch(0.45_0.045_var(--hue))]': regular,
+        'dark:active:bg-[oklch(0.5_0.05_var(--hue))]': regular,
+
+        'card-base': card,
+        'enabled:hover:bg-[var(--btn-card-bg-hover)]': card,
+        'enabled:active:bg-[var(--btn-card-bg-active)]': card,
+        'disabled:text-black/10': card,
+        'disabled:dark:text-white/10': card,
+    }
+]}
+>
+    {props.isIcon && <Icon class="mx-auto" name={props.iconName} size={iconSize}></Icon> }
+    <slot />
+</button>
+
+<style define:vars={{ height, width, iconSize }}>
+
+</style>

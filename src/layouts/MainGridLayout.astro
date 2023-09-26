@@ -1,0 +1,60 @@
+---
+import Layout from "./Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import SideBar from "../components/widget/SideBar.astro";
+import {pathsEqual} from "../utils/url-utils";
+
+interface Props {
+    title: string;
+    banner: string;
+}
+
+const { title, banner } = Astro.props;
+
+const isHomePage = pathsEqual(Astro.url.pathname, '/') || pathsEqual(Astro.url.pathname, '/page/1');
+
+const pageWidth = "1200px";
+const sidebarWidth = "280px";
+
+---
+<Layout title={title} banner={banner}>
+<div class=`max-w-[1200px] grid grid-cols-[280px_auto] grid-auto-rows-[auto] mx-auto gap-4 relative`
+     transition:animate="none"
+>
+    <div id="top-row" class="col-span-2 grid-rows-1" class:list={{
+        'min-h-[calc(var(--banner-height-home)_-_72px)]': isHomePage,
+        'min-h-[calc(var(--banner-height)_-_72px)]': !isHomePage}}
+    >
+        <Navbar transition:animate="fade" transition:persist></Navbar>
+    </div>
+    <SideBar class="max-w-[280px] col-span-1 grid-rows-2" transition:persist></SideBar>
+
+    <div class="grid-rows-2 grid-cols-2 overflow-hidden" transition:animate="slide">
+        <!-- the overflow-hidden here prevent long text break the layout-->
+        <slot></slot>
+    </div>
+
+</div>
+</Layout>
+
+<style>
+#top-row {
+    view-transition-name: rrrr;
+}
+/* i don't know how this work*/
+html::view-transition-old(rrrr) {
+    mix-blend-mode: normal;
+    animation: none;
+    height: auto;
+    overflow: clip;
+    object-fit: none;
+}
+html::view-transition-new(rrrr) {
+    mix-blend-mode: normal;
+    animation: none;
+    height: auto;
+    overflow: clip;
+    object-fit: none;
+}
+
+</style>

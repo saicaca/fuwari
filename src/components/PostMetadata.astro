@@ -1,0 +1,78 @@
+---
+import {formatDateToYYYYMMDD} from "../utils/date-utils";
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+    class: string;
+    pubDate: Date;
+    tags: string[];
+    categories: string[];
+}
+const {pubDate, tags, categories} = Astro.props;
+const className = Astro.props.class;
+---
+
+<div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-3", className]}>
+    <!-- publish date -->
+    <div class="flex items-center">
+        <div class="meta-icon"
+        >
+            <Icon name="material-symbols:calendar-today-outline-rounded" class="text-xl"></Icon>
+        </div>
+        <span class="text-black/50 dark:text-white/50 text-sm font-medium">{formatDateToYYYYMMDD(pubDate)}</span>
+    </div>
+
+    <!-- categories -->
+    <div class="flex items-center">
+        <div class="meta-icon"
+        >
+            <Icon name="material-symbols:menu-rounded" class="text-xl"></Icon>
+        </div>
+        <div class="flex flex-row">
+            {categories && categories.map(category => <div
+                    class="with-divider"
+            >
+                <a href=`/archive/category/${category}`
+                   class="transition text-black/50 dark:text-white/50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)]">
+                    {category}
+                </a>
+            </div>)}
+            {!categories && <div class="transition text-black/50 dark:text-white/50 text-sm font-medium">Uncategorized</div>}
+        </div>
+    </div>
+
+    <!-- tags -->
+    <div class="flex items-center">
+        <div class="meta-icon"
+        >
+            <Icon name="material-symbols:tag-rounded" class="text-xl"></Icon>
+        </div>
+        <div class="flex flex-row">
+            {tags.map(tag => <div
+                    class="with-divider"
+            >
+                <a href=`/archive/tag/${tag}`
+                   class="transition text-black/50 dark:text-white/50 text-sm font-medium
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)]">
+                    {tag}
+                </a>
+            </div>)}
+        </div>
+    </div>
+</div>
+
+<style>
+@tailwind components;
+
+@layer components {
+    .meta-icon {
+        @apply w-8 h-8 transition rounded-md flex items-center justify-center bg-[var(--btn-regular-bg)]
+        text-[var(--btn-content)] dark:text-[var(--primary)] mr-2
+    }
+    .with-divider {
+        @apply before:content-['/'] before:mx-[6px] before:text-[var(--meta-divider)] before:text-sm
+        before:font-medium before:first-of-type:hidden before:transition
+    }
+}
+</style>

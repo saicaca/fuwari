@@ -1,0 +1,191 @@
+---
+import GlobalStyles from "../components/GlobalStyles.astro";
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import { ViewTransitions } from 'astro:transitions';
+import ImageBox from "../components/misc/ImageBox.astro";
+
+import { fade } from 'astro:transitions';
+import {getConfig} from "../utils/config-utils";
+import {pathsEqual} from "../utils/url-utils";
+
+interface Props {
+	title: string;
+	banner: string;
+}
+
+let { title, banner } = Astro.props;
+
+const isHomePage = pathsEqual(Astro.url.pathname, '/') || pathsEqual(Astro.url.pathname, '/page/1');
+
+const testPathName = Astro.url.pathname;
+
+const anim = {
+	old: {
+		name: 'fadeIn',
+		duration: '4s',
+		easing: 'linear',
+		fillMode: 'forwards',
+		mixBlendMode: 'normal',
+	},
+	new: {
+		name: 'fadeOut',
+		duration: '4s',
+		easing: 'linear',
+		fillMode: 'backwards',
+		mixBlendMode: 'normal',
+	}
+};
+
+const myFade = {
+	forwards: anim,
+	backwards: anim,
+};
+
+// defines global css variables
+// why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
+const viConf = getConfig();
+const hue = viConf.appearance.hue;
+if (!banner || typeof banner !== 'string' || banner.trim() === '') {
+	banner = viConf.banner.url;
+}
+
+---
+
+<!DOCTYPE html>
+<html lang="en" isHome={isHomePage} pathname={testPathName}>
+	<head>
+		<ViewTransitions />
+
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description">
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-32.png" sizes="32x32">
+		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-128.png" sizes="128x128">
+		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-180.png" sizes="180x180">
+		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-192.png" sizes="192x192">
+		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-32.png" sizes="32x32">
+		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-128.png" sizes="128x128">
+		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-180.png" sizes="180x180">
+		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-192.png" sizes="192x192">
+
+		<style define:vars={{ hue }}></style>  <!-- defines global css variables -->
+
+		<title>{title}</title>
+	</head>
+	<body class="bg-[oklch(0.95_0.01_var(--hue))] dark:bg-[oklch(0.16_0.014_var(--hue))] min-h-screen transition">
+		<GlobalStyles>
+		<div class="absolute w-full"
+			 class:list={{'banner-home': isHomePage, 'banner-else': !isHomePage}}
+			 id="banner-wrapper"
+		>
+			<!-- TODO the transition here is not correct -->
+			<ImageBox id="boxtest" class="object-center object-cover h-full"
+					  src={banner} transition:animate="fade"
+			>
+			</ImageBox>
+		</div>
+		<slot />
+		</GlobalStyles>
+	</body>
+</html>
+<style is:global>
+	:root {
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
+
+		--page-width: 1200px;
+	}
+	html {
+		background: #13151A;
+		background-size: 224px;
+	}
+	code {
+		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+			Bitstream Vera Sans Mono, Courier New, monospace;
+	}
+</style>
+<style>
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.banner-home {
+		@apply h-[var(--banner-height-home)]
+	}
+	.banner-else {
+		@apply h-[var(--banner-height)]
+	}
+}
+
+#banner-wrapper {
+	view-transition-name: banner-ani;
+}
+/* i don't know how this work*/
+html::view-transition-old(banner-ani) {
+	mix-blend-mode: normal;
+	animation: none;
+	height: 100%;
+	overflow: clip;
+	object-fit: none;
+}
+html::view-transition-new(banner-ani) {
+	mix-blend-mode: normal;
+	animation: none;
+	height: 100%;
+	overflow: clip;
+	object-fit: none;
+}
+
+
+
+.banner-home {
+
+}
+</style>
+<script>
+/* Preload fonts */
+// (async function() {
+// 	try {
+// 		await Promise.all([
+// 			document.fonts.load("400 1em Roboto"),
+// 			document.fonts.load("700 1em Roboto"),
+// 		]);
+// 		document.body.classList.remove("hidden");
+// 	} catch (error) {
+// 		console.log("Failed to load fonts:", error);
+// 	}
+// })();
+
+function loadTheme() {
+	if (localStorage.theme === 'dark' || (!('theme' in localStorage) &&
+		window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+		document.documentElement.classList.add('dark');
+	} else {
+		document.documentElement.classList.remove('dark');
+	}
+}
+loadTheme();
+
+function setBannerHeight() {
+	const banner = document.getElementById('banner-wrapper');
+	if (document.documentElement.hasAttribute('isHome')) {
+		banner.classList.remove('banner-else');
+		banner.classList.add('banner-home');
+	} else {
+		banner.classList.remove('banner-home');
+		banner.classList.add('banner-else');
+	}
+}
+
+/* Load light/dark mode setting */
+/* astro:after-swap event happened before swap animation */
+document.addEventListener('astro:after-swap', () => {
+	setBannerHeight();
+	loadTheme();
+}, { once: false });
+</script>

@@ -1,0 +1,83 @@
+---
+import {formatDateToYYYYMMDD} from "../utils/date-utils";
+interface Props {
+    title: string;
+    url: string;
+    pubDate: Date;
+    tags: string[];
+    cover: string;
+    description: string;
+    words: number;
+}
+const { title, url, pubDate, tags, cover, description, words } = Astro.props;
+// console.log(Astro.props);
+import ImageBox from "./misc/ImageBox.astro";
+import ButtonTag from "./control/ButtonTag.astro";
+import { Icon } from 'astro-icon/components';
+
+// tags = ['Foo', 'Bar', 'Baz', 'Qux', 'Quux'];
+
+// const cover = 'https://saicaca.github.io/vivia-preview/assets/79905307_p0.jpg';
+// cover = null;
+const hasCover = cover !== undefined && cover !== null && cover !== '';
+
+
+---
+<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
+    <div class:list={["card-base z-30 px-8 py-6 relative ",
+        {
+            'w-[calc(70%_+_var(--radius-large))]': hasCover,
+            'w-[calc(100%_-_76px_+_var(--radius-large))]': !hasCover,
+        }
+    ]}>
+        <a href={url}
+            class="transition w-full block font-bold mb-1 text-3xl
+            text-neutral-900 dark:text-neutral-100
+            hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+            before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+            before:absolute before:top-8 before:left-4
+            ">
+            This is a very long title
+        </a>
+        <div class="flex text-neutral-500 dark:text-neutral-400 items-center mb-1">
+            <div>{formatDateToYYYYMMDD(pubDate)}</div>
+            <div class="transition h-1 w-1 rounded-sm bg-neutral-400 dark:bg-neutral-600 mx-3"></div>
+            <div>Uncategorized</div>
+            <div class="transition h-1 w-1 rounded-sm bg-neutral-400 dark:bg-neutral-600 mx-3"></div>
+            <div>{words} words</div>
+        </div>
+        <div class="flex gap-2 mb-4">
+            {tags.map(t => (
+                    <ButtonTag dot>{t}</ButtonTag>
+            ))}
+        </div>
+        <div class="transition text-neutral-700 dark:text-neutral-300">This is the description of the article</div>
+
+    </div>
+    {!hasCover && <a href={url}
+        class="transition w-[72px]
+        bg-[var(--btn-enter-bg)] dark:bg-[var(--btn-enter-bg-dark)]
+        hover:bg-[var(--btn-card-bg-hover)] active:bg-[var(--btn-card-bg-active)]
+        absolute top-0 bottom-0 right-0 flex items-center">
+        <Icon name="material-symbols:chevron-right-rounded"
+              class="transition text-4xl text-[var(--primary)] ml-[22px]"></Icon>
+    </a>}
+
+    {hasCover && <a href={url}
+        class="group w-[30%] absolute top-0 bottom-0 right-0">
+        <div class="absolute z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition"></div>
+        <div class="absolute z-20 w-full h-full flex items-center justify-center ">
+            <Icon name="material-symbols:chevron-right-rounded"
+                  class="transition opacity-0 group-hover:opacity-100 text-white text-5xl"></Icon>
+        </div>
+        <ImageBox src="https://saicaca.github.io/vivia-preview/assets/79905307_p0.jpg"
+            class="w-full h-full">
+        </ImageBox>
+    </a>}
+</div>
+
+<style lang="stylus">
+:root
+  --btn-enter-bg oklch(0.98 0.005 var(--hue))
+  --btn-enter-bg-dark oklch(0.2 0.02 var(--hue))
+</style>

@@ -1,0 +1,18 @@
+---
+import WidgetLayout from "./WidgetLayout.astro";
+import ButtonLink from "../control/ButtonLink.astro";
+import {getPostUrlBySlug, getSortedPosts} from "../../utils/content-utils";
+
+let posts = await getSortedPosts()
+
+const LIMIT = 5;
+
+posts = posts.slice(0, LIMIT)
+
+// console.log(posts)
+---
+<WidgetLayout name="Recent Posts">
+    {posts.map(post =>
+        <ButtonLink url={getPostUrlBySlug(post.slug)}>{post.data.title}</ButtonLink>
+    )}
+</WidgetLayout>

@@ -1,0 +1,35 @@
+---
+
+import {getSortedPosts} from "../../../utils/content-utils";
+import MainGridLayout from "../../../layouts/MainGridLayout.astro";
+import ArchivePanel from "../../../components/ArchivePanel.astro";
+
+
+export async function getStaticPaths() {
+    let posts = await getSortedPosts()
+
+    const allCategories = posts.reduce((acc, post) => {
+        if (!Array.isArray(post.data.categories))
+            return acc;
+        post.data.categories.forEach(category => acc.add(category));
+        return acc;
+    }, new Set());
+
+    const allCategoriesArray = Array.from(allCategories);
+
+    return allCategoriesArray.map(category => {
+        return {
+            params: {
+                category: category
+            }
+        }
+    });
+}
+
+const { category } = Astro.params;
+
+---
+
+<MainGridLayout>
+    <ArchivePanel categories={[category]}></ArchivePanel>
+</MainGridLayout>

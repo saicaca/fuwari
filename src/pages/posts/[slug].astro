@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import ButtonTag from "../../components/control/ButtonTag.astro";
+import ImageBox from "../../components/misc/ImageBox.astro";
+import {Icon} from "astro-icon/components";
+import {formatDateToYYYYMMDD} from "../../utils/date-utils";
+import PostMetadata from "../../components/PostMetadata.astro";
+// 1. 为每个集合条目生成一个新路径
+
+
+export async function getStaticPaths() {
+    const blogEntries = await getCollection('posts');
+    return blogEntries.map(entry => ({
+        params: { slug: entry.slug }, props: { entry },
+    }));
+}
+// 2. 当渲染的时候，你可以直接从属性中得到条目
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const { remarkPluginFrontmatter } = await entry.render();
+
+
+---
+<MainGridLayout banner={entry.data.cover}>
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
+        <div class:list={["card-base z-10 px-9 py-6 relative w-full ",
+            {}
+        ]}>
+            <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition">
+                <div class="flex flex-row items-center">
+                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/5 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+                        <Icon name="material-symbols:notes-rounded"></Icon>
+                    </div>
+                    <div class="text-sm">{remarkPluginFrontmatter.words} words</div>
+                </div>
+                <div class="flex flex-row items-center">
+                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/5 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+                        <Icon name="material-symbols:schedule-outline-rounded"></Icon>
+                    </div>
+                    <div class="text-sm">{remarkPluginFrontmatter.minutes} minutes</div>
+                </div>
+            </div>
+            <div class="relative">
+                <div
+                        class="transition w-full block font-bold mb-3 text-4xl
+                text-black/90 dark:text-white/90
+                before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+                before:absolute before:top-[10px] before:left-[-18px]
+                ">
+                    {entry.data.title}
+                </div>
+            </div>
+            <PostMetadata
+                    class="mb-5"
+                    pubDate={entry.data.pubDate}
+                    tags={entry.data.tags}
+                    categories={entry.data.categories}
+            ></PostMetadata>
+
+            <div class="border-b-black/8 dark:border-b-white/8 border-dashed border-b-[1px] mb-5"></div>
+
+            <div class="prose dark:prose-invert max-w-none prose-h1:text-3xl">
+                <Content />
+            </div>
+
+
+        </div>
+
+    </div>
+
+</MainGridLayout>

@@ -1,0 +1,60 @@
+---
+import Button from "./control/Button.astro";
+import { Icon } from 'astro-icon/components';
+const className = Astro.props.class;
+---
+<div class:list={[
+    className,
+    "card-base max-w-[var(--page-width)] h-[72px] rounded-t-none mx-auto flex items-center justify-between px-4"]}>
+    <a href="/"><Button height="52px" class="px-5 font-bold" light>
+        <div class="flex flex-row text-[var(--primary)] items-center text-md">
+            <Icon name="material-symbols:home-outline-rounded" size={28} class="mb-1 mr-2" />
+            <div class="top-2"></div>Vivia Preview
+        </div>
+    </Button></a>
+    <div>
+        <a href="/"><Button light class="font-bold px-5">Home</Button></a>
+        <a href="/archive"><Button light class="font-bold px-5">Archive</Button></a>
+        <Button light class="font-bold px-5">About</Button>
+    </div>
+    <div>
+        <Button id="scheme-switch" iconName="material-symbols:wb-sunny-outline-rounded" iconSize={20} isIcon light></Button>
+    </div>
+
+</div>
+
+<style lang="stylus">
+</style>
+
+<script>
+
+function switchTheme() {
+    if (localStorage.theme === 'dark') {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+    } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+    }
+}
+
+function loadThemeSwitchScript() {
+    let switchBtn = document.getElementById("scheme-switch");
+    if (switchBtn === null) {
+        console.log("test")
+    }
+    switchBtn.addEventListener("click", function () {
+        console.log("test")
+        switchTheme()
+    });
+}
+
+loadThemeSwitchScript();
+
+document.addEventListener('astro:after-swap', () => {
+    loadThemeSwitchScript();
+}, { once: false });
+
+
+
+</script>

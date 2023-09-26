@@ -1,0 +1,20 @@
+appearance:
+  hue: 290
+
+banner:
+  url: https://saicaca.github.io/vivia-preview/assets/banner.jpg
+
+profile:
+  avatar: https://saicaca.github.io/vivia-preview/assets/avatar.jpg
+  author: Your Name
+  subtitle: This is the subtitle
+  links:
+  - name: Twitter
+    icon: fa6-brands:twitter
+    url: https://twitter.com
+  - name: Steam
+    icon: fa6-brands:steam
+    url: https://store.steampowered.com
+  - name: GitHub
+    icon: fa6-brands:github
+    url: https://github.com
