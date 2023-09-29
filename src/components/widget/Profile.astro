@@ -11,7 +11,7 @@ const vConf = getConfig();
 
 ---
 <div class="card-base" transition:persist>
-    <ImageBox src={vConf.profile.avatar} class="w-full rounded-2xl mb-3"></ImageBox>
+    <ImageBox src={vConf.profile.avatar} class="w-[240px] mt-4 mx-auto lg:w-full lg:mt-0 rounded-2xl mb-3"></ImageBox>
     <div class="font-bold text-lg text-center mb-1 dark:text-neutral-50 transition">{vConf.profile.author}</div>
     <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-3 transition"></div>
     <div class="text-center text-neutral-400 mb-2 transition">{vConf.profile.subtitle}</div>

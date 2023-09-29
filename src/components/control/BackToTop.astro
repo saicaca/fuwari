@@ -1,0 +1,59 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from "./Button.astro";
+---
+
+<!-- There can't be a filter on parent element, or it will break `fixed` -->
+<div class="back-to-top-wrapper" transition:persist>
+    <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden" onclick="topFunction()">
+        <Button card height="60px" width="60px">
+            <Icon name="material-symbols:keyboard-arrow-up-rounded" class="mx-auto"></Icon>
+        </Button>
+    </div>
+</div>
+
+
+
+<style lang="stylus">
+.back-to-top-wrapper
+    width: 60px
+    height: 60px
+    position: absolute
+    right: -84px
+    top: 0
+
+.back-to-top-btn
+    color: var(--primary)
+    font-size: 36px
+    font-weight: bold
+    border: none
+    position: fixed
+    bottom: 240px
+    opacity: 1
+    cursor: pointer
+    i
+        font-size: 28px
+    &.hide
+        transform: scale(0.9)
+        opacity: 0
+        pointer-events: none
+
+</style>
+
+<script is:raw>
+
+function topFunction() {
+    window.scroll({ top: 0, behavior: 'smooth' });
+}
+function scrollFunction() {
+    let btn = document.getElementById('back-to-top-btn');
+    if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+        btn.classList.remove('hide')
+    } else {
+        btn.classList.add('hide')
+    }
+}
+window.onscroll = function() {
+    scrollFunction();
+}
+</script>

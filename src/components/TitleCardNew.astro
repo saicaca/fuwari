@@ -30,14 +30,14 @@ const coverWidth = "30%";
 const { remarkPluginFrontmatter } = await entry.render();
 
 ---
-<div class:list={["card-base flex w-full rounded-[var(--radius-large)] overflow-hidden relative", className]}>
-    <div class:list={[" px-10 pt-7 pb-6 relative", {'w-full': !hasCover, "w-[calc(100%_-_var(--coverWidth))]": hasCover}]}>
+<div class:list={["card-base flex flex-col-reverse lg:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative", className]}>
+    <div class:list={[" px-10 pt-4 lg:pt-7 pb-6 relative", {'w-full': !hasCover, "w-full lg:w-[calc(100%_-_var(--coverWidth))]": hasCover}]}>
         <a href={url}
            class="transition w-full block font-bold mb-3 text-4xl
         text-black/90 dark:text-white/90
         hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
         before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
-        before:absolute before:top-[38px] before:left-5
+        before:absolute before:top-[26px] lg:before:top-[38px] before:left-5
         ">
             {title}
         </a>
@@ -58,7 +58,10 @@ const { remarkPluginFrontmatter } = await entry.render();
     </div>
 
     {hasCover && <a href={url}
-                    class=`group w-[var(--coverWidth)] absolute top-3 bottom-3 right-3 rounded-xl overflow-hidden`>
+                    class:list={["group",
+                        "max-h-[20vh] lg:max-h-none mx-4 mt-4 lg:mx-0 lg:mt-0",
+                        "lg:w-[var(--coverWidth)] relative lg:absolute lg:top-3 lg:bottom-3 lg:right-3 rounded-xl overflow-hidden"
+                    ]} >
         <div class="absolute z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition"></div>
         <div class="absolute z-20 w-full h-full flex items-center justify-center ">
             <Icon name="material-symbols:chevron-right-rounded"

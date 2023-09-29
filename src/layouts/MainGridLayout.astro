@@ -3,6 +3,8 @@ import Layout from "./Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import SideBar from "../components/widget/SideBar.astro";
 import {pathsEqual} from "../utils/url-utils";
+import Footer from "../components/Footer.astro";
+import BackToTop from "../components/control/BackToTop.astro";
 
 interface Props {
     title: string;
@@ -18,7 +20,7 @@ const sidebarWidth = "280px";
 
 ---
 <Layout title={title} banner={banner}>
-<div class=`max-w-[1200px] grid grid-cols-[280px_auto] grid-auto-rows-[auto] mx-auto gap-4 relative`
+<div class=`max-w-[1200px] min-h-screen grid grid-cols-[280px_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto] mx-auto gap-4 relative overflow-hidden `
      transition:animate="none"
 >
     <div id="top-row" class="col-span-2 grid-rows-1" class:list={{
@@ -27,14 +29,21 @@ const sidebarWidth = "280px";
     >
         <Navbar transition:animate="fade" transition:persist></Navbar>
     </div>
-    <SideBar class="max-w-[280px] col-span-1 grid-rows-2" transition:persist></SideBar>
+    <SideBar class="row-start-3 row-end-4 col-span-2 lg:row-start-2 lg:row-end-3 lg:col-span-1 lg:max-w-[280px] overflow-hidden" transition:persist></SideBar>
 
-    <div class="grid-rows-2 grid-cols-2 overflow-hidden" transition:animate="slide">
+    <div class="row-start-2 row-end-3 col-span-2 lg:col-span-1 overflow-hidden" transition:animate="slide">
         <!-- the overflow-hidden here prevent long text break the layout-->
         <slot></slot>
+
     </div>
 
+    <div class="grid-rows-3 col-span-2 mt-4" transition:persist>
+        <Footer></Footer>
+    </div>
+    <BackToTop></BackToTop>
 </div>
+
+
 </Layout>
 
 <style>

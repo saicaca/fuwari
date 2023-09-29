@@ -1,0 +1,20 @@
+---
+
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+
+import { getEntry } from 'astro:content'
+
+const aboutPost = await getEntry('spec', 'about')
+
+const { Content } = await aboutPost.render()
+
+---
+<MainGridLayout>
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-[120px]">
+        <div class="card-base z-10 px-9 py-6 relative w-full ">
+            <div class="prose dark:prose-invert max-w-none prose-h1:text-3xl">
+                <Content />
+            </div>
+        </div>
+    </div>
+</MainGridLayout>

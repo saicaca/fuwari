@@ -65,6 +65,8 @@ color_set({
 
   --deep-text: oklch(0.25 0.02 var(--hue))
 
+  --line-divider: black(0.08) white(0.08)
+
   --line-color: black(0.1) white(0.1)
   --meta-divider: black(0.2) white(0.2)
   --selection-bg: oklch(0.90 0.05 var(--hue)) oklch(0.40 0.08 var(--hue))
@@ -87,6 +89,9 @@ color_set({
     }
     h1, h2, h3, h4, h5, h6, p, a, span, li, ul, ol, blockquote, code, pre, table, th, td, strong {
         @apply transition;
+    }
+    .card-shadow {
+        @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)]
     }
 }
 </style>
