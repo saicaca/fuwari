@@ -55,7 +55,7 @@ const commonUrl: string = parts.slice(0, -1).join('/') + '/';
 
 <div class:list={[className, "flex flex-row gap-3 justify-center"]}>
     <a href={page.url.prev}>
-        <Button isIcon card iconName="material-symbols:chevron-left-rounded" class="text-[var(--primary)]" iconSize={28}
+        <Button isIcon card iconName="material-symbols:chevron-left-rounded" class="text-[var(--primary)] rounded-lg" iconSize={28}
                 disabled = {page.url.prev == undefined}
         ></Button>
     </a>
@@ -70,14 +70,14 @@ const commonUrl: string = parts.slice(0, -1).join('/') + '/';
                     {p}
                 </div>
             return <a href={commonUrl + p}>
-                <Button card iconName="material-symbols:chevron-left-rounded" height="44px" width="44px">
+                <Button card iconName="material-symbols:chevron-left-rounded" class="rounded-lg" height="44px" width="44px">
                     {p}
                 </Button>
             </a>
         })}
     </div>
     <a href={page.url.next}>
-        <Button isIcon card iconName="material-symbols:chevron-right-rounded" class="text-[var(--primary)]" iconSize={28}
+        <Button isIcon card iconName="material-symbols:chevron-right-rounded" class="text-[var(--primary)] rounded-lg" iconSize={28}
                 disabled = {page.url.next == undefined}
         ></Button>
     </a>

@@ -1,0 +1,135 @@
+---
+import {getConfig} from "../../utils/config-utils";
+const hueSet: number[] = [0, 30, 60, 180, 250, 270, 300, 330, 345];
+
+const enableBanner = getConfig().banner.enable;
+
+---
+<div id="display-setting" class:list={["card-base closed absolute transition-all w-[320px] fixed right-4 border-[var(--primary)] px-4 py-4",
+    {"border-[3px]": !enableBanner}
+]}>
+    <div class="flex flex-row gap-2 mb-3 items-center justify-between">
+        <div class="font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3
+            before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+            before:absolute before:left-[-12px] before:top-[5.5px]"
+        >
+            Primary Color
+        </div>
+        <div id="hueValue" class="transition bg-[var(--btn-regular-bg)] w-10 h-7 rounded-md flex justify-center font-bold transition text-sm items-center text-[var(--btn-content)]">
+            {0}
+        </div>
+    </div>
+    <div id="preset-list" class="flex flex-row gap-1 mb-4 hidden">
+        {hueSet.map((hue) => <div
+            class="h-7 w-8 rounded-md cursor-pointer
+                bg-[oklch(0.75_0.14_var(--hue))]
+                hover:bg-[oklch(0.70_0.12_var(--hue))]
+                active:bg-[oklch(0.65_0.11_var(--hue))]
+            "
+            style=`--hue: ${hue}` data-hue={hue}
+        >
+
+        </div>)}
+    </div>
+    <div class="w-full h-6 px-1 bg-[oklch(0.80_0.10_0)] dark:bg-[oklch(0.70_0.10_0)] rounded select-none">
+        <input type="range" min="0" max="360" value="0" class="slider" id="colorSlider" step="5" style="width: 100%;">
+    </div>
+
+</div>
+
+<script is:raw>
+(function () {
+    let presetList = document.getElementById("preset-list");
+    let output = document.getElementById("hueValue");
+    let slider = document.getElementById("colorSlider");
+    output.innerHTML = slider.value; // Display the default slider value
+
+    let r = document.querySelector(':root');
+    function setHue(hue) {
+        localStorage.setItem('hue', hue);
+        output.innerHTML = hue;
+        slider.value = hue;
+
+        r.style.setProperty(`--hue`, hue);
+    }
+
+    let storedHue = localStorage.getItem('hue');
+    if (storedHue) {
+        setHue(storedHue);
+    }
+
+    presetList.onclick = function(event) {
+        let hue = event.target.dataset.hue;
+        if (hue) {
+            setHue(hue);
+        }
+    }
+
+    slider.oninput = function() {
+        let hue = this.value;
+        output.innerHTML = this.value;
+        setHue(hue);
+    }
+
+    document.addEventListener("click", event => {
+        var cDom = document.getElementById("display-setting");
+        let settingBtn = document.getElementById("display-settings-switch");
+        var tDom = event.target;
+        if (cDom == tDom || cDom.contains(tDom) || settingBtn == tDom || settingBtn.contains(tDom)) {
+            return;
+        }
+        cDom.classList.add("closed");
+    });
+
+})();
+
+</script>
+
+<style lang="stylus" is:global>
+#display-setting
+    input[type="range"]
+        -webkit-appearance: none;
+        height: 24px;
+        background-image: var(--color-selection-bar)
+        transition: background-image 0.15s ease-in-out
+
+    /* Input Thumb */
+    ::-webkit-slider-thumb
+        -webkit-appearance: none;
+        height: 16px;
+        width: 8px;
+        border-radius: 2px;
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: none;
+
+    ::-moz-range-thumb
+        -webkit-appearance: none;
+        height: 24px;
+        width: 10px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: none;
+
+    &::-ms-thumb
+        -webkit-appearance: none;
+        height: 24px;
+        width: 10px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: none;
+</style>
+
+<style>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    #display-setting {
+        @apply top-[84px]
+    }
+    #display-setting.closed {
+        @apply top-[76px] opacity-0 pointer-events-none
+    }
+}
+</style>

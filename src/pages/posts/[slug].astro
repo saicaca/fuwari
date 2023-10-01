@@ -6,8 +6,9 @@ import ImageBox from "../../components/misc/ImageBox.astro";
 import {Icon} from "astro-icon/components";
 import {formatDateToYYYYMMDD} from "../../utils/date-utils";
 import PostMetadata from "../../components/PostMetadata.astro";
-// 1. 为每个集合条目生成一个新路径
-
+import {getPostUrlBySlug} from "../../utils/content-utils";
+import Button from "../../components/control/Button.astro";
+import {getConfig} from "../../utils/config-utils";
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection('posts');
@@ -15,16 +16,17 @@ export async function getStaticPaths() {
         params: { slug: entry.slug }, props: { entry },
     }));
 }
-// 2. 当渲染的时候，你可以直接从属性中得到条目
+
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 const { remarkPluginFrontmatter } = await entry.render();
 
+const enableBanner = getConfig().banner.enable;
 
 ---
 <MainGridLayout banner={entry.data.cover}>
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
         <div class:list={["card-base z-10 px-9 py-6 relative w-full ",
             {}
         ]}>
@@ -59,15 +61,39 @@ const { remarkPluginFrontmatter } = await entry.render();
                     categories={entry.data.categories}
             ></PostMetadata>
 
-            <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>
+            <!-- always show cover as long as it has one -->
+
+            {entry.data.cover &&
+                <ImageBox src={entry.data.cover} class="mb-8 rounded-xl"/>
+            }
+
+            {!entry.data.cover && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
 
             <div class="prose dark:prose-invert max-w-none prose-h1:text-3xl">
                 <Content />
             </div>
 
-
         </div>
+    </div>
 
+    <div class="flex justify-between gap-4 overflow-hidden w-full">
+        <a href={getPostUrlBySlug(entry.data.prevSlug)} class="w-full font-bold overflow-hidden">
+            {entry.data.prevSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-start gap-4" card height="60px">
+                <Icon name="material-symbols:chevron-left-rounded" size={32} class="text-[var(--primary)]" />
+                <div class="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_48px)] text-black/75 dark:text-white/75">
+                    {entry.data.prevTitle}
+                </div>
+            </Button>}
+        </a>
+
+        <a href={getPostUrlBySlug(entry.data.nextSlug)} class="w-full font-bold overflow-hidden">
+            {entry.data.nextSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-end gap-4" card height="60px">
+                <div class="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_48px)] text-black/75 dark:text-white/75">
+                    {entry.data.nextTitle}
+                </div>
+                <Icon name="material-symbols:chevron-right-rounded" size={32} class="text-[var(--primary)]" />
+            </Button>}
+        </a>
     </div>
 
 </MainGridLayout>

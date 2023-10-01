@@ -43,6 +43,9 @@ color_set(colors)
         if length(value) > 1
           {key}: oklch_fallback(value[1])
 
+rainbow-light = linear-gradient(to right, oklch(0.80 0.10 0), oklch(0.80 0.10 30), oklch(0.80 0.10 60), oklch(0.80 0.10 90), oklch(0.80 0.10 120), oklch(0.80 0.10 150), oklch(0.80 0.10 180), oklch(0.80 0.10 210), oklch(0.80 0.10 240), oklch(0.80 0.10 270), oklch(0.80 0.10 300), oklch(0.80 0.10 330), oklch(0.80 0.10 360))
+rainbow-dark = linear-gradient(to right, oklch(0.70 0.10 0), oklch(0.70 0.10 30), oklch(0.70 0.10 60), oklch(0.70 0.10 90), oklch(0.70 0.10 120), oklch(0.70 0.10 150), oklch(0.70 0.10 180), oklch(0.70 0.10 210), oklch(0.70 0.10 240), oklch(0.70 0.10 270), oklch(0.70 0.10 300), oklch(0.70 0.10 330), oklch(0.70 0.10 360))
+
 :root
   --radius-large 16px
 
@@ -53,7 +56,7 @@ color_set({
   --primary: oklch(0.70 0.14 var(--hue))
   --card-bg: white oklch(0.25 0.02 var(--hue))
 
-  --btn-content: oklch(0.55 0.12 var(--hue))
+  --btn-content: oklch(0.55 0.12 var(--hue)) oklch(0.75 0.1 var(--hue))
 
   --btn-regular-bg: oklch(0.95 0.025 var(--hue)) oklch(0.38 0.04 var(--hue))
 
@@ -70,6 +73,8 @@ color_set({
   --line-color: black(0.1) white(0.1)
   --meta-divider: black(0.2) white(0.2)
   --selection-bg: oklch(0.90 0.05 var(--hue)) oklch(0.40 0.08 var(--hue))
+
+  --color-selection-bar: rainbow-light rainbow-dark
 })
 
 

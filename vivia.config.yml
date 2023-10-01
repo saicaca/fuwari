@@ -2,6 +2,7 @@ appearance:
   hue: 250
 
 banner:
+  enable: true
   url: https://saicaca.github.io/vivia-preview/assets/banner.jpg
 
 profile:

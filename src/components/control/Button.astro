@@ -34,7 +34,6 @@ import { Icon } from 'astro-icon/components';
     class:list={[
     className,
     `
-    rounded-lg
     transition
     h-[var(--height)]
     `,
@@ -60,7 +59,7 @@ import { Icon } from 'astro-icon/components';
         'dark:hover:bg-[oklch(0.45_0.045_var(--hue))]': regular,
         'dark:active:bg-[oklch(0.5_0.05_var(--hue))]': regular,
 
-        'card-base': card,
+        'bg-[var(--card-bg)]': card,
         'enabled:hover:bg-[var(--btn-card-bg-hover)]': card,
         'enabled:active:bg-[var(--btn-card-bg-active)]': card,
         'disabled:text-black/10': card,

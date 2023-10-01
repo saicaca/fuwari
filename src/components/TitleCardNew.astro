@@ -43,7 +43,7 @@ const { remarkPluginFrontmatter } = await entry.render();
         </a>
 
         <!-- metadata -->
-        <PostMetadata pubDate={pubDate} tags={tags} categories={categories} class="mb-4"></PostMetadata>
+        <PostMetadata pubDate={pubDate} tags={tags} categories={categories} class:list={{"mb-4": description, "mb-6": !description}}></PostMetadata>
 
         <div class="transition text-black/75 dark:text-white/75 mb-4">
             { description }
@@ -67,7 +67,7 @@ const { remarkPluginFrontmatter } = await entry.render();
             <Icon name="material-symbols:chevron-right-rounded"
                   class="transition opacity-0 group-hover:opacity-100 text-white text-5xl"></Icon>
         </div>
-        <ImageBox src="https://saicaca.github.io/vivia-preview/assets/79905307_p0.jpg"
+        <ImageBox src={cover}
                   class="w-full h-full">
         </ImageBox>
     </a>}

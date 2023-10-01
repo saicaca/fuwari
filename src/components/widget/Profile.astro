@@ -1,6 +1,6 @@
 ---
 import ImageBox from "../misc/ImageBox.astro";
-import ButtonLight from "../control/Button.astro";
+import Button from "../control/Button.astro";
 import {getConfig} from "../../utils/config-utils";
 interface props {
 
@@ -18,7 +18,7 @@ const vConf = getConfig();
     <div class="flex gap-2 mx-2 justify-center mb-4">
         {vConf.profile.links.map(item =>
             <a href={item.url} target="_blank">
-                <ButtonLight isIcon iconName={item.icon} regular height="40px"></ButtonLight>
+                <Button isIcon iconName={item.icon} regular height="40px" class="rounded-lg"></Button>
             </a>
         )}
     </div>

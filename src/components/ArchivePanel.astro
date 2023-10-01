@@ -69,7 +69,7 @@ function formatDate(date: Date) {
                     </div>
                     {group.posts.map(post => (
                             <a href={getPostUrlBySlug(post.slug)} class="group">
-                                <Button light height="40px" class="w-full hover:text-[initial]">
+                                <Button light height="40px" class="w-full rounded-lg hover:text-[initial]">
                                     <div class="flex flex-row justify-start items-center h-full">
                                         <!-- date -->
                                         <div class="w-[10%] transition text-sm text-right text-black/50 dark:text-white/50">{formatDate(post.data.pubDate)}</div>

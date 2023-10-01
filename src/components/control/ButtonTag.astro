@@ -8,7 +8,7 @@ interface Props {
 const { size, dot, href }: Props = Astro.props;
 ---
 <a href={href}>
-    <Button regular height="32px" class="text-[15px] px-3 flex flex-row items-center">
+    <Button regular height="32px" class="text-[15px] px-3 flex flex-row items-center rounded-lg">
         {dot && <div class="h-1 w-1 bg-[var(--btn-content)] dark:bg-[var(--card-bg)] transition rounded-md mr-2"></div>}
         <slot></slot>
     </Button>

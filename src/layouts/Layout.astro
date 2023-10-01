@@ -46,10 +46,13 @@ const myFade = {
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
 const viConf = getConfig();
-const hue = viConf.appearance.hue;
+const configHue = viConf.appearance.hue;
 if (!banner || typeof banner !== 'string' || banner.trim() === '') {
 	banner = viConf.banner.url;
 }
+
+// TODO don't use post cover as banner for now
+banner = viConf.banner.url;
 
 ---
 
@@ -71,7 +74,7 @@ if (!banner || typeof banner !== 'string' || banner.trim() === '') {
 		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-180.png" sizes="180x180">
 		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-192.png" sizes="192x192">
 
-		<style define:vars={{ hue }}></style>  <!-- defines global css variables -->
+		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
 		<title>{title}</title>
 	</head>
@@ -82,7 +85,7 @@ if (!banner || typeof banner !== 'string' || banner.trim() === '') {
 			 id="banner-wrapper"
 		>
 			<!-- TODO the transition here is not correct -->
-			<ImageBox id="boxtest" class="object-center object-cover h-full"
+			<ImageBox id="boxtest" class:list={["object-center object-cover h-full", {"hidden": !viConf.banner.enable}]}
 					  src={banner} transition:animate="fade"
 			>
 			</ImageBox>
@@ -93,6 +96,7 @@ if (!banner || typeof banner !== 'string' || banner.trim() === '') {
 </html>
 <style is:global>
 	:root {
+		--hue: var(--configHue);
 		--accent: 136, 58, 234;
 		--accent-light: 224, 204, 250;
 		--accent-dark: 49, 10, 101;
@@ -169,7 +173,13 @@ function loadTheme() {
 		document.documentElement.classList.remove('dark');
 	}
 }
-loadTheme();
+
+function loadHue() {
+	const hue = localStorage.hue;
+	if (hue) {
+		document.documentElement.style.setProperty('--hue', hue);
+	}
+}
 
 function setBannerHeight() {
 	const banner = document.getElementById('banner-wrapper');
@@ -182,10 +192,15 @@ function setBannerHeight() {
 	}
 }
 
-/* Load light/dark mode setting */
+/* Load settings when entering the site */
+loadTheme();
+loadHue();
+
+/* Load settings before swapping */
 /* astro:after-swap event happened before swap animation */
 document.addEventListener('astro:after-swap', () => {
 	setBannerHeight();
 	loadTheme();
+	loadHue();
 }, { once: false });
 </script>
