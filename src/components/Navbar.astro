@@ -23,7 +23,10 @@ const className = Astro.props.class;
             <Button class="rounded-lg" id="display-settings-switch" iconName="material-symbols:palette-outline" iconSize={20} isIcon light></Button>
         </div>
         <div>
-            <Button class="rounded-lg" id="scheme-switch" iconName="material-symbols:wb-sunny-outline-rounded" iconSize={20} isIcon light></Button>
+            <Button class="rounded-lg flex items-center justify-center" id="scheme-switch" light height="44px" width="44px">
+                <Icon name="material-symbols:wb-sunny-outline-rounded" size={20} class="absolute opacity-[var(--display-light-icon)]"></Icon>
+                <Icon name="material-symbols:dark-mode-outline-rounded" size={20} class="absolute opacity-[var(--display-dark-icon)]"></Icon>
+            </Button>
         </div>
     </div>
     <DisplaySetting></DisplaySetting>

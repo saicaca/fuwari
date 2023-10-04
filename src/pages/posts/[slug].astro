@@ -30,6 +30,7 @@ const enableBanner = getConfig().banner.enable;
         <div class:list={["card-base z-10 px-9 py-6 relative w-full ",
             {}
         ]}>
+            <!-- word count and reading time -->
             <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition">
                 <div class="flex flex-row items-center">
                     <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
@@ -44,16 +45,20 @@ const enableBanner = getConfig().banner.enable;
                     <div class="text-sm">{remarkPluginFrontmatter.minutes} minutes</div>
                 </div>
             </div>
+
+            <!-- title -->
             <div class="relative">
                 <div
-                        class="transition w-full block font-bold mb-3 text-4xl
+                        class="transition w-full block font-bold mb-3 text-[40px]/[44px]
                 text-black/90 dark:text-white/90
                 before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
-                before:absolute before:top-[10px] before:left-[-18px]
+                before:absolute before:top-[12px] before:left-[-18px]
                 ">
                     {entry.data.title}
                 </div>
             </div>
+
+            <!-- metadata -->
             <PostMetadata
                     class="mb-5"
                     pubDate={entry.data.pubDate}
