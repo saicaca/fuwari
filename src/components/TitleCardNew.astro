@@ -28,19 +28,19 @@ import I18nKey from "../i18n/i18nKey";
 // cover = null;
 const hasCover = cover !== undefined && cover !== null && cover !== '';
 
-const coverWidth = "30%";
+const coverWidth = "28%";
 
 const { remarkPluginFrontmatter } = await entry.render();
 
 ---
 <div class:list={["card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative", className]}>
-    <div class:list={[" px-10 pt-4 md:pt-7 pb-6 relative", {"w-full md:w-[calc(100%_-_52px)]": !hasCover, "w-full md:w-[calc(100%_-_var(--coverWidth))]": hasCover}]}>
+    <div class:list={["pl-9 pr-9 md:pr-2 pt-4 md:pt-7 pb-6 relative", {"w-full md:w-[calc(100%_-_52px_-_12px)]": !hasCover, "w-full md:w-[calc(100%_-_var(--coverWidth)_-_12px)]": hasCover}]}>
         <a href={url}
            class="transition w-full block font-bold mb-3 text-3xl
         text-black/90 dark:text-white/90
         hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
         before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
-        before:absolute md:before:top-[35px] before:left-5
+        before:absolute md:before:top-[35px] before:left-[18px]
         ">
             {title}
         </a>

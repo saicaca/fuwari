@@ -83,16 +83,15 @@ if (title) {
 
 		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
-		<title>{title}</title>
 	</head>
 	<body class="bg-[oklch(0.95_0.01_var(--hue))] dark:bg-[oklch(0.16_0.014_var(--hue))] min-h-screen transition ">
 		<GlobalStyles>
-		<div class="absolute w-full"
+		<div id="banner-wrapper" class="absolute w-full transition-all"
 			 class:list={{'banner-home': isHomePage, 'banner-else': !isHomePage}}
-			 id="banner-wrapper"
+
 		>
 			<!-- TODO the transition here is not correct -->
-			<ImageBox id="boxtest" class:list={["object-center object-cover h-full", {"hidden": !viConf.banner.enable}]}
+			<ImageBox  id="boxtest" class:list={["object-center object-cover h-full", {"hidden": !viConf.banner.enable}]}
 					  src={banner} transition:animate="fade"
 			>
 			</ImageBox>
@@ -150,12 +149,6 @@ html::view-transition-new(banner-ani) {
 	height: 100%;
 	overflow: clip;
 	object-fit: none;
-}
-
-
-
-.banner-home {
-
 }
 </style>
 <script is:inline>
@@ -291,3 +284,14 @@ document.addEventListener('astro:after-swap', () => {
 	fb();
 });
 </script>
+
+<style is:global lang="stylus">
+#banner-wrapper
+	top: 0
+	opacity: 1
+.banner-closed
+	#banner-wrapper
+		top: -120px
+		opacity: 0
+
+</style>

@@ -23,17 +23,19 @@ const sidebarWidth = "280px";
 const enableBanner = getConfig().banner.enable;
 
 ---
+
 <Layout title={title} banner={banner}>
-<div class=`max-w-[1200px] min-h-screen grid grid-cols-[280px_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto] mx-auto gap-4 relative overflow-hidden `
+<div class=`max-w-[1200px] min-h-screen grid grid-cols-[280px_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto] 
+    mx-auto gap-4 relative  md:px-4 lg:px-0`
      transition:animate="none"
 >
-    <div id="top-row" class="col-span-2 grid-rows-1 z-50" class:list={{
-        'min-h-[calc(var(--banner-height-home)_-_72px)]': enableBanner && isHomePage,
-        'min-h-[calc(var(--banner-height)_-_72px)]': enableBanner && !isHomePage,}}
+    <div id="top-row" class="col-span-2 grid-rows-1 z-50" class:list={["transition-all", {
+        'h-[calc(var(--banner-height-home)_-_72px)]': enableBanner && isHomePage,
+        'h-[calc(var(--banner-height)_-_72px)]': enableBanner && !isHomePage,}]}
     >
         <Navbar transition:animate="fade" transition:persist></Navbar>
     </div>
-    <SideBar class="row-start-3 row-end-4 col-span-2 lg:row-start-2 lg:row-end-3 lg:col-span-1 lg:max-w-[280px] overflow-hidden" transition:persist></SideBar>
+    <SideBar class="row-start-3 row-end-4 col-span-2 lg:row-start-2 lg:row-end-3 lg:col-span-1 lg:max-w-[280px] " transition:persist></SideBar>
 
     <div class="row-start-2 row-end-3 col-span-2 lg:col-span-1 overflow-hidden" transition:animate="slide">
         <!-- the overflow-hidden here prevent long text break the layout-->
@@ -46,8 +48,6 @@ const enableBanner = getConfig().banner.enable;
     </div>
     <BackToTop></BackToTop>
 </div>
-
-
 </Layout>
 
 <style>
@@ -69,5 +69,9 @@ html::view-transition-new(rrrr) {
     overflow: clip;
     object-fit: none;
 }
-
+</style>
+<style lang="stylus" is:global>
+.banner-closed
+    #top-row
+      height: 72px;
 </style>

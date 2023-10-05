@@ -1,10 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import MainGridLayout from "../../layouts/MainGridLayout.astro";
-import ButtonTag from "../../components/control/ButtonTag.astro";
 import ImageBox from "../../components/misc/ImageBox.astro";
 import {Icon} from "astro-icon/components";
-import {formatDateToYYYYMMDD} from "../../utils/date-utils";
 import PostMetadata from "../../components/PostMetadata.astro";
 import {getPostUrlBySlug} from "../../utils/content-utils";
 import Button from "../../components/control/Button.astro";
@@ -24,12 +22,10 @@ const { Content } = await entry.render();
 
 const { remarkPluginFrontmatter } = await entry.render();
 
-const enableBanner = getConfig().banner.enable;
-
 ---
 <MainGridLayout banner={entry.data.cover} title={entry.data.title}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
-        <div class:list={["card-base z-10 px-9 py-6 relative w-full ",
+        <div class:list={["card-base z-10 px-4 md:px-9 py-6 relative w-full ",
             {}
         ]}>
             <!-- word count and reading time -->
@@ -51,10 +47,11 @@ const enableBanner = getConfig().banner.enable;
             <!-- title -->
             <div class="relative">
                 <div
-                        class="transition w-full block font-bold mb-3 text-[40px]/[44px]
-                text-black/90 dark:text-white/90
-                before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
-                before:absolute before:top-[12px] before:left-[-18px]
+                    class="transition w-full block font-bold mb-3
+                    text-3xl md:text-[40px]/[44px]
+                    text-black/90 dark:text-white/90
+                    md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+                    before:absolute before:top-[12px] before:left-[-18px]
                 ">
                     {entry.data.title}
                 </div>
@@ -76,27 +73,30 @@ const enableBanner = getConfig().banner.enable;
 
             {!entry.data.cover && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
 
-            <div class="prose dark:prose-invert max-w-none prose-h1:text-3xl">
+            <div class="prose dark:prose-invert prose-sm md:prose-base max-w-none custom-md
+            ">
+            <!--<div class="prose dark:prose-invert max-w-none custom-md">-->
+            <!--<div class="max-w-none custom-md">-->
                 <Content />
             </div>
 
         </div>
     </div>
 
-    <div class="flex justify-between gap-4 overflow-hidden w-full">
-        <a href={getPostUrlBySlug(entry.data.prevSlug)} class="w-full font-bold overflow-hidden">
-            {entry.data.prevSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-start gap-4" card height="60px">
+    <div class="flex flex-col md:flex-row justify-between gap-4 overflow-hidden w-full">
+        <a href={getPostUrlBySlug(entry.data.nextSlug)} class="w-full font-bold overflow-hidden">
+            {entry.data.nextSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-start gap-4" card height="60px">
                 <Icon name="material-symbols:chevron-left-rounded" size={32} class="text-[var(--primary)]" />
                 <div class="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_48px)] text-black/75 dark:text-white/75">
-                    {entry.data.prevTitle}
+                    {entry.data.nextTitle}
                 </div>
             </Button>}
         </a>
 
-        <a href={getPostUrlBySlug(entry.data.nextSlug)} class="w-full font-bold overflow-hidden">
-            {entry.data.nextSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-end gap-4" card height="60px">
+        <a href={getPostUrlBySlug(entry.data.prevSlug)} class="w-full font-bold overflow-hidden">
+            {entry.data.prevSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-end gap-4" card height="60px">
                 <div class="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_48px)] text-black/75 dark:text-white/75">
-                    {entry.data.nextTitle}
+                    {entry.data.prevTitle}
                 </div>
                 <Icon name="material-symbols:chevron-right-rounded" size={32} class="text-[var(--primary)]" />
             </Button>}
@@ -104,3 +104,66 @@ const enableBanner = getConfig().banner.enable;
     </div>
 
 </MainGridLayout>
+
+<style lang="stylus" is:global>
+.custom-md
+  a
+    background: none
+    margin: -4px
+    padding: 4px
+    border-radius: 6px
+    color: var(--primary)
+    text-decoration none
+    &:hover
+      background: var(--link-hover)
+    &:active
+      background: var(--link-active)
+  code
+    font-family: monospace
+    background: var(--inline-code-bg)
+    color: var(--inline-code-color)
+    padding: 2px 4px
+    border-radius: 4px
+    overflow: hidden
+    &:before
+        content: none
+    &:after
+        content: none
+  pre
+    background: var(--codeblock-bg) !important
+    code
+      padding: 0
+      background: none
+      ::selection
+        background: var(--codeblock-selection)
+      span.br::selection
+          background: var(--codeblock-selection)
+  ul
+    li
+      &::marker
+        color: var(--primary)
+  ol
+    li
+      &::marker
+        color: var(--primary)
+  blockquote
+    font-style: normal
+    border-left-color: rgba(0,0,0,0)
+    position: relative;
+    &:before
+      content: ''
+      position: absolute
+      left: -0.25rem
+      display: block
+      background: var(--btn-regular-bg)
+      height: 100%
+      width: 0.25rem
+      border-radius: 1rem
+    p
+      &:before
+        content: none
+      &:after
+        content: none
+
+
+</style>
