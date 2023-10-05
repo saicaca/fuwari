@@ -1,5 +1,7 @@
 ---
 import {getConfig} from "../../utils/config-utils";
+import {i18n} from "../../i18n/translation";
+import I18nKey from "../../i18n/i18nKey";
 const hueSet: number[] = [0, 30, 60, 180, 250, 270, 300, 330, 345];
 
 const enableBanner = getConfig().banner.enable;
@@ -13,7 +15,7 @@ const enableBanner = getConfig().banner.enable;
             before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
             before:absolute before:left-[-12px] before:top-[5.5px]"
         >
-            Primary Color
+            {i18n(I18nKey.primaryColor)}
         </div>
         <div id="hueValue" class="transition bg-[var(--btn-regular-bg)] w-10 h-7 rounded-md flex justify-center font-bold transition text-sm items-center text-[var(--btn-content)]">
             {0}

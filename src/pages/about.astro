@@ -3,13 +3,15 @@
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 
 import { getEntry } from 'astro:content'
+import {i18n} from "../i18n/translation";
+import I18nKey from "../i18n/i18nKey";
 
 const aboutPost = await getEntry('spec', 'about')
 
 const { Content } = await aboutPost.render()
 
 ---
-<MainGridLayout>
+<MainGridLayout title={i18n(I18nKey.about)}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-[120px]">
         <div class="card-base z-10 px-9 py-6 relative w-full ">
             <div class="prose dark:prose-invert max-w-none prose-h1:text-3xl">

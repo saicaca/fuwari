@@ -9,6 +9,8 @@ import PostMetadata from "../../components/PostMetadata.astro";
 import {getPostUrlBySlug} from "../../utils/content-utils";
 import Button from "../../components/control/Button.astro";
 import {getConfig} from "../../utils/config-utils";
+import {i18n} from "../../i18n/translation";
+import I18nKey from "../../i18n/i18nKey";
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection('posts');
@@ -25,7 +27,7 @@ const { remarkPluginFrontmatter } = await entry.render();
 const enableBanner = getConfig().banner.enable;
 
 ---
-<MainGridLayout banner={entry.data.cover}>
+<MainGridLayout banner={entry.data.cover} title={entry.data.title}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
         <div class:list={["card-base z-10 px-9 py-6 relative w-full ",
             {}
@@ -36,13 +38,13 @@ const enableBanner = getConfig().banner.enable;
                     <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
                         <Icon name="material-symbols:notes-rounded"></Icon>
                     </div>
-                    <div class="text-sm">{remarkPluginFrontmatter.words} words</div>
+                    <div class="text-sm">{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount)}</div>
                 </div>
                 <div class="flex flex-row items-center">
                     <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
                         <Icon name="material-symbols:schedule-outline-rounded"></Icon>
                     </div>
-                    <div class="text-sm">{remarkPluginFrontmatter.minutes} minutes</div>
+                    <div class="text-sm">{remarkPluginFrontmatter.minutes} {" " + i18n(I18nKey.minutesCount)}</div>
                 </div>
             </div>
 

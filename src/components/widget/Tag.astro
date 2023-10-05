@@ -3,11 +3,13 @@
 import WidgetLayout from "./WidgetLayout.astro";
 import ButtonTag from "../control/ButtonTag.astro";
 import {getTagList} from "../../utils/content-utils";
+import {i18n} from "../../i18n/translation";
+import I18nKey from "../../i18n/i18nKey";
 
 const tags = await getTagList();
 
 ---
-<WidgetLayout name="Tags">
+<WidgetLayout name={i18n(I18nKey.tags)}>
     <div class="flex gap-2 flex-wrap">
         {tags.map(t => (
             <ButtonTag href={`/archive/tag/${t.name}`}>

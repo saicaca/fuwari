@@ -1,9 +1,12 @@
+// @ts-ignore
 import _config from '../../vivia.config.yml';
 
 interface ViviaConfig {
+    title: string;
     menu: {
         [key: string]: string;
     };
+    lang: string;
     appearance: {
         hue: number;
     };

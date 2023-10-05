@@ -1,5 +1,13 @@
+title: Fuwari
+menu:
+  home: /
+  archive: /archive
+  about: /about
+
 appearance:
   hue: 250
+
+lang: en
 
 banner:
   enable: true

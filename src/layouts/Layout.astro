@@ -54,12 +54,19 @@ if (!banner || typeof banner !== 'string' || banner.trim() === '') {
 // TODO don't use post cover as banner for now
 banner = viConf.banner.url;
 
+let pageTitle = getConfig().title;
+if (title) {
+	pageTitle = `${title} - ${pageTitle}`;
+}
+
 ---
 
 <!DOCTYPE html>
 <html lang="en" isHome={isHomePage} pathname={testPathName}>
 	<head>
 		<ViewTransitions />
+
+		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description">

@@ -19,6 +19,8 @@ import ImageBox from "./misc/ImageBox.astro";
 import ButtonTag from "./control/ButtonTag.astro";
 import { Icon } from 'astro-icon/components';
 import Button from "./control/Button.astro";
+import {i18n} from "../i18n/translation";
+import I18nKey from "../i18n/i18nKey";
 
 // tags = ['Foo', 'Bar', 'Baz', 'Qux', 'Quux'];
 
@@ -51,9 +53,9 @@ const { remarkPluginFrontmatter } = await entry.render();
         </div>
 
         <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition">
-            <div>{remarkPluginFrontmatter.words} words</div>
+            <div>{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount)}</div>
             <div>|</div>
-            <div>{remarkPluginFrontmatter.minutes} minutes</div>
+            <div>{remarkPluginFrontmatter.minutes} {" " + i18n(I18nKey.minutesCount)}</div>
         </div>
 
     </div>

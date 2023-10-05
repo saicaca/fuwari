@@ -2,7 +2,22 @@
 import Button from "./control/Button.astro";
 import { Icon } from 'astro-icon/components';
 import DisplaySetting from "./widget/DisplaySetting.astro";
+import {getConfig} from "../utils/config-utils";
+import I18nKey from "../i18n/i18nKey";
+import {i18n} from "../i18n/translation";
 const className = Astro.props.class;
+
+function isI18nKey(key: string): key is I18nKey {
+    return Object.values(I18nKey).includes(key);
+}
+
+function getLinkName(name: string) {
+    if (isI18nKey(name)) {
+        return i18n(name);
+    }
+    return name;
+}
+
 ---
 <div class:list={[
     className,
@@ -10,13 +25,13 @@ const className = Astro.props.class;
     <a href="/"><Button height="52px" class="px-5 font-bold rounded-lg" light>
         <div class="flex flex-row text-[var(--primary)] items-center text-md">
             <Icon name="material-symbols:home-outline-rounded" size={28} class="mb-1 mr-2" />
-            <div class="top-2"></div>Vivia Preview
+            {getConfig().title}
         </div>
     </Button></a>
     <div>
-        <a href="/"><Button light class="font-bold px-5 rounded-lg">Home</Button></a>
-        <a href="/archive"><Button light class="font-bold px-5 rounded-lg">Archive</Button></a>
-        <a href="/about"><Button light class="font-bold px-5 rounded-lg">About</Button></a>
+        {Object.keys(getConfig().menu).map((key) => {
+            return <a href={getConfig().menu[key]}><Button light class="font-bold px-5 rounded-lg">{getLinkName(key)}</Button></a>
+        })}
     </div>
     <div class="flex">
         <div>
