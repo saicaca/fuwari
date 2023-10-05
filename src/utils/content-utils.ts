@@ -20,7 +20,9 @@ export async function getSortedPosts() {
     return sorted;
 }
 
-export function getPostUrlBySlug(slug: string): string {
+export function getPostUrlBySlug(slug: string): string | null {
+    if (!slug)
+        return null;
     return `/posts/${slug}`;
 }
 
@@ -35,9 +37,18 @@ export async function getTagList(): Promise<{ name: string; count: number }[]> {
         })
     });
 
-    // 获取对象的所有键并按字典顺序排序
-    const keys: string[] = Object.keys(countMap).sort();
+    // sort tags
+    const keys: string[] = Object.keys(countMap).sort(function (a, b) {
+        var textA = a.toLowerCase();
+        var textB = b.toLowerCase();
+        if (textA < textB) {
+            return -1;
+        }
+        if (textA > textB) {
+            return 1;
+        }
+        return 0;
+    });
 
-    // 使用排序后的键构建包含 key 和 value 的数组
     return keys.map((key) => ({name: key, count: countMap[key]}));
 }
