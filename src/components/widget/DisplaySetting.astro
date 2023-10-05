@@ -39,53 +39,6 @@ const enableBanner = getConfig().banner.enable;
 
 </div>
 
-<script is:raw>
-(function () {
-    let presetList = document.getElementById("preset-list");
-    let output = document.getElementById("hueValue");
-    let slider = document.getElementById("colorSlider");
-    output.innerHTML = slider.value; // Display the default slider value
-
-    let r = document.querySelector(':root');
-    function setHue(hue) {
-        localStorage.setItem('hue', hue);
-        output.innerHTML = hue;
-        slider.value = hue;
-
-        r.style.setProperty(`--hue`, hue);
-    }
-
-    let storedHue = localStorage.getItem('hue');
-    if (storedHue) {
-        setHue(storedHue);
-    }
-
-    presetList.onclick = function(event) {
-        let hue = event.target.dataset.hue;
-        if (hue) {
-            setHue(hue);
-        }
-    }
-
-    slider.oninput = function() {
-        let hue = this.value;
-        output.innerHTML = this.value;
-        setHue(hue);
-    }
-
-    document.addEventListener("click", event => {
-        var cDom = document.getElementById("display-setting");
-        let settingBtn = document.getElementById("display-settings-switch");
-        var tDom = event.target;
-        if (cDom == tDom || cDom.contains(tDom) || settingBtn == tDom || settingBtn.contains(tDom)) {
-            return;
-        }
-        cDom.classList.add("closed");
-    });
-
-})();
-
-</script>
 
 <style lang="stylus" is:global>
 #display-setting

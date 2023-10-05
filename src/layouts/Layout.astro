@@ -158,7 +158,7 @@ html::view-transition-new(banner-ani) {
 
 }
 </style>
-<script>
+<script is:inline>
 /* Preload fonts */
 // (async function() {
 // 	try {
@@ -171,6 +171,81 @@ html::view-transition-new(banner-ani) {
 // 		console.log("Failed to load fonts:", error);
 // 	}
 // })();
+
+/* TODO This is a temporary solution for style flicker issue when the transition is activated */
+/* issue link: https://github.com/withastro/astro/issues/8711, the solution get from here too */
+function disableAnimation() {
+	const css = document.createElement('style')
+	css.appendChild(
+		document.createTextNode(
+			`*{
+              -webkit-transition:none!important;
+              -moz-transition:none!important;
+              -o-transition:none!important;
+              -ms-transition:none!important;
+              transition:none!important
+              }`
+		)
+	)
+	console.log("add")
+	document.head.appendChild(css)
+
+	return () => {
+		// Force restyle
+		;(() => window.getComputedStyle(document.body))()
+
+		// Wait for next tick before removing
+		setTimeout(() => {
+			console.log("remove")
+			document.head.removeChild(css)
+		}, 1)
+	}
+}
+
+
+function activateDisplaySettings() {
+	let presetList = document.getElementById("preset-list");
+	let output = document.getElementById("hueValue");
+	let slider = document.getElementById("colorSlider");
+	output.innerHTML = slider.value; // Display the default slider value
+
+	let r = document.querySelector(':root');
+	function setHue(hue) {
+		localStorage.setItem('hue', hue);
+		output.innerHTML = hue;
+		slider.value = hue;
+
+		r.style.setProperty(`--hue`, hue);
+	}
+
+	let storedHue = localStorage.getItem('hue');
+	if (storedHue) {
+		setHue(storedHue);
+	}
+
+	presetList.onclick = function(event) {
+		let hue = event.target.dataset.hue;
+		if (hue) {
+			setHue(hue);
+		}
+	}
+
+	slider.oninput = function() {
+		let hue = this.value;
+		output.innerHTML = this.value;
+		setHue(hue);
+	}
+
+	document.addEventListener("click", event => {
+		var cDom = document.getElementById("display-setting");
+		let settingBtn = document.getElementById("display-settings-switch");
+		var tDom = event.target;
+		if (cDom == tDom || cDom.contains(tDom) || settingBtn == tDom || settingBtn.contains(tDom)) {
+			return;
+		}
+		cDom.classList.add("closed");
+	});
+}
 
 function loadTheme() {
 	if (localStorage.theme === 'dark' || (!('theme' in localStorage) &&
@@ -200,8 +275,10 @@ function setBannerHeight() {
 }
 
 /* Load settings when entering the site */
+disableAnimation()()		// TODO
 loadTheme();
 loadHue();
+activateDisplaySettings();
 
 /* Load settings before swapping */
 /* astro:after-swap event happened before swap animation */
@@ -209,5 +286,8 @@ document.addEventListener('astro:after-swap', () => {
 	setBannerHeight();
 	loadTheme();
 	loadHue();
-}, { once: false });
+	disableAnimation()();		// TODO
+	activateDisplaySettings();
+	fb();
+});
 </script>
