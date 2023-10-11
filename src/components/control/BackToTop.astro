@@ -4,7 +4,7 @@ import Button from "./Button.astro";
 ---
 
 <!-- There can't be a filter on parent element, or it will break `fixed` -->
-<div class="back-to-top-wrapper" transition:persist>
+<div class="back-to-top-wrapper hidden lg:block" transition:persist>
     <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="topFunction()">
         <Button card height="60px" width="60px">
             <Icon name="material-symbols:keyboard-arrow-up-rounded" class="mx-auto"></Icon>

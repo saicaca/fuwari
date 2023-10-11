@@ -14,7 +14,7 @@
     "@astrojs/tailwind": "^4.0.0",
     "@astrojs/vue": "^3.0.1",
     "@fontsource/roboto": "^5.0.8",
-    "astro": "^3.2.3",
+    "astro": "^3.2.4",
     "astro-icon": "1.0.0-next.2",
     "colorjs.io": "^0.4.5",
     "mdast-util-to-string": "^4.0.0",

@@ -62,7 +62,7 @@ if (title) {
 ---
 
 <!DOCTYPE html>
-<html lang="en" isHome={isHomePage} pathname={testPathName}>
+<html lang="en" isHome={isHomePage} pathname={testPathName} class="bg-[var(--page-bg)] transition">
 	<head>
 		<ViewTransitions />
 
@@ -81,10 +81,12 @@ if (title) {
 		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-180.png" sizes="180x180">
 		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-192.png" sizes="192x192">
 
+		<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+
 		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
 	</head>
-	<body class="bg-[oklch(0.95_0.01_var(--hue))] dark:bg-[oklch(0.16_0.014_var(--hue))] min-h-screen transition ">
+	<body class=" min-h-screen transition ">
 		<GlobalStyles>
 		<div id="banner-wrapper" class="absolute w-full transition-all"
 			 class:list={{'banner-home': isHomePage, 'banner-else': !isHomePage}}
@@ -167,6 +169,7 @@ html::view-transition-new(banner-ani) {
 
 /* TODO This is a temporary solution for style flicker issue when the transition is activated */
 /* issue link: https://github.com/withastro/astro/issues/8711, the solution get from here too */
+/* update: fixed in Astro 3.2.4 */
 function disableAnimation() {
 	const css = document.createElement('style')
 	css.appendChild(
@@ -180,7 +183,6 @@ function disableAnimation() {
               }`
 		)
 	)
-	console.log("add")
 	document.head.appendChild(css)
 
 	return () => {
@@ -189,7 +191,6 @@ function disableAnimation() {
 
 		// Wait for next tick before removing
 		setTimeout(() => {
-			console.log("remove")
 			document.head.removeChild(css)
 		}, 1)
 	}
@@ -268,7 +269,8 @@ function setBannerHeight() {
 }
 
 /* Load settings when entering the site */
-disableAnimation()()		// TODO
+// disableAnimation()()		// TODO
+setBannerHeight();
 loadTheme();
 loadHue();
 activateDisplaySettings();
@@ -279,9 +281,8 @@ document.addEventListener('astro:after-swap', () => {
 	setBannerHeight();
 	loadTheme();
 	loadHue();
-	disableAnimation()();		// TODO
+	// disableAnimation()();		// TODO
 	activateDisplaySettings();
-	fb();
 });
 </script>
 

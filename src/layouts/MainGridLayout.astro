@@ -17,15 +17,13 @@ const { title, banner } = Astro.props;
 
 const isHomePage = pathsEqual(Astro.url.pathname, '/') || pathsEqual(Astro.url.pathname, '/page/1');
 
-const pageWidth = "1200px";
-const sidebarWidth = "280px";
 
 const enableBanner = getConfig().banner.enable;
 
 ---
 
 <Layout title={title} banner={banner}>
-<div class=`max-w-[1200px] min-h-screen grid grid-cols-[280px_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto] 
+<div class=`max-w-[var(--page-width)] min-h-screen grid grid-cols-[280px_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto] 
     mx-auto gap-4 relative  md:px-4 lg:px-0`
      transition:animate="none"
 >
