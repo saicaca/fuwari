@@ -4,11 +4,11 @@ import MainGridLayout from "../../layouts/MainGridLayout.astro";
 import ImageBox from "../../components/misc/ImageBox.astro";
 import {Icon} from "astro-icon/components";
 import PostMetadata from "../../components/PostMetadata.astro";
-import {getPostUrlBySlug} from "../../utils/content-utils";
 import Button from "../../components/control/Button.astro";
 import {getConfig} from "../../utils/config-utils";
 import {i18n} from "../../i18n/translation";
 import I18nKey from "../../i18n/i18nKey";
+import {getPostUrlBySlug} from "../../utils/url-utils";
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection('posts');

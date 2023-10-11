@@ -24,4 +24,6 @@ export const en: Translation = {
     [Key.postsCount]: "posts",
 
     [Key.primaryColor]: "Primary Color",
+
+    [Key.more]: "More",
 };

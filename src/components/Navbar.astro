@@ -19,10 +19,10 @@ function getLinkName(name: string) {
 }
 
 ---
-<div class:list={[
+<div transition:animate="none" class:list={[
     className,
-    "card-base max-w-[var(--page-width)] h-[72px] rounded-t-none mx-auto flex items-center justify-between px-4"]}>
-    <a href="/"><Button height="52px" class="px-5 font-bold rounded-lg" light>
+    "card-base sticky top-0 overflow-visible max-w-[var(--page-width)] h-[72px] rounded-t-none mx-auto flex items-center justify-between px-4"]}>
+    <a href="/page/1"><Button height="52px" class="px-5 font-bold rounded-lg" light>
         <div class="flex flex-row text-[var(--primary)] items-center text-md">
             <Icon name="material-symbols:home-outline-rounded" size={28} class="mb-1 mr-2" />
             {getConfig().title}

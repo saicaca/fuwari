@@ -8,8 +8,12 @@ import I18nKey from "../../i18n/i18nKey";
 
 const tags = await getTagList();
 
+const COLLAPSED_HEIGHT = "120px";
+
+const isCollapsed = tags.length >= 20;
+
 ---
-<WidgetLayout name={i18n(I18nKey.tags)}>
+<WidgetLayout name={i18n(I18nKey.tags)} id="tags" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}>
     <div class="flex gap-2 flex-wrap">
         {tags.map(t => (
             <ButtonTag href={`/archive/tag/${t.name}`}>

@@ -21,6 +21,8 @@ enum I18nKey {
     postsCount = "postsCount",
 
     primaryColor = "primaryColor",
+
+    more = "more",
 }
 
 export default I18nKey;

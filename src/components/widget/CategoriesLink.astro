@@ -1,0 +1,21 @@
+---
+
+import {CategoryMap} from "../../utils/content-utils";
+import {getCategoryUrl} from "../../utils/url-utils";
+import ButtonLink from "../control/ButtonLink.astro";
+
+interface Props {
+    categories: CategoryMap;
+}
+
+const {categories} = Astro.props;
+
+---
+<div>
+    {Object.entries(categories).map(([key, value]) =>
+        <ButtonLink url={getCategoryUrl(key)} badge={value.count}>{value.name}</ButtonLink>
+        <div class="ml-2">
+            {Object.keys(value.children).length > 0 && <Astro.self categories={value.children}></Astro.self>}
+        </div>
+    )}
+</div>

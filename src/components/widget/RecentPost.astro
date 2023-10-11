@@ -1,17 +1,17 @@
 ---
 import WidgetLayout from "./WidgetLayout.astro";
 import ButtonLink from "../control/ButtonLink.astro";
-import {getPostUrlBySlug, getSortedPosts} from "../../utils/content-utils";
+import {getSortedPosts} from "../../utils/content-utils";
 import {i18n} from "../../i18n/translation";
 import I18nKey from "../../i18n/i18nKey";
+import {getPostUrlBySlug} from "../../utils/url-utils";
 
 let posts = await getSortedPosts()
 
-const LIMIT = 5;
+const LIMIT = 3;
 
 posts = posts.slice(0, LIMIT)
 
-// console.log(posts)
 ---
 <WidgetLayout name={i18n(I18nKey.recentPosts)}>
     {posts.map(post =>

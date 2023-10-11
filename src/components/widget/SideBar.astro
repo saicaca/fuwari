@@ -1,14 +1,20 @@
 ---
 import Profile from "./Profile.astro";
 import RecentPost from "./RecentPost.astro";
-import Tag from "./Tag.astro";
+import Tag from "./Tags.astro";
+import Categories from "./Categories.astro";
 
 const className = Astro.props.class;
 ---
-<div id="sidebar" class:list={[className, "flex flex-col w-full gap-4"]} transition:persist>
-    <Profile></Profile>
-    <RecentPost></RecentPost>
-    <Tag></Tag>
+<div id="sidebar" class:list={[className, "w-full"]} transition:persist>
+    <div class="flex flex-col w-full gap-4 mb-4">
+        <Profile></Profile>
+    </div>
+    <div class="flex flex-col w-full gap-4 top-4 sticky top-4" transition:animate="none">
+        <Categories></Categories>
+        <RecentPost></RecentPost>
+        <Tag></Tag>
+    </div>
 </div>
 
 <style>

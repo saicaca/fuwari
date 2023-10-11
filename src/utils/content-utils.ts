@@ -20,12 +20,6 @@ export async function getSortedPosts() {
     return sorted;
 }
 
-export function getPostUrlBySlug(slug: string): string | null {
-    if (!slug)
-        return null;
-    return `/posts/${slug}`;
-}
-
 export async function getTagList(): Promise<{ name: string; count: number }[]> {
     const allBlogPosts = await getCollection("posts");
 
@@ -51,4 +45,28 @@ export async function getTagList(): Promise<{ name: string; count: number }[]> {
     });
 
     return keys.map((key) => ({name: key, count: countMap[key]}));
+}
+
+type Category = {
+    name: string;
+    count: number;
+    children: CategoryMap;
+}
+
+export type CategoryMap = { [key: string]: Category };
+
+export async function getCategoryMap(): Promise<CategoryMap> {
+    const allBlogPosts = await getCollection("posts");
+    let root: CategoryMap = {};
+    allBlogPosts.map((post) => {
+        let current = root;
+        if (!post.data.categories)
+            return;
+        for (const c of post.data.categories) {
+            if (!current[c]) current[c] = {name: c, count: 0, children: {}};
+            current[c].count++;
+            current = current[c].children;
+        }
+    });
+    return root;
 }

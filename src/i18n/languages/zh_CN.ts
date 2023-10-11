@@ -24,4 +24,6 @@ export const zh_CN: Translation = {
     [Key.postsCount]: "篇文章",
 
     [Key.primaryColor]: "主题色",
+
+    [Key.more]: "更多",
 };

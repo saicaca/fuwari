@@ -1,23 +1,16 @@
 ---
-import { getCollection, getEntry } from "astro:content";
 import MainGridLayout from "../../layouts/MainGridLayout.astro";
 import TitleCard from "../../components/TitleCardNew.astro";
 import Pagination from "../../components/control/Pagination.astro";
-import {getPostUrlBySlug, getSortedPosts} from "../../utils/content-utils";
-import {getConfig} from "../../utils/config-utils";
+import {getSortedPosts} from "../../utils/content-utils";
+import {getPostUrlBySlug} from "../../utils/url-utils";
 
 export async function getStaticPaths({ paginate }) {
-    // const allBlogPosts = await getCollection("posts");
     const allBlogPosts = await getSortedPosts();
     return paginate(allBlogPosts, { pageSize: 6 });
 }
 
 const {page} = Astro.props;
-
-// page.data.map(entry => console.log(entry));
-// console.log(page)
-
-// console.log(getConfig());
 
 ---
 

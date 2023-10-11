@@ -1,0 +1,33 @@
+---
+import WidgetLayout from "./WidgetLayout.astro";
+
+import {i18n} from "../../i18n/translation";
+import I18nKey from "../../i18n/i18nKey";
+import {CategoryMap, getCategoryMap} from "../../utils/content-utils";
+import CategoriesLink from "./CategoriesLink.astro";
+
+const categories = await getCategoryMap();
+
+const COLLAPSED_HEIGHT = "120px";
+const COLLAPSE_THRESHOLD = 5;
+
+function count(categoryMap: CategoryMap): number {
+    let res = 0;
+    for (const key in categoryMap) {
+        res++;
+        res += count(categoryMap[key].children);
+    }
+    return res;
+}
+
+const isCollapsed = count(categories) >= COLLAPSE_THRESHOLD;
+
+interface Props {
+    categories: CategoryMap;
+}
+
+---
+
+<WidgetLayout name={i18n(I18nKey.categories)} id="categories" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}>
+    <CategoriesLink categories={categories}></CategoriesLink>
+</WidgetLayout>
