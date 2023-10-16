@@ -9,6 +9,7 @@ import {getConfig} from "../../utils/config-utils";
 import {i18n} from "../../i18n/translation";
 import I18nKey from "../../i18n/i18nKey";
 import {getPostUrlBySlug} from "../../utils/url-utils";
+import CommentLayout from "../../components/comment/CommentLayout.astro";
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection('posts');
@@ -83,8 +84,8 @@ const { remarkPluginFrontmatter } = await entry.render();
         </div>
     </div>
 
-    <div class="flex flex-col md:flex-row justify-between gap-4 overflow-hidden w-full">
-        <a href={getPostUrlBySlug(entry.data.nextSlug)} class="w-full font-bold overflow-hidden">
+    <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
+        <a href={getPostUrlBySlug(entry.data.nextSlug)} class="w-full font-bold overflow-hidden active:scale-95">
             {entry.data.nextSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-start gap-4" card height="60px">
                 <Icon name="material-symbols:chevron-left-rounded" size={32} class="text-[var(--primary)]" />
                 <div class="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_48px)] text-black/75 dark:text-white/75">
@@ -93,7 +94,7 @@ const { remarkPluginFrontmatter } = await entry.render();
             </Button>}
         </a>
 
-        <a href={getPostUrlBySlug(entry.data.prevSlug)} class="w-full font-bold overflow-hidden">
+        <a href={getPostUrlBySlug(entry.data.prevSlug)} class="w-full font-bold overflow-hidden active:scale-95">
             {entry.data.prevSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-end gap-4" card height="60px">
                 <div class="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_48px)] text-black/75 dark:text-white/75">
                     {entry.data.prevTitle}
@@ -102,6 +103,10 @@ const { remarkPluginFrontmatter } = await entry.render();
             </Button>}
         </a>
     </div>
+
+    <CommentLayout>
+
+    </CommentLayout>
 
 </MainGridLayout>
 

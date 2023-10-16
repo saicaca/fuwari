@@ -10,15 +10,15 @@ const className = Astro.props
 const vConf = getConfig();
 
 ---
-<div class="card-base" transition:persist>
-    <ImageBox src={vConf.profile.avatar} class="w-[240px] mt-4 mx-auto lg:w-full lg:mt-0 rounded-2xl mb-3"></ImageBox>
+<div class="card-base">
+    <ImageBox src={vConf.profile.avatar} class="mt-4 mx-auto lg:w-full lg:mt-0 rounded-2xl mb-3"></ImageBox>
     <div class="font-bold text-lg text-center mb-1 dark:text-neutral-50 transition">{vConf.profile.author}</div>
     <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-3 transition"></div>
     <div class="text-center text-neutral-400 mb-2 transition">{vConf.profile.subtitle}</div>
     <div class="flex gap-2 mx-2 justify-center mb-4">
         {vConf.profile.links.map(item =>
             <a href={item.url} target="_blank">
-                <Button isIcon iconName={item.icon} regular height="40px" class="rounded-lg"></Button>
+                <Button isIcon iconName={item.icon} regular height="40px" class="rounded-lg active:scale-90"></Button>
             </a>
         )}
     </div>

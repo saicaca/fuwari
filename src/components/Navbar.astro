@@ -22,7 +22,7 @@ function getLinkName(name: string) {
 <div transition:animate="none" class:list={[
     className,
     "card-base sticky top-0 overflow-visible max-w-[var(--page-width)] h-[72px] rounded-t-none mx-auto flex items-center justify-between px-4"]}>
-    <a href="/page/1"><Button height="52px" class="px-5 font-bold rounded-lg" light>
+    <a href="/page/1"><Button height="52px" class="px-5 font-bold rounded-lg active:scale-95" light>
         <div class="flex flex-row text-[var(--primary)] items-center text-md">
             <Icon name="material-symbols:home-outline-rounded" size={28} class="mb-1 mr-2" />
             {getConfig().title}
@@ -30,15 +30,15 @@ function getLinkName(name: string) {
     </Button></a>
     <div>
         {Object.keys(getConfig().menu).map((key) => {
-            return <a href={getConfig().menu[key]}><Button light class="font-bold px-5 rounded-lg">{getLinkName(key)}</Button></a>
+            return <a href={getConfig().menu[key]}><Button light class="font-bold px-5 rounded-lg active:scale-95">{getLinkName(key)}</Button></a>
         })}
     </div>
     <div class="flex">
         <div>
-            <Button class="rounded-lg" id="display-settings-switch" iconName="material-symbols:palette-outline" iconSize={20} isIcon light></Button>
+            <Button class="rounded-lg active:scale-90" id="display-settings-switch" iconName="material-symbols:palette-outline" iconSize={20} isIcon light></Button>
         </div>
         <div>
-            <Button class="rounded-lg flex items-center justify-center" id="scheme-switch" light height="44px" width="44px">
+            <Button class="rounded-lg flex items-center justify-center active:scale-90" id="scheme-switch" light height="44px" width="44px">
                 <Icon name="material-symbols:wb-sunny-outline-rounded" size={20} class="absolute opacity-[var(--display-light-icon)]"></Icon>
                 <Icon name="material-symbols:dark-mode-outline-rounded" size={20} class="absolute opacity-[var(--display-dark-icon)]"></Icon>
             </Button>

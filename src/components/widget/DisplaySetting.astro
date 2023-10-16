@@ -56,22 +56,36 @@ const enableBanner = getConfig().banner.enable;
         border-radius: 2px;
         background: rgba(255, 255, 255, 0.7);
         box-shadow: none;
+        &:hover
+          background: rgba(255, 255, 255, 0.8);
+        &:active
+          background: rgba(255, 255, 255, 0.6);
 
     ::-moz-range-thumb
         -webkit-appearance: none;
-        height: 24px;
-        width: 10px;
-        border-radius: 4px;
+        height: 16px;
+        width: 8px;
+        border-radius: 2px;
         background: rgba(255, 255, 255, 0.7);
         box-shadow: none;
+        &:hover
+          background: rgba(255, 255, 255, 0.8);
+        &:active
+          background: rgba(255, 255, 255, 0.6);
+
 
     &::-ms-thumb
         -webkit-appearance: none;
-        height: 24px;
-        width: 10px;
-        border-radius: 4px;
+        height: 16px;
+        width: 8px;
+        border-radius: 2px;
         background: rgba(255, 255, 255, 0.7);
         box-shadow: none;
+        &:hover
+          background: rgba(255, 255, 255, 0.8);
+        &:active
+          background: rgba(255, 255, 255, 0.6);
+
 
 .banner-closed
   #display-setting

@@ -7,7 +7,7 @@ import Categories from "./Categories.astro";
 const className = Astro.props.class;
 ---
 <div id="sidebar" class:list={[className, "w-full"]} transition:persist>
-    <div class="flex flex-col w-full gap-4 mb-4">
+    <div class="flex flex-col w-full gap-4 mb-4" transition:animate="none">
         <Profile></Profile>
     </div>
     <div class="flex flex-col w-full gap-4 top-4 sticky top-4" transition:animate="none">
@@ -18,16 +18,4 @@ const className = Astro.props.class;
 </div>
 
 <style>
-#sidebar {
-    view-transition-name: ssss;
-}
-/* TODO temporarily */
-html::view-transition-old(ssss) {
-    mix-blend-mode: normal;
-    animation: none;
-}
-html::view-transition-new(ssss) {
-    mix-blend-mode: normal;
-    animation: none;
-}
 </style>

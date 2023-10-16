@@ -63,7 +63,7 @@ const { remarkPluginFrontmatter } = await entry.render();
     {hasCover && <a href={url}
                     class:list={["group",
                         "max-h-[20vh] md:max-h-none mx-4 mt-4 md:mx-0 md:mt-0",
-                        "md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden"
+                        "md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden active:scale-95"
                     ]} >
         <div class="absolute z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition"></div>
         <div class="absolute z-20 w-full h-full flex items-center justify-center ">
@@ -78,7 +78,7 @@ const { remarkPluginFrontmatter } = await entry.render();
 
     {!hasCover &&
         <a href={url} class="hidden md:block">
-            <Button width="52px" height="full" class="absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)] hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)]">
+            <Button width="52px" height="full" class="absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)] hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95">
                 <Icon name="material-symbols:chevron-right-rounded"
                       class="transition text-[var(--primary)] text-4xl mx-auto">
                 </Icon>
