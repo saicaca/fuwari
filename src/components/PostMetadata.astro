@@ -30,13 +30,13 @@ const className = Astro.props.class;
         >
             <Icon name="material-symbols:menu-rounded" class="text-xl"></Icon>
         </div>
-        <div class="flex flex-row">
+        <div class="flex flex-row flex-nowrap">
             {categories && categories.map(category => <div
                     class="with-divider"
             >
                 <a href=`/archive/category/${category}`
                    class="link transition text-black/50 dark:text-white/50 text-sm font-medium
-                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)]">
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
                     {category}
                 </a>
             </div>)}
@@ -50,13 +50,13 @@ const className = Astro.props.class;
         >
             <Icon name="material-symbols:tag-rounded" class="text-xl"></Icon>
         </div>
-        <div class="flex flex-row">
+        <div class="flex flex-row flex-nowrap">
             {tags && tags.map(tag => <div
                     class="with-divider"
             >
                 <a href=`/archive/tag/${tag}`
                    class="link transition text-black/50 dark:text-white/50 text-sm font-medium
-                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)]">
+                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
                     {tag}
                 </a>
             </div>)}
