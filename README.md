@@ -1,16 +1,18 @@
-# Astro Starter Kit: Basics
+# Fuwari
 
-```
-npm create astro@latest -- --template basics
-```
+> [!WARNING]
+> This project is still very unfinished and the code is quite messy.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+Fuwari (not the final name maybe) is a static blog template built with [Astro](https://astro.build), a refactored version of [hexo-theme-vivia](https://github.com/saicaca/hexo-theme-vivia).
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+[**🖥️Live Demo (Vercel)**](https://fuwari.vercel.app)
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## ✨ Features (Compared to the Hexo Version)
+
+- Rebuilt with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com)
+- View Transitions between pages
+  - [haven't supported by Firefox and Safari yet](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API#browser_compatibility)
+- A lot of UI redesign and improvements
 
 ## 🚀 Project Structure
 
