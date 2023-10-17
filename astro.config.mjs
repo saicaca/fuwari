@@ -5,7 +5,10 @@ import icon from "astro-icon";
 import tailwind from "@astrojs/tailwind";
 import {remarkReadingTime} from "./src/plugins/remark-reading-time.mjs";
 
+import rehypeKatex from "rehype-katex";
+
 import Color from 'colorjs.io';
+import remarkMath from "remark-math";
 
 // https://astro.build/config
 
@@ -30,6 +33,7 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkReadingTime],
+    rehypePlugins: [],
   },
   redirects: {
     '/': '/page/1',
