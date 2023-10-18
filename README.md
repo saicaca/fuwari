@@ -1,7 +1,7 @@
 # Fuwari
 
 > [!WARNING]
-> This project is still very unfinished and the code is quite messy.
+> This project is still very unfinished and the code is quite messy. Features may be changed or removed in the future.
 
 Fuwari (not the final name maybe) is a static blog template built with [Astro](https://astro.build), a refactored version of [hexo-theme-vivia](https://github.com/saicaca/hexo-theme-vivia).
 
@@ -14,43 +14,37 @@ Fuwari (not the final name maybe) is a static blog template built with [Astro](h
   - [haven't supported by Firefox and Safari yet](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API#browser_compatibility)
 - A lot of UI redesign and improvements
 
-## 🚀 Project Structure
+## 🚀 How to Use
 
-Inside of your Astro project, you'll see the following folders and files:
+1. Fork this repo.
+2. Edit the config file `fuwari.config.yml` to customize your blog.
+3. Run `npm run new-post -- <filename>` to create a new post and edit it in `src/content/posts/`.
+4. Deploy your blog to Vercel, Netlify, GitHub Pages, etc. following [the guides](https://docs.astro.build/en/guides/deploy/).
 
+## ⚙️ Frontmatter of Posts
+
+```yaml
+---
+title: My First Blog Post
+published: 2023-09-09
+description: This is the first post of my new Astro blog.
+cover:
+  url: /images/cover.jpg
+  alt: The cover image
+tags: ['Foo', 'Bar']
+---
 ```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
 
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:3000`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Command                          | Action                                           |
+|:---------------------------------|:-------------------------------------------------|
+| `npm install`                    | Installs dependencies                            |
+| `npm run dev`                    | Starts local dev server at `localhost:4321`      |
+| `npm run build`                  | Build your production site to `./dist/`          |
+| `npm run preview`                | Preview your build locally, before deploying     |
+| `npm run astro ...`              | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help`        | Get help using the Astro CLI                     |
+| `npm run new-post -- <filename>` | Create a new post                                |

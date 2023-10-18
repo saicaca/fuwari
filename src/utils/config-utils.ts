@@ -1,5 +1,5 @@
 // @ts-ignore
-import _config from '../../vivia.config.yml';
+import _config from '../../fuwari.config.yml';
 
 interface ViviaConfig {
     title: string;
