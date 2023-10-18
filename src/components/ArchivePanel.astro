@@ -51,9 +51,9 @@ function formatDate(date: Date) {
     return `${month}-${day}`;
 }
 
-
-// console.log(groups)
-
+function formatTag(tag: string[]) {
+    return tag.map(t => `#${t}`).join(' ');
+}
 
 ---
 
@@ -96,7 +96,7 @@ function formatDate(date: Date) {
                                         <div class="w-[15%] text-left text-sm transition
                                         whitespace-nowrap overflow-ellipsis overflow-hidden
                                         text-black/30 dark:text-white/30"
-                                        >#Test #Markdown</div>
+                                        >{formatTag(post.data.tags)}</div>
                                     </div>
                                 </Button>
                             </a>

@@ -1,12 +1,11 @@
 ---
-title: 'My Fourth Blog Post'
-published: 2022-07-01
-description: 'This is the first post of my new Astro blog.'
-author: 'Astro Learner'
+title: 'Cover Image Example'
+published: 2022-09-09
+description: 'How to set a cover image using the cover attribute.'
 cover:
-  url:
+  url: 'https://saicaca.github.io/vivia-preview/assets/79905307_p0.jpg'
   alt:
-tags: ["astro", "blogging", "learning in public"]
+tags: ["Fuwari", "Blogging", "Customization"]
 ---
 # My First Blog Post
 

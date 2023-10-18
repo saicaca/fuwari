@@ -1,7 +1,7 @@
 // @ts-ignore
 import _config from '../../fuwari.config.yml';
 
-interface ViviaConfig {
+interface FuwariConfig {
     title: string;
     menu: {
         [key: string]: string;
@@ -35,6 +35,6 @@ interface ViviaConfig {
     }
 }
 
-const config: ViviaConfig = _config;
+const config: FuwariConfig = _config;
 
 export const getConfig = () => config;
