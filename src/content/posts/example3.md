@@ -1,11 +1,11 @@
 ---
 title: 'My Third Blog Post'
-pubDate: 2020-07-01
+published: 2020-07-01
 description: 'This is the first post of my new Astro blog.'
 author: 'Astro Learner'
-image:
-  url: 'https://docs.astro.build/assets/full-logo-light.png'
-  alt: 'The full Astro logo.'
+cover:
+  url:
+  alt:
 tags: ["astro", "blogging", "learning in public"]
 ---
 # My First Blog Post

@@ -1,13 +1,12 @@
 ---
 title: 'My Second Blog Post'
-pubDate: 2021-07-01
+published: 2021-07-01
 description: 'This is the first post of my new Astro blog.'
 author: 'Astro Learner'
-image:
-  url: 'https://docs.astro.build/assets/full-logo-light.png'
-  alt: 'The full Astro logo.'
+cover:
+  url: 'https://saicaca.github.io/vivia-preview/assets/79905307_p0.jpg'
+  alt:
 tags: ["astro", "blogging", "learning in public"]
-cover: 'https://saicaca.github.io/vivia-preview/assets/79905307_p0.jpg'
 ---
 # My First Blog Post
 

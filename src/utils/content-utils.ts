@@ -3,8 +3,8 @@ import {CollectionEntry, getCollection} from "astro:content";
 export async function getSortedPosts() {
     const allBlogPosts = await getCollection("posts");
     const sorted = allBlogPosts.sort((a, b) => {
-        const dateA = new Date(a.data.pubDate);
-        const dateB = new Date(b.data.pubDate);
+        const dateA = new Date(a.data.published);
+        const dateB = new Date(b.data.published);
         return dateA > dateB ? -1 : 1;
     });
 

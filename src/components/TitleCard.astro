@@ -3,13 +3,13 @@ import {formatDateToYYYYMMDD} from "../utils/date-utils";
 interface Props {
     title: string;
     url: string;
-    pubDate: Date;
+    published: Date;
     tags: string[];
     cover: string;
     description: string;
     words: number;
 }
-const { title, url, pubDate, tags, cover, description, words } = Astro.props;
+const { title, url, published, tags, cover, description, words } = Astro.props;
 // console.log(Astro.props);
 import ImageBox from "./misc/ImageBox.astro";
 import ButtonTag from "./control/ButtonTag.astro";
@@ -40,7 +40,7 @@ const hasCover = cover !== undefined && cover !== null && cover !== '';
             This is a very long title
         </a>
         <div class="flex text-neutral-500 dark:text-neutral-400 items-center mb-1">
-            <div>{formatDateToYYYYMMDD(pubDate)}</div>
+            <div>{formatDateToYYYYMMDD(published)}</div>
             <div class="transition h-1 w-1 rounded-sm bg-neutral-400 dark:bg-neutral-600 mx-3"></div>
             <div>Uncategorized</div>
             <div class="transition h-1 w-1 rounded-sm bg-neutral-400 dark:bg-neutral-600 mx-3"></div>

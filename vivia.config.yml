@@ -11,7 +11,7 @@ lang: en
 
 banner:
   enable: true
-  url: https://saicaca.github.io/vivia-preview/assets/banner.jpg
+  url: /images/demo-banner.jpg
 
 profile:
   avatar: https://saicaca.github.io/vivia-preview/assets/avatar.jpg

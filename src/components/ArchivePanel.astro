@@ -26,7 +26,7 @@ if (Array.isArray(categories) && categories.length > 0) {
 
 const groups = function () {
     const groupedPosts = posts.reduce((grouped, post) => {
-        const year = post.data.pubDate.getFullYear()
+        const year = post.data.published.getFullYear()
         if (!grouped[year]) {
             grouped[year] = []
         }
@@ -73,7 +73,7 @@ function formatDate(date: Date) {
                                 <Button light height="40px" class="w-full rounded-lg hover:text-[initial]">
                                     <div class="flex flex-row justify-start items-center h-full">
                                         <!-- date -->
-                                        <div class="w-[10%] transition text-sm text-right text-black/50 dark:text-white/50">{formatDate(post.data.pubDate)}</div>
+                                        <div class="w-[10%] transition text-sm text-right text-black/50 dark:text-white/50">{formatDate(post.data.published)}</div>
                                         <!-- dot and line -->
                                         <div class="w-[10%] relative dash-line h-full flex items-center">
                                             <div class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
