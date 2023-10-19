@@ -156,6 +156,7 @@ const { remarkPluginFrontmatter } = await entry.render();
       position: absolute
       left: -0.25rem
       display: block
+      transition: background 0.15s ease-in-out;
       background: var(--btn-regular-bg)
       height: 100%
       width: 0.25rem
@@ -167,5 +168,8 @@ const { remarkPluginFrontmatter } = await entry.render();
         content: none
   img
     border-radius: 8px
+  hr
+    border-color: var(--line-divider)
+    border-style: dashed
 
 </style>

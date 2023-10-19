@@ -7,20 +7,17 @@ cover:
   alt:
 tags: ["Fuwari", "Blogging", "Customization"]
 ---
-# My First Blog Post
 
-Published on: 2022-07-01
+# How to set a cover image using the cover attribute
 
-Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
+Select an Image: Before you start, make sure you have an image you want to use as a cover. Let's assume its filename is my-cover-image.jpg and it's located in an images directory at the root of your site.
 
-## What I've accomplished
+Edit your article: At the top of your Markdown file, include the frontmatter section. Add a cover attribute and specify the path to your cover image.
 
-1. **Installing Astro**: First, I created a new Astro project and set up my online accounts.
-
-2. **Making Pages**: I then learned how to make pages by creating new `.astro` files and placing them in the `src/pages/` folder.
-
-3. **Making Blog Posts**: This is my first blog post! I now have Astro pages and Markdown posts!
-
-## What's next
-
-I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+```markdown
+---
+title: "Your Article Title"
+published: 2023-10-05
+cover: "/images/my-cover-image.jpg"
+---
+```

@@ -9,6 +9,7 @@ import ImageBox from "../components/misc/ImageBox.astro";
 import { fade } from 'astro:transitions';
 import {getConfig} from "../utils/config-utils";
 import {pathsEqual} from "../utils/url-utils";
+import ConfigCarrier from "../components/ConfigCarrier.astro";
 
 interface Props {
 	title: string;
@@ -87,6 +88,7 @@ if (title) {
 
 	</head>
 	<body class=" min-h-screen transition ">
+		<ConfigCarrier></ConfigCarrier>
 		<GlobalStyles>
 		<div id="banner-wrapper" class="absolute w-full transition-all"
 			 class:list={{'banner-home': isHomePage, 'banner-else': !isHomePage}}
@@ -153,7 +155,7 @@ html::view-transition-new(banner-ani) {
 	object-fit: none;
 }
 </style>
-<script is:inline>
+<script>
 /* Preload fonts */
 // (async function() {
 // 	try {
@@ -198,9 +200,9 @@ function disableAnimation() {
 
 
 function activateDisplaySettings() {
-	let presetList = document.getElementById("preset-list");
 	let output = document.getElementById("hueValue");
 	let slider = document.getElementById("colorSlider");
+	let configCarrier = document.getElementById("config-carrier");
 	output.innerHTML = slider.value; // Display the default slider value
 
 	let r = document.querySelector(':root');
@@ -215,13 +217,8 @@ function activateDisplaySettings() {
 	let storedHue = localStorage.getItem('hue');
 	if (storedHue) {
 		setHue(storedHue);
-	}
-
-	presetList.onclick = function(event) {
-		let hue = event.target.dataset.hue;
-		if (hue) {
-			setHue(hue);
-		}
+	} else {
+		setHue(configCarrier.dataset.hue);
 	}
 
 	slider.oninput = function() {
@@ -245,8 +242,10 @@ function loadTheme() {
 	if (localStorage.theme === 'dark' || (!('theme' in localStorage) &&
 		window.matchMedia('(prefers-color-scheme: dark)').matches)) {
 		document.documentElement.classList.add('dark');
+		localStorage.theme = 'dark';
 	} else {
 		document.documentElement.classList.remove('dark');
+		localStorage.theme = 'light';
 	}
 }
 
