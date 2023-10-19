@@ -26,7 +26,7 @@ const { remarkPluginFrontmatter } = await entry.render();
 ---
 <MainGridLayout banner={entry.data.cover.url} title={entry.data.title}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
-        <div class:list={["card-base z-10 px-4 md:px-9 py-6 relative w-full ",
+        <div class:list={["card-base z-10 px-4 md:px-9 pt-6 pb-10 relative w-full ",
             {}
         ]}>
             <!-- word count and reading time -->
@@ -171,5 +171,10 @@ const { remarkPluginFrontmatter } = await entry.render();
   hr
     border-color: var(--line-divider)
     border-style: dashed
+  iframe
+    border-radius: 8px
+    margin-left: auto
+    margin-right: auto
+    max-width: 100%
 
 </style>

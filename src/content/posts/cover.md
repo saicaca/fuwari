@@ -1,6 +1,6 @@
 ---
 title: 'Cover Image Example'
-published: 2022-09-09
+published: 2023-09-01
 description: 'How to set a cover image using the cover attribute.'
 cover:
   url: 'https://saicaca.github.io/vivia-preview/assets/79905307_p0.jpg'
