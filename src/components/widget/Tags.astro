@@ -16,7 +16,7 @@ const isCollapsed = tags.length >= 20;
 <WidgetLayout name={i18n(I18nKey.tags)} id="tags" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}>
     <div class="flex gap-2 flex-wrap">
         {tags.map(t => (
-            <ButtonTag href={`/archive/tag/${t.name}`}>
+            <ButtonTag href={`/archive/tag/${t.name}`} label={`View all posts with the ${t.name} tag`}>
                 {t.name}
             </ButtonTag>
         ))}

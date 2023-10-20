@@ -69,7 +69,7 @@ function formatTag(tag: string[]) {
                         <div class="w-[80%] transition text-left text-black/50 dark:text-white/50">{group.posts.length} Articles</div>
                     </div>
                     {group.posts.map(post => (
-                            <a href={getPostUrlBySlug(post.slug)} class="group">
+                            <a href={getPostUrlBySlug(post.slug)} aria-label={post.data.title} class="group">
                                 <Button light height="40px" class="w-full rounded-lg hover:text-[initial]">
                                     <div class="flex flex-row justify-start items-center h-full">
                                         <!-- date -->

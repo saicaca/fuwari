@@ -22,10 +22,6 @@ import Button from "./control/Button.astro";
 import {i18n} from "../i18n/translation";
 import I18nKey from "../i18n/i18nKey";
 
-// tags = ['Foo', 'Bar', 'Baz', 'Qux', 'Quux'];
-
-// const cover = 'https://saicaca.github.io/vivia-preview/assets/79905307_p0.jpg';
-// cover = null;
 const hasCover = cover !== undefined && cover !== null && cover !== '';
 
 const coverWidth = "28%";
@@ -60,7 +56,7 @@ const { remarkPluginFrontmatter } = await entry.render();
 
     </div>
 
-    {hasCover && <a href={url}
+    {hasCover && <a href={url} aria-label={title}
                     class:list={["group",
                         "max-h-[20vh] md:max-h-none mx-4 mt-4 md:mx-0 md:mt-0",
                         "md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden active:scale-95"
@@ -71,14 +67,14 @@ const { remarkPluginFrontmatter } = await entry.render();
                   class="transition opacity-0 group-hover:opacity-100 text-white text-5xl">
             </Icon>
         </div>
-        <ImageBox src={cover}
+        <ImageBox src={cover} alt={entry.data.cover.alt || "Cover Image of the Post"}
                   class="w-full h-full">
         </ImageBox>
     </a>}
 
     {!hasCover &&
-        <a href={url} class="hidden md:block">
-            <Button width="52px" height="full" class="absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)] hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95">
+        <a href={url} aria-label={title} class="hidden md:block">
+            <Button name="Enter the Post" width="52px" height="full" class="absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)] hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95">
                 <Icon name="material-symbols:chevron-right-rounded"
                       class="transition text-[var(--primary)] text-4xl mx-auto">
                 </Icon>

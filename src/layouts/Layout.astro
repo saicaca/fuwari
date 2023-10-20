@@ -94,8 +94,7 @@ if (title) {
 			 class:list={{'banner-home': isHomePage, 'banner-else': !isHomePage}}
 
 		>
-			<!-- TODO the transition here is not correct -->
-			<ImageBox  id="boxtest" class:list={["object-center object-cover h-full", {"hidden": !viConf.banner.enable}]}
+			<ImageBox id="boxtest" alt="Banner image of the blog" class:list={["object-center object-cover h-full", {"hidden": !viConf.banner.enable}]}
 					  src={banner} transition:animate="fade"
 			>
 			</ImageBox>

@@ -2,7 +2,6 @@
 import {getConfig} from "../../utils/config-utils";
 import {i18n} from "../../i18n/translation";
 import I18nKey from "../../i18n/i18nKey";
-const hueSet: number[] = [0, 30, 60, 180, 250, 270, 300, 330, 345];
 
 const enableBanner = getConfig().banner.enable;
 
@@ -21,20 +20,8 @@ const enableBanner = getConfig().banner.enable;
             {0}
         </div>
     </div>
-    <div id="preset-list" class="flex flex-row gap-1 mb-4 hidden">
-        {hueSet.map((hue) => <div
-            class="h-7 w-8 rounded-md cursor-pointer
-                bg-[oklch(0.75_0.14_var(--hue))]
-                hover:bg-[oklch(0.70_0.12_var(--hue))]
-                active:bg-[oklch(0.65_0.11_var(--hue))]
-            "
-            style=`--hue: ${hue}` data-hue={hue}
-        >
-
-        </div>)}
-    </div>
     <div class="w-full h-6 px-1 bg-[oklch(0.80_0.10_0)] dark:bg-[oklch(0.70_0.10_0)] rounded select-none">
-        <input type="range" min="0" max="360" value="0" class="slider" id="colorSlider" step="5" style="width: 100%;">
+        <input aria-label="Theme Color" type="range" min="0" max="360" value="0" class="slider" id="colorSlider" step="5" style="width: 100%;">
     </div>
 
 </div>

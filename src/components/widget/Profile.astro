@@ -12,20 +12,20 @@ const vConf = getConfig();
 
 ---
 <div class="card-base">
-    <a href="/about" class="group block relative m-3 overflow-hidden rounded-xl active:scale-95">
+    <a aria-label="Go to About Page" href="/about" class="group block relative m-3 overflow-hidden rounded-xl active:scale-95">
         <div class="absolute transition group-hover:bg-black/30 group-active:bg-black/50 w-full h-full z-50 flex items-center justify-center">
             <Icon name="material-symbols:person-outline-rounded"
                   class="transition opacity-0 group-hover:opacity-100 text-white text-6xl">
             </Icon>
         </div>
-        <ImageBox src={vConf.profile.avatar} class="mt-1 mx-auto w-[240px] lg:w-full h-full lg:mt-0 "></ImageBox>
+        <ImageBox src={vConf.profile.avatar} alt="Profile Image of the Author" class="mt-1 mx-auto w-[240px] lg:w-full h-full lg:mt-0 "></ImageBox>
     </a>
     <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{vConf.profile.author}</div>
     <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-3 transition"></div>
     <div class="text-center text-neutral-400 mb-2 transition">{vConf.profile.subtitle}</div>
     <div class="flex gap-2 mx-2 justify-center mb-4">
         {vConf.profile.links.map(item =>
-            <a href={item.url} target="_blank">
+            <a aria-label={item.name} href={item.url} target="_blank">
                 <Button isIcon iconName={item.icon} regular height="40px" class="rounded-lg active:scale-90"></Button>
             </a>
         )}

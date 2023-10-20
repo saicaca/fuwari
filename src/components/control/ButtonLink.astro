@@ -2,10 +2,11 @@
 interface Props {
     badge?: string
     url?: string
+    label?: string
 }
-const { badge, url } = Astro.props
+const { badge, url, name } = Astro.props
 ---
-<a href={url}>
+<a href={url} aria-label={name}>
     <button
         class:list={`
             w-full

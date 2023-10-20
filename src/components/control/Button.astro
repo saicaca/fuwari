@@ -1,6 +1,7 @@
 ---
 interface Props {
     id?: string;
+    name?: string;
     isIcon?: boolean;
     iconName?: string;
     width?: string;
@@ -15,6 +16,7 @@ interface Props {
 const props = Astro.props;
 const {
     id,
+    name,
     isIcon = false,
     iconName,
     width,
@@ -31,6 +33,7 @@ import { Icon } from 'astro-icon/components';
 
 <button id={id}
         disabled={disabled}
+        aria-label={name}
     class:list={[
     className,
     `

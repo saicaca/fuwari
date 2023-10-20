@@ -30,15 +30,15 @@ function getLinkName(name: string) {
     </Button></a>
     <div>
         {Object.keys(getConfig().menu).map((key) => {
-            return <a href={getConfig().menu[key]}><Button light class="font-bold px-5 rounded-lg active:scale-95">{getLinkName(key)}</Button></a>
+            return <a aria-label={getLinkName(key)} href={getConfig().menu[key]}><Button light class="font-bold px-5 rounded-lg active:scale-95">{getLinkName(key)}</Button></a>
         })}
     </div>
     <div class="flex">
         <div>
-            <Button class="rounded-lg active:scale-90" id="display-settings-switch" iconName="material-symbols:palette-outline" iconSize={20} isIcon light></Button>
+            <Button name="Display Settings" class="rounded-lg active:scale-90" id="display-settings-switch" iconName="material-symbols:palette-outline" iconSize={20} isIcon light></Button>
         </div>
         <div>
-            <Button class="rounded-lg flex items-center justify-center active:scale-90" id="scheme-switch" light height="44px" width="44px">
+            <Button name="Light/Dark Mode" class="rounded-lg flex items-center justify-center active:scale-90" id="scheme-switch" light height="44px" width="44px">
                 <Icon name="material-symbols:wb-sunny-outline-rounded" size={20} class="absolute opacity-[var(--display-light-icon)]"></Icon>
                 <Icon name="material-symbols:dark-mode-outline-rounded" size={20} class="absolute opacity-[var(--display-dark-icon)]"></Icon>
             </Button>
