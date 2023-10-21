@@ -8,11 +8,11 @@ interface Props {
     published: Date;
     tags: string[];
     categories: string[];
-    cover: string;
+    image: string;
     description: string;
     words: number;
 }
-const { entry, title, url, published, tags, categories, cover, description, words } = Astro.props;
+const { entry, title, url, published, tags, categories, image, description, words } = Astro.props;
 const className = Astro.props.class;
 // console.log(Astro.props);
 import ImageBox from "./misc/ImageBox.astro";
@@ -22,7 +22,7 @@ import Button from "./control/Button.astro";
 import {i18n} from "../i18n/translation";
 import I18nKey from "../i18n/i18nKey";
 
-const hasCover = cover !== undefined && cover !== null && cover !== '';
+const hasCover = image !== undefined && image !== null && image !== '';
 
 const coverWidth = "28%";
 
@@ -67,7 +67,7 @@ const { remarkPluginFrontmatter } = await entry.render();
                   class="transition opacity-0 group-hover:opacity-100 text-white text-5xl">
             </Icon>
         </div>
-        <ImageBox src={cover} alt={entry.data.cover.alt || "Cover Image of the Post"}
+        <ImageBox src={image} alt="Cover Image of the Post"
                   class="w-full h-full">
         </ImageBox>
     </a>}

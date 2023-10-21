@@ -5,11 +5,11 @@ interface Props {
     url: string;
     published: Date;
     tags: string[];
-    cover: string;
+    image: string;
     description: string;
     words: number;
 }
-const { title, url, published, tags, cover, description, words } = Astro.props;
+const { title, url, published, tags, image, description, words } = Astro.props;
 // console.log(Astro.props);
 import ImageBox from "./misc/ImageBox.astro";
 import ButtonTag from "./control/ButtonTag.astro";
@@ -19,7 +19,7 @@ import { Icon } from 'astro-icon/components';
 
 // const cover = 'https://saicaca.github.io/vivia-preview/assets/79905307_p0.jpg';
 // cover = null;
-const hasCover = cover !== undefined && cover !== null && cover !== '';
+const hasCover = image !== undefined && image !== null && image !== '';
 
 
 ---

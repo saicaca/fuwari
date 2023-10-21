@@ -28,9 +28,7 @@ Fuwari (not the final name maybe) is a static blog template built with [Astro](h
 title: My First Blog Post
 published: 2023-09-09
 description: This is the first post of my new Astro blog.
-cover:
-  url: /images/cover.jpg
-  alt: The cover image
+image: /images/cover.jpg
 tags: ['Foo', 'Bar']
 ---
 ```

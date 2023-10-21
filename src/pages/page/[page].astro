@@ -25,7 +25,7 @@ const {page} = Astro.props;
                 categories={entry.data.categories}
                 published={entry.data.published}
                 url={getPostUrlBySlug(entry.slug)}
-                cover={entry.data.cover.url}
+                image={entry.data.image}
                 description={entry.data.description}
             ></TitleCard>
         )}

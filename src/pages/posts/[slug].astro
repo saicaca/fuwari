@@ -24,7 +24,7 @@ const { Content } = await entry.render();
 const { remarkPluginFrontmatter } = await entry.render();
 
 ---
-<MainGridLayout banner={entry.data.cover.url} title={entry.data.title}>
+<MainGridLayout banner={entry.data.image} title={entry.data.title}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
         <div class:list={["card-base z-10 px-4 md:px-9 pt-6 pb-10 relative w-full ",
             {}
@@ -68,11 +68,11 @@ const { remarkPluginFrontmatter } = await entry.render();
 
             <!-- always show cover as long as it has one -->
 
-            {entry.data.cover.url &&
-                <ImageBox src={entry.data.cover.url} class="mb-8 rounded-xl"/>
+            {entry.data.image &&
+                <ImageBox src={entry.data.image} class="mb-8 rounded-xl"/>
             }
 
-            {!entry.data.cover.url && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
+            {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
 
             <div class="prose dark:prose-invert prose-sm md:prose-base max-w-none custom-md
             ">

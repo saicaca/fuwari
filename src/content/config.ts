@@ -5,10 +5,7 @@ const blogCollection = defineCollection({
         title: z.string(),
         published: z.date(),
         description: z.string().optional(),
-        cover: z.object({
-            url: z.string(),
-            alt: z.string(),
-        }),
+        image: z.string().optional(),
         tags: z.array(z.string()).optional(),
     })
 })

@@ -39,9 +39,7 @@ const content =
 title: ${args[0]}
 published: ${getDate()}
 description: 
-cover:
-  url: 
-  alt: 
+image:
 tags: []
 categories: []
 ---
