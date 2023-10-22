@@ -7,12 +7,17 @@ Fuwari (not the final name maybe) is a static blog template built with [Astro](h
 
 [**🖥️Live Demo (Vercel)**](https://fuwari.vercel.app)
 
-## ✨ Features (Compared to the Hexo Version)
+## ✨ Features
 
-- Rebuilt with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com)
-- View Transitions between pages
-  - [haven't supported by Firefox and Safari yet](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API#browser_compatibility)
-- A lot of UI redesign and improvements
+- [x] **Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com)**
+- [x] **View Transitions between pages**
+  - [Haven't supported by Firefox and Safari yet](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API#browser_compatibility)
+- [x] Light / dark mode
+- [x] Customizable theme colors & banner
+- [x] Responsive design
+- [ ] Comments
+- [ ] Search
+- [ ] TOC
 
 ## 🚀 How to Use
 
