@@ -7,9 +7,9 @@ import { ViewTransitions } from 'astro:transitions';
 import ImageBox from "../components/misc/ImageBox.astro";
 
 import { fade } from 'astro:transitions';
-import {getConfig} from "../utils/config-utils";
 import {pathsEqual} from "../utils/url-utils";
 import ConfigCarrier from "../components/ConfigCarrier.astro";
+import {siteConfig} from "../config";
 
 interface Props {
 	title: string;
@@ -46,18 +46,19 @@ const myFade = {
 
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
-const viConf = getConfig();
-const configHue = viConf.appearance.hue;
+const configHue = siteConfig.themeHue;
 if (!banner || typeof banner !== 'string' || banner.trim() === '') {
-	banner = viConf.banner.url;
+	banner = siteConfig.banner.src;
 }
 
 // TODO don't use post cover as banner for now
-banner = viConf.banner.url;
+banner = siteConfig.banner.src;
 
-let pageTitle = getConfig().title;
+let pageTitle;
 if (title) {
-	pageTitle = `${title} - ${pageTitle}`;
+	pageTitle = `${title} - ${siteConfig.title}`;
+} else {
+	pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`;
 }
 
 ---
@@ -94,8 +95,8 @@ if (title) {
 			 class:list={{'banner-home': isHomePage, 'banner-else': !isHomePage}}
 
 		>
-			<ImageBox id="boxtest" alt="Banner image of the blog" class:list={["object-center object-cover h-full", {"hidden": !viConf.banner.enable}]}
-					  src={banner} transition:animate="fade"
+			<ImageBox id="boxtest" alt="Banner image of the blog" class:list={["object-center object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
+					  src={siteConfig.banner.src} transition:animate="fade"
 			>
 			</ImageBox>
 		</div>

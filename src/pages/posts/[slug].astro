@@ -5,7 +5,6 @@ import ImageBox from "../../components/misc/ImageBox.astro";
 import {Icon} from "astro-icon/components";
 import PostMetadata from "../../components/PostMetadata.astro";
 import Button from "../../components/control/Button.astro";
-import {getConfig} from "../../utils/config-utils";
 import {i18n} from "../../i18n/translation";
 import I18nKey from "../../i18n/i18nKey";
 import {getPostUrlBySlug} from "../../utils/url-utils";
@@ -109,16 +108,30 @@ const { remarkPluginFrontmatter } = await entry.render();
 <style lang="stylus" is:global>
 .custom-md
   a
+    position: relative
     background: none
     margin: -4px
     padding: 4px
     border-radius: 6px
     color: var(--primary)
-    text-decoration none
+    text-decoration-line: none;
+    /*&:after*/
+    /*  content: ''*/
+    /*  position: absolute*/
+    /*  left: 2px*/
+    /*  right: 2px*/
+    /*  bottom: 4px*/
+    /*  height: 6px*/
+    /*  border-radius: 3px*/
+    /*  background: var(--link-hover)*/
+    /*  transition: background 0.15s ease-in-out;*/
+    /*  z-index: -1;*/
     &:hover
       background: var(--link-hover)
     &:active
       background: var(--link-active)
+      /*&:after*/
+      /*  background: var(--link-active)*/
   code
     font-family: monospace
     background: var(--inline-code-bg)
@@ -132,6 +145,9 @@ const { remarkPluginFrontmatter } = await entry.render();
         content: none
   pre
     background: var(--codeblock-bg) !important
+    border-radius: 12px
+    padding-left: 20px
+    padding-right: 20px
     code
       padding: 0
       background: none
@@ -172,7 +188,7 @@ const { remarkPluginFrontmatter } = await entry.render();
     border-color: var(--line-divider)
     border-style: dashed
   iframe
-    border-radius: 8px
+    border-radius: 12px
     margin-left: auto
     margin-right: auto
     max-width: 100%

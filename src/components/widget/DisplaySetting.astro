@@ -1,9 +1,9 @@
 ---
-import {getConfig} from "../../utils/config-utils";
 import {i18n} from "../../i18n/translation";
 import I18nKey from "../../i18n/i18nKey";
+import {siteConfig} from "../../config";
 
-const enableBanner = getConfig().banner.enable;
+const enableBanner = siteConfig.banner.enable;
 
 ---
 <div id="display-setting" class:list={["card-base closed absolute transition-all w-[320px] fixed right-4 border-[var(--primary)] px-4 py-4",

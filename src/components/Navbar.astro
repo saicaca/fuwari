@@ -2,20 +2,41 @@
 import Button from "./control/Button.astro";
 import { Icon } from 'astro-icon/components';
 import DisplaySetting from "./widget/DisplaySetting.astro";
-import {getConfig} from "../utils/config-utils";
 import I18nKey from "../i18n/i18nKey";
 import {i18n} from "../i18n/translation";
+import {LinkPreset, NavBarLink} from "../types/config";
+import {navBarConfig, siteConfig} from "../config";
 const className = Astro.props.class;
 
 function isI18nKey(key: string): key is I18nKey {
     return Object.values(I18nKey).includes(key);
 }
 
-function getLinkName(name: string) {
-    if (isI18nKey(name)) {
-        return i18n(name);
+let links: NavBarLink[] = navBarConfig.links.map((item) => {
+    if (typeof item === "number") {
+        return getLinkPresetInfo(item)
     }
-    return name;
+    return item;
+});
+
+function getLinkPresetInfo(p: LinkPreset): NavBarLink {
+    switch (p) {
+        case LinkPreset.Home:
+            return {
+                name: i18n(I18nKey.home),
+                url: "/page/1"
+            };
+        case LinkPreset.Archive:
+            return {
+                name: i18n(I18nKey.archive),
+                url: "/archive"
+            };
+        case LinkPreset.About:
+            return {
+                name: i18n(I18nKey.about),
+                url: "/about"
+            };
+    }
 }
 
 ---
@@ -25,12 +46,12 @@ function getLinkName(name: string) {
     <a href="/page/1"><Button height="52px" class="px-5 font-bold rounded-lg active:scale-95" light>
         <div class="flex flex-row text-[var(--primary)] items-center text-md">
             <Icon name="material-symbols:home-outline-rounded" size={28} class="mb-1 mr-2" />
-            {getConfig().title}
+            {siteConfig.title}
         </div>
     </Button></a>
     <div>
-        {Object.keys(getConfig().menu).map((key) => {
-            return <a aria-label={getLinkName(key)} href={getConfig().menu[key]}><Button light class="font-bold px-5 rounded-lg active:scale-95">{getLinkName(key)}</Button></a>
+        {links.map((l) => {
+            return <a aria-label={l.name} href={l.url} target={l.external ? "_blank" : null}><Button light class="font-bold px-5 rounded-lg active:scale-95">{l.name}</Button></a>;
         })}
     </div>
     <div class="flex">

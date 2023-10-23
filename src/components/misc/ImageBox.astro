@@ -5,11 +5,23 @@ interface Props {
     class?: string;
     alt?: string
 }
+import { Image } from 'astro:assets';
+
 const {id, src, alt} = Astro.props;
 const className = Astro.props.class;
+
+const isLocal = !(src.startsWith('/') || src.startsWith('http') || src.startsWith('https') || src.startsWith('data:'));
+
+let img;
+if (isLocal) {
+    img = (await import("../../" + src)).default;
+}
+
 ---
 <div class:list={[className, 'overflow-hidden relative']}>
-    <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50"></div>
-    <img src={src} alt={alt} class="w-full h-full object-center object-cover">
+    <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
+    {isLocal && <Image src={img} alt={alt || ""} class="w-full h-full object-center object-cover" />}
+    {!isLocal && <img src={src} alt={alt || ""} class="w-full h-full object-center object-cover" />}
+
 </div>
 

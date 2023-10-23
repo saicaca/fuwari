@@ -2,7 +2,7 @@ import {en} from "./languages/en.ts";
 import {zh_TW} from "./languages/zh_TW.ts";
 import {zh_CN} from "./languages/zh_CN.ts";
 import type I18nKey from "./i18nKey.ts";
-import {getConfig} from "../utils/config-utils.ts";
+import {siteConfig} from "../config.ts";
 
 export type Translation = {
     [K in I18nKey]: string;
@@ -25,6 +25,6 @@ export function getTranslation(lang: string): Translation {
 }
 
 export function i18n(key: I18nKey): string {
-    const lang = getConfig().lang || "en";
+    const lang = siteConfig.lang || "en";
     return getTranslation(lang)[key];
 }

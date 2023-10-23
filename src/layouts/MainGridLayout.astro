@@ -6,7 +6,7 @@ import {pathsEqual} from "../utils/url-utils";
 import Footer from "../components/Footer.astro";
 import BackToTop from "../components/control/BackToTop.astro";
 import DisplaySetting from "../components/widget/DisplaySetting.astro";
-import {getConfig} from "../utils/config-utils";
+import {siteConfig} from "../config";
 
 interface Props {
     title: string;
@@ -17,8 +17,7 @@ const { title, banner } = Astro.props;
 
 const isHomePage = pathsEqual(Astro.url.pathname, '/') || pathsEqual(Astro.url.pathname, '/page/1');
 
-
-const enableBanner = getConfig().banner.enable;
+const enableBanner = siteConfig.banner.enable;
 
 ---
 

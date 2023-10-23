@@ -22,7 +22,7 @@ Fuwari (not the final name maybe) is a static blog template built with [Astro](h
 ## 🚀 How to Use
 
 1. Fork this repo.
-2. Edit the config file `fuwari.config.yml` to customize your blog.
+2. Edit the config file `src/config.ts` to customize your blog.
 3. Run `npm run new-post -- <filename>` to create a new post and edit it in `src/content/posts/`.
 4. Deploy your blog to Vercel, Netlify, GitHub Pages, etc. following [the guides](https://docs.astro.build/en/guides/deploy/).
 
