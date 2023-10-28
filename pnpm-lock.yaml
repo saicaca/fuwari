@@ -50,6 +50,9 @@ dependencies:
   valine:
     specifier: ^1.5.1
     version: 1.5.1
+  katex: 
+    specifier: ^0.16.9
+    version: 0.16.9
 
 devDependencies:
   '@astrojs/ts-plugin':
