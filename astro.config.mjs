@@ -32,8 +32,8 @@ export default defineConfig({
     })
   ],
   markdown: {
-    remarkPlugins: [remarkReadingTime],
-    rehypePlugins: [],
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex]
   },
   redirects: {
     '/': '/page/1',
