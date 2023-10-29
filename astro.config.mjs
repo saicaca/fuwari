@@ -32,7 +32,7 @@ export default defineConfig({
     })
   ],
   markdown: {
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [remarkMath, remarkReadingTime],
     rehypePlugins: [rehypeKatex]
   },
   redirects: {
