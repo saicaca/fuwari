@@ -1,10 +1,11 @@
-import type {NavBarConfig, ProfileConfig, SiteConfig} from "./types/config.ts";
+import type {LicenseConfig, NavBarConfig, ProfileConfig, SiteConfig} from "./types/config.ts";
 import {LinkPreset} from "./types/config.ts";
 
 export const siteConfig: SiteConfig = {
     title: 'Fuwari',
     subtitle: 'Demo Site',
-    lang: 'en-US',
+    url: 'https://fuwari.vercel.app/',
+    lang: 'en',
     themeHue: 250,
     banner: {
         enable: true,
@@ -44,4 +45,10 @@ export const profileConfig: ProfileConfig = {
             url: 'https://github.com/saicaca/fuwari',
         }
     ]
+}
+
+export const licenseConfig: LicenseConfig = {
+    enable: true,
+    name: 'CC BY-NC-SA 4.0',
+    url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
 }

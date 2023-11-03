@@ -26,4 +26,8 @@ export const zh_CN: Translation = {
     [Key.primaryColor]: "主题色",
 
     [Key.more]: "更多",
+
+    [Key.author]: "作者",
+    [Key.publishedAt]: "发布于",
+    [Key.license]: "许可协议",
 };

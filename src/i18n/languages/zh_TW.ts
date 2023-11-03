@@ -26,4 +26,8 @@ export const zh_TW: Translation = {
     [Key.primaryColor]: "主題色",
 
     [Key.more]: "更多",
+
+    [Key.author]: "作者",
+    [Key.publishedAt]: "發佈於",
+    [Key.license]: "許可協議",
 };

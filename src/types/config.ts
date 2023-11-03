@@ -1,6 +1,7 @@
 export type SiteConfig = {
     title: string,
     subtitle: string,
+    url: string,
 
     lang: string,
 
@@ -37,3 +38,9 @@ export type ProfileConfig = {
         icon: string,
     }[],
 };
+
+export type LicenseConfig = {
+    enable: boolean;
+    name: string,
+    url: string,
+}

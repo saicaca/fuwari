@@ -27,7 +27,8 @@ export default defineConfig({
     icon({
       include: {
         'material-symbols': ['*'],
-        'fa6-brands': ['*']
+        'fa6-brands': ['*'],
+        'fa6-regular': ['*']
       }
     })
   ],

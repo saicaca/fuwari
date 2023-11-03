@@ -26,4 +26,8 @@ export const en: Translation = {
     [Key.primaryColor]: "Primary Color",
 
     [Key.more]: "More",
+
+    [Key.author]: "Author",
+    [Key.publishedAt]: "Published at",
+    [Key.license]: "License",
 };

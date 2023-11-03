@@ -23,6 +23,10 @@ enum I18nKey {
     primaryColor = "primaryColor",
 
     more = "more",
+
+    author = "author",
+    publishedAt = "publishedAt",
+    license = "license",
 }
 
 export default I18nKey;

@@ -8,7 +8,8 @@ import Button from "../../components/control/Button.astro";
 import {i18n} from "../../i18n/translation";
 import I18nKey from "../../i18n/i18nKey";
 import {getPostUrlBySlug} from "../../utils/url-utils";
-import CommentLayout from "../../components/comment/CommentLayout.astro";
+import License from "../../components/misc/License.astro";
+import {licenseConfig} from "../../config";
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection('posts');
@@ -25,7 +26,7 @@ const { remarkPluginFrontmatter } = await entry.render();
 ---
 <MainGridLayout banner={entry.data.image} title={entry.data.title}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
-        <div class:list={["card-base z-10 px-4 md:px-9 pt-6 pb-10 relative w-full ",
+        <div class:list={["card-base z-10 px-4 md:px-9 pt-6 pb-4 relative w-full ",
             {}
         ]}>
             <!-- word count and reading time -->
@@ -73,12 +74,14 @@ const { remarkPluginFrontmatter } = await entry.render();
 
             {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
 
-            <div class="prose dark:prose-invert prose-sm md:prose-base max-w-none custom-md
+            <div class="mb-6 prose dark:prose-invert prose-sm md:prose-base max-w-none custom-md
             ">
             <!--<div class="prose dark:prose-invert max-w-none custom-md">-->
             <!--<div class="max-w-none custom-md">-->
                 <Content />
             </div>
+
+            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl"></License>}
 
         </div>
     </div>
@@ -183,7 +186,7 @@ const { remarkPluginFrontmatter } = await entry.render();
       &:after
         content: none
   img
-    border-radius: 8px
+    border-radius: 12px
   hr
     border-color: var(--line-divider)
     border-style: dashed
