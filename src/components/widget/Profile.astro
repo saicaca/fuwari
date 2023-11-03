@@ -14,15 +14,15 @@ const config = profileConfig;
 <div class="card-base">
     <a aria-label="Go to About Page" href="/about" class="group block relative m-3 overflow-hidden rounded-xl active:scale-95">
         <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50 w-full h-full z-50 flex items-center justify-center">
-            <Icon name="material-symbols:person-outline-rounded"
-                  class="transition opacity-0 group-hover:opacity-100 text-white text-6xl">
+            <Icon name="fa6-regular:address-card"
+                  class="transition opacity-0 group-hover:opacity-100 text-white text-5xl">
             </Icon>
         </div>
         <ImageBox src={config.avatar} alt="Profile Image of the Author" class="mt-1 mx-auto w-[240px] lg:w-full h-full lg:mt-0 "></ImageBox>
     </a>
     <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
-    <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-3 transition"></div>
-    <div class="text-center text-neutral-400 mb-2 transition">{config.bio}</div>
+    <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
+    <div class="text-center text-neutral-400 mb-2.5 transition">{config.bio}</div>
     <div class="flex gap-2 mx-2 justify-center mb-4">
         {config.links.map(item =>
             <a aria-label={item.name} href={item.url} target="_blank">

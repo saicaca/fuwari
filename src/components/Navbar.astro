@@ -51,7 +51,14 @@ function getLinkPresetInfo(p: LinkPreset): NavBarLink {
     </Button></a>
     <div>
         {links.map((l) => {
-            return <a aria-label={l.name} href={l.url} target={l.external ? "_blank" : null}><Button light class="font-bold px-5 rounded-lg active:scale-95">{l.name}</Button></a>;
+            return <a aria-label={l.name} href={l.url} target={l.external ? "_blank" : null}>
+                <Button light class="font-bold px-5 rounded-lg active:scale-95">
+                    <div class="flex items-center">
+                        {l.name}
+                        {l.external && <Icon size="14" name="fa6-solid:arrow-up-right-from-square" class="transition -translate-y-[1px] ml-1 text-black/[0.2] dark:text-white/[0.2]"></Icon>}
+                    </div>
+                </Button>
+            </a>;
         })}
     </div>
     <div class="flex">

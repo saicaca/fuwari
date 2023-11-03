@@ -90,7 +90,7 @@ const { remarkPluginFrontmatter } = await entry.render();
         <a href={getPostUrlBySlug(entry.data.nextSlug)} class="w-full font-bold overflow-hidden active:scale-95">
             {entry.data.nextSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-start gap-4" card height="60px">
                 <Icon name="material-symbols:chevron-left-rounded" size={32} class="text-[var(--primary)]" />
-                <div class="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_48px)] text-black/75 dark:text-white/75">
+                <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_48px)] text-black/75 dark:text-white/75">
                     {entry.data.nextTitle}
                 </div>
             </Button>}
@@ -98,7 +98,7 @@ const { remarkPluginFrontmatter } = await entry.render();
 
         <a href={getPostUrlBySlug(entry.data.prevSlug)} class="w-full font-bold overflow-hidden active:scale-95">
             {entry.data.prevSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-end gap-4" card height="60px">
-                <div class="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_48px)] text-black/75 dark:text-white/75">
+                <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_48px)] text-black/75 dark:text-white/75">
                     {entry.data.prevTitle}
                 </div>
                 <Icon name="material-symbols:chevron-right-rounded" size={32} class="text-[var(--primary)]" />
