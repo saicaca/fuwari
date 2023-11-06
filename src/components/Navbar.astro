@@ -6,6 +6,7 @@ import I18nKey from "../i18n/i18nKey";
 import {i18n} from "../i18n/translation";
 import {LinkPreset, NavBarLink} from "../types/config";
 import {navBarConfig, siteConfig} from "../config";
+import NavMenuPanel from "./widget/NavMenuPanel.astro";
 const className = Astro.props.class;
 
 function isI18nKey(key: string): key is I18nKey {
@@ -49,7 +50,7 @@ function getLinkPresetInfo(p: LinkPreset): NavBarLink {
             {siteConfig.title}
         </div>
     </Button></a>
-    <div>
+    <div class="hidden md:block">
         {links.map((l) => {
             return <a aria-label={l.name} href={l.url} target={l.external ? "_blank" : null}>
                 <Button light class="font-bold px-5 rounded-lg active:scale-95">
@@ -71,8 +72,13 @@ function getLinkPresetInfo(p: LinkPreset): NavBarLink {
                 <Icon name="material-symbols:dark-mode-outline-rounded" size={20} class="absolute opacity-[var(--display-dark-icon)]"></Icon>
             </Button>
         </div>
+        <div>
+            <Button name="Nav Menu" class="rounded-lg active:scale-90 block md:hidden" id="nav-menu-switch" iconName="material-symbols:menu-rounded" iconSize={20} isIcon light></Button>
+        </div>
+
     </div>
     <DisplaySetting></DisplaySetting>
+    <NavMenuPanel links={links}></NavMenuPanel>
 
 </div>
 
@@ -91,7 +97,7 @@ function switchTheme() {
     }
 }
 
-function loadThemeSwitchScript() {
+function loadButtonScript() {
     let switchBtn = document.getElementById("scheme-switch");
     switchBtn.addEventListener("click", function () {
         switchTheme()
@@ -102,12 +108,18 @@ function loadThemeSwitchScript() {
         let settingPanel = document.getElementById("display-setting");
         settingPanel.classList.toggle("closed");
     });
+
+    let menuBtn = document.getElementById("nav-menu-switch");
+    menuBtn.addEventListener("click", function () {
+        let menuPanel = document.getElementById("nav-menu-panel");
+        menuPanel.classList.toggle("closed");
+    });
 }
 
-loadThemeSwitchScript();
+loadButtonScript();
 
 document.addEventListener('astro:after-swap', () => {
-    loadThemeSwitchScript();
+    loadButtonScript();
 }, { once: false });
 
 

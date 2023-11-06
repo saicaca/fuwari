@@ -198,7 +198,6 @@ function disableAnimation() {
 	}
 }
 
-
 function activateDisplaySettings() {
 	let output = document.getElementById("hueValue");
 	let slider = document.getElementById("colorSlider");
@@ -227,15 +226,19 @@ function activateDisplaySettings() {
 		setHue(hue);
 	}
 
-	document.addEventListener("click", event => {
-		var cDom = document.getElementById("display-setting");
-		let settingBtn = document.getElementById("display-settings-switch");
-		var tDom = event.target;
-		if (cDom == tDom || cDom.contains(tDom) || settingBtn == tDom || settingBtn.contains(tDom)) {
-			return;
-		}
-		cDom.classList.add("closed");
-	});
+	function setClickOutsideToClose(panel, switchBtn) {
+		document.addEventListener("click", event => {
+			var cDom = document.getElementById(panel);
+			let settingBtn = document.getElementById(switchBtn);
+			var tDom = event.target;
+			if (cDom == tDom || cDom.contains(tDom) || settingBtn == tDom || settingBtn.contains(tDom)) {
+				return;
+			}
+			cDom.classList.add("closed");
+		});
+	}
+	setClickOutsideToClose("display-setting", "display-settings-switch")
+	setClickOutsideToClose("nav-menu-panel", "nav-menu-switch")
 }
 
 function loadTheme() {
