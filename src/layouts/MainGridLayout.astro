@@ -27,7 +27,7 @@ const enableBanner = siteConfig.banner.enable;
      transition:animate="none"
 >
     <div id="top-row" class="col-span-2 grid-rows-1 z-50" class:list={["transition-all", {
-        'h-[calc(var(--banner-height-home)_-_72px)]': enableBanner && isHomePage,
+        'h-[calc(var(--banner-height)_-_72px)] md:h-[calc(var(--banner-height-home)_-_72px)]': enableBanner && isHomePage,
         'h-[calc(var(--banner-height)_-_72px)]': enableBanner && !isHomePage,}]}
     >
         <Navbar transition:animate="fade" transition:persist></Navbar>
