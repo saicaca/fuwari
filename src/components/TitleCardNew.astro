@@ -8,11 +8,12 @@ interface Props {
     published: Date;
     tags: string[];
     categories: string[];
+    category: string;
     image: string;
     description: string;
     words: number;
 }
-const { entry, title, url, published, tags, categories, image, description, words } = Astro.props;
+const { entry, title, url, published, tags, categories, category, image, description, words } = Astro.props;
 const className = Astro.props.class;
 // console.log(Astro.props);
 import ImageBox from "./misc/ImageBox.astro";
@@ -27,6 +28,11 @@ const hasCover = image !== undefined && image !== null && image !== '';
 const coverWidth = "28%";
 
 const { remarkPluginFrontmatter } = await entry.render();
+
+let cate = categories;
+if (category) {
+    cate = [category];
+}
 
 ---
 <div class:list={["card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative", className]}>
@@ -43,7 +49,7 @@ const { remarkPluginFrontmatter } = await entry.render();
         </a>
 
         <!-- metadata -->
-        <PostMetadata published={published} tags={tags} categories={categories} class:list={{"mb-4": description, "mb-6": !description}}></PostMetadata>
+        <PostMetadata published={published} tags={tags} categories={cate} class:list={{"mb-4": description, "mb-6": !description}}></PostMetadata>
 
         <div class="transition text-black/75 dark:text-white/75 mb-3.5">
             { description }

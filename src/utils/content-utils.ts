@@ -60,6 +60,9 @@ export async function getCategoryMap(): Promise<CategoryMap> {
     let root: CategoryMap = {};
     allBlogPosts.map((post) => {
         let current = root;
+        if (post.data.category) {
+            post.data.categories = [post.data.category];
+        }
         if (!post.data.categories)
             return;
         for (const c of post.data.categories) {

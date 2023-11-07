@@ -11,7 +11,7 @@ Fuwari (not the final name maybe) is a static blog template built with [Astro](h
 
 - [x] **Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com)**
 - [x] **View Transitions between pages**
-  - [Haven't supported by Firefox and Safari yet](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API#browser_compatibility)
+  - [is not supported by Firefox and Safari yet](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API#browser_compatibility)
 - [x] Light / dark mode
 - [x] Customizable theme colors & banner
 - [x] Responsive design
@@ -34,7 +34,8 @@ title: My First Blog Post
 published: 2023-09-09
 description: This is the first post of my new Astro blog.
 image: /images/cover.jpg
-tags: ['Foo', 'Bar']
+tags: [Foo, Bar]
+category: Front-end
 ---
 ```
 
