@@ -4,7 +4,6 @@ import {LinkPreset} from "./types/config.ts";
 export const siteConfig: SiteConfig = {
     title: 'Fuwari',
     subtitle: 'Demo Site',
-    url: 'https://fuwari.vercel.app/',
     lang: 'en',
     themeHue: 250,
     banner: {
