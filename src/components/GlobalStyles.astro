@@ -93,6 +93,8 @@ color_set({
   --link-hover: oklch(0.95 0.025 var(--hue)) oklch(0.40 0.08 var(--hue))
   --link-active: oklch(0.90 0.05 var(--hue)) oklch(0.35 0.07 var(--hue))
 
+  --float-panel-bg: white oklch(0.19 0.015 var(--hue))
+
   --color-selection-bar: rainbow-light rainbow-dark
 
   --display-light-icon: 1 0
@@ -121,7 +123,13 @@ color_set({
         @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)]
     }
     .link {
+        @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-[4px] -m-[4px];
+    }
+    .link-lg {
         @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-[6px] -m-[6px];
+    }
+    .float-panel {
+        @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
     }
 }
 </style>

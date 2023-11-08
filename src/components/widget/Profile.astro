@@ -12,13 +12,13 @@ const config = profileConfig;
 
 ---
 <div class="card-base">
-    <a aria-label="Go to About Page" href="/about" class="group block relative m-3 overflow-hidden rounded-xl active:scale-95">
+    <a aria-label="Go to About Page" href="/about" class="group block relative mx-auto mt-4 lg:mx-3 lg:mt-3 mb-3 max-w-[240px] lg:max-w-none overflow-hidden rounded-xl active:scale-95">
         <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50 w-full h-full z-50 flex items-center justify-center">
             <Icon name="fa6-regular:address-card"
                   class="transition opacity-0 group-hover:opacity-100 text-white text-5xl">
             </Icon>
         </div>
-        <ImageBox src={config.avatar} alt="Profile Image of the Author" class="mt-1 mx-auto w-[240px] lg:w-full h-full lg:mt-0 "></ImageBox>
+        <ImageBox src={config.avatar} alt="Profile Image of the Author" class="mx-auto lg:w-full h-full lg:mt-0 "></ImageBox>
     </a>
     <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
     <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
