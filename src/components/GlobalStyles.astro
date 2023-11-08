@@ -95,6 +95,18 @@ color_set({
 
   --float-panel-bg: white oklch(0.19 0.015 var(--hue))
 
+  --scrollbar-bg-light: black(0.4)
+  --scrollbar-bg-hover-light: black(0.5)
+  --scrollbar-bg-active-light: black(0.6)
+
+  --scrollbar-bg-dark: white(0.4)
+  --scrollbar-bg-hover-dark: white(0.5)
+  --scrollbar-bg-active-dark: white(0.6)
+
+  --scrollbar-bg: var(--scrollbar-bg-light) var(--scrollbar-bg-dark)
+  --scrollbar-bg-hover: var(--scrollbar-bg-hover-light) var(--scrollbar-bg-hover-dark)
+  --scrollbar-bg-active: var(--scrollbar-bg-active-light) var(--scrollbar-bg-active-dark)
+
   --color-selection-bar: rainbow-light rainbow-dark
 
   --display-light-icon: 1 0
@@ -105,6 +117,55 @@ color_set({
 /* some global styles */
 ::selection
   background-color: var(--selection-bg)
+
+.scrollbar-base.os-scrollbar
+  transition: width 0.15s ease-in-out, height 0.15s ease-in-out, opacity 0.15s, visibility 0.15s, top 0.15s, right 0.15s, bottom 0.15s, left 0.15s;
+  pointer-events: unset;
+  &.os-scrollbar-horizontal
+    padding-top: 4px;
+    padding-bottom: 4px;
+    height: 16px;
+    .os-scrollbar-track .os-scrollbar-handle
+      height: 4px;
+      border-radius: 4px;
+    &:hover
+      .os-scrollbar-track .os-scrollbar-handle
+        height: 8px;
+    &.px-2
+      padding-left: 8px;
+      padding-right: 8px;
+  &.os-scrollbar-vertical
+    padding-left: 4px;
+    padding-right: 4px;
+    width: 16px;
+    .os-scrollbar-track .os-scrollbar-handle
+      width: 4px;
+      border-radius: 4px;
+    &:hover
+      .os-scrollbar-track .os-scrollbar-handle
+        width: 8px;
+    &.py-1
+      padding-top: 4px;
+      padding-bottom: 4px;
+
+.scrollbar-auto
+  &.os-scrollbar
+    --os-handle-bg: var(--scrollbar-bg);
+    --os-handle-bg-hover: var(--scrollbar-bg-hover);
+    --os-handle-bg-active: var(--scrollbar-bg-active);
+
+.scrollbar-dark
+  &.os-scrollbar
+    --os-handle-bg: var(--scrollbar-bg-dark);
+    --os-handle-bg-hover: var(--scrollbar-bg-hover-dark);
+    --os-handle-bg-active: var(--scrollbar-bg-active-dark);
+
+.scrollbar-light
+  &.os-scrollbar
+    --os-handle-bg: var(--scrollbar-bg-light);
+    --os-handle-bg-hover: var(--scrollbar-bg-hover-light);
+    --os-handle-bg-active: var(--scrollbar-bg-active-light);
+
 
 </style>
 <style is:global>

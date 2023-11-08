@@ -29,6 +29,9 @@ dependencies:
   mdast-util-to-string:
     specifier: ^4.0.0
     version: 4.0.0
+  overlayscrollbars:
+    specifier: ^2.4.4
+    version: 2.4.4
   reading-time:
     specifier: ^1.5.0
     version: 1.5.0
@@ -4283,6 +4286,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       lcid: 1.0.0
+    dev: false
+
+  /overlayscrollbars@2.4.4:
+    resolution: {integrity: sha512-792lwASLr3FlZER+/P7NseFQjffDEcQOg6HtyBSLrnb3crH+Ybk0tzaljQVQZs0pjGF/xFjyvMKin6whkL0RnQ==}
     dev: false
 
   /p-limit@2.3.0:

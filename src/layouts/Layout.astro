@@ -156,7 +156,15 @@ html::view-transition-new(banner-ani) {
 }
 </style>
 <script>
-/* Preload fonts */
+import 'overlayscrollbars/overlayscrollbars.css';
+import {
+	OverlayScrollbars,
+	ScrollbarsHidingPlugin,
+	SizeObserverPlugin,
+	ClickScrollPlugin
+} from 'overlayscrollbars';
+
+	/* Preload fonts */
 // (async function() {
 // 	try {
 // 		await Promise.all([
@@ -270,22 +278,42 @@ function setBannerHeight() {
 	}
 }
 
-/* Load settings when entering the site */
-// disableAnimation()()		// TODO
-setBannerHeight();
-loadTheme();
-loadHue();
-activateDisplaySettings();
+function initCustomScrollbar() {
+	OverlayScrollbars(document.querySelector('body'), {
+		scrollbars: {
+			theme: 'scrollbar-base scrollbar-auto py-1',
+			autoHide: 'move',
+			autoHideDelay: 1300,
+			autoHideSuspend: false
+		}
+	});
+	document.querySelectorAll('pre').forEach((ele) => {
+		OverlayScrollbars(ele, {
+			scrollbars: {
+				theme: 'scrollbar-base scrollbar-dark px-2',
+				autoHide: 'leave',
+				autoHideDelay: 1300,
+				autoHideSuspend: false
+			}
+		});
+	});
+}
 
-/* Load settings before swapping */
-/* astro:after-swap event happened before swap animation */
-document.addEventListener('astro:after-swap', () => {
+function init() {
+	// disableAnimation()()		// TODO
 	setBannerHeight();
 	loadTheme();
 	loadHue();
-	// disableAnimation()();		// TODO
 	activateDisplaySettings();
-});
+	initCustomScrollbar();
+}
+
+/* Load settings when entering the site */
+init();
+
+/* Load settings before swapping */
+/* astro:after-swap event happened before swap animation */
+document.addEventListener('astro:after-swap', init);
 </script>
 
 <style is:global lang="stylus">
