@@ -1,5 +1,3 @@
-import {siteConfig} from "../config.ts";
-import astroConfig from "../../astro.config.mjs"
 
 export function pathsEqual(path1: string, path2: string) {
     const normalizedPath1 = path1.replace(/^\/|\/$/g, '').toLowerCase();
@@ -24,6 +22,3 @@ export function getCategoryUrl(category: string): string | null {
     return `/archive/category/${category}`;
 }
 
-export function getFullUrl(path: string): string {
-    return joinUrl(astroConfig.site || "", astroConfig.base || "", path);
-}

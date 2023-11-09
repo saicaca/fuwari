@@ -12,14 +12,13 @@ const className = Astro.props.class;
 
 import { Icon } from 'astro-icon/components';
 import {licenseConfig, profileConfig} from "../../config";
-import {getFullUrl, getPostUrlBySlug} from "../../utils/url-utils";
 import {i18n} from "../../i18n/translation";
 import I18nKey from "../../i18n/i18nKey";
 
 const profileConf = profileConfig;
 const licenseConf = licenseConfig;
 
-const postUrl = getFullUrl(getPostUrlBySlug(slug));
+const postUrl = Astro.url;
 
 ---
 <div class=`relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 ${className}`>
