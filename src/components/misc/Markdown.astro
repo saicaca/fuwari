@@ -1,4 +1,5 @@
 ---
+import '@fontsource-variable/jetbrains-mono/wght-italic.css';
 interface Props {
     class: string;
 }
@@ -38,10 +39,9 @@ const className = Astro.props.class;
     /*&:after*/
     /*  background: var(--link-active)*/
     code
-      font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace
+      font-family: JetBrains Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace
       background: var(--inline-code-bg)
       color: var(--inline-code-color)
-      font-size: 0.875rem
       padding: 2px 4px
       border-radius: 4px
       overflow: hidden
@@ -55,6 +55,8 @@ const className = Astro.props.class;
       padding-left: 20px
       padding-right: 20px
       code
+        color: unset
+        font-size: 0.875rem
         padding: 0
         background: none
         ::selection
