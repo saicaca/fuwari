@@ -1,0 +1,50 @@
+---
+import {NavBarLink} from "../../types/config";
+import {siteConfig} from "../../config";
+import {Icon} from "astro-icon/components";
+
+interface Props {
+    links: NavBarLink[],
+}
+
+const links = Astro.props.links;
+
+const enableBanner = siteConfig.banner.enable;
+
+---
+<div id="nav-menu-panel" class:list={["float-panel closed absolute transition-all fixed right-4 px-2 py-2"]}>
+    {links.map((link) => (
+        <a href={link.url} class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "
+           target={link.external ? "_blank" : null}
+        >
+            <div class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
+                {link.name}
+            </div>
+            {!link.external && <Icon name="material-symbols:chevron-right-rounded"
+                  class="transition text-[var(--primary)]" size="20"
+            >
+            </Icon>}
+            {link.external && <Icon name="fa6-solid:arrow-up-right-from-square"
+                  class="transition text-black/25 dark:text-white/25 -translate-x-1" size="12"
+            >
+            </Icon>}
+        </a>
+    ))}
+</div>
+
+<style>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    #nav-menu-panel {
+        @apply top-[84px]
+    }
+    #nav-menu-panel.closed {
+        @apply top-[76px] opacity-0 pointer-events-none
+    }
+}
+</style>

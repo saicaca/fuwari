@@ -23,6 +23,7 @@ const {page} = Astro.props;
                 title={entry.data.title}
                 tags={entry.data.tags}
                 categories={entry.data.categories}
+                category={entry.data.category}
                 published={entry.data.published}
                 url={getPostUrlBySlug(entry.slug)}
                 image={entry.data.image}
