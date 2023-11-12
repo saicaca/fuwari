@@ -13,6 +13,20 @@ const className = Astro.props.class;
 
 <style lang="stylus" is:global>
   .custom-md
+    h1,h2,h3,h4,h5,h6
+      a
+        margin: -2px
+        padding: 2px
+      .anchor
+        margin-left: 0.2ch
+        opacity: 0
+        transition: opacity 0.15s ease-in-out, background 0.15s ease-in-out
+        .anchor-icon
+          margin-left: 0.45ch
+          margin-right: 0.45ch
+      &:hover
+        .anchor
+          opacity: 1
     a
       position: relative
       background: none

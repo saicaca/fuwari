@@ -9,6 +9,8 @@ import rehypeKatex from "rehype-katex";
 
 import Color from 'colorjs.io';
 import remarkMath from "remark-math";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
 
 // https://astro.build/config
 
@@ -37,7 +39,16 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkMath, remarkReadingTime],
-    rehypePlugins: [rehypeKatex]
+    rehypePlugins: [rehypeKatex, rehypeSlug,
+      [rehypeAutolinkHeadings, {
+        behavior: 'append',
+        properties: {className: ['anchor']},
+        content: {
+          type: 'element',
+          tagName: 'span',
+          properties: {className: ['anchor-icon']},
+          children: [{type: 'text', value: '#'}]
+      }}]]
   },
   redirects: {
     '/': '/page/1',
