@@ -5,21 +5,19 @@ import Button from "./Button.astro";
 
 <!-- There can't be a filter on parent element, or it will break `fixed` -->
 <div class="back-to-top-wrapper hidden lg:block" transition:persist>
-    <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition active:scale-90" onclick="topFunction()">
+    <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="topFunction()">
         <Button name="Back to Top" card height="60px" width="60px">
             <Icon name="material-symbols:keyboard-arrow-up-rounded" class="mx-auto"></Icon>
         </Button>
     </div>
 </div>
 
-
-
 <style lang="stylus">
 .back-to-top-wrapper
     width: 60px
     height: 60px
     position: absolute
-    right: -84px
+    right: 0
     top: 0
 
 .back-to-top-btn
@@ -31,12 +29,15 @@ import Button from "./Button.astro";
     bottom: 240px
     opacity: 1
     cursor: pointer
+    transform: translateX(80px)
     i
         font-size: 28px
     &.hide
-        transform: scale(0.9)
+        transform: translateX(80px) scale(0.9)
         opacity: 0
         pointer-events: none
+    &:active
+      transform: translateX(80px) scale(0.9)
 
 </style>
 
