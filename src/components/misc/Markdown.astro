@@ -14,11 +14,11 @@ const className = Astro.props.class;
 <style lang="stylus" is:global>
   .custom-md
     h1,h2,h3,h4,h5,h6
-      a
-        margin: -2px
-        padding: 2px
       .anchor
+        margin: -2px
         margin-left: 0.2ch
+        padding: 2px
+        user-select: none
         opacity: 0
         transition: opacity 0.15s ease-in-out, background 0.15s ease-in-out
         .anchor-icon
