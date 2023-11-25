@@ -7,6 +7,8 @@ Fuwari (not the final name maybe) is a static blog template built with [Astro](h
 
 [**🖥️Live Demo (Vercel)**](https://fuwari.vercel.app)
 
+![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
+
 ## ✨ Features
 
 - [x] **Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com)**
@@ -21,7 +23,7 @@ Fuwari (not the final name maybe) is a static blog template built with [Astro](h
 
 ## 🚀 How to Use
 
-1. Fork this repo.
+1. [Generate a new repository](https://github.com/saicaca/fuwari/generate) from this template.
 2. Edit the config file `src/config.ts` to customize your blog.
 3. Run `npm run new-post -- <filename>` to create a new post and edit it in `src/content/posts/`.
 4. Deploy your blog to Vercel, Netlify, GitHub Pages, etc. following [the guides](https://docs.astro.build/en/guides/deploy/).
