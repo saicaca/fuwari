@@ -16,7 +16,7 @@ const {page} = Astro.props;
 
 <!-- 显示当前页面。也可以使用 Astro.params.page -->
 <MainGridLayout>
-    <div class="flex flex-col gap-4 mb-4">
+    <div class="flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] md:bg-transparent md:gap-4 mb-4">
         {page.data.map(entry =>
             <TitleCard
                 entry={entry}
