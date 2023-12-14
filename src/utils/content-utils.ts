@@ -20,7 +20,12 @@ export async function getSortedPosts() {
     return sorted;
 }
 
-export async function getTagList(): Promise<{ name: string; count: number }[]> {
+export type Tag = {
+    name: string;
+    count: number;
+}
+
+export async function getTagList(): Promise<Tag[]> {
     const allBlogPosts = await getCollection("posts");
 
     const countMap: { [key: string]: number } = {};
@@ -32,44 +37,38 @@ export async function getTagList(): Promise<{ name: string; count: number }[]> {
     });
 
     // sort tags
-    const keys: string[] = Object.keys(countMap).sort(function (a, b) {
-        var textA = a.toLowerCase();
-        var textB = b.toLowerCase();
-        if (textA < textB) {
-            return -1;
-        }
-        if (textA > textB) {
-            return 1;
-        }
-        return 0;
+    const keys: string[] = Object.keys(countMap).sort((a, b) => {
+        return a.toLowerCase().localeCompare(b.toLowerCase());
     });
 
     return keys.map((key) => ({name: key, count: countMap[key]}));
 }
 
-type Category = {
+export type Category = {
     name: string;
     count: number;
-    children: CategoryMap;
 }
 
-export type CategoryMap = { [key: string]: Category };
-
-export async function getCategoryMap(): Promise<CategoryMap> {
+export async function getCategoryList(): Promise<Category[]> {
     const allBlogPosts = await getCollection("posts");
-    let root: CategoryMap = {};
+    let count : {[key: string]: number} = {};
     allBlogPosts.map((post) => {
-        let current = root;
-        if (post.data.category) {
-            post.data.categories = [post.data.category];
-        }
-        if (!post.data.categories)
+        if (!post.data.category) {
             return;
-        for (const c of post.data.categories) {
-            if (!current[c]) current[c] = {name: c, count: 0, children: {}};
-            current[c].count++;
-            current = current[c].children;
         }
+        if (!count[post.data.category]) {
+            count[post.data.category] = 0;
+        }
+        count[post.data.category]++;
     });
-    return root;
+
+    let lst = Object.keys(count).sort((a, b) => {
+        return a.toLowerCase().localeCompare(b.toLowerCase());
+    });
+
+    let ret : Category[] = [];
+    for (const c of lst) {
+        ret.push({name: c, count: count[c]});
+    }
+    return ret;
 }

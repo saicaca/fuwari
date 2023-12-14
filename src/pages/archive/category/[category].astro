@@ -1,6 +1,5 @@
 ---
-
-import {getSortedPosts} from "../../../utils/content-utils";
+import {getCategoryList, getSortedPosts} from "../../../utils/content-utils";
 import MainGridLayout from "../../../layouts/MainGridLayout.astro";
 import ArchivePanel from "../../../components/ArchivePanel.astro";
 import {i18n} from "../../../i18n/translation";
@@ -8,21 +7,11 @@ import I18nKey from "../../../i18n/i18nKey";
 
 
 export async function getStaticPaths() {
-    let posts = await getSortedPosts()
-
-    const allCategories = posts.reduce((acc, post) => {
-        if (!Array.isArray(post.data.categories))
-            return acc;
-        post.data.categories.forEach(category => acc.add(category));
-        return acc;
-    }, new Set());
-
-    const allCategoriesArray = Array.from(allCategories);
-
-    return allCategoriesArray.map(category => {
+    const categories = await getCategoryList();
+    return categories.map(category => {
         return {
             params: {
-                category: category
+                category: category.name
             }
         }
     });

@@ -20,7 +20,7 @@ if (Array.isArray(tags) && tags.length > 0) {
 
 if (Array.isArray(categories) && categories.length > 0) {
     posts = posts.filter(post =>
-        Array.isArray(post.data.categories) && post.data.categories.some(category => categories.includes(category))
+        post.data.category && categories.includes(post.data.category)
     );
 }
 

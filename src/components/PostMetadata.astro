@@ -8,10 +8,9 @@ interface Props {
     class: string;
     published: Date;
     tags: string[];
-    categories: string[];
     category: string;
 }
-const {published, tags, categories} = Astro.props;
+const {published, tags, category} = Astro.props;
 const className = Astro.props.class;
 ---
 
@@ -25,23 +24,21 @@ const className = Astro.props.class;
         <span class="text-black/50 dark:text-white/50 text-sm font-medium">{formatDateToYYYYMMDD(published)}</span>
     </div>
 
-    <!-- categories -->
+    <!-- categoriy -->
     <div class="flex items-center">
         <div class="meta-icon"
         >
             <Icon name="material-symbols:menu-rounded" class="text-xl"></Icon>
         </div>
         <div class="flex flex-row flex-nowrap">
-            {(categories && categories.length > 0) && categories.map(category => <div
-                    class="with-divider"
-            >
-                <a href=`/archive/category/${category}` aria-label=`View all posts in the ${category} category`
+            {category &&
+                <div><a href=`/archive/category/${category}` aria-label=`View all posts in the ${category} category`
                    class="link-lg transition text-black/50 dark:text-white/50 text-sm font-medium
                                 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
                     {category}
-                </a>
-            </div>)}
-            {!(categories && categories.length > 0) && <div class="transition text-black/50 dark:text-white/50 text-sm font-medium">{i18n(I18nKey.uncategorized)}</div>}
+                </a></div>
+            }
+            {!category && <div class="transition text-black/50 dark:text-white/50 text-sm font-medium">{i18n(I18nKey.uncategorized)}</div>}
         </div>
     </div>
 
