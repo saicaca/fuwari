@@ -1,9 +1,9 @@
 ---
-import MainGridLayout from "../../layouts/MainGridLayout.astro";
-import TitleCard from "../../components/TitleCardNew.astro";
-import Pagination from "../../components/control/Pagination.astro";
-import {getSortedPosts} from "../../utils/content-utils";
-import {getPostUrlBySlug} from "../../utils/url-utils";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import TitleCard from "@components/TitleCardNew.astro";
+import Pagination from "@components/control/Pagination.astro";
+import {getSortedPosts} from "@utils/content-utils";
+import {getPostUrlBySlug} from "@utils/url-utils";
 
 export async function getStaticPaths({ paginate }) {
     const allBlogPosts = await getSortedPosts();
