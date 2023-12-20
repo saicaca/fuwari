@@ -1,5 +1,7 @@
 {
-    "recommendations": [
-      "biomejs.biome"
-    ]
+  "recommendations": [
+    "biomejs.biome",
+    "astro-build.astro-vscode",
+    "eliostruyf.vscode-front-matter"
+  ]
 }
