@@ -190,7 +190,10 @@ color_set({
         @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-[6px] -m-[6px];
     }
     .float-panel {
-        @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
+        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
+    }
+    .float-panel.closed {
+        @apply top-[4.75rem] opacity-0 pointer-events-none
     }
 }
 </style>

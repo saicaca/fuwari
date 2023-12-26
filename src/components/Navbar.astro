@@ -43,10 +43,10 @@ function getLinkPresetInfo(p: LinkPreset): NavBarLink {
 ---
 <div transition:animate="none" class:list={[
     className,
-    "card-base sticky top-0 overflow-visible max-w-[var(--page-width)] h-[72px] rounded-t-none mx-auto flex items-center justify-between px-4"]}>
+    "card-base sticky top-0 overflow-visible max-w-[var(--page-width)] h-[4.5rem] rounded-t-none mx-auto flex items-center justify-between px-4"]}>
     <a href="/page/1"><Button height="52px" class="px-5 font-bold rounded-lg active:scale-95" light>
         <div class="flex flex-row text-[var(--primary)] items-center text-md">
-            <Icon name="material-symbols:home-outline-rounded" size={28} class="mb-1 mr-2" />
+            <Icon name="material-symbols:home-outline-rounded" size={"1.75rem"} class="mb-1 mr-2" />
             {siteConfig.title}
         </div>
     </Button></a>
@@ -64,16 +64,16 @@ function getLinkPresetInfo(p: LinkPreset): NavBarLink {
     </div>
     <div class="flex">
         <div>
-            <Button name="Display Settings" class="rounded-lg active:scale-90" id="display-settings-switch" iconName="material-symbols:palette-outline" iconSize={20} isIcon light></Button>
+            <Button name="Display Settings" class="rounded-lg active:scale-90" id="display-settings-switch" iconName="material-symbols:palette-outline" iconSize={"1.25rem"} isIcon light></Button>
         </div>
         <div>
-            <Button name="Light/Dark Mode" class="rounded-lg flex items-center justify-center active:scale-90" id="scheme-switch" light height="44px" width="44px">
-                <Icon name="material-symbols:wb-sunny-outline-rounded" size={20} class="absolute opacity-[var(--display-light-icon)]"></Icon>
-                <Icon name="material-symbols:dark-mode-outline-rounded" size={20} class="absolute opacity-[var(--display-dark-icon)]"></Icon>
+            <Button name="Light/Dark Mode" class="rounded-lg flex items-center justify-center active:scale-90" id="scheme-switch" light height="2.75rem" width="2.75rem">
+                <Icon name="material-symbols:wb-sunny-outline-rounded" size={"1.25rem"} class="absolute opacity-[var(--display-light-icon)]"></Icon>
+                <Icon name="material-symbols:dark-mode-outline-rounded" size={"1.25rem"} class="absolute opacity-[var(--display-dark-icon)]"></Icon>
             </Button>
         </div>
         <div>
-            <Button name="Nav Menu" class="rounded-lg active:scale-90 block md:hidden" id="nav-menu-switch" iconName="material-symbols:menu-rounded" iconSize={20} isIcon light></Button>
+            <Button name="Nav Menu" class="rounded-lg active:scale-90 block md:hidden" id="nav-menu-switch" iconName="material-symbols:menu-rounded" iconSize={"1.25rem"} isIcon light></Button>
         </div>
 
     </div>
