@@ -5,10 +5,11 @@ interface Props {
     src: string;
     class?: string;
     alt?: string
+    basePath?: string
 }
 import { Image } from 'astro:assets';
 
-const {id, src, alt} = Astro.props;
+const {id, src, alt, basePath = '/'} = Astro.props;
 const className = Astro.props.class;
 
 const isLocal = !(src.startsWith('/') || src.startsWith('http') || src.startsWith('https') || src.startsWith('data:'));
@@ -18,7 +19,7 @@ const isLocal = !(src.startsWith('/') || src.startsWith('http') || src.startsWit
 let img;
 if (isLocal) {
     const files = import.meta.glob<ImageMetadata>("../../**", { import: 'default' });
-    let normalizedPath = "../../" + path.normalize(src).replace(/\\/g, "/");
+    let normalizedPath = path.normalize(path.join("../../", basePath, src)).replace(/\\/g, "/");
     img = await (files[normalizedPath])();
 }
 
