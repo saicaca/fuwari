@@ -7,10 +7,11 @@ import PostMetadata from "@components/PostMetadata.astro";
 import Button from "@components/control/Button.astro";
 import {i18n} from "@i18n/translation";
 import I18nKey from "@i18n/i18nKey";
-import {getPostUrlBySlug} from "@utils/url-utils";
+import {getDir, getPostUrlBySlug} from "@utils/url-utils";
 import License from "@components/misc/License.astro";
 import {licenseConfig} from "src/config";
 import Markdown from "@components/misc/Markdown.astro";
+import path from "path";
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection('posts', ({ data }) => {
@@ -72,7 +73,7 @@ const { remarkPluginFrontmatter } = await entry.render();
             <!-- always show cover as long as it has one -->
 
             {entry.data.image &&
-                <ImageBox src={entry.data.image} class="mb-8 rounded-xl"/>
+                <ImageBox src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl"/>
             }
 
             {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}

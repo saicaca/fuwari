@@ -1,4 +1,5 @@
 ---
+import path from "path";
 import PostMetadata from "./PostMetadata.astro";
 interface Props {
     class: string;
@@ -22,6 +23,7 @@ import { Icon } from 'astro-icon/components';
 import Button from "./control/Button.astro";
 import {i18n} from "../i18n/translation";
 import I18nKey from "../i18n/i18nKey";
+import {getDir} from "../utils/url-utils";
 
 const hasCover = image !== undefined && image !== null && image !== '';
 
@@ -69,7 +71,7 @@ const { remarkPluginFrontmatter } = await entry.render();
                   class="transition opacity-0 group-hover:opacity-100 text-white text-5xl">
             </Icon>
         </div>
-        <ImageBox src={image} alt="Cover Image of the Post"
+        <ImageBox src={image} basePath={path.join("content/posts/", getDir(entry.id))} alt="Cover Image of the Post"
                   class="w-full h-full">
         </ImageBox>
     </a>}

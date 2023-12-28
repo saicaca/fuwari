@@ -18,3 +18,11 @@ export function getCategoryUrl(category: string): string | null {
   if (!category) return null
   return `/archive/category/${category}`
 }
+
+export function getDir(path: string): string {
+    const lastSlashIndex = path.lastIndexOf('/')
+    if (lastSlashIndex < 0) {
+        return '/'
+    }
+    return path.substring(0, lastSlashIndex + 1)
+}
