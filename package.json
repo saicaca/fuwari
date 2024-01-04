@@ -13,12 +13,12 @@
     "lint": "biome check --apply ./src"
   },
   "dependencies": {
-    "@astrojs/check": "^0.2.0",
-    "@astrojs/tailwind": "^5.0.2",
-    "@astrojs/vue": "^3.0.1",
+    "@astrojs/check": "^0.3.4",
+    "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/vue": "^4.0.7",
     "@fontsource-variable/jetbrains-mono": "^5.0.18",
     "@fontsource/roboto": "^5.0.8",
-    "astro": "^3.5.0",
+    "astro": "^4.1.0",
     "astro-icon": "1.0.0-next.2",
     "colorjs.io": "^0.4.5",
     "mdast-util-to-string": "^4.0.0",
@@ -34,7 +34,7 @@
     "valine": "^1.5.1"
   },
   "devDependencies": {
-    "@astrojs/ts-plugin": "^1.1.3",
+    "@astrojs/ts-plugin": "^1.3.1",
     "@biomejs/biome": "1.4.1",
     "@iconify-json/fa6-brands": "^1.1.13",
     "@iconify-json/fa6-regular": "^1.1.13",
@@ -42,7 +42,7 @@
     "@iconify-json/material-symbols": "^1.1.59",
     "@rollup/plugin-yaml": "^4.1.2",
     "@tailwindcss/typography": "^0.5.10",
-    "astro-compress": "2.2.5",
+    "astro-compress": "github:astro-community/AstroCompress#no-sharp",
     "stylus": "^0.59.0"
   }
 }

@@ -13,7 +13,10 @@ import {licenseConfig} from "src/config";
 import Markdown from "@components/misc/Markdown.astro";
 
 export async function getStaticPaths() {
-    const blogEntries = await getCollection('posts');
+    const blogEntries = await getCollection('posts', ({ data }) => {
+    return data.draft !== true;
+    // return import.meta.env.PROD ? data.draft !== true : true;
+    });
     return blogEntries.map(entry => ({
         params: { slug: entry.slug }, props: { entry },
     }));
