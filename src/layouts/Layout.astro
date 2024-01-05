@@ -1,15 +1,15 @@
 ---
-import GlobalStyles from "../components/GlobalStyles.astro";
+import GlobalStyles from "@components/GlobalStyles.astro";
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { ViewTransitions } from 'astro:transitions';
-import ImageBox from "../components/misc/ImageBox.astro";
+import ImageBox from "@components/misc/ImageBox.astro";
 
 import { fade } from 'astro:transitions';
-import {pathsEqual} from "../utils/url-utils";
-import ConfigCarrier from "../components/ConfigCarrier.astro";
-import {siteConfig} from "../config";
+import {pathsEqual} from "@utils/url-utils";
+import ConfigCarrier from "@components/ConfigCarrier.astro";
+import {siteConfig} from "@/config";
 
 interface Props {
 	title: string;
