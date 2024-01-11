@@ -17,5 +17,6 @@
     "source.fixAll": "explicit",
     "quickfix.biome": "always",
     "source.organizeImports.biome": "always"
-  }
+  },
+  "frontMatter.dashboard.openOnStart": false
 }
