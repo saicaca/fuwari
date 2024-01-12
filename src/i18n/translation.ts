@@ -23,7 +23,7 @@ const map: { [key: string]: Translation } = {
 }
 
 export function getTranslation(lang: string): Translation {
-  const languages = lang.toLowerCase()
+  lang = lang.toLowerCase()
   return map[lang] || defaultTranslation
 }
 
