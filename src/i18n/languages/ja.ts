@@ -23,11 +23,11 @@ export const ja: Translation = {
   [Key.postCount]: 'post',
   [Key.postsCount]: 'posts',
 
-  [Key.primaryColor]: 'Primary Color',
+  [Key.primaryColor]: '原色',
 
   [Key.more]: 'もっと',
 
   [Key.author]: '作者',
-  [Key.publishedAt]: 'Published at',
+  [Key.publishedAt]: '公開日',
   [Key.license]: 'ライセンス',
 }
