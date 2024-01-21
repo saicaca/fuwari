@@ -7,22 +7,16 @@ import {getPostUrlBySlug} from "@utils/url-utils";
 
 export async function getStaticPaths({ paginate }) {
     const allBlogPosts = await getSortedPosts();
-    return paginate(allBlogPosts, { pageSize: 6 });
+    return paginate(allBlogPosts, { pageSize: 8 });
 }
 
 const {page} = Astro.props;
 
 ---
 
-<!-- 显示当前页面。也可以使用 Astro.params.page -->
 <MainGridLayout>
     <div class="flex flex-col gap-4 mb-4">
         {page.data.map((entry: { data: { draft: boolean; title: string; tags: string[]; category: string; published: Date; image: string; description: string; }; slug: string; }) => {
-            // ここで draft が true の場合は何もレンダリングしない
-            if (import.meta.env.PROD && entry.data.draft) {
-                return null;
-            }
-
             return (
                 <TitleCard
                     entry={entry}
@@ -41,11 +35,3 @@ const {page} = Astro.props;
     </div>
     <Pagination class="mx-auto" page={page}></Pagination>
 </MainGridLayout>
-
-<script>
-    if (import.meta.env.DEV) {
-        console.log("開発環境");
-    } else {
-        console.log("本番環境");
-    }
-</script>

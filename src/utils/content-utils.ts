@@ -1,7 +1,9 @@
 import { getCollection } from 'astro:content'
 
 export async function getSortedPosts() {
-  const allBlogPosts = await getCollection('posts')
+  const allBlogPosts = await getCollection('posts', ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  })
   const sorted = allBlogPosts.sort((a, b) => {
     const dateA = new Date(a.data.published)
     const dateB = new Date(b.data.published)
@@ -26,7 +28,9 @@ export type Tag = {
 }
 
 export async function getTagList(): Promise<Tag[]> {
-  const allBlogPosts = await getCollection('posts')
+  const allBlogPosts = await getCollection('posts', ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  })
 
   const countMap: { [key: string]: number } = {}
   allBlogPosts.map(post => {
@@ -50,7 +54,9 @@ export type Category = {
 }
 
 export async function getCategoryList(): Promise<Category[]> {
-  const allBlogPosts = await getCollection('posts')
+  const allBlogPosts = await getCollection('posts', ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  })
   const count: { [key: string]: number } = {}
   allBlogPosts.map(post => {
     if (!post.data.category) {

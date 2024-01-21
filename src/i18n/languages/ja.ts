@@ -20,8 +20,8 @@ export const ja: Translation = {
   [Key.wordsCount]: '文字',
   [Key.minuteCount]: '分',
   [Key.minutesCount]: '分',
-  [Key.postCount]: 'post',
-  [Key.postsCount]: 'posts',
+  [Key.postCount]: '件の投稿',
+  [Key.postsCount]: '件の投稿',
 
   [Key.primaryColor]: '原色',
 

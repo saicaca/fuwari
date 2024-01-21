@@ -1,4 +1,5 @@
 ---
+import {UNCATEGORIZED} from "@constants/constants";
 interface Props {
     keyword: string;
     tags: string[];
@@ -9,6 +10,8 @@ const { keyword, tags, categories} = Astro.props;
 import Button from "./control/Button.astro";
 import {getSortedPosts} from "../utils/content-utils";
 import {getPostUrlBySlug} from "../utils/url-utils";
+import {i18n} from "../i18n/translation";
+import I18nKey from "../i18n/i18nKey";
 
 let posts = await getSortedPosts()
 
@@ -20,7 +23,8 @@ if (Array.isArray(tags) && tags.length > 0) {
 
 if (Array.isArray(categories) && categories.length > 0) {
     posts = posts.filter(post =>
-        post.data.category && categories.includes(post.data.category)
+        (post.data.category && categories.includes(post.data.category)) ||
+        (!post.data.category && categories.includes(UNCATEGORIZED))
     );
 }
 
@@ -66,7 +70,7 @@ function formatTag(tag: string[]) {
                         <div class="w-[10%]">
                             <div class="h-3 w-3 bg-none rounded-full outline outline-[var(--primary)] mx-auto -outline-offset-[2px] z-50 outline-3"></div>
                         </div>
-                        <div class="w-[80%] transition text-left text-black/50 dark:text-white/50">{group.posts.length} Articles</div>
+                        <div class="w-[80%] transition text-left text-black/50 dark:text-white/50">{group.posts.length} {i18n(I18nKey.postsCount)}</div>
                     </div>
                     {group.posts.map(post => (
                             <a href={getPostUrlBySlug(post.slug)} aria-label={post.data.title} class="group">

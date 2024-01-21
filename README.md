@@ -25,7 +25,7 @@ Fuwari (not the final name maybe) is a static blog template built with [Astro](h
 
 1. [Generate a new repository](https://github.com/saicaca/fuwari/generate) from this template.
 2. Edit the config file `src/config.ts` to customize your blog.
-3. Run `pnpm run new-post -- <filename>` to create a new post and edit it in `src/content/posts/`.
+3. Run `npm run new-post -- <filename>` or `pnpm run new-post <filename>` to create a new post and edit it in `src/content/posts/`.
 4. Deploy your blog to Vercel, Netlify, GitHub Pages, etc. following [the guides](https://docs.astro.build/en/guides/deploy/).
 
 ## ⚙️ Frontmatter of Posts
@@ -38,6 +38,7 @@ description: This is the first post of my new Astro blog.
 image: /images/cover.jpg
 tags: [Foo, Bar]
 category: Front-end
+draft: false
 ---
 ```
 
@@ -45,12 +46,12 @@ category: Front-end
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                          | Action                                           |
-|:---------------------------------|:-------------------------------------------------|
-| `pnpm install`                    | Installs dependencies                            |
-| `pnpm run dev`                    | Starts local dev server at `localhost:4321`      |
-| `pnpm run build`                  | Build your production site to `./dist/`          |
-| `pnpm run preview`                | Preview your build locally, before deploying     |
-| `pnpm run astro ...`              | Run CLI commands like `astro add`, `astro check` |
-| `pnpm run astro -- --help`        | Get help using the Astro CLI                     |
-| `pnpm run new-post -- <filename>` | Create a new post                                |
+| Command                                                           | Action                                           |
+|:------------------------------------------------------------------|:-------------------------------------------------|
+| `npm install`                                                     | Installs dependencies                            |
+| `npm run dev`                                                     | Starts local dev server at `localhost:4321`      |
+| `npm run build`                                                   | Build your production site to `./dist/`          |
+| `npm run preview`                                                 | Preview your build locally, before deploying     |
+| `npm run astro ...`                                               | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help`                                         | Get help using the Astro CLI                     |
+| `npm run new-post -- <filename>`<br/>`pnpm run new-post <filename>` | Create a new post                                |
