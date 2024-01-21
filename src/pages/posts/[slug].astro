@@ -1,19 +1,21 @@
 ---
 import { getCollection } from 'astro:content';
-import MainGridLayout from "../../layouts/MainGridLayout.astro";
-import ImageBox from "../../components/misc/ImageBox.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import ImageBox from "@components/misc/ImageBox.astro";
 import {Icon} from "astro-icon/components";
-import PostMetadata from "../../components/PostMetadata.astro";
-import Button from "../../components/control/Button.astro";
-import {i18n} from "../../i18n/translation";
-import I18nKey from "../../i18n/i18nKey";
-import {getPostUrlBySlug} from "../../utils/url-utils";
-import License from "../../components/misc/License.astro";
-import {licenseConfig} from "../../config";
-import Markdown from "../../components/misc/Markdown.astro";
+import PostMetadata from "@components/PostMetadata.astro";
+import Button from "@components/control/Button.astro";
+import {i18n} from "@i18n/translation";
+import I18nKey from "@i18n/i18nKey";
+import {getPostUrlBySlug} from "@utils/url-utils";
+import License from "@components/misc/License.astro";
+import {licenseConfig} from "src/config";
+import Markdown from "@components/misc/Markdown.astro";
 
 export async function getStaticPaths() {
-    const blogEntries = await getCollection('posts');
+    const blogEntries = await getCollection('posts', ({ data }) => {
+        return import.meta.env.PROD ? data.draft !== true : true;
+    });
     return blogEntries.map(entry => ({
         params: { slug: entry.slug }, props: { entry },
     }));

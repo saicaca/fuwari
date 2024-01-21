@@ -1,9 +1,9 @@
 ---
-import MainGridLayout from "../../layouts/MainGridLayout.astro";
-import TitleCard from "../../components/TitleCardNew.astro";
-import Pagination from "../../components/control/Pagination.astro";
-import {getSortedPosts} from "../../utils/content-utils";
-import {getPostUrlBySlug} from "../../utils/url-utils";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import TitleCard from "@components/TitleCardNew.astro";
+import Pagination from "@components/control/Pagination.astro";
+import {getSortedPosts} from "@utils/content-utils";
+import {getPostUrlBySlug} from "@utils/url-utils";
 
 export async function getStaticPaths({ paginate }) {
     const allBlogPosts = await getSortedPosts();
@@ -17,18 +17,35 @@ const {page} = Astro.props;
 <!-- 显示当前页面。也可以使用 Astro.params.page -->
 <MainGridLayout>
     <div class="flex flex-col gap-4 mb-4">
-        {page.data.map(entry =>
-            <TitleCard
-                entry={entry}
-                title={entry.data.title}
-                tags={entry.data.tags}
-                category={entry.data.category}
-                published={entry.data.published}
-                url={getPostUrlBySlug(entry.slug)}
-                image={entry.data.image}
-                description={entry.data.description}
-            ></TitleCard>
-        )}
+        {page.data.map((entry: { data: { draft: boolean; title: string; tags: string[]; category: string; published: Date; image: string; description: string; }; slug: string; }) => {
+            // ここで draft が true の場合は何もレンダリングしない
+            if (import.meta.env.PROD && entry.data.draft) {
+                return null;
+            }
+
+            return (
+                <TitleCard
+                    entry={entry}
+                    title={entry.data.title}
+                    tags={entry.data.tags}
+                    category={entry.data.category}
+                    published={entry.data.published}
+                    url={getPostUrlBySlug(entry.slug)}
+                    image={entry.data.image}
+                    description={entry.data.description}
+                    draft={entry.data.draft}
+                ></TitleCard>
+
+            );
+        })}
     </div>
     <Pagination class="mx-auto" page={page}></Pagination>
 </MainGridLayout>
+
+<script>
+    if (import.meta.env.DEV) {
+        console.log("開発環境");
+    } else {
+        console.log("本番環境");
+    }
+</script>
