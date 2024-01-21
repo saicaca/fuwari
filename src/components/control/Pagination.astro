@@ -64,13 +64,13 @@ const commonUrl: string = parts.slice(0, -1).join('/') + '/';
             if (p == HIDDEN)
                 return <Icon name="material-symbols:more-horiz" class="mx-1"/>;
             if (p == page.currentPage)
-                return <div class="h-[44px] w-[44px] rounded-lg bg-[var(--primary)] flex items-center justify-center
+                return <div class="h-11 w-11 rounded-lg bg-[var(--primary)] flex items-center justify-center
                     font-bold text-white dark:text-black/70"
                 >
                     {p}
                 </div>
             return <a href={commonUrl + p} aria-label=`Page ${p}`>
-                <Button card iconName="material-symbols:chevron-left-rounded" class="rounded-lg active:scale-[0.85]" height="44px" width="44px">
+                <Button card iconName="material-symbols:chevron-left-rounded" class="rounded-lg active:scale-[0.85]" height="2.75rem" width="2.75rem">
                     {p}
                 </Button>
             </a>

@@ -9,8 +9,9 @@ interface Props {
     published: Date;
     tags: string[];
     category: string;
+    hideTagsForMobile: boolean;
 }
-const {published, tags, category} = Astro.props;
+const {published, tags, category, hideTagsForMobile} = Astro.props;
 const className = Astro.props.class;
 ---
 
@@ -24,7 +25,7 @@ const className = Astro.props.class;
         <span class="text-black/50 dark:text-white/50 text-sm font-medium">{formatDateToYYYYMMDD(published)}</span>
     </div>
 
-    <!-- categoriy -->
+    <!-- categories -->
     <div class="flex items-center">
         <div class="meta-icon"
         >
@@ -40,7 +41,7 @@ const className = Astro.props.class;
     </div>
 
     <!-- tags -->
-    <div class="flex items-center">
+    <div class:list={["items-center", {"flex": !hideTagsForMobile, "hidden md:flex": hideTagsForMobile}]}>
         <div class="meta-icon"
         >
             <Icon name="material-symbols:tag-rounded" class="text-xl"></Icon>

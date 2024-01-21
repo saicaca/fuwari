@@ -6,11 +6,11 @@ import {siteConfig} from "../../config";
 const enableBanner = siteConfig.banner.enable;
 
 ---
-<div id="display-setting" class:list={["float-panel closed absolute transition-all w-[320px] fixed right-4 px-4 py-4"]}>
+<div id="display-setting" class:list={["float-panel closed absolute transition-all w-80 fixed right-4 px-4 py-4"]}>
     <div class="flex flex-row gap-2 mb-3 items-center justify-between">
         <div class="font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3
             before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
-            before:absolute before:left-[-12px] before:top-[5.5px]"
+            before:absolute before:-left-3 before:top-[0.33rem]"
         >
             {i18n(I18nKey.primaryColor)}
         </div>
@@ -29,16 +29,16 @@ const enableBanner = siteConfig.banner.enable;
 #display-setting
     input[type="range"]
         -webkit-appearance: none;
-        height: 24px;
+        height: 1.5rem;
         background-image: var(--color-selection-bar)
         transition: background-image 0.15s ease-in-out
 
     /* Input Thumb */
     ::-webkit-slider-thumb
         -webkit-appearance: none;
-        height: 16px;
-        width: 8px;
-        border-radius: 2px;
+        height: 1rem;
+        width: 0.5rem;
+        border-radius: 0.125rem;
         background: rgba(255, 255, 255, 0.7);
         box-shadow: none;
         &:hover
@@ -48,9 +48,9 @@ const enableBanner = siteConfig.banner.enable;
 
     ::-moz-range-thumb
         -webkit-appearance: none;
-        height: 16px;
-        width: 8px;
-        border-radius: 2px;
+        height: 1rem;
+        width: 0.5rem;
+        border-radius: 0.125rem;
         border-width: 0
         background: rgba(255, 255, 255, 0.7);
         box-shadow: none;
@@ -61,33 +61,13 @@ const enableBanner = siteConfig.banner.enable;
 
     &::-ms-thumb
         -webkit-appearance: none;
-        height: 16px;
-        width: 8px;
-        border-radius: 2px;
+        height: 1rem;
+        width: 0.5rem;
+        border-radius: 0.125rem;
         background: rgba(255, 255, 255, 0.7);
         box-shadow: none;
         &:hover
           background: rgba(255, 255, 255, 0.8);
         &:active
           background: rgba(255, 255, 255, 0.6);
-
-
-.banner-closed
-  #display-setting
-    border-width: 3px
-</style>
-
-<style>
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-    #display-setting {
-        @apply top-[84px]
-    }
-    #display-setting.closed {
-        @apply top-[76px] opacity-0 pointer-events-none
-    }
-}
 </style>
