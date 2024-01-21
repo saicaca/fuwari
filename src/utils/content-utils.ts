@@ -1,4 +1,7 @@
 import { getCollection } from 'astro:content'
+import {UNCATEGORIZED} from "@constants/constants.ts";
+import {i18n} from "@i18n/translation.ts";
+import I18nKey from "@i18n/i18nKey.ts";
 
 export async function getSortedPosts() {
   const allBlogPosts = await getCollection('posts', ({ data }) => {
@@ -60,12 +63,11 @@ export async function getCategoryList(): Promise<Category[]> {
   const count: { [key: string]: number } = {}
   allBlogPosts.map(post => {
     if (!post.data.category) {
+      const ucKey = i18n(I18nKey.uncategorized);
+      count[ucKey] = count[ucKey] ? count[ucKey] + 1 : 1
       return
     }
-    if (!count[post.data.category]) {
-      count[post.data.category] = 0
-    }
-    count[post.data.category]++
+    count[post.data.category] = count[post.data.category] ? count[post.data.category] + 1 : 1
   })
 
   const lst = Object.keys(count).sort((a, b) => {
