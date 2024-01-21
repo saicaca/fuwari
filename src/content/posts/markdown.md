@@ -3,7 +3,7 @@ title: Markdown Example
 published: 2023-10-01
 description: A simple example of a Markdown blog post.
 tags: [Markdown, Blogging, Demo]
-category: Example
+category: Examples
 draft: false
 ---
 
@@ -155,7 +155,7 @@ Here's a "line block":
 
 and images can be specified like so:
 
-![example image](../../assets/images/demo-banner.png "An exemplary image")
+[//]: # (![example image]&#40;./demo-banner.png "An exemplary image"&#41;)
 
 Inline math equations go in like so: $\omega = d\phi / dt$. Display
 math should get its own line and be put in in double-dollarsigns:
