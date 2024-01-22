@@ -279,13 +279,21 @@ function setBannerHeight() {
 }
 
 function initCustomScrollbar() {
-	OverlayScrollbars(document.querySelector('body'), {
+	OverlayScrollbars(
+		// docs say that a initialization to the body element would affect native functionality like window.scrollTo
+		// but just leave it here for now
+		{
+			target: document.querySelector('body'),
+			cancel: {
+				nativeScrollbarsOverlaid: true,    // don't initialize the overlay scrollbar if there is a native one
+			}
+		}, {
 		scrollbars: {
 			theme: 'scrollbar-base scrollbar-auto py-1',
 			autoHide: 'move',
 			autoHideDelay: 500,
-			autoHideSuspend: false
-		}
+			autoHideSuspend: false,
+		},
 	});
 	document.querySelectorAll('pre').forEach((ele) => {
 		OverlayScrollbars(ele, {
