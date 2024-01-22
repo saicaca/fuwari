@@ -47,7 +47,7 @@ rainbow-light = linear-gradient(to right, oklch(0.80 0.10 0), oklch(0.80 0.10 30
 rainbow-dark = linear-gradient(to right, oklch(0.70 0.10 0), oklch(0.70 0.10 30), oklch(0.70 0.10 60), oklch(0.70 0.10 90), oklch(0.70 0.10 120), oklch(0.70 0.10 150), oklch(0.70 0.10 180), oklch(0.70 0.10 210), oklch(0.70 0.10 240), oklch(0.70 0.10 270), oklch(0.70 0.10 300), oklch(0.70 0.10 330), oklch(0.70 0.10 360))
 
 :root
-  --radius-large 16px
+  --radius-large 1rem
 
   --banner-height-home 60vh
   --banner-height 40vh
@@ -184,10 +184,10 @@ color_set({
         @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)]
     }
     .link {
-        @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-[4px] -m-[4px];
+        @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-1 -m-1;
     }
     .link-lg {
-        @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-[6px] -m-[6px];
+        @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-1.5 -m-1.5;
     }
     .float-panel {
         @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
