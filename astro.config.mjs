@@ -55,6 +55,7 @@ export default defineConfig({
             tagName: "span",
             properties: {
               className: ["anchor-icon"],
+              'data-pagefind-ignore': true,
             },
             children: [
               {

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
     "new-post": "node scripts/new-post.js",
@@ -23,6 +23,7 @@
     "colorjs.io": "^0.4.5",
     "mdast-util-to-string": "^4.0.0",
     "overlayscrollbars": "^2.4.6",
+    "pagefind": "^1.0.4",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-katex": "^7.0.0",
