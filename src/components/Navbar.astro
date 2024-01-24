@@ -126,6 +126,9 @@ document.addEventListener('astro:after-swap', () => {
 async function loadPagefind() {
     console.log('load')
     const pagefind = await import("/pagefind/pagefind.js");
+    await pagefind.options({
+        "excerptLength": 20
+    })
     pagefind.init();
     window.pagefind = pagefind
 }
