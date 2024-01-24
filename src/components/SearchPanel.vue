@@ -3,13 +3,14 @@ import { ref, watch } from 'vue'
 const keyword = ref('')
 const result = ref([])
 
-watch(keyword, async (newVal, oldVal) => {
+const search = async (keyword: string) => {
   let panel = document.getElementById('search-panel');
   if (!keyword) {
     panel.classList.add("closed");
   }
 
-  const ret = await pagefind.search(newVal)
+  // for prod
+  const ret = await pagefind.search(keyword)
   let arr = []
   for (const item of ret.results) {
     arr.push(await item.data())
@@ -24,23 +25,56 @@ watch(keyword, async (newVal, oldVal) => {
   } else {
     panel.classList.add("closed");
   }
+}
+
+const togglePanel = async () => {
+  console.log('togglePanel')
+  let panel = document.getElementById('search-panel');
+  panel.classList.toggle("closed");
+}
+
+watch(keyword, async (newVal, oldVal) => {
+  search(newVal)
 })
 </script>
 
 <template>
-<div id="search-bar" class="transition-all flex items-center h-11 mr-2 rounded-lg
+<!-- search bar for desktop view -->
+<div id="search-bar" class="hidden lg:flex transition-all items-center h-11 mr-2 rounded-lg
       bg-black/[0.04] hover:bg-black/[0.06] focus-within:bg-black/[0.06]
       dark:bg-white/5 dark:hover:bg-white/10 dark:focus-within:bg-white/10
 ">
   <slot name="search-icon"></slot>
-  <input placeholder="Search" v-model="keyword"
+  <input placeholder="Search" v-model="keyword" @focusin="search(keyword)"
          class="transition-all text-sm ml-2 bg-transparent outline-0
          h-full w-40 active:w-60 focus:w-60 text-black/50 dark:text-white/50"
   >
 </div>
-<div id="search-panel" class="float-panel closed search-panel absolute w-[30rem] top-20 right-4 shadow-2xl rounded-2xl p-2">
+
+<!-- toggle btn for phone/tablet view -->
+<div @click="togglePanel">
+  <slot name="search-switch"></slot>
+</div>
+
+<!-- search panel -->
+<div id="search-panel" class="float-panel closed search-panel absolute md:w-[30rem] top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
+
+  <!-- search bar inside panel for phone/tablet -->
+  <div id="search-bar" class="flex lg:hidden transition-all items-center h-11 rounded-xl
+      bg-black/[0.04] hover:bg-black/[0.06] focus-within:bg-black/[0.06]
+      dark:bg-white/5 dark:hover:bg-white/10 dark:focus-within:bg-white/10
+  ">
+    <slot name="search-icon"></slot>
+    <input placeholder="Search" v-model="keyword" @focusin="search(keyword)"
+           class="transition-all text-sm ml-2 bg-transparent outline-0
+         h-full w-full focus:w-60 text-black/50 dark:text-white/50"
+    >
+  </div>
+
+  <!-- search results -->
   <a v-for="item of result" :href="item.url"
-     class="transition group block rounded-xl px-3 py-2 hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]">
+     class="transition first-of-type:mt-2 lg:first-of-type:mt-0 group block
+     rounded-xl text-lg px-3 py-2 hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]">
     <div class="transition text-deep inline-flex font-bold group-hover:text-[var(--primary)]">
       {{ item.meta.title }}<slot name="arrow-icon"></slot>
     </div>

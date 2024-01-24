@@ -66,7 +66,9 @@ function getLinkPresetInfo(p: LinkPreset): NavBarLink {
     <div class="flex">
         <SearchPanel client:load>
             <Icon slot="search-icon" name="material-symbols:search" size={"1.25rem"} class="ml-3 transition my-auto text-black/30 dark:text-white/30"></Icon>
-            <Icon slot="arrow-icon" name="material-symbols:chevron-right-rounded" size={"1.25rem"} class="transition my-auto text-[var(--primary)]"></Icon>
+            <!--<Icon slot="arrow-icon" name="material-symbols:chevron-right-rounded" size={"1.25rem"} class="transition my-auto text-[var(&#45;&#45;primary)]"></Icon>-->
+            <Icon slot="arrow-icon" name="fa6-solid:chevron-right" size={"0.75rem"} class="transition translate-x-0.5 my-auto text-[var(--primary)]"></Icon>
+            <Button slot="search-switch" name="Search Panel" class="block lg:hidden rounded-lg active:scale-90" id="search-switch" iconName="material-symbols:search" iconSize={"1.25rem"} isIcon light></Button>
         </SearchPanel>
         <Button name="Display Settings" class="rounded-lg active:scale-90" id="display-settings-switch" iconName="material-symbols:palette-outline" iconSize={"1.25rem"} isIcon light></Button>
         <Button name="Light/Dark Mode" class="rounded-lg flex items-center justify-center active:scale-90" id="scheme-switch" light height="2.75rem" width="2.75rem">
