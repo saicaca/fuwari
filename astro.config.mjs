@@ -9,6 +9,7 @@ import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
+import vue from "@astrojs/vue"
 
 const oklchToHex = (str) => {
   const DEFAULT_HUE = 250
@@ -37,6 +38,7 @@ export default defineConfig({
     Compress({
       Image: false,
     }),
+    vue()
   ],
   markdown: {
     remarkPlugins: [remarkMath, remarkReadingTime],
@@ -55,6 +57,7 @@ export default defineConfig({
             tagName: "span",
             properties: {
               className: ["anchor-icon"],
+              'data-pagefind-ignore': true,
             },
             children: [
               {

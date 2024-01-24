@@ -234,19 +234,22 @@ function activateDisplaySettings() {
 		setHue(hue);
 	}
 
-	function setClickOutsideToClose(panel, switchBtn) {
+	function setClickOutsideToClose(panel: string, ignores: string[]) {
 		document.addEventListener("click", event => {
-			var cDom = document.getElementById(panel);
-			let settingBtn = document.getElementById(switchBtn);
-			var tDom = event.target;
-			if (cDom == tDom || cDom.contains(tDom) || settingBtn == tDom || settingBtn.contains(tDom)) {
-				return;
+			let panelDom = document.getElementById(panel);
+			let tDom = event.target;
+			for (let ig of ignores) {
+				let ie = document.getElementById(ig)
+				if (ie == tDom || ie.contains(tDom)) {
+					return;
+				}
 			}
-			cDom.classList.add("closed");
+			panelDom.classList.add("closed");
 		});
 	}
-	setClickOutsideToClose("display-setting", "display-settings-switch")
-	setClickOutsideToClose("nav-menu-panel", "nav-menu-switch")
+	setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
+	setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
+	setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
 }
 
 function loadTheme() {

@@ -7,6 +7,7 @@ import {i18n} from "../i18n/translation";
 import {LinkPreset, NavBarLink} from "../types/config";
 import {navBarConfig, siteConfig} from "../config";
 import NavMenuPanel from "./widget/NavMenuPanel.astro";
+import SearchPanel from "./SearchPanel.vue"
 const className = Astro.props.class;
 
 function isI18nKey(key: string): key is I18nKey {
@@ -63,19 +64,18 @@ function getLinkPresetInfo(p: LinkPreset): NavBarLink {
         })}
     </div>
     <div class="flex">
-        <div>
-            <Button name="Display Settings" class="rounded-lg active:scale-90" id="display-settings-switch" iconName="material-symbols:palette-outline" iconSize={"1.25rem"} isIcon light></Button>
-        </div>
-        <div>
-            <Button name="Light/Dark Mode" class="rounded-lg flex items-center justify-center active:scale-90" id="scheme-switch" light height="2.75rem" width="2.75rem">
-                <Icon name="material-symbols:wb-sunny-outline-rounded" size={"1.25rem"} class="absolute opacity-[var(--display-light-icon)]"></Icon>
-                <Icon name="material-symbols:dark-mode-outline-rounded" size={"1.25rem"} class="absolute opacity-[var(--display-dark-icon)]"></Icon>
-            </Button>
-        </div>
-        <div>
-            <Button name="Nav Menu" class="rounded-lg active:scale-90 block md:hidden" id="nav-menu-switch" iconName="material-symbols:menu-rounded" iconSize={"1.25rem"} isIcon light></Button>
-        </div>
-
+        <SearchPanel client:load>
+            <Icon slot="search-icon" name="material-symbols:search" size={"1.25rem"} class="ml-3 transition my-auto text-black/30 dark:text-white/30"></Icon>
+            <!--<Icon slot="arrow-icon" name="material-symbols:chevron-right-rounded" size={"1.25rem"} class="transition my-auto text-[var(&#45;&#45;primary)]"></Icon>-->
+            <Icon slot="arrow-icon" name="fa6-solid:chevron-right" size={"0.75rem"} class="transition translate-x-0.5 my-auto text-[var(--primary)]"></Icon>
+            <Button slot="search-switch" name="Search Panel" class="block lg:hidden rounded-lg active:scale-90" id="search-switch" iconName="material-symbols:search" iconSize={"1.25rem"} isIcon light></Button>
+        </SearchPanel>
+        <Button name="Display Settings" class="rounded-lg active:scale-90" id="display-settings-switch" iconName="material-symbols:palette-outline" iconSize={"1.25rem"} isIcon light></Button>
+        <Button name="Light/Dark Mode" class="rounded-lg flex items-center justify-center active:scale-90" id="scheme-switch" light height="2.75rem" width="2.75rem">
+            <Icon name="material-symbols:wb-sunny-outline-rounded" size={"1.25rem"} class="absolute opacity-[var(--display-light-icon)]"></Icon>
+            <Icon name="material-symbols:dark-mode-outline-rounded" size={"1.25rem"} class="absolute opacity-[var(--display-dark-icon)]"></Icon>
+        </Button>
+        <Button name="Nav Menu" class="rounded-lg active:scale-90 block md:hidden" id="nav-menu-switch" iconName="material-symbols:menu-rounded" iconSize={"1.25rem"} isIcon light></Button>
     </div>
     <DisplaySetting></DisplaySetting>
     <NavMenuPanel links={links}></NavMenuPanel>
@@ -121,7 +121,16 @@ loadButtonScript();
 document.addEventListener('astro:after-swap', () => {
     loadButtonScript();
 }, { once: false });
-
-
-
+</script>
+<script is:raw>
+async function loadPagefind() {
+    console.log('load')
+    const pagefind = await import("/pagefind/pagefind.js");
+    await pagefind.options({
+        "excerptLength": 20
+    })
+    pagefind.init();
+    window.pagefind = pagefind
+}
+loadPagefind()
 </script>
