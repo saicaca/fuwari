@@ -122,15 +122,15 @@ document.addEventListener('astro:after-swap', () => {
     loadButtonScript();
 }, { once: false });
 </script>
-<script is:raw>
+
+{import.meta.env.PROD && <script is:raw>
 async function loadPagefind() {
-    console.log('load')
-    const pagefind = await import("/pagefind/pagefind.js");
+    const pagefind = await import("/pagefind/pagefind.js")
     await pagefind.options({
         "excerptLength": 20
     })
-    pagefind.init();
+    pagefind.init()
     window.pagefind = pagefind
 }
 loadPagefind()
-</script>
+</script>}

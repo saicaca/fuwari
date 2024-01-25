@@ -18,7 +18,7 @@ Fuwari (not the final name maybe) is a static blog template built with [Astro](h
 - [x] Customizable theme colors & banner
 - [x] Responsive design
 - [ ] Comments
-- [ ] Search
+- [x] Search
 - [ ] TOC
 
 ## 🚀 How to Use
