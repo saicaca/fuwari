@@ -18,7 +18,7 @@ const {
 } = Astro.props
 
 ---
-<widget-layout data-id={id} data-isCollapsed={isCollapsed} class="pb-4 card-base">
+<widget-layout data-id={id} data-is-collapsed={isCollapsed} class="pb-4 card-base">
     <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
         before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
         before:absolute before:left-[-16px] before:top-[5.5px]">{name}</div>
@@ -45,7 +45,7 @@ const {
         constructor() {
             super();
 
-            if (!this.dataset.isCollapsed)
+            if (this.dataset.isCollapsed === undefined || this.dataset.isCollapsed === false)
                 return;
 
             const id = this.dataset.id;
