@@ -1,0 +1,22 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+import PostCard from "../components/PostCard.astro";
+import Pagination from "../components/control/Pagination.astro";
+import {getSortedPosts} from "../utils/content-utils";
+import {getPostUrlBySlug} from "../utils/url-utils";
+import {PAGE_SIZE} from "../constants/constants";
+import PostPage from "../components/PostPage.astro";
+
+export async function getStaticPaths({ paginate }) {
+    const allBlogPosts = await getSortedPosts();
+    return paginate(allBlogPosts, { pageSize: PAGE_SIZE });
+}
+
+const {page} = Astro.props;
+
+---
+
+<MainGridLayout>
+    <PostPage page={page}></PostPage>
+    <Pagination class="mx-auto" page={page}></Pagination>
+</MainGridLayout>

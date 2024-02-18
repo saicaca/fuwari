@@ -70,9 +70,6 @@ export default defineConfig({
       ],
     ],
   },
-  redirects: {
-    "/": "/page/1",
-  },
   vite: {
     plugins: [yaml()],
     css: {
