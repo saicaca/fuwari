@@ -1,9 +1,6 @@
 # Fuwari
 
-> [!WARNING]
-> This project is still very unfinished and the code is quite messy. Features may be changed or removed in the future.
-
-Fuwari (not the final name maybe) is a static blog template built with [Astro](https://astro.build), a refactored version of [hexo-theme-vivia](https://github.com/saicaca/hexo-theme-vivia).
+Fuwari is a static blog template built with [Astro](https://astro.build), a refactored version of [hexo-theme-vivia](https://github.com/saicaca/hexo-theme-vivia).
 
 [**🖥️Live Demo (Vercel)**](https://fuwari.vercel.app)
 

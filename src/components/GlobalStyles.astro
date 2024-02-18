@@ -199,11 +199,36 @@ color_set({
         @apply bg-transparent text-[var(--primary)]
     }
 
-    .text-deep {
+    .btn-card {
+        @apply transition flex items-center justify-center bg-[var(--card-bg)] hover:bg-[var(--btn-card-bg-hover)]
+        active:bg-[var(--btn-card-bg-active)]
+    }
+    .btn-card.disabled {
+        @apply pointer-events-none text-black/10 dark:text-white/10
+    }
+    .btn-plain {
+        @apply transition flex items-center justify-center bg-none hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
+        text-black/75 hover:text-[var(--primary)] dark:text-white/75 dark:hover:text-[var(--primary)]
+    }
+    .btn-regular {
+        @apply transition flex items-center justify-center bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)]
+        text-[var(--btn-content)] dark:text-white/75
+    }
+
+    .text-90 {
         @apply text-black/90 dark:text-white/90
     }
-    .text-sub {
+    .text-75 {
+        @apply text-black/75 dark:text-white/75
+    }
+    .text-50 {
         @apply text-black/50 dark:text-white/50
+    }
+    .text-30 {
+        @apply text-black/30 dark:text-white/30
+    }
+    .text-25 {
+        @apply text-black/25 dark:text-white/25
     }
 }
 </style>

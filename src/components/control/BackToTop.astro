@@ -1,51 +1,50 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Button from "./Button.astro";
 ---
 
 <!-- There can't be a filter on parent element, or it will break `fixed` -->
 <div class="back-to-top-wrapper hidden lg:block" transition:persist>
-    <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="topFunction()">
-        <Button name="Back to Top" card height="60px" width="60px">
+    <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="backToTop()">
+        <button aria-label="Back to Top" class="btn-card h-[3.75rem] w-[3.75rem]">
             <Icon name="material-symbols:keyboard-arrow-up-rounded" class="mx-auto"></Icon>
-        </Button>
+        </button>
     </div>
 </div>
 
 <style lang="stylus">
 .back-to-top-wrapper
-    width: 60px
-    height: 60px
+    width: 3.75rem
+    height: 3.75rem
     position: absolute
     right: 0
     top: 0
 
 .back-to-top-btn
     color: var(--primary)
-    font-size: 36px
+    font-size: 2.25rem
     font-weight: bold
     border: none
     position: fixed
-    bottom: 240px
+    bottom: 15rem
     opacity: 1
     cursor: pointer
-    transform: translateX(80px)
+    transform: translateX(5rem)
     i
-        font-size: 28px
+        font-size: 1.75rem
     &.hide
-        transform: translateX(80px) scale(0.9)
+        transform: translateX(5rem) scale(0.9)
         opacity: 0
         pointer-events: none
     &:active
-      transform: translateX(80px) scale(0.9)
+      transform: translateX(5rem) scale(0.9)
 
 </style>
 
 <script is:raw>
-
-function topFunction() {
+function backToTop() {
     window.scroll({ top: 0, behavior: 'smooth' });
 }
+
 function scrollFunction() {
     let btn = document.getElementById('back-to-top-btn');
     if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
@@ -54,7 +53,5 @@ function scrollFunction() {
         btn.classList.add('hide')
     }
 }
-window.onscroll = function() {
-    scrollFunction();
-}
+window.onscroll = scrollFunction
 </script>

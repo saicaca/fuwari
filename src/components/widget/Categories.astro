@@ -22,6 +22,12 @@ interface Props {
 
 <WidgetLayout name={i18n(I18nKey.categories)} id="categories" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}>
     {categories.map((c) =>
-        <ButtonLink url={getCategoryUrl(c.name)} badge={c.count} label=`View all posts in the ${c.name} category`>{c.name}</ButtonLink>
+        <ButtonLink
+            url={getCategoryUrl(c.name)}
+            badge={c.count}
+            label=`View all posts in the ${c.name} category`
+        >
+            {c.name}
+        </ButtonLink>
     )}
 </WidgetLayout>

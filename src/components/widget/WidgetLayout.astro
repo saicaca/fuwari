@@ -1,5 +1,4 @@
 ---
-import Button from "../control/Button.astro";
 import { Icon } from 'astro-icon/components';
 import {i18n} from "../../i18n/translation";
 import I18nKey from "../../i18n/i18nKey";
@@ -26,11 +25,11 @@ const {
         <slot></slot>
     </div>
     {isCollapsed && <div class="expand-btn px-4 -mb-2">
-        <Button light class=" w-full rounded-lg" height="36px">
+        <button class="btn-plain w-full h-9 rounded-lg">
             <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2">
                 <Icon name="material-symbols:more-horiz" size={28}></Icon> {i18n(I18nKey.more)}
             </div>
-        </Button>
+        </button>
     </div>}
 </widget-layout>
 

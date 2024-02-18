@@ -1,10 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import ImageBox from "@components/misc/ImageBox.astro";
+import ImageWrapper from "../../components/misc/ImageWrapper.astro";
 import {Icon} from "astro-icon/components";
-import PostMetadata from "@components/PostMetadata.astro";
-import Button from "@components/control/Button.astro";
+import PostMetadata from "../../components/PostMeta.astro";
 import {i18n} from "@i18n/translation";
 import I18nKey from "@i18n/i18nKey";
 import {getDir, getPostUrlBySlug} from "@utils/url-utils";
@@ -74,7 +73,7 @@ const { remarkPluginFrontmatter } = await entry.render();
             <!-- always show cover as long as it has one -->
 
             {entry.data.image &&
-                <ImageBox src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl"/>
+                <ImageWrapper src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl"/>
             }
 
             {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
@@ -90,21 +89,21 @@ const { remarkPluginFrontmatter } = await entry.render();
 
     <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
         <a href={getPostUrlBySlug(entry.data.nextSlug)} class="w-full font-bold overflow-hidden active:scale-95">
-            {entry.data.nextSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-start gap-4" card height="3.75rem">
+            {entry.data.nextSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center justify-start gap-4" >
                 <Icon name="material-symbols:chevron-left-rounded" size={32} class="text-[var(--primary)]" />
                 <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
                     {entry.data.nextTitle}
                 </div>
-            </Button>}
+            </div>}
         </a>
 
         <a href={getPostUrlBySlug(entry.data.prevSlug)} class="w-full font-bold overflow-hidden active:scale-95">
-            {entry.data.prevSlug && <Button class="w-full max-w-full h-10 px-4 rounded-2xl flex items-center justify-end gap-4" card height="3.75rem">
+            {entry.data.prevSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center justify-end gap-4">
                 <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
                     {entry.data.prevTitle}
                 </div>
                 <Icon name="material-symbols:chevron-right-rounded" size={32} class="text-[var(--primary)]" />
-            </Button>}
+            </div>}
         </a>
     </div>
 

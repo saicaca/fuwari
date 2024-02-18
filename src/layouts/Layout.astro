@@ -4,7 +4,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { ViewTransitions } from 'astro:transitions';
-import ImageBox from "@components/misc/ImageBox.astro";
+import ImageWrapper from "@components/misc/ImageWrapper.astro";
 
 import { fade } from 'astro:transitions';
 import {pathsEqual} from "@utils/url-utils";
@@ -95,10 +95,10 @@ if (title) {
 			 class:list={{'banner-home': isHomePage, 'banner-else': !isHomePage}}
 
 		>
-			<ImageBox id="boxtest" alt="Banner image of the blog" class:list={["object-center object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
+			<ImageWrapper id="boxtest" alt="Banner image of the blog" class:list={["object-center object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
 					  src={siteConfig.banner.src} transition:animate="fade"
 			>
-			</ImageBox>
+			</ImageWrapper>
 		</div>
 		<slot />
 		</GlobalStyles>
@@ -107,20 +107,7 @@ if (title) {
 <style is:global>
 	:root {
 		--hue: var(--configHue);
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
-
-		--page-width: 1200px;
-	}
-	html {
-		background: #13151A;
-		background-size: 224px;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
+		--page-width: 75rem;
 	}
 </style>
 <style>
@@ -163,6 +150,7 @@ import {
 	SizeObserverPlugin,
 	ClickScrollPlugin
 } from 'overlayscrollbars';
+import {getHue, setHue} from "../utils/setting-utils";
 
 	/* Preload fonts */
 // (async function() {
@@ -206,51 +194,23 @@ function disableAnimation() {
 	}
 }
 
-function activateDisplaySettings() {
-	let output = document.getElementById("hueValue");
-	let slider = document.getElementById("colorSlider");
-	let configCarrier = document.getElementById("config-carrier");
-	output.innerHTML = slider.value; // Display the default slider value
-
-	let r = document.querySelector(':root');
-	function setHue(hue) {
-		localStorage.setItem('hue', hue);
-		output.innerHTML = hue;
-		slider.value = hue;
-
-		r.style.setProperty(`--hue`, hue);
-	}
-
-	let storedHue = localStorage.getItem('hue');
-	if (storedHue) {
-		setHue(storedHue);
-	} else {
-		setHue(configCarrier.dataset.hue);
-	}
-
-	slider.oninput = function() {
-		let hue = this.value;
-		output.innerHTML = this.value;
-		setHue(hue);
-	}
-
-	function setClickOutsideToClose(panel: string, ignores: string[]) {
-		document.addEventListener("click", event => {
-			let panelDom = document.getElementById(panel);
-			let tDom = event.target;
-			for (let ig of ignores) {
-				let ie = document.getElementById(ig)
-				if (ie == tDom || ie.contains(tDom)) {
-					return;
-				}
+function setClickOutsideToClose(panel: string, ignores: string[]) {
+	document.addEventListener("click", event => {
+		let panelDom = document.getElementById(panel);
+		let tDom = event.target;
+		for (let ig of ignores) {
+			let ie = document.getElementById(ig)
+			if (ie == tDom || (ie?.contains(tDom))) {
+				return;
 			}
-			panelDom.classList.add("closed");
-		});
-	}
-	setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
-	setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
-	setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
+		}
+		panelDom.classList.add("closed");
+	});
 }
+setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
+setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
+setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
+
 
 function loadTheme() {
 	if (localStorage.theme === 'dark' || (!('theme' in localStorage) &&
@@ -264,10 +224,7 @@ function loadTheme() {
 }
 
 function loadHue() {
-	const hue = localStorage.hue;
-	if (hue) {
-		document.documentElement.style.setProperty('--hue', hue);
-	}
+	setHue(getHue())
 }
 
 function setBannerHeight() {
@@ -315,7 +272,6 @@ function init() {
 	setBannerHeight();
 	loadTheme();
 	loadHue();
-	activateDisplaySettings();
 	initCustomScrollbar();
 }
 

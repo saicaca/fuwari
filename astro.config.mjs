@@ -1,5 +1,4 @@
 import tailwind from "@astrojs/tailwind"
-import yaml from "@rollup/plugin-yaml"
 import Compress from "astro-compress"
 import icon from "astro-icon"
 import { defineConfig } from "astro/config"
@@ -9,7 +8,7 @@ import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
-import vue from "@astrojs/vue"
+import svelte from "@astrojs/svelte"
 
 const oklchToHex = (str) => {
   const DEFAULT_HUE = 250
@@ -38,7 +37,7 @@ export default defineConfig({
     Compress({
       Image: false,
     }),
-    vue()
+    svelte(),
   ],
   markdown: {
     remarkPlugins: [remarkMath, remarkReadingTime],
@@ -71,7 +70,6 @@ export default defineConfig({
     ],
   },
   vite: {
-    plugins: [yaml()],
     css: {
       preprocessorOptions: {
         stylus: {

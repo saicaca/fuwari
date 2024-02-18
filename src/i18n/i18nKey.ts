@@ -20,7 +20,7 @@ enum I18nKey {
   postCount = 'postCount',
   postsCount = 'postsCount',
 
-  primaryColor = 'primaryColor',
+  themeColor = 'themeColor',
 
   more = 'more',
 

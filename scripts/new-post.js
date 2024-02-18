@@ -1,10 +1,12 @@
+/* This is a script to create a new post markdown file with front-matter */
+
 import fs from "fs"
 import path from "path"
 
 function getDate() {
   const today = new Date()
   const year = today.getFullYear()
-  const month = String(today.getMonth() + 1).padStart(2, "0") //月份从0开始，所以要加1
+  const month = String(today.getMonth() + 1).padStart(2, "0")
   const day = String(today.getDate()).padStart(2, "0")
 
   return `${year}-${month}-${day}`

@@ -1,5 +1,5 @@
-import Key from '../i18nKey.ts'
-import type { Translation } from '../translation.ts'
+import Key from '../i18nKey'
+import type { Translation } from '../translation'
 
 export const zh_TW: Translation = {
   [Key.home]: '首頁',
@@ -23,7 +23,7 @@ export const zh_TW: Translation = {
   [Key.postCount]: '篇文章',
   [Key.postsCount]: '篇文章',
 
-  [Key.primaryColor]: '主題色',
+  [Key.themeColor]: '主題色',
 
   [Key.more]: '更多',
 

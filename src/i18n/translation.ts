@@ -1,9 +1,9 @@
-import { siteConfig } from '../config.ts'
-import type I18nKey from './i18nKey.ts'
-import { en } from './languages/en.ts'
-import { ja } from './languages/ja.ts'
-import { zh_CN } from './languages/zh_CN.ts'
-import { zh_TW } from './languages/zh_TW.ts'
+import { siteConfig } from '../config'
+import type I18nKey from './i18nKey'
+import { en } from './languages/en'
+import { ja } from './languages/ja'
+import { zh_CN } from './languages/zh_CN'
+import { zh_TW } from './languages/zh_TW'
 
 export type Translation = {
   [K in I18nKey]: string
@@ -23,8 +23,7 @@ const map: { [key: string]: Translation } = {
 }
 
 export function getTranslation(lang: string): Translation {
-  lang = lang.toLowerCase()
-  return map[lang] || defaultTranslation
+  return map[lang.toLowerCase()] || defaultTranslation
 }
 
 export function i18n(key: I18nKey): string {
