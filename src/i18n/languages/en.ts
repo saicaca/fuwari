@@ -1,5 +1,5 @@
-import Key from '../i18nKey.ts'
-import type { Translation } from '../translation.ts'
+import Key from '../i18nKey'
+import type { Translation } from '../translation'
 
 export const en: Translation = {
   [Key.home]: 'Home',
@@ -23,7 +23,7 @@ export const en: Translation = {
   [Key.postCount]: 'post',
   [Key.postsCount]: 'posts',
 
-  [Key.primaryColor]: 'Primary Color',
+  [Key.themeColor]: 'Theme Color',
 
   [Key.more]: 'More',
 

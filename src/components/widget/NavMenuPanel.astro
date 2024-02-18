@@ -8,9 +8,6 @@ interface Props {
 }
 
 const links = Astro.props.links;
-
-const enableBanner = siteConfig.banner.enable;
-
 ---
 <div id="nav-menu-panel" class:list={["float-panel closed absolute transition-all fixed right-4 px-2 py-2"]}>
     {links.map((link) => (

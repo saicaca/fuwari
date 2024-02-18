@@ -22,7 +22,7 @@ const className = Astro.props.class;
         >
             <Icon name="material-symbols:calendar-today-outline-rounded" class="text-xl"></Icon>
         </div>
-        <span class="text-black/50 dark:text-white/50 text-sm font-medium">{formatDateToYYYYMMDD(published)}</span>
+        <span class="text-50 text-sm font-medium">{formatDateToYYYYMMDD(published)}</span>
     </div>
 
     <!-- categories -->
@@ -33,7 +33,7 @@ const className = Astro.props.class;
         </div>
         <div class="flex flex-row flex-nowrap">
             <div><a href=`/archive/category/${category || 'uncategorized'}` aria-label=`View all posts in the ${category} category`
-               class="link-lg transition text-black/50 dark:text-white/50 text-sm font-medium
+               class="link-lg transition text-50 text-sm font-medium
                             hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
                 {category || i18n(I18nKey.uncategorized)}
             </a></div>
@@ -51,12 +51,12 @@ const className = Astro.props.class;
                     class="with-divider"
             >
                 <a href=`/archive/tag/${tag}` aria-label=`View all posts with the ${tag} tag`
-                   class="link-lg transition text-black/50 dark:text-white/50 text-sm font-medium
+                   class="link-lg transition text-50 text-sm font-medium
                                 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
                     {tag}
                 </a>
             </div>)}
-            {!(tags && tags.length > 0) && <div class="transition text-black/50 dark:text-white/50 text-sm font-medium">{i18n(I18nKey.noTags)}</div>}
+            {!(tags && tags.length > 0) && <div class="transition text-50 text-sm font-medium">{i18n(I18nKey.noTags)}</div>}
         </div>
     </div>
 </div>
@@ -70,7 +70,7 @@ const className = Astro.props.class;
         text-[var(--btn-content)] mr-2
     }
     .with-divider {
-        @apply before:content-['/'] before:ml-1.5 before:mr-0.5 before:text-[var(--meta-divider)] before:text-sm
+        @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-[var(--meta-divider)] before:text-sm
         before:font-medium before:first-of-type:hidden before:transition
     }
 }

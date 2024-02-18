@@ -3,8 +3,8 @@ import type {
   NavBarConfig,
   ProfileConfig,
   SiteConfig,
-} from './types/config.ts'
-import { LinkPreset } from './types/config.ts'
+} from './types/config'
+import { LinkPreset } from './types/config'
 
 export const siteConfig: SiteConfig = {
   title: 'Fuwari',
@@ -12,7 +12,7 @@ export const siteConfig: SiteConfig = {
   lang: 'en',
   themeHue: 250,
   banner: {
-    enable: true,
+    enable: false,
     src: 'assets/images/demo-banner.png',
   },
 }
