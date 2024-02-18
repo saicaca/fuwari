@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { title, banner } = Astro.props
-const isHomePage = pathsEqual(Astro.url.pathname, '/') || pathsEqual(Astro.url.pathname, '/page/1')
+const isHomePage = pathsEqual(Astro.url.pathname, '/')
 const enableBanner = siteConfig.banner.enable
 
 ---

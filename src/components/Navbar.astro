@@ -19,7 +19,7 @@ let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset)
 <div transition:animate="none" class:list={[
     className,
     "card-base sticky top-0 overflow-visible max-w-[var(--page-width)] h-[4.5rem] rounded-t-none mx-auto flex items-center justify-between px-4"]}>
-    <a href="/page/1" class="btn-plain h-[3.25rem] px-5 font-bold rounded-lg active:scale-95">
+    <a href="/" class="btn-plain h-[3.25rem] px-5 font-bold rounded-lg active:scale-95">
         <div class="flex flex-row text-[var(--primary)] items-center text-md">
             <Icon name="material-symbols:home-outline-rounded" size={"1.75rem"} class="mb-1 mr-2" />
             {siteConfig.title}
