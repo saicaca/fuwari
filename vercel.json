@@ -1,9 +1,1 @@
-{
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/page/1",
-      "statusCode": 307
-    }
-  ]
-}
+{}
