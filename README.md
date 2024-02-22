@@ -5,6 +5,7 @@ Fuwari is a static blog template built with [Astro](https://astro.build), a refa
 [**🖥️Live Demo (Vercel)**](https://fuwari.vercel.app)
 
 ![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari?ref=badge_shield)
 
 ## ✨ Features
 
@@ -52,3 +53,7 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`                                               | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help`                                         | Get help using the Astro CLI                     |
 | `npm run new-post -- <filename>`<br/>`pnpm run new-post <filename>` | Create a new post                                |
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari?ref=badge_large)
