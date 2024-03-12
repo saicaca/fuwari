@@ -9,6 +9,7 @@ import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
 import svelte from "@astrojs/svelte"
+import swup from '@swup/astro';
 
 const oklchToHex = (str) => {
   const DEFAULT_HUE = 250
@@ -26,6 +27,16 @@ export default defineConfig({
   base: "/",
   integrations: [
     tailwind(),
+    swup({
+      theme: false,
+      animationClass: 'transition-',
+      containers: ['main'],
+      smoothScrolling: true,
+      cache: true,
+      preload: true,
+      accessibility: true,
+      globalInstance: true,
+    }),
     icon({
       include: {
         "material-symbols": ["*"],

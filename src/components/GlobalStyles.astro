@@ -236,5 +236,13 @@ color_set({
     .text-25 {
         @apply text-black/25 dark:text-white/25
     }
+
+    html.is-changing .transition-fade {
+        @apply transition-all duration-200
+    }
+    html.is-animating .transition-fade {
+        @apply opacity-0 translate-y-4
+    }
 }
+
 </style>
