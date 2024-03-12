@@ -29,11 +29,11 @@ const { remarkPluginFrontmatter } = await entry.render();
 ---
 <MainGridLayout banner={entry.data.image} title={entry.data.title}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
-        <div class:list={["card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ",
+        <div id="post-container" class:list={["card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ",
             {}
         ]}>
             <!-- word count and reading time -->
-            <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition">
+            <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation">
                 <div class="flex flex-row items-center">
                     <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
                         <Icon name="material-symbols:notes-rounded"></Icon>
@@ -49,7 +49,7 @@ const { remarkPluginFrontmatter } = await entry.render();
             </div>
 
             <!-- title -->
-            <div class="relative">
+            <div class="relative onload-animation">
                 <div
                     data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title"
                     class="transition w-full block font-bold mb-3
@@ -63,26 +63,28 @@ const { remarkPluginFrontmatter } = await entry.render();
             </div>
 
             <!-- metadata -->
-            <PostMetadata
-                    class="mb-5"
-                    published={entry.data.published}
-                    tags={entry.data.tags}
-                    category={entry.data.category}
-            ></PostMetadata>
+            <div class="onload-animation">
+                <PostMetadata
+                        class="mb-5"
+                        published={entry.data.published}
+                        tags={entry.data.tags}
+                        category={entry.data.category}
+                ></PostMetadata>
+                {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
+            </div>
 
             <!-- always show cover as long as it has one -->
 
             {entry.data.image &&
-                <ImageWrapper src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl"/>
+                <ImageWrapper src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl banner-container onload-animation"/>
             }
 
-            {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
 
-            <Markdown class="mb-6">
+            <Markdown class="mb-6 markdown-content onload-animation">
                 <Content />
             </Markdown>
 
-            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl"></License>}
+            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
 
         </div>
     </div>
@@ -108,3 +110,12 @@ const { remarkPluginFrontmatter } = await entry.render();
     </div>
 
 </MainGridLayout>
+
+<style is:global>
+#post-container :nth-child(1) { animation-delay: 0ms }
+#post-container :nth-child(2) { animation-delay: 75ms }
+#post-container :nth-child(3) { animation-delay: 150ms }
+#post-container :nth-child(4) { animation-delay: 300ms }
+#post-container :nth-child(5) { animation-delay: 450ms }
+#post-container :nth-child(6) { animation-delay: 600ms }
+</style>
