@@ -4,9 +4,10 @@ import { Icon } from 'astro-icon/components';
 interface Props {
     page: Page;
     class?: string;
+    style?: string;
 }
 
-const {page} = Astro.props;
+const {page, style} = Astro.props;
 
 const HIDDEN = -1;
 
@@ -59,7 +60,7 @@ const getPageUrl = (p: number) => {
 
 ---
 
-<div class:list={[className, "flex flex-row gap-3 justify-center"]}>
+<div class:list={[className, "flex flex-row gap-3 justify-center"]} style={style}>
     <a href={page.url.prev} aria-label={page.url.prev ? "Previous Page" : null}
        class:list={["btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11",
            {"disabled": page.url.prev == undefined}

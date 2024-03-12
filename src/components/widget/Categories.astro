@@ -15,12 +15,17 @@ const COLLAPSE_THRESHOLD = 5;
 const isCollapsed = categories.length >= COLLAPSE_THRESHOLD;
 
 interface Props {
-    categories: Category[];
+    class?: string;
+    style?: string;
 }
+const className = Astro.props.class
+const style = Astro.props.style
 
 ---
 
-<WidgetLayout name={i18n(I18nKey.categories)} id="categories" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}>
+<WidgetLayout name={i18n(I18nKey.categories)} id="categories" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}
+                class={className} style={style}
+>
     {categories.map((c) =>
         <ButtonLink
             url={getCategoryUrl(c.name)}

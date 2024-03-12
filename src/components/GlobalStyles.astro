@@ -52,6 +52,8 @@ rainbow-dark = linear-gradient(to right, oklch(0.70 0.10 0), oklch(0.70 0.10 30)
   --banner-height-home 60vh
   --banner-height 40vh
 
+  --content-delay 150ms
+
 color_set({
   --primary: oklch(0.70 0.14 var(--hue)) oklch(0.75 0.14 var(--hue))
   --page-bg: oklch(0.95 0.01 var(--hue)) oklch(0.16 0.014 var(--hue))
@@ -257,20 +259,20 @@ color_set({
 }
 .onload-animation {
     opacity: 0;
-    animation: 500ms fade-in-up;
+    animation: 300ms fade-in-up;
     animation-fill-mode: forwards;
 }
 #top-row {
     animation-delay: 0ms
 }
 #sidebar {
-    animation-delay: 150ms
+    animation-delay: 100ms
 }
 #content-wrapper {
-    animation-delay: 350ms;
+    animation-delay: var(--content-delay);
 }
 #footer {
-    animation-delay: 500ms;
+    animation-delay: 400ms;
 }
 
 

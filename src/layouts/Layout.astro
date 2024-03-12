@@ -287,6 +287,10 @@ const setup = () => {
 		}
 	})
 */
+	// Remove the delay for the first time page load
+	window.swup.hooks.on('link:click', () => {
+		document.documentElement.style.setProperty('--content-delay', '0ms')
+	})
 }
 if (window.swup.hooks) {
 	setup()

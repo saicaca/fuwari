@@ -12,8 +12,15 @@ const COLLAPSED_HEIGHT = "7.5rem";
 
 const isCollapsed = tags.length >= 20;
 
+interface Props {
+    class?: string;
+    style?: string;
+}
+const className = Astro.props.class
+const style = Astro.props.style
+
 ---
-<WidgetLayout name={i18n(I18nKey.tags)} id="tags" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}>
+<WidgetLayout name={i18n(I18nKey.tags)} id="tags" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT} class={className} style={style}>
     <div class="flex gap-2 flex-wrap">
         {tags.map(t => (
             <ButtonTag href={`/archive/tag/${t.name}`} label={`View all posts with the ${t.name} tag`}>
