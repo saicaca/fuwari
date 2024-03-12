@@ -245,4 +245,33 @@ color_set({
     }
 }
 
+@keyframes fade-in-up {
+    0% {
+        transform: translateY(2rem);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+.onload-animation {
+    opacity: 0;
+    animation: 600ms fade-in-up;
+    animation-fill-mode: forwards;
+}
+#top-row {
+    animation-delay: 0ms
+}
+#sidebar {
+    animation-delay: 150ms
+}
+#content-wrapper {
+    animation-delay: 350ms;
+}
+#footer {
+    animation-delay: 500ms;
+}
+
+
 </style>
