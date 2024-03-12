@@ -90,6 +90,7 @@ color_set({
 
   --license-block-bg: black(0.03) var(--codeblock-bg)
 
+  --link-underline: oklch(0.93 0.04 var(--hue)) oklch(0.40 0.08 var(--hue))
   --link-hover: oklch(0.95 0.025 var(--hue)) oklch(0.40 0.08 var(--hue))
   --link-active: oklch(0.90 0.05 var(--hue)) oklch(0.35 0.07 var(--hue))
 
@@ -213,6 +214,11 @@ color_set({
     .btn-regular {
         @apply transition flex items-center justify-center bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)]
         text-[var(--btn-content)] dark:text-white/75
+    }
+
+    .link-underline {
+        @apply transition underline decoration-2 decoration-dashed decoration-[var(--link-underline)]
+        hover:decoration-[var(--link-hover)] active:decoration-[var(--link-active)] underline-offset-[0.25rem]
     }
 
     .text-90 {

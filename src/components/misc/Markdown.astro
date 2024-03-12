@@ -22,6 +22,7 @@ const className = Astro.props.class;
         padding: 0.125rem
         user-select: none
         opacity: 0
+        text-decoration: none
         transition: opacity 0.15s ease-in-out, background 0.15s ease-in-out
         .anchor-icon
           margin-left: 0.45ch
@@ -35,8 +36,13 @@ const className = Astro.props.class;
       margin: -0.25rem
       padding: 0.25rem
       border-radius: 0.375rem
+      font-weight: 500
       color: var(--primary)
-      text-decoration-line: none;
+      text-decoration-line: underline
+      text-decoration-color: var(--link-underline)
+      text-decoration-thickness: 0.125rem
+      text-decoration-style: dashed
+      text-underline-offset: 0.25rem
       /*&:after*/
       /*  content: ''*/
       /*  position: absolute*/
@@ -50,8 +56,10 @@ const className = Astro.props.class;
       /*  z-index: -1;*/
       &:hover
         background: var(--link-hover)
+        text-decoration-color: var(--link-hover)
       &:active
         background: var(--link-active)
+        text-decoration-color: var(--link-active)
     /*&:after*/
     /*  background: var(--link-active)*/
     code

@@ -22,7 +22,7 @@ $: if (hue || hue === 0) {
             before:absolute before:-left-3 before:top-[0.33rem]"
         >
             {i18n(I18nKey.themeColor)}
-            <button class="btn-regular w-7 h-7 rounded-md  active:scale-90"
+            <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                     class:opacity-0={hue === defaultHue} class:pointer-events-none={hue === defaultHue} on:click={resetHue}>
                 <div class="text-[var(--btn-content)]">
                     <slot name="restore-icon"></slot>
