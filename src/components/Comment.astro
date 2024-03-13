@@ -1,0 +1,35 @@
+---
+import {giscusConfig, siteConfig} from "../config";
+interface Props {
+    postId: string;
+}
+const { postId } = Astro.props;
+
+const config = giscusConfig
+
+const discussionTitle = `giscus - ${postId}`
+---
+
+{config.enable && <div class="card-base p-6">
+    <div class="giscus"></div>
+</div>}
+
+<script is:inline
+        src="https://giscus.app/client.js"
+        data-repo={config.repo}
+        data-repo-id={config.repoId}
+        data-category={config.category}
+        data-category-id={config.categoryId}
+        data-mapping="specific"
+        data-term={discussionTitle}
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang={siteConfig.lang}
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+

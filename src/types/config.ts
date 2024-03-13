@@ -43,3 +43,11 @@ export type LicenseConfig = {
   name: string
   url: string
 }
+
+export type GiscusConfig = {
+    enable: boolean
+    repo: string
+    repoId: string
+    category: string
+    categoryId: string
+}
