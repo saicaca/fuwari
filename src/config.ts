@@ -11,6 +11,7 @@ export const siteConfig: SiteConfig = {
   subtitle: 'Demo Site',
   lang: 'en',
   themeHue: 250,
+  themeEdit: true,
   banner: {
     enable: false,
     src: 'assets/images/demo-banner.png',

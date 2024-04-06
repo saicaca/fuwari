@@ -5,6 +5,7 @@ export type SiteConfig = {
   lang: string
 
   themeHue: number
+  themeEdit: boolean
   banner: {
     enable: boolean
     src: string
