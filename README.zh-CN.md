@@ -2,7 +2,7 @@
 
 基于 [Astro](https://astro.build) 开发的静态博客模板。
 
-[**🖥️在线预览（Vercel）**](https://fuwari.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;[**🌏English README**](https://github.com/saicaca/fuwari)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;[**📦旧 Hexo 版本**](https://github.com/saicaca/hexo-theme-vivia)
+[**🖥️在线预览（Vercel）**](https://fuwari.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;[**🌏English README**](https://github.com/saicaca/fuwari)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;[**🌏日本語 README**](https://github.com/saicaca/fuwari/blob/main/README.ja-JP.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;[**📦旧 Hexo 版本**](https://github.com/saicaca/hexo-theme-vivia)
 
 ![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
 
