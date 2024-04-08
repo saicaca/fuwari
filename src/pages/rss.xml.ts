@@ -6,7 +6,7 @@ import MarkdownIt from 'markdown-it';
 const parser = new MarkdownIt();
 
 export async function GET(context: any) {
-const blog = await getCollection('posts');
+    const blog = await getCollection('posts');
   return rss({
     title: profileConfig.name,
     description: profileConfig.bio || 'No description',
