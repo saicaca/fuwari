@@ -10,6 +10,7 @@ import remarkMath from "remark-math"
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
 import svelte from "@astrojs/svelte"
 import swup from '@swup/astro';
+import { siteConfig } from "./src/config";
 
 const oklchToHex = (str) => {
   const DEFAULT_HUE = 250
@@ -23,7 +24,7 @@ const oklchToHex = (str) => {
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://fuwari.vercel.app/",
+  site: siteConfig.url,
   base: "/",
   integrations: [
     tailwind(),
