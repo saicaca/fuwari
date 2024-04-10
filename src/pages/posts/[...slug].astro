@@ -13,6 +13,7 @@ import Markdown from "@components/misc/Markdown.astro";
 import path from "path";
 import {profileConfig} from "../../config";
 import {formatDateToYYYYMMDD} from "../../utils/date-utils";
+import Comment from "@components/comment/index.astro"
 
 export async function getStaticPaths() {
     const blogEntries = await getCollection('posts', ({ data }) => {
@@ -106,6 +107,10 @@ const jsonLd = {
 
         </div>
     </div>
+
+
+    <Comment post={entry}></Comment>
+
 
     <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
         <a href={getPostUrlBySlug(entry.data.nextSlug)} class="w-full font-bold overflow-hidden active:scale-95">

@@ -1,0 +1,36 @@
+---
+import { commentConfig } from '@/config'
+interface Props {
+  identifier: string
+  url: string
+  title: string
+}
+
+const { identifier, url, title } = Astro.props
+
+if (!commentConfig || !commentConfig.disqus) {
+  throw new Error('Disqus comments are not configured')
+}
+const shortname = commentConfig.disqus.shortname
+---
+
+<div id="disqus_thread"></div>
+
+<script is:inline define:vars={{ shortname, identifier, url, title }}>
+  // @ts-ignore
+  var disqus_config = function () {
+    this.page.url = url
+    this.page.identifier = identifier
+    this.page.title = title
+  }
+
+  ;(function () {
+    var d = document,
+      s = d.createElement('script')
+    s.src = 'https://' + shortname + '.disqus.com/embed.js'
+    s.setAttribute('data-timestamp', new Date().toString())
+    ;(d.head || d.body).appendChild(s)
+  })()
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<style is:global></style>
