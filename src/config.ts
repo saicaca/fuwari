@@ -9,7 +9,7 @@ import { LinkPreset } from './types/config'
 export const siteConfig: SiteConfig = {
   title: 'CocosByte',
   subtitle: 'ZiLong`s Blog',
-  lang: 'zh-cn',
+  lang: 'zh_CN',
   themeHue: 250,
   banner: {
     enable: false,
