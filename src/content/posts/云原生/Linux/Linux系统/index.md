@@ -1,5 +1,5 @@
 ---
-title: Linux 笔记
+title: Linux
 published: 2023-09-05
 description: "Linux 学习笔记"
 image: ""

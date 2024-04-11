@@ -1,5 +1,5 @@
 ---
-title: MongoDB 笔记
+title: MongoDB
 published: 2023-09-05
 description: "MongoDB 学习笔记"
 image: ""

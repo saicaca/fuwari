@@ -1,5 +1,5 @@
 ---
-title: Redis数据库 笔记
+title: Redis
 published: 2023-09-05
 description: "Redis 学习笔记"
 image: ""

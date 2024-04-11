@@ -1,5 +1,5 @@
 ---
-title: Mysql 笔记
+title: Mysql
 published: 2023-09-05
 description: "Mysql 学习笔记"
 image: ""
