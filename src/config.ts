@@ -22,17 +22,12 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Home,
     LinkPreset.Archive,
     LinkPreset.About,
-    {
-      name: 'GitHub',
-      url: 'https://github.com/CocosByte',
-      external: true,
-    },
   ],
 }
 
 export const profileConfig: ProfileConfig = {
   avatar: 'assets/images/head.jpg',
-  name: 'Lorem Ipsum',
+  name: 'Coco Yu',
   bio: '朽木亦可雕',
   links: [
     {
