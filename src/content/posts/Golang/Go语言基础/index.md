@@ -51,7 +51,7 @@ draft: false
 
 
 
-<img src="./image-20230517110031409.png" alt="image-20230517110031409" style="zoom: 80%;" />
+<img src="./image-20230517110031409.png" alt="image-20230517110031409" />
 
 
 
