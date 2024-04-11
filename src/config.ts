@@ -7,9 +7,9 @@ import type {
 import { LinkPreset } from './types/config'
 
 export const siteConfig: SiteConfig = {
-  title: 'Fuwari',
-  subtitle: 'Demo Site',
-  lang: 'en',
+  title: 'CocosByte',
+  subtitle: 'ZiLong`s Blog',
+  lang: 'zh-cn',
   themeHue: 250,
   banner: {
     enable: false,
@@ -24,31 +24,26 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.About,
     {
       name: 'GitHub',
-      url: 'https://github.com/saicaca/fuwari',
+      url: 'https://github.com/CocosByte',
       external: true,
     },
   ],
 }
 
 export const profileConfig: ProfileConfig = {
-  avatar: 'assets/images/demo-avatar.png',
+  avatar: 'assets/images/head.jpg',
   name: 'Lorem Ipsum',
-  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  bio: '朽木亦可雕',
   links: [
     {
       name: 'Twitter',
       icon: 'fa6-brands:twitter',
-      url: 'https://twitter.com',
-    },
-    {
-      name: 'Steam',
-      icon: 'fa6-brands:steam',
-      url: 'https://store.steampowered.com',
+      url: 'https://twitter.com/CocoYuZL',
     },
     {
       name: 'GitHub',
       icon: 'fa6-brands:github',
-      url: 'https://github.com/saicaca/fuwari',
+      url: 'https://github.com/CocosByte',
     },
   ],
 }
