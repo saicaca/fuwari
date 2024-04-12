@@ -12,7 +12,11 @@ export type SiteConfig = {
 
   favicon: {
     enable: boolean
-    src: string
+    size: string
+    src: {
+      light: string
+      dark: string
+    }
   }
 }
 

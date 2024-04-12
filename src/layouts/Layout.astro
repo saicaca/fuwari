@@ -74,7 +74,8 @@ if (title) {
 		<meta name="description" content="Astro description">
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		{enableFavicon ? <link rel="icon" href={siteConfig.favicon.src}> :
+		{enableFavicon ? <link rel="icon" media="(prefers-color-scheme: light)" href={siteConfig.favicon.src.light} sizes={siteConfig.favicon.size}> 
+		<link rel="icon" media="(prefers-color-scheme: dark)" href={siteConfig.favicon.src.dark}> :
 		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-32.png" sizes="32x32">
 		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-128.png" sizes="128x128">
 		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-180.png" sizes="180x180">

@@ -17,7 +17,11 @@ export const siteConfig: SiteConfig = {
   },
   favicon: {
     enable: true,
-    src: '/favicon/favicon-light-32.png',
+    size: '32x32',
+    src: {
+      light: '/favicon/favicon-light-32.png',
+      dark: '/favicon/favicon-dark-32.png',
+    }
   },
 }
 
