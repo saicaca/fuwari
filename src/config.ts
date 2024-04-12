@@ -15,6 +15,10 @@ export const siteConfig: SiteConfig = {
     enable: false,
     src: 'assets/images/demo-banner.png',
   },
+  favicon: {
+    enable: true,
+    src: '/favicon/favicon-light-32.png',
+  },
 }
 
 export const navBarConfig: NavBarConfig = {

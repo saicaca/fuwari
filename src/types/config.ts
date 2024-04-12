@@ -9,6 +9,11 @@ export type SiteConfig = {
     enable: boolean
     src: string
   }
+
+  favicon: {
+    enable: boolean
+    src: string
+  }
 }
 
 export enum LinkPreset {
