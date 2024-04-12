@@ -44,6 +44,7 @@ const myFade = {
 
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
+const targetTheme = siteConfig.colorScheme;
 const configHue = siteConfig.themeHue;
 if (!banner || typeof banner !== 'string' || banner.trim() === '') {
 	banner = siteConfig.banner.src;
@@ -64,7 +65,7 @@ if (title) {
 ---
 
 <!DOCTYPE html>
-<html lang="en" isHome={isHomePage} pathname={testPathName} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
+<html lang="en" isHome={isHomePage} pathname={testPathName} class:list={["bg-[var(--page-bg)] transition text-[14px] md:text-[16px]" , targetTheme]}>
 	<head>
 
 		<title>{pageTitle}</title>
@@ -205,13 +206,22 @@ setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-sw
 
 
 function loadTheme() {
-	if (localStorage.theme === 'dark' || (!('theme' in localStorage) &&
-		window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-		document.documentElement.classList.add('dark');
-		localStorage.theme = 'dark';
+	let root = document.documentElement.classList;
+	let theme = localStorage.getItem('theme');
+	if (theme) {
+		if (localStorage.theme === 'light') {
+			root.remove('dark');
+		} else if (localStorage.theme === 'dark') {
+			root.add('dark');
+	} 
 	} else {
-		document.documentElement.classList.remove('dark');
-		localStorage.theme = 'light';
+		if (root.contains('dark')) {
+			root.add('dark');
+		} else if (root.contains('auto')) {
+			window.matchMedia('(prefers-color-scheme: light)').matches ? root.remove('dark') : root.add('dark');
+		} else {
+			root.remove('dark');
+		}
 	}
 }
 

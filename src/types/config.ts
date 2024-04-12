@@ -4,6 +4,7 @@ export type SiteConfig = {
 
   lang: string
 
+  colorScheme: string
   themeHue: number
   banner: {
     enable: boolean

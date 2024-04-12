@@ -10,6 +10,7 @@ export const siteConfig: SiteConfig = {
   title: 'Fuwari',
   subtitle: 'Demo Site',
   lang: 'en',
+  colorScheme: 'auto',
   themeHue: 250,
   banner: {
     enable: false,
