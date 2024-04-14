@@ -20,6 +20,6 @@ const { category } = Astro.params;
 
 ---
 
-<MainGridLayout title={i18n(I18nKey.archive)}>
+<MainGridLayout title={i18n(I18nKey.archive)} description={i18n(I18nKey.archive)}>
     <ArchivePanel categories={[category]}></ArchivePanel>
 </MainGridLayout>
