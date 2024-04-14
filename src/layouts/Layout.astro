@@ -86,26 +86,6 @@ if (title) {
 		<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 
 		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<link
-			rel="alternate"
-			type="application/rss+xml"
-			title="Your Site's Title"
-			href={`${Astro.site}rss.xml`}
-		/>
-
-		<script async src="https://ctrdh.zeabur.app/script.js" data-website-id="1d795bf3-26da-4a1e-bba1-c67f7c55816a"></script>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-8C7KXD07JR"></script>
-
-		<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'G-8C7KXD07JR');
-		</script>
-
 
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"is-home": isHomePage, "enable-banner": enableBanner}]}>
