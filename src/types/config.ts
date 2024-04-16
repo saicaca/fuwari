@@ -1,14 +1,14 @@
 export type SiteConfig = {
   title: string
   subtitle: string
-
+  siteUrl: string
   lang: string
-
   themeHue: number
   banner: {
     enable: boolean
     src: string
   }
+  license: string
 }
 
 export enum LinkPreset {
