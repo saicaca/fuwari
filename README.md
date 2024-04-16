@@ -2,7 +2,9 @@
 
 A static blog template built with [Astro](https://astro.build).
 
-[**🖥️Live Demo (Vercel)**](https://fuwari.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;[**🌏中文 README**](https://github.com/saicaca/fuwari/blob/main/README.zh-CN.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;[**📦Old Hexo Version**](https://github.com/saicaca/hexo-theme-vivia)
+> copied from [saicaca](https://github.com/saicaca/fuwari).
+
+[**🖥️Live Demo (Vercel)**](https://fuwari.vercel.app)
 
 ![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
 
@@ -16,6 +18,16 @@ A static blog template built with [Astro](https://astro.build).
 - [ ] Comments
 - [x] Search
 - [ ] TOC
+
+## Changed Part
+
+- refer to Hexo version changed some style; and chose a preferred style for template;
+- custom display CC license; 
+- changed color of dark mode, it seems too bright at night;
+- add two new options of profiles; 
+- add ICP license to footer template; 
+- now set copyright date to current time; 
+- now set siteUrl from config.ts
 
 ## 🚀 How to Use
 
