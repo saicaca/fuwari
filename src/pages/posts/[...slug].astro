@@ -54,7 +54,7 @@ const { remarkPluginFrontmatter } = await entry.render();
                     data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title"
                     class="transition w-full block font-bold mb-3
                     text-3xl md:text-[2.5rem]/[2.75rem]
-                    text-black/90 dark:text-white/90
+                    text-gray-800 dark:text-gray-200
                     md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
                     before:absolute before:top-[0.75rem] before:left-[-1.125rem]
                 ">
@@ -84,7 +84,8 @@ const { remarkPluginFrontmatter } = await entry.render();
                 <Content />
             </Markdown>
 
-            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
+            <!--The protocol is displayed when the article is original-->
+            {entry.data.original && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation" />}
 
         </div>
     </div>

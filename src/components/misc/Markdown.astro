@@ -3,7 +3,7 @@ import '@fontsource-variable/jetbrains-mono';
 import '@fontsource-variable/jetbrains-mono/wght-italic.css';
 
 interface Props {
-    class: string;
+    class: unknown;
 }
 const className = Astro.props.class;
 ---
@@ -145,6 +145,12 @@ const className = Astro.props.class;
 @layer components {
     .custom-md h1 {
         @apply text-3xl
+    }
+}
+
+@layer components {
+    .custom-md h1,h2,h3,h4,h5,h6 {
+        @apply text-gray-700 dark:text-gray-300
     }
 }
 

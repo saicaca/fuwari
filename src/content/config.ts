@@ -9,6 +9,8 @@ const postsCollection = defineCollection({
     image: z.string().optional(),
     tags: z.array(z.string()).optional(),
     category: z.string().optional(),
+    // original or transport option, to display license after Markdown file
+    original: z.boolean().optional()
   }),
 })
 export const collections = {
