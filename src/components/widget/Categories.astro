@@ -18,7 +18,7 @@ interface Props {
     class?: string;
     style?: string;
 }
-const className = Astro.props.class
+const className = Astro.props.class.concat(" cursor-default")
 const style = Astro.props.style
 
 ---

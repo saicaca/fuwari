@@ -9,6 +9,7 @@ const { badge, url, name } = Astro.props
 <a href={url} aria-label={name}>
     <button
         class:list={`
+            group
             w-full
             h-10
             rounded-lg
@@ -34,6 +35,7 @@ const { badge, url, name } = Astro.props
                 <div class="transition h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
                     text-[var(--btn-content)] dark:text-[var(--deep-text)]
                     bg-[oklch(0.95_0.025_var(--hue))] dark:bg-[var(--primary)]
+                    dark:group-hover:bg-[var(--page-bg)] dark:group-hover:text-[var(--btn-content)]
                     flex items-center justify-center">
                     { badge }
                 </div>

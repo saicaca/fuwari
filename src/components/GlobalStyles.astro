@@ -187,7 +187,13 @@ color_set({
         @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)]
     }
     .link {
-        @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-1 -m-1;
+        /**
+            @apply transition hover:text-[var(--link-hover)] active:text-[var(--link-active)];
+         */
+        @apply transition hover:text-neutral-800 dark:hover:text-neutral-200;
+    }
+    .link-bg {
+        @apply rounded-md p-1 -m-1
     }
     .link-lg {
         @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-1.5 -m-1.5;
