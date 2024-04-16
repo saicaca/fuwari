@@ -44,6 +44,7 @@
     "@iconify-json/material-symbols": "^1.1.74",
     "@rollup/plugin-yaml": "^4.1.2",
     "@tailwindcss/typography": "^0.5.10",
+    "@types/node": "^20.12.7",
     "stylus": "^0.63.0"
   }
 }
