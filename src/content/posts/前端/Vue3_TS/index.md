@@ -99,10 +99,14 @@ npm run serve
 `vite` 是新一代前端构建工具，官网地址：[https://vitejs.cn](https://vitejs.cn/)，`vite`的优势如下：
 
 - 轻量快速的热重载（`HMR`），能实现极速的服务启动。
+
 - 对 `TypeScript`、`JSX`、`CSS` 等支持开箱即用。
+
 - 真正的按需编译，不再等待整个应用编译完成。
+
 - `webpack`构建 与 `vite`构建对比图如下：
-<img src="./1683167182037-71c78210-8217-4e7d-9a83-e463035efbbe.png" alt="webpack构建" title="webpack构建" style="zoom:20%;box-shadow:0 0 10px black" />	<img src="./1683167204081-582dc237-72bc-499e-9589-2cdfd452e62f.png" alt="vite构建" title="vite构建" style="zoom: 20%;box-shadow:0 0 10px black" />
+
+  <img src="./1683167182037-71c78210-8217-4e7d-9a83-e463035efbbe.png" alt="webpack构建" />	<img src="./1683167204081-582dc237-72bc-499e-9589-2cdfd452e62f.png" alt="vite构建" title="vite构建"  />
 * 具体操作如下（点击查看[官方文档](https://cn.vuejs.org/guide/quick-start.html#creating-a-vue-application)）
 
 ```powershell
@@ -156,9 +160,11 @@ npm create vue@latest
 
 安装官方推荐的`vscode`插件：
 
-<img src="./volar.png" alt="Snipaste_2023-10-08_20-46-34" style="zoom:50%;" /> 
+<img src="./volar.png" alt="Snipaste_2023-10-08_20-46-34"  /> 
 
-<img src="./image-20231218085906380.png" alt="image-20231218085906380" style="zoom:42%;" /> 
+
+
+<img src="./image-20231218085906380.png" alt="image-20231218085906380" /> 
 
 总结：
 
@@ -215,13 +221,13 @@ npm create vue@latest
 
 `Options`类型的 `API`，数据、方法、计算属性等，是分散在：`data`、`methods`、`computed`中的，若想新增或者修改一个需求，就需要分别修改：`data`、`methods`、`computed`，不便于维护和复用。
 
-<img src="./1696662197101-55d2b251-f6e5-47f4-b3f1-d8531bbf9279.gif" alt="1.gif" style="zoom:70%;border-radius:20px" /><img src="./1696662200734-1bad8249-d7a2-423e-a3c3-ab4c110628be.gif" alt="2.gif" style="zoom:70%;border-radius:20px" />
+<img src="./1696662197101-55d2b251-f6e5-47f4-b3f1-d8531bbf9279.gif" alt="1.gif"  /><img src="./1696662200734-1bad8249-d7a2-423e-a3c3-ab4c110628be.gif" alt="2.gif" />
 
 ### Composition API 的优势
 
 可以用函数的方式，更加优雅的组织代码，让相关功能的代码更加有序的组织在一起。
 
-<img src="./1696662249851-db6403a1-acb5-481a-88e0-e1e34d2ef53a.gif" alt="3.gif" style="height:300px;border-radius:10px"  /><img src="./1696662256560-7239b9f9-a770-43c1-9386-6cc12ef1e9c0.gif" alt="4.gif" style="height:300px;border-radius:10px"  />
+<img src="./1696662249851-db6403a1-acb5-481a-88e0-e1e34d2ef53a.gif" alt="3.gif"   /><img src="./1696662256560-7239b9f9-a770-43c1-9386-6cc12ef1e9c0.gif" alt="4.gif"  />
 
 > 说明：以上四张动图原创作者：大帅老猿
 
@@ -503,7 +509,7 @@ function test(){
 
 > 1. `ref`创建的变量必须使用`.value`（可以使用`volar`插件自动添加`.value`）。
 >
->    <img src="./自动补充value.png" alt="自动补充value" style="zoom:50%;border-radius:20px" /> 
+>    <img src="./自动补充value.png" alt="自动补充value"  /> 
 >
 > 2. `reactive`重新分配一个新对象，会**失去**响应式（可以使用`Object.assign`去整体替换）。
 
@@ -1640,7 +1646,7 @@ app.mount('#app')
 
 此时开发者工具中已经有了`pinia`选项
 
-<img src="https://cdn.nlark.com/yuque/0/2023/png/35780599/1684309952481-c67f67f9-d1a3-4d69-8bd6-2b381e003f31.png" style="zoom:80%;border:1px solid black;border-radius:10px" />
+<img src="https://cdn.nlark.com/yuque/0/2023/png/35780599/1684309952481-c67f67f9-d1a3-4d69-8bd6-2b381e003f31.png" />
 
 ## 5.3【存储+读取数据】
 
@@ -1905,7 +1911,7 @@ export const useTalkStore = defineStore('talk',()=>{
 
 **常见搭配形式：**
 
-<img src="./image-20231119185900990.png" alt="image-20231119185900990" style="zoom:60%;" /> 
+<img src="./image-20231119185900990.png" alt="image-20231119185900990" /> 
 
 ## 6.1. 【props】
 
