@@ -162,11 +162,11 @@ npm create vue@latest
 
 安装官方推荐的`vscode`插件：
 
-<img src="./volar.png" alt="Snipaste_2023-10-08_20-46-34" /> 
+![image-20240417100215274](image-20240417100215274.png) 
 
 
 
-<img src="./image-20231218085906380.png" alt="image-20231218085906380" /> 
+![image-20240417100218271](image-20240417100218271.png) 
 
 总结：
 
@@ -223,7 +223,7 @@ npm create vue@latest
 
 `Options`类型的 `API`，数据、方法、计算属性等，是分散在：`data`、`methods`、`computed`中的，若想新增或者修改一个需求，就需要分别修改：`data`、`methods`、`computed`，不便于维护和复用。
 
-![img](1696662197101-55d2b251-f6e5-47f4-b3f1-d8531bbf9279-1713257298017-3.gif)![img](1696662200734-1bad8249-d7a2-423e-a3c3-ab4c110628be-1713257302888-5.gif)
+![img](1696662197101-55d2b251-f6e5-47f4-b3f1-d8531bbf9279-1713257298017-3-1713319343823-1.gif)![img](1696662200734-1bad8249-d7a2-423e-a3c3-ab4c110628be-1713257302888-5-1713319347630-3.gif)
 
 ### Composition API 的优势
 
@@ -513,7 +513,7 @@ function test(){
 
 > 1. `ref`创建的变量必须使用`.value`（可以使用`volar`插件自动添加`.value`）。
 >
->    <img src="./自动补充value.png" alt="自动补充value"  /> 
+>    ![image-20240417100321640](image-20240417100321640.png) 
 >
 > 2. `reactive`重新分配一个新对象，会**失去**响应式（可以使用`Object.assign`去整体替换）。
 
@@ -567,7 +567,7 @@ function test(){
 
 作用：根据已有数据计算出新数据（和`Vue2`中的`computed`作用一致）。
 
-<img src="./computed.gif" style="zoom:20%;" />  
+![img](computed-1713319406900-5.gif)  
 
 ```vue
 <template>
@@ -1269,7 +1269,7 @@ function test(){
 
 ## 4.1. 【对路由的理解】
 
-<img src="./image-20231018144351536.png" alt="image-20231018144351536" style="zoom:20%;border-radius:40px" /> 
+![image-20240417100256771](image-20240417100256771.png) 
 
 ## 4.2. 【基本切换效果】
 
@@ -1624,7 +1624,7 @@ console.log(router.replace)
 
 ## 5.1【准备一个效果】
 
-<img src="./images/pinia_example.gif" alt="pinia_example" style="zoom:30%;border:3px solid" /> 
+![pinia_example](pinia_example.gif)
 
 ## 5.2【搭建 pinia 环境】
 
@@ -1650,7 +1650,7 @@ app.mount('#app')
 
 此时开发者工具中已经有了`pinia`选项
 
-<img src="https://cdn.nlark.com/yuque/0/2023/png/35780599/1684309952481-c67f67f9-d1a3-4d69-8bd6-2b381e003f31.png" />
+![image-20240417100307840](image-20240417100307840.png)
 
 ## 5.3【存储+读取数据】
 
@@ -1915,7 +1915,7 @@ export const useTalkStore = defineStore('talk',()=>{
 
 **常见搭配形式：**
 
-<img src="./image-20231119185900990.png" alt="image-20231119185900990" /> 
+![image-20240417100315963](image-20240417100315963.png) 
 
 ## 6.1. 【props】
 
