@@ -6,7 +6,6 @@ image: ""
 tags: ["前端", "Vue"]
 category: Vue
 draft: false
-
 ---
 
 
@@ -18,7 +17,7 @@ draft: false
 - 官方发版地址：[Release v3.0.0 One Piece · vuejs/core](https://github.com/vuejs/core/releases/tag/v3.0.0)
 - 截止2023年10月，最新的公开版本为：`3.3.4`
 
-  ![image-20240416164848938](image-20240416164848938.png) 
+  ![image-20240417111610160](image-20240417111610160.png) 
 
 ## 1.1. 【性能的提升】
 
@@ -99,16 +98,10 @@ npm run serve
 `vite` 是新一代前端构建工具，官网地址：[https://vitejs.cn](https://vitejs.cn/)，`vite`的优势如下：
 
 - 轻量快速的热重载（`HMR`），能实现极速的服务启动。
-
 - 对 `TypeScript`、`JSX`、`CSS` 等支持开箱即用。
-
 - 真正的按需编译，不再等待整个应用编译完成。
-
 - `webpack`构建 与 `vite`构建对比图如下：
-
-  ![image-20240416164855789](image-20240416164855789.png)
-  
-  ​	![image-20240416164902294](image-20240416164902294.png)
+![image-20240417111625919](image-20240417111625919.png)	![image-20240417111631355](image-20240417111631355.png)
 * 具体操作如下（点击查看[官方文档](https://cn.vuejs.org/guide/quick-start.html#creating-a-vue-application)）
 
 ```powershell
@@ -162,11 +155,9 @@ npm create vue@latest
 
 安装官方推荐的`vscode`插件：
 
-![image-20240417100215274](image-20240417100215274.png) 
+![image-20240417111643642](image-20240417111643642.png) 
 
-
-
-![image-20240417100218271](image-20240417100218271.png) 
+![image-20240417111646587](image-20240417111646587.png) 
 
 总结：
 
@@ -223,21 +214,15 @@ npm create vue@latest
 
 `Options`类型的 `API`，数据、方法、计算属性等，是分散在：`data`、`methods`、`computed`中的，若想新增或者修改一个需求，就需要分别修改：`data`、`methods`、`computed`，不便于维护和复用。
 
-![image1](image1.gif)
-
-![image2](image2.gif)
+![1.gif](1696662197101-55d2b251-f6e5-47f4-b3f1-d8531bbf9279-1713323829326-1.gif)![2.gif](1696662200734-1bad8249-d7a2-423e-a3c3-ab4c110628be-1713323835244-3.gif)
 
 ### Composition API 的优势
 
 可以用函数的方式，更加优雅的组织代码，让相关功能的代码更加有序的组织在一起。
 
+![3.gif](1696662249851-db6403a1-acb5-481a-88e0-e1e34d2ef53a-1713323847100-5.gif)
 
-
-![image3](image3.gif)
-
-
-
-![image4](image4.gif)
+![4.gif](1696662256560-7239b9f9-a770-43c1-9386-6cc12ef1e9c0-1713323851118-7.gif)
 
 > 说明：以上四张动图原创作者：大帅老猿
 
@@ -519,7 +504,7 @@ function test(){
 
 > 1. `ref`创建的变量必须使用`.value`（可以使用`volar`插件自动添加`.value`）。
 >
->    ![image-20240417100321640](image-20240417100321640.png) 
+>    ![image-20240417111754005](image-20240417111754005.png) 
 >
 > 2. `reactive`重新分配一个新对象，会**失去**响应式（可以使用`Object.assign`去整体替换）。
 
@@ -573,7 +558,7 @@ function test(){
 
 作用：根据已有数据计算出新数据（和`Vue2`中的`computed`作用一致）。
 
-![computed](computed.gif)  
+![img](computed-1713323885616-9.gif)  
 
 ```vue
 <template>
@@ -1275,7 +1260,7 @@ function test(){
 
 ## 4.1. 【对路由的理解】
 
-![image-20240417100256771](image-20240417100256771.png) 
+![image-20240417111829435](image-20240417111829435.png) 
 
 ## 4.2. 【基本切换效果】
 
@@ -1656,7 +1641,7 @@ app.mount('#app')
 
 此时开发者工具中已经有了`pinia`选项
 
-![image-20240417100307840](image-20240417100307840.png)
+![image-20240417111847598](image-20240417111847598.png)
 
 ## 5.3【存储+读取数据】
 
@@ -1921,7 +1906,7 @@ export const useTalkStore = defineStore('talk',()=>{
 
 **常见搭配形式：**
 
-![image-20240417100315963](image-20240417100315963.png) 
+![image-20240417111913613](image-20240417111913613.png) 
 
 ## 6.1. 【props】
 
@@ -2324,7 +2309,7 @@ function sendToy(){
 
 ### 1. 默认插槽
 
-![img](http://49.232.112.44/images/default_slot.png)
+![image-20240417111929282](image-20240417111929282.png)
 
 ```vue
 父组件中：
