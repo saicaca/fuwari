@@ -214,17 +214,13 @@ npm create vue@latest
 
 `Options`类型的 `API`，数据、方法、计算属性等，是分散在：`data`、`methods`、`computed`中的，若想新增或者修改一个需求，就需要分别修改：`data`、`methods`、`computed`，不便于维护和复用。
 
-![1.gif](1696662197101-55d2b251-f6e5-47f4-b3f1-d8531bbf9279-1713323829326-1.gif)![2.gif](1696662200734-1bad8249-d7a2-423e-a3c3-ab4c110628be-1713323835244-3.gif)
+
 
 ### Composition API 的优势
 
 可以用函数的方式，更加优雅的组织代码，让相关功能的代码更加有序的组织在一起。
 
-![3.gif](1696662249851-db6403a1-acb5-481a-88e0-e1e34d2ef53a-1713323847100-5.gif)
 
-![4.gif](1696662256560-7239b9f9-a770-43c1-9386-6cc12ef1e9c0-1713323851118-7.gif)
-
-> 说明：以上四张动图原创作者：大帅老猿
 
 ## 3.2. 【拉开序幕的 setup】
 ### setup 概述
@@ -556,9 +552,7 @@ function test(){
 ```
 ## 3.8. 【computed】
 
-作用：根据已有数据计算出新数据（和`Vue2`中的`computed`作用一致）。
-
-![img](computed-1713323885616-9.gif)  
+作用：根据已有数据计算出新数据（和`Vue2`中的`computed`作用一致）。  
 
 ```vue
 <template>
@@ -1615,7 +1609,7 @@ console.log(router.replace)
 
 ## 5.1【准备一个效果】
 
-![pinia_example](pinia_example.gif)
+
 
 ## 5.2【搭建 pinia 环境】
 
