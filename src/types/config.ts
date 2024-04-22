@@ -10,14 +10,13 @@ export type SiteConfig = {
     src: string
   }
 
-  favicon: {
-    enable: boolean
-    size: string
-    src: {
-      light: string
-      dark: string
-    }
-  }
+  favicon: Favicon[]
+}
+
+export type Favicon = {
+  src: string,
+  theme?: 'light' | 'dark'
+  sizes?: string
 }
 
 export enum LinkPreset {
