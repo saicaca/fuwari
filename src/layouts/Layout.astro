@@ -12,9 +12,10 @@ import {profileConfig, siteConfig} from "@/config";
 interface Props {
 	title: string;
 	banner: string;
+	description?: string;
 }
 
-let { title, banner } = Astro.props;
+let { title, banner, description } = Astro.props;
 
 const isHomePage = pathsEqual(Astro.url.pathname, '/');
 
@@ -70,7 +71,7 @@ if (title) {
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description">
+		<meta name="description" content={description || pageTitle}>
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-32.png" sizes="32x32">
