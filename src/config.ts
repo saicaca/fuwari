@@ -15,14 +15,13 @@ export const siteConfig: SiteConfig = {
     enable: false,
     src: 'assets/images/demo-banner.png',
   },
-  favicon: {
-    enable: false,
-    size: '32x32',
-    src: {
-      light: '/favicon/favicon-light-32.png',
-      dark: '/favicon/favicon-dark-32.png',
-    }
-  },
+  favicon: [    // Leave this array empty to use the default favicon
+    // {
+    //   src: '/favicon/icon.png',    // Path of the favicon, relative to the /public directory
+    //   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
+    //   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
+    // }
+  ]
 }
 
 export const navBarConfig: NavBarConfig = {
