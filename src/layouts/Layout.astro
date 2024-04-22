@@ -54,6 +54,7 @@ if (!banner || typeof banner !== 'string' || banner.trim() === '') {
 banner = siteConfig.banner.src;
 
 const enableBanner = siteConfig.banner.enable;
+const enableFavicon = siteConfig.favicon.enable;
 
 let pageTitle;
 if (title) {
@@ -74,6 +75,8 @@ if (title) {
 		<meta name="description" content={description || pageTitle}>
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		{enableFavicon ? <link rel="icon" media="(prefers-color-scheme: light)" href={siteConfig.favicon.src.light} sizes={siteConfig.favicon.size}> 
+		<link rel="icon" media="(prefers-color-scheme: dark)" href={siteConfig.favicon.src.dark}> :
 		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-32.png" sizes="32x32">
 		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-128.png" sizes="128x128">
 		<link rel="icon" media="(prefers-color-scheme: light)" href="/favicon/favicon-light-180.png" sizes="180x180">
@@ -81,7 +84,7 @@ if (title) {
 		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-32.png" sizes="32x32">
 		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-128.png" sizes="128x128">
 		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-180.png" sizes="180x180">
-		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-192.png" sizes="192x192">
+		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-192.png" sizes="192x192">}
 
 		<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 

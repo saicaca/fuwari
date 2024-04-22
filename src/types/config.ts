@@ -9,6 +9,15 @@ export type SiteConfig = {
     enable: boolean
     src: string
   }
+
+  favicon: {
+    enable: boolean
+    size: string
+    src: {
+      light: string
+      dark: string
+    }
+  }
 }
 
 export enum LinkPreset {
