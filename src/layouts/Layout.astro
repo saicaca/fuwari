@@ -7,7 +7,7 @@ import ImageWrapper from "@components/misc/ImageWrapper.astro";
 
 import {pathsEqual} from "@utils/url-utils";
 import ConfigCarrier from "@components/ConfigCarrier.astro";
-import {siteConfig} from "@/config";
+import {profileConfig, siteConfig} from "@/config";
 
 interface Props {
 	title: string;
@@ -83,6 +83,8 @@ if (title) {
 		<link rel="icon" media="(prefers-color-scheme: dark)"  href="/favicon/favicon-dark-192.png" sizes="192x192">
 
 		<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+
+		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
 		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
