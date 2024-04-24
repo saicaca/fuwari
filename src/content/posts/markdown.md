@@ -27,6 +27,19 @@ content starts at 4-columns in.
 > They can span multiple paragraphs,
 > if you like.
 
+> [!NOTE]
+> This is a note
+>
+> They can span multiple paragraphs
+
+> [!TIP/ You can change the title!]
+> This is actually a TIP
+
+> [!IMPORTANT]
+> There are four types of admonitions:
+> `[!TIP] [!NOTE] [!IMPORTANT] [!WARNING] [!CAUTION]`
+> You can change the title by addding it after a slash: `[!TIP/ Your title]`
+
 Use 3 dashes for an em-dash. Use 2 dashes for ranges (ex., "it's all
 in chapters 12--14"). Three dots ... will be converted to an ellipsis.
 Unicode is supported. ☺

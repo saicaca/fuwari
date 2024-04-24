@@ -7,6 +7,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
+import remarkBlockcuoteAdmonitions from 'remark-github-beta-blockquote-admonitions'
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
 import svelte from "@astrojs/svelte"
 import swup from '@swup/astro';
@@ -53,7 +54,32 @@ export default defineConfig({
     sitemap(),
   ],
   markdown: {
-    remarkPlugins: [remarkMath, remarkReadingTime],
+    remarkPlugins: [
+      remarkMath,
+      remarkReadingTime,
+      [
+        remarkBlockcuoteAdmonitions,
+        {
+          titleFilter: title =>
+            title.match(/\[!(TIP|NOTE|CAUTION|WARNING|IMPORTANT)( ?\/*.*)\]/),
+          titleTextMap: title => ({
+            displayTitle:
+              title.indexOf('/') !== -1
+                ? title.slice(title.indexOf('/') + 1, -1).trim()
+                : title.match(/(?:\[!)(.+?)(?:\/|\]| )/)[1],
+            checkedTitle: title.match(/(?:\[!)(.+?)(?:\/|\]| )/)[1],
+          }),
+          classNameMaps: {
+            block: str => [str.toLowerCase(), 'admonitions'],
+            title: ['admonitions-title'],
+          },
+          dataMaps: {
+            block: data => ({ ...data, hName: 'blockquote' }),
+            title: data => ({ data }),
+          },
+        },
+      ],
+    ],
     rehypePlugins: [
       rehypeKatex,
       rehypeSlug,

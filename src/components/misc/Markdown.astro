@@ -110,6 +110,38 @@ const className = Astro.props.class;
       font-weight: inherit
       border-left-color: rgba(0,0,0,0)
       position: relative;
+      &.admonitions
+        p:nth-child(1)
+          margin-bottom: 0.4rem
+          font-weight: bold
+        p:nth-child(2)
+          margin-top: 0
+      &.tip
+        p:nth-child(1)
+            color: var(--admonitions-color-tip)
+        &:before
+          background: var(--admonitions-color-tip)
+      &.note
+        p:nth-child(1)
+            color: var(--admonitions-color-note)
+        &:before
+          background: var(--admonitions-color-note)
+      &.important
+        p:nth-child(1)
+            color: var(--admonitions-color-important)
+        &:before
+          background: var(--admonitions-color-important)
+      &.warning
+        p:nth-child(1)
+            color: var(--admonitions-color-warning)
+        &:before
+          background: var(--admonitions-color-warning)
+      &.caution
+        p:nth-child(1)
+            color: var(--admonitions-color-caution)
+        &:before
+          background: var(--admonitions-color-caution)
+
       &:before
         content: ''
         position: absolute
