@@ -31,6 +31,12 @@ Use 3 dashes for an em-dash. Use 2 dashes for ranges (ex., "it's all
 in chapters 12--14"). Three dots ... will be converted to an ellipsis.
 Unicode is supported. ☺
 
+### Color chips:
+Create them using the color inside a code block: <code>\`#ef4591\`</code>; You can scape the styling using \\.
+- Hex `#ef4591` `#ef3`
+- Rgb `rgb(24, 213, 78)`
+- Hsl `hsl(0, 100%, 50%)` 
+
 ## An h2 header
 
 Here's a numbered list:

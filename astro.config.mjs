@@ -8,6 +8,7 @@ import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
+import rehypeColorChips from 'rehype-color-chips'
 import svelte from "@astrojs/svelte"
 import swup from '@swup/astro';
 import sitemap from '@astrojs/sitemap';
@@ -80,6 +81,7 @@ export default defineConfig({
           },
         },
       ],
+      [rehypeColorChips, { customClassName: 'color-chip' }]
     ],
   },
   vite: {
