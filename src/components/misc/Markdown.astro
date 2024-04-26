@@ -25,15 +25,16 @@ const className = Astro.props.class;
     wrapper.className = "relative";
 
     const copyButton = document.createElement("button");
-    copyButton.className = "copy-code btn-regular absolute top-0 right-0 text-sm px-3 py-2 rounded-bl-lg";
+    copyButton.className = "copy-code btn-regular absolute top-0 right-0 text-sm px-3 py-2 rounded-bl-lg rounded-tr-lg";
     copyButton.textContent = copyButtonLabel;
 
     codeBlock.setAttribute("tabindex", "0");
-    codeBlock.appendChild(copyButton);
     if (codeBlock.parentNode) {
       codeBlock.parentNode.insertBefore(wrapper, codeBlock);
     }
+
     wrapper.appendChild(codeBlock);
+    wrapper.appendChild(copyButton);
 
     copyButton.addEventListener("click", async () => {
       await copyCode(codeBlock, copyButton);
