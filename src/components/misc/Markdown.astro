@@ -32,7 +32,7 @@ const className = Astro.props.class;
       wrapper.className = "relative";
 
       let copyButton = document.createElement("button");
-      copyButton.className = "copy-code btn-regular absolute top-0 right-0 text-sm px-3 py-2 rounded-bl-lg rounded-tr-lg opacity-75";
+      copyButton.className = "copy-code btn-regular absolute top-0 right-0 text-sm px-3 py-2 rounded-bl-lg rounded-tr-lg opacity-75 hover:opacity-100 transition-all duration-200 ease-in-out";
       copyButton.textContent = i18n(I18nKey.codeCopy);
 
       codeBlock.setAttribute("tabindex", "0");
@@ -49,9 +49,11 @@ const className = Astro.props.class;
         await navigator.clipboard.writeText(text);
 
         copyButton.textContent = i18n(I18nKey.codeCopied);
+        copyButton.classList.toggle("opacity-100");
 
         setTimeout(() => {
           copyButton.textContent = i18n(I18nKey.codeCopy);
+          copyButton.classList.toggle("opacity-100");
         }, 700);
       });
     }
