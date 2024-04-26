@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.5.9",
-    "@astrojs/sitemap": "^3.1.2",
     "@astrojs/rss": "^4.0.5",
+    "@astrojs/sitemap": "^3.1.2",
     "@astrojs/svelte": "^5.2.0",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/jetbrains-mono": "^5.0.20",
@@ -38,7 +38,8 @@
     "sharp": "^0.33.2",
     "svelte": "^4.2.12",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.2",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.6.0",
