@@ -14,46 +14,52 @@ const className = Astro.props.class;
 </div>
 
 <script>
-  import { i18n } from "../../i18n/translation";
-  import I18nKey from "../../i18n/i18nKey";
+  import { i18n } from "@i18n/translation";
+  import I18nKey from "@i18n/i18nKey";
 
-  const copyButtonLabel = i18n(I18nKey.codeCopy);
-  const codeBlocks = Array.from(document.querySelectorAll("pre"));
+  const observer = new MutationObserver(addPreCopyButton);
+  observer.observe(document.body, { childList: true, subtree: true });
+  
+  document.addEventListener("DOMContentLoaded", addPreCopyButton);
 
-  for (const codeBlock of codeBlocks) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "relative";
+  function addPreCopyButton() {
+    observer.disconnect();
+    
+    let codeBlocks = Array.from(document.querySelectorAll("pre"));
 
-    const copyButton = document.createElement("button");
-    copyButton.className = "copy-code btn-regular absolute top-0 right-0 text-sm px-3 py-2 rounded-bl-lg rounded-tr-lg";
-    copyButton.textContent = copyButtonLabel;
+    for (let codeBlock of codeBlocks) {
+      let wrapper = document.createElement("div");
+      wrapper.className = "relative";
 
-    codeBlock.setAttribute("tabindex", "0");
-    if (codeBlock.parentNode) {
-      codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+      let copyButton = document.createElement("button");
+      copyButton.className = "copy-code btn-regular absolute top-0 right-0 text-sm px-3 py-2 rounded-bl-lg rounded-tr-lg opacity-75";
+      copyButton.textContent = i18n(I18nKey.codeCopy);
+
+      codeBlock.setAttribute("tabindex", "0");
+      if (codeBlock.parentNode) {
+        codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+      }
+
+      wrapper.appendChild(codeBlock);
+      wrapper.appendChild(copyButton);
+
+      copyButton.addEventListener("click", async () => {
+        let text = codeBlock?.querySelector("code")?.innerText;
+
+        await navigator.clipboard.writeText(text);
+
+        copyButton.textContent = i18n(I18nKey.codeCopied);
+
+        setTimeout(() => {
+          copyButton.textContent = i18n(I18nKey.codeCopy);
+        }, 700);
+      });
     }
-
-    wrapper.appendChild(codeBlock);
-    wrapper.appendChild(copyButton);
-
-    copyButton.addEventListener("click", async () => {
-      await copyCode(codeBlock, copyButton);
-    });
-  }
-
-  async function copyCode(block, button) {
-    const code = block.querySelector("code");
-    const text = code.innerText;
-
-    await navigator.clipboard.writeText(text);
-
-    button.textContent = i18n(I18nKey.codeCopied);
-
-    setTimeout(() => {
-      button.textContent = copyButtonLabel;
-    }, 700);
+    
+    observer.observe(document.body, { childList: true, subtree: true });
   }
 </script>
+
 
 <style lang="stylus" is:global>
   .custom-md
