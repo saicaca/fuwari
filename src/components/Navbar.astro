@@ -6,6 +6,7 @@ import {navBarConfig, siteConfig} from "../config";
 import NavMenuPanel from "./widget/NavMenuPanel.astro";
 import Search from "./Search.svelte";
 import {LinkPresets} from "../constants/link-presets";
+import LightDarkSwitch from "./LightDarkSwitch.svelte";
 const className = Astro.props.class;
 
 let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset): NavBarLink => {
@@ -48,10 +49,7 @@ let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset)
         <button aria-label="Display Settings" class="btn-plain h-11 w-11 rounded-lg active:scale-90" id="display-settings-switch">
             <Icon name="material-symbols:palette-outline" size={"1.25rem"}></Icon>
         </button>
-        <button aria-label="Light/Dark Mode" class="btn-plain h-11 w-11 rounded-lg active:scale-90" id="scheme-switch">
-            <Icon name="material-symbols:wb-sunny-outline-rounded" size={"1.25rem"} class="absolute opacity-[var(--display-light-icon)]"></Icon>
-            <Icon name="material-symbols:dark-mode-outline-rounded" size={"1.25rem"} class="absolute opacity-[var(--display-dark-icon)]"></Icon>
-        </button>
+        <LightDarkSwitch client:load></LightDarkSwitch>
         <button aria-label="Menu" name="Nav Menu" class="btn-plain w-11 h-11 rounded-lg active:scale-90 md:hidden" id="nav-menu-switch">
             <Icon name="material-symbols:menu-rounded" size={"1.25rem"}></Icon>
         </button>
@@ -86,13 +84,13 @@ function loadButtonScript() {
     let settingBtn = document.getElementById("display-settings-switch");
     settingBtn.addEventListener("click", function () {
         let settingPanel = document.getElementById("display-setting");
-        settingPanel.classList.toggle("closed");
+        settingPanel.classList.toggle("float-panel-closed");
     });
 
     let menuBtn = document.getElementById("nav-menu-switch");
     menuBtn.addEventListener("click", function () {
         let menuPanel = document.getElementById("nav-menu-panel");
-        menuPanel.classList.toggle("closed");
+        menuPanel.classList.toggle("float-panel-closed");
     });
 }
 

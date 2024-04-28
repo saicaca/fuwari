@@ -22,6 +22,10 @@ enum I18nKey {
 
   themeColor = 'themeColor',
 
+  lightMode =  'lightMode',
+  darkMode = 'darkMode',
+  systemMode = 'systemMode',
+
   more = 'more',
 
   author = 'author',

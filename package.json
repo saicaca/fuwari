@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.5.9",
-    "@astrojs/sitemap": "^3.1.2",
     "@astrojs/rss": "^4.0.5",
+    "@astrojs/sitemap": "^3.1.2",
     "@astrojs/svelte": "^5.2.0",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/jetbrains-mono": "^5.0.20",
@@ -47,6 +47,7 @@
     "@iconify-json/fa6-regular": "^1.1.18",
     "@iconify-json/fa6-solid": "^1.1.20",
     "@iconify-json/material-symbols": "^1.1.74",
+    "@iconify/svelte": "^3.1.6",
     "@rollup/plugin-yaml": "^4.1.2",
     "@tailwindcss/typography": "^0.5.10",
     "@types/markdown-it": "^14.0.0",

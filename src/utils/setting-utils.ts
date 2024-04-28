@@ -17,3 +17,28 @@ export function setHue(hue: number): void {
   }
   r.style.setProperty('--hue', hue)
 }
+
+export const LIGHT_MODE = 'light', DARK_MODE = 'dark', AUTO_MODE = 'auto'
+
+export function setTheme(theme: string): void {
+  localStorage.setItem('theme', theme)
+  switch (theme) {
+    case LIGHT_MODE:
+      document.documentElement.classList.remove('dark');
+      break
+    case DARK_MODE:
+      document.documentElement.classList.add('dark');
+      break
+    case AUTO_MODE:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      break
+  }
+}
+
+export function getStoredTheme(): string {
+  return localStorage.getItem('theme') || AUTO_MODE
+}
