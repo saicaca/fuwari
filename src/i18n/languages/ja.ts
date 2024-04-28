@@ -25,6 +25,10 @@ export const ja: Translation = {
 
   [Key.themeColor]: 'テーマカラー',
 
+  [Key.lightMode]: 'ライト',
+  [Key.darkMode]: 'ダーク',
+  [Key.systemMode]: 'システム',
+
   [Key.more]: 'もっと',
 
   [Key.author]: '作者',

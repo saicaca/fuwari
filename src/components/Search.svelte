@@ -26,7 +26,7 @@ onMount(() => {
             return
 
         if (!keyword && isDesktop) {
-            panel.classList.add("closed")
+            panel.classList.add("float-panel-closed")
             return
         }
 
@@ -43,12 +43,12 @@ onMount(() => {
         }
 
         if (!arr.length && isDesktop) {
-            panel.classList.add("closed")
+            panel.classList.add("float-panel-closed")
             return
         }
 
         if (isDesktop) {
-            panel.classList.remove("closed")
+            panel.classList.remove("float-panel-closed")
         }
         result = arr
     }
@@ -56,7 +56,7 @@ onMount(() => {
 
 const togglePanel = () => {
     let panel = document.getElementById('search-panel')
-    panel?.classList.toggle("closed")
+    panel?.classList.toggle("float-panel-closed")
 }
 
 $: search(keywordDesktop, true)
@@ -82,7 +82,7 @@ $: search(keywordMobile, false)
 </button>
 
 <!-- search panel -->
-<div id="search-panel" class="float-panel closed search-panel absolute md:w-[30rem]
+<div id="search-panel" class="float-panel float-panel-closed search-panel absolute md:w-[30rem]
 top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
 
     <!-- search bar inside panel for phone/tablet -->
