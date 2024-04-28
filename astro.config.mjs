@@ -8,6 +8,8 @@ import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
+/*import { remarkDirectiveHandlers } from "./src/plugins/directives/index.mjs"*/
+/*import remarkDirective from "remark-directive"*/
 import svelte from "@astrojs/svelte"
 import swup from '@swup/astro';
 import sitemap from '@astrojs/sitemap';
@@ -53,7 +55,7 @@ export default defineConfig({
     sitemap(),
   ],
   markdown: {
-    remarkPlugins: [remarkMath, remarkReadingTime],
+    remarkPlugins: [remarkMath, remarkReadingTime, /*remarkDirective, ...remarkDirectiveHandlers*/],
     rehypePlugins: [
       rehypeKatex,
       rehypeSlug,
