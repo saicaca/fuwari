@@ -11,6 +11,7 @@ import {profileConfig, siteConfig} from "@/config";
 import {Favicon} from "../types/config";
 import {defaultFavicons} from "../constants/icon";
 import {LIGHT_MODE, DARK_MODE, AUTO_MODE, DEFAULT_THEME} from "../constants/constants";
+import {url} from "../utils/url-utils";
 
 interface Props {
 	title: string;
@@ -81,7 +82,7 @@ const favicons: Favicon[] = siteConfig.favicon.length > 0 ? siteConfig.favicon :
 		<meta name="generator" content={Astro.generator} />
 		{favicons.map(favicon => (
 			<link rel="icon"
-				  href={favicon.src}
+				  href={favicon.src.startsWith('/') ? url(favicon.src) : favicon.src}
 				  sizes={favicon.sizes}
 				  media={favicon.theme && `(prefers-color-scheme: ${favicon.theme})`}
 			/>
