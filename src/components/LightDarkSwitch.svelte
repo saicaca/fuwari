@@ -3,8 +3,9 @@
 import Icon from "@iconify/svelte"
 import {i18n} from '@i18n/translation'
 import I18nKey from '@i18n/i18nKey'
-import {LIGHT_MODE, DARK_MODE, AUTO_MODE, setTheme, getStoredTheme} from '../utils/setting-utils.ts'
+import {setTheme, getStoredTheme} from '../utils/setting-utils.ts'
 import {onMount} from "svelte";
+import {AUTO_MODE, DARK_MODE, LIGHT_MODE} from "@constants/constants.ts";
 
 const seq = [LIGHT_MODE, DARK_MODE, AUTO_MODE]
 let mode = AUTO_MODE
