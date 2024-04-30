@@ -68,10 +68,12 @@ if (title) {
 
 const favicons: Favicon[] = siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons
 
+const siteLang = siteConfig.lang.replace('_', '-')
+
 ---
 
 <!DOCTYPE html>
-<html lang="en" isHome={isHomePage} pathname={testPathName} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
+<html lang={siteLang} isHome={isHomePage} pathname={testPathName} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
 	<head>
 
 		<title>{pageTitle}</title>
