@@ -1,0 +1,69 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  class: string;
+  date: string;
+  tags: string[];
+  society: string;
+}
+
+const { date, tags, society, hideTagsForMobile } = Astro.props;
+const className = Astro.props.class;
+---
+<div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 justify-between", className]}>
+    <!-- categories -->
+    <!--<div class="flex items-center">-->
+    <div class="flex items-center">
+        <div class="meta-icon"
+        >
+            <Icon name="material-symbols:menu-rounded" class="text-xl"></Icon>
+        </div>
+        <div class="flex flex-row flex-nowrap transition text-50 text-sm font-medium whitespace-nowrap">
+          {society}
+        </div>
+    </div>
+
+    <!-- tags -->
+  {tags && tags.length > 0 &&
+    (
+      <div class:list={["items-center", {"flex": !hideTagsForMobile, "hidden md:flex": hideTagsForMobile}]}>
+        <div class="meta-icon"
+        >
+          <Icon name="material-symbols:tag-rounded" class="text-xl"></Icon>
+        </div>
+        <div class="flex flex-row flex-nowrap">
+          {(tags && tags.length > 0) && tags.map(tag =>
+            <div
+                    class="with-divider text-50 text-sm font-medium whitespace-nowrap"
+            >
+              {tag}
+            </div>)}
+        </div>
+      </div>)}
+
+    <!-- publish date -->
+    <div class="flex items-center">
+      <span class="text-50 text-sm font-medium">{date}</span>
+      <div class="meta-icon"
+      >
+        <Icon name="material-symbols:calendar-today-outline-rounded" class="text-xl"></Icon>
+      </div>
+    </div>
+</div>
+
+<style>
+  @tailwind components;
+
+  @layer components {
+    .meta-icon {
+      @apply w-8 h-8 transition rounded-md flex items-center justify-center bg-[var(--btn-regular-bg)]
+      text-[var(--btn-content)] mr-2
+    }
+
+    .with-divider {
+      @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-[var(--meta-divider)] before:text-sm
+      before:font-medium before:first-of-type:hidden before:transition
+    }
+  }
+</style>
