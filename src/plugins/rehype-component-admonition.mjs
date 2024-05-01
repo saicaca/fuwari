@@ -20,7 +20,7 @@ export function AdmonitionComponent(properties, children, type) {
   const title = properties?.title;
 
   return h(`blockquote`,
-    { class: `admonition ad-${type}` },
-    [ h("span", { class: `ad-title` }, title ? title : type.toUpperCase()), ...children] 
+    { class: `admonition bdm-${type}` },
+    [ h("span", { class: `bdm-title` }, title ? title : type.toUpperCase()), ...children] 
   );
 }
