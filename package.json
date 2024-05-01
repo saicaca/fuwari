@@ -25,6 +25,7 @@
     "astro-compress": "^2.2.15",
     "astro-icon": "1.1.0",
     "colorjs.io": "^0.5.0",
+    "hastscript": "^9.0.0",
     "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",
     "overlayscrollbars": "^2.6.1",

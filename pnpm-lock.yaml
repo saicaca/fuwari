@@ -44,6 +44,9 @@ importers:
       colorjs.io:
         specifier: ^0.5.0
         version: 0.5.0
+      hastscript:
+        specifier: ^9.0.0
+        version: 9.0.0
       markdown-it:
         specifier: ^14.1.0
         version: 14.1.0
@@ -2723,6 +2726,9 @@ packages:
 
   hastscript@8.0.0:
     resolution: {integrity: sha512-dMOtzCEd3ABUeSIISmrETiKuyydk1w0pa+gE/uormcTpSYuaNJPbX1NU3JLyscSLjwAQM8bWMhhIlnCqnRvDTw==}
+
+  hastscript@9.0.0:
+    resolution: {integrity: sha512-jzaLBGavEDKHrc5EfFImKN7nZKKBdSLIdGvCwDZ9TfzbF2ffXiov8CKE445L2Z1Ek2t/m4SKQ2j6Ipv7NyUolw==}
 
   html-escaper@3.0.3:
     resolution: {integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==}
@@ -7912,6 +7918,14 @@ snapshots:
       space-separated-tokens: 2.0.2
 
   hastscript@8.0.0:
+    dependencies:
+      '@types/hast': 3.0.4
+      comma-separated-tokens: 2.0.3
+      hast-util-parse-selector: 4.0.0
+      property-information: 6.4.1
+      space-separated-tokens: 2.0.2
+
+  hastscript@9.0.0:
     dependencies:
       '@types/hast': 3.0.4
       comma-separated-tokens: 2.0.3
