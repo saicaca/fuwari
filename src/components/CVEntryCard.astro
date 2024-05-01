@@ -1,0 +1,117 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { CVEntry } from '../types/CVMetadata';
+import CVEntryMetadata from './CVEntryMetadata.astro';
+import ImageWrapper from './misc/ImageWrapper.astro';
+
+export interface Props {
+  cv_entry: CVEntry;
+  class: string;
+  style: string;
+}
+
+const { cv_entry, style } = Astro.props;
+const { title, society, date, location, description, tags } = cv_entry;
+// let {logo} = cv_entry;
+const className = Astro.props.class;
+
+let logo = undefined;
+
+const hasCover = logo !== '' && logo !== undefined;
+function srcToPublicPath(src: string) {
+  src = src.replace('src', 'assets');
+  console.log('src', src);
+  return src;
+}
+const image = hasCover ? srcToPublicPath(logo) : undefined;
+
+const coverWidth = '28%';
+
+let url;
+switch (typeof location) {
+  case 'object':
+    if ('github' in location && location.github) {
+      url = `https://github.com/${location.github}`;
+    }
+    break;
+  case 'string':
+    if (location.startsWith('http')) {
+      url = location;
+    }
+    break;
+}
+---
+<div class:list={["card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative", className]}
+     style={style}>
+    <div class:list={["pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative", {
+      "w-full md:w-[calc(100%_-_52px_-_12px)]": !hasCover,
+      "w-full md:w-[calc(100%_-_var(--coverWidth))]": hasCover,
+    }]}>
+        <a href={url} target="_blank" class="transition w-full block font-bold mb-3 text-3xl text-90
+        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+        active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
+        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
+        ">
+          {title}
+            <Icon class="inline text-[var(--primary)] md:hidden -translate-y-[0.15rem]"
+                  name="material-symbols:chevron-right-rounded" size={28}>
+            </Icon>
+        </a>
+
+        <!-- metadata -->
+        <CVEntryMetadata date={date} tags={tags} society={society} hideTagsForMobile={false}
+                         class:list={{"mb-4": description, "mb-6": !description}}>
+        </CVEntryMetadata>
+
+        <!-- description -->
+        <div class="transition text-75 mb-3.5">
+            <ul>
+              {
+                description.map(line => (
+                        <li>{line}</li>
+                ))}
+            </ul>
+        </div>
+
+        <!-- word count and read time  -->
+        <!--<div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition">-->
+        <!--    <div>{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount)}</div>-->
+        <!--    <div>|</div>-->
+        <!--    <div>{remarkPluginFrontmatter.minutes} {" " + i18n(I18nKey.minutesCount)}</div>-->
+        <!--</div>-->
+    </div>
+
+  {hasCover && <a aria-label={title}
+                  class:list={["group",
+                    "max-h-[20vh] md:max-h-none mx-4 mt-4 -mb-2 md:mb-0 md:mx-0 md:mt-0",
+                    "md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden active:scale-95"
+                  ]}>
+      <div class="absolute pointer-events-none z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition"></div>
+      <div class="absolute pointer-events-none z-20 w-full h-full flex items-center justify-center ">
+          <Icon name="material-symbols:chevron-right-rounded"
+                class="transition opacity-0 group-hover:opacity-100 text-white text-5xl">
+          </Icon>
+      </div>
+      <ImageWrapper src={image} alt="Cover Image of the Post"
+                    class="w-full h-full object-center"
+                    imgClass="md:w-full h-full object-contain object-center">
+          <!--imgClass="object-scale-down md:object-contain md:object-center">-->
+      </ImageWrapper>
+  </a>}
+
+  {!hasCover &&
+          <a href={url} aria-label={title} class="hidden md:flex btn-regular w-[3.25rem]
+         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
+        ">
+              <Icon name="material-symbols:chevron-right-rounded"
+                    class="transition text-[var(--primary)] text-4xl mx-auto">
+              </Icon>
+          </a>
+  }
+</div>
+<div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden"></div>
+
+<style lang="stylus" define:vars={{coverWidth}}>
+</style>
