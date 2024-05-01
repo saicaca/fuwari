@@ -4,123 +4,140 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@astrojs/check':
-    specifier: ^0.5.9
-    version: 0.5.9(typescript@5.4.2)
-  '@astrojs/rss':
-    specifier: ^4.0.5
-    version: 4.0.5
-  '@astrojs/sitemap':
-    specifier: ^3.1.2
-    version: 3.1.2
-  '@astrojs/svelte':
-    specifier: ^5.2.0
-    version: 5.2.0(astro@4.4.15)(svelte@4.2.12)(typescript@5.4.2)(vite@5.1.6)
-  '@astrojs/tailwind':
-    specifier: ^5.1.0
-    version: 5.1.0(astro@4.4.15)(tailwindcss@3.4.1)
-  '@fontsource-variable/jetbrains-mono':
-    specifier: ^5.0.20
-    version: 5.0.20
-  '@fontsource/roboto':
-    specifier: ^5.0.12
-    version: 5.0.12
-  '@swup/astro':
-    specifier: ^1.4.0
-    version: 1.4.0
-  astro:
-    specifier: ^4.4.15
-    version: 4.4.15(stylus@0.63.0)(typescript@5.4.2)
-  astro-compress:
-    specifier: ^2.2.15
-    version: 2.2.15
-  astro-icon:
-    specifier: 1.1.0
-    version: 1.1.0
-  colorjs.io:
-    specifier: ^0.5.0
-    version: 0.5.0
-  markdown-it:
-    specifier: ^14.1.0
-    version: 14.1.0
-  mdast-util-to-string:
-    specifier: ^4.0.0
-    version: 4.0.0
-  overlayscrollbars:
-    specifier: ^2.6.1
-    version: 2.6.1
-  pagefind:
-    specifier: ^1.0.4
-    version: 1.0.4
-  reading-time:
-    specifier: ^1.5.0
-    version: 1.5.0
-  rehype-autolink-headings:
-    specifier: ^7.1.0
-    version: 7.1.0
-  rehype-katex:
-    specifier: ^7.0.0
-    version: 7.0.0
-  rehype-slug:
-    specifier: ^6.0.0
-    version: 6.0.0
-  remark-math:
-    specifier: ^6.0.0
-    version: 6.0.0
-  sanitize-html:
-    specifier: ^2.13.0
-    version: 2.13.0
-  sharp:
-    specifier: ^0.33.2
-    version: 0.33.2
-  svelte:
-    specifier: ^4.2.12
-    version: 4.2.12
-  tailwindcss:
-    specifier: ^3.4.1
-    version: 3.4.1
-  typescript:
-    specifier: ^5.4.2
-    version: 5.4.2
+importers:
 
-devDependencies:
-  '@astrojs/ts-plugin':
-    specifier: ^1.6.0
-    version: 1.6.0
-  '@biomejs/biome':
-    specifier: 1.6.1
-    version: 1.6.1
-  '@iconify-json/fa6-brands':
-    specifier: ^1.1.18
-    version: 1.1.18
-  '@iconify-json/fa6-regular':
-    specifier: ^1.1.18
-    version: 1.1.18
-  '@iconify-json/fa6-solid':
-    specifier: ^1.1.20
-    version: 1.1.20
-  '@iconify-json/material-symbols':
-    specifier: ^1.1.74
-    version: 1.1.75
-  '@iconify/svelte':
-    specifier: ^3.1.6
-    version: 3.1.6(svelte@4.2.12)
-  '@rollup/plugin-yaml':
-    specifier: ^4.1.2
-    version: 4.1.2(rollup@2.79.1)
-  '@tailwindcss/typography':
-    specifier: ^0.5.10
-    version: 0.5.10(tailwindcss@3.4.1)
-  '@types/markdown-it':
-    specifier: ^14.0.0
-    version: 14.0.0
-  '@types/sanitize-html':
-    specifier: ^2.11.0
-    version: 2.11.0
-  stylus:
-    specifier: ^0.63.0
-    version: 0.63.0
+  .:
+    dependencies:
+      '@astrojs/check':
+        specifier: ^0.5.9
+        version: 0.5.9(prettier@2.8.8)(typescript@5.4.2)
+      '@astrojs/rss':
+        specifier: ^4.0.5
+        version: 4.0.5
+      '@astrojs/sitemap':
+        specifier: ^3.1.2
+        version: 3.1.4
+      '@astrojs/svelte':
+        specifier: ^5.2.0
+        version: 5.4.0(astro@4.4.15(@types/node@20.11.28)(lightningcss@1.24.1)(stylus@0.63.0)(terser@5.29.2)(typescript@5.4.2))(svelte@4.2.12)(typescript@5.4.2)(vite@5.1.6(@types/node@20.11.28)(lightningcss@1.24.1)(stylus@0.63.0)(terser@5.29.2))
+      '@astrojs/tailwind':
+        specifier: ^5.1.0
+        version: 5.1.0(astro@4.4.15(@types/node@20.11.28)(lightningcss@1.24.1)(stylus@0.63.0)(terser@5.29.2)(typescript@5.4.2))(tailwindcss@3.4.1)
+      '@fontsource-variable/jetbrains-mono':
+        specifier: ^5.0.20
+        version: 5.0.20
+      '@fontsource/roboto':
+        specifier: ^5.0.12
+        version: 5.0.12
+      '@swup/astro':
+        specifier: ^1.4.0
+        version: 1.4.0(@types/babel__core@7.20.5)
+      astro:
+        specifier: ^4.4.15
+        version: 4.4.15(@types/node@20.11.28)(lightningcss@1.24.1)(stylus@0.63.0)(terser@5.29.2)(typescript@5.4.2)
+      astro-compress:
+        specifier: ^2.2.15
+        version: 2.2.15
+      astro-icon:
+        specifier: 1.1.0
+        version: 1.1.0
+      colorjs.io:
+        specifier: ^0.5.0
+        version: 0.5.0
+      markdown-it:
+        specifier: ^14.1.0
+        version: 14.1.0
+      mdast-util-to-string:
+        specifier: ^4.0.0
+        version: 4.0.0
+      overlayscrollbars:
+        specifier: ^2.6.1
+        version: 2.6.1
+      pagefind:
+        specifier: ^1.0.4
+        version: 1.0.4
+      reading-time:
+        specifier: ^1.5.0
+        version: 1.5.0
+      rehype-autolink-headings:
+        specifier: ^7.1.0
+        version: 7.1.0
+      rehype-components:
+        specifier: ^0.3.0
+        version: 0.3.0
+      rehype-katex:
+        specifier: ^7.0.0
+        version: 7.0.0
+      rehype-slug:
+        specifier: ^6.0.0
+        version: 6.0.0
+      remark-directive:
+        specifier: ^3.0.0
+        version: 3.0.0
+      remark-directive-rehype:
+        specifier: ^0.4.2
+        version: 0.4.2
+      remark-math:
+        specifier: ^6.0.0
+        version: 6.0.0
+      sanitize-html:
+        specifier: ^2.13.0
+        version: 2.13.0
+      sharp:
+        specifier: ^0.33.3
+        version: 0.33.3
+      svelte:
+        specifier: ^4.2.12
+        version: 4.2.12
+      tailwindcss:
+        specifier: ^3.4.1
+        version: 3.4.1
+      typescript:
+        specifier: ^5.4.2
+        version: 5.4.2
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
+    devDependencies:
+      '@astrojs/ts-plugin':
+        specifier: ^1.6.0
+        version: 1.6.0
+      '@biomejs/biome':
+        specifier: 1.6.1
+        version: 1.6.1
+      '@iconify-json/fa6-brands':
+        specifier: ^1.1.18
+        version: 1.1.18
+      '@iconify-json/fa6-regular':
+        specifier: ^1.1.18
+        version: 1.1.18
+      '@iconify-json/fa6-solid':
+        specifier: ^1.1.20
+        version: 1.1.20
+      '@iconify-json/material-symbols':
+        specifier: ^1.1.74
+        version: 1.1.75
+      '@iconify/svelte':
+        specifier: ^3.1.6
+        version: 3.1.6(svelte@4.2.12)
+      '@rollup/plugin-yaml':
+        specifier: ^4.1.2
+        version: 4.1.2(rollup@2.79.1)
+      '@tailwindcss/typography':
+        specifier: ^0.5.10
+        version: 0.5.10(tailwindcss@3.4.1)
+      '@types/markdown-it':
+        specifier: ^14.0.0
+        version: 14.0.0
+      '@types/mdast':
+        specifier: ^4.0.3
+        version: 4.0.3
+      '@types/sanitize-html':
+        specifier: ^2.11.0
+        version: 2.11.0
+      stylus:
+        specifier: ^0.63.0
+        version: 0.63.0
 
 packages:
 
@@ -134,9 +151,6 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
-    dependencies:
-      '@jridgewell/gen-mapping': 0.3.5
-      '@jridgewell/trace-mapping': 0.3.25
 
   '@antfu/install-pkg@0.1.1':
     resolution: {integrity: sha512-LyB/8+bSfa0DFGC06zpCEfs89/XoWZwws5ygEa5D+Xsm3OfI+aXQ86VgVG7Acyef+rSZ5HE7J8rrxzrQeM3PjQ==}
@@ -178,15 +192,15 @@ packages:
   '@astrojs/rss@4.0.5':
     resolution: {integrity: sha512-IyJVL6z09AQtxbgLaAwebT3T5YKe4oTHDesqydJv1KLHw+zEzzMCFuuNsEyxjiqu7df9+DDCpDXLj/WRiEUXvw==}
 
-  '@astrojs/sitemap@3.1.2':
-    resolution: {integrity: sha512-FxOJldIl5ltZ5CNjocQxHkAO9orwHBjqtaU28o4smobp9vowS0nbGp+I9CrPxkzWdl1crSDm9vjL9tnvG1DSug==}
+  '@astrojs/sitemap@3.1.4':
+    resolution: {integrity: sha512-po8CqDCK14O6phU1mB5C8SyVLyQEa+7pJM8oXxs1mVh8DgvxxaA5E7lak1vzOmBcyyyHBW32jakGqNYc66sBRw==}
 
-  '@astrojs/svelte@5.2.0':
-    resolution: {integrity: sha512-GmwbXks2WMkmAfl0rlPM/2gA1RtmZzjGV2mOceV3g7QNyjIsSYBPKrlEnSFnuR+YMvlAtWdbMFBsb3gtGxnTTg==}
-    engines: {node: '>=18.14.1'}
+  '@astrojs/svelte@5.4.0':
+    resolution: {integrity: sha512-D9/CVJ+Fy3fu+FzJ7x+0GnRUhHsJKsU6tW/xQQ1QzrFMABuEoM5U4YKTYtxWkqB4B4jNb7gbA4p9ZtEhYZ3/+w==}
+    engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
     peerDependencies:
       astro: ^4.0.0
-      svelte: ^4.0.0 || ^5.0.0-next.56
+      svelte: ^4.0.0 || ^5.0.0-next.90
       typescript: ^5.3.3
 
   '@astrojs/tailwind@5.1.0':
@@ -1061,6 +1075,11 @@ packages:
   '@iconify-json/material-symbols@1.1.75':
     resolution: {integrity: sha512-YMLagGENDw9QNoo4sPDoMX9wO20YptQ2FuTDCf/H/uRH4lGmD08C+z+kYwR4A90qyyo6hYG7yccPEiMOuLow5A==}
 
+  '@iconify/svelte@3.1.6':
+    resolution: {integrity: sha512-yLSrlkOx5J6xXU5GDLPBV/MdVBVEZhd36onfqSbxQobp1XBoWQbMPLNZyCAmTKCPnmzXSowGy79agl8FQ3kj6A==}
+    peerDependencies:
+      svelte: '*'
+
   '@iconify/tools@3.0.7':
     resolution: {integrity: sha512-DxfhFLMnooS34dHelpGUnnYrxLZHs0czC1CgrBhAbuL8ddVzBb2VEQm8kh9qGh7A34qeXAB5iSHH3A72rAaFrg==}
 
@@ -1688,8 +1707,8 @@ packages:
   '@types/sax@1.2.7':
     resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
 
-  '@types/tar@6.1.11':
-    resolution: {integrity: sha512-ThA1WD8aDdVU4VLuyq5NEqriwXErF5gEIJeyT6gHBWU7JtSmW2a5qjNv3/vR82O20mW+1vhmeZJfBQPT3HCugg==}
+  '@types/tar@6.1.13':
+    resolution: {integrity: sha512-IznnlmU5f4WcGTh2ltRu/Ijpmk8wiWXfF0VA4s+HPjHZgvFggk1YaIkbo5krX/zUCzWF8N/l4+W/LNxnvAJ8nw==}
 
   '@types/unist@2.0.10':
     resolution: {integrity: sha512-IfYcSBWE3hLpBg8+X2SEa8LVkJdJEkT2Ese2aaLs3ptGdVtABxndrMaxuFlQ1qdFf9Q5rDvDpxI3WwgvKFAsQA==}
@@ -4305,6 +4324,9 @@ packages:
     resolution: {integrity: sha512-xhV7w8S+bUwlPTb4bAOUQhv8/cSS5offJuX8GQGq32ONF0ZtDWKfkdomM3HMRA+LhX6um/FZ0COqlwsjD53LeQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
+  stream-replace-string@2.0.0:
+    resolution: {integrity: sha512-TlnjJ1C0QrmxRNrON00JvaFFlNh5TTG00APw23j74ET7gkQpTASi6/L2fuiav8pzK715HXtUeClpBTw2NPSn6w==}
+
   streamx@2.16.1:
     resolution: {integrity: sha512-m9QYj6WygWyWa3H1YY69amr4nVgy61xfjys7xO7kviL5rfIEc2naf+ewFiOA+aEJD7y0JO3h2GoiUv4TDwEGzQ==}
 
@@ -4959,30 +4981,21 @@ snapshots:
     dependencies:
       prismjs: 1.29.0
 
-  /@astrojs/rss@4.0.5:
-    resolution: {integrity: sha512-IyJVL6z09AQtxbgLaAwebT3T5YKe4oTHDesqydJv1KLHw+zEzzMCFuuNsEyxjiqu7df9+DDCpDXLj/WRiEUXvw==}
+  '@astrojs/rss@4.0.5':
     dependencies:
       fast-xml-parser: 4.3.6
       kleur: 4.1.5
-    dev: false
 
-  /@astrojs/sitemap@3.1.2:
-    resolution: {integrity: sha512-FxOJldIl5ltZ5CNjocQxHkAO9orwHBjqtaU28o4smobp9vowS0nbGp+I9CrPxkzWdl1crSDm9vjL9tnvG1DSug==}
+  '@astrojs/sitemap@3.1.4':
     dependencies:
       sitemap: 7.1.1
+      stream-replace-string: 2.0.0
       zod: 3.22.4
-    dev: false
 
-  /@astrojs/svelte@5.2.0(astro@4.4.15)(svelte@4.2.12)(typescript@5.4.2)(vite@5.1.6):
-    resolution: {integrity: sha512-GmwbXks2WMkmAfl0rlPM/2gA1RtmZzjGV2mOceV3g7QNyjIsSYBPKrlEnSFnuR+YMvlAtWdbMFBsb3gtGxnTTg==}
-    engines: {node: '>=18.14.1'}
-    peerDependencies:
-      astro: ^4.0.0
-      svelte: ^4.0.0 || ^5.0.0-next.56
-      typescript: ^5.3.3
+  '@astrojs/svelte@5.4.0(astro@4.4.15(@types/node@20.11.28)(lightningcss@1.24.1)(stylus@0.63.0)(terser@5.29.2)(typescript@5.4.2))(svelte@4.2.12)(typescript@5.4.2)(vite@5.1.6(@types/node@20.11.28)(lightningcss@1.24.1)(stylus@0.63.0)(terser@5.29.2))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 3.0.2(svelte@4.2.12)(vite@5.1.6)
-      astro: 4.4.15(stylus@0.63.0)(typescript@5.4.2)
+      '@sveltejs/vite-plugin-svelte': 3.0.2(svelte@4.2.12)(vite@5.1.6(@types/node@20.11.28)(lightningcss@1.24.1)(stylus@0.63.0)(terser@5.29.2))
+      astro: 4.4.15(@types/node@20.11.28)(lightningcss@1.24.1)(stylus@0.63.0)(terser@5.29.2)(typescript@5.4.2)
       svelte: 4.2.12
       svelte2tsx: 0.6.27(svelte@4.2.12)(typescript@5.4.2)
       typescript: 5.4.2
@@ -5942,22 +5955,17 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  /@iconify/svelte@3.1.6(svelte@4.2.12):
-    resolution: {integrity: sha512-yLSrlkOx5J6xXU5GDLPBV/MdVBVEZhd36onfqSbxQobp1XBoWQbMPLNZyCAmTKCPnmzXSowGy79agl8FQ3kj6A==}
-    peerDependencies:
-      svelte: '*'
+  '@iconify/svelte@3.1.6(svelte@4.2.12)':
     dependencies:
       '@iconify/types': 2.0.0
       svelte: 4.2.12
-    dev: true
 
-  /@iconify/tools@3.0.7:
-    resolution: {integrity: sha512-DxfhFLMnooS34dHelpGUnnYrxLZHs0czC1CgrBhAbuL8ddVzBb2VEQm8kh9qGh7A34qeXAB5iSHH3A72rAaFrg==}
+  '@iconify/tools@3.0.7':
     dependencies:
       '@iconify/types': 2.0.0
       '@iconify/utils': 2.1.22
       '@types/cheerio': 0.22.35
-      '@types/tar': 6.1.11
+      '@types/tar': 6.1.13
       cheerio: 1.0.0-rc.12
       extract-zip: 2.0.1
       local-pkg: 0.4.3
@@ -6570,19 +6578,15 @@ snapshots:
     dependencies:
       '@types/node': 20.11.28
 
-  /@types/sanitize-html@2.11.0:
-    resolution: {integrity: sha512-7oxPGNQHXLHE48r/r/qjn7q0hlrs3kL7oZnGj0Wf/h9tj/6ibFyRkNbsDxaBBZ4XUZ0Dx5LGCyDJ04ytSofacQ==}
+  '@types/sanitize-html@2.11.0':
     dependencies:
       htmlparser2: 8.0.2
 
-  /@types/sax@1.2.7:
-    resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
+  '@types/sax@1.2.7':
     dependencies:
       '@types/node': 20.11.28
-    dev: false
 
-  /@types/tar@6.1.11:
-    resolution: {integrity: sha512-ThA1WD8aDdVU4VLuyq5NEqriwXErF5gEIJeyT6gHBWU7JtSmW2a5qjNv3/vR82O20mW+1vhmeZJfBQPT3HCugg==}
+  '@types/tar@6.1.13':
     dependencies:
       '@types/node': 20.11.28
       minipass: 4.2.8
@@ -6658,10 +6662,7 @@ snapshots:
 
   '@vscode/l10n@0.0.18': {}
 
-  /acorn@8.11.3:
-    resolution: {integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==}
-    engines: {node: '>=0.4.0'}
-    hasBin: true
+  acorn@8.11.3: {}
 
   ansi-align@3.0.1:
     dependencies:
@@ -7310,9 +7311,7 @@ snapshots:
     dependencies:
       typed-query-selector: 2.11.1
 
-  /dequal@2.0.3:
-    resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
-    engines: {node: '>=6'}
+  dequal@2.0.3: {}
 
   detect-libc@1.0.3: {}
 
@@ -8247,8 +8246,7 @@ snapshots:
       mlly: 1.6.1
       pkg-types: 1.0.3
 
-  /locate-character@3.0.0:
-    resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}
+  locate-character@3.0.0: {}
 
   locate-path@5.0.0:
     dependencies:
@@ -8482,8 +8480,7 @@ snapshots:
 
   mdn-data@2.0.28: {}
 
-  /mdn-data@2.0.30:
-    resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
+  mdn-data@2.0.30: {}
 
   mdurl@2.0.0: {}
 
@@ -9300,7 +9297,7 @@ snapshots:
 
   prebuild-install@7.1.2:
     dependencies:
-      detect-libc: 2.0.2
+      detect-libc: 2.0.3
       expand-template: 2.0.3
       github-from-package: 0.0.0
       minimist: 1.2.8
@@ -9736,7 +9733,7 @@ snapshots:
   sharp@0.32.6:
     dependencies:
       color: 4.2.3
-      detect-libc: 2.0.2
+      detect-libc: 2.0.3
       node-addon-api: 6.1.0
       prebuild-install: 7.1.2
       semver: 7.6.0
@@ -9878,6 +9875,8 @@ snapshots:
   stdin-discarder@0.1.0:
     dependencies:
       bl: 5.1.0
+
+  stream-replace-string@2.0.0: {}
 
   streamx@2.16.1:
     dependencies:
