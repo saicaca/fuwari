@@ -1,3 +1,5 @@
+import {AUTO_MODE, DARK_MODE, DEFAULT_THEME, LIGHT_MODE} from "@constants/constants.ts";
+
 export function getDefaultHue(): number {
   const fallback = '250'
   const configCarrier = document.getElementById('config-carrier')
@@ -16,4 +18,27 @@ export function setHue(hue: number): void {
     return
   }
   r.style.setProperty('--hue', hue)
+}
+
+export function setTheme(theme: string): void {
+  localStorage.setItem('theme', theme)
+  switch (theme) {
+    case LIGHT_MODE:
+      document.documentElement.classList.remove('dark');
+      break
+    case DARK_MODE:
+      document.documentElement.classList.add('dark');
+      break
+    case AUTO_MODE:
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      break
+  }
+}
+
+export function getStoredTheme(): string {
+  return localStorage.getItem('theme') || DEFAULT_THEME
 }

@@ -6,6 +6,8 @@ import {navBarConfig, siteConfig} from "../config";
 import NavMenuPanel from "./widget/NavMenuPanel.astro";
 import Search from "./Search.svelte";
 import {LinkPresets} from "../constants/link-presets";
+import LightDarkSwitch from "./LightDarkSwitch.svelte";
+import {url} from "../utils/url-utils";
 const className = Astro.props.class;
 
 let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset): NavBarLink => {
@@ -19,7 +21,7 @@ let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset)
 <div class:list={[
     className,
     "card-base sticky top-0 overflow-visible max-w-[var(--page-width)] h-[4.5rem] rounded-t-none mx-auto flex items-center justify-between px-4"]}>
-    <a href="/" class="btn-plain h-[3.25rem] px-5 font-bold rounded-lg active:scale-95">
+    <a href={url('/')} class="btn-plain h-[3.25rem] px-5 font-bold rounded-lg active:scale-95">
         <div class="flex flex-row text-[var(--primary)] items-center text-md">
             <Icon name="material-symbols:home-outline-rounded" size={"1.75rem"} class="mb-1 mr-2" />
             {siteConfig.title}
@@ -27,7 +29,7 @@ let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset)
     </a>
     <div class="hidden md:flex">
         {links.map((l) => {
-            return <a aria-label={l.name} href={l.url} target={l.external ? "_blank" : null}
+            return <a aria-label={l.name} href={l.external ? l.url : url(l.url)} target={l.external ? "_blank" : null}
                       class="btn-plain h-11 font-bold px-5 rounded-lg active:scale-95"
             >
                 <div class="flex items-center">
@@ -45,13 +47,12 @@ let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset)
             <Icon slot="arrow-icon" name="fa6-solid:chevron-right" size={"0.75rem"} class="transition translate-x-0.5 my-auto text-[var(--primary)]"></Icon>
             <Icon slot="search-switch" name="material-symbols:search" size={"1.25rem"}></Icon>
         </Search>
-        <button aria-label="Display Settings" class="btn-plain h-11 w-11 rounded-lg active:scale-90" id="display-settings-switch">
-            <Icon name="material-symbols:palette-outline" size={"1.25rem"}></Icon>
-        </button>
-        <button aria-label="Light/Dark Mode" class="btn-plain h-11 w-11 rounded-lg active:scale-90" id="scheme-switch">
-            <Icon name="material-symbols:wb-sunny-outline-rounded" size={"1.25rem"} class="absolute opacity-[var(--display-light-icon)]"></Icon>
-            <Icon name="material-symbols:dark-mode-outline-rounded" size={"1.25rem"} class="absolute opacity-[var(--display-dark-icon)]"></Icon>
-        </button>
+        {!siteConfig.themeColor.fixed && (
+            <button aria-label="Display Settings" class="btn-plain h-11 w-11 rounded-lg active:scale-90" id="display-settings-switch">
+                <Icon name="material-symbols:palette-outline" size={"1.25rem"}></Icon>
+            </button>
+        )}
+        <LightDarkSwitch client:load></LightDarkSwitch>
         <button aria-label="Menu" name="Nav Menu" class="btn-plain w-11 h-11 rounded-lg active:scale-90 md:hidden" id="nav-menu-switch">
             <Icon name="material-symbols:menu-rounded" size={"1.25rem"}></Icon>
         </button>
@@ -84,15 +85,17 @@ function loadButtonScript() {
     });
 
     let settingBtn = document.getElementById("display-settings-switch");
-    settingBtn.addEventListener("click", function () {
-        let settingPanel = document.getElementById("display-setting");
-        settingPanel.classList.toggle("closed");
-    });
+    if (settingBtn) {
+        settingBtn.addEventListener("click", function () {
+            let settingPanel = document.getElementById("display-setting");
+            settingPanel.classList.toggle("float-panel-closed");
+        });
+    }
 
     let menuBtn = document.getElementById("nav-menu-switch");
     menuBtn.addEventListener("click", function () {
         let menuPanel = document.getElementById("nav-menu-panel");
-        menuPanel.classList.toggle("closed");
+        menuPanel.classList.toggle("float-panel-closed");
     });
 }
 
@@ -103,9 +106,9 @@ document.addEventListener('astro:after-swap', () => {
 }, { once: false });
 </script>
 
-{import.meta.env.PROD && <script is:raw>
+{import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
 async function loadPagefind() {
-    const pagefind = await import('/pagefind/pagefind.js')
+    const pagefind = await import(scriptUrl)
     await pagefind.options({
         'excerptLength': 20
     })

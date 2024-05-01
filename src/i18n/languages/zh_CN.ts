@@ -25,6 +25,10 @@ export const zh_CN: Translation = {
 
   [Key.themeColor]: '主题色',
 
+  [Key.lightMode]: '亮色',
+  [Key.darkMode]: '暗色',
+  [Key.systemMode]: '跟随系统',
+
   [Key.more]: '更多',
 
   [Key.author]: '作者',

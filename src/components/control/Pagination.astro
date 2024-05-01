@@ -1,6 +1,7 @@
 ---
 import type { Page } from "astro";
 import { Icon } from 'astro-icon/components';
+import {url} from "../../utils/url-utils";
 interface Props {
     page: Page;
     class?: string;
@@ -49,19 +50,16 @@ if (r == page.lastPage - 2)
 if (r < page.lastPage)
     pages.push(page.lastPage);
 
-const parts: string[] = page.url.current.split('/');
-const commonUrl: string = parts.slice(0, -1).join('/') + '/';
-
 const getPageUrl = (p: number) => {
     if (p == 1)
-        return commonUrl;
-    return commonUrl + p;
+        return '/';
+    return `/${p}/`;
 }
 
 ---
 
 <div class:list={[className, "flex flex-row gap-3 justify-center"]} style={style}>
-    <a href={page.url.prev} aria-label={page.url.prev ? "Previous Page" : null}
+    <a href={url(page.url.prev)} aria-label={page.url.prev ? "Previous Page" : null}
        class:list={["btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11",
            {"disabled": page.url.prev == undefined}
        ]}
@@ -78,12 +76,12 @@ const getPageUrl = (p: number) => {
                 >
                     {p}
                 </div>
-            return <a href={getPageUrl(p)} aria-label=`Page ${p}`
+            return <a href={url(getPageUrl(p))} aria-label=`Page ${p}`
                 class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]"
             >{p}</a>
         })}
     </div>
-    <a href={page.url.next} aria-label={page.url.next ? "Next Page" : null}
+    <a href={url(page.url.next)} aria-label={page.url.next ? "Next Page" : null}
        class:list={["btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11",
            {"disabled": page.url.next == undefined}
        ]}

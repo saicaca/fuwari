@@ -3,6 +3,7 @@ import {formatDateToYYYYMMDD} from "../utils/date-utils";
 import { Icon } from 'astro-icon/components';
 import {i18n} from "../i18n/translation";
 import I18nKey from "../i18n/i18nKey";
+import {url} from "../utils/url-utils";
 
 interface Props {
     class: string;
@@ -32,7 +33,7 @@ const className = Astro.props.class;
             <Icon name="material-symbols:menu-rounded" class="text-xl"></Icon>
         </div>
         <div class="flex flex-row flex-nowrap">
-            <div><a href=`/archive/category/${category || 'uncategorized'}` aria-label=`View all posts in the ${category} category`
+            <div><a href={url(`/archive/category/${category || 'uncategorized'}/`)} aria-label=`View all posts in the ${category} category`
                class="link-lg transition text-50 text-sm font-medium
                             hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
                 {category || i18n(I18nKey.uncategorized)}
@@ -50,7 +51,7 @@ const className = Astro.props.class;
             {(tags && tags.length > 0) && tags.map(tag => <div
                     class="with-divider"
             >
-                <a href=`/archive/tag/${tag}` aria-label=`View all posts with the ${tag} tag`
+                <a href={url(`/archive/tag/${tag}/`)} aria-label=`View all posts with the ${tag} tag`
                    class="link-lg transition text-50 text-sm font-medium
                                 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
                     {tag}

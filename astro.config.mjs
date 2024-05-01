@@ -31,6 +31,7 @@ const oklchToHex = (str) => {
 export default defineConfig({
   site: "https://fuwari.vercel.app/",
   base: "/",
+  trailingSlash: "always",
   integrations: [
     tailwind(),
     swup({
@@ -98,6 +99,17 @@ export default defineConfig({
     ],
   },
   vite: {
+    build: {
+      rollupOptions: {
+        onwarn(warning, warn) {
+          // temporarily suppress this warning
+          if (warning.message.includes("is dynamically imported by") && warning.message.includes("but also statically imported by")) {
+            return;
+          }
+          warn(warning);
+        }
+      }
+    },
     css: {
       preprocessorOptions: {
         stylus: {

@@ -10,6 +10,8 @@ import ConfigCarrier from "@components/ConfigCarrier.astro";
 import {profileConfig, siteConfig} from "@/config";
 import {Favicon} from "../types/config";
 import {defaultFavicons} from "../constants/icon";
+import {LIGHT_MODE, DARK_MODE, AUTO_MODE, DEFAULT_THEME} from "../constants/constants";
+import {url} from "../utils/url-utils";
 
 interface Props {
 	title: string;
@@ -47,7 +49,7 @@ const myFade = {
 
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
-const configHue = siteConfig.themeHue;
+const configHue = siteConfig.themeColor.hue;
 if (!banner || typeof banner !== 'string' || banner.trim() === '') {
 	banner = siteConfig.banner.src;
 }
@@ -66,10 +68,12 @@ if (title) {
 
 const favicons: Favicon[] = siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons
 
+const siteLang = siteConfig.lang.replace('_', '-')
+
 ---
 
 <!DOCTYPE html>
-<html lang="en" isHome={isHomePage} pathname={testPathName} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
+<html lang={siteLang} isHome={isHomePage} pathname={testPathName} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
 	<head>
 
 		<title>{pageTitle}</title>
@@ -80,11 +84,31 @@ const favicons: Favicon[] = siteConfig.favicon.length > 0 ? siteConfig.favicon :
 		<meta name="generator" content={Astro.generator} />
 		{favicons.map(favicon => (
 			<link rel="icon"
-				  href={favicon.src}
+				  href={favicon.src.startsWith('/') ? url(favicon.src) : favicon.src}
 				  sizes={favicon.sizes}
 				  media={favicon.theme && `(prefers-color-scheme: ${favicon.theme})`}
 			/>
 		))}
+		<!-- Set the theme before the page is rendered to avoid a flash -->
+		<script define:vars={{DEFAULT_THEME: DEFAULT_THEME, LIGHT_MODE: LIGHT_MODE, DARK_MODE: DARK_MODE, AUTO_MODE: AUTO_MODE}}>
+			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
+			switch (theme) {
+				case LIGHT_MODE:
+					document.documentElement.classList.remove('dark');
+					break
+				case DARK_MODE:
+					document.documentElement.classList.add('dark');
+					break
+				case AUTO_MODE:
+					if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						document.documentElement.classList.add('dark');
+					} else {
+						document.documentElement.classList.remove('dark');
+					}
+			}
+		</script>
+
+		<slot name="head"></slot>
 
 		<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 
@@ -148,7 +172,7 @@ import {
 	SizeObserverPlugin,
 	ClickScrollPlugin
 } from 'overlayscrollbars';
-import {getHue, setHue} from "../utils/setting-utils";
+import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
 
 	/* Preload fonts */
 // (async function() {
@@ -202,7 +226,7 @@ function setClickOutsideToClose(panel: string, ignores: string[]) {
 				return;
 			}
 		}
-		panelDom.classList.add("closed");
+		panelDom.classList.add("float-panel-closed");
 	});
 }
 setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
@@ -211,14 +235,8 @@ setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-sw
 
 
 function loadTheme() {
-	if (localStorage.theme === 'dark' || (!('theme' in localStorage) &&
-		window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-		document.documentElement.classList.add('dark');
-		localStorage.theme = 'dark';
-	} else {
-		document.documentElement.classList.remove('dark');
-		localStorage.theme = 'light';
-	}
+	const theme = getStoredTheme()
+	setTheme(theme)
 }
 
 function loadHue() {

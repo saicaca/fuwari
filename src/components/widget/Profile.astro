@@ -2,11 +2,12 @@
 import ImageWrapper from "../misc/ImageWrapper.astro";
 import {Icon} from "astro-icon/components";
 import {profileConfig} from "../../config";
+import {url} from "../../utils/url-utils";
 
 const config = profileConfig;
 ---
 <div class="card-base">
-    <a aria-label="Go to About Page" href="/about"
+    <a aria-label="Go to About Page" href={url('/about/')}
        class="group block relative mx-auto mt-4 lg:mx-3 lg:mt-3 mb-3
        max-w-[240px] lg:max-w-none overflow-hidden rounded-xl active:scale-95">
         <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
@@ -22,7 +23,7 @@ const config = profileConfig;
     <div class="text-center text-neutral-400 mb-2.5 transition">{config.bio}</div>
     <div class="flex gap-2 mx-2 justify-center mb-4">
         {config.links.map(item =>
-            <a aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
+            <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
                 <Icon name={item.icon} size="1.5rem"></Icon>
             </a>
         )}
