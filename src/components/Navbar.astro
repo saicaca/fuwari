@@ -47,7 +47,7 @@ let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset)
             <Icon slot="arrow-icon" name="fa6-solid:chevron-right" size={"0.75rem"} class="transition translate-x-0.5 my-auto text-[var(--primary)]"></Icon>
             <Icon slot="search-switch" name="material-symbols:search" size={"1.25rem"}></Icon>
         </Search>
-        {siteConfig.themeEdit && (
+        {!siteConfig.themeColor.fixed && (
             <button aria-label="Display Settings" class="btn-plain h-11 w-11 rounded-lg active:scale-90" id="display-settings-switch">
                 <Icon name="material-symbols:palette-outline" size={"1.25rem"}></Icon>
             </button>
