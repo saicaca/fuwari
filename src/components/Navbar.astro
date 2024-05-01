@@ -47,9 +47,11 @@ let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset)
             <Icon slot="arrow-icon" name="fa6-solid:chevron-right" size={"0.75rem"} class="transition translate-x-0.5 my-auto text-[var(--primary)]"></Icon>
             <Icon slot="search-switch" name="material-symbols:search" size={"1.25rem"}></Icon>
         </Search>
-        <button aria-label="Display Settings" class="btn-plain h-11 w-11 rounded-lg active:scale-90" id="display-settings-switch">
-            <Icon name="material-symbols:palette-outline" size={"1.25rem"}></Icon>
-        </button>
+        {!siteConfig.themeColor.fixed && (
+            <button aria-label="Display Settings" class="btn-plain h-11 w-11 rounded-lg active:scale-90" id="display-settings-switch">
+                <Icon name="material-symbols:palette-outline" size={"1.25rem"}></Icon>
+            </button>
+        )}
         <LightDarkSwitch client:load></LightDarkSwitch>
         <button aria-label="Menu" name="Nav Menu" class="btn-plain w-11 h-11 rounded-lg active:scale-90 md:hidden" id="nav-menu-switch">
             <Icon name="material-symbols:menu-rounded" size={"1.25rem"}></Icon>
@@ -83,10 +85,12 @@ function loadButtonScript() {
     });
 
     let settingBtn = document.getElementById("display-settings-switch");
-    settingBtn.addEventListener("click", function () {
-        let settingPanel = document.getElementById("display-setting");
-        settingPanel.classList.toggle("float-panel-closed");
-    });
+    if (settingBtn) {
+        settingBtn.addEventListener("click", function () {
+            let settingPanel = document.getElementById("display-setting");
+            settingPanel.classList.toggle("float-panel-closed");
+        });
+    }
 
     let menuBtn = document.getElementById("nav-menu-switch");
     menuBtn.addEventListener("click", function () {
