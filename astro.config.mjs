@@ -8,8 +8,11 @@ import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
 import remarkMath from "remark-math"
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
-/*import { remarkDirectiveHandlers } from "./src/plugins/directives/index.mjs"*/
-/*import remarkDirective from "remark-directive"*/
+import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs"
+import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs"
+import remarkDirective from "remark-directive" /* Handle directives */
+import remarkDirectiveRehype from 'remark-directive-rehype' /* Pass directives to rehype */
+import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import svelte from "@astrojs/svelte"
 import swup from '@swup/astro';
 import sitemap from '@astrojs/sitemap';
@@ -55,10 +58,20 @@ export default defineConfig({
     sitemap(),
   ],
   markdown: {
-    remarkPlugins: [remarkMath, remarkReadingTime, /*remarkDirective, ...remarkDirectiveHandlers*/],
+    remarkPlugins: [remarkMath, remarkReadingTime, remarkDirective, remarkDirectiveRehype],
     rehypePlugins: [
       rehypeKatex,
       rehypeSlug,
+      [rehypeComponents, {
+        components: {
+          github: GithubCardComponent,
+          tip: (x, y) => AdmonitionComponent(x, y, "tip"),
+          note: (x, y) => AdmonitionComponent(x, y, "note"),
+          important: (x, y) => AdmonitionComponent(x, y, "important"),
+          caution: (x, y) => AdmonitionComponent(x, y, "caution"),
+          warning: (x, y) => AdmonitionComponent(x, y, "warning"),
+        },
+      }],
       [
         rehypeAutolinkHeadings,
         {
