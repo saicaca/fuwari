@@ -26,7 +26,7 @@ export function GithubCardComponent(properties, children) {
   const cardUuid = `GC${Math.random().toString(36).slice(-6)}` // Collisions are not important
 
   const nAvatar = h(
-    `span#${cardUuid}-avatar`,
+    `div#${cardUuid}-avatar`,
     { class: "gc-avatar"},
   )
   const nLanguage = h(
@@ -39,12 +39,15 @@ export function GithubCardComponent(properties, children) {
     `div`,
     { class: "gc-titlebar" },
     [
-      h("span", { class: "gc-owner" }, [
-        nAvatar,
-        h("span", { class: "gc-user" }, repo.split("/")[0] ),
+      h("div", { class: "gc-titlebar-left"}, [
+        h("div", { class: "gc-owner" }, [
+            nAvatar,
+            h("div", { class: "gc-user" }, repo.split("/")[0] ),
+        ]),
+        h("div", { class: "gc-divider" }, "/" ),
+        h("div", { class: "gc-repo" }, repo.split("/")[1] )
       ]),
-      h("span", { class: "gc-divider" }, "/" ),
-      h("span", { class: "gc-repo" }, repo.split("/")[1] )
+      h("div", { class: "github-logo"})
     ]
   )
 
@@ -55,17 +58,17 @@ export function GithubCardComponent(properties, children) {
   )
 
   const nStars = h(
-    `span#${cardUuid}-stars`,
+    `div#${cardUuid}-stars`,
     { class: "gc-stars" },
     "00K"
   )
   const nForks = h(
-    `span#${cardUuid}-forks`,
+    `div#${cardUuid}-forks`,
     { class: "gc-forks" },
     "0K"
   )
   const nLicense = h(
-    `span#${cardUuid}-license`,
+    `div#${cardUuid}-license`,
     { class: "gc-license" },
     "0K"
   )
@@ -101,6 +104,7 @@ export function GithubCardComponent(properties, children) {
   return h(`a#${cardUuid}-card`,
     { class: "card-github fetch-waiting no-styling",
       href: `https://github.com/${repo}`,
+      target: '_blank',
       repo },
     [
       nTitle,

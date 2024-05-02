@@ -17,10 +17,15 @@ export function AdmonitionComponent(properties, children, type) {
     'Invalid admonition directive. (Admonition directives must be of block type ":::note{name="name"} <content> :::")'
   );
 
-  const title = properties?.title;
+  let label = null
+  if (properties && properties['has-directive-label']) {
+    label = children[0];            // The first child is the label
+    children = children.slice(1);
+    label.tagName = "div";          // Change the tag <p> to <div>
+  }
 
   return h(`blockquote`,
     { class: `admonition bdm-${type}` },
-    [ h("span", { class: `bdm-title` }, title ? title : type.toUpperCase()), ...children] 
+    [ h("span", { class: `bdm-title` }, label ? label : type.toUpperCase()), ...children]
   );
 }

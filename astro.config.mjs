@@ -16,6 +16,7 @@ import rehypeComponents from "rehype-components"; /* Render the custom directive
 import svelte from "@astrojs/svelte"
 import swup from '@swup/astro';
 import sitemap from '@astrojs/sitemap';
+import {parseDirectiveNode} from "./src/plugins/remark-directive-rehype.js";
 
 const oklchToHex = (str) => {
   const DEFAULT_HUE = 250
@@ -59,15 +60,15 @@ export default defineConfig({
     sitemap(),
   ],
   markdown: {
-    remarkPlugins: [remarkMath, remarkReadingTime, remarkDirective, remarkDirectiveRehype],
+    remarkPlugins: [remarkMath, remarkReadingTime, remarkDirective, parseDirectiveNode],
     rehypePlugins: [
       rehypeKatex,
       rehypeSlug,
       [rehypeComponents, {
         components: {
           github: GithubCardComponent,
-          tip: (x, y) => AdmonitionComponent(x, y, "tip"),
           note: (x, y) => AdmonitionComponent(x, y, "note"),
+          tip: (x, y) => AdmonitionComponent(x, y, "tip"),
           important: (x, y) => AdmonitionComponent(x, y, "important"),
           caution: (x, y) => AdmonitionComponent(x, y, "caution"),
           warning: (x, y) => AdmonitionComponent(x, y, "warning"),
