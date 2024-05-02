@@ -1,39 +1,66 @@
 ---
-title: Markdown extended features
+title: Markdown Extended Features
 published: 2024-05-01
 description: 'Read more about Markdown features in Fuwari'
 image: ''
 tags: [Demo, Example, Markdown, Fuwari]
-category: 'Examlpes'
+category: 'Examples'
 draft: false 
 ---
 
-## Github repository cards
-You can add dynamic cards that link to Github repositories, on page load, the repository information is pulled from the Github API. `::github{repo="saicaca/fuwari"}`
+## GitHub repository cards
+You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API. 
 
 ::github{repo="Fabrizz/MMM-OnSpotify"}
 
+Create a GitHub repository card with the code `::github{repo="<owner>/<repo>"}`.
 
-## Admonitions, notes, containers
-Fuwari supports admonitions of type: `tip, note, important, warning, caution`
+```markdown
+::github{repo="saicaca/fuwari"}
+```
+
+## Admonitions
+
+Following types of admonitions are supported: `note` `tip` `important` `warning` `caution`
 
 :::note
-This is a note, other frameworks call them containers or alerts
+Highlights information that users should take into account, even when skimming.
 :::
 
-:::tip{title="TIP"}
-This is a tip, you can change the title using the title property: `:::tip{title="Custom title"} \`
+:::tip
+Optional information to help a user be more successful.
 :::
 
 :::important
-Drink 8 glasses of water!
+Crucial information necessary for users to succeed.
 :::
 
 :::warning
-You should star the [Fuwari repository](https://github.com/saicaca/fuwari)
+Critical content demanding immediate user attention due to potential risks.
 :::
 
 :::caution
-Admonitions can have other elements inside
-::github{repo="saicaca/fuwari"}
+Negative potential consequences of an action.
 :::
+
+```markdown
+:::note
+Highlights information that users should take into account, even when skimming.
+:::
+
+:::tip
+Optional information to help a user be more successful.
+:::
+```
+
+The title of the admonition can be customized.
+
+:::note[MY CUSTOM TITLE]
+This is a note with a custom title.
+:::
+
+```markdown
+:::note[MY CUSTOM TITLE]
+This is a note with a custom title.
+:::
+```
