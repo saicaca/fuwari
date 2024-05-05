@@ -18,6 +18,10 @@ export const siteConfig: SiteConfig = {
     enable: false,
     src: 'assets/images/demo-banner.png',   // Relative to the /src directory. Relative to the /public directory if it starts with '/'
   },
+  dynamicOGImage: { 
+    enable: false, // Enable dynamic Open Graph Image generation for markdown posts
+    config: {}, // Configuration object to customize the image. See delucis/astro-og-canvas
+  },
   favicon: [    // Leave this array empty to use the default favicon
     // {
     //   src: '/favicon/icon.png',    // Path of the favicon, relative to the /public directory
