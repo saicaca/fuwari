@@ -27,22 +27,36 @@ export type SiteConfig = {
     src: string
   }
 
-  /**
-   * Generate Open Graph images dynamically for markdown posts.
-   * - You can view the example fuwari post to view more information and customize the OG content.
-   */
-  dynamicOGImage: {
-    /** A flag indicating whether to enable dynamic Open Graph generation (defaults to false). */
-    enable: boolean
-    /** Optional customization for the Open Graph image generation. Merged with defaults.
-     * ```js
-     * // This is the default configuration
-     * { title: data.title, description: data.description }
-     * ```
-     * @see https://github.com/delucis/astro-og-canvas/tree/latest/packages/astro-og-canvas
-     */
-    config: Record<string, any>
+  /** Open Graph configuration for the site */
+  openGraph: {
+    /** OG image for posts/main site */
+    postImage: {
+      /** A flag indicating whether to enable dynamic Open Graph generation (defaults to false). */
+      dynamicImage: boolean,
+      /** Optional customization for the Open Graph image generation. Merged with defaults.
+       * ```js
+       * // This is the default configuration
+       * { title: data.title, description: data.description }
+       * ```
+       * @see https://github.com/delucis/astro-og-canvas/tree/latest/packages/astro-og-canvas
+       */
+      dynamicImageConfig?: Record<string, any>
+      /** The URL of the post image
+       * - Relative to the /src directory.
+       * - Relative to the /public directory if it starts with '/' */
+      staticImage?: string
+    }
+    /** OG image for the base site */
+    siteImage: {
+       /** A flag indicating whether to enable the Open Graph image. */
+      enable: boolean,
+      /** The URL of the banner image
+       * - Relative to the /src directory.
+       * - Relative to the /public directory if it starts with '/' */
+      src: string
+    }
   }
+
 
   /** The favicon fo the site */
   favicon: Favicon[]

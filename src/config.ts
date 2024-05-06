@@ -18,17 +18,32 @@ export const siteConfig: SiteConfig = {
     enable: false,
     src: 'assets/images/demo-banner.png',   // Relative to the /src directory. Relative to the /public directory if it starts with '/'
   },
-  dynamicOGImage: { 
-    enable: false, // Enable dynamic Open Graph Image generation for markdown posts
-    config: {}, // Configuration object to customize the image. See delucis/astro-og-canvas
-  },
   favicon: [    // Leave this array empty to use the default favicon
     // {
     //   src: '/favicon/icon.png',    // Path of the favicon, relative to the /public directory
     //   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
     //   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
     // }
-  ]
+  ],
+
+  openGraph: { 
+    postImage: {
+      dynamicImage: true,          // Enable dynamic Open Graph Image generation for markdown posts /* [ENABLED FOR DEMO. CHANGE TO FALSE IN PROD] */
+      dynamicImageConfig: {       // Configuration object to customize the image. See delucis/astro-og-canvas
+        fonts: ["https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.ttf"],
+        font: { title: { families: ["Poppins"] }, description: { families: ["Poppins"] } },
+        logo: { path: "./src/assets/images/demo-opengraph-logo.png", size: [540] },
+        border: { color: [94, 188, 254], width: 16, side: "inline-start" },
+        bgGradient: [[6, 10, 20], [0, 58, 66]],
+        dir: "ltr",
+      },
+      // staticImage: "assets/images/opengraph-post.png"
+    },
+    siteImage: {
+      enable: true,
+      src: 'assets/images/demo-opengraph.png',   // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+    },
+  },
 }
 
 export const navBarConfig: NavBarConfig = {

@@ -9,7 +9,7 @@ import { siteConfig } from '@/config';
  * @returns {Promise<object>} An object containing the `OGImageRoute` or an empty object if disabled.
  */
 async function getOpenGraphData() {
-  if (siteConfig.dynamicOGImage.enable) {
+  if (siteConfig.openGraph.postImage.dynamicImage) {
     const posts = await getCollection("posts");
     const pages = Object.fromEntries(
       posts.map(({ id, slug, data }) => [id, { data, slug }]),
@@ -20,6 +20,7 @@ async function getOpenGraphData() {
       getImageOptions: async (_, { data, slug }: (typeof pages)[string]) => ({
         title: data.title,
         description: data.description,
+        ...siteConfig.openGraph.postImage.dynamicImageConfig || {},
       }),
     });
   } else {
