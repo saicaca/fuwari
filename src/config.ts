@@ -37,11 +37,11 @@ export const siteConfig: SiteConfig = {
         bgGradient: [[6, 10, 20], [0, 58, 66]],
         dir: "ltr",
       },
-      // staticImage: "assets/images/opengraph-post.png"
+      // staticImage: "/demo-opengraph.png" // This image should be in the public folder, as its not processed by Astro
     },
     siteImage: {
       enable: true,
-      src: 'assets/images/demo-opengraph.png',   // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+      src: '/demo-opengraph.png', // This image should be in the public folder, as its not processed by Astro
     },
   },
 }

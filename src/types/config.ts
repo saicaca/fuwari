@@ -41,18 +41,18 @@ export type SiteConfig = {
        * @see https://github.com/delucis/astro-og-canvas/tree/latest/packages/astro-og-canvas
        */
       dynamicImageConfig?: Record<string, any>
-      /** The URL of the post image
-       * - Relative to the /src directory.
-       * - Relative to the /public directory if it starts with '/' */
+      /** The URL of the post OG image
+       * - This image SHOULD be in the public folder.
+       * - Public assets can be referenced directly using a / . */
       staticImage?: string
     }
     /** OG image for the base site */
     siteImage: {
        /** A flag indicating whether to enable the Open Graph image. */
       enable: boolean,
-      /** The URL of the banner image
-       * - Relative to the /src directory.
-       * - Relative to the /public directory if it starts with '/' */
+      /** The URL of the site OG image
+       * - This image SHOULD be in the public folder.
+       * - Public assets can be referenced directly using a / . */
       src: string
     }
   }

@@ -14,12 +14,12 @@ The [Open Graph protocol](https://ogp.me/) enables any web page to become a rich
 :::tip
 Go to the social media/messaging app of your preference and send a link. It should become a rich object!
 Below is an example of Discord + Github:
-<img src="/demo-opengraph-discord.png" width="72%">
+![Opengraph discord demo image](../../assets/images/demo-opengraph-discord.png)
 :::
 
 ## Basic post metadata
 Fuwari by default adds basic metadata to each post page automatically. Pulling it from the site configuration and the post data:
-```html
+```jsx
 <meta name="author" content={profileConfig.name}>
 <meta property="og:site_name" content={siteConfig.title}>
 <meta property="og:url" content={Astro.url}>
@@ -66,4 +66,4 @@ This is not really important as the images have a high compression rate and aren
 To customize the looks of the generated OG image, you should change the default `dynamicOpenGraph.config` entry. You can find the extended configuration here: [delucis/astro-og-canvas#image-options](https://github.com/delucis/astro-og-canvas/tree/latest/packages/astro-og-canvas#image-options)
 
 For example, this will be the generated image for this post:
-<img src="/demo-opengraph-example.png" width="72%">
+![Opengraph demo image](../../assets/images/demo-opengraph-example.png)
