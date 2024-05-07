@@ -25,11 +25,10 @@ let { title, banner, description, slug } = Astro.props;
 const isHomePage = pathsEqual(Astro.url.pathname, '/');
 
 let ogImageSrc;
-ogImageSrc = siteConfig.openGraph.siteImage.enable ? (Astro.site ? `${Astro.site.origin}${siteConfig.openGraph.siteImage.src}` : siteConfig.openGraph.siteImage.src) : false; 
-if (siteConfig.openGraph.postImage.dynamicImage && slug) {
-	ogImageSrc = Astro.site ? `${Astro.site.origin}/open-graph/${slug}.png` : false;
-} else if (siteConfig.openGraph.postImage.staticImage)
-	ogImageSrc = Astro.site ? `${Astro.site.origin}${siteConfig.openGraph.postImage.staticImage}` : siteConfig.openGraph.postImage.staticImage;
+// if siteOGImage is enabled, use the siteOGImage as the og:image
+ogImageSrc = siteConfig.siteOGImage.enable ? (Astro.site ? `${Astro.site.origin}${siteConfig.siteOGImage.src}` : siteConfig.siteOGImage.src) : false;
+// if postOGImageDynamic is enabled, use the generated one as the og:image
+if (siteConfig.postOGImageDynamic && slug) ogImageSrc = Astro.site ? `${Astro.site.origin}/open-graph/${slug}.png` : false;
 
 const testPathName = Astro.url.pathname;
 

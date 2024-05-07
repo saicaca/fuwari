@@ -27,35 +27,18 @@ export type SiteConfig = {
     src: string
   }
 
-  /** Open Graph configuration for the site */
-  openGraph: {
-    /** OG image for posts/main site */
-    postImage: {
-      /** A flag indicating whether to enable dynamic Open Graph generation (defaults to false). */
-      dynamicImage: boolean,
-      /** Optional customization for the Open Graph image generation. Merged with defaults.
-       * ```js
-       * // This is the default configuration
-       * { title: data.title, description: data.description }
-       * ```
-       * @see https://github.com/delucis/astro-og-canvas/tree/latest/packages/astro-og-canvas
-       */
-      dynamicImageConfig?: Record<string, any>
-      /** The URL of the post OG image
-       * - This image SHOULD be in the public folder.
-       * - Public assets can be referenced directly using a / . */
-      staticImage?: string
-    }
-    /** OG image for the base site */
-    siteImage: {
-       /** A flag indicating whether to enable the Open Graph image. */
-      enable: boolean,
-      /** The URL of the site OG image
-       * - This image SHOULD be in the public folder.
-       * - Public assets can be referenced directly using a / . */
-      src: string
-    }
+  /** A flag indicating whether to enable the Open Graph image. */
+  siteOGImage: {
+    /** A flag indicating whether to enable the Open Graph image. */
+    enable: boolean,
+    /** The URL of the site OG image
+     * - This image SHOULD be in the public folder.
+     * - Public assets can be referenced directly using a / . */
+    src: string
   }
+
+  /** A flag indicating whether to enable dynamic Open Graph generation (defaults to false). */
+  postOGImageDynamic: boolean
 
 
   /** The favicon fo the site */

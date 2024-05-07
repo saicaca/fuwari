@@ -26,24 +26,12 @@ export const siteConfig: SiteConfig = {
     // }
   ],
 
-  openGraph: { 
-    postImage: {
-      dynamicImage: true,          // Enable dynamic Open Graph Image generation for markdown posts /* [ENABLED FOR DEMO. CHANGE TO FALSE IN PROD] */
-      dynamicImageConfig: {       // Configuration object to customize the image. See delucis/astro-og-canvas
-        fonts: ["https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.ttf"],
-        font: { title: { families: ["Poppins"] }, description: { families: ["Poppins"] } },
-        logo: { path: "./src/assets/images/demo-opengraph-logo.png", size: [540] },
-        border: { color: [94, 188, 254], width: 16, side: "inline-start" },
-        bgGradient: [[6, 10, 20], [0, 58, 66]],
-        dir: "ltr",
-      },
-      // staticImage: "/demo-opengraph.png" // This image should be in the public folder, as its not processed by Astro
-    },
-    siteImage: {
-      enable: true,
-      src: '/demo-opengraph.png', // This image should be in the public folder, as its not processed by Astro
-    },
+  siteOGImage: {
+    enable: true,
+    src: '/demo-opengraph.png', // This image should be in the public folder, as its not processed by Astro
   },
+  postOGImageDynamic: true, // Enable dynamic Open Graph Image generation for markdown posts
+                            // Read the docs, as this generates images between 90/300kb in size per post!
 }
 
 export const navBarConfig: NavBarConfig = {
