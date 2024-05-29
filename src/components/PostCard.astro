@@ -47,8 +47,7 @@ const { remarkPluginFrontmatter } = await entry.render();
         <PostMetadata published={published} tags={tags} category={category} hideTagsForMobile={true} class:list={{"mb-4": description, "mb-6": !description}}></PostMetadata>
 
         <!-- description -->
-        <div class="transition text-75 mb-3.5">
-            { description }
+        <div class="transition text-75 mb-3.5 prose max-w-none" set:html={description}>
         </div>
 
         <!-- word count and read time  -->
