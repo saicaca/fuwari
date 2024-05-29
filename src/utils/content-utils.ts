@@ -1,6 +1,7 @@
 import I18nKey from '@i18n/i18nKey'
 import { i18n } from '@i18n/translation'
 import { getCollection } from 'astro:content'
+import MarkdownIt from 'markdown-it'
 
 export async function getSortedPosts() {
   const allBlogPosts = await getCollection('posts', ({ data }) => {
@@ -80,4 +81,13 @@ export async function getCategoryList(): Promise<Category[]> {
     ret.push({ name: c, count: count[c] })
   }
   return ret
+}
+
+const parser = new MarkdownIt()
+// return exerpt if there's <!-- more -->
+// or return null
+export function getContentExerpt(content: string) {
+  const splittedContent = content.split('<!-- more -->')
+  if (splittedContent.length >= 2) return parser.render(splittedContent[0])
+  return null
 }
