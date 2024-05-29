@@ -1,7 +1,7 @@
 ---
 title: Markdown Extended Features
 published: 2024-05-01
-description: 'Read more about Markdown features in Fuwari'
+description: ''
 image: ''
 tags: [Demo, Example, Markdown, Fuwari]
 category: 'Examples'
@@ -18,6 +18,8 @@ Create a GitHub repository card with the code `::github{repo="<owner>/<repo>"}`.
 ```markdown
 ::github{repo="saicaca/fuwari"}
 ```
+
+<!-- more -->
 
 ## Admonitions
 
