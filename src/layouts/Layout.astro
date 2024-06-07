@@ -100,6 +100,7 @@ const siteLang = siteConfig.lang.replace('_', '-')
 		<meta name="twitter:description" content={description || pageTitle}>
 
 		{ogImageSrc && <meta property="og:image" content={ogImageSrc}/>}
+		{ogImageSrc && <meta property="twitter:image" content={ogImageSrc}/>}
 
 		<meta name="generator" content={Astro.generator} />
 		{favicons.map(favicon => (
