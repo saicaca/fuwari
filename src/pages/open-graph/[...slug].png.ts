@@ -9,6 +9,8 @@ import { siteConfig } from '@/config';
 import Roboto300 from "node_modules/@fontsource/roboto/files/roboto-latin-300-normal.woff";
 import Roboto700 from "node_modules/@fontsource/roboto/files/roboto-latin-700-normal.woff";
 
+
+
 const ogOptions: SatoriOptions = {
 	width: 1200,
 	height: 630,

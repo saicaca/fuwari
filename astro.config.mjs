@@ -113,7 +113,7 @@ export default defineConfig({
       }
     },
     plugins: [
-      rawFonts([".woff2", ".ttf"]),
+      rawFonts([".woff2", ".ttf", ".woff", ".otf"]),
     ],
     css: {
       preprocessorOptions: {
