@@ -1,3 +1,5 @@
+import type { LIGHT_MODE, DARK_MODE, AUTO_MODE } from "@constants/constants"
+
 /** Main configuration for Fuwari. */
 export type SiteConfig = {
   /** Site title. Shown in site tab, site */
@@ -120,3 +122,5 @@ export type LicenseConfig = {
   /** The URL of the license document */
   url: string
 }
+
+export type LIGHT_DARK_MODE = typeof LIGHT_MODE | typeof DARK_MODE | typeof AUTO_MODE
