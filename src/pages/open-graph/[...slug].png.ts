@@ -5,8 +5,9 @@ import { getCollection } from 'astro:content';
 import { Resvg } from "@resvg/resvg-js";
 import { siteConfig } from '@/config';
 
-import Roboto300 from "@assets/roboto_5.0.12_latin-400-normal.ttf";
-import Roboto700 from "@assets/roboto_5.0.8_latin-700-normal.ttf";
+/* TTF, OTF and WOFF, this import may not compatible with all static pages services (?) */
+import Roboto300 from "node_modules/@fontsource/roboto/files/roboto-latin-300-normal.woff";
+import Roboto700 from "node_modules/@fontsource/roboto/files/roboto-latin-700-normal.woff";
 
 const ogOptions: SatoriOptions = {
 	width: 1200,
@@ -29,6 +30,7 @@ const ogOptions: SatoriOptions = {
 };
 
 const markup = (title: string, published: Date, description?: string, category?: string, tags?: string[]) =>
+  /* Satori uses tailwind! Create or view a desing using https://og-playground.vercel.app/ */
 	html`
     <div tw="flex flex-col w-full h-full justify-center bg-amber-800">
       <div tw="bg-gray-50 flex w-full">
