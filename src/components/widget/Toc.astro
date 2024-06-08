@@ -1,0 +1,164 @@
+---
+import type { MarkdownHeading } from 'astro'
+import I18nKey from '../../i18n/i18nKey'
+import { i18n } from '../../i18n/translation'
+import ButtonLink from '../control/ButtonLink.astro'
+import WidgetLayout from './WidgetLayout.astro'
+
+const toc: MarkdownHeading[] = Astro.props.toc || [];
+
+toc.forEach(item => {
+    if (item.text[item.text.length - 1] === '#') {
+        item.text = item.text.slice(0, -1);
+    }
+});
+
+const headingLevel = ['pl-0', 'pl-2', 'pl-4', 'pl-6', 'pl-8', 'pl-10'];
+
+---
+
+<WidgetLayout name={i18n(I18nKey.contents)} id="toc-widget">
+    <table-of-contents
+        class="h-[30vh] transition-fade"
+        data-overlayscrollbars-initialize
+    >
+    {toc.map((item) => (
+        <div
+            id={`toc-item-${item.slug}`}
+            class={`border-l-4 border-transparent ${headingLevel[item.depth - 1]}`}
+        >
+            <ButtonLink url={"#" + item.slug} label={item.text}>
+                {item.text}
+            </ButtonLink>
+        </div>
+    ))}
+    </table-of-contents>
+</WidgetLayout>
+
+<script>
+import "overlayscrollbars/overlayscrollbars.css";
+import { OverlayScrollbars } from "overlayscrollbars";
+import type { headingPairInterface } from "@/types/config";
+
+class TableOfContents extends HTMLElement {
+    headingPairs: Record<string, headingPairInterface> = {};
+    isAnchorScrolling = true;
+    scrollbar: OverlayScrollbars;
+    isPageReady = false;
+
+    constructor() {
+        super();
+
+        const tocEl = document.querySelector(
+            "table-of-contents"
+        ) as HTMLElement;
+        this.scrollbar = OverlayScrollbars(
+            {
+                target: tocEl,
+                cancel: {
+                    nativeScrollbarsOverlaid: true,
+                },
+            },
+            {
+                scrollbars: {
+                    theme: "scrollbar-base scrollbar-auto py-1",
+                    autoHide: "move",
+                    autoHideDelay: 500,
+                    autoHideSuspend: false,
+                },
+            }
+        );
+
+        const observer = new IntersectionObserver(
+            (entries) => this.sync(entries),
+            {
+                rootMargin: "0px 0px 0px 0px",
+                threshold: [1],
+            }
+        );
+
+        const tocItems: HTMLElement[] = Array.from(
+            document.querySelectorAll("[id^='toc-item']")
+        );
+
+        const tocWidgetEl = document.querySelector("[data-id=toc-widget]");
+        if (!tocItems.length) {
+            tocWidgetEl?.classList.add("hidden");
+            return;
+        }
+        tocWidgetEl?.classList.remove("hidden");
+
+        let prevToc: HTMLElement | null = null;
+        tocItems.map((tocHeading) => {
+            tocHeading.addEventListener("click", () => {
+                this.isAnchorScrolling = true;
+            });
+
+            const id = tocHeading.id.slice("toc-item-".length);
+            const mdHeading = document.getElementById(id);
+            if (mdHeading) {
+                observer.observe(mdHeading);
+                this.headingPairs[id] = {
+                    tocHeading,
+                    mdHeading,
+                    prevToc,
+                };
+                prevToc = tocHeading;
+            }
+        });
+
+        window.addEventListener("scrollend", () => {
+            this.isAnchorScrolling = false;
+            if (!this.isPageReady && window.scrollY === 0)
+                this.isPageReady = true;
+        });
+    }
+
+    markTocHeading = (tocHeading: HTMLElement) => {
+        tocHeading.classList.add("border-l-[var(--primary)]", "toc-active");
+    };
+
+    unmarkTocHeading = (tocHeading: HTMLElement) => {
+        tocHeading.classList.remove("border-l-[var(--primary)]", "toc-active");
+    };
+
+    sync(entries: IntersectionObserverEntry[]) {
+        entries.map((entry) => {
+            const mdHeading = entry.target as HTMLElement;
+            const headingPair = this.headingPairs[mdHeading.id];
+
+            if (!headingPair) return;
+            if (entry.isIntersecting) {
+                this.markTocHeading(headingPair.tocHeading);
+                if (entry.boundingClientRect.top < window.innerHeight / 2) {
+                    const prevToc = headingPair.prevToc;
+                    prevToc && this.markTocHeading(prevToc);
+                }
+            } else {
+                if (entry.boundingClientRect.top < 0) {
+                    const prevToc = headingPair.prevToc;
+                    prevToc && this.unmarkTocHeading(prevToc);
+                } else this.unmarkTocHeading(headingPair.tocHeading);
+            }
+        });
+
+        // toc scroll to the active heading
+        if (this.isAnchorScrolling || !this.isPageReady) return;
+
+        const activeTocHeading = Object.values(this.headingPairs).find((pair) =>
+            pair.tocHeading.classList.contains("toc-active")
+        );
+        const activeTitleOffset = activeTocHeading?.tocHeading.offsetTop;
+        if (!activeTitleOffset) return;
+
+        const { scrollOffsetElement } = this.scrollbar.elements();
+        scrollOffsetElement.scrollTo({
+            top: activeTitleOffset,
+            left: 0,
+            behavior: "smooth",
+        });
+    }
+}
+customElements.define("table-of-contents", TableOfContents);
+
+</script>

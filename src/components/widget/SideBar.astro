@@ -2,14 +2,22 @@
 import Profile from "./Profile.astro";
 import Tag from "./Tags.astro";
 import Categories from "./Categories.astro";
+import Toc from "./Toc.astro";
 
-const className = Astro.props.class;
+interface Props {
+    class: string,
+    toc?: import('astro').MarkdownHeading
+}
+
+const { class: className, toc } = Astro.props;
+
 ---
 <div id="sidebar" class:list={[className, "w-full"]}>
     <div class="flex flex-col w-full gap-4 mb-4">
         <Profile></Profile>
     </div>
-    <div class="flex flex-col w-full gap-4 top-4 sticky top-4">
+    <div id="misc" class="flex flex-col w-full gap-4 top-4 sticky top-4">
+        <Toc toc={toc}></Toc>
         <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
         <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
     </div>

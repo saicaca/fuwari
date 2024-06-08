@@ -24,9 +24,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
-
-const { remarkPluginFrontmatter } = await entry.render();
+const { Content, remarkPluginFrontmatter, headings } = await entry.render();
 
 const jsonLd = {
     "@context": "https://schema.org",
@@ -44,7 +42,7 @@ const jsonLd = {
 }
 
 ---
-<MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description}>
+<MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} toc={headings}>
     <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
         <div id="post-container" class:list={["card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ",

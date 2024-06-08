@@ -11,9 +11,10 @@ interface Props {
     title: string;
     banner?: string;
     description?: string;
+    toc?: import('astro').MarkdownHeading;
 }
 
-const { title, banner, description } = Astro.props
+const { title, banner, description, toc } = Astro.props
 const isHomePage = pathsEqual(Astro.url.pathname, '/')
 const enableBanner = siteConfig.banner.enable
 
@@ -28,7 +29,7 @@ const enableBanner = siteConfig.banner.enable
         <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div> <!-- used for onload animation -->
         <Navbar></Navbar>
     </div>
-    <SideBar class="row-start-3 row-end-4 col-span-2 lg:row-start-2 lg:row-end-3 lg:col-span-1 lg:max-w-[17.5rem] onload-animation"></SideBar>
+    <SideBar class="row-start-3 row-end-4 col-span-2 lg:row-start-2 lg:row-end-3 lg:col-span-1 lg:max-w-[17.5rem] onload-animation" toc={toc}></SideBar>
 
     <div id="content-wrapper" class="row-start-2 row-end-3 col-span-2 lg:col-span-1 overflow-hidden onload-animation">
         <!-- the overflow-hidden here prevent long text break the layout-->
