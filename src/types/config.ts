@@ -13,6 +13,7 @@ export type SiteConfig = {
   banner: {
     enable: boolean
     src: string
+    position?: string
   }
 
   favicon: Favicon[]
