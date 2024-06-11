@@ -25,7 +25,14 @@ export const siteConfig: SiteConfig = {
     //   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
     //   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
     // }
-  ]
+  ],
+
+  siteOGImage: {
+    enable: true,
+    src: '/demo-opengraph.png', // This image should be in the public folder, as its not processed by Astro
+  },
+  postOGImageDynamic: true, // Enable dynamic Open Graph Image generation for markdown posts
+                            // Read the docs, as this generates images between 90/300kb in size per post!
 }
 
 export const navBarConfig: NavBarConfig = {
