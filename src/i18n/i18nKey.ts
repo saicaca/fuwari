@@ -32,9 +32,6 @@ enum I18nKey {
   author = 'author',
   publishedAt = 'publishedAt',
   license = 'license',
-
-  codeCopy = 'copy',
-  codeCopied = 'codeCopied',
 }
 
 export default I18nKey

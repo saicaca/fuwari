@@ -35,7 +35,4 @@ export const zh_CN: Translation = {
   [Key.author]: '作者',
   [Key.publishedAt]: '发布于',
   [Key.license]: '许可协议',
-
-  [Key.codeCopy]: '复制',
-  [Key.codeCopied]: '复制成功',
 }
