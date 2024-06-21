@@ -1,18 +1,18 @@
----
-import path from 'node:path'
-import { getCollection } from 'astro:content'
-import License from '@components/misc/License.astro'
-import Markdown from '@components/misc/Markdown.astro'
-import I18nKey from '@i18n/i18nKey'
-import { i18n } from '@i18n/translation'
-import MainGridLayout from '@layouts/MainGridLayout.astro'
-import { getDir, getPostUrlBySlug } from '@utils/url-utils'
-import { Icon } from 'astro-icon/components'
-import { licenseConfig } from 'src/config'
-import PostMetadata from '../../components/PostMeta.astro'
-import ImageWrapper from '../../components/misc/ImageWrapper.astro'
-import { profileConfig, siteConfig } from '../../config'
-import { formatDateToYYYYMMDD } from '../../utils/date-utils'
+import { getCollection } from 'astro:content';
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import ImageWrapper from "../../components/misc/ImageWrapper.astro";
+import {Icon} from "astro-icon/components";
+import PostMetadata from "../../components/PostMeta.astro";
+import {i18n} from "@i18n/translation";
+import I18nKey from "@i18n/i18nKey";
+import {getDir, getPostUrlBySlug} from "@utils/url-utils";
+import License from "@components/misc/License.astro";
+import {licenseConfig} from "src/config";
+import Markdown from "@components/misc/Markdown.astro";
+import path from "path";
+import {profileConfig} from "../../config";
+import {formatDateToYYYYMMDD} from "../../utils/date-utils";
+import Comment from "@components/comment/index.astro"
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('posts', ({ data }) => {
@@ -108,6 +108,10 @@ const jsonLd = {
 
         </div>
     </div>
+
+
+    <Comment post={entry}></Comment>
+
 
     <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
         <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}

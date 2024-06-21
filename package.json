@@ -35,6 +35,7 @@
     "hastscript": "^9.0.0",
     "katex": "^0.16.19",
     "markdown-it": "^14.1.0",
+    "giscus": "^1.5.0",
     "mdast-util-to-string": "^4.0.0",
     "overlayscrollbars": "^2.10.1",
     "pagefind": "^1.2.0",
@@ -67,5 +68,10 @@
     "postcss-import": "^16.1.0",
     "postcss-nesting": "^13.0.1"
   },
-  "packageManager": "pnpm@9.14.4"
+  "pnpm": {
+    "overrides": {
+      "vite-imagetools": "^6.2.7",
+      "sharp": "^0.33.0"
+    }
+  }
 }

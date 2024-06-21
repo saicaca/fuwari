@@ -1,4 +1,5 @@
-import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from '@constants/constants'
+import type Giscus from 'giscus'
+import type { LIGHT_MODE, DARK_MODE, AUTO_MODE } from "@constants/constants"
 
 export type SiteConfig = {
   title: string
@@ -85,4 +86,35 @@ export type BlogPostData = {
   prevSlug?: string
   nextTitle?: string
   nextSlug?: string
+
+export type CommentConfig = {
+  twikoo?: TwikooConfig
+  disqus?: DisqusConfig
+  giscus?: GiscusConfig
+}
+
+type TwikooConfig = {
+  envId: string
+  region?: string
+  lang?: string
+}
+
+type DisqusConfig = {
+  shortname: string
+}
+
+type GiscusConfig = {
+  repo: Giscus.Repo
+  repoId?: string
+  category?: string
+  categoryId?: string
+  mapping?: Giscus.Mapping
+  term?: string
+  strict: Giscus.BooleanString
+  reactionsEnabled: Giscus.BooleanString
+  emitMetadata: Giscus.BooleanString
+  inputPosition: Giscus.InputPosition
+  theme: Giscus.Theme
+  lang: Giscus.AvailableLanguage
+  loading: Giscus.Loading
 }
