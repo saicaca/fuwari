@@ -64,3 +64,14 @@ This is a note with a custom title.
 This is a note with a custom title.
 :::
 ```
+
+> [!TIP]
+> [The GitHub syntax](https://github.com/orgs/community/discussions/16925) is also supported.
+
+```
+> [!NOTE]
+> The GitHub syntax is also supported.
+
+> [!TIP]
+> The GitHub syntax is also supported.
+```
