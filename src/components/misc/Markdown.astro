@@ -90,6 +90,8 @@ const className = Astro.props.class;
           margin-right: 1rem
           width: 1rem
           color: rgba(255, 255, 255, 0.25)
+        &:last-child:empty
+          display: none
 
     pre
       background: var(--codeblock-bg) !important
