@@ -35,16 +35,16 @@ export default defineConfig({
   trailingSlash: "always",
   integrations: [
     tailwind(),
-    swup({
-      theme: false,
-      animationClass: 'transition-',
-      containers: ['main'],
-      smoothScrolling: true,
-      cache: true,
-      preload: true,
-      accessibility: true,
-      globalInstance: true,
-    }),
+    // swup({
+    //   theme: true,
+    //   animationClass: 'transition-',
+    //   containers: ['main'],
+    //   smoothScrolling: true,
+    //   cache: true,
+    //   preload: true,
+    //   accessibility: true,
+    //   globalInstance: true,
+    // }),
     icon({
       include: {
         "material-symbols": ["*"],

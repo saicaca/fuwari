@@ -1,0 +1,46 @@
+---
+import Layout from "./Layout.astro";
+import Categories from "@components/widget/Categories.astro";
+import Tag from "@components/widget/Tags.astro";
+import SideBar from "@components/widget/SideBar.astro";
+import { i18n } from "@/i18n/translation";
+import I18nKey from "@/i18n/i18nKey";
+import { getCategoryUrl } from "../utils/url-utils";
+import WidgetLayout from "@components/widget/WidgetLayout.astro";
+import ButtonLink from "@components/control/ButtonLink.astro";
+
+interface Menu {
+    title: string;
+    depth: number;
+    url: string;
+}
+
+interface Props {
+	title: string;
+	banner?: string;
+	description?: string;
+  menu: Menu[];
+}
+
+const { title, banner, description, menu } = Astro.props
+---
+
+<Layout title={title} banner={banner} description={description}>
+    <SideBar>
+        <WidgetLayout name={i18n(I18nKey.menu)} id="menu" isCollapsed={false}
+          collapsedHeight={0} class="hidden sm:block">
+            {menu.map((item) => (
+              <div style={{paddingLeft: `${(item.depth - 1)*8}px` }}>
+                  <ButtonLink  href={item.url}>{item.title}</ButtonLink>
+              </div>
+            ))}
+        </WidgetLayout>
+        <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
+        <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
+    </SideBar>
+
+    <div id="content-wrapper" class="row-start-2 row-end-3 col-span-2 lg:col-span-1 overflow-hidden onload-animation">
+        <!-- the overflow-hidden here prevent long text break the layout-->
+        <slot></slot>
+    </div>
+</Layout>

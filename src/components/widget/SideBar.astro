@@ -1,16 +1,14 @@
 ---
 import Profile from "./Profile.astro";
-import Tag from "./Tags.astro";
-import Categories from "./Categories.astro";
 
 const className = Astro.props.class;
 ---
-<div id="sidebar" class:list={[className, "w-full"]}>
+
+<div class="row-start-3 row-end-4 col-span-2 lg:row-start-2 lg:row-end-3 lg:col-span-1 lg:max-w-[17.5rem] onload-animation">
     <div class="flex flex-col w-full gap-4 mb-4">
         <Profile></Profile>
     </div>
-    <div class="flex flex-col w-full gap-4 top-4 sticky top-4">
-        <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
-        <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
+    <div class="flex flex-col w-full gap-4 sticky top-4">
+        <slot />
     </div>
 </div>

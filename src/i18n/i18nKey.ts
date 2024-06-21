@@ -2,9 +2,11 @@ enum I18nKey {
   home = 'home',
   about = 'about',
   archive = 'archive',
+  search = 'search',
 
   tags = 'tags',
   categories = 'categories',
+  menu = 'menu',
   recentPosts = 'recentPosts',
 
   comments = 'comments',
@@ -22,7 +24,7 @@ enum I18nKey {
 
   themeColor = 'themeColor',
 
-  lightMode =  'lightMode',
+  lightMode = 'lightMode',
   darkMode = 'darkMode',
   systemMode = 'systemMode',
 

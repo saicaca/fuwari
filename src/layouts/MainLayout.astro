@@ -1,0 +1,27 @@
+---
+import Layout from "./Layout.astro";
+import Categories from "@components/widget/Categories.astro";
+import Tag from "@components/widget/Tags.astro";
+import SideBar from "@components/widget/SideBar.astro";
+
+interface Props {
+    title: string;
+    banner?: string;
+    description?: string;
+    menu?: any[];
+}
+
+const { title, banner, description, menu } = Astro.props
+---
+
+<Layout title={title} banner={banner} description={description}>
+    <SideBar>
+        <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
+        <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
+    </SideBar>
+
+    <div id="content-wrapper" class="row-start-2 row-end-3 col-span-2 lg:col-span-1 overflow-hidden onload-animation">
+        <!-- the overflow-hidden here prevent long text break the layout-->
+        <slot></slot>
+    </div>
+</Layout>

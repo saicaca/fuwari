@@ -18,16 +18,14 @@ const { badge, url, name } = Astro.props
             transition-all
             pl-2
             hover:pl-3
-            
             text-neutral-700
             hover:text-[var(--primary)]
             dark:text-neutral-300
             dark:hover:text-[var(--primary)]
-        `
-        }
+        `}
     >
         <div class="flex items-center justify-between relative mr-2">
-            <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  ">
+            <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis">
                 <slot></slot>
             </div>
             { badge !== undefined && badge !== null && badge !== '' &&
