@@ -327,6 +327,7 @@ const setup = () => {
 	window.swup.hooks.on('link:click', () => {
 		document.documentElement.style.setProperty('--content-delay', '0ms')
 	})
+	window.swup.hooks.on('content:replace', initCustomScrollbar)
 }
 if (window.swup.hooks) {
 	setup()
