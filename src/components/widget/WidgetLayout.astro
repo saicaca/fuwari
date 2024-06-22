@@ -29,7 +29,7 @@ const className = Astro.props.class
         <slot></slot>
     </div>
     {isCollapsed && <div class="expand-btn px-4 -mb-2">
-        <button class="btn-plain w-full h-9 rounded-lg">
+        <button class="btn-plain rounded-lg w-full h-9">
             <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2">
                 <Icon name="material-symbols:more-horiz" size={28}></Icon> {i18n(I18nKey.more)}
             </div>
