@@ -46,6 +46,7 @@ const jsonLd = {
 let menuText = entry.body
   // code block
   .replace(/```([\s\S]*?)```\s?/g, '')
+  .replace(/~~~([\s\S]*?)~~~\s?/g, '')
   // inline code block
   .replace(/`{1,2}[^`](.*?)`{1,2}/gm, '')
   // code in list
