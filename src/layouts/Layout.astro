@@ -15,7 +15,6 @@ import {url} from "../utils/url-utils";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import BackToTop from "../components/control/BackToTop.astro";
-import "@/assets/katex.min.css"
 
 interface Props {
 	title: string;
@@ -122,7 +121,8 @@ const siteLang = siteConfig.lang.replace('_', '-')
 			}
 		</script>
 
-		<link rel="stylesheet" href="../assets/katex.min.css">
+		<!--<link rel="stylesheet" href="/katex.min.css">-->
+		<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 

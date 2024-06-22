@@ -31,7 +31,7 @@ const { title, banner, description, menu } = Astro.props
           collapsedHeight={0} class="hidden sm:block">
             {menu.map((item) => (
               <div style={{paddingLeft: `${(item.depth - 1)*8}px` }}>
-                  <ButtonLink  href={item.url}>{item.title}</ButtonLink>
+                  <ButtonLink url={item.url}>{item.url}</ButtonLink>
               </div>
             ))}
         </WidgetLayout>
