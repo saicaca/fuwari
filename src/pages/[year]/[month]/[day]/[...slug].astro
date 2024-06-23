@@ -1,5 +1,6 @@
 ---
 import path from "node:path";
+import { getCollection } from "astro:content";
 import { profileConfig } from "@/config";
 import PostMetadata from "@components/PostMeta.astro";
 import ImageWrapper from "@components/misc/ImageWrapper.astro";
@@ -182,11 +183,11 @@ const jsonLd = {
     class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full"
   >
     <a
-      href={getPostUrlByPosts(entry.data.nextPosts)}
+      href={getPostUrlByPosts(entry.data.prevPosts)}
       class="w-full font-bold overflow-hidden active:scale-95"
     >
       {
-        entry.data.nextPosts && (
+        entry.data.prevPosts && (
           <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center justify-start gap-4">
             <Icon
               name="material-symbols:chevron-left-rounded"
@@ -194,7 +195,7 @@ const jsonLd = {
               class="text-[var(--primary)]"
             />
             <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
-              {entry.data.nextTitle}
+              {entry.data.prevTitle}
             </div>
           </div>
         )
@@ -202,14 +203,14 @@ const jsonLd = {
     </a>
 
     <a
-      href={getPostUrlByPosts(entry.data.prevPosts)}
+      href={getPostUrlByPosts(entry.data.nextPosts)}
       class="w-full font-bold overflow-hidden active:scale-95"
     >
       {
-        entry.data.prevPosts && (
+        entry.data.nextPosts && (
           <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center justify-end gap-4">
             <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
-              {entry.data.prevTitle}
+              {entry.data.nextTitle}
             </div>
             <Icon
               name="material-symbols:chevron-right-rounded"

@@ -16,29 +16,30 @@ type  MyPosts  = Posts & {
 
 export async function getSortedPosts() {
   const allBlogPosts = await getCollection('posts', ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true
-  })
+    return import.meta.env.PROD ? data.draft !== true : true;
+  });
 
-  const sorted:Array<MyPosts> = allBlogPosts.sort((a, b) => {
-    const dateA = new Date(a.data.published)
-    const dateB = new Date(b.data.published)
-    return dateA > dateB ? -1 : 1
-  })
+  const sorted: Array<MyPosts> = allBlogPosts.sort((a, b) => {
+    const dateA = new Date(a.data.published);
+    const dateB = new Date(b.data.published);
+    return dateA > dateB ? -1 : 1;
+  });
 
-  for (let i = 1; i < sorted.length; i++) {
-    const nextPosts = sorted[i - 1];
-    if (!nextPosts) continue;
-    sorted[i].data.nextPosts = nextPosts
-    sorted[i].data.nextTitle = nextPosts.data.title
+  // 为每篇文章设置 next 和 prev 引用
+  for (let i = 0; i < sorted.length; i++) {
+    if (i > 0) {
+      // 设置上一篇文章
+      sorted[i].data.prevPosts = sorted[i - 1];
+      sorted[i].data.prevTitle = sorted[i - 1].data.title;
+    }
+    if (i < sorted.length - 1) { 
+      // 设置下一篇文章
+      sorted[i].data.nextPosts = sorted[i + 1];
+      sorted[i].data.nextTitle = sorted[i + 1].data.title;
+    }
   }
-  for (let i = 0; i < sorted.length - 1; i++) {
-    const prePosts = sorted[i - 1];
-    if (!prePosts) continue;
-    sorted[i].data.prevPosts =prePosts
-    sorted[i].data.prevTitle =prePosts.data.title
-  }
 
-  return sorted
+  return sorted;
 }
 
 export type Tag = {
