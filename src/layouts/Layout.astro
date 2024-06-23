@@ -1,57 +1,62 @@
 ---
 import GlobalStyles from "@components/GlobalStyles.astro";
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 import ImageWrapper from "@components/misc/ImageWrapper.astro";
 
-import {pathsEqual} from "@utils/url-utils";
+import { pathsEqual } from "@utils/url-utils";
 import ConfigCarrier from "@components/ConfigCarrier.astro";
-import {profileConfig, siteConfig} from "@/config";
-import {Favicon} from "../types/config";
-import {defaultFavicons} from "../constants/icon";
-import {LIGHT_MODE, DARK_MODE, AUTO_MODE, DEFAULT_THEME} from "../constants/constants";
-import {url} from "../utils/url-utils";
+import { profileConfig, siteConfig } from "@/config";
+import { Favicon } from "../types/config";
+import { defaultFavicons } from "../constants/icon";
+import {
+  LIGHT_MODE,
+  DARK_MODE,
+  AUTO_MODE,
+  DEFAULT_THEME,
+} from "../constants/constants";
+import { url } from "../utils/url-utils";
 
 interface Props {
-	title: string;
-	banner: string;
-	description?: string;
+  title: string;
+  banner: string;
+  description?: string;
 }
 
 let { title, banner, description } = Astro.props;
 
-const isHomePage = pathsEqual(Astro.url.pathname, '/');
+const isHomePage = pathsEqual(Astro.url.pathname, "/");
 
 const testPathName = Astro.url.pathname;
 
 const anim = {
-	old: {
-		name: 'fadeIn',
-		duration: '4s',
-		easing: 'linear',
-		fillMode: 'forwards',
-		mixBlendMode: 'normal',
-	},
-	new: {
-		name: 'fadeOut',
-		duration: '4s',
-		easing: 'linear',
-		fillMode: 'backwards',
-		mixBlendMode: 'normal',
-	}
+  old: {
+    name: "fadeIn",
+    duration: "4s",
+    easing: "linear",
+    fillMode: "forwards",
+    mixBlendMode: "normal",
+  },
+  new: {
+    name: "fadeOut",
+    duration: "4s",
+    easing: "linear",
+    fillMode: "backwards",
+    mixBlendMode: "normal",
+  },
 };
 
 const myFade = {
-	forwards: anim,
-	backwards: anim,
+  forwards: anim,
+  backwards: anim,
 };
 
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
 const configHue = siteConfig.themeColor.hue;
-if (!banner || typeof banner !== 'string' || banner.trim() === '') {
-	banner = siteConfig.banner.src;
+if (!banner || typeof banner !== "string" || banner.trim() === "") {
+  banner = siteConfig.banner.src;
 }
 
 // TODO don't use post cover as banner for now
@@ -61,258 +66,319 @@ const enableBanner = siteConfig.banner.enable;
 
 let pageTitle;
 if (title) {
-	pageTitle = `${title} - ${siteConfig.title}`;
+  pageTitle = `${title} - ${siteConfig.title}`;
 } else {
-	pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`;
+  pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`;
 }
 
-const favicons: Favicon[] = siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons
+const favicons: Favicon[] =
+  siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons;
 
-const siteLang = siteConfig.lang.replace('_', '-')
-
+const siteLang = siteConfig.lang.replace("_", "-");
 ---
 
-<!DOCTYPE html>
-<html lang={siteLang} isHome={isHomePage} pathname={testPathName} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
-	<head>
+<!doctype html>
+<html
+  lang={siteLang}
+  isHome={isHomePage}
+  pathname={testPathName}
+  class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]"
+>
+  <head>
+    <title>{pageTitle}</title>
 
-		<title>{pageTitle}</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description || pageTitle} />
+    <meta name="author" content={profileConfig.name} />
 
-		<meta charset="UTF-8" />
-		<meta name="description" content={description || pageTitle}>
-		<meta name="author" content={profileConfig.name}>
+    <meta property="og:site_name" content={siteConfig.title} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description || pageTitle} />
 
-		<meta property="og:site_name" content={siteConfig.title}>
-		<meta property="og:url" content={Astro.url}>
-		<meta property="og:title" content={pageTitle}>
-		<meta property="og:description" content={description || pageTitle}>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description || pageTitle} />
 
-		<meta name="twitter:card" content="summary_large_image">
-		<meta property="twitter:url" content={Astro.url}>
-		<meta name="twitter:title" content={pageTitle}>
-		<meta name="twitter:description" content={description || pageTitle}>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    {
+      favicons.map((favicon) => (
+        <link
+          rel="icon"
+          href={favicon.src.startsWith("/") ? url(favicon.src) : favicon.src}
+          sizes={favicon.sizes}
+          media={favicon.theme && `(prefers-color-scheme: ${favicon.theme})`}
+        />
+      ))
+    }
+    <!-- Set the theme before the page is rendered to avoid a flash -->
+    <script
+      define:vars={{
+        DEFAULT_THEME: DEFAULT_THEME,
+        LIGHT_MODE: LIGHT_MODE,
+        DARK_MODE: DARK_MODE,
+        AUTO_MODE: AUTO_MODE,
+      }}
+    >
+      const theme = localStorage.getItem("theme") || DEFAULT_THEME;
+      switch (theme) {
+        case LIGHT_MODE:
+          document.documentElement.classList.remove("dark");
+          break;
+        case DARK_MODE:
+          document.documentElement.classList.add("dark");
+          break;
+        case AUTO_MODE:
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+      }
+    </script>
 
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		{favicons.map(favicon => (
-			<link rel="icon"
-				  href={favicon.src.startsWith('/') ? url(favicon.src) : favicon.src}
-				  sizes={favicon.sizes}
-				  media={favicon.theme && `(prefers-color-scheme: ${favicon.theme})`}
-			/>
-		))}
-		<!-- Set the theme before the page is rendered to avoid a flash -->
-		<script define:vars={{DEFAULT_THEME: DEFAULT_THEME, LIGHT_MODE: LIGHT_MODE, DARK_MODE: DARK_MODE, AUTO_MODE: AUTO_MODE}}>
-			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
-			switch (theme) {
-				case LIGHT_MODE:
-					document.documentElement.classList.remove('dark');
-					break
-				case DARK_MODE:
-					document.documentElement.classList.add('dark');
-					break
-				case AUTO_MODE:
-					if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-						document.documentElement.classList.add('dark');
-					} else {
-						document.documentElement.classList.remove('dark');
-					}
-			}
-		</script>
+    <slot name="head" />
 
-		<slot name="head"></slot>
+    <link
+      rel="stylesheet"
+      href="https://cdn.staticfile.org/KaTeX/0.16.9/katex.min.css"
+      integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+      crossorigin="anonymous"
+    />
 
-		<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={profileConfig.name}
+      href={`${Astro.site}rss.xml`}
+    />
 
-		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
+    <style define:vars={{ configHue }}></style>
+    <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
+  </head>
+  <body
+    class="min-h-screen transition"
+    class:list={[{ "is-home": isHomePage, "enable-banner": enableBanner }]}
+  >
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLDD4D7W9R"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
+      gtag("config", "G-GLDD4D7W9R");
+    </script>
 
-	</head>
-	<body class=" min-h-screen transition " class:list={[{"is-home": isHomePage, "enable-banner": enableBanner}]}>
-		<ConfigCarrier></ConfigCarrier>
-		<GlobalStyles>
-		<div id="banner-wrapper" class="absolute w-full">
-			<ImageWrapper id="boxtest" alt="Banner image of the blog" class:list={["object-center object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
-					  src={siteConfig.banner.src}
-			>
-			</ImageWrapper>
-		</div>
-		<slot />
-		</GlobalStyles>
-	</body>
+    <ConfigCarrier />
+    <GlobalStyles>
+      <div id="banner-wrapper" class="absolute w-full">
+        <ImageWrapper
+          id="boxtest"
+          alt="Banner image of the blog"
+          class:list={[
+            "object-center object-cover h-full",
+            { hidden: !siteConfig.banner.enable },
+          ]}
+          src={siteConfig.banner.src}
+        />
+      </div>
+      <slot />
+    </GlobalStyles>
+  </body>
 </html>
 <style is:global>
-	:root {
-		--hue: var(--configHue);
-		--page-width: 94rem;
-	}
+  :root {
+    --hue: var(--configHue);
+    --page-width: 94rem;
+  }
 </style>
 <style is:global>
-@tailwind components;
-@tailwind utilities;
+  @tailwind components;
+  @tailwind utilities;
 
-@layer components {
-	/* TODO: temporarily make banner height same for all pages since I cannot make the transition feel good
+  @layer components {
+    /* TODO: temporarily make banner height same for all pages since I cannot make the transition feel good
 		I want to make the height transition parallel with the content transition instead of blocking it
 	*/
 
-	/*
+    /*
 	.enable-banner.is-home #banner-wrapper {
 		@apply h-[var(--banner-height)] md:h-[var(--banner-height-home)]
 	}
 	*/
-	.enable-banner #banner-wrapper {
-		@apply h-[var(--banner-height)]
-	}
+    .enable-banner #banner-wrapper {
+      @apply h-[var(--banner-height)];
+    }
 
-	/*
+    /*
 	.enable-banner.is-home #top-row {
 		@apply h-[calc(var(--banner-height)_-_4.5rem)] md:h-[calc(var(--banner-height-home)_-_4.5rem)]
 	}
 	*/
-	.enable-banner #top-row {
-		@apply h-[calc(var(--banner-height)_-_4.5rem)]
-	}
-}
+    .enable-banner #top-row {
+      @apply h-[calc(var(--banner-height)_-_4.5rem)];
+    }
+  }
 </style>
 <script>
-import 'overlayscrollbars/overlayscrollbars.css';
-import {
-	OverlayScrollbars,
-	ScrollbarsHidingPlugin,
-	SizeObserverPlugin,
-	ClickScrollPlugin
-} from 'overlayscrollbars';
-import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
+  import "overlayscrollbars/overlayscrollbars.css";
+  import {
+    OverlayScrollbars,
+    ScrollbarsHidingPlugin,
+    SizeObserverPlugin,
+    ClickScrollPlugin,
+  } from "overlayscrollbars";
+  import {
+    getHue,
+    getStoredTheme,
+    setHue,
+    setTheme,
+  } from "../utils/setting-utils";
 
-	/* Preload fonts */
-// (async function() {
-// 	try {
-// 		await Promise.all([
-// 			document.fonts.load("400 1em Roboto"),
-// 			document.fonts.load("700 1em Roboto"),
-// 		]);
-// 		document.body.classList.remove("hidden");
-// 	} catch (error) {
-// 		console.log("Failed to load fonts:", error);
-// 	}
-// })();
+  /* Preload fonts */
+  // (async function() {
+  // 	try {
+  // 		await Promise.all([
+  // 			document.fonts.load("400 1em Roboto"),
+  // 			document.fonts.load("700 1em Roboto"),
+  // 		]);
+  // 		document.body.classList.remove("hidden");
+  // 	} catch (error) {
+  // 		console.log("Failed to load fonts:", error);
+  // 	}
+  // })();
 
-/* TODO This is a temporary solution for style flicker issue when the transition is activated */
-/* issue link: https://github.com/withastro/astro/issues/8711, the solution get from here too */
-/* update: fixed in Astro 3.2.4 */
-function disableAnimation() {
-	const css = document.createElement('style')
-	css.appendChild(
-		document.createTextNode(
-			`*{
+  /* TODO This is a temporary solution for style flicker issue when the transition is activated */
+  /* issue link: https://github.com/withastro/astro/issues/8711, the solution get from here too */
+  /* update: fixed in Astro 3.2.4 */
+  function disableAnimation() {
+    const css = document.createElement("style");
+    css.appendChild(
+      document.createTextNode(
+        `*{
               -webkit-transition:none!important;
               -moz-transition:none!important;
               -o-transition:none!important;
               -ms-transition:none!important;
               transition:none!important
-              }`
-		)
-	)
-	document.head.appendChild(css)
+              }`,
+      ),
+    );
+    document.head.appendChild(css);
 
-	return () => {
-		// Force restyle
-		;(() => window.getComputedStyle(document.body))()
+    return () => {
+      // Force restyle
+      (() => window.getComputedStyle(document.body))();
 
-		// Wait for next tick before removing
-		setTimeout(() => {
-			document.head.removeChild(css)
-		}, 1)
-	}
-}
+      // Wait for next tick before removing
+      setTimeout(() => {
+        document.head.removeChild(css);
+      }, 1);
+    };
+  }
 
-function setClickOutsideToClose(panel: string, ignores: string[]) {
-	document.addEventListener("click", event => {
-		let panelDom = document.getElementById(panel);
-		let tDom = event.target;
-		for (let ig of ignores) {
-			let ie = document.getElementById(ig)
-			if (ie == tDom || (ie?.contains(tDom))) {
-				return;
-			}
-		}
-		panelDom.classList.add("float-panel-closed");
-	});
-}
-setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
-setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
-setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
+  function setClickOutsideToClose(panel: string, ignores: string[]) {
+    document.addEventListener("click", (event) => {
+      let panelDom = document.getElementById(panel);
+      let tDom = event.target;
+      for (let ig of ignores) {
+        let ie = document.getElementById(ig);
+        if (ie == tDom || ie?.contains(tDom)) {
+          return;
+        }
+      }
+      panelDom.classList.add("float-panel-closed");
+    });
+  }
+  setClickOutsideToClose("display-setting", [
+    "display-setting",
+    "display-settings-switch",
+  ]);
+  setClickOutsideToClose("nav-menu-panel", [
+    "nav-menu-panel",
+    "nav-menu-switch",
+  ]);
+  setClickOutsideToClose("search-panel", [
+    "search-panel",
+    "search-bar",
+    "search-switch",
+  ]);
 
+  function loadTheme() {
+    const theme = getStoredTheme();
+    setTheme(theme);
+  }
 
-function loadTheme() {
-	const theme = getStoredTheme()
-	setTheme(theme)
-}
+  function loadHue() {
+    setHue(getHue());
+  }
 
-function loadHue() {
-	setHue(getHue())
-}
+  function setBannerHeight() {
+    const banner = document.getElementById("banner-wrapper");
+    if (document.documentElement.hasAttribute("isHome")) {
+      banner.classList.remove("banner-else");
+      banner.classList.add("banner-home");
+    } else {
+      banner.classList.remove("banner-home");
+      banner.classList.add("banner-else");
+    }
+  }
 
-function setBannerHeight() {
-	const banner = document.getElementById('banner-wrapper');
-	if (document.documentElement.hasAttribute('isHome')) {
-		banner.classList.remove('banner-else');
-		banner.classList.add('banner-home');
-	} else {
-		banner.classList.remove('banner-home');
-		banner.classList.add('banner-else');
-	}
-}
+  function initCustomScrollbar() {
+    OverlayScrollbars(
+      // docs say that a initialization to the body element would affect native functionality like window.scrollTo
+      // but just leave it here for now
+      {
+        target: document.querySelector("body"),
+        cancel: {
+          nativeScrollbarsOverlaid: true, // don't initialize the overlay scrollbar if there is a native one
+        },
+      },
+      {
+        scrollbars: {
+          theme: "scrollbar-base scrollbar-auto py-1",
+          autoHide: "move",
+          autoHideDelay: 500,
+          autoHideSuspend: false,
+        },
+      },
+    );
+    document.querySelectorAll("pre").forEach((ele) => {
+      OverlayScrollbars(ele, {
+        scrollbars: {
+          theme: "scrollbar-base scrollbar-dark px-2",
+          autoHide: "leave",
+          autoHideDelay: 500,
+          autoHideSuspend: false,
+        },
+      });
+    });
+  }
 
-function initCustomScrollbar() {
-	OverlayScrollbars(
-		// docs say that a initialization to the body element would affect native functionality like window.scrollTo
-		// but just leave it here for now
-		{
-			target: document.querySelector('body'),
-			cancel: {
-				nativeScrollbarsOverlaid: true,    // don't initialize the overlay scrollbar if there is a native one
-			}
-		}, {
-		scrollbars: {
-			theme: 'scrollbar-base scrollbar-auto py-1',
-			autoHide: 'move',
-			autoHideDelay: 500,
-			autoHideSuspend: false,
-		},
-	});
-	document.querySelectorAll('pre').forEach((ele) => {
-		OverlayScrollbars(ele, {
-			scrollbars: {
-				theme: 'scrollbar-base scrollbar-dark px-2',
-				autoHide: 'leave',
-				autoHideDelay: 500,
-				autoHideSuspend: false
-			}
-		});
-	});
-}
+  function init() {
+    // disableAnimation()()		// TODO
+    setBannerHeight();
+    loadTheme();
+    loadHue();
+    initCustomScrollbar();
+  }
 
-function init() {
-	// disableAnimation()()		// TODO
-	setBannerHeight();
-	loadTheme();
-	loadHue();
-	initCustomScrollbar();
-}
+  /* Load settings when entering the site */
+  init();
 
-/* Load settings when entering the site */
-init();
+  /* Load settings before swapping */
+  /* astro:after-swap event happened before swap animation */
+  document.addEventListener("astro:after-swap", init);
 
-/* Load settings before swapping */
-/* astro:after-swap event happened before swap animation */
-document.addEventListener('astro:after-swap', init);
-
-const setup = () => {
-	// TODO: temp solution to change the height of the banner
-/*
+  const setup = () => {
+    // TODO: temp solution to change the height of the banner
+    /*
 	window.swup.hooks.on('animation:out:start', () => {
 		const path = window.location.pathname
 		const body = document.querySelector('body')
@@ -323,18 +389,17 @@ const setup = () => {
 		}
 	})
 */
-	// Remove the delay for the first time page load
-	window.swup.hooks.on('link:click', () => {
-		document.documentElement.style.setProperty('--content-delay', '0ms')
-	})
-	window.swup.hooks.on('content:replace', initCustomScrollbar)
-}
-if (window.swup.hooks) {
-	setup()
-} else {
-	document.addEventListener('swup:enable', setup)
-}
-
+    // Remove the delay for the first time page load
+    window.swup.hooks.on("link:click", () => {
+      document.documentElement.style.setProperty("--content-delay", "0ms");
+    });
+    window.swup.hooks.on("content:replace", initCustomScrollbar);
+  };
+  if (window.swup.hooks) {
+    setup();
+  } else {
+    document.addEventListener("swup:enable", setup);
+  }
 </script>
 
 <style is:global lang="stylus">
