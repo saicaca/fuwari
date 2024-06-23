@@ -58,6 +58,8 @@
     "@types/markdown-it": "^14.1.1",
     "@types/mdast": "^4.0.4",
     "@types/sanitize-html": "^2.11.0",
+    "prettier": "^3.3.2",
+    "prettier-plugin-astro": "^0.14.0",
     "remark-github-admonitions-to-directives": "^1.0.5",
     "stylus": "^0.63.0"
   },
