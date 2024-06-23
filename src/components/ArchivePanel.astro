@@ -1,63 +1,60 @@
 ---
-import {getSortedPosts} from "../utils/content-utils";
-import {getPostUrlBySlug} from "../utils/url-utils";
-import {i18n} from "../i18n/translation";
-import I18nKey from "../i18n/i18nKey";
-import {UNCATEGORIZED} from "@constants/constants";
+import I18nKey from '../i18n/i18nKey'
+import { i18n } from '../i18n/translation'
+import { getPostsByCategory, getPostsByTag, getSortedPosts } from '../utils/content-utils'
+import { getPostUrlByPosts } from '../utils/url-utils'
 
 interface Props {
-    keyword: string;
-    tags: string[];
-    categories: string[];
+  keyword?: string
+  tag?: string
+  categorie?: string
 }
-const { keyword, tags, categories} = Astro.props;
+const { keyword, tag, categorie } = Astro.props
 
 let posts = await getSortedPosts()
 
-if (Array.isArray(tags) && tags.length > 0) {
-    posts = posts.filter(post =>
-        Array.isArray(post.data.tags) && post.data.tags.some(tag => tags.includes(tag))
-    );
+if (tag) {
+  posts = await getPostsByTag(tag)
 }
 
-if (Array.isArray(categories) && categories.length > 0) {
-    posts = posts.filter(post =>
-        (post.data.category && categories.includes(post.data.category)) ||
-        (!post.data.category && categories.includes(UNCATEGORIZED))
-    );
+if (categorie) {
+  posts = await getPostsByCategory(categorie)
 }
 
-const groups = function () {
-    const groupedPosts = posts.reduce((grouped, post) => {
-        const year = post.data.published.getFullYear()
-        if (!grouped[year]) {
-            grouped[year] = []
-        }
-        grouped[year].push(post)
-        return grouped
-    }, {})
+const groups = (() => {
+  const groupedPosts: { [key: string]: typeof posts } = {}
 
-    // convert the object to an array
-    const groupedPostsArray = Object.keys(groupedPosts).map(key => ({
-        year: key,
-        posts: groupedPosts[key]
+  for (const post of posts) {
+    try {
+      const year = post.data.published.getFullYear().toString();
+      if (!groupedPosts[year]) {
+        groupedPosts[year] = []
+      }
+      groupedPosts[year].push(post)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  const groupedPostsArray = Object.keys(groupedPosts)
+    .map(key => ({
+      year: key,
+      posts: groupedPosts[key],
     }))
+    .sort((a, b) => Number(b.year) - Number(a.year))
 
-    // sort years by latest first
-    groupedPostsArray.sort((a, b) => b.year - a.year)
-    return groupedPostsArray;
-}();
+  return groupedPostsArray
+})()
 
 function formatDate(date: Date) {
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${month}-${day}`;
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const day = date.getDate().toString().padStart(2, '0')
+  return `${month}-${day}`
 }
 
-function formatTag(tag: string[]) {
-    return tag.map(t => `#${t}`).join(' ');
+function formatTag(tag?: string[]) {
+  return tag?.map(t => `#${t}`).join(' ')
 }
-
 ---
 
 <div class="card-base px-8 py-6">
@@ -72,7 +69,7 @@ function formatTag(tag: string[]) {
                     <div class="w-[70%] md:w-[80%] transition text-left text-50">{group.posts.length} {i18n(I18nKey.postsCount)}</div>
                 </div>
                 {group.posts.map(post => (
-                    <a href={getPostUrlBySlug(post.slug)}
+                    <a href={getPostUrlByPosts(post)}
                        aria-label={post.data.title}
                        class="group btn-plain block h-10 w-full rounded-lg hover:text-[initial]"
                     >
