@@ -45,9 +45,6 @@ dependencies:
   colorjs.io:
     specifier: ^0.5.0
     version: 0.5.0
-  glob:
-    specifier: ^10.4.2
-    version: 10.4.2
   hastscript:
     specifier: ^9.0.0
     version: 9.0.0
