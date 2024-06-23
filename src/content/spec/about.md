@@ -1,9 +1,20 @@
-# About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
-
+# 简介
 ::github{repo="saicaca/fuwari"}
+- 西安石油大学
 
-> ### Sources of images used in this site
-> - [Unsplash](https://unsplash.com/)
-> - [星と少女](https://www.pixiv.net/artworks/108916539) by [Stella](https://www.pixiv.net/users/93273965)
-> - [Rabbit - v1.4 Showcase](https://civitai.com/posts/586908) by [Rabbit_YourMajesty](https://civitai.com/user/Rabbit_YourMajesty)
+## 工作经历
+
+- 中海油服深圳分公司
+- 杭州财人汇
+- 网易
+- 阿里巴巴
+
+## 兴趣爱好
+
+- 电子游戏
+- 射箭 🏹
+- 羽毛球
+
+## 联系方式
+
+- Mail: <a href="mailto:yq12315@gmail.com">Mail To Me</a>

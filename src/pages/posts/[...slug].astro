@@ -1,26 +1,27 @@
 ---
+import path from 'path'
 import { getCollection } from 'astro:content';
+import License from '@components/misc/License.astro'
+import Markdown from '@components/misc/Markdown.astro'
+import I18nKey from '@i18n/i18nKey'
+import { i18n } from '@i18n/translation'
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import ImageWrapper from "../../components/misc/ImageWrapper.astro";
+import { getDir, getPostUrlBySlug } from '@utils/url-utils'
 import {Icon} from "astro-icon/components";
+import { licenseConfig } from 'src/config'
 import PostMetadata from "../../components/PostMeta.astro";
-import {i18n} from "@i18n/translation";
-import I18nKey from "@i18n/i18nKey";
-import {getDir, getPostUrlBySlug} from "@utils/url-utils";
-import License from "@components/misc/License.astro";
-import {licenseConfig} from "src/config";
-import Markdown from "@components/misc/Markdown.astro";
-import path from "path";
+import ImageWrapper from '../../components/misc/ImageWrapper.astro'
 import {profileConfig} from "../../config";
 import {formatDateToYYYYMMDD} from "../../utils/date-utils";
-
+// TODO: 没用的文件，等待删除
 export async function getStaticPaths() {
-    const blogEntries = await getCollection('posts', ({ data }) => {
-        return import.meta.env.PROD ? data.draft !== true : true;
-    });
-    return blogEntries.map(entry => ({
-        params: { slug: entry.slug }, props: { entry },
-    }));
+  const blogEntries = await getCollection('posts', ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true
+  })
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }))
 }
 
 const { entry } = Astro.props;
