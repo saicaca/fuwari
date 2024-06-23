@@ -10,7 +10,7 @@ export async function getStaticPaths() {
     let posts = await getSortedPosts()
 
     const allTags = posts.reduce((acc, post) => {
-        post.data.tags.forEach(tag => acc.add(tag));
+        post?.data?.tags?.forEach(tag => acc.add(tag));
         return acc;
     }, new Set());
 
