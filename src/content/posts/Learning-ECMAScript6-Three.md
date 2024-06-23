@@ -1,6 +1,6 @@
 ---
 title: ECMAScript6学习简记（三）- 函数扩展
-date: 2015-09-09 05:24:03
+published: 2015-09-09 05:24:03
 tags:
   - 学习笔记
   - es6

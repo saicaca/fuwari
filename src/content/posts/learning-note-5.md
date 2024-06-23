@@ -1,6 +1,6 @@
 ---
 title: 前端开发学习笔记五
-date: 2015-01-01 23:32:23
+published: 2015-01-01 23:32:23
 tags:
   - 学习笔记
   - JavaScript

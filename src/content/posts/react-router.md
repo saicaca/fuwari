@@ -1,6 +1,6 @@
 ---
 title: 初试 react-router
-date: 2015-10-09 05:58:24
+published: 2015-10-09 05:58:24
 tags:
   - JavaScript
   - React

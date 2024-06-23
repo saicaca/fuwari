@@ -1,6 +1,6 @@
 ---
 title: Rax 代码转换到 React
-date: 2019-08-01 20:15:38
+published: 2019-08-01 20:15:38
 tags:
   - Javascript
   - Babel

@@ -1,7 +1,7 @@
 ---
 title: 基于 React 的前端项目开发总结
 category: 技术
-date: 2017-05-12 23:00:52
+published: 2017-05-12 23:00:52
 tags:
   - React
   - Redux

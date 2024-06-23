@@ -1,6 +1,6 @@
 ---
 title: 轻量级fullPage整屏滚动框架V1.3发布
-date: 2015-10-14 04:23:40
+published: 2015-10-14 04:23:40
 tags:
   - JavaScript
   - project

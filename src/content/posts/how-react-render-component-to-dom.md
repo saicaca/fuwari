@@ -1,7 +1,7 @@
 ---
 title: ReactDOM 是如何把组件渲染到 DOM 中的？
 category: 技术
-date: 2017-09-21 03:28:39
+published: 2017-09-21 03:28:39
 tags:
   - React
 ---

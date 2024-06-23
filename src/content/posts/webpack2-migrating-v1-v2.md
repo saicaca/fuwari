@@ -1,7 +1,7 @@
 ---
 title: 【翻译向】Webpack 1 到 2 升级指南
 category: 技术
-date: 2017-01-20 01:00:33
+published: 2017-01-20 01:00:33
 tags:
   - webpack
 ---

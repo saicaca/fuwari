@@ -1,6 +1,6 @@
 ---
 title: JavaScript 中的类和继承
-date: 2016-03-22 03:38:13
+published: 2016-03-22 03:38:13
 tags:
   - JavaScript
   - inherit

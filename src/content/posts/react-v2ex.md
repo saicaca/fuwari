@@ -1,6 +1,6 @@
 ---
 title: react-v2ex
-date: 2015-12-26 08:11:25
+published: 2015-12-26 08:11:25
 tags:
   - JavaScript
   - React

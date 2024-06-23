@@ -1,6 +1,6 @@
 ---
 title: 用ES6重构fullPage
-date: 2016-02-22 06:18:09
+published: 2016-02-22 06:18:09
 tags:
   - JavaScript
 category: 技术

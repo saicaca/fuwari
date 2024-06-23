@@ -1,7 +1,7 @@
 ---
 title: ECMAScript6学习简记（二）- 数组扩展
 category: 技术
-date: 2015-09-02 21:39:20
+published: 2015-09-02 21:39:20
 tags:
   - 学习笔记
   - es6

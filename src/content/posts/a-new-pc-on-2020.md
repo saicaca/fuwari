@@ -1,7 +1,7 @@
 ---
 title: 为自己配置的第二台 PC
 category: 随笔
-date: 2020-10-12 22:08:47
+published: 2020-10-12 22:08:47
 tags:
   - PC
   - Workbench

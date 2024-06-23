@@ -1,7 +1,7 @@
 ---
 title: React 源码浅析之 - 入口文件
 category: 技术
-date: 2017-09-21 00:10:41
+published: 2017-09-21 00:10:41
 tags:
   - React
   - SourceCode

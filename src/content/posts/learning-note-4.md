@@ -1,6 +1,6 @@
 ---
 title: 前端开发学习笔记四
-date: 2014-12-31 00:09:34
+published: 2014-12-31 00:09:34
 tags:
   - 学习笔记
   - JavaScript

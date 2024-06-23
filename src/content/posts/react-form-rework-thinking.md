@@ -1,7 +1,7 @@
 ---
 title: 一个 React Form 组件的重构思路
 category: 技术
-date: 2017-03-18 05:31:31
+published: 2017-03-18 05:31:31
 tags:
   - React
   - Form

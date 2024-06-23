@@ -1,16 +1,16 @@
 ---
-import Layout from "./Layout.astro";
-import Navbar from "@components/Navbar.astro";
-import SideBar from "@components/widget/SideBar.astro";
-import {pathsEqual} from "@utils/url-utils";
-import Footer from "@components/Footer.astro";
-import BackToTop from "@components/control/BackToTop.astro";
-import {siteConfig} from "@/config";
+import { siteConfig } from '@/config'
+import Footer from '@components/Footer.astro'
+import Navbar from '@components/Navbar.astro'
+import BackToTop from '@components/control/BackToTop.astro'
+import SideBar from '@components/widget/SideBar.astro'
+import { pathsEqual } from '@utils/url-utils'
+import Layout from './Layout.astro'
 
 interface Props {
-    title: string;
-    banner?: string;
-    description?: string;
+  title: string
+  banner?: string
+  description?: string
 }
 
 const { title, banner, description } = Astro.props

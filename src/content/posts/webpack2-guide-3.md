@@ -1,7 +1,7 @@
 ---
 title: 【翻译向】webpack2 指南（下）
 category: 技术
-date: 2017-01-19 01:14:35
+published: 2017-01-19 01:14:35
 tags:
   - webpack
 ---

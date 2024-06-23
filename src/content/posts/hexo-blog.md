@@ -1,6 +1,6 @@
 ---
 title: 借助Hexo和Github搭建一个博客
-date: 2015-01-09 00:34:46
+published: 2015-01-09 00:34:46
 tags:
   - 网站建设
   - hexo

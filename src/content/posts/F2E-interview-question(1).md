@@ -1,6 +1,6 @@
 ---
 title: 前端面试题(1)
-date: 2015-02-06 20:44:05
+published: 2015-02-06 20:44:05
 tags:
   - 面试题
   - JavaScript

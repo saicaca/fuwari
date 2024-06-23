@@ -1,6 +1,6 @@
 ---
 title: 前端开发学习笔记六
-date: 2015-01-13 20:05:27
+published: 2015-01-13 20:05:27
 tags:
   - 学习笔记
   - JavaScript

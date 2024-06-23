@@ -1,5 +1,6 @@
 import i18nKey from '@i18n/i18nKey'
 import { i18n } from '@i18n/translation'
+import { genreatePermalink } from './date-utils'
 
 export function pathsEqual(path1: string, path2: string) {
   const normalizedPath1 = path1.replace(/^\/|\/$/g, '').toLowerCase()
@@ -12,9 +13,12 @@ function joinUrl(...parts: string[]): string {
   return joined.replace(/\/+/g, '/');
 }
 
-export function getPostUrlBySlug(slug: string): string | null {
-  if (!slug) return null
-  return url(`/posts/${slug}/`)
+export function getPostUrlBySlug(post): string | null {
+  if (!post || !post.data) return null
+  const { slug, data } = post
+  const { published } = data
+  return url(`${genreatePermalink(published)}/${slug}/`)
+  // return url(`/posts/${slug}/`)
 }
 
 export function getCategoryUrl(category: string): string | null {

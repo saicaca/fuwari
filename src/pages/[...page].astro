@@ -1,21 +1,21 @@
 ---
-import MainGridLayout from "../layouts/MainGridLayout.astro";
-import PostCard from "../components/PostCard.astro";
-import Pagination from "../components/control/Pagination.astro";
-import {getSortedPosts} from "../utils/content-utils";
-import {getPostUrlBySlug} from "../utils/url-utils";
-import {PAGE_SIZE} from "../constants/constants";
-import PostPage from "../components/PostPage.astro";
+import PostCard from '../components/PostCard.astro'
+import PostPage from '../components/PostPage.astro'
+import Pagination from '../components/control/Pagination.astro'
+import { PAGE_SIZE } from '../constants/constants'
+import MainGridLayout from '../layouts/MainGridLayout.astro'
+import { getSortedPosts } from '../utils/content-utils'
+import { getPostUrlBySlug } from '../utils/url-utils'
 
 export async function getStaticPaths({ paginate }) {
-    const allBlogPosts = await getSortedPosts();
-    return paginate(allBlogPosts, { pageSize: PAGE_SIZE });
+  const allBlogPosts = await getSortedPosts()
+  return paginate(allBlogPosts, { pageSize: PAGE_SIZE })
 }
 
-const {page} = Astro.props;
+const { page } = Astro.props
 
-const len = page.data.length;
-
+const len = page.data.length
+// TODO: 没用的文件，等待删除
 ---
 
 <MainGridLayout>

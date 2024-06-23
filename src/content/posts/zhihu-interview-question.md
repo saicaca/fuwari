@@ -1,6 +1,6 @@
 ---
 title: 知乎前端面试题解答
-date: 2015-01-15 07:33:06
+published: 2015-01-15 07:33:06
 tags:
   - 前端
   - JavaScript

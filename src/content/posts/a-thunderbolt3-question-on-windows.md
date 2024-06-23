@@ -1,7 +1,7 @@
 ---
 title: Windows10 中 thunderbolt3 接口的故障排查经历
 category: 随笔
-date: 2021-03-04 22:22:37
+published: 2021-03-04 22:22:37
 tags:
   - thunderbolt
 ---

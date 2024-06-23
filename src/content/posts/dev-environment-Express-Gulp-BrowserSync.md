@@ -1,6 +1,6 @@
 ---
 title: 基于 Express+Gulp+BrowserSync 搭建高性能的前端开发环境
-date: 2015-11-03 04:45:23
+published: 2015-11-03 04:45:23
 tags:
   - Express
   - JavaScript

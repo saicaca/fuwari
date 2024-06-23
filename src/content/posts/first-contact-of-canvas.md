@@ -1,6 +1,6 @@
 ---
 title: Canvas 基础
-date: 2015-10-20 06:41:38
+published: 2015-10-20 06:41:38
 tags:
   - canvas
 category: 技术

@@ -1,6 +1,6 @@
 ---
 title: js函数表达式和函数声明的区别
-date: 2015-02-09 07:01:09
+published: 2015-02-09 07:01:09
 tags:
   - JavaScript
 category: 技术

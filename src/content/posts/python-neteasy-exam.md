@@ -1,6 +1,6 @@
 ---
 title: 网易云课堂考试题-python
-date: 2015-01-29 00:23:14
+published: 2015-01-29 00:23:14
 tags:
   - python
 category: 技术

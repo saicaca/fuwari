@@ -1,6 +1,6 @@
 ---
 title: JavaScript 异步编程
-date: 2015-07-05 04:16:56
+published: 2015-07-05 04:16:56
 tags:
   - async
   - JavaScript

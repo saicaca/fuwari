@@ -1,6 +1,6 @@
 ---
 title: elefixed
-date: 2015-01-22 04:02:45
+published: 2015-01-22 04:02:45
 tags:
   - JavaScript
   - jQuery

@@ -1,7 +1,7 @@
 ---
 title: React 单页面初始化渲染优化
 category: 技术
-date: 2017-04-20 23:16:05
+published: 2017-04-20 23:16:05
 tags:
   - React
   - react-router

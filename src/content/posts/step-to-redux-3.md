@@ -1,7 +1,7 @@
 ---
 title: 【翻译向】走进 Redux 之高级篇
 category: 技术
-date: 2016-05-22 04:14:46
+published: 2016-05-22 04:14:46
 tags:
   - Redux
   - 学习笔记

@@ -1,6 +1,6 @@
 ---
 title: learnyounode-functional-javascript
-date: 2015-09-24 03:53:33
+published: 2015-09-24 03:53:33
 tags:
   - JavaScript
 category: 技术

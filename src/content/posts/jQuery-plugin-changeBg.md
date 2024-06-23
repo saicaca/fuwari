@@ -1,6 +1,6 @@
 ---
 title: jQuery插件-changeBg
-date: 2015-02-08 04:36:04
+published: 2015-02-08 04:36:04
 tags:
   - JavaScript
   - jQuery

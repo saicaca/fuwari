@@ -1,6 +1,6 @@
 ---
 title: 博客重构之-从hexo 迁移到 next+contentLayer
-date: 2023-12-20 17:25:56
+published: 2023-12-20 17:25:56
 tags:
   - blog
   - hexo

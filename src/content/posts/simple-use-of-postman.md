@@ -1,6 +1,6 @@
 ---
 title: Postman 的简单使用
-date: 2016-02-27 05:51:47
+published: 2016-02-27 05:51:47
 tags:
   - Postman
   - 调试工具

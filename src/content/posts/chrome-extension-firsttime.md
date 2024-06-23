@@ -1,6 +1,6 @@
 ---
 title: 初试chrome应用
-date: 2015-01-12 05:01:28
+published: 2015-01-12 05:01:28
 tags:
   - chrome
   - onedrive
