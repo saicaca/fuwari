@@ -1,0 +1,25 @@
+/* TEAM */
+    Developer: kisnows
+    Contact: yq12315 [at] gmail.com
+    Weibo: @kisnows
+    Twitter: @kisnows
+    Blog: http://kisnows.com
+    From: HangZhou, ZheJiang, China
+    University: Xi'an Shiyou University
+    Degree: Bachelor
+
+/* THANKS */
+    hexo Founder:  Tommy Chen
+    Site: https://hexo.io/
+
+    humans.txt Founder: Abel Cabans
+    Site: http://www.humanstxt.org
+
+/* SITE */
+    Last update: 2015/10/14
+    Language: Chinese
+    Doctype: HTML5
+    Standards: HTML5, CSS3
+    Components: require,JQuery
+    Deployment: Git, GitHub
+    Text Editor: Sublime Text
