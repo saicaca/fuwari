@@ -1,5 +1,5 @@
 ---
-import { getPostUrlBySlug } from '@utils/url-utils'
+import { getPostUrlByPosts } from '@utils/url-utils'
 import PostCard from './PostCard.astro'
 const { page } = Astro.props
 
@@ -18,7 +18,7 @@ const interval = 50
                     tags={entry.data.tags}
                     category={entry.data.category}
                     published={entry.data.published}
-                    url={getPostUrlBySlug(entry)}
+                    url={getPostUrlByPosts(entry)}
                     image={entry.data.image}
                     description={entry.data.description}
                     draft={entry.data.draft}

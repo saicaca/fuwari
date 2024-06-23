@@ -5,7 +5,7 @@ import Pagination from '../components/control/Pagination.astro'
 import { PAGE_SIZE } from '../constants/constants'
 import MainGridLayout from '../layouts/MainGridLayout.astro'
 import { getSortedPosts } from '../utils/content-utils'
-import { getPostUrlBySlug } from '../utils/url-utils'
+import { getPostUrlByPosts } from '../utils/url-utils'
 
 export async function getStaticPaths({ paginate }) {
   const allBlogPosts = await getSortedPosts()

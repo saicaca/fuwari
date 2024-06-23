@@ -1,24 +1,41 @@
 import { getCollection } from 'astro:content'
+import type { CollectionEntry, ContentEntryMap,SchemaContext , } from 'astro:content';
 import I18nKey from '@i18n/i18nKey'
 import { i18n } from '@i18n/translation'
+
+type Posts = CollectionEntry<'posts'>
+
+type  MyPosts  = Posts & {
+  data: CollectionEntry<'posts'>['data'] & {
+    nextPosts?: CollectionEntry<'posts'>
+    nextTitle?: string;
+    prevPosts?: CollectionEntry<'posts'>
+    prevTitle?: string;
+  }
+}
 
 export async function getSortedPosts() {
   const allBlogPosts = await getCollection('posts', ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true
   })
-  const sorted = allBlogPosts.sort((a, b) => {
+
+  const sorted:Array<MyPosts> = allBlogPosts.sort((a, b) => {
     const dateA = new Date(a.data.published)
     const dateB = new Date(b.data.published)
     return dateA > dateB ? -1 : 1
   })
 
   for (let i = 1; i < sorted.length; i++) {
-    sorted[i].data.nextSlug = sorted[i - 1].slug
-    sorted[i].data.nextTitle = sorted[i - 1].data.title
+    const nextPosts = sorted[i - 1];
+    if (!nextPosts) continue;
+    sorted[i].data.nextPosts = nextPosts
+    sorted[i].data.nextTitle = nextPosts.data.title
   }
   for (let i = 0; i < sorted.length - 1; i++) {
-    sorted[i].data.prevSlug = sorted[i + 1].slug
-    sorted[i].data.prevTitle = sorted[i + 1].data.title
+    const prePosts = sorted[i - 1];
+    if (!prePosts) continue;
+    sorted[i].data.prevPosts =prePosts
+    sorted[i].data.prevTitle =prePosts.data.title
   }
 
   return sorted
