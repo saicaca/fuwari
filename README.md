@@ -1,4 +1,9 @@
-# 🍥Fuwari
+# 博客
+
+基于 https://github.com/saicaca/fuwari 二次开发。
+
+
+以下是 fuwari 的 README.md 的内容。
 
 A static blog template built with [Astro](https://astro.build).
 
