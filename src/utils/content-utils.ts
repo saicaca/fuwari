@@ -30,24 +30,26 @@ export type Tag = {
 }
 
 export async function getTagList(): Promise<Tag[]> {
-  const allBlogPosts = await getCollection('posts', ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true
-  })
+  const allBlogPosts = await getSortedPosts()
+  const tagCounts = allBlogPosts.reduce(
+    (acc: { [key: string]: number }, post) => {
+      post.data.tags?.forEach((tag) => {
+        acc[tag] = (acc[tag] || 0) + 1
+      })
+      return acc
+    },
+    {}
+  )
 
-  const countMap: { [key: string]: number } = {}
-  allBlogPosts.map(post => {
-    post?.data?.tags?.map((tag: string) => {
-      if (!countMap[tag]) countMap[tag] = 0
-      countMap[tag]++
-    })
+  const tags =  Object.keys(tagCounts).map((tagName) => ({
+      name: tagName,
+      count: tagCounts[tagName],
+    }))
+// 按照 count 数量对 tags 从达到小排序
+  
+  return tags.sort((a, b) => {
+    return b.count - a.count
   })
-
-  // sort tags
-  const keys: string[] = Object.keys(countMap).sort((a, b) => {
-    return a.toLowerCase().localeCompare(b.toLowerCase())
-  })
-
-  return keys.map(key => ({ name: key, count: countMap[key] }))
 }
 
 export type Category = {
