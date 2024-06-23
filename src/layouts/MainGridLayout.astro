@@ -18,7 +18,7 @@ const isHomePage = pathsEqual(Astro.url.pathname, "/");
 const enableBanner = siteConfig.banner.enable;
 ---
 
-<Layout title={title} banner={banner} description={description}>
+<Layout title={title} banner={banner} description={description}> 
   <slot slot="head" name="head" />
   <div
     class="max-w-[var(--page-width)] min-h-screen grid grid-cols-[17.5rem_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto]

@@ -1,13 +1,7 @@
 # 简介
-::github{repo="saicaca/fuwari"}
-- 西安石油大学
+<!-- ::github{repo="saicaca/fuwari"} -->
 
-## 工作经历
-
-- 中海油服深圳分公司
-- 杭州财人汇
-- 网易
-- 阿里巴巴
+阿里巴巴，前端开发工程师。
 
 ## 兴趣爱好
 

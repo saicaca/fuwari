@@ -6,6 +6,7 @@ tags:
   - hexo
   - next.js
 category: 技术
+image: ./hexo-to-next.webp
 ---
 
 基于 hexo 的博客用了多年了，有很多主题和插件可以用，用的还是挺舒服的。但是最近打算把它从 hexo 迁移走，原因：
