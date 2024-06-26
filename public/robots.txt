@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://blog.kisnows.com
-
-# Sitemaps
-Sitemap: https://blog.kisnows.com/sitemap.xml
