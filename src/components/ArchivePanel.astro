@@ -1,41 +1,32 @@
 ---
-import { UNCATEGORIZED } from '@constants/constants'
 import I18nKey from '../i18n/i18nKey'
 import { i18n } from '../i18n/translation'
-import { getSortedPosts } from '../utils/content-utils'
+import { getPostsByCategory, getPostsByTag, getSortedPosts } from '../utils/content-utils'
 import { getPostUrlByPosts } from '../utils/url-utils'
 
 interface Props {
-  keyword: string
-  tags: string[]
-  categories: string[]
+  keyword?: string
+  tag?: string
+  categorie?: string
 }
-const { keyword, tags, categories } = Astro.props
+const { keyword, tag, categorie } = Astro.props
 
 let posts = await getSortedPosts()
 
-if (Array.isArray(tags) && tags.length > 0) {
-  posts = posts.filter(
-    post =>
-      Array.isArray(post.data.tags) &&
-      post.data.tags.some(tag => tags.includes(tag)),
-  )
+if (tag) {
+  posts = await getPostsByTag(tag)
 }
 
-if (Array.isArray(categories) && categories.length > 0) {
-  posts = posts.filter(
-    post =>
-      (post.data.category && categories.includes(post.data.category)) ||
-      (!post.data.category && categories.includes(UNCATEGORIZED)),
-  )
+if (categorie) {
+  posts = await getPostsByCategory(categorie)
 }
 
 const groups = (() => {
-  const groupedPosts: { [key: number]: Array<typeof posts> } = {}
+  const groupedPosts: { [key: string]: typeof posts } = {}
 
   for (const post of posts) {
     try {
-      const year = post.data.published.getFullYear()
+      const year = post.data.published.getFullYear().toString();
       if (!groupedPosts[year]) {
         groupedPosts[year] = []
       }
@@ -50,7 +41,7 @@ const groups = (() => {
       year: key,
       posts: groupedPosts[key],
     }))
-    .sort((a, b) => b.year - a.year)
+    .sort((a, b) => Number(b.year) - Number(a.year))
 
   return groupedPostsArray
 })()
@@ -61,7 +52,7 @@ function formatDate(date: Date) {
   return `${month}-${day}`
 }
 
-function formatTag(tag: string[]) {
+function formatTag(tag?: string[]) {
   return tag?.map(t => `#${t}`).join(' ')
 }
 ---

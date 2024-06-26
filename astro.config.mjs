@@ -33,6 +33,10 @@ export default defineConfig({
   site: 'https://blog.kisnows.com/',
   base: '/',
   trailingSlash: 'always',
+  redirects: {
+     "/tags/[...slug]": "/archive/tag/[...slug]",
+     "/tags/": "/archive/tag/",
+  },
   integrations: [
     tailwind(),
     swup({
