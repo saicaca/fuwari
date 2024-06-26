@@ -5,6 +5,7 @@ tags:
   - 前端开发
   - 最佳实践
 category: 技术
+image: ./frontend-development-standardization-best-practices.webp
 ---
 
 

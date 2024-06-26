@@ -5,6 +5,7 @@ published: 2023-01-11 15:15:00
 tags:
   - performance
   - alibaba
+image: ./alibaba-buyer-performance-optimization-summary.webp
 ---
 
 ## 前言
