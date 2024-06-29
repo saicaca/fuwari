@@ -13,25 +13,27 @@ const config = profileConfig;
         <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
         w-full h-full z-50 flex items-center justify-center">
             <Icon name="fa6-regular:address-card"
-                  class="transition opacity-0 group-hover:opacity-100 text-white text-5xl">
+                  class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl">
             </Icon>
         </div>
         <ImageWrapper src={config.avatar} alt="Profile Image of the Author" class="mx-auto lg:w-full h-full lg:mt-0 "></ImageWrapper>
     </a>
-    <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
-    <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
-    <div class="text-center text-neutral-400 mb-2.5 transition">{config.bio}</div>
-    <div class="flex gap-2 justify-center mb-1">
-        {config.links.length > 1 && config.links.map(item =>
-            <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
-                <Icon name={item.icon} size="1.5rem"></Icon>
-            </a>
-        )}
-        {config.links.length == 1 && <a rel="me" aria-label={config.links[0].name} href={config.links[0].url} target="_blank"
-                                        class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95">
-            <Icon name={config.links[0].icon} size="1.5rem"></Icon>
-            {config.links[0].name}
-        </a>}
+    <div class="px-2">
+        <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
+        <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
+        <div class="text-center text-neutral-400 mb-2.5 transition">{config.bio}</div>
+        <div class="flex gap-2 justify-center mb-1">
+            {config.links.length > 1 && config.links.map(item =>
+                    <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
+                        <Icon name={item.icon} size="1.5rem"></Icon>
+                    </a>
+            )}
+            {config.links.length == 1 && <a rel="me" aria-label={config.links[0].name} href={config.links[0].url} target="_blank"
+                                            class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95">
+                <Icon name={config.links[0].icon} size="1.5rem"></Icon>
+                {config.links[0].name}
+            </a>}
+        </div>
     </div>
 </div>
 
