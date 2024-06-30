@@ -1,9 +1,5 @@
-# About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
+## 关于我
 
-::github{repo="saicaca/fuwari"}
+我会在我的博客中分享技术与产品的经验、独立开发的历程、软硬件折腾的记录还有生活。欢迎你使用 RSS 订阅关注我的博客。
 
-> ### Sources of images used in this site
-> - [Unsplash](https://unsplash.com/)
-> - [星と少女](https://www.pixiv.net/artworks/108916539) by [Stella](https://www.pixiv.net/users/93273965)
-> - [Rabbit - v1.4 Showcase](https://civitai.com/posts/586908) by [Rabbit_YourMajesty](https://civitai.com/user/Rabbit_YourMajesty)
+如果你有任何想和我说的，都欢迎可以在帖子正文留言。
