@@ -74,7 +74,7 @@ const siteLang = siteConfig.lang.replace('_', '-')
 ---
 
 <!DOCTYPE html>
-<html lang={siteLang}>
+<html lang={siteLang} class="lenis lenis-smooth">
 	<head>
 
 		<title>{pageTitle}</title>
@@ -122,6 +122,15 @@ const siteLang = siteConfig.lang.replace('_', '-')
 		</script>
 
 		<!--<link rel="stylesheet" href="/katex.min.css">-->
+    <script is:inline src="/vendor/lenis/lenis1.0.42.min.js"></script>
+    <script is:inline>
+			const lenis = new Lenis();
+			function raf(time) {
+				lenis.raf(time)
+				requestAnimationFrame(raf)
+			}
+			requestAnimationFrame(raf)
+    </script>
 		<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
@@ -156,6 +165,22 @@ const siteLang = siteConfig.lang.replace('_', '-')
 		--hue: var(--configHue);
 		--page-width: 75rem;
 	}
+  html.lenis,
+  html.lenis body {
+      height: auto;
+  }
+  .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+      overflow: hidden;
+  }
+  .lenis.lenis-scrolling iframe {
+      pointer-events: none;
+  }
 </style>
 <style is:global>
 @tailwind components;

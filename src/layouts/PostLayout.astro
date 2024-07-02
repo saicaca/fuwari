@@ -19,7 +19,13 @@ interface Props {
 	title: string;
 	banner?: string;
 	description?: string;
-  menu: Menu[];
+  menu: Headings[];
+}
+
+interface Headings {
+    text: string
+    slug: any
+    depth: number
 }
 
 const { title, banner, description, menu } = Astro.props
@@ -29,9 +35,9 @@ const { title, banner, description, menu } = Astro.props
     <SideBar>
         <WidgetLayout name={i18n(I18nKey.menu)} id="menu" isCollapsed={false}
           collapsedHeight={0} class="hidden sm:block">
-            {menu.map((item) => (
-              <div style={{paddingLeft: `${(item.depth - 1)*8}px` }}>
-                  <ButtonLink url={item.url}>{item.title}</ButtonLink>
+            {menu.map((heading) => (
+              <div style={{paddingLeft: `${(heading.depth - 1)*8}px` }}>
+                  <ButtonLink url={`#${heading.slug}`}>{heading.text.substring(0, heading.text.length - 1)}</ButtonLink>
               </div>
             ))}
         </WidgetLayout>

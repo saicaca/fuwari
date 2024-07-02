@@ -24,9 +24,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
-
-const { remarkPluginFrontmatter } = await entry.render();
+const { Content, remarkPluginFrontmatter, headings } = await entry.render();
 
 const jsonLd = {
     "@context": "https://schema.org",
@@ -43,30 +41,8 @@ const jsonLd = {
     // TODO include cover image here
 }
 
-let menuText = entry.body
-  // code block
-  .replace(/```([\s\S]*?)```\s?/g, '')
-  .replace(/~~~([\s\S]*?)~~~\s?/g, '')
-  // inline code block
-  .replace(/`{1,2}[^`](.*?)`{1,2}/gm, '')
-  // code in list
-  .replace(/\n\x20{4,8}([\s\S]*?)(\r\n){2}/g, '')
-  // get menu text
-  .match(/\r\n#+.*/g)
-
-let menu = [];
-for (const key in menuText) {
-    let menuItem = menuText[key]
-      .replace(/[\r\n]/g, '')
-    menu.push({
-        title: menuItem.replace(/#/g, '').substring(1),
-        depth: menuItem.match(/#+/g)[0].length,
-        url: '#' + menuItem.toLowerCase().replace(/\s/g, '-').replace(/#/g, '').substring(1),
-    })
-}
-
 ---
-<PostLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} menu={menu}>
+<PostLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} menu={headings}>
     <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
         <div id="post-container" class:list={["card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ",
