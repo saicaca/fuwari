@@ -7,9 +7,9 @@ import type {
 import { LinkPreset } from './types/config'
 
 export const siteConfig: SiteConfig = {
-  title: 'Fuwari',
-  subtitle: 'Demo Site',
-  lang: 'en',         // 'en', 'zh_CN', 'zh_TW', 'ja'
+  title: '沐印',
+  subtitle: '欢迎光临',
+  lang: 'zh_CN',         // 'en', 'zh_CN', 'zh_TW', 'ja'
   themeColor: {
     hue: 250,         // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
     fixed: false,     // Hide the theme color picker for visitors
@@ -33,35 +33,35 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Home,
     LinkPreset.Archive,
     LinkPreset.About,
-    {
-      name: 'GitHub',
-      url: 'https://github.com/saicaca/fuwari',     // Internal links should not include the base path, as it is automatically added
-      external: true,                               // Show an external link icon and will open in a new tab
-    },
+    // {
+    //   name: 'GitHub',
+    //   url: 'https://github.com/wxydejoy',     // Internal links should not include the base path, as it is automatically added
+    //   external: true,                               // Show an external link icon and will open in a new tab
+    // },
   ],
 }
 
 export const profileConfig: ProfileConfig = {
-  avatar: 'assets/images/demo-avatar.png',  // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-  name: 'Lorem Ipsum',
-  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  avatar: 'https://img.undf.top/ob/c6256512dfcaeb133c16f68316adc615.jpg',  // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+  name: '沐印',
+  bio: '欢迎光临',
   links: [
-    {
-      name: 'Twitter',
-      icon: 'fa6-brands:twitter',       // Visit https://icones.js.org/ for icon codes
-                                        // You will need to install the corresponding icon set if it's not already included
-                                        // `pnpm add @iconify-json/<icon-set-name>`
-      url: 'https://twitter.com',
-    },
-    {
-      name: 'Steam',
-      icon: 'fa6-brands:steam',
-      url: 'https://store.steampowered.com',
-    },
+    // {
+    //   name: 'Twitter',
+    //   icon: 'fa6-brands:twitter',       // Visit https://icones.js.org/ for icon codes
+    //                                     // You will need to install the corresponding icon set if it's not already included
+    //                                     // `pnpm add @iconify-json/<icon-set-name>`
+    //   url: 'https://twitter.com',
+    // },
+    // {
+    //   name: 'Steam',
+    //   icon: 'fa6-brands:steam',
+    //   url: 'https://store.steampowered.com',
+    // },
     {
       name: 'GitHub',
       icon: 'fa6-brands:github',
-      url: 'https://github.com/saicaca/fuwari',
+      url: 'https://github.com/wxydejoy',
     },
   ],
 }
