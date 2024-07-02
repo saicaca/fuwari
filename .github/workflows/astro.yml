@@ -20,6 +20,21 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
+
+      - name: Clone Post
+        uses: GuillaumeFalourd/clone-github-repo-action@v2.1
+        with:
+          owner: 'wxydejoy'
+          repository: 'post'
+          access-token: ${{ secrets.CLONE }}
+          
+      - name: 删除_posts文件夹下的.git文件等
+        run: |
+          mkdir -p src/content/posts/ 
+          mv post/* src/content/posts/
+          rm -rf src/content/posts/.git
+          rm -rf src/content/posts/.github
+    
       - name: Install, build, and upload your site
         uses: withastro/action@v2
         with:
