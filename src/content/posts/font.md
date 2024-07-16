@@ -82,7 +82,7 @@ The [Fontsource](https://fontsource.org/) project simplifies using Google Fonts 
 4.  Use the font’s name as shown in the `body` example on its Fontsource page as the `font-family` value. This will work anywhere you can write CSS in your Astro project.
     
         h1 {
-        font-family: "Twinkle Star", cursive;
+            font-family: "Twinkle Star", cursive;
         }
     
 --------------------------
