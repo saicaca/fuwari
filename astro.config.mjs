@@ -37,7 +37,7 @@ export default defineConfig({
     tailwind(),
     swup({
       theme: false,
-      animationClass: 'transition-',
+      animationClass: 'transition',
       containers: ['main'],
       smoothScrolling: true,
       cache: true,

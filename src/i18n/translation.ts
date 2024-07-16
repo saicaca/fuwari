@@ -1,4 +1,4 @@
-import { siteConfig } from '../config'
+import { siteConfig } from '../config.ts'
 import type I18nKey from './i18nKey'
 import { en } from './languages/en'
 import { ja } from './languages/ja'
