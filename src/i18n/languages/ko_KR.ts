@@ -18,11 +18,11 @@ export const ko_KR: Translation = {
   [Key.noTags]: '태그 없음',
 
   [Key.wordCount]: '단어',
-  [Key.wordsCount]: '단어들',
+  [Key.wordsCount]: '단어',
   [Key.minuteCount]: '분',
-  [Key.minutesCount]: '분들',
+  [Key.minutesCount]: '분',
   [Key.postCount]: '게시물',
-  [Key.postsCount]: '게시물들',
+  [Key.postsCount]: '게시물',
 
   [Key.themeColor]: '테마 색상',
 
