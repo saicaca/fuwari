@@ -25,30 +25,30 @@
 4. `pnpm new-post <filename>`을 실행하여 새 게시물을 만들고 `src/content/posts/`에서 편집하세요.
 5. [가이드](https://docs.astro.build/en/guides/deploy/)에 따라 블로그를 Vercel, Netlify, GitHub 페이지 등에 배포하세요. 배포하기 전에 `astro.config.mjs`에서 사이트 구성을 편집해야 합니다.
 
-## ⚙️ Frontmatter of Posts
+## ⚙️ 게시물의 머리말 설정
 
 ```yaml
 ---
-title: My First Blog Post
+title: 내 첫 블로그 게시물
 published: 2023-09-09
-description: This is the first post of my new Astro blog.
+description: 내 새로운 Astro 블로그의 첫 번째 게시물입니다!
 image: /images/cover.jpg
-tags: [Foo, Bar]
-category: Front-end
+tags: [푸, 바, 오]
+category: 앞-끝
 draft: false
 ---
 ```
 
-## 🧞 Commands
+## 🧞 명령어
 
-All commands are run from the root of the project, from a terminal:
+모든 명령어는 프로젝트 최상단, 터미널에서 실행됩니다:
 
 | Command                             | Action                                           |
 |:------------------------------------|:-------------------------------------------------|
-| `pnpm install` AND `pnpm add sharp` | Installs dependencies                            |
-| `pnpm dev`                          | Starts local dev server at `localhost:4321`      |
-| `pnpm build`                        | Build your production site to `./dist/`          |
-| `pnpm preview`                      | Preview your build locally, before deploying     |
-| `pnpm new-post <filename>`          | Create a new post                                |
-| `pnpm astro ...`                    | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro --help`                 | Get help using the Astro CLI                     |
+| `pnpm install` AND `pnpm add sharp` | 종속성을 설치합니다.                            |
+| `pnpm dev`                          | `localhost:4321`에서 로컬 개발 서버를 시작합니다.      |
+| `pnpm build`                        | `./dist/`에 프로덕션 사이트를 구축합니다.         |
+| `pnpm preview`                      | 배포하기 전에 로컬에서 빌드 미리보기     |
+| `pnpm new-post <filename>`          | 새 게시물 작성                                |
+| `pnpm astro ...`                    | `astro add`, `astro check`와 같은 CLI 명령어 실행 |
+| `pnpm astro --help`                 | Astro CLI를 사용하여 도움 받기                     |
