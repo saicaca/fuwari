@@ -18,7 +18,7 @@ export function setHue(hue: number): void {
   if (!r) {
     return
   }
-  r.hue.setProperty('--hue', hue)
+  r.style.setProperty('--hue', hue)
 }
 
 
