@@ -4,6 +4,7 @@ import { en } from './languages/en'
 import { ja } from './languages/ja'
 import { zh_CN } from './languages/zh_CN'
 import { zh_TW } from './languages/zh_TW'
+import { ko } from './languages/ko'
 
 export type Translation = {
   [K in I18nKey]: string
@@ -20,6 +21,8 @@ const map: { [key: string]: Translation } = {
   zh_tw: zh_TW,
   ja: ja,
   ja_jp: ja,
+  ko: ko,
+  ko_kr: ko
 }
 
 export function getTranslation(lang: string): Translation {
