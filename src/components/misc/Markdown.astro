@@ -441,22 +441,21 @@ const className = Astro.props.class;
     opacity: 0.7
     transition: opacity 0.15s ease-in-out
 
-    .gc-description, .gc-infobar
+    .gc-description, .gc-infobar, .gc-avatar
       background-color: var(--tw-prose-body)
       color: transparent
       opacity: 0.5;
-      border-radius: 0.5rem
       animation: pulsate 2s infinite linear
       user-select: none
 
       &:before
         background-color: transparent
 
-    .gc-avatar
-      display: none
-
     .gc-repo
       margin-left: -0.1rem
+
+    .gc-description, .gc-infobar
+      border-radius: 0.5rem
 
   a.card-github.fetch-error
     pointer-events: all
