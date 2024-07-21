@@ -3,7 +3,7 @@ import WidgetLayout from "./WidgetLayout.astro";
 
 import {i18n} from "../../i18n/translation";
 import I18nKey from "../../i18n/i18nKey";
-import {Category, getCategoryList} from "../../utils/content-utils";
+import {getCategoryList} from "../../utils/content-utils";
 import {getCategoryUrl} from "../../utils/url-utils";
 import ButtonLink from "../control/ButtonLink.astro";
 
@@ -29,7 +29,7 @@ const style = Astro.props.style
     {categories.map((c) =>
         <ButtonLink
             url={getCategoryUrl(c.name)}
-            badge={c.count}
+            badge={String(c.count)}
             label=`View all posts in the ${c.name} category`
         >
             {c.name}

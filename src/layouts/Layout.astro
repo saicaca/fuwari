@@ -8,22 +8,20 @@ import ImageWrapper from "@components/misc/ImageWrapper.astro";
 import {pathsEqual} from "@utils/url-utils";
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import {profileConfig, siteConfig} from "@/config";
-import {Favicon} from "../types/config";
+import {type Favicon} from "../types/config";
 import {defaultFavicons} from "../constants/icon";
 import {LIGHT_MODE, DARK_MODE, AUTO_MODE, DEFAULT_THEME} from "../constants/constants";
 import {url} from "../utils/url-utils";
 
 interface Props {
-	title: string;
-	banner: string;
+	title?: string;
+	banner?: string;
 	description?: string;
 }
 
 let { title, banner, description } = Astro.props;
 
 const isHomePage = pathsEqual(Astro.url.pathname, '/');
-
-const testPathName = Astro.url.pathname;
 
 const anim = {
 	old: {
@@ -73,7 +71,7 @@ const siteLang = siteConfig.lang.replace('_', '-')
 ---
 
 <!DOCTYPE html>
-<html lang={siteLang} isHome={isHomePage} pathname={testPathName} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
+<html lang={siteLang} data-isHome={String(isHomePage)} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
 	<head>
 
 		<title>{pageTitle}</title>
@@ -232,13 +230,14 @@ function setClickOutsideToClose(panel: string, ignores: string[]) {
 	document.addEventListener("click", event => {
 		let panelDom = document.getElementById(panel);
 		let tDom = event.target;
+		if (!(tDom instanceof Node)) return;		// Ensure the event target is an HTML Node
 		for (let ig of ignores) {
 			let ie = document.getElementById(ig)
 			if (ie == tDom || (ie?.contains(tDom))) {
 				return;
 			}
 		}
-		panelDom.classList.add("float-panel-closed");
+		panelDom!.classList.add("float-panel-closed");
 	});
 }
 setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
@@ -257,7 +256,8 @@ function loadHue() {
 
 function setBannerHeight() {
 	const banner = document.getElementById('banner-wrapper');
-	if (document.documentElement.hasAttribute('isHome')) {
+	if (!banner) return
+	if (document.documentElement.dataset.isHome === "true") {
 		banner.classList.remove('banner-else');
 		banner.classList.add('banner-home');
 	} else {
@@ -267,11 +267,13 @@ function setBannerHeight() {
 }
 
 function initCustomScrollbar() {
+	const bodyElement = document.querySelector('body');
+	if (!bodyElement) return;
 	OverlayScrollbars(
 		// docs say that a initialization to the body element would affect native functionality like window.scrollTo
 		// but just leave it here for now
 		{
-			target: document.querySelector('body'),
+			target: bodyElement,
 			cancel: {
 				nativeScrollbarsOverlaid: true,    // don't initialize the overlay scrollbar if there is a native one
 			}

@@ -24,6 +24,9 @@ if (isLocal) {
     const files = import.meta.glob<ImageMetadata>("../../**", { import: 'default' });
     let normalizedPath = path.normalize(path.join("../../", basePath, src)).replace(/\\/g, "/");
     img = await (files[normalizedPath])();
+    if (!img) {
+        console.error(`No image found for path ${normalizedPath}`);
+    }
 }
 
 const imageClass = 'w-full h-full object-cover';
@@ -31,7 +34,7 @@ const imageStyle = `object-position: ${position}`
 ---
 <div class:list={[className, 'overflow-hidden relative']}>
     <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
-    {isLocal && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle}/>}
+    {isLocal && img && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle}/>}
     {!isLocal && <img src={isPublic ? url(src) : src} alt={alt || ""} class={imageClass} style={imageStyle}/>}
 </div>
 
