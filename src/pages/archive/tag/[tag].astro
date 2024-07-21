@@ -5,7 +5,6 @@ import ArchivePanel from "@components/ArchivePanel.astro";
 import {i18n} from "@i18n/translation";
 import I18nKey from "@i18n/i18nKey";
 
-
 export async function getStaticPaths() {
     let posts = await getSortedPosts()
 
@@ -25,7 +24,7 @@ export async function getStaticPaths() {
     });
 }
 
-const { tag } = Astro.params;
+const tag= Astro.params.tag as string;
 
 ---
 

@@ -14,11 +14,11 @@ export function getHue(): number {
 
 export function setHue(hue: number): void {
   localStorage.setItem('hue', String(hue))
-  const r = document.querySelector(':root')
+  const r = document.querySelector(':root') as HTMLElement
   if (!r) {
     return
   }
-  r.style.setProperty('--hue', hue)
+  r.style.setProperty('--hue', String(hue))
 }
 
 

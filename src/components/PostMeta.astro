@@ -10,9 +10,9 @@ interface Props {
     published: Date;
     tags: string[];
     category: string;
-    hideTagsForMobile: boolean;
+    hideTagsForMobile?: boolean;
 }
-const {published, tags, category, hideTagsForMobile} = Astro.props;
+const {published, tags, category, hideTagsForMobile = false} = Astro.props;
 const className = Astro.props.class;
 ---
 
