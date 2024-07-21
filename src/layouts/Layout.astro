@@ -23,28 +23,6 @@ let { title, banner, description } = Astro.props;
 
 const isHomePage = pathsEqual(Astro.url.pathname, '/');
 
-const anim = {
-	old: {
-		name: 'fadeIn',
-		duration: '4s',
-		easing: 'linear',
-		fillMode: 'forwards',
-		mixBlendMode: 'normal',
-	},
-	new: {
-		name: 'fadeOut',
-		duration: '4s',
-		easing: 'linear',
-		fillMode: 'backwards',
-		mixBlendMode: 'normal',
-	}
-};
-
-const myFade = {
-	forwards: anim,
-	backwards: anim,
-};
-
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
 const configHue = siteConfig.themeColor.hue;
@@ -100,7 +78,7 @@ const siteLang = siteConfig.lang.replace('_', '-')
 			/>
 		))}
 		<!-- Set the theme before the page is rendered to avoid a flash -->
-		<script define:vars={{DEFAULT_THEME: DEFAULT_THEME, LIGHT_MODE: LIGHT_MODE, DARK_MODE: DARK_MODE, AUTO_MODE: AUTO_MODE}}>
+		<script is:inline define:vars={{DEFAULT_THEME: DEFAULT_THEME, LIGHT_MODE: LIGHT_MODE, DARK_MODE: DARK_MODE, AUTO_MODE: AUTO_MODE}}>
 			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
 			switch (theme) {
 				case LIGHT_MODE:
@@ -178,9 +156,9 @@ const siteLang = siteConfig.lang.replace('_', '-')
 import 'overlayscrollbars/overlayscrollbars.css';
 import {
 	OverlayScrollbars,
-	ScrollbarsHidingPlugin,
-	SizeObserverPlugin,
-	ClickScrollPlugin
+	// ScrollbarsHidingPlugin,
+	// SizeObserverPlugin,
+	// ClickScrollPlugin
 } from 'overlayscrollbars';
 import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
 
@@ -200,6 +178,7 @@ import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
 /* TODO This is a temporary solution for style flicker issue when the transition is activated */
 /* issue link: https://github.com/withastro/astro/issues/8711, the solution get from here too */
 /* update: fixed in Astro 3.2.4 */
+/*
 function disableAnimation() {
 	const css = document.createElement('style')
 	css.appendChild(
@@ -225,6 +204,7 @@ function disableAnimation() {
 		}, 1)
 	}
 }
+*/
 
 function setClickOutsideToClose(panel: string, ignores: string[]) {
 	document.addEventListener("click", event => {

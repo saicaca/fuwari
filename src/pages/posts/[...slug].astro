@@ -45,7 +45,7 @@ const jsonLd = {
 
 ---
 <MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description}>
-    <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
         <div id="post-container" class:list={["card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ",
             {}
@@ -111,7 +111,7 @@ const jsonLd = {
         <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
            class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.nextSlug}]}>
             {entry.data.nextSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center justify-start gap-4" >
-                <Icon name="material-symbols:chevron-left-rounded" size="2rem" class="text-[var(--primary)]" />
+                <Icon name="material-symbols:chevron-left-rounded" class="text-[2rem] text-[var(--primary)]" />
                 <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
                     {entry.data.nextTitle}
                 </div>
@@ -124,7 +124,7 @@ const jsonLd = {
                 <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
                     {entry.data.prevTitle}
                 </div>
-                <Icon name="material-symbols:chevron-right-rounded" size="2rem" class="text-[var(--primary)]" />
+                <Icon name="material-symbols:chevron-right-rounded" class="text-[2rem] text-[var(--primary)]" />
             </div>}
         </a>
     </div>

@@ -64,7 +64,7 @@ const getPageUrl = (p: number) => {
            {"disabled": page.url.prev == undefined}
        ]}
     >
-        <Icon name="material-symbols:chevron-left-rounded" size="1.75rem"></Icon>
+        <Icon name="material-symbols:chevron-left-rounded" class="text-[1.75rem]"></Icon>
     </a>
     <div class="bg-[var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 font-bold">
         {pages.map((p) => {
@@ -86,6 +86,6 @@ const getPageUrl = (p: number) => {
            {"disabled": page.url.next == undefined}
        ]}
     >
-        <Icon name="material-symbols:chevron-right-rounded" size="1.75rem"></Icon>
+        <Icon name="material-symbols:chevron-right-rounded" class="text-[1.75rem]"></Icon>
     </a>
 </div>
