@@ -53,11 +53,15 @@ export default defineConfig({
         "fa6-solid": ["*"],
       },
     }),
-    Compress({
-      Image: false,
-    }),
     svelte(),
     sitemap(),
+    Compress({
+      CSS: false,
+      Image: false,
+      Action: {
+        Passed: async () => true,   // https://github.com/PlayForm/Compress/issues/376
+      },
+    }),
   ],
   markdown: {
     remarkPlugins: [remarkMath, remarkReadingTime, remarkGithubAdmonitionsToDirectives, remarkDirective, parseDirectiveNode],
