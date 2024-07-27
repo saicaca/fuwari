@@ -49,8 +49,8 @@ rainbow-dark = linear-gradient(to right, oklch(0.70 0.10 0), oklch(0.70 0.10 30)
 :root
   --radius-large 1rem
 
-  --banner-height-home 60vh
-  --banner-height 40vh
+  --banner-height-home 65vh
+  --banner-height 35vh
 
   --content-delay 150ms
 
@@ -258,10 +258,10 @@ color_set({
         @apply text-black/25 dark:text-white/25
     }
 
-    html.is-changing .transition-fade {
+    html.is-changing .transition-swup-fade {
         @apply transition-all duration-200
     }
-    html.is-animating .transition-fade {
+    html.is-animating .transition-swup-fade {
         @apply opacity-0 translate-y-4
     }
 }
