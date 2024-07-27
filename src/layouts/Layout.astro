@@ -5,13 +5,12 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import ImageWrapper from "@components/misc/ImageWrapper.astro";
 
-import {pathsEqual} from "@utils/url-utils";
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import {profileConfig, siteConfig} from "@/config";
 import {type Favicon} from "../types/config";
 import {defaultFavicons} from "../constants/icon";
 import {LIGHT_MODE, DARK_MODE, AUTO_MODE, DEFAULT_THEME} from "../constants/constants";
-import {url} from "../utils/url-utils";
+import {pathsEqual, url} from "../utils/url-utils";
 
 interface Props {
 	title?: string;
@@ -21,7 +20,10 @@ interface Props {
 
 let { title, banner, description } = Astro.props;
 
-const isHomePage = pathsEqual(Astro.url.pathname, '/');
+// apply a class to the body element to decide the height of the banner, only used for initial page load
+// Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
+// so use Swup hooks instead to change the height immediately when a link is clicked
+const isHomePage = pathsEqual(Astro.url.pathname, url('/'));
 
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
@@ -49,7 +51,7 @@ const siteLang = siteConfig.lang.replace('_', '-')
 ---
 
 <!DOCTYPE html>
-<html lang={siteLang} data-isHome={String(isHomePage)} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
+<html lang={siteLang} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
 	<head>
 
 		<title>{pageTitle}</title>
@@ -108,9 +110,7 @@ const siteLang = siteConfig.lang.replace('_', '-')
 	<body class=" min-h-screen transition " class:list={[{"is-home": isHomePage, "enable-banner": enableBanner}]}>
 		<ConfigCarrier></ConfigCarrier>
 		<GlobalStyles>
-		<div id="banner-wrapper" class="absolute w-full">
-			<ImageWrapper id="boxtest" alt="Banner image of the blog" class:list={["object-center object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
-					  src={siteConfig.banner.src}
+		<div id="banner-wrapper" class="absolute w-full transition-all duration-700">
 			<ImageWrapper id="boxtest" alt="Banner image of the blog" class:list={["object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
 					  src={siteConfig.banner.src} position={siteConfig.banner.position}
 			>
@@ -131,24 +131,16 @@ const siteLang = siteConfig.lang.replace('_', '-')
 @tailwind utilities;
 
 @layer components {
-	/* TODO: temporarily make banner height same for all pages since I cannot make the transition feel good
-		I want to make the height transition parallel with the content transition instead of blocking it
-	*/
-
-	/*
 	.enable-banner.is-home #banner-wrapper {
 		@apply h-[var(--banner-height)] md:h-[var(--banner-height-home)]
 	}
-	*/
 	.enable-banner #banner-wrapper {
 		@apply h-[var(--banner-height)]
 	}
 
-	/*
 	.enable-banner.is-home #top-row {
 		@apply h-[calc(var(--banner-height)_-_4.5rem)] md:h-[calc(var(--banner-height-home)_-_4.5rem)]
 	}
-	*/
 	.enable-banner #top-row {
 		@apply h-[calc(var(--banner-height)_-_4.5rem)]
 	}
@@ -163,6 +155,7 @@ import {
 	// ClickScrollPlugin
 } from 'overlayscrollbars';
 import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
+import {pathsEqual, url} from "../utils/url-utils";
 
 	/* Preload fonts */
 // (async function() {
@@ -236,18 +229,6 @@ function loadHue() {
 	setHue(getHue())
 }
 
-function setBannerHeight() {
-	const banner = document.getElementById('banner-wrapper');
-	if (!banner) return
-	if (document.documentElement.dataset.isHome === "true") {
-		banner.classList.remove('banner-else');
-		banner.classList.add('banner-home');
-	} else {
-		banner.classList.remove('banner-home');
-		banner.classList.add('banner-else');
-	}
-}
-
 function initCustomScrollbar() {
 	const bodyElement = document.querySelector('body');
 	if (!bodyElement) return;
@@ -281,7 +262,6 @@ function initCustomScrollbar() {
 
 function init() {
 	// disableAnimation()()		// TODO
-	setBannerHeight();
 	loadTheme();
 	loadHue();
 	initCustomScrollbar();
@@ -312,6 +292,16 @@ const setup = () => {
 		document.documentElement.style.setProperty('--content-delay', '0ms')
 	})
 	window.swup.hooks.on('content:replace', initCustomScrollbar)
+	window.swup.hooks.on('visit:start', (visit) => {
+		// change banner height immediately when a link is clicked
+		const bodyElement = document.querySelector('body')
+		if (pathsEqual(visit.to.url, url('/'))) {
+			bodyElement!.classList.add('is-home');
+		} else {
+			bodyElement!.classList.remove('is-home');
+		}
+	});
+
 }
 if (window.swup.hooks) {
 	setup()

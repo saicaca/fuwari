@@ -4,8 +4,6 @@ import Navbar from "@components/Navbar.astro";
 import SideBar from "@components/widget/SideBar.astro";
 import Footer from "@components/Footer.astro";
 import BackToTop from "@components/control/BackToTop.astro";
-// import {siteConfig} from "@/config";
-// import {pathsEqual} from "@utils/url-utils";
 
 interface Props {
     title?: string;
@@ -14,8 +12,6 @@ interface Props {
 }
 
 const { title, banner, description } = Astro.props
-// const isHomePage = pathsEqual(Astro.url.pathname, '/')
-// const enableBanner = siteConfig.banner.enable
 
 ---
 
@@ -24,7 +20,7 @@ const { title, banner, description } = Astro.props
 <div class="max-w-[var(--page-width)] min-h-screen grid grid-cols-[17.5rem_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto]
     mx-auto gap-4 relative px-0 md:px-4"
 >
-    <div id="top-row" class="col-span-2 grid-rows-1 z-50 onload-animation" class:list={[""]}>
+    <div id="top-row" class="transition-all duration-700 col-span-2 grid-rows-1 z-50 onload-animation" class:list={[""]}>
         <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div> <!-- used for onload animation -->
         <Navbar></Navbar>
     </div>
@@ -32,7 +28,7 @@ const { title, banner, description } = Astro.props
 
     <div id="content-wrapper" class="row-start-2 row-end-3 col-span-2 lg:col-span-1 overflow-hidden onload-animation">
         <!-- the overflow-hidden here prevent long text break the layout-->
-        <main id="swup" class="transition-fade">
+        <main id="swup" class="transition-swup-fade">
             <slot></slot>
         </main>
 
