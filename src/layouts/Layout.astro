@@ -111,6 +111,8 @@ const siteLang = siteConfig.lang.replace('_', '-')
 		<div id="banner-wrapper" class="absolute w-full">
 			<ImageWrapper id="boxtest" alt="Banner image of the blog" class:list={["object-center object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
 					  src={siteConfig.banner.src}
+			<ImageWrapper id="boxtest" alt="Banner image of the blog" class:list={["object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
+					  src={siteConfig.banner.src} position={siteConfig.banner.position}
 			>
 			</ImageWrapper>
 		</div>
