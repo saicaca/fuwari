@@ -18,6 +18,11 @@ export const siteConfig: SiteConfig = {
     enable: false,
     src: 'assets/images/demo-banner.png',   // Relative to the /src directory. Relative to the /public directory if it starts with '/'
     position: 'center', // Equivalent to object-position, defaults center
+    credit: {
+      enable: false,         // Display the credit text of the banner image
+      text: '',              // Credit text to be displayed
+      url: ''                // (Optional) URL link to the original artwork or artist's page
+    }
   },
   favicon: [    // Leave this array empty to use the default favicon
     // {
