@@ -153,12 +153,12 @@ function createPhotoSwipe() {
     pswpModule: () => import("photoswipe"),
   })
 
-  lightbox.addFilter("domItemData", (itemData, element, linkEl) => {
+  lightbox.addFilter("domItemData", (itemData, element) => {
     if (element instanceof HTMLImageElement) {
       itemData.src = element.src
 
-      itemData.w = Number(element.getAttribute("width"))
-      itemData.h = Number(element.getAttribute("height"))
+      itemData.w = Number(element.naturalWidth || window.innerWidth)
+      itemData.h = Number(element.naturalHeight || window.innerHeight)
 
       itemData.msrc = element.src
     }
