@@ -94,7 +94,7 @@ const jsonLd = {
             <!-- always show cover as long as it has one -->
 
             {entry.data.image &&
-                <ImageWrapper src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl banner-container onload-animation"/>
+                <ImageWrapper id="post-cover" src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl banner-container onload-animation"/>
             }
 
 
@@ -139,59 +139,3 @@ const jsonLd = {
 #post-container :nth-child(5) { animation-delay: calc(var(--content-delay) + 250ms) }
 #post-container :nth-child(6) { animation-delay: calc(var(--content-delay) + 325ms) } 
 </style>
-
-
-<script>
-import PhotoSwipeLightbox from "photoswipe/lightbox"
-import "photoswipe/style.css"
-
-let lightbox: PhotoSwipeLightbox
-
-function createPhotoSwipe() {
-  lightbox = new PhotoSwipeLightbox({
-    gallery: "#post-container img",
-    pswpModule: () => import("photoswipe"),
-  })
-
-  lightbox.addFilter("domItemData", (itemData, element) => {
-    if (element instanceof HTMLImageElement) {
-      itemData.src = element.src
-
-      itemData.w = Number(element.naturalWidth || window.innerWidth)
-      itemData.h = Number(element.naturalHeight || window.innerHeight)
-
-      itemData.msrc = element.src
-    }
-
-    return itemData
-  })
-
-  lightbox.init()
-}
-
-const setup = () => {
-  if (!lightbox) {
-    createPhotoSwipe()
-  }
-  window.swup.hooks.on("page:view", () => {
-    createPhotoSwipe()
-  })
-
-  window.swup.hooks.on(
-    "content:replace",
-    () => {
-      console.log("content:replace")
-      lightbox?.destroy?.()
-    },
-    { before: true },
-  )
-}
-
-if (window.swup) {
-  setup()
-} else {
-  document.addEventListener("swup:enable", setup)
-}
-
-</script>
-        
