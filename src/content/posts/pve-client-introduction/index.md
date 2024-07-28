@@ -4,7 +4,7 @@ description: 我在过去一个月中做了什么来构建一个现代化、功�
 published:  2024-07-29
 tags: [Indie Hacker, PVE]
 category: 技术
-draft: true
+draft: false
 ---
 
 ## 介绍
