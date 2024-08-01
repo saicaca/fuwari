@@ -2,6 +2,7 @@ enum I18nKey {
   home = 'home',
   about = 'about',
   archive = 'archive',
+  search = 'search',
   cv = 'cv',
 
   tags = 'tags',
@@ -23,7 +24,7 @@ enum I18nKey {
 
   themeColor = 'themeColor',
 
-  lightMode =  'lightMode',
+  lightMode = 'lightMode',
   darkMode = 'darkMode',
   systemMode = 'systemMode',
 
@@ -34,4 +35,4 @@ enum I18nKey {
   license = 'license',
 }
 
-export default I18nKey
+export default I18nKey;

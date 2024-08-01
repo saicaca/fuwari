@@ -5,7 +5,7 @@ description: 'Read more about Markdown features in Fuwari'
 image: ''
 tags: [Demo, Example, Markdown, Fuwari]
 category: 'Examples'
-draft: false 
+draft: true 
 ---
 
 ## GitHub repository cards
@@ -63,4 +63,15 @@ This is a note with a custom title.
 :::note[MY CUSTOM TITLE]
 This is a note with a custom title.
 :::
+```
+
+> [!TIP]
+> [The GitHub syntax](https://github.com/orgs/community/discussions/16925) is also supported.
+
+```
+> [!NOTE]
+> The GitHub syntax is also supported.
+
+> [!TIP]
+> The GitHub syntax is also supported.
 ```

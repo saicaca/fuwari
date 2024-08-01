@@ -13,6 +13,91 @@ const className = Astro.props.class;
     <slot/>
 </div>
 
+<script>
+  const observer = new MutationObserver(addPreCopyButton);
+  observer.observe(document.body, { childList: true, subtree: true });
+  
+  document.addEventListener("DOMContentLoaded", addPreCopyButton);
+
+  function addPreCopyButton() {
+    observer.disconnect();
+    
+    let codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (let codeBlock of codeBlocks) {
+      if (codeBlock.parentElement?.nodeName === "DIV" && codeBlock.parentElement?.classList.contains("code-block")) continue
+
+      let wrapper = document.createElement("div");
+      wrapper.className = "relative code-block";
+
+      let copyButton = document.createElement("button");
+      copyButton.className = "copy-btn btn-regular-dark absolute active:scale-90 h-8 w-8 top-2 right-2 opacity-75 text-sm p-1.5 rounded-lg transition-all ease-in-out";
+
+      codeBlock.setAttribute("tabindex", "0");
+      if (codeBlock.parentNode) {
+        codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+      }
+
+      let copyIcon = `<svg class="copy-btn-icon copy-icon" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M368.37-237.37q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-474.26q0-34.48 24.26-58.74 24.26-24.26 58.74-24.26h378.26q34.48 0 58.74 24.26 24.26 24.26 24.26 58.74v474.26q0 34.48-24.26 58.74-24.26 24.26-58.74 24.26H368.37Zm0-83h378.26v-474.26H368.37v474.26Zm-155 238q-34.48 0-58.74-24.26-24.26-24.26-24.26-58.74v-515.76q0-17.45 11.96-29.48 11.97-12.02 29.33-12.02t29.54 12.02q12.17 12.03 12.17 29.48v515.76h419.76q17.45 0 29.48 11.96 12.02 11.97 12.02 29.33t-12.02 29.54q-12.03 12.17-29.48 12.17H213.37Zm155-238v-474.26 474.26Z"/></svg>`
+      let successIcon = `<svg class="copy-btn-icon success-icon" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="m389-377.13 294.7-294.7q12.58-12.67 29.52-12.67 16.93 0 29.61 12.67 12.67 12.68 12.67 29.53 0 16.86-12.28 29.14L419.07-288.41q-12.59 12.67-29.52 12.67-16.94 0-29.62-12.67L217.41-430.93q-12.67-12.68-12.79-29.45-.12-16.77 12.55-29.45 12.68-12.67 29.62-12.67 16.93 0 29.28 12.67L389-377.13Z"/></svg>`
+      copyButton.innerHTML = `<div>${copyIcon} ${successIcon}</div>
+      `
+
+      wrapper.appendChild(codeBlock);
+      wrapper.appendChild(copyButton);
+
+      let timeout;
+      copyButton.addEventListener("click", async () => {
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        let text = codeBlock?.querySelector("code")?.innerText;
+        await navigator.clipboard.writeText(text);
+        copyButton.classList.add("success");
+        timeout = setTimeout(() => {
+          copyButton.classList.remove("success");
+        }, 1000);
+      });
+    }
+    
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+</script>
+
+<!-- Styles for copy-code-button -->
+<style lang="css" is:global>
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    @layer components {
+        .btn-regular-dark {
+            @apply flex items-center justify-center
+            bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))] active:bg-[oklch(0.55_0.01_var(--hue))]
+            dark:bg-[oklch(0.30_0.02_var(--hue))] dark:hover:bg-[oklch(0.35_0.03_var(--hue))] dark:active:bg-[oklch(0.40_0.03_var(--hue))]
+        }
+        .btn-regular-dark.success {
+            @apply bg-[oklch(0.75_0.14_var(--hue))] dark:bg-[oklch(0.75_0.14_var(--hue))]
+        }
+
+        .copy-btn-icon {
+            @apply absolute top-1/2 left-1/2 transition -translate-x-1/2 -translate-y-1/2
+        }
+        .copy-btn .copy-icon {
+            @apply opacity-100 fill-white dark:fill-white/75
+        }
+        .copy-btn.success .copy-icon {
+            @apply opacity-0 fill-[var(--deep-text)]
+        }
+        .copy-btn .success-icon {
+            @apply opacity-0
+        }
+        .copy-btn.success .success-icon {
+            @apply opacity-100
+        }
+    }
+</style>
+
 <style lang="stylus" is:global>
   .custom-md
     h1, h2, h3, h4, h5, h6
@@ -90,6 +175,8 @@ const className = Astro.props.class;
           margin-right: 1rem
           width: 1rem
           color: rgba(255, 255, 255, 0.25)
+        &:last-child:empty, &:last-child:has(> span:empty:only-child)
+          display: none
 
     pre
       background: var(--codeblock-bg) !important
@@ -354,22 +441,21 @@ const className = Astro.props.class;
     opacity: 0.7
     transition: opacity 0.15s ease-in-out
 
-    .gc-description, .gc-infobar
+    .gc-description, .gc-infobar, .gc-avatar
       background-color: var(--tw-prose-body)
       color: transparent
       opacity: 0.5;
-      border-radius: 0.5rem
       animation: pulsate 2s infinite linear
       user-select: none
 
       &:before
         background-color: transparent
 
-    .gc-avatar
-      display: none
-
     .gc-repo
       margin-left: -0.1rem
+
+    .gc-description, .gc-infobar
+      border-radius: 0.5rem
 
   a.card-github.fetch-error
     pointer-events: all

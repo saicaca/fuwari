@@ -49,8 +49,8 @@ rainbow-dark = linear-gradient(to right, oklch(0.70 0.10 0), oklch(0.70 0.10 30)
 :root
   --radius-large 1rem
 
-  --banner-height-home 60vh
-  --banner-height 40vh
+  --banner-height-home 65vh
+  --banner-height 35vh
 
   --content-delay 150ms
 
@@ -177,7 +177,7 @@ color_set({
 
 
 </style>
-<style is:global>
+<style is:global lang="scss">
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -192,11 +192,15 @@ color_set({
     .card-shadow {
         @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)]
     }
+    .expand-animation {
+        @apply relative before:ease-out before:transition active:bg-none hover:before:bg-[var(--btn-plain-bg-hover)] active:before:bg-[var(--btn-plain-bg-active)] z-0
+        before:absolute before:rounded-[inherit] before:inset-0 before:scale-[0.85] hover:before:scale-100 before:-z-10
+    }
     .link {
-        @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-1 -m-1;
+        @apply transition rounded-md p-1 -m-1 expand-animation;
     }
     .link-lg {
-        @apply transition hover:bg-[var(--link-hover)] active:bg-[var(--link-active)] rounded-md p-1.5 -m-1.5;
+        @apply transition rounded-md p-1.5 -m-1.5 expand-animation;
     }
     .float-panel {
         @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
@@ -216,8 +220,17 @@ color_set({
         @apply pointer-events-none text-black/10 dark:text-white/10
     }
     .btn-plain {
-        @apply transition flex items-center justify-center bg-none hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
-        text-black/75 hover:text-[var(--primary)] dark:text-white/75 dark:hover:text-[var(--primary)]
+        @apply transition relative flex items-center justify-center bg-none
+        text-black/75 hover:text-[var(--primary)] dark:text-white/75 dark:hover:text-[var(--primary)];
+        &:not(.scale-animation) {
+            @apply hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
+        }
+        &.scale-animation {
+            @apply expand-animation;
+            &.current-theme-btn {
+                @apply before:scale-100 before:opacity-100 before:bg-[var(--btn-plain-bg-hover)] text-[var(--primary)]
+            }
+        }
     }
     .btn-regular {
         @apply transition flex items-center justify-center bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)]
@@ -245,11 +258,28 @@ color_set({
         @apply text-black/25 dark:text-white/25
     }
 
-    html.is-changing .transition-fade {
+    html.is-changing .transition-swup-fade {
         @apply transition-all duration-200
     }
-    html.is-animating .transition-fade {
+    html.is-animating .transition-swup-fade {
         @apply opacity-0 translate-y-4
+    }
+
+    /* PhotoSwipe */
+    .pswp__button {
+        @apply transition bg-black/40 hover:bg-black/50 active:bg-black/60 flex items-center justify-center mr-0 w-12 h-12 !important;
+    }
+    .pswp__button--zoom, .pswp__button--close {
+        @apply mt-4 rounded-xl active:scale-90 !important;
+    }
+    .pswp__button--zoom {
+        @apply mr-2.5 !important;
+    }
+    .pswp__button--close {
+        @apply mr-4 !important;
+    }
+    .custom-md img, #post-cover img {
+        @apply cursor-zoom-in
     }
 }
 
@@ -268,7 +298,7 @@ color_set({
     animation: 300ms fade-in-up;
     animation-fill-mode: forwards;
 }
-#top-row {
+#navbar {
     animation-delay: 0ms
 }
 #sidebar {
@@ -278,6 +308,9 @@ color_set({
     animation-delay: var(--content-delay);
 }
 #footer {
+    animation-delay: 400ms;
+}
+#banner-credit {
     animation-delay: 400ms;
 }
 

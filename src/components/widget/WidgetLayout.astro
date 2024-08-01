@@ -21,7 +21,7 @@ const {
 const className = Astro.props.class
 
 ---
-<widget-layout data-id={id} data-is-collapsed={isCollapsed} class={"pb-4 card-base " + className} style={style}>
+<widget-layout data-id={id} data-is-collapsed={String(isCollapsed)} class={"pb-4 card-base " + className} style={style}>
     <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
         before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
         before:absolute before:left-[-16px] before:top-[5.5px]">{name}</div>
@@ -29,9 +29,9 @@ const className = Astro.props.class
         <slot></slot>
     </div>
     {isCollapsed && <div class="expand-btn px-4 -mb-2">
-        <button class="btn-plain w-full h-9 rounded-lg">
+        <button class="btn-plain rounded-lg w-full h-9">
             <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2">
-                <Icon name="material-symbols:more-horiz" size={28}></Icon> {i18n(I18nKey.more)}
+                <Icon name="material-symbols:more-horiz" class="text-[1.75rem]"></Icon> {i18n(I18nKey.more)}
             </div>
         </button>
     </div>}
@@ -48,15 +48,15 @@ const className = Astro.props.class
         constructor() {
             super();
 
-            if (this.dataset.isCollapsed === undefined || this.dataset.isCollapsed === false)
+            if (this.dataset.isCollapsed !== "true")
                 return;
 
             const id = this.dataset.id;
             const btn = this.querySelector('.expand-btn');
             const wrapper = this.querySelector(`#${id}`)
-            btn.addEventListener('click', () => {
-                wrapper.classList.remove('collapsed');
-                btn.classList.add('hidden');
+            btn!.addEventListener('click', () => {
+                wrapper!.classList.remove('collapsed');
+                btn!.classList.add('hidden');
             })
         }
     }

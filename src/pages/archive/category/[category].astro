@@ -1,5 +1,5 @@
 ---
-import {getCategoryList, getSortedPosts} from "@utils/content-utils";
+import {getCategoryList} from "@utils/content-utils";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import ArchivePanel from "@components/ArchivePanel.astro";
 import {i18n} from "@i18n/translation";
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
     });
 }
 
-const { category } = Astro.params;
+const category = Astro.params.category as string;
 
 ---
 

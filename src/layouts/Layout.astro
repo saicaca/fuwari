@@ -1,85 +1,80 @@
 ---
-import GlobalStyles from "@components/GlobalStyles.astro";
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import ImageWrapper from "@components/misc/ImageWrapper.astro";
+import GlobalStyles from '@components/GlobalStyles.astro'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+import ImageWrapper from '@components/misc/ImageWrapper.astro'
 
-import {pathsEqual} from "@utils/url-utils";
-import ConfigCarrier from "@components/ConfigCarrier.astro";
-import {profileConfig, siteConfig} from "@/config";
-import {Favicon} from "../types/config";
-import {defaultFavicons} from "../constants/icon";
-import {LIGHT_MODE, DARK_MODE, AUTO_MODE, DEFAULT_THEME} from "../constants/constants";
-import {url} from "../utils/url-utils";
+import { profileConfig, siteConfig } from '@/config'
+import ConfigCarrier from '@components/ConfigCarrier.astro'
+import {
+  AUTO_MODE,
+  DARK_MODE,
+  DEFAULT_THEME,
+  LIGHT_MODE,
+} from '../constants/constants'
+import { defaultFavicons } from '../constants/icon'
+import type { Favicon } from '../types/config'
+import { url, pathsEqual } from '../utils/url-utils'
 
 interface Props {
-	title: string;
-	banner: string;
-	description?: string;
+  title?: string
+  banner?: string
+  description?: string
 }
 
-let { title, banner, description } = Astro.props;
+let { title, banner, description } = Astro.props
 
-const isHomePage = pathsEqual(Astro.url.pathname, '/');
-
-const testPathName = Astro.url.pathname;
-
-const anim = {
-	old: {
-		name: 'fadeIn',
-		duration: '4s',
-		easing: 'linear',
-		fillMode: 'forwards',
-		mixBlendMode: 'normal',
-	},
-	new: {
-		name: 'fadeOut',
-		duration: '4s',
-		easing: 'linear',
-		fillMode: 'backwards',
-		mixBlendMode: 'normal',
-	}
-};
-
-const myFade = {
-	forwards: anim,
-	backwards: anim,
-};
+// apply a class to the body element to decide the height of the banner, only used for initial page load
+// Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
+// so use Swup hooks instead to change the height immediately when a link is clicked
+const isHomePage = pathsEqual(Astro.url.pathname, url('/'))
 
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
-const configHue = siteConfig.themeColor.hue;
+const configHue = siteConfig.themeColor.hue
 if (!banner || typeof banner !== 'string' || banner.trim() === '') {
-	banner = siteConfig.banner.src;
+  banner = siteConfig.banner.src
 }
 
 // TODO don't use post cover as banner for now
-banner = siteConfig.banner.src;
+banner = siteConfig.banner.src
 
-const enableBanner = siteConfig.banner.enable;
+const enableBanner = siteConfig.banner.enable
 
-let pageTitle;
+let pageTitle: string
 if (title) {
-	pageTitle = `${title} - ${siteConfig.title}`;
+  pageTitle = `${title} - ${siteConfig.title}`
 } else {
-	pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`;
+  pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`
 }
 
-const favicons: Favicon[] = siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons
+const favicons: Favicon[] =
+  siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons
 
 const siteLang = siteConfig.lang.replace('_', '-')
-
 ---
 
 <!DOCTYPE html>
-<html lang={siteLang} isHome={isHomePage} pathname={testPathName} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
+<html lang={siteLang} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
 	<head>
 
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
 		<meta name="description" content={description || pageTitle}>
+		<meta name="author" content={profileConfig.name}>
+
+		<meta property="og:site_name" content={siteConfig.title}>
+		<meta property="og:url" content={Astro.url}>
+		<meta property="og:title" content={pageTitle}>
+		<meta property="og:description" content={description || pageTitle}>
+
+		<meta name="twitter:card" content="summary_large_image">
+		<meta property="twitter:url" content={Astro.url}>
+		<meta name="twitter:title" content={pageTitle}>
+		<meta name="twitter:description" content={description || pageTitle}>
+
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		{favicons.map(favicon => (
@@ -90,7 +85,7 @@ const siteLang = siteConfig.lang.replace('_', '-')
 			/>
 		))}
 		<!-- Set the theme before the page is rendered to avoid a flash -->
-		<script define:vars={{DEFAULT_THEME: DEFAULT_THEME, LIGHT_MODE: LIGHT_MODE, DARK_MODE: DARK_MODE, AUTO_MODE: AUTO_MODE}}>
+		<script is:inline define:vars={{DEFAULT_THEME: DEFAULT_THEME, LIGHT_MODE: LIGHT_MODE, DARK_MODE: DARK_MODE, AUTO_MODE: AUTO_MODE}}>
 			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
 			switch (theme) {
 				case LIGHT_MODE:
@@ -110,7 +105,7 @@ const siteLang = siteConfig.lang.replace('_', '-')
 
 		<slot name="head"></slot>
 
-		<link rel="stylesheet" href="https://cdn.staticfile.org/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
@@ -120,9 +115,9 @@ const siteLang = siteConfig.lang.replace('_', '-')
 	<body class=" min-h-screen transition " class:list={[{"is-home": isHomePage, "enable-banner": enableBanner}]}>
 		<ConfigCarrier></ConfigCarrier>
 		<GlobalStyles>
-		<div id="banner-wrapper" class="absolute w-full">
-			<ImageWrapper id="boxtest" alt="Banner image of the blog" class:list={["object-center object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
-					  src={siteConfig.banner.src}
+		<div id="banner-wrapper" class="absolute w-full transition-all duration-700">
+			<ImageWrapper id="boxtest" alt="Banner image of the blog" class:list={["object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
+					  src={siteConfig.banner.src} position={siteConfig.banner.position}
 			>
 			</ImageWrapper>
 		</div>
@@ -141,24 +136,16 @@ const siteLang = siteConfig.lang.replace('_', '-')
 @tailwind utilities;
 
 @layer components {
-	/* TODO: temporarily make banner height same for all pages since I cannot make the transition feel good
-		I want to make the height transition parallel with the content transition instead of blocking it
-	*/
-
-	/*
 	.enable-banner.is-home #banner-wrapper {
 		@apply h-[var(--banner-height)] md:h-[var(--banner-height-home)]
 	}
-	*/
 	.enable-banner #banner-wrapper {
 		@apply h-[var(--banner-height)]
 	}
 
-	/*
 	.enable-banner.is-home #top-row {
 		@apply h-[calc(var(--banner-height)_-_4.5rem)] md:h-[calc(var(--banner-height-home)_-_4.5rem)]
 	}
-	*/
 	.enable-banner #top-row {
 		@apply h-[calc(var(--banner-height)_-_4.5rem)]
 	}
@@ -168,11 +155,12 @@ const siteLang = siteConfig.lang.replace('_', '-')
 import 'overlayscrollbars/overlayscrollbars.css';
 import {
 	OverlayScrollbars,
-	ScrollbarsHidingPlugin,
-	SizeObserverPlugin,
-	ClickScrollPlugin
+	// ScrollbarsHidingPlugin,
+	// SizeObserverPlugin,
+	// ClickScrollPlugin
 } from 'overlayscrollbars';
 import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
+import {pathsEqual, url} from "../utils/url-utils";
 
 	/* Preload fonts */
 // (async function() {
@@ -190,6 +178,7 @@ import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
 /* TODO This is a temporary solution for style flicker issue when the transition is activated */
 /* issue link: https://github.com/withastro/astro/issues/8711, the solution get from here too */
 /* update: fixed in Astro 3.2.4 */
+/*
 function disableAnimation() {
 	const css = document.createElement('style')
 	css.appendChild(
@@ -215,18 +204,20 @@ function disableAnimation() {
 		}, 1)
 	}
 }
+*/
 
 function setClickOutsideToClose(panel: string, ignores: string[]) {
 	document.addEventListener("click", event => {
 		let panelDom = document.getElementById(panel);
 		let tDom = event.target;
+		if (!(tDom instanceof Node)) return;		// Ensure the event target is an HTML Node
 		for (let ig of ignores) {
 			let ie = document.getElementById(ig)
 			if (ie == tDom || (ie?.contains(tDom))) {
 				return;
 			}
 		}
-		panelDom.classList.add("float-panel-closed");
+		panelDom!.classList.add("float-panel-closed");
 	});
 }
 setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
@@ -243,23 +234,14 @@ function loadHue() {
 	setHue(getHue())
 }
 
-function setBannerHeight() {
-	const banner = document.getElementById('banner-wrapper');
-	if (document.documentElement.hasAttribute('isHome')) {
-		banner.classList.remove('banner-else');
-		banner.classList.add('banner-home');
-	} else {
-		banner.classList.remove('banner-home');
-		banner.classList.add('banner-else');
-	}
-}
-
 function initCustomScrollbar() {
+	const bodyElement = document.querySelector('body');
+	if (!bodyElement) return;
 	OverlayScrollbars(
 		// docs say that a initialization to the body element would affect native functionality like window.scrollTo
 		// but just leave it here for now
 		{
-			target: document.querySelector('body'),
+			target: bodyElement,
 			cancel: {
 				nativeScrollbarsOverlaid: true,    // don't initialize the overlay scrollbar if there is a native one
 			}
@@ -285,7 +267,6 @@ function initCustomScrollbar() {
 
 function init() {
 	// disableAnimation()()		// TODO
-	setBannerHeight();
 	loadTheme();
 	loadHue();
 	initCustomScrollbar();
@@ -315,14 +296,88 @@ const setup = () => {
 	window.swup.hooks.on('link:click', () => {
 		document.documentElement.style.setProperty('--content-delay', '0ms')
 	})
+	window.swup.hooks.on('content:replace', initCustomScrollbar)
+	window.swup.hooks.on('visit:start', (visit) => {
+		// change banner height immediately when a link is clicked
+		const bodyElement = document.querySelector('body')
+		if (pathsEqual(visit.to.url, url('/'))) {
+			bodyElement!.classList.add('is-home');
+		} else {
+			bodyElement!.classList.remove('is-home');
+		}
+	});
+
 }
-if (window.swup.hooks) {
+if (window?.swup?.hooks) {
 	setup()
 } else {
 	document.addEventListener('swup:enable', setup)
 }
 
 </script>
+
+<script>
+import PhotoSwipeLightbox from "photoswipe/lightbox"
+import "photoswipe/style.css"
+
+let lightbox: PhotoSwipeLightbox
+
+function createPhotoSwipe() {
+	lightbox = new PhotoSwipeLightbox({
+		gallery: ".custom-md img, #post-cover img",
+		pswpModule: () => import("photoswipe"),
+		closeSVG: '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M480-424 284-228q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536-480l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480-424Z"/></svg>',
+		zoomSVG: '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M340-540h-40q-17 0-28.5-11.5T260-580q0-17 11.5-28.5T300-620h40v-40q0-17 11.5-28.5T380-700q17 0 28.5 11.5T420-660v40h40q17 0 28.5 11.5T500-580q0 17-11.5 28.5T460-540h-40v40q0 17-11.5 28.5T380-460q-17 0-28.5-11.5T340-500v-40Zm40 220q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l224 224q11 11 11 28t-11 28q-11 11-28 11t-28-11L532-372q-30 24-69 38t-83 14Zm0-80q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>',
+		padding: { top: 20, bottom: 20, left: 20, right: 20 },
+		wheelToZoom: true,
+		arrowPrev: false,
+		arrowNext: false,
+		imageClickAction: 'close',
+		tapAction: 'close',
+		doubleTapAction: 'zoom',
+	})
+
+	lightbox.addFilter("domItemData", (itemData, element) => {
+		if (element instanceof HTMLImageElement) {
+			itemData.src = element.src
+
+			itemData.w = Number(element.naturalWidth || window.innerWidth)
+			itemData.h = Number(element.naturalHeight || window.innerHeight)
+
+			itemData.msrc = element.src
+		}
+
+		return itemData
+	})
+
+	lightbox.init()
+}
+
+const setup = () => {
+	if (!lightbox) {
+		createPhotoSwipe()
+	}
+	window.swup.hooks.on("page:view", () => {
+		createPhotoSwipe()
+	})
+
+	window.swup.hooks.on(
+		"content:replace",
+		() => {
+			console.log("content:replace")
+			lightbox?.destroy?.()
+		},
+		{ before: true },
+	)
+}
+
+if (window.swup) {
+	setup()
+} else {
+	document.addEventListener("swup:enable", setup)
+}
+</script>
+
 
 <style is:global lang="stylus">
 #banner-wrapper

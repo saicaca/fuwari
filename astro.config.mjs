@@ -1,22 +1,27 @@
+import sitemap from '@astrojs/sitemap';
+import svelte from "@astrojs/svelte"
 import tailwind from "@astrojs/tailwind"
+import swup from '@swup/astro';
 import Compress from "astro-compress"
 import icon from "astro-icon"
 import { defineConfig } from "astro/config"
 import Color from "colorjs.io"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
-import remarkMath from "remark-math"
-import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
-import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs"
-import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs"
 import remarkDirective from "remark-directive" /* Handle directives */
-import remarkDirectiveRehype from 'remark-directive-rehype' /* Pass directives to rehype */
-import rehypeComponents from "rehype-components"; /* Render the custom directive content */
-import svelte from "@astrojs/svelte"
-import swup from '@swup/astro';
-import sitemap from '@astrojs/sitemap';
+import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
+import remarkMath from "remark-math"
+import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs"
+import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs"
 import {parseDirectiveNode} from "./src/plugins/remark-directive-rehype.js";
+import {unified} from 'unified';
+import remarkParse from 'remark-parse';
+import remarkRuby from "remark-ruby";
+import stringify from 'rehype-stringify';
+import remark2rehype from 'remark-rehype';
+import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
 
 const oklchToHex = (str) => {
   const DEFAULT_HUE = 250
@@ -37,12 +42,16 @@ export default defineConfig({
     tailwind(),
     swup({
       theme: false,
-      animationClass: 'transition-',
+      animationClass: 'transition-swup-',   // see https://swup.js.org/options/#animationselector
+                                            // the default value `transition-` cause transition delay
+                                            // when the Tailwind class `transition-all` is used
       containers: ['main'],
       smoothScrolling: true,
       cache: true,
       preload: true,
       accessibility: true,
+      updateHead: true,
+      updateBodyClass: false,
       globalInstance: true,
     }),
     icon({
@@ -53,14 +62,17 @@ export default defineConfig({
         "fa6-solid": ["*"],
       },
     }),
-    Compress({
-      Image: false,
-    }),
     svelte(),
     sitemap(),
+    Compress({
+      CSS: false,
+      Image: false,
+      Action: {
+        Passed: async () => true,   // https://github.com/PlayForm/Compress/issues/376
+      },
+    }),
   ],
   markdown: {
-    remarkPlugins: [remarkMath, remarkReadingTime, remarkDirective, parseDirectiveNode],
     rehypePlugins: [
       rehypeKatex,
       rehypeSlug,
@@ -97,6 +109,23 @@ export default defineConfig({
           },
         },
       ],
+    ],
+    remarkPlugins: [
+      remarkMath,
+      remarkReadingTime,
+      remarkDirective,
+      parseDirectiveNode,
+      unified,
+      remarkParse,
+      remarkRuby,
+      remark2rehype,
+      stringify,
+      //
+      // unified()
+      //   .use(remarkParse)
+      //   .use(remarkRuby)
+      //   .use(remark2rehype)
+      //   .use(stringify)
     ],
   },
   vite: {

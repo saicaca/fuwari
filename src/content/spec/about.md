@@ -1,9 +1,20 @@
-# About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
+# About the blog
 
-::github{repo="saicaca/fuwari"}
+# About me
 
-> ### Sources of images used in this site
-> - [Unsplash](https://unsplash.com/)
-> - [星と少女](https://www.pixiv.net/artworks/108916539) by [Stella](https://www.pixiv.net/users/93273965)
-> - [Rabbit - v1.4 Showcase](https://civitai.com/posts/586908) by [Rabbit_YourMajesty](https://civitai.com/user/Rabbit_YourMajesty)
+Hi, I'm Herschel Pravin Pawar, you can call me kat (with a small k)!
+I have been programming on and off since 2018, and I wrote my first lines of rust in August 2023.
+I love learning and trying new things, and I especially love solving programs I encounter using rust.
+
+# Site wide credits
+
+> Blog Template: [fuwari](https://github.com/saicaca/fuwari) by saicaca
+> 
+> Favicon: [Cherry Blossom](https://github.com/twitter/twemoji) by Twitter
+> 
+> Hosting: [Cloudflare Pages](https://pages.cloudflare.com/)
+> 
+> Website Banner: Low Poly Grid by [haikei](https://haikei.app/)
+> 
+> Image Hosting: [Cloudflare R2](https://developers.cloudflare.com/r2/)
+> 
