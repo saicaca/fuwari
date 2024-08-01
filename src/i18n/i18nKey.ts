@@ -35,4 +35,4 @@ enum I18nKey {
   license = 'license',
 }
 
-export default I18nKey
+export default I18nKey;
