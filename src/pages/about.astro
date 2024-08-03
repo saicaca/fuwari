@@ -1,16 +1,15 @@
 ---
 
-import MainGridLayout from "../layouts/MainGridLayout.astro";
+import MainGridLayout from '../layouts/MainGridLayout.astro'
 
 import { getEntry } from 'astro:content'
-import {i18n} from "../i18n/translation";
-import I18nKey from "../i18n/i18nKey";
-import Markdown from "@components/misc/Markdown.astro";
+import { i18n } from '../i18n/translation'
+import I18nKey from '../i18n/i18nKey'
+import Markdown from '@components/misc/Markdown.astro'
 
 const aboutPost = await getEntry('spec', 'about')
 
 const { Content } = await aboutPost.render()
-
 ---
 <MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">

@@ -9,7 +9,7 @@ export function pathsEqual(path1: string, path2: string) {
 
 function joinUrl(...parts: string[]): string {
   const joined = parts.join('/')
-  return joined.replace(/\/+/g, '/');
+  return joined.replace(/\/+/g, '/')
 }
 
 export function getPostUrlBySlug(slug: string): string {

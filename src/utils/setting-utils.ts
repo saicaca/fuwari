@@ -1,4 +1,9 @@
-import {AUTO_MODE, DARK_MODE, DEFAULT_THEME, LIGHT_MODE} from "@constants/constants.ts";
+import {
+  AUTO_MODE,
+  DARK_MODE,
+  DEFAULT_THEME,
+  LIGHT_MODE,
+} from '@constants/constants.ts'
 import type { LIGHT_DARK_MODE } from '@/types/config'
 
 export function getDefaultHue(): number {
@@ -20,7 +25,6 @@ export function setHue(hue: number): void {
   }
   r.style.setProperty('--hue', String(hue))
 }
-
 
 export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
   switch (theme) {
@@ -46,5 +50,5 @@ export function setTheme(theme: LIGHT_DARK_MODE): void {
 }
 
 export function getStoredTheme(): LIGHT_DARK_MODE {
-  return localStorage.getItem('theme') as LIGHT_DARK_MODE || DEFAULT_THEME
+  return (localStorage.getItem('theme') as LIGHT_DARK_MODE) || DEFAULT_THEME
 }

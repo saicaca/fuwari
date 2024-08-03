@@ -1,23 +1,22 @@
 ---
-import {formatDateToYYYYMMDD} from "../../utils/date-utils";
-import { Icon } from 'astro-icon/components';
-import {licenseConfig, profileConfig} from "../../config";
-import {i18n} from "../../i18n/translation";
-import I18nKey from "../../i18n/i18nKey";
+import { formatDateToYYYYMMDD } from '../../utils/date-utils'
+import { Icon } from 'astro-icon/components'
+import { licenseConfig, profileConfig } from '../../config'
+import { i18n } from '../../i18n/translation'
+import I18nKey from '../../i18n/i18nKey'
 
 interface Props {
-    title: string;
-    slug: string;
-    pubDate: Date;
-    class: string;
+  title: string
+  slug: string
+  pubDate: Date
+  class: string
 }
 
-const { title, slug, pubDate } = Astro.props;
-const className = Astro.props.class;
-const profileConf = profileConfig;
-const licenseConf = licenseConfig;
-const postUrl = decodeURIComponent(Astro.url.toString());
-
+const { title, slug, pubDate } = Astro.props
+const className = Astro.props.class
+const profileConf = profileConfig
+const licenseConf = licenseConfig
+const postUrl = decodeURIComponent(Astro.url.toString())
 ---
 <div class=`relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 ${className}`>
     <div class="transition font-bold text-black/75 dark:text-white/75">

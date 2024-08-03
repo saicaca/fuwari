@@ -1,11 +1,11 @@
 ---
-import '@fontsource-variable/jetbrains-mono';
-import '@fontsource-variable/jetbrains-mono/wght-italic.css';
+import '@fontsource-variable/jetbrains-mono'
+import '@fontsource-variable/jetbrains-mono/wght-italic.css'
 
 interface Props {
-    class: string;
+  class: string
 }
-const className = Astro.props.class;
+const className = Astro.props.class
 ---
 <div data-pagefind-body class=`prose dark:prose-invert prose-base max-w-none custom-md ${className}`>
     <!--<div class="prose dark:prose-invert max-w-none custom-md">-->
@@ -46,12 +46,13 @@ const className = Astro.props.class;
       wrapper.appendChild(codeBlock);
       wrapper.appendChild(copyButton);
 
-      let timeout;
+      let timeout: ReturnType<typeof setTimeout>;
       copyButton.addEventListener("click", async () => {
         if (timeout) {
             clearTimeout(timeout);
         }
         let text = codeBlock?.querySelector("code")?.innerText;
+        if (text === undefined) return;
         await navigator.clipboard.writeText(text);
         copyButton.classList.add("success");
         timeout = setTimeout(() => {
