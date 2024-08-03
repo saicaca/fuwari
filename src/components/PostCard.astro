@@ -48,8 +48,8 @@ const { remarkPluginFrontmatter } = await entry.render();
         <PostMetadata published={published} tags={tags} category={category} hideTagsForMobile={true} class="mb-4"></PostMetadata>
 
         <!-- description -->
-        <div class="transition text-75 mb-3.5 pr-4">
-            { description }
+        <div class:list={["transition text-75 mb-3.5 pr-4", {"line-clamp-2 md:line-clamp-1": !description}]}>
+            { description || remarkPluginFrontmatter.excerpt }
         </div>
 
         <!-- word count and read time  -->
