@@ -1,31 +1,30 @@
 ---
-import {getSortedPosts} from "@utils/content-utils";
-import MainGridLayout from "@layouts/MainGridLayout.astro";
-import ArchivePanel from "@components/ArchivePanel.astro";
-import {i18n} from "@i18n/translation";
-import I18nKey from "@i18n/i18nKey";
+import { getSortedPosts } from '@utils/content-utils'
+import MainGridLayout from '@layouts/MainGridLayout.astro'
+import ArchivePanel from '@components/ArchivePanel.astro'
+import { i18n } from '@i18n/translation'
+import I18nKey from '@i18n/i18nKey'
 
 export async function getStaticPaths() {
-    let posts = await getSortedPosts()
+  let posts = await getSortedPosts()
 
-    const allTags = posts.reduce((acc, post) => {
-        post.data.tags.forEach(tag => acc.add(tag));
-        return acc;
-    }, new Set());
+  const allTags = posts.reduce((acc, post) => {
+    post.data.tags.forEach(tag => acc.add(tag))
+    return acc
+  }, new Set())
 
-    const allTagsArray = Array.from(allTags);
+  const allTagsArray = Array.from(allTags)
 
-    return allTagsArray.map(tag => {
-        return {
-            params: {
-                tag: tag
-            }
-        }
-    });
+  return allTagsArray.map(tag => {
+    return {
+      params: {
+        tag: tag,
+      },
+    }
+  })
 }
 
-const tag= Astro.params.tag as string;
-
+const tag = Astro.params.tag as string
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)} description={i18n(I18nKey.archive)}>

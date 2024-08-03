@@ -1,25 +1,18 @@
 ---
-import { Icon } from 'astro-icon/components';
-import {i18n} from "../../i18n/translation";
-import I18nKey from "../../i18n/i18nKey";
+import { Icon } from 'astro-icon/components'
+import { i18n } from '../../i18n/translation'
+import I18nKey from '../../i18n/i18nKey'
 interface Props {
-    id: string;
-    name?: string;
-    isCollapsed?: boolean;
-    collapsedHeight?: string;
-    class?: string;
-    style?: string;
+  id: string
+  name?: string
+  isCollapsed?: boolean
+  collapsedHeight?: string
+  class?: string
+  style?: string
 }
-const props = Astro.props;
-const {
-    id,
-    name,
-    isCollapsed,
-    collapsedHeight,
-    style,
-} = Astro.props
+const props = Astro.props
+const { id, name, isCollapsed, collapsedHeight, style } = Astro.props
 const className = Astro.props.class
-
 ---
 <widget-layout data-id={id} data-is-collapsed={String(isCollapsed)} class={"pb-4 card-base " + className} style={style}>
     <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2

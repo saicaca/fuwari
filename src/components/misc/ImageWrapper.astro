@@ -1,35 +1,44 @@
 ---
-import path from "path";
+import path from 'path'
 interface Props {
-    id?: string
-    src: string;
-    class?: string;
-    alt?: string
-    position?: string;
-    basePath?: string
+  id?: string
+  src: string
+  class?: string
+  alt?: string
+  position?: string
+  basePath?: string
 }
-import { Image } from 'astro:assets';
-import { url } from "../../utils/url-utils";
+import { Image } from 'astro:assets'
+import { url } from '../../utils/url-utils'
 
-const {id, src, alt, position = 'center', basePath = '/'} = Astro.props;
-const className = Astro.props.class;
+const { id, src, alt, position = 'center', basePath = '/' } = Astro.props
+const className = Astro.props.class
 
-const isLocal = !(src.startsWith('/') || src.startsWith('http') || src.startsWith('https') || src.startsWith('data:'));
-const isPublic = src.startsWith('/');
+const isLocal = !(
+  src.startsWith('/') ||
+  src.startsWith('http') ||
+  src.startsWith('https') ||
+  src.startsWith('data:')
+)
+const isPublic = src.startsWith('/')
 
 // TODO temporary workaround for images dynamic import
 // https://github.com/withastro/astro/issues/3373
-let img;
+let img
 if (isLocal) {
-    const files = import.meta.glob<ImageMetadata>("../../**", { import: 'default' });
-    let normalizedPath = path.normalize(path.join("../../", basePath, src)).replace(/\\/g, "/");
-    img = await (files[normalizedPath])();
-    if (!img) {
-        console.error(`No image found for path ${normalizedPath}`);
-    }
+  const files = import.meta.glob<ImageMetadata>('../../**', {
+    import: 'default',
+  })
+  let normalizedPath = path
+    .normalize(path.join('../../', basePath, src))
+    .replace(/\\/g, '/')
+  img = await files[normalizedPath]()
+  if (!img) {
+    console.error(`No image found for path ${normalizedPath}`)
+  }
 }
 
-const imageClass = 'w-full h-full object-cover';
+const imageClass = 'w-full h-full object-cover'
 const imageStyle = `object-position: ${position}`
 ---
 <div id={id} class:list={[className, 'overflow-hidden relative']}>

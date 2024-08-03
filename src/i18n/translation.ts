@@ -22,7 +22,7 @@ const map: { [key: string]: Translation } = {
   ja: ja,
   ja_jp: ja,
   ko: ko,
-  ko_kr: ko
+  ko_kr: ko,
 }
 
 export function getTranslation(lang: string): Translation {

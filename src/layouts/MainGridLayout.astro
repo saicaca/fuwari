@@ -4,8 +4,8 @@ import Navbar from '@components/Navbar.astro'
 import BackToTop from '@components/control/BackToTop.astro'
 import SideBar from '@components/widget/SideBar.astro'
 import Layout from './Layout.astro'
-import { Icon } from 'astro-icon/components';
-import { siteConfig } from '../config';
+import { Icon } from 'astro-icon/components'
+import { siteConfig } from '../config'
 
 interface Props {
   title?: string
@@ -14,8 +14,9 @@ interface Props {
 }
 
 const { title, banner, description } = Astro.props
-const hasBannerCredit = siteConfig.banner.enable && siteConfig.banner.credit.enable
-const hasBannerLink = !!(siteConfig.banner.credit.url)
+const hasBannerCredit =
+  siteConfig.banner.enable && siteConfig.banner.credit.enable
+const hasBannerLink = !!siteConfig.banner.credit.url
 ---
 
 <Layout title={title} banner={banner} description={description}>

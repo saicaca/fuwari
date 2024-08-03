@@ -1,63 +1,68 @@
 ---
-import {getSortedPosts} from "../utils/content-utils";
-import {getPostUrlBySlug} from "../utils/url-utils";
-import {i18n} from "../i18n/translation";
-import I18nKey from "../i18n/i18nKey";
-import {UNCATEGORIZED} from "@constants/constants";
+import { getSortedPosts } from '../utils/content-utils'
+import { getPostUrlBySlug } from '../utils/url-utils'
+import { i18n } from '../i18n/translation'
+import I18nKey from '../i18n/i18nKey'
+import { UNCATEGORIZED } from '@constants/constants'
 
 interface Props {
-    keyword?: string;
-    tags?: string[];
-    categories?: string[];
+  keyword?: string
+  tags?: string[]
+  categories?: string[]
 }
-const { keyword, tags, categories} = Astro.props;
+const { keyword, tags, categories } = Astro.props
 
 let posts = await getSortedPosts()
 
 if (Array.isArray(tags) && tags.length > 0) {
-    posts = posts.filter(post =>
-        Array.isArray(post.data.tags) && post.data.tags.some(tag => tags.includes(tag))
-    );
+  posts = posts.filter(
+    post =>
+      Array.isArray(post.data.tags) &&
+      post.data.tags.some(tag => tags.includes(tag)),
+  )
 }
 
 if (Array.isArray(categories) && categories.length > 0) {
-    posts = posts.filter(post =>
-        (post.data.category && categories.includes(post.data.category)) ||
-        (!post.data.category && categories.includes(UNCATEGORIZED))
-    );
+  posts = posts.filter(
+    post =>
+      (post.data.category && categories.includes(post.data.category)) ||
+      (!post.data.category && categories.includes(UNCATEGORIZED)),
+  )
 }
 
-const groups: {year: number, posts: typeof posts}[] = function () {
-    const groupedPosts = posts.reduce((grouped: {[year: number]: typeof posts}, post) => {
-        const year = post.data.published.getFullYear()
-        if (!grouped[year]) {
-            grouped[year] = []
-        }
-        grouped[year].push(post)
-        return grouped
-    }, {})
+const groups: { year: number; posts: typeof posts }[] = (function () {
+  const groupedPosts = posts.reduce(
+    (grouped: { [year: number]: typeof posts }, post) => {
+      const year = post.data.published.getFullYear()
+      if (!grouped[year]) {
+        grouped[year] = []
+      }
+      grouped[year].push(post)
+      return grouped
+    },
+    {},
+  )
 
-    // convert the object to an array
-    const groupedPostsArray = Object.keys(groupedPosts).map(key => ({
-        year: parseInt(key),
-        posts: groupedPosts[parseInt(key)]
-    }))
+  // convert the object to an array
+  const groupedPostsArray = Object.keys(groupedPosts).map(key => ({
+    year: parseInt(key),
+    posts: groupedPosts[parseInt(key)],
+  }))
 
-    // sort years by latest first
-    groupedPostsArray.sort((a, b) => b.year - a.year)
-    return groupedPostsArray;
-}();
+  // sort years by latest first
+  groupedPostsArray.sort((a, b) => b.year - a.year)
+  return groupedPostsArray
+})()
 
 function formatDate(date: Date) {
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${month}-${day}`;
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const day = date.getDate().toString().padStart(2, '0')
+  return `${month}-${day}`
 }
 
 function formatTag(tag: string[]) {
-    return tag.map(t => `#${t}`).join(' ');
+  return tag.map(t => `#${t}`).join(' ')
 }
-
 ---
 
 <div class="card-base px-8 py-6">
