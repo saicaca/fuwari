@@ -1,10 +1,10 @@
 <script lang="ts">
-import { onMount } from 'svelte'
-import { url } from '@utils/url-utils.ts'
-import { i18n } from '@i18n/translation'
 import I18nKey from '@i18n/i18nKey'
-let keywordDesktop = ''
-let keywordMobile = ''
+import { i18n } from '@i18n/translation'
+import { url } from '@utils/url-utils.ts'
+import { onMount } from 'svelte'
+const keywordDesktop = ''
+const keywordMobile = ''
 let result = []
 const fakeResult = [
   {
@@ -28,7 +28,7 @@ let search = (keyword: string, isDesktop: boolean) => {}
 
 onMount(() => {
   search = async (keyword: string, isDesktop: boolean) => {
-    let panel = document.getElementById('search-panel')
+    const panel = document.getElementById('search-panel')
     if (!panel) return
 
     if (!keyword && isDesktop) {
@@ -61,7 +61,7 @@ onMount(() => {
 })
 
 const togglePanel = () => {
-  let panel = document.getElementById('search-panel')
+  const panel = document.getElementById('search-panel')
   panel?.classList.toggle('float-panel-closed')
 }
 

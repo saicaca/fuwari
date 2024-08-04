@@ -35,7 +35,7 @@ while (r + 1 <= page.lastPage && count < VISIBLE) {
   r++
 }
 
-let pages: number[] = []
+const pages: number[] = []
 if (l > 1) pages.push(1)
 if (l == 3) pages.push(2)
 if (l > 3) pages.push(HIDDEN)

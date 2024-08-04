@@ -29,7 +29,7 @@ if (isLocal) {
   const files = import.meta.glob<ImageMetadata>('../../**', {
     import: 'default',
   })
-  let normalizedPath = path
+  const normalizedPath = path
     .normalize(path.join('../../', basePath, src))
     .replace(/\\/g, '/')
   img = await files[normalizedPath]()

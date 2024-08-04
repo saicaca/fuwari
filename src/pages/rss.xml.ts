@@ -1,8 +1,8 @@
-import rss from '@astrojs/rss'
 import { siteConfig } from '@/config'
-import sanitizeHtml from 'sanitize-html'
-import MarkdownIt from 'markdown-it'
+import rss from '@astrojs/rss'
 import { getSortedPosts } from '@utils/content-utils.ts'
+import MarkdownIt from 'markdown-it'
+import sanitizeHtml from 'sanitize-html'
 const parser = new MarkdownIt()
 
 export async function GET(context: any) {

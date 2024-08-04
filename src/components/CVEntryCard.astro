@@ -1,44 +1,44 @@
 ---
-import { Icon } from 'astro-icon/components';
-import type { CVEntry } from '../types/CVMetadata';
-import CVEntryMetadata from './CVEntryMetadata.astro';
-import ImageWrapper from './misc/ImageWrapper.astro';
+import { Icon } from 'astro-icon/components'
+import type { CVEntry } from '../types/CVMetadata'
+import CVEntryMetadata from './CVEntryMetadata.astro'
+import ImageWrapper from './misc/ImageWrapper.astro'
 
 export interface Props {
-  cv_entry: CVEntry;
-  class: string;
-  style: string;
+  cv_entry: CVEntry
+  class: string
+  style: string
 }
 
-const { cv_entry, style } = Astro.props;
-const { title, society, date, location, description, tags } = cv_entry;
+const { cv_entry, style } = Astro.props
+const { title, society, date, location, description, tags } = cv_entry
 // let {logo} = cv_entry;
-const className = Astro.props.class;
+const className = Astro.props.class
 
-let logo = undefined;
+const logo = undefined
 
-const hasCover = logo !== '' && logo !== undefined;
+const hasCover = logo !== '' && logo !== undefined
 function srcToPublicPath(src: string) {
-  src = src.replace('src', 'assets');
-  console.log('src', src);
-  return src;
+  src = src.replace('src', 'assets')
+  console.log('src', src)
+  return src
 }
-const image = hasCover ? srcToPublicPath(logo) : undefined;
+const image = hasCover ? srcToPublicPath(logo) : undefined
 
-const coverWidth = '28%';
+const coverWidth = '28%'
 
-let url;
+let url
 switch (typeof location) {
   case 'object':
     if ('github' in location && location.github) {
-      url = `https://github.com/${location.github}`;
+      url = `https://github.com/${location.github}`
     }
-    break;
+    break
   case 'string':
     if (location.startsWith('http')) {
-      url = location;
+      url = location
     }
-    break;
+    break
 }
 ---
 <div class:list={["card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative", className]}
