@@ -1,22 +1,23 @@
 ---
-import { Icon } from 'astro-icon/components';
-import DisplaySettings from "./widget/DisplaySettings.svelte";
-import {LinkPreset, type NavBarLink} from "../types/config";
-import {navBarConfig, siteConfig} from "../config";
-import NavMenuPanel from "./widget/NavMenuPanel.astro";
-import Search from "./Search.svelte";
-import {LinkPresets} from "../constants/link-presets";
-import LightDarkSwitch from "./LightDarkSwitch.svelte";
-import {url} from "../utils/url-utils";
-const className = Astro.props.class;
+import { Icon } from 'astro-icon/components'
+import DisplaySettings from './widget/DisplaySettings.svelte'
+import { LinkPreset, type NavBarLink } from '../types/config'
+import { navBarConfig, siteConfig } from '../config'
+import NavMenuPanel from './widget/NavMenuPanel.astro'
+import Search from './Search.svelte'
+import { LinkPresets } from '../constants/link-presets'
+import LightDarkSwitch from './LightDarkSwitch.svelte'
+import { url } from '../utils/url-utils'
+const className = Astro.props.class
 
-let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset): NavBarLink => {
-    if (typeof item === "number") {
-        return LinkPresets[item]
+let links: NavBarLink[] = navBarConfig.links.map(
+  (item: NavBarLink | LinkPreset): NavBarLink => {
+    if (typeof item === 'number') {
+      return LinkPresets[item]
     }
-    return item;
-});
-
+    return item
+  },
+)
 ---
 <div id="navbar" class="sticky top-0 z-50 onload-animation">
     <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div> <!-- used for onload animation -->

@@ -16,12 +16,8 @@ import remarkMath from "remark-math"
 import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs"
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs"
 import {parseDirectiveNode} from "./src/plugins/remark-directive-rehype.js";
-import {unified} from 'unified';
-import remarkParse from 'remark-parse';
-import remarkRuby from "remark-ruby";
-import stringify from 'rehype-stringify';
-import remark2rehype from 'remark-rehype';
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
+import {remarkExcerpt} from "./src/plugins/remark-excerpt.js";
 
 const oklchToHex = (str) => {
   const DEFAULT_HUE = 250
@@ -73,6 +69,7 @@ export default defineConfig({
     }),
   ],
   markdown: {
+    remarkPlugins: [remarkMath, remarkReadingTime, remarkExcerpt, remarkGithubAdmonitionsToDirectives, remarkDirective, parseDirectiveNode],
     rehypePlugins: [
       rehypeKatex,
       rehypeSlug,
@@ -109,23 +106,6 @@ export default defineConfig({
           },
         },
       ],
-    ],
-    remarkPlugins: [
-      remarkMath,
-      remarkReadingTime,
-      remarkDirective,
-      parseDirectiveNode,
-      unified,
-      remarkParse,
-      remarkRuby,
-      remark2rehype,
-      stringify,
-      //
-      // unified()
-      //   .use(remarkParse)
-      //   .use(remarkRuby)
-      //   .use(remark2rehype)
-      //   .use(stringify)
     ],
   },
   vite: {

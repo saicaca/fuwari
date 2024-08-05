@@ -25,5 +25,6 @@ pnpm-debug.log*
 package-lock.json
 bun.lockb
 yarn.lock
-
 .idea
+.vscode
+public/favicon/*.png

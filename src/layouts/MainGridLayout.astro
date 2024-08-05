@@ -4,8 +4,8 @@ import Navbar from '@components/Navbar.astro'
 import BackToTop from '@components/control/BackToTop.astro'
 import SideBar from '@components/widget/SideBar.astro'
 import Layout from './Layout.astro'
-import { Icon } from 'astro-icon/components';
-import { siteConfig } from '../config';
+import { Icon } from 'astro-icon/components'
+import { siteConfig } from '../config'
 
 interface Props {
   title?: string
@@ -14,8 +14,9 @@ interface Props {
 }
 
 const { title, banner, description } = Astro.props
-const hasBannerCredit = siteConfig.banner.enable && siteConfig.banner.credit.enable
-const hasBannerLink = !!(siteConfig.banner.credit.url)
+const hasBannerCredit =
+  siteConfig.banner.enable && siteConfig.banner.credit.enable
+const hasBannerLink = !!siteConfig.banner.credit.url
 ---
 
 <Layout title={title} banner={banner} description={description}>
@@ -33,9 +34,9 @@ const hasBannerLink = !!(siteConfig.banner.credit.url)
         >
             <Icon class="text-white/75 text-[1.25rem] mr-1" name="material-symbols:copyright-outline-rounded" ></Icon>
             <div class="text-white/75 text-xs">{siteConfig.banner.credit.text}</div>
-            <Icon class:list={["transition absolute text-[oklch(0.75_0.14_var(--hue))] right-2 text-[1.25rem] opacity-0",
+            <Icon class:list={["transition absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0",
                 {"group-hover:opacity-100": hasBannerLink}]}
-                  name="material-symbols:chevron-right-rounded">
+                  name="fa6-solid:arrow-up-right-from-square">
             </Icon>
         </a>}
 

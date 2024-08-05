@@ -1,33 +1,33 @@
 ---
-import path from 'node:path';
-import { getCollection } from 'astro:content';
-import License from '@components/misc/License.astro';
-import Markdown from '@components/misc/Markdown.astro';
-import I18nKey from '@i18n/i18nKey';
-import { i18n } from '@i18n/translation';
-import MainGridLayout from '@layouts/MainGridLayout.astro';
-import { getDir, getPostUrlBySlug } from '@utils/url-utils';
-import { Icon } from 'astro-icon/components';
-import { licenseConfig } from 'src/config';
-import PostMetadata from '../../components/PostMeta.astro';
-import ImageWrapper from '../../components/misc/ImageWrapper.astro';
+import path from 'node:path'
+import { getCollection } from 'astro:content'
+import License from '@components/misc/License.astro'
+import Markdown from '@components/misc/Markdown.astro'
+import I18nKey from '@i18n/i18nKey'
+import { i18n } from '@i18n/translation'
+import MainGridLayout from '@layouts/MainGridLayout.astro'
+import { getDir, getPostUrlBySlug } from '@utils/url-utils'
+import { Icon } from 'astro-icon/components'
+import { licenseConfig } from 'src/config'
+import PostMetadata from '../../components/PostMeta.astro'
+import ImageWrapper from '../../components/misc/ImageWrapper.astro'
 import { profileConfig } from '../../config'
 import { formatDateToYYYYMMDD } from '../../utils/date-utils'
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('posts', ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true;
-  });
+    return import.meta.env.PROD ? data.draft !== true : true
+  })
   return blogEntries.map(entry => ({
     params: { slug: entry.slug },
     props: { entry },
-  }));
+  }))
 }
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { entry } = Astro.props
+const { Content } = await entry.render()
 
-const { remarkPluginFrontmatter } = await entry.render();
+const { remarkPluginFrontmatter } = await entry.render()
 
 const jsonLd = {
   '@context': 'https://schema.org',

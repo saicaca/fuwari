@@ -1,53 +1,53 @@
 ---
-import MainGridLayout from '../layouts/MainGridLayout.astro';
-import type { CVData } from '../types/CVMetadata';
+import MainGridLayout from '../layouts/MainGridLayout.astro'
+import type { CVData } from '../types/CVMetadata'
 
-import I18nKey from '../i18n/i18nKey';
-import { i18n } from '../i18n/translation';
+import I18nKey from '../i18n/i18nKey'
+import { i18n } from '../i18n/translation'
 
-import { exec } from 'node:child_process';
-import { access, readFile } from 'node:fs/promises';
+import { exec } from 'node:child_process'
+import { access, readFile } from 'node:fs/promises'
 
-import * as fs from 'node:fs/promises';
-import * as util from 'node:util';
-import * as yaml from 'yaml';
-import CVEntryCard from '../components/CVEntryCard.astro';
+import * as fs from 'node:fs/promises'
+import * as util from 'node:util'
+import * as yaml from 'yaml'
+import CVEntryCard from '../components/CVEntryCard.astro'
 
-const execPromise = util.promisify(exec);
+const execPromise = util.promisify(exec)
 
-console.log("git --version");
+console.log('git --version')
 await execPromise('git --version')
   .then(() => {
-    console.log('git is installed');
+    console.log('git is installed')
   })
   .catch(() => {
-    throw new Error('git is not available');
-  });
+    throw new Error('git is not available')
+  })
 
 const folderExists = async path =>
   await access(path, fs.constants.F_OK)
     .then(() => {
-      return true;
+      return true
     })
     .catch(() => {
-      return false;
-    });
+      return false
+    })
 
 if (await folderExists('node_modules/git/typst')) {
-  console.log('Pulling typst');
+  console.log('Pulling typst')
   const { _gitCloneOut, gitCloneErr } = await execPromise(
     'git -C node_modules/git/typst pull',
-  );
+  )
   if (gitCloneErr) {
-    console.error(gitCloneErr);
+    console.error(gitCloneErr)
   }
 } else {
-  console.log('Cloning typst');
+  console.log('Cloning typst')
   const { _gitCloneOut, gitCloneErr } = await execPromise(
     'git clone https://github.com/pawarherschel/typst.git node_modules/git/typst',
-  );
+  )
   if (gitCloneErr) {
-    console.error(gitCloneErr);
+    console.error(gitCloneErr)
   }
 }
 
@@ -64,12 +64,9 @@ if (await folderExists('node_modules/git/typst')) {
 //   }
 // }
 
-const sourceOfTruth = await readFile(
-  'node_modules/git/typst/SOT.yaml',
-  'utf-8',
-);
+const sourceOfTruth = await readFile('node_modules/git/typst/SOT.yaml', 'utf-8')
 
-const parsedYaml: CVData = yaml.parse(sourceOfTruth);
+const parsedYaml: CVData = yaml.parse(sourceOfTruth)
 
 const {
   metadata,
@@ -79,13 +76,14 @@ const {
   skills,
   certificate,
   publications,
-} = parsedYaml;
+} = parsedYaml
 ---
 
 <MainGridLayout title={i18n(I18nKey.cv)}>
     <div class="flex w-full flex-col rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
         <div class="card-base z-10 px-9 py-6 mb-6  relative w-full rounded-[var(--radius-large)] bg-[var(--card-bg)] ">
-            <h1 class="transition w-full block font-bold mb-3 text-3xl text-90">Projects</h1>
+            <h1 class="text-4xl font-bold text-90 text-[var(--text-color)] mb-4 text-center">Projects</h1>
+            <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
             <div class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4">
               {
                 projects.map((project) =>
@@ -98,7 +96,8 @@ const {
             </div>
         </div>
         <div class="card-base z-10 px-9 py-6 mb-6 relative w-full rounded-[var(--radius-large)] bg-[var(--card-bg)] ">
-            <h1 class="transition w-full block font-bold mb-3 text-3xl text-90">Publications</h1>
+            <h1 class="text-4xl font-bold text-90 text-[var(--text-color)] mb-4 text-center">Publications</h1>
+            <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
             <div class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4">
               {
                 publications.map((publications) =>
@@ -111,7 +110,8 @@ const {
             </div>
         </div>
         <div class="card-base z-10 px-9 py-6 mb-6 relative w-full rounded-[var(--radius-large)] bg-[var(--card-bg)] ">
-            <h1 class="transition w-full block font-bold mb-3 text-3xl text-90">Education</h1>
+            <h1 class="text-4xl font-bold text-90 text-[var(--text-color)] mb-4 text-center">Education</h1>
+            <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
             <div class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4">
               {
                 education.map((education) =>

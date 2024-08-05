@@ -1,15 +1,15 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from 'astro-icon/components'
 
 export interface Props {
-  class: string;
-  date: string;
-  tags: string[];
-  society: string;
+  class: string
+  date: string
+  tags: string[]
+  society: string
 }
 
-const { date, tags, society, hideTagsForMobile } = Astro.props;
-const className = Astro.props.class;
+const { date, tags, society, hideTagsForMobile } = Astro.props
+const className = Astro.props.class
 ---
 <div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 justify-between", className]}>
     <!-- categories -->

@@ -1,19 +1,19 @@
 ---
-import {formatDateToYYYYMMDD} from "../utils/date-utils";
-import { Icon } from 'astro-icon/components';
-import {i18n} from "../i18n/translation";
-import I18nKey from "../i18n/i18nKey";
-import {url} from "../utils/url-utils";
+import { formatDateToYYYYMMDD } from '../utils/date-utils'
+import { Icon } from 'astro-icon/components'
+import { i18n } from '../i18n/translation'
+import I18nKey from '../i18n/i18nKey'
+import { url } from '../utils/url-utils'
 
 interface Props {
-    class: string;
-    published: Date;
-    tags: string[];
-    category: string;
-    hideTagsForMobile?: boolean;
+  class: string
+  published: Date
+  tags: string[]
+  category: string
+  hideTagsForMobile?: boolean
 }
-const {published, tags, category, hideTagsForMobile = false} = Astro.props;
-const className = Astro.props.class;
+const { published, tags, category, hideTagsForMobile = false } = Astro.props
+const className = Astro.props.class
 ---
 
 <div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>
@@ -30,7 +30,7 @@ const className = Astro.props.class;
     <div class="flex items-center">
         <div class="meta-icon"
         >
-            <Icon name="material-symbols:menu-rounded" class="text-xl"></Icon>
+            <Icon name="material-symbols:book-2-outline-rounded" class="text-xl"></Icon>
         </div>
         <div class="flex flex-row flex-nowrap items-center">
             <a href={url(`/archive/category/${category || 'uncategorized'}/`)} aria-label=`View all posts in the ${category} category`

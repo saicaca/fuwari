@@ -9,6 +9,7 @@ I love learning and trying new things, and I especially love solving programs I 
 # Site wide credits
 
 > Blog Template: [fuwari](https://github.com/saicaca/fuwari) by saicaca
+> ::github{repo="saicaca/fuwari"}
 > 
 > Favicon: [Cherry Blossom](https://github.com/twitter/twemoji) by Twitter
 > 
