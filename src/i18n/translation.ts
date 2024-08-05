@@ -2,9 +2,9 @@ import { siteConfig } from '../config'
 import type I18nKey from './i18nKey'
 import { en } from './languages/en'
 import { ja } from './languages/ja'
-import { ko } from './languages/ko'
 import { zh_CN } from './languages/zh_CN'
 import { zh_TW } from './languages/zh_TW'
+import { ko } from './languages/ko'
 
 export type Translation = {
   [K in I18nKey]: string

@@ -82,7 +82,8 @@ const {
 <MainGridLayout title={i18n(I18nKey.cv)}>
     <div class="flex w-full flex-col rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
         <div class="card-base z-10 px-9 py-6 mb-6  relative w-full rounded-[var(--radius-large)] bg-[var(--card-bg)] ">
-            <h1 class="transition w-full block font-bold mb-3 text-3xl text-90">Projects</h1>
+            <h1 class="text-4xl font-bold text-90 text-[var(--text-color)] mb-4 text-center">Projects</h1>
+            <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
             <div class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4">
               {
                 projects.map((project) =>
@@ -95,7 +96,8 @@ const {
             </div>
         </div>
         <div class="card-base z-10 px-9 py-6 mb-6 relative w-full rounded-[var(--radius-large)] bg-[var(--card-bg)] ">
-            <h1 class="transition w-full block font-bold mb-3 text-3xl text-90">Publications</h1>
+            <h1 class="text-4xl font-bold text-90 text-[var(--text-color)] mb-4 text-center">Publications</h1>
+            <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
             <div class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4">
               {
                 publications.map((publications) =>
@@ -108,7 +110,8 @@ const {
             </div>
         </div>
         <div class="card-base z-10 px-9 py-6 mb-6 relative w-full rounded-[var(--radius-large)] bg-[var(--card-bg)] ">
-            <h1 class="transition w-full block font-bold mb-3 text-3xl text-90">Education</h1>
+            <h1 class="text-4xl font-bold text-90 text-[var(--text-color)] mb-4 text-center">Education</h1>
+            <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
             <div class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4">
               {
                 education.map((education) =>
