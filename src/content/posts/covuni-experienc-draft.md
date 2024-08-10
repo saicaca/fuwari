@@ -5,7 +5,11 @@ description: ''
 image: ''
 tags: []
 category: ''
-draft: true 
+draft: false
+---
+
+---
+> DRAFT
 ---
 
 For July 2024,
