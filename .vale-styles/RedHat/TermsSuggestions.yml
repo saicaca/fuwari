@@ -1,0 +1,55 @@
+---
+extends: substitution
+ignorecase: false
+level: suggestion
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/termssuggestions/
+message: "Depending on the context, consider using '%s' rather than '%s'."
+scope: sentence
+action:
+  name: replace
+swap:
+  "(?<!, | in | on | at | to | for | from | of | with | without | against )which": "that|, which"
+  ", that": "that|, which"
+  "(?<!.-)jar": compress|archive
+  "[Nn]avigate": click|select|browse|go to
+  "bottom(?:-)?left": lower left|lower-left
+  "bottom(?:-)?right": lower right|lower-right
+  "shell(?! prompt| script)": shell prompt
+  "x64|x86-64|(?<!64-bit )x86": 64-bit x86|x86_64
+  '(?<!.*-|program )operator': Operator
+  '(?<!.*-|program )operators': Operators
+  '(?<![\.\-])(?:zip|gzip|tar)(?! file| archive)': compress
+  '(?<!\.)tar file': ".tar file"
+  '(?<!\.)zip file': ".zip file"
+  above: earlier|previous|preceding|before
+  afterwards: afterward
+  all caps: uppercase
+  below: after|later|following
+  bottom left: lower left
+  bottom right: lower right
+  bugfix: bug fix
+  can not: cannot
+  choose: select
+  componentization: component-based development|component model|component architecture|shared components
+  componentize: develop components|divide into components|re-engineer into reusable software components
+  consumes: uses
+  distro: distribution
+  drag and drop: drag
+  executable(?! program| routine| files?): executable program
+  frontend: front end|front-end
+  higher: later
+  hit: press|type
+  in order to: to
+  information on: information about
+  launch: start|open
+  legacy: existing|traditional|established|classic|earlier|previous
+  once: after|when
+  on-premise: on-site|in-house
+  refer to: see
+  segfault: segmentation fault
+  spawn: create
+  start up: start
+  tarball: ".tar file"
+  thus: therefore
+  translate: convert|transform
+  via: through|by|from|on|by using

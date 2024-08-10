@@ -1,0 +1,234 @@
+---
+extends: substitution
+ignorecase: true
+level: warning
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/hyphens/
+message: "Use %s rather than '%s'."
+action:
+  name: replace
+# swap maps tokens in the form "bad: good"
+swap:
+  "(?<!.-)addon": add-on
+  "broad cast|broad-cast": broadcast
+  "call out|call-out": callout
+  "comma delimited|commadelimited": comma-delimited
+  "command driven|commanddriven": command-driven
+  "meta-data|meta data": metadata
+  "open-source|OpenSource|opensource": open source
+  "over-ride|over ride": override
+  "plug-ins|plug ins": plugins
+  "plug-in|plug in": plugin
+  "super-user|super user": superuser
+  "timeframe|time-frame": time frame
+  "up-grade|up grade": upgrade
+  "up-selling|up selling": upselling
+  "up-stream|up stream": upstream
+  "up-time|up time": uptime
+  ad-hoc: ad hoc
+  auto-configure: autoconfigure
+  auto-generated: autogenerate
+  auto-install: autoinstall
+  auto-number: autonumber
+  back-up: backup
+  bench-mark: benchmark
+  bi-annual: biannual
+  bi-directional: bidirectional
+  bi-monthly: bimonthly
+  bi-weekly: biweekly
+  bilevel: bi-level
+  check-out: checkout
+  checkin: check-in
+  client-server: client/server
+  cloud-bursting: cloudbursting
+  cloud-washing: cloudwashing
+  co-author: coauthor
+  co-existence: coexistence
+  co-locate|collocate: colocate
+  co-location: colocation
+  co-operate: cooperate
+  co-ordinate: coordinate
+  co-requisite: corequisite
+  co-worker: coworker
+  comma separated: comma-separated
+  command-language: command language
+  container based: container-based
+  counter-clockwise: counterclockwise
+  counter-measures: countermeasures
+  cross reference: cross-reference
+  cross site scripting: cross-site scripting
+  crossplatform|cross platform: cross-platform
+  cyber-attack: cyberattack
+  cyber-crime: cybercrime
+  cyber-security: cybersecurity
+  cyber-space: cyberspace
+  daisy-chain|daisychain: daisy chain
+  de-bias: debias
+  de-bug: debug
+  desk top|desk-top: desktop
+  disklabel|disk-label: disk label
+  domainname|domain-name: domain name
+  dotted-decimal: dotted decimal
+  double byte: double-byte
+  double click: double-click
+  double-click on: double-click
+  double-word: doubleword
+  down-load|down load: download
+  down-stream|down stream: downstream
+  e-book: ebook
+  e-mail: email
+  extra-linguistic: extralinguistic
+  extra-partition: extrapartition
+  firm ware|firm-ware: firmware
+  floating-point: floating point
+  fly-out: flyout
+  fore-ground|forground: foreground
+  frontend: front end|front-end
+  gray-scale|gray scale: grayscale
+  helpdesk|help-desk: help desk
+  hot-line: hotline
+  hotadd|hot-add: hot add
+  hotplug|hot-plug: hot plug
+  hotswap|hot-swap: hot swap
+  hyper-active: hyperactive
+  hyper-converged: hyperconverged
+  hyper-sensitive: hypersensitive
+  in line|in-line: inline
+  infra-red: infrared
+  infra-structure: infrastructure
+  inter-active: interactive
+  inter-cept: intercept
+  inter-related: interrelated
+  intra-node: intranode
+  intra-partition: intrapartition
+  intra-record: intrarecord
+  intra-system: intrasystem
+  load-balance: load balance
+  load-balancing: load balancing
+  macro-instruction: macroinstruction
+  macro-structure: macrostructure
+  meta-class: metaclass
+  meta-file: metafile
+  meta-table: metatable
+  micro-chip: microchip
+  micro-circuit: microcircuit
+  micro-code: microcode
+  mid-day: midday
+  mid-term: midterm
+  mid-year: midyear
+  mini-computer: minicomputer
+  mini-course: minicourse
+  mini-disk: minidisk
+  mouse-button|mousebutton: mouse button
+  multi site|multi-site: multisite
+  multi-channel: multichannel
+  multi-cloud: multicloud
+  multi-factor: multifactor
+  multi-media: multimedia
+  multi-path: multipath
+  multi-plexer: multiplexer
+  multi-point: multipoint
+  multi-processing: multiprocessing
+  multi-processor: multiprocessor
+  multi-schema: multischema
+  multi-table: multitable
+  multi-tenant: multitenant
+  multi-tier: multitiered
+  multi-tiered: multitiered
+  multi-vendor: multivendor
+  multicore: multi-core
+  multiinstance: multi-instance
+  new-line: newline
+  non-compliant: noncompliant
+  non-contiguous: noncontiguous
+  non-heap: nonheap
+  non-interactive: noninteractive
+  non-linear: nonlinear
+  non-negotiable: nonnegotiable
+  non-paired: nonpaired
+  non-system: nonsystem
+  non-zero: nonzero
+  nonnative: non-native
+  off-boarding: offboarding
+  off-load: offload
+  omni-channel: omnichannel
+  on-boarding: onboarding
+  on-line: online
+  op-code: opcode
+  over-lay: overlay
+  over-ride: override
+  over-strike: overstrike
+  post-editing: postediting
+  post-install: postinstall
+  post-installation: postinstallation
+  post-mortem: postmortem
+  post-operation: postoperation
+  post-requisite: postrequisite
+  power down: turn off|power off
+  power up: power on|turn on
+  poweroff: power-off
+  pre-apply: preapply
+  pre-assembled: preassembled
+  pre-cache: precache
+  pre-compile: precompile
+  pre-configure: preconfigure
+  pre-defined: predefined
+  pre-enrollment: preenrollment
+  pre-establish: preestablish
+  pre-formatted: preformatted
+  pre-install: preinstall
+  pre-installation: preinstallation
+  pre-operational: preoperational
+  pre-process: preprocess
+  pre-processor: preprocessor
+  pre-runtime: preruntime
+  pseudo code|pseudo-code: pseudocode
+  pseudo ops|pseudoops: pseudo-ops
+  pseudo-code: pseudocode
+  pseudo-random: pseudorandom
+  pseudo-text: pseudotext
+  pulldown|pull down: pull-down
+  re-direct: redirect
+  re-edit: reedit
+  re-examine: reexamine
+  re-register: reregister
+  re-synchronize: resynchronize
+  recreate: re-create
+  reenable: re-enable
+  remote-access: remote access
+  run level|run-level: runlevel
+  run-time: run time|runtime
+  semi-colon: semicolon
+  semi-conductor: semiconductor
+  serverside: server-side|server side
+  set-up: setup
+  soundcard|sound-card: sound card
+  stand-alone: standalone
+  straight forward|straight-forward: straightforward
+  sub-address: subaddress
+  sub-area: subarea
+  sub-capacity: subcapacity
+  sub-class: subclass
+  sub-command: subcommand
+  sub-directory: subdirectory
+  sub-menu: submenu
+  sub-net: subnet
+  sub-network: subnetwork
+  sub-package: subpackage
+  sub-tab: subtab
+  super-class: superclass
+  super-object: superobject
+  super-script: superscript
+  text based: text-based
+  textmode|text-mode: text mode
+  time-out: timeout|time out
+  trade-off|trade off: tradeoff
+  un-available: unavailable
+  un-committed: uncommitted
+  un-formatted: unformatted
+  un-install: uninstall
+  un-ordered: unordered
+  under-lying: underlying
+  under-run: underrun
+  under-used: underused
+  up-sell: upsell
+  video-mode|videomode: video mode

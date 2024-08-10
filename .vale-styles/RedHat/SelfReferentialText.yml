@@ -1,0 +1,14 @@
+---
+extends: existence
+ignorecase: true
+level: suggestion
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/selfreferentialtext/
+message: "Avoid using self-referential text such as '%s'."
+# source: "IBM - Audience and medium, p. 22"
+tokens:
+  - this topic
+  - this module
+  - this assembly
+  - this chapter
+  - this section
+  - this subsection

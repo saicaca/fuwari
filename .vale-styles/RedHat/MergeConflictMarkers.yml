@@ -1,0 +1,13 @@
+---
+extends: existence
+scope: raw
+level: error
+nonword: true
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/mergeconflictmarkers/
+message: "Do not commit Git merge conflict markers in source code."
+action:
+  name: remove
+tokens:
+  - '^<{7}\s.*$'
+  - '^={7}$'
+  - '^>{7}\s.*$'

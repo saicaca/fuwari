@@ -1,0 +1,9 @@
+---
+extends: occurrence
+level: suggestion
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/sentencelength/
+message: "Try to keep sentences to an average of 32 words or fewer."
+scope: sentence
+# source: "IBM - Conversational style"
+max: 32
+token: \b(\w+)\b

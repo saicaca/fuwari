@@ -1,0 +1,11 @@
+---
+extends: substitution
+level: warning
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/headingpunctuation/
+message: "Do not use end punctuation in headings."
+nonword: true
+scope: heading
+action:
+  name: replace
+swap:
+  '[.?!]$': ''

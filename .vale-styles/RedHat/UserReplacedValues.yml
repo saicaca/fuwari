@@ -1,0 +1,16 @@
+---
+extends: existence
+level: suggestion
+message: "Separate words by underscores in user-replaced values."
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/userreplacedvalues/
+scope: raw
+nonword: true
+action:
+  name: edit
+  params:
+    - regex
+    - "(-)" # pattern
+    - "_" # replace
+tokens:
+  - '__<[a-z_\x60]+-[\x60a-z_-]+>__'
+  - '<[a-z_]+-[a-z_-]+>'

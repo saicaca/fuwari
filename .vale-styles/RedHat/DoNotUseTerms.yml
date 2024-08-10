@@ -1,0 +1,27 @@
+---
+extends: substitution
+ignorecase: false
+level: warning
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/donotuseterms/
+message: "%s"
+swap:
+  # Start each error message with "Do not use ..."
+  # Error messages must be single quoted.
+  'ACK(?! flag)': 'Do not use "ACK" as acronym for "acknowledgement". When writing about the acknowledgement flag ("ACK flag") in a TCP packet, use "ACK flag".'
+  'future-proof': Do not use "future-proof" in a statement about the benefits, characteristics, or performance of a Red Hat product or service.'
+  'out of the box|out-of-the-box': 'Do not use "out of the box" or "out-of-the-box". Use text that is suitable for the context and the noun to which this adjective applies.'
+  and/or: 'Do not use "and/or". Depending on the context, use one of the following constructions: a and b, a or b, or a, b, or both.'
+  basically: 'Do not use "basically". "Basically" is another term for "in principle" or "fundamentally".'
+  congratulations: 'Do not use "congratulations" in technical information."'
+  debuggable: 'Do not use "debuggable". Rephrase the sentence to use the verb or noun debug. For example, change rebuild the debuggable version to rebuild the version that can be debugged.'
+  foo: 'Do not use "foo". This term is technical jargon in code and as shorthand for fubar, an acronym of profanity in code.'
+  fubar: 'Do not use "fubar". This term is an acronym of a profanity that is sometimes used by developers in code.'
+  \bred\b(?!-? *hat)|orange|yellow|green|blue|indigo|violet: 'Do not use colors to describe something unless it is also described non-visually, for example, with the name of the item.'
+  kerberize|kerberized: 'Do not use "kerberize" to refer to applications or services that use Kerberos authentication. Refer to such applications as "Kerberos-aware" or "Kerberos-enabled", or rewrite the sentence.'
+  native interface: 'Do not use "native interface" to refer to the command line interface for the JBoss EAP management tool.'
+  overhead: 'Do not use "overhead". Use terminology that is more specific. For example, write "running large queries can increase processor usage".'
+  please: 'Do not use "please" in technical documentation.'
+  quiescent: 'Do not use "quiescent". If a system is, or needs to be inactive, write "inactive". If a system is, or needs to be safe, write "safe".'
+  resides: 'Do not use "resides" if a simpler verb is possible.'
+  respective|respectively: 'Do not use "respective" or "respectively". Rewrite to avoid using these words.'
+  time-tested: 'Do not use "time-tested". Time-tested implies a claim of suitability or reliability.'
