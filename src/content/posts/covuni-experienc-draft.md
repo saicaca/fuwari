@@ -3,7 +3,7 @@ title: covuni-experienc-draft
 published: 2024-08-05
 description: "I share my experience attending Coventry University's Summer School in July 2024. Over four weeks, I learned about various aspects of game development, culminating in a game jam as the program's finale. This post provides a week-by-week breakdown of the program and my thoughts on each part."
 image: 'https://r2.sakurakat.systems/covuni-experience-banner.jpg'
-tags: ['Programming', 'Game Development', 'Unity', 'C#', ]
+tags: ['Programming', 'Game Development', 'Unity', "CSharp", ]
 category: 'Programming'
 draft: false
 ---
