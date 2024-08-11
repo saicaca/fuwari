@@ -66,18 +66,18 @@ I'd add a gif of me playing the game, but I performed the task on the university
 
 ## Animation
 
-On the next day we were taught how to use the animation system in unity, the 2 d[^2-space-d-and-3-space-d] and 3 d[^2-space-d-and-3-space-d] systems.
-They started by explaining what a rig is for 3 d animations and how 3 d models are animated using it.
+On the next day we were taught how to use the animation system in unity, the 2D and 3D systems.
+They started by explaining what a rig is for 3D animations and how 3D models are animated using it.
 Then we were given a rundown on how to *actually* use the animation system,
 that is, animator controller, animation clips,
 the transitions required as glue, animation parameters, animator component, and finally, how to use the animator in code.
-We then moved on to 2 d animation by using sprites and how to make them from spritesheets. 
+We then moved on to 2D animation by using sprites and how to make them from spritesheets. 
 
 As for the lab task, we made a flappy bird clone where the background moves and loops infinitely.
 > ![me attempting to play flappy bird and losing on the first pipe](https://r2.sakurakat.systems/covuni-experience--flappy-bird.gif)
 
-We also animated a Lora Croft inspired 2 d character.
-> ![Lora Croft inspired 2 d character](https://r2.sakurakat.systems/covuni-experience--2d-character.png)
+We also animated a Lora Croft inspired 2D character.
+> ![Lora Croft inspired 2D character](https://r2.sakurakat.systems/covuni-experience--2d-character.png)
 
 We sliced her body parts from a spritesheet
 > ![character spritesheet](https://r2.sakurakat.systems/covuni-experience--2d-character-spritesheet.png)
@@ -284,7 +284,7 @@ The requirements for the game jam were:
 
 I teamed up with Shashank Bhave
 ([GitHub](https://github.com/CAPTAINxNEMO), [LinkedIn](https://www.linkedin.com/in/shashank-bhave/)) for the game jam.
-We satisfied the requirements by creating a 2 d platformer where every level fits in one screen. 
+We satisfied the requirements by creating a 2D platformer where every level fits in one screen. 
 The theme of `Continuous Change` was incorporated by changing the player character and their abilities every few seconds.
 
 We decided to name the resulting game `Fractured Elements`.
@@ -319,8 +319,7 @@ In my next blog post, I want to go into how the game works.
 [^tangent-A*]: I learned A* by watching [A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)](https://www.youtube.com/watch?v=aKYlikFAV4k) by [The Coding Train](https://www.youtube.com/@TheCodingTrain).<iframe width="1237" height="696" src="https://www.youtube.com/embed/aKYlikFAV4k" title="A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> While it's on the longer side and has three parts, I do recommend watching it since Daniel Shiffman made it easy to understand, and, also implemented it.
 [^tangent-crazy-machine]: I have fond memories of playing the game when i was small. It was very fun and I spent hours messing around in the sandbox  
 [^gmtk2023-itchio]: my submission to the game jam https://pawarherschel.itch.io/cosmos-conquerors
-[^gmtk2023-github]: source code for Cosmos Conquerors https://github.com/pawarherschel/GMTK2023
-[^2-space-d-and-3-space-d]: there isn't supposed to be a space between 2 and d, and 3 and d, but for whatever reason, webstorm/intellij complains about it being 2d and 3d. It recommended to a non-breaking space.  
+    [^gmtk2023-github]: source code for Cosmos Conquerors https://github.com/pawarherschel/GMTK2023  
 [^wikipedia-typestate]: Wikipedia article for Typestate analysis https://en.wikipedia.org/wiki/Typestate_analysis
 [^rust-book-typestate]: Encoding States and Behavior as Types from The Rust Programming Language book https://doc.rust-lang.org/book/ch17-03-oo-design-patterns.html#encoding-states-and-behavior-as-types  
 [^stack-overflow-c-sharp-typestate]: https://stackoverflow.com/questions/78677699/type-state-pattern-in-c-sharp
