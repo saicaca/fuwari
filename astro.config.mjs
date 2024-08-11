@@ -10,6 +10,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeKatex from "rehype-katex"
 import rehypeSlug from "rehype-slug"
+import rehypeCitation from 'rehype-citation'
 import remarkDirective from "remark-directive" /* Handle directives */
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 import remarkMath from "remark-math"
@@ -73,6 +74,11 @@ export default defineConfig({
     rehypePlugins: [
       rehypeKatex,
       rehypeSlug,
+      [rehypeCitation,{
+        bibliography: "bibliography.bib",
+        linkCitations: true,
+        // csl: "mla",
+      }],
       [rehypeComponents, {
         components: {
           github: GithubCardComponent,
