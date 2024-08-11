@@ -1,17 +1,23 @@
 ---
 title: covuni-experienc-draft
 published: 2024-08-05
-description: ''
-image: ''
-tags: []
-category: ''
+description: "I share my experience attending Coventry University's Summer School in July 2024. Over four weeks, I learned about various aspects of game development, culminating in a game jam as the program's finale. This post provides a week-by-week breakdown of the program and my thoughts on each part."
+image: 'https://r2.sakurakat.systems/covuni-experience-banner.jpg'
+tags: ['Programming', 'Game Development', 'Unity', 'C#', ]
+category: 'Programming'
 draft: false
 ---
 
 ---
+
 :::WARNING
+
 DRAFT
+
 :::
+
+provisional title: `Exploring Game Development at Coventry University's Summer School`
+
 ---
 
 For July 2024,
@@ -26,9 +32,7 @@ Once we got to the UK, it turned out to be summer school, which made more sense 
 
 This blog post covers some of what I learned and did during the summer school.
 Also, this is from my perspective, and I already knew the basics of Godot,
-I participated in Game Maker's Toolkit's Game Jam in 2023
-([my submission to the game jam](https://pawarherschel.itch.io/cosmos-conquerors))
-([link to repo](https://github.com/pawarherschel/GMTK2023)).
+I participated in Game Maker's Toolkit's Game Jam in 2023 [^gmtk2023-itchio] [^gmtk2023-github].
 ::github{repo="pawarherschel/GMTK2023"}
 I also know unity on a surface level due to uploading avatars and making minor changes to them for VRChat.
 I feel like the best way to divide the content will be what I did each week,
@@ -43,10 +47,9 @@ For the first week, we got introduced to the unity game engine from complete scr
 The professors didn't expect you to know anything about unity,
 so we started with the UI of the editor, first lines in C# for unity,
 how to run the games,
-how to fix Visual Studio if the LSP
+how to fix Visual Studio if the LSP[^LSP]
 (Language Server Protocol[^LSP]) 
-doesn't work 
-[^why-lsp-important],
+doesn't work[^why-lsp-important],
 and so on.
 
 ## Physics
@@ -56,12 +59,14 @@ The professors then explained the key terms related to physics in unity and wher
 They also explained how colliders are done in professional games. 
 For me, the most significant part of this day was the event functions required to make colliders (and triggers) useful.
 As the lab task of the day, we made a red square jump and move on a platform.
+
 As an extra challenge, we got a skeleton pinball project.
 In the project, we had to configure some parameters and write some scripts as glue code.
+I'd add a gif of me playing the game, but I performed the task on the university computer. 
 
 ## Animation
 
-On the next day we were taught how to use the animation system in unity, the 2 d and 3 d systems.
+On the next day we were taught how to use the animation system in unity, the 2 d[^2-space-d-and-3-space-d] and 3 d[^2-space-d-and-3-space-d] systems.
 They started by explaining what a rig is for 3 d animations and how 3 d models are animated using it.
 Then we were given a rundown on how to *actually* use the animation system,
 that is, animator controller, animation clips,
@@ -101,7 +106,7 @@ They're proven to work well on all kinds of hardware while also giving the illus
 Navigation is a big part
 of making NPCs
 seem intelligent by making them follow a path towards some target without getting stuck on a corner or on some object.
-The default algorithm for pathfinding in unity is A* [^A*-tangent].
+The default algorithm for pathfinding in unity is A* (tangent[^A*-tangent]).
 
 Unity uses NavMesh for navigation.
 The topics they covered were NavMesh, Off-Mesh Link, NavMesh Obstacle, and NavMesh Agent.
@@ -113,10 +118,9 @@ The lab task for the day was to make a character that pathfinds to a sphere usin
 For the challenge, we had to make it so that you can move the target sphere, and the character will still follow it.
 > ![the navmesh project](https://r2.sakurakat.systems/covuni-experience--navmesh-project.gif)
 
-The challenge wasn't intriguing enough for me,
-so I wanted to make the character use auto generated Off Mesh Links, 
+I wanted to make the character use auto generated Off Mesh Links, 
 and I did it by changing the cost for surfaces to wacky numbers.
-:::note[the weird numbers]
+:::note[the wacky numbers]
 
 ![the hacky numbers](https://r2.sakurakat.systems/covuni-experience--navmesh-hack.png)
 
@@ -133,32 +137,25 @@ and gave an example of a rudimentary way to implement FSM by chaining if-else.
 
 To me, FSM is interesting because if the language has a strong type system and supports generics,
 then it's possible to get a type-safe FSM. 
-The technique mentioned in the last sentence is called typestate 
-([Wikipedia article for Typestate analysis](https://en.wikipedia.org/wiki/Typestate_analysis) and
-[Encoding States and Behavior as Types from The Rust Programming Language book](https://doc.rust-lang.org/book/ch17-03-oo-design-patterns.html#encoding-states-and-behavior-as-types)), 
+The technique mentioned in the last sentence is called typestate [^wikipedia-typestate] [^rust-book-typestate], 
 which I have implemented before in rust.
-Typestate pattern can be used in C# as well,
+Typestate pattern can be used in C# as well [^stack-overflow-c-sharp-typestate] [@so_typestate_c_sharp],
 however, I didn't use it myself due to how much time it would have required.
 
 We've already used FSMs in Unity, the animation tree is an example of FSM.
 The states are the available animations,
 the parameters along with the conditions are the state transitions, and the animation being played is the current state.
 
-FSMs are also an example of event driven programming 
-([Wikipedia entry for Event-driven finite-state machine](https://en.wikipedia.org/wiki/Event-driven_finite-state_machine)), 
+FSMs are also an example of event driven programming [^wikipedia-event-driven-fsm], 
 which you might be familiar with if you use JavaScript/Typescript/ECMAScript (whatever, idfk what it's called).
-I have used Event-Driven Programming ([link to Wikipedia](https://en.wikipedia.org/wiki/Event-driven_programming))
+I have used Event-Driven Programming [^wikipedia-event-driven-programming]
 in Godot with the help of [signals](https://docs.godotengine.org/en/stable/classes/class_signal.html) 
 ([Godot documentation for Using Signals](https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html)).
 They made connecting scripts really easy.
 Unity also has an [Event System](https://docs.unity3d.com/560/Documentation/Manual/EventSystem.html),
 but I didn't feel confident in myself
 to learn how to make events and connect scripts using them by using the Unity docs.
-(tangent[^tangent])
-
-The professors recommended (or at least they only taught)
-us to make an abstract class with all the functions and then use inheritance to create actual classes for the states.
-Coming from Rust, composition would have been my choice rather than inheritance.
+(tangent [^documentation-tangent]) (another tangent lol [^composition-inheritance-tangent])
 
 There were three lab tasks we had to do,
 Implementing a basic If/else FSM,
@@ -167,6 +164,7 @@ Implementing a FSM using the State Pattern.
 The project we made was controlling a cat,
 and when the cat is in a certain radius of the chicken, the chicken tried to flee.
 > ![the cat and chicken game](https://r2.sakurakat.systems/covuni-experience--cat-and-chicken.gif)
+
 The challenge was creating a first-person controller,
 which can shoot spheres, and a cube that will follow the player;
 once the cube is shot, it will stop following after the player.
@@ -200,26 +198,32 @@ but due to me being an idiot, I used an online md editor and didn't save the fil
 
 ## Game Mechanics
 
-I was going to put the document I made for the [SCP-3008](https://scp-wiki.wikidot.com/scp-3008)
-(the IKEA store) inspired game, but due to technical issues I wasn't able to save the file...
+I was going to put the document I made for the [SCP-3008](https://scp-wiki.wikidot.com/scp-3008) 
+(the IKEA store) [@mortos_scp_3008] inspired game, but due to technical issues I wasn't able to save the file...
+The premise for the game was that you're a D-Class personnel who had to get inside SCP-3008, and 
+your objective is to bring back information regarding the structure and the creatures. 
+Due to the scary nature of SCP-3008, it would be a horror game.
 
-:::caution[TODO]
+You can only see in a cone in front of you, 
+but you can hear the creatures.
+According to the article, the creatures say lines such as 
+"[The store is now closed, please exit the building](https://scp-wiki.wikidot.com/scp-3008#:~:text=The%20store%20is%20now%20closed%2C%20please%20exit%20the%20building)".
+These voice lines act as information regarding where the creatures are in relation to the player.
 
-1. add an explanation for the game 
+During the day phase, you prepare for the night (kinda obvious I think).
+One of the core mechanics are randomly generated areas with objects which might help you survive the night, and 
+you also have the items from previous days.
+After you survive the night, you move to a different area.
 
-:::
-
+As for the difficulty increase, your cone of vision keeps shrinking;
+however, the amplitude of the voice lines stays constant.
 
 ## Level Design and Storytelling with Games
 
 The lab tasks for level design and storytelling were connected, so I'm going to write them as one. 
-I made the first level for a puzzle game "inspired" by `Crazy Machines`.
-
-:::caution[TODO]
-
-1. add the tangent about `Crazy Machines`
-
-:::
+I made the first level for a puzzle game "inspired"
+by [Crazy Machines](https://store.steampowered.com/app/18420/Crazy_Machines/) 
+(tangent[^crazy-machine-tangent]).
 
 Fortunately, I had solved my technical issue, and I was able to save the task output.
 
@@ -285,11 +289,11 @@ The theme of `Continuous Change` was incorporated by changing the player charact
 
 We decided to name the resulting game `Fractured Elements`.
 it's available to download at [itch.io](https://pawarherschel.itch.io/fractured-elements),
-and the source code is available on GitHub [link to repo](https://github.com/pawarherschel/CovUniGJ2024).
+and the source code is available on [GitHub](https://github.com/pawarherschel/CovUniGJ2024).
 
 ::github{repo="pawarherschel/CovUniGJ2024"}
 
-(yes, I'm very creative with naming)
+(yes, I'm __very__ creative with naming)
 
 :::caution[TODO]
 
@@ -301,13 +305,47 @@ and the source code is available on GitHub [link to repo](https://github.com/paw
 In my next blog post, I want to go into how the game works.
 
 ---
-[^tangent]: The documentation for both Godot and Rust is really good and easy to understand. But,
+
+# Citations
+
+[^ref]
+
+---
+
+[^documentation-tangent]: The documentation for both Godot and Rust is really good and easy to understand. But,
 Unity's and Java's official documentation is scary, and it was hard for me.
+
 [^search-disclaimer]: At the time of writing, this comes up when you search for "Coventry University summer school"
+
 [^LSP]: It's the thing that gives you the red squiggly line in your editor
+
 [^why-lsp-important]: This turned out to be important since the LSP kept breaking for us lol
+
 [^A*-tangent]: I learned A* by watching [A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)](https://www.youtube.com/watch?v=aKYlikFAV4k) by [The Coding Train](https://www.youtube.com/@TheCodingTrain).<iframe
 width="1237" height="696" src="https://www.youtube.com/embed/aKYlikFAV4k" title="A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 While it's on the longer side and has three parts,
 I do recommend watching it since Daniel Shiffman made it easy to understand,
 and, also implemented it.
+
+[^crazy-machine-tangent]: I have fond memories of playing the game when i was small. It was very fun and I spent hours messing around in the sandbox 
+
+[^gmtk2023-itchio]: my submission to the game jam https://pawarherschel.itch.io/cosmos-conquerors
+
+[^gmtk2023-github]: source code for Cosmos Conquerors https://github.com/pawarherschel/GMTK2023
+
+[^2-space-d-and-3-space-d]: there isn't supposed to be a space between 2 and d, and 3 and d, but for whatever reason, webstorm/intellij complains about it being 2d and 3d.
+It recommended to a non-breaking space. 
+
+[^wikipedia-typestate]: Wikipedia article for Typestate analysis https://en.wikipedia.org/wiki/Typestate_analysis
+
+[^rust-book-typestate]: Encoding States and Behavior as Types from The Rust Programming Language book https://doc.rust-lang.org/book/ch17-03-oo-design-patterns.html#encoding-states-and-behavior-as-types 
+
+[^stack-overflow-c-sharp-typestate]: https://stackoverflow.com/questions/78677699/type-state-pattern-in-c-sharp
+
+[^wikipedia-event-driven-fsm]: https://en.wikipedia.org/wiki/Event-driven_finite-state_machine
+
+[^wikipedia-event-driven-programming]:  https://en.wikipedia.org/wiki/Event-driven_programming
+
+[^composition-inheritance-tangent]: The professors recommended (or at least they only taught)
+us to make an abstract class with all the functions and then use inheritance to create actual classes for the states.
+Coming from Rust, composition would have been my choice rather than inheritance.
