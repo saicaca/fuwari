@@ -106,7 +106,7 @@ They're proven to work well on all kinds of hardware while also giving the illus
 Navigation is a big part
 of making NPCs
 seem intelligent by making them follow a path towards some target without getting stuck on a corner or on some object.
-The default algorithm for pathfinding in unity is A* (tangent[^A*-tangent]).
+The default algorithm for pathfinding in unity is A* (tangent[^tangent-A*]).
 
 Unity uses NavMesh for navigation.
 The topics they covered were NavMesh, Off-Mesh Link, NavMesh Obstacle, and NavMesh Agent.
@@ -155,7 +155,7 @@ They made connecting scripts really easy.
 Unity also has an [Event System](https://docs.unity3d.com/560/Documentation/Manual/EventSystem.html),
 but I didn't feel confident in myself
 to learn how to make events and connect scripts using them by using the Unity docs.
-(tangent [^documentation-tangent]) (another tangent lol [^composition-inheritance-tangent])
+(tangent [^tangent-documentation]) (another tangent lol [^tangent-composition-inheritance])
 
 There were three lab tasks we had to do,
 Implementing a basic If/else FSM,
@@ -223,7 +223,7 @@ however, the amplitude of the voice lines stays constant.
 The lab tasks for level design and storytelling were connected, so I'm going to write them as one. 
 I made the first level for a puzzle game "inspired"
 by [Crazy Machines](https://store.steampowered.com/app/18420/Crazy_Machines/) 
-(tangent[^crazy-machine-tangent]).
+(tangent[^tangent-crazy-machine]).
 
 Fortunately, I had solved my technical issue, and I was able to save the task output.
 
@@ -312,40 +312,18 @@ In my next blog post, I want to go into how the game works.
 
 ---
 
-[^documentation-tangent]: The documentation for both Godot and Rust is really good and easy to understand. But,
-Unity's and Java's official documentation is scary, and it was hard for me.
-
+[^tangent-documentation]: The documentation for both Godot and Rust is really good and easy to understand. But, Unity's and Java's official documentation is scary, and it was hard for me.
 [^search-disclaimer]: At the time of writing, this comes up when you search for "Coventry University summer school"
-
 [^LSP]: It's the thing that gives you the red squiggly line in your editor
-
 [^why-lsp-important]: This turned out to be important since the LSP kept breaking for us lol
-
-[^A*-tangent]: I learned A* by watching [A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)](https://www.youtube.com/watch?v=aKYlikFAV4k) by [The Coding Train](https://www.youtube.com/@TheCodingTrain).<iframe
-width="1237" height="696" src="https://www.youtube.com/embed/aKYlikFAV4k" title="A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-While it's on the longer side and has three parts,
-I do recommend watching it since Daniel Shiffman made it easy to understand,
-and, also implemented it.
-
-[^crazy-machine-tangent]: I have fond memories of playing the game when i was small. It was very fun and I spent hours messing around in the sandbox 
-
+[^tangent-A*]: I learned A* by watching [A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)](https://www.youtube.com/watch?v=aKYlikFAV4k) by [The Coding Train](https://www.youtube.com/@TheCodingTrain).<iframe width="1237" height="696" src="https://www.youtube.com/embed/aKYlikFAV4k" title="A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> While it's on the longer side and has three parts, I do recommend watching it since Daniel Shiffman made it easy to understand, and, also implemented it.
+[^tangent-crazy-machine]: I have fond memories of playing the game when i was small. It was very fun and I spent hours messing around in the sandbox  
 [^gmtk2023-itchio]: my submission to the game jam https://pawarherschel.itch.io/cosmos-conquerors
-
 [^gmtk2023-github]: source code for Cosmos Conquerors https://github.com/pawarherschel/GMTK2023
-
-[^2-space-d-and-3-space-d]: there isn't supposed to be a space between 2 and d, and 3 and d, but for whatever reason, webstorm/intellij complains about it being 2d and 3d.
-It recommended to a non-breaking space. 
-
+[^2-space-d-and-3-space-d]: there isn't supposed to be a space between 2 and d, and 3 and d, but for whatever reason, webstorm/intellij complains about it being 2d and 3d. It recommended to a non-breaking space.  
 [^wikipedia-typestate]: Wikipedia article for Typestate analysis https://en.wikipedia.org/wiki/Typestate_analysis
-
-[^rust-book-typestate]: Encoding States and Behavior as Types from The Rust Programming Language book https://doc.rust-lang.org/book/ch17-03-oo-design-patterns.html#encoding-states-and-behavior-as-types 
-
+[^rust-book-typestate]: Encoding States and Behavior as Types from The Rust Programming Language book https://doc.rust-lang.org/book/ch17-03-oo-design-patterns.html#encoding-states-and-behavior-as-types  
 [^stack-overflow-c-sharp-typestate]: https://stackoverflow.com/questions/78677699/type-state-pattern-in-c-sharp
-
 [^wikipedia-event-driven-fsm]: https://en.wikipedia.org/wiki/Event-driven_finite-state_machine
-
 [^wikipedia-event-driven-programming]:  https://en.wikipedia.org/wiki/Event-driven_programming
-
-[^composition-inheritance-tangent]: The professors recommended (or at least they only taught)
-us to make an abstract class with all the functions and then use inheritance to create actual classes for the states.
-Coming from Rust, composition would have been my choice rather than inheritance.
+[^tangent-composition-inheritance]: The professors recommended (or at least they only taught) us to make an abstract class with all the functions and then use inheritance to create actual classes for the states. Coming from Rust, composition would have been my choice rather than inheritance.
