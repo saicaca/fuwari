@@ -9,13 +9,15 @@ draft: false
 ---
 
 ---
-> DRAFT
+:::WARNING
+DRAFT
+:::
 ---
 
 For July 2024,
 I had the privilege
 of attending [Coventry University's Summer School](https://www.coventry.ac.uk/study-at-coventry/summer-schools/)
-(at the time of writing, this comes up when you search for "Coventry University summer school")
+[^search-disclaimer]
 organized by [Vishwaniketan Incubation Center](https://vic.vishwaniketan.edu.in/)
 (VIC from hereon).
 This experience lasted for 4 weeks  
@@ -24,7 +26,10 @@ Once we got to the UK, it turned out to be summer school, which made more sense 
 
 This blog post covers some of what I learned and did during the summer school.
 Also, this is from my perspective, and I already knew the basics of Godot,
-I participated in Game Maker's Toolkit's Game Jam in 2023 ([my submission to the game jam](https://pawarherschel.itch.io/cosmos-conquerors)).
+I participated in Game Maker's Toolkit's Game Jam in 2023
+([my submission to the game jam](https://pawarherschel.itch.io/cosmos-conquerors))
+([link to repo](https://github.com/pawarherschel/GMTK2023)).
+::github{repo="pawarherschel/GMTK2023"}
 I also know unity on a surface level due to uploading avatars and making minor changes to them for VRChat.
 I feel like the best way to divide the content will be what I did each week,
 however, I will avoid going into excruciating details about each topic, 
@@ -39,8 +44,9 @@ The professors didn't expect you to know anything about unity,
 so we started with the UI of the editor, first lines in C# for unity,
 how to run the games,
 how to fix Visual Studio if the LSP
-(Language Server Protocol, the thing that gives you the red squiggly line in your editor) 
-doesn't work (which was really important since the LSP kept breaking for us lol),
+(Language Server Protocol[^LSP]) 
+doesn't work 
+[^why-lsp-important],
 and so on.
 
 ## Physics
@@ -61,10 +67,18 @@ Then we were given a rundown on how to *actually* use the animation system,
 that is, animator controller, animation clips,
 the transitions required as glue, animation parameters, animator component, and finally, how to use the animator in code.
 We then moved on to 2 d animation by using sprites and how to make them from spritesheets. 
+
 As for the lab task, we made a flappy bird clone where the background moves and loops infinitely.
+> ![me attempting to play flappy bird and losing on the first pipe](https://r2.sakurakat.systems/covuni-experience--flappy-bird.gif)
+
 We also animated a Lora Croft inspired 2 d character.
+> ![Lora Croft inspired 2 d character](https://r2.sakurakat.systems/covuni-experience--2d-character.png)
+
 We sliced her body parts from a spritesheet
+> ![character spritesheet](https://r2.sakurakat.systems/covuni-experience--2d-character-spritesheet.png)
+
 and animated in a way where it looked like her body parts were connected using joints without using joints. 
+> ![2d animation](https://r2.sakurakat.systems/covuni-experience--2d-animation.gif)
 
 Thus, they managed to complete the three core concepts required to make games. 
 
@@ -87,12 +101,7 @@ They're proven to work well on all kinds of hardware while also giving the illus
 Navigation is a big part
 of making NPCs
 seem intelligent by making them follow a path towards some target without getting stuck on a corner or on some object.
-The default algorithm for pathfinding in unity is A*
-(I learned A* by watching [A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)](https://www.youtube.com/watch?v=aKYlikFAV4k) 
-by [The Coding Train](https://www.youtube.com/@TheCodingTrain).
-While it's on the longer side and has three parts,
-I do recommend watching it since Daniel Shiffman
-made it easy to understand, and, also implemented it).
+The default algorithm for pathfinding in unity is A* [^A*-tangent].
 
 Unity uses NavMesh for navigation.
 The topics they covered were NavMesh, Off-Mesh Link, NavMesh Obstacle, and NavMesh Agent.
@@ -102,10 +111,17 @@ Then the professors taught about NavMesh Obstacles, why, and how to use it.
 
 The lab task for the day was to make a character that pathfinds to a sphere using the NavMesh System.
 For the challenge, we had to make it so that you can move the target sphere, and the character will still follow it.
-The challenge wasn't challenging enough for me,
+> ![the navmesh project](https://r2.sakurakat.systems/covuni-experience--navmesh-project.gif)
+
+The challenge wasn't intriguing enough for me,
 so I wanted to make the character use auto generated Off Mesh Links, 
 and I did it by changing the cost for surfaces to wacky numbers.
+:::note[the weird numbers]
 
+![the hacky numbers](https://r2.sakurakat.systems/covuni-experience--navmesh-hack.png)
+
+:::
+> ![pathfinding using weird numbers](https://r2.sakurakat.systems/covuni-experience--navmesh-hack.gif)
 
 ## Finite State Machine (FSM)
 
@@ -138,9 +154,7 @@ They made connecting scripts really easy.
 Unity also has an [Event System](https://docs.unity3d.com/560/Documentation/Manual/EventSystem.html),
 but I didn't feel confident in myself
 to learn how to make events and connect scripts using them by using the Unity docs.
-(Tangent:
-the documentation for both Godot and Rust is really good and easy to understand. But,
-Unity's and Java's official documentation is scary, and it was hard for me.)
+(tangent[^tangent])
 
 The professors recommended (or at least they only taught)
 us to make an abstract class with all the functions and then use inheritance to create actual classes for the states.
@@ -150,11 +164,13 @@ There were three lab tasks we had to do,
 Implementing a basic If/else FSM,
 Implementing an FSM using Rabin events, and
 Implementing a FSM using the State Pattern.
-The project we made was a cat pathfinding to a chicken,
-and when the cat is in a certain radius of the chicken, the chicken tried to flee. 
+The project we made was controlling a cat,
+and when the cat is in a certain radius of the chicken, the chicken tried to flee.
+> ![the cat and chicken game](https://r2.sakurakat.systems/covuni-experience--cat-and-chicken.gif)
 The challenge was creating a first-person controller,
 which can shoot spheres, and a cube that will follow the player;
 once the cube is shot, it will stop following after the player.
+> ![the fps thingy](https://r2.sakurakat.systems/covuni-experience--fps-thingy.gif)
 
 ## My thoughts
 
@@ -179,14 +195,71 @@ While the second week was all the things I wanted to learn, the third week wasn'
 ## High Concept Document (HCD)
 
 We made an HCD for a game idea we got from [Game Idea Generator](https://ygd.bafta.org/resources/game-idea-generator).
-I was going to put the document I made for the [SCP-3008](https://scp-wiki.wikidot.com/scp-3008)
-(the IKEA store) inspired game, but due to technical issues I wasn't able to save the file...
+We brainstormed about some game ideas,
+but due to me being an idiot, I used an online md editor and didn't save the file.
 
 ## Game Mechanics
 
-## Level Design
+I was going to put the document I made for the [SCP-3008](https://scp-wiki.wikidot.com/scp-3008)
+(the IKEA store) inspired game, but due to technical issues I wasn't able to save the file...
 
-## Storytelling with Games
+:::caution[TODO]
+
+1. add an explanation for the game 
+
+:::
+
+
+## Level Design and Storytelling with Games
+
+The lab tasks for level design and storytelling were connected, so I'm going to write them as one. 
+I made the first level for a puzzle game "inspired" by `Crazy Machines`.
+
+:::caution[TODO]
+
+1. add the tangent about `Crazy Machines`
+
+:::
+
+Fortunately, I had solved my technical issue, and I was able to save the task output.
+
+The premise of the game is, 
+you’re a small child who can see fae-creatures.
+The fae creatures are trapped in the human world and your task is to free them from their "cages".
+Each cage has a weakness, and each item is associated with a material.
+To free the fae from the cage, you need to collide an object, which is made of the material it's weak to.
+To know what's weak to what, you will need to listen to the stories and fairytales that are part of the puzzles. 
+
+![Level Design](https://r2.sakurakat.systems/covuni-experience--level-design.png)
+
+Legend for the image:
+- Red Rectangles: different sections of the UI
+- Magenta Rectangles: gameplay related UI 
+- Lime-Green Lines: platforms
+- Yellow Circles: metal ball
+- Brown Rectangles: books, which will act as dominoes
+- Magenta Diamond: the final goal
+- Purple Rectangle: the area where you're allowed to place "blocks" from your inventory.
+
+```markdown
+Game Window: where the puzzle takes places
+Inventory: available "blocks" for the puzzle
+Notepad: for writing notes, which persist across puzzles,
+and also exist during fairy tale time
+
+level 1: hello world
+
+start
+metal ball rolls down
+hits the book
+book hits other book like dominoes
+last book hits another metal ball
+the metal ball hits the goal
+win
+
+the inventory will have the initial metal ball
+the allow area is the only place where you can initially put the ball
+```
 
 # Week 4 and wrapping up
 
@@ -194,16 +267,19 @@ During the fourth week, as a culmination of all our efforts and knowledge, we pa
 [Mohilly](https://mohilly.itch.io/),
 [ae2720](https://ae2720.itch.io/),
 [ae2791](https://ae2791.itch.io/), and 
-[ab8809](https://ab8809.itch.io/) at [itch.io](https://itch.io/jam/summer-school-24).
+[ab8809](https://ab8809.itch.io/) 
+at [itch.io](https://itch.io/jam/summer-school-24).
 
 The requirements for the game jam were:
- - 2D Platformer
+- 2D Platformer
     - Create a game in the 2D platformer genre, focusing on movement, jumping, and
       exploration. 
- - Continuous Change
+- Continuous Change
     -  Implement mechanics that highlight the theme. This could include
        changing environments, shifting levels, evolving abilities, or any other creative interpretation.
-   
+
+I teamed up with Shashank Bhave
+([GitHub](https://github.com/CAPTAINxNEMO), [LinkedIn](https://www.linkedin.com/in/shashank-bhave/)) for the game jam.
 We satisfied the requirements by creating a 2 d platformer where every level fits in one screen. 
 The theme of `Continuous Change` was incorporated by changing the player character and their abilities every few seconds.
 
@@ -211,4 +287,27 @@ We decided to name the resulting game `Fractured Elements`.
 it's available to download at [itch.io](https://pawarherschel.itch.io/fractured-elements),
 and the source code is available on GitHub [link to repo](https://github.com/pawarherschel/CovUniGJ2024).
 
+::github{repo="pawarherschel/CovUniGJ2024"}
+
+(yes, I'm very creative with naming)
+
+:::caution[TODO]
+
+1. add details about the game mechanics
+2. add details about the lore
+
+:::
+
 In my next blog post, I want to go into how the game works.
+
+---
+[^tangent]: The documentation for both Godot and Rust is really good and easy to understand. But,
+Unity's and Java's official documentation is scary, and it was hard for me.
+[^search-disclaimer]: At the time of writing, this comes up when you search for "Coventry University summer school"
+[^LSP]: It's the thing that gives you the red squiggly line in your editor
+[^why-lsp-important]: This turned out to be important since the LSP kept breaking for us lol
+[^A*-tangent]: I learned A* by watching [A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)](https://www.youtube.com/watch?v=aKYlikFAV4k) by [The Coding Train](https://www.youtube.com/@TheCodingTrain).<iframe
+width="1237" height="696" src="https://www.youtube.com/embed/aKYlikFAV4k" title="A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+While it's on the longer side and has three parts,
+I do recommend watching it since Daniel Shiffman made it easy to understand,
+and, also implemented it.
