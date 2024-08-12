@@ -14,7 +14,7 @@ interface Props {
     lang?: string
 }
 
-const { title, banner, description , lang} = Astro.props
+const { title, banner, description, lang} = Astro.props
 const hasBannerCredit =
   siteConfig.banner.enable && siteConfig.banner.credit.enable
 const hasBannerLink = !!siteConfig.banner.credit.url
