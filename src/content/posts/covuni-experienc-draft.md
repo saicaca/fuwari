@@ -234,7 +234,7 @@ Each cage has a weakness, and each item is associated with a material.
 To free the fae from the cage, you need to collide an object, which is made of the material it's weak to.
 To know what's weak to what, you will need to listen to the stories and fairytales that are part of the puzzles. 
 
-![Level Design](https://r2.sakurakat.systems/covuni-experience--level-design.png)
+> ![Level Design](https://r2.sakurakat.systems/covuni-experience--level-design.png)
 
 Legend for the image:
 - Red Rectangles: different sections of the UI
@@ -287,22 +287,40 @@ I teamed up with Shashank Bhave
 We satisfied the requirements by creating a 2D platformer where every level fits in one screen. 
 The theme of `Continuous Change` was incorporated by changing the player character and their abilities every few seconds.
 
-We decided to name the resulting game `Fractured Elements`.
-it's available to download at [itch.io](https://pawarherschel.itch.io/fractured-elements),
+The name we decided for the game was `Fractured Elements`.
+It's available to download at [itch.io](https://pawarherschel.itch.io/fractured-elements),
 and the source code is available on [GitHub](https://github.com/pawarherschel/CovUniGJ2024).
 
 ::github{repo="pawarherschel/CovUniGJ2024"}
 
 (yes, I'm __very__ creative with naming)
 
-:::caution[TODO]
+The level design was done by Shashank, while I tried my best to implement the themes in code.
+He designed the level, found the game art, and made the level using tilemaps.
 
-1. add details about the game mechanics
-2. add details about the lore
+> ![the complete map](https://r2.sakurakat.systems/covuni-experience--map.png)
 
+:::note[room 1]
+![room 1](https://r2.sakurakat.systems/covuni-experience--map--room-1.png)
 :::
 
-In my next blog post, I want to go into how the game works.
+:::note[room 2]
+![room 2](https://r2.sakurakat.systems/covuni-experience--map--room-2.png)
+:::
+
+:::note[room 3 (boss)]
+![room 3 (boss)](https://r2.sakurakat.systems/covuni-experience--map--room-3-boss.png)
+:::
+
+The main character has the power to control "elements"; however, they don't have control over their powers.
+Due to that, they keep switching between forms.
+To control their powers, they need to harvest power cores from ancient golems.
+
+To do so, the player must deal with the constant switching between forms and weapons while also platforming. 
+
+# What to expect next
+
+In my next blog post, I want to go into how the game works and Shashank will expand on how he made the level design.
 
 ---
 
