@@ -1,5 +1,4 @@
 ---
-import GlobalStyles from '@components/GlobalStyles.astro'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
@@ -16,6 +15,9 @@ import {
 import { defaultFavicons } from '../constants/icon'
 import type { Favicon } from '../types/config'
 import { url, pathsEqual } from '../utils/url-utils'
+
+import '../styles/main.css'         // let Astro catch postcss errors
+import '../styles/variables.styl'
 
 interface Props {
   title?: string
@@ -106,7 +108,6 @@ const siteLang = siteConfig.lang.replace('_', '-')
 		<slot name="head"></slot>
 
 		<link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
 		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
@@ -114,7 +115,6 @@ const siteLang = siteConfig.lang.replace('_', '-')
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"is-home": isHomePage, "enable-banner": enableBanner}]}>
 		<ConfigCarrier></ConfigCarrier>
-		<GlobalStyles>
 		<div id="banner-wrapper" class="absolute w-full transition-all duration-700">
 			<ImageWrapper id="boxtest" alt="Banner image of the blog" class:list={["object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
 					  src={siteConfig.banner.src} position={siteConfig.banner.position}
@@ -122,7 +122,6 @@ const siteLang = siteConfig.lang.replace('_', '-')
 			</ImageWrapper>
 		</div>
 		<slot />
-		</GlobalStyles>
 	</body>
 </html>
 <style is:global>

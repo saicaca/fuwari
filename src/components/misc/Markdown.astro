@@ -65,171 +65,37 @@ const className = Astro.props.class
   }
 </script>
 
+
 <!-- Styles for copy-code-button -->
 <style lang="css" is:global>
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+.btn-regular-dark {
+    @apply flex items-center justify-center
+    bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))] active:bg-[oklch(0.55_0.01_var(--hue))]
+    dark:bg-[oklch(0.30_0.02_var(--hue))] dark:hover:bg-[oklch(0.35_0.03_var(--hue))] dark:active:bg-[oklch(0.40_0.03_var(--hue))]
+}
+.btn-regular-dark.success {
+    @apply bg-[oklch(0.75_0.14_var(--hue))] dark:bg-[oklch(0.75_0.14_var(--hue))]
+}
 
-    @layer components {
-        .btn-regular-dark {
-            @apply flex items-center justify-center
-            bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))] active:bg-[oklch(0.55_0.01_var(--hue))]
-            dark:bg-[oklch(0.30_0.02_var(--hue))] dark:hover:bg-[oklch(0.35_0.03_var(--hue))] dark:active:bg-[oklch(0.40_0.03_var(--hue))]
-        }
-        .btn-regular-dark.success {
-            @apply bg-[oklch(0.75_0.14_var(--hue))] dark:bg-[oklch(0.75_0.14_var(--hue))]
-        }
-
-        .copy-btn-icon {
-            @apply absolute top-1/2 left-1/2 transition -translate-x-1/2 -translate-y-1/2
-        }
-        .copy-btn .copy-icon {
-            @apply opacity-100 fill-white dark:fill-white/75
-        }
-        .copy-btn.success .copy-icon {
-            @apply opacity-0 fill-[var(--deep-text)]
-        }
-        .copy-btn .success-icon {
-            @apply opacity-0
-        }
-        .copy-btn.success .success-icon {
-            @apply opacity-100
-        }
-    }
+.copy-btn-icon {
+    @apply absolute top-1/2 left-1/2 transition -translate-x-1/2 -translate-y-1/2
+}
+.copy-btn .copy-icon {
+    @apply opacity-100 fill-white dark:fill-white/75
+}
+.copy-btn.success .copy-icon {
+    @apply opacity-0 fill-[var(--deep-text)]
+}
+.copy-btn .success-icon {
+    @apply opacity-0
+}
+.copy-btn.success .success-icon {
+    @apply opacity-100
+}
 </style>
 
 <style lang="stylus" is:global>
   .custom-md
-    h1, h2, h3, h4, h5, h6
-      .anchor
-        margin: -0.125rem !important
-        margin-left: 0.2ch !important
-        padding: 0.125rem !important
-        user-select: none !important
-        opacity: 0 !important
-        text-decoration: none !important
-        transition: opacity 0.15s ease-in-out, background 0.15s ease-in-out !important
-
-        .anchor-icon
-          margin-left: 0.45ch !important
-          margin-right: 0.45ch !important
-
-      &:hover
-        .anchor
-          opacity: 1 !important
-
-    a:not(.no-styling)
-      position: relative
-      background: none
-      margin: -0.25rem
-      padding: 0.25rem
-      border-radius: 0.375rem
-      font-weight: 500
-      color: var(--primary)
-      text-decoration-line: underline
-      text-decoration-color: var(--link-underline)
-      text-decoration-thickness: 0.125rem
-      text-decoration-style: dashed
-      text-underline-offset: 0.25rem
-      /*&:after*/
-      /*  content: ''*/
-      /*  position: absolute*/
-      /*  left: 2px*/
-      /*  right: 2px*/
-      /*  bottom: 4px*/
-      /*  height: 6px*/
-      /*  border-radius: 3px*/
-      /*  background: var(--link-hover)*/
-      /*  transition: background 0.15s ease-in-out;*/
-      /*  z-index: -1;*/
-
-      &:hover
-        background: var(--link-hover)
-        text-decoration-color: var(--link-hover)
-
-      &:active
-        background: var(--link-active)
-        text-decoration-color: var(--link-active)
-
-    code
-      font-family: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace
-      background: var(--inline-code-bg)
-      color: var(--inline-code-color)
-      padding: 0.125rem 0.25rem
-      border-radius: 0.25rem
-      overflow: hidden
-      counter-reset: line
-
-      &:before
-        content: none
-
-      &:after
-        content: none
-
-      span.line
-        &:before
-          content: counter(line)
-          counter-increment: line
-          direction: rtl
-          display: inline-block
-          margin-right: 1rem
-          width: 1rem
-          color: rgba(255, 255, 255, 0.25)
-        &:last-child:empty, &:last-child:has(> span:empty:only-child)
-          display: none
-
-    pre
-      background: var(--codeblock-bg) !important
-      border-radius: 0.75rem
-      padding-left: 1.25rem
-      padding-right: 1.25rem
-
-      code
-        color: unset
-        font-size: 0.875rem
-        padding: 0
-        background: none
-
-        ::selection
-          background: var(--codeblock-selection)
-
-        span.br::selection
-          background: var(--codeblock-selection)
-
-    ul
-      li
-        &::marker
-          color: var(--primary)
-
-    ol
-      li
-        &::marker
-          color: var(--primary)
-
-    blockquote
-      font-style: normal
-      font-weight: inherit
-      border-left-color: rgba(0, 0, 0, 0)
-      position: relative;
-
-      &:before
-        content: ''
-        position: absolute
-        left: -0.25rem
-        display: block
-        transition: background 0.15s ease-in-out;
-        background: var(--btn-regular-bg)
-        height: 100%
-        width: 0.25rem
-        border-radius: 1rem
-
-      p
-        &:before
-          content: none
-
-        &:after
-          content: none
 
     blockquote.admonition
       .bdm-title
@@ -474,18 +340,5 @@ const className = Astro.props.class
     transition-property: all
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
     transition-duration: 0.15s
-
-</style>
-
-<style lang="css" is:global>
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-
-    @layer components {
-        .custom-md h1 {
-            @apply text-3xl
-        }
-    }
 
 </style>

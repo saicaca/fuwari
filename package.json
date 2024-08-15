@@ -24,7 +24,6 @@
     "astro": "^4.12.2",
     "astro-compress": "^2.3.0",
     "astro-icon": "1.1.0",
-    "colorjs.io": "^0.5.2",
     "hastscript": "^9.0.0",
     "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",
@@ -59,10 +58,11 @@
     "@types/mdast": "^4.0.4",
     "@types/sanitize-html": "^2.11.0",
     "photoswipe": "^5.4.4",
+    "postcss-import": "^16.1.0",
+    "postcss-nesting": "^13.0.0",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "remark-github-admonitions-to-directives": "^1.0.5",
-    "sass": "^1.77.8",
     "stylus": "^0.63.0"
   },
   "pnpm": {
