@@ -31,19 +31,19 @@ sold to us by VIC as "[International Summer Internship](https://ugfellowship.vis
 Once we got to the UK, it turned out to be summer school, which made more sense to me than internship.
 
 This blog post covers some of what I learned and did during the summer school.
-Also, this is from my perspective, and I already knew the basics of Godot,
-I participated in Game Maker's Toolkit's Game Jam in 2023 [^gmtk2023-itchio] [^gmtk2023-github].
+Also, this is from the perspective of someone who is already familiar with the basics of Godot enough
+to participate in Game Maker's Toolkit's Game Jam in 2023 [^gmtk2023-itchio] [^gmtk2023-github].
 ::github{repo="pawarherschel/GMTK2023"}
 I also know unity on a surface level due to uploading avatars and making minor changes to them for VRChat.
-I feel like the best way to divide the content will be what I did each week,
-however, I will avoid going into excruciating details about each topic, 
-since that will just imply me practically copying their presentation.
+I feel like the best way to structure this blog post would be to tell you what I did each week.
+However, I will avoid going into the details about each topic as
+that would entail  copying their presentation word-for-word.
 
 ---
 
 # Week 1
 
-For the first week, we got introduced to the unity game engine from complete scratch.
+For the first week, we got introduced to the unity game engine from scratch.
 The professors didn't expect you to know anything about unity,
 so we started with the UI of the editor, first lines in C# for unity,
 how to run the games,
@@ -54,7 +54,7 @@ and so on.
 
 ## Physics
 
-After that, we moved on to what's physics in games and why it's important.
+After that, we moved on to what physics is in games and why it's important.
 The professors then explained the key terms related to physics in unity and where they can be found.
 They also explained how colliders are done in professional games. 
 For me, the most significant part of this day was the event functions required to make colliders (and triggers) useful.
@@ -76,8 +76,8 @@ We then moved on to 2D animation by using sprites and how to make them from spri
 As for the lab task, we made a flappy bird clone where the background moves and loops infinitely.
 > ![me attempting to play flappy bird and losing on the first pipe](https://r2.sakurakat.systems/covuni-experience--flappy-bird.gif)
 
-We also animated a Lora Croft inspired 2D character.
-> ![Lora Croft inspired 2D character](https://r2.sakurakat.systems/covuni-experience--2d-character.png)
+We also animated a Lara Croft inspired 2D character.
+> ![Lara Croft inspired 2D character](https://r2.sakurakat.systems/covuni-experience--2d-character.png)
 
 We sliced her body parts from a spritesheet
 > ![character spritesheet](https://r2.sakurakat.systems/covuni-experience--2d-character-spritesheet.png)
@@ -98,7 +98,7 @@ I anticipated that we would have plenty of free time during the first week, and 
 # Week 2
 
 The focus for the second week was AI used in games.
-The major why the specific AI techniques used is their performance cost.
+The major reason why the specific AI techniques used is their performance cost.
 They're proven to work well on all kinds of hardware while also giving the illusion of intelligence.
 
 ## Navigation
@@ -182,10 +182,10 @@ This is the reason I love the academic setting.
 
 The third week was all about game design and how it's done in the industry.
 I'm not a creative person, I'm a developer.
-I take in requirements and spit out code to the best of my ability.
-On the other hand, I have no idea how to make a game fun,
-I can add game mechanics and build a game around them, however, I won't be able to make it a fun experience.
-But it's important to know what the designers do and what their struggles are.
+I can take in requirements and turn them into code to the best of my ability.
+However, while I can add game mechanics and build a game around them,
+I struggle with making the experience genuinely fun.But it's important to know
+what the designers do and what their struggles are.
 That way I can contribute more to the team while also somewhat bridging the gap between developers and designers.
 
 While the second week was all the things I wanted to learn, the third week wasn't as interesting for me. 
