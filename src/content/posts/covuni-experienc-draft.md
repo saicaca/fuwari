@@ -1,23 +1,11 @@
 ---
-title: covuni-experienc-draft
+title: Exploring Game Development at Coventry University's Summer School
 published: 2024-08-05
 description: "I share my experience attending Coventry University's Summer School in July 2024. Over four weeks, I learned about various aspects of game development, culminating in a game jam as the program's finale. This post provides a week-by-week breakdown of the program and my thoughts on each part."
 image: 'https://r2.sakurakat.systems/covuni-experience-banner.jpg'
 tags: ['Programming', 'Game Development', 'Unity', "CSharp", ]
 category: 'Programming'
 draft: false
----
-
----
-
-:::WARNING
-
-DRAFT
-
-:::
-
-provisional title: `Exploring Game Development at Coventry University's Summer School`
-
 ---
 
 In July 2024,
@@ -340,7 +328,7 @@ In my next blog post, I want to go into how the game works and Shashank will exp
     [^gmtk2023-github]: source code for Cosmos Conquerors https://github.com/pawarherschel/GMTK2023  
 [^wikipedia-typestate]: Wikipedia article for Typestate analysis https://en.wikipedia.org/wiki/Typestate_analysis
 [^rust-book-typestate]: Encoding States and Behavior as Types from The Rust Programming Language book https://doc.rust-lang.org/book/ch17-03-oo-design-patterns.html#encoding-states-and-behavior-as-types  
-[^stack-overflow-c-sharp-typestate]: https://stackoverflow.com/questions/78677699/type-state-pattern-in-c-sharp
-[^wikipedia-event-driven-fsm]: https://en.wikipedia.org/wiki/Event-driven_finite-state_machine
-[^wikipedia-event-driven-programming]:  https://en.wikipedia.org/wiki/Event-driven_programming
+[^stack-overflow-c-sharp-typestate]: Type-state pattern in C# https://stackoverflow.com/questions/78677699/type-state-pattern-in-c-sharp
+[^wikipedia-event-driven-fsm]: Event-driven finite-state machine https://en.wikipedia.org/wiki/Event-driven_finite-state_machine
+[^wikipedia-event-driven-programming]:  Event-driven programming https://en.wikipedia.org/wiki/Event-driven_programming
 [^tangent-composition-inheritance]: The professors recommended (or at least they only taught) us to make an abstract class with all the functions and then use inheritance to create actual classes for the states. Coming from Rust, composition would have been my choice rather than inheritance.
