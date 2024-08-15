@@ -20,18 +20,18 @@ provisional title: `Exploring Game Development at Coventry University's Summer S
 
 ---
 
-For July 2024,
+In July 2024,
 I had the privilege
 of attending [Coventry University's Summer School](https://www.coventry.ac.uk/study-at-coventry/summer-schools/)
 [^search-disclaimer]
 organized by [Vishwaniketan Incubation Center](https://vic.vishwaniketan.edu.in/)
 (VIC from hereon).
-This experience lasted for 4 weeks  
+This experience lasted for 4 weeks and was
 sold to us by VIC as "[International Summer Internship](https://ugfellowship.vishwaniketan.edu.in/)."
 Once we got to the UK, it turned out to be summer school, which made more sense to me than internship.
 
 This blog post covers some of what I learned and did during the summer school.
-Also, this is from the perspective of someone who is already familiar with the basics of Godot enough
+Note that this is from the perspective of someone who is already familiar with the basics of Godot enough
 to participate in Game Maker's Toolkit's Game Jam in 2023 [^gmtk2023-itchio] [^gmtk2023-github].
 ::github{repo="pawarherschel/GMTK2023"}
 I also know unity on a surface level due to uploading avatars and making minor changes to them for VRChat.
@@ -54,7 +54,7 @@ and so on.
 
 ## Physics
 
-After that, we moved on to what physics is in games and why it's important.
+After that, we moved on to the role of physics in games and why it's important.
 The professors then explained the key terms related to physics in unity and where they can be found.
 They also explained how colliders are done in professional games. 
 For me, the most significant part of this day was the event functions required to make colliders (and triggers) useful.
@@ -287,7 +287,7 @@ I teamed up with Shashank Bhave
 We satisfied the requirements by creating a 2D platformer where every level fits in one screen. 
 The theme of `Continuous Change` was incorporated by changing the player character and their abilities every few seconds.
 
-The name we decided for the game was `Fractured Elements`.
+We named the game `Fractured Elements`.
 It's available to download at [itch.io](https://pawarherschel.itch.io/fractured-elements),
 and the source code is available on [GitHub](https://github.com/pawarherschel/CovUniGJ2024).
 
