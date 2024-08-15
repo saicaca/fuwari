@@ -35,9 +35,9 @@ For the first week, we got introduced to the unity game engine from scratch.
 The professors didn't expect you to know anything about unity,
 so we started with the UI of the editor, first lines in C# for unity,
 how to run the games,
-how to fix Visual Studio if the LSP[^LSP]
-(Language Server Protocol[^LSP]) 
-doesn't work[^why-lsp-important],
+how to fix Visual Studio if the LSP [^LSP]
+(Language Server Protocol [^LSP]) 
+doesn't work [^why-lsp-important],
 and so on.
 
 ## Physics
@@ -56,7 +56,7 @@ I'd add a gif of me playing the game, but I performed the task on the university
 
 On the next day we were taught how to use the animation system in unity, the 2D and 3D systems.
 They started by explaining what a rig is for 3D animations and how 3D models are animated using it.
-Then we were given a rundown on how to *actually* use the animation system,
+Then we were given a [rundown on how to *actually* use the animation system,
 that is, animator controller, animation clips,
 the transitions required as glue, animation parameters, animator component, and finally, how to use the animator in code.
 We then moved on to 2D animation by using sprites and how to make them from spritesheets. 
@@ -94,7 +94,7 @@ They're proven to work well on all kinds of hardware while also giving the illus
 Navigation is a big part
 of making NPCs
 seem intelligent by making them follow a path towards some target without getting stuck on a corner or on some object.
-The default algorithm for pathfinding in unity is A* (tangent[^tangent-A*]).
+The default algorithm for pathfinding in unity is A* (tangent [^tangent-A*]).
 
 Unity uses NavMesh for navigation.
 The topics they covered were NavMesh, Off-Mesh Link, NavMesh Obstacle, and NavMesh Agent.
@@ -211,7 +211,7 @@ however, the amplitude of the voice lines stays constant.
 The lab tasks for level design and storytelling were connected, so I'm going to write them as one. 
 I made the first level for a puzzle game "inspired"
 by [Crazy Machines](https://store.steampowered.com/app/18420/Crazy_Machines/) 
-(tangent[^tangent-crazy-machine]).
+(tangent [^tangent-crazy-machine]).
 
 Fortunately, I had solved my technical issue, and I was able to save the task output.
 
@@ -325,7 +325,7 @@ In my next blog post, I want to go into how the game works and Shashank will exp
 [^tangent-A*]: I learned A* by watching [A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)](https://www.youtube.com/watch?v=aKYlikFAV4k) by [The Coding Train](https://www.youtube.com/@TheCodingTrain).<iframe width="1237" height="696" src="https://www.youtube.com/embed/aKYlikFAV4k" title="A* Pathfinding Algorithm (Coding Challenge 51 - Part 1)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> While it's on the longer side and has three parts, I do recommend watching it since Daniel Shiffman made it easy to understand, and, also implemented it.
 [^tangent-crazy-machine]: I have fond memories of playing the game when i was small. It was very fun and I spent hours messing around in the sandbox  
 [^gmtk2023-itchio]: my submission to the game jam https://pawarherschel.itch.io/cosmos-conquerors
-    [^gmtk2023-github]: source code for Cosmos Conquerors https://github.com/pawarherschel/GMTK2023  
+[^gmtk2023-github]: source code for Cosmos Conquerors https://github.com/pawarherschel/GMTK2023  
 [^wikipedia-typestate]: Wikipedia article for Typestate analysis https://en.wikipedia.org/wiki/Typestate_analysis
 [^rust-book-typestate]: Encoding States and Behavior as Types from The Rust Programming Language book https://doc.rust-lang.org/book/ch17-03-oo-design-patterns.html#encoding-states-and-behavior-as-types  
 [^stack-overflow-c-sharp-typestate]: Type-state pattern in C# https://stackoverflow.com/questions/78677699/type-state-pattern-in-c-sharp
