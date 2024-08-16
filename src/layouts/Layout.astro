@@ -18,10 +18,10 @@ import type { Favicon } from '../types/config'
 import { url, pathsEqual } from '../utils/url-utils'
 
 interface Props {
-	title?: string
-	banner?: string
-	description?: string
-	lang?: string
+  title?: string
+  banner?: string
+  description?: string
+  lang?: string
 }
 
 let { title, banner, description, lang } = Astro.props
@@ -55,7 +55,7 @@ const favicons: Favicon[] =
 
 // const siteLang = siteConfig.lang.replace('_', '-')
 if (!lang) {
-	lang = `${siteConfig.lang}`
+  lang = `${siteConfig.lang}`
 }
 const siteLang = lang.replace('_', '-')
 ---

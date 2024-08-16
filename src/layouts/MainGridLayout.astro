@@ -8,13 +8,13 @@ import { Icon } from 'astro-icon/components'
 import { siteConfig } from '../config'
 
 interface Props {
-    title?: string
-    banner?: string
-    description?: string
-    lang?: string
+  title?: string
+  banner?: string
+  description?: string
+  lang?: string
 }
 
-const { title, banner, description, lang} = Astro.props
+const { title, banner, description, lang } = Astro.props
 const hasBannerCredit =
   siteConfig.banner.enable && siteConfig.banner.credit.enable
 const hasBannerLink = !!siteConfig.banner.credit.url
