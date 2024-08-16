@@ -11,7 +11,7 @@ import { Icon } from 'astro-icon/components'
 import { licenseConfig } from 'src/config'
 import PostMetadata from '../../components/PostMeta.astro'
 import ImageWrapper from '../../components/misc/ImageWrapper.astro'
-import { profileConfig } from '../../config'
+import { profileConfig, siteConfig } from '../../config'
 import { formatDateToYYYYMMDD } from '../../utils/date-utils'
 
 export async function getStaticPaths() {
@@ -41,7 +41,7 @@ const jsonLd = {
     url: Astro.site,
   },
   datePublished: formatDateToYYYYMMDD(entry.data.published),
-  inLanguage: entry.data.language.replace('_', '-'),
+  inLanguage: siteConfig.lang.replace('_', '-'),
   // TODO include cover image here
 }
 ---
