@@ -57,7 +57,6 @@ export function GithubCardComponent(properties, children) {
   const nScript = h(
     `script#${cardUuid}-script`,
     { type: 'text/javascript', defer: true },
-      //language=JavaScript
     `
       fetch('https://api.github.com/repos/${repo}', { referrerPolicy: "no-referrer" }).then(response => response.json()).then(data => {
         if (data.description) {
