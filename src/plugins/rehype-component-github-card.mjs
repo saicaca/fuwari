@@ -63,7 +63,7 @@ export function GithubCardComponent(properties, children) {
         if(data.description) {
           document.getElementById('${cardUuid}-description').innerText = data.description.replace(/:[a-zA-Z0-9_]+:/g, '');
         } else {
-          document.getElementById('${cardUuid}-description').innerText = ""
+          document.getElementById('${cardUuid}-description').innerText = "";
         }
         document.getElementById('${cardUuid}-language').innerText = data.language;
         document.getElementById('${cardUuid}-forks').innerText = Intl.NumberFormat('en-us', { notation: "compact", maximumFractionDigits: 1 }).format(data.forks).replaceAll("\u202f", '');
@@ -72,17 +72,16 @@ export function GithubCardComponent(properties, children) {
         avatarEl.style.backgroundImage = 'url(' + data.owner.avatar_url + ')';
         avatarEl.style.backgroundColor = 'transparent';
         if (data.license?.spdx_id) {
-          document.getElementById('${cardUuid}-license').innerText = data.license?.spdx_id
+          document.getElementById('${cardUuid}-license').innerText = data.license?.spdx_id;
         } else {
-          document.getElementById('${cardUuid}-license').classList.add = "no-license"
-        };
+          document.getElementById('${cardUuid}-license').classList.add = "no-license";
+        }
           document.getElementById('${cardUuid}-card').classList.remove("fetch-waiting");
-          console.log("[GITHUB-CARD] Loaded card for ${repo} | ${cardUuid}.")
+          console.log("[GITHUB-CARD] Loaded card for ${repo} | ${cardUuid}.");
       }).catch(err => {
         const c = document.getElementById('${cardUuid}-card');
         c.classList.add("fetch-error");
-         console.warn("[GITHUB-CARD] (Error) Loading card for ${repo} | ${cardUuid}.")
-         console.warn(err)
+        console.warn("[GITHUB-CARD] (Error) Loading card for ${repo} | ${cardUuid}.");
       })
     `,
   )
