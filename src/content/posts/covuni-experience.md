@@ -16,13 +16,13 @@ organized by [Vishwaniketan Incubation Center](https://vic.vishwaniketan.edu.in/
 (VIC from hereon).
 This experience lasted for 4 weeks and was
 sold to us by VIC as "[International Summer Internship](https://ugfellowship.vishwaniketan.edu.in/)."
-Once we got to the UK, it turned out to be summer school, which made more sense to me than internship.
+Once we got to the UK, it turned out to be summer school, which made more sense to me than an internship.
 
 This blog post covers some of what I learned and did during the summer school.
 Note that this is from the perspective of someone who is already familiar with the basics of Godot enough
 to participate in Game Maker's Toolkit's Game Jam in 2023 [^gmtk2023-itchio] [^gmtk2023-github].
 ::github{repo="pawarherschel/GMTK2023"}
-I also know unity on a surface level due to uploading avatars and making minor changes to them for VRChat.
+I also know Unity on a surface level due to uploading avatars and making minor changes to them for VRChat.
 I feel like the best way to structure this blog post would be to tell you what I did each week.
 However, I will avoid going into the details about each topic as
 that would entail  copying their presentation word-for-word.
@@ -31,9 +31,9 @@ that would entail  copying their presentation word-for-word.
 
 # Week 1
 
-For the first week, we got introduced to the unity game engine from scratch.
-The professors didn't expect you to know anything about unity,
-so we started with the UI of the editor, first lines in C# for unity,
+For the first week, we got introduced to the Unity game engine from scratch.
+The professors didn't expect you to know anything about Unity,
+so we started with the UI of the editor, first lines in C# for Unity,
 how to run the games,
 how to fix Visual Studio if the LSP [^LSP]
 (Language Server Protocol [^LSP]) 
@@ -43,26 +43,26 @@ and so on.
 ## Physics
 
 After that, we moved on to the role of physics in games and why it's important.
-The professors then explained the key terms related to physics in unity and where they can be found.
+The professors then explained the key terms related to physics in Unity and where they can be found.
 They also explained how colliders are done in professional games. 
 For me, the most significant part of this day was the event functions required to make colliders (and triggers) useful.
 As the lab task of the day, we made a red square jump and move on a platform.
 
 As an extra challenge, we got a skeleton pinball project.
 In the project, we had to configure some parameters and write some scripts as glue code.
-I'd add a gif of me playing the game, but I performed the task on the university computer. 
+I'd add a GIF of me playing the game, but I performed the task on the university computer. 
 
 ## Animation
 
-On the next day we were taught how to use the animation system in unity, the 2D and 3D systems.
+On the next day we were taught how to use the animation system in Unity.
 They started by explaining what a rig is for 3D animations and how 3D models are animated using it.
-Then we were given a [rundown on how to *actually* use the animation system,
+Then, we were given a rundown on how to *actually* use the animation system,
 that is, animator controller, animation clips,
 the transitions required as glue, animation parameters, animator component, and finally, how to use the animator in code.
 We then moved on to 2D animation by using sprites and how to make them from spritesheets. 
 
-As for the lab task, we made a flappy bird clone where the background moves and loops infinitely.
-> ![me attempting to play flappy bird and losing on the first pipe](https://r2.sakurakat.systems/covuni-experience--flappy-bird.gif)
+As for the lab task, we made a Flappy Bird clone where the background moves and loops infinitely.
+> ![me attempting to play Flappy Bird and losing on the first pipe](https://r2.sakurakat.systems/covuni-experience--flappy-bird.gif)
 
 We also animated a Lara Croft inspired 2D character.
 > ![Lara Croft inspired 2D character](https://r2.sakurakat.systems/covuni-experience--2d-character.png)
@@ -73,7 +73,7 @@ We sliced her body parts from a spritesheet
 and animated in a way where it looked like her body parts were connected using joints without using joints. 
 > ![2d animation](https://r2.sakurakat.systems/covuni-experience--2d-animation.gif)
 
-Thus, they managed to complete the three core concepts required to make games. 
+Thus, they managed to teach the three core concepts required to make games. 
 
 ## My thoughts
 
@@ -94,7 +94,7 @@ They're proven to work well on all kinds of hardware while also giving the illus
 Navigation is a big part
 of making NPCs
 seem intelligent by making them follow a path towards some target without getting stuck on a corner or on some object.
-The default algorithm for pathfinding in unity is A* (tangent [^tangent-A*]).
+The default algorithm for pathfinding in Unity is A* (tangent [^tangent-A*]).
 
 Unity uses NavMesh for navigation.
 The topics they covered were NavMesh, Off-Mesh Link, NavMesh Obstacle, and NavMesh Agent.
@@ -106,7 +106,7 @@ The lab task for the day was to make a character that pathfinds to a sphere usin
 For the challenge, we had to make it so that you can move the target sphere, and the character will still follow it.
 > ![the navmesh project](https://r2.sakurakat.systems/covuni-experience--navmesh-project.gif)
 
-I wanted to make the character use auto generated Off Mesh Links, 
+I wanted to make the character use automatically generated Off Mesh Links, 
 and I did it by changing the cost for surfaces to wacky numbers.
 :::note[the wacky numbers]
 
@@ -120,8 +120,8 @@ and I did it by changing the cost for surfaces to wacky numbers.
 The second AI technique we learned about was FSM.
 The professors gave us examples of what good AI and bad AI are
 by showing us example videos and explaining why they're good or bad.
-They then explained where exactly does FSM fit into the pipeline
-and gave an example of a rudimentary way to implement FSM by chaining if-else.
+They then explained where exactly FSM fits into the pipeline
+and gave an example of a rudimentary way to implement FSM by chaining conditional statements.
 
 To me, FSM is interesting because if the language has a strong type system and supports generics,
 then it's possible to get a type-safe FSM. 
@@ -135,7 +135,7 @@ The states are the available animations,
 the parameters along with the conditions are the state transitions, and the animation being played is the current state.
 
 FSMs are also an example of event driven programming [^wikipedia-event-driven-fsm], 
-which you might be familiar with if you use JavaScript/Typescript/ECMAScript (whatever, idfk what it's called).
+which you might be familiar with if you use JavaScript/Typescript/ECMAScript.
 I have used Event-Driven Programming [^wikipedia-event-driven-programming]
 in Godot with the help of [signals](https://docs.godotengine.org/en/stable/classes/class_signal.html) 
 ([Godot documentation for Using Signals](https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html)).
