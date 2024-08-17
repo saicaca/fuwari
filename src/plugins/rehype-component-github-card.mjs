@@ -57,9 +57,14 @@ export function GithubCardComponent(properties, children) {
   const nScript = h(
     `script#${cardUuid}-script`,
     { type: 'text/javascript', defer: true },
+    // language=JavaScript
     `
       fetch('https://api.github.com/repos/${repo}', { referrerPolicy: "no-referrer" }).then(response => response.json()).then(data => {
-        document.getElementById('${cardUuid}-description').innerText = data.description.replace(/:[a-zA-Z0-9_]+:/g, '');
+        if(data.description) {
+          document.getElementById('${cardUuid}-description').innerText = data.description.replace(/:[a-zA-Z0-9_]+:/g, '');
+        } else {
+          document.getElementById('${cardUuid}-description').innerText = ""
+        }
         document.getElementById('${cardUuid}-language').innerText = data.language;
         document.getElementById('${cardUuid}-forks').innerText = Intl.NumberFormat('en-us', { notation: "compact", maximumFractionDigits: 1 }).format(data.forks).replaceAll("\u202f", '');
         document.getElementById('${cardUuid}-stars').innerText = Intl.NumberFormat('en-us', { notation: "compact", maximumFractionDigits: 1 }).format(data.stargazers_count).replaceAll("\u202f", '');
@@ -77,6 +82,7 @@ export function GithubCardComponent(properties, children) {
         const c = document.getElementById('${cardUuid}-card');
         c.classList.add("fetch-error");
          console.warn("[GITHUB-CARD] (Error) Loading card for ${repo} | ${cardUuid}.")
+         console.warn(err)
       })
     `,
   )
