@@ -66,13 +66,13 @@ The project contains the following scripts:
 
 The scripts related to the core mechanic of Continuously Changing are these:
 
-| Player                         | Boss                         |
-|--------------------------------|------------------------------|
-| PlayerPrefabSwitcherOnTimer.cs | BossPrefabSwitcherOnTimer.cs |
-| PlayerController.cs            | BossController.cs            |
-| InternalPlayerController.cs    | InternalBossController.cs    |
+| Player                         | Boss                         | Jump                                                                                                               |
+|--------------------------------|------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| PlayerPrefabSwitcherOnTimer.cs | BossPrefabSwitcherOnTimer.cs | [Prefab Switcher on Timer](#prefab-switcher-on-timer)                                                              |
+| PlayerController.cs            | BossController.cs            | [Player Controller](#player-controller) \| [Boss Controller](#boss-controller)                                     |
+| InternalPlayerController.cs    | InternalBossController.cs    | [Internal Player Controller](#internal-player-controller) \| [Internal Boss Controller](#internal-boss-controller) |
 
-Another special mention is the `ProjectileScript.cs` script which is used by both, the Player, and the Boss.
+Another special mention is the `ProjectileScript.cs` script used by both, the Player, and the Boss.
 
 ## Other Scripts
 
@@ -82,13 +82,108 @@ Another special mention is the `ProjectileScript.cs` script which is used by bot
 | HealthScript.cs          | Sets the player's max health to the health configured in the editor, can be set per level.                                                                                                                      |
 | LevelScript.cs           | Checks if the number of enemies is zero, and then switches to the next level.                                                                                                                                   |
 
+## Prefab Switcher on Timer
+
+[Jump back](#important-scripts)
+
+These scripts have a serialized field called `prefabs`. It is an array of `GameObject`.
+
+This class is overly complex for the sake of being easy to use.
+To switch prefabs, you need to change the `SpriteIndex`,
+everything else will be handled by a chain of getters and setters.
+
+This script also has a `changeCooldown` field.
+This is the time in seconds after which the prefab will be switched automatically.
+
+These scripts are applied to the root of player, and boss. 
+They contain their respective internal controllers in code.
+
+## Player Controller
+
+[Jump back](#important-scripts)
+
+Let us focus on the unique points of the player controller.
+The `PlayerController` class has an instance of `PlayerPrefabSwitcherOnTimer`.
+`PlayerPrefabSwitcherOnTimer` exposes the current internal controller via the public variable `CurrentInternalController`.
+Now, `CurrentInternalController` exposes functions required for the player controller.
+
+## Internal Player Controller
+
+[Jump back](#important-scripts)
+
+### Serialized Fields
+
+| Name               | Type       | Usage                                                                                                                                                                                                                                                                                                                  |
+|--------------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| projectile         | GameObject | The projectile to spawn                                                                                                                                                                                                                                                                                                |
+| projectileLocation | Transform  | The location where the projectile is spawned                                                                                                                                                                                                                                                                           |
+| projectileVelocity | float      | The velocity of projectile when it's spawned                                                                                                                                                                                                                                                                           |
+| attackTimePoint    | float      | The point of time in animation when the projectile is spawned.<br/>The time is normalized between 0 and 1, both inclusive.<br/>The script attempts to only spawn the projectile only once (due to how fragile the system is, sometimes the projectile doesn't spawn and other times it will be spawned multiple times) |
+
+### Animation Parameters
+
+| Parameter | Type    | Description                            |
+|-----------|---------|----------------------------------------|
+| attack    | trigger | plays the attack animation             |
+| jump      | trigger | plays the jump animation               |
+| run       | bool    | plays the running animation while true |
+
+### Public Functions
+
+| Name         | Return Type | Description                                                                                                      |
+|--------------|-------------|------------------------------------------------------------------------------------------------------------------|
+| SetRunning   | void        | Sets the animation parameter `running` boolean to `true`                                                         |
+| ResetRunning | void        | Sets the animation parameter `running` boolean to `false`                                                        |
+| Attack       | bool        | Sets the animation parameter `attack` trigger, returns false if the attack animation is playing, otherwise false |
+| Jump         | bool        | If the player can jump, sets the animation parameter `jump` trigger and returns true, otherwise returns false    |
+| FaceRight    | void        | Sets sprite to face `right` and changes the projectile location appropriately                                    |
+| FaceLeft     | void        | Sets sprite to face `left` and changes the projectile location appropriately                                     |
+
+### Note
+
+One of the challenges I had to tackle was making the player attack.
+I will explain it in the [Spawning projectiles at a specific moment in animation](#spawning-projectiles-at-a-specific-moment-in-animation) Section.
+
+## Boss Controller
+
+[Jump back](#important-scripts)
 
 
-### EnemyScript.cs
 
-This script handles the AI for the normal enemies.
-The enemies have a `Circle Collider 2D` with trigger set to true.
-When this trigger is no longer being triggered, the enemy flips their direction.
+## Internal Boss Controller
+
+[Jump back](#important-scripts)
+
+### Serialized Fields
+
+| Name               | Type       | Usage                                                                                                                                                                                                                                                                                                                                       |
+|--------------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| attackTriggerTime  | float      | (same as player)<br/>The point of time in animation when the projectile is spawned.<br/>The time is normalized between 0 and 1, both inclusive.<br/>The script attempts to only spawn the projectile only once (due to how fragile the system is, sometimes the projectile doesn't spawn and other times it will be spawned multiple times) |
+| projectile         | GameObject | (same as player)<br/>The projectile to spawn                                                                                                                                                                                                                                                                                                |
+| projectileLocation | Transform  | (same as player)<br/>The location where the projectile is spawned                                                                                                                                                                                                                                                                           |
+
+### Animation Parameters
+
+| Parameter | Type    | Description                                                 |
+|-----------|---------|-------------------------------------------------------------|
+| attack    | trigger | (same as player)<br/>plays the attack animation             |
+| chase     | bool    | (same as player)<br/>plays the running animation while true |
+
+### Public Functions
+
+| Name            | Return Type | Description                                                                                                      |
+|-----------------|-------------|------------------------------------------------------------------------------------------------------------------|
+| Attack          | bool        | Sets the animation parameter `attack` trigger, returns false if the attack animation is playing, otherwise false |
+| Chase           | bool        | Returns `true` if the animation parameter `chase` boolean was set to `true`, otherwise returns false             |
+| StopChase       | void        | Sets the animation parameter `chase` boolean to `false`                                                          |
+| SpawnProjectile | void        | Spawns the attack projectile                                                                                     |
+
+### Note
+
+Boss attacks use the same system as player attack
+([Spawning projectiles at a specific moment in animation](#spawning-projectiles-at-a-specific-moment-in-animation))
+
+Once the boss is killed, it switches the scene to the win screen.
 
 
 
