@@ -8,6 +8,14 @@ category: ''
 draft: false 
 ---
 
+:::caution[TODO]
+
+- [ ] link the github repo
+- [ ] turn the file names into links to the file on github
+- [ ] diagrams where possible
+
+:::
+
 # Introduction
 
 In the previous post,
