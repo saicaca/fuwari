@@ -172,10 +172,10 @@ I will explain it in the [Spawning projectiles at a specific moment in animation
 
 ### Animation Parameters
 
-| Parameter | Type    | Description                                                 |
-|-----------|---------|-------------------------------------------------------------|
-| attack    | trigger | (same as player)<br/>plays the attack animation             |
-| chase     | bool    | (same as player)<br/>plays the running animation while true |
+| Parameter | Type    | Description                                     |
+|-----------|---------|-------------------------------------------------|
+| attack    | trigger | (same as player)<br/>plays the attack animation |
+| chase     | bool    | plays the running animation while true          |
 
 ### Public Functions
 
