@@ -8,6 +8,28 @@ category: 'Programming'
 draft: false
 ---
 
+# Table of Contents
+<!-- TOC -->
+* [Table of Contents](#table-of-contents)
+* [Week 1](#week-1)
+  * [Physics](#physics)
+  * [Animation](#animation)
+  * [My thoughts](#my-thoughts)
+* [Week 2](#week-2)
+  * [Navigation](#navigation)
+  * [Finite State Machine (FSM)](#finite-state-machine-fsm)
+  * [My thoughts](#my-thoughts-1)
+* [Week 3](#week-3)
+  * [High Concept Document (HCD)](#high-concept-document-hcd)
+  * [Game Mechanics](#game-mechanics)
+  * [Level Design and Storytelling with Games](#level-design-and-storytelling-with-games)
+* [Week 4 and wrapping up](#week-4-and-wrapping-up)
+* [What to expect next](#what-to-expect-next)
+* [Citations](#citations)
+* [Footnotes](#footnote-label)
+<!-- TOC -->
+
+
 In July 2024,
 I had the privilege
 of attending [Coventry University's Summer School](https://www.coventry.ac.uk/study-at-coventry/summer-schools/)
