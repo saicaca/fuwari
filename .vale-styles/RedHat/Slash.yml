@@ -1,0 +1,27 @@
+---
+extends: existence
+ignorecase: true
+level: warning
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/slash/
+message: "Use either 'or' or 'and' in '%s'"
+# source: "IBM - Slashes, p. 68"
+scope:
+  - sentence
+  - heading
+tokens:
+  - '(?<!/)\w+/\w+'
+exceptions:
+  - '\d{1,4}\/\d{1,4}'
+  - "0/"
+  - "[Ii]nput/[Oo]utput"
+  - "C/C"
+  - "client/server"
+  - "I/O"
+  - "N/A"
+  - "read/write"
+  - "SSL/TLS"
+  - "TCP/IP"
+  - "upstream/downstream"
+  - "z/OS"
+  - "z/OSMF"
+  - "[Kk]ey/value"

@@ -1,0 +1,8 @@
+---
+extends: existence
+ignorecase: true
+level: suggestion
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/productcentricwriting/
+message: "Do not use transitive verb constructions like '%s' to grant abilities to inanimate objects. Whenever possible, use direct, user-focused sentences where the subject of the sentence performs the action."
+tokens:
+  - '(allows?|enables?|lets?|permits?)\s(you|customers|the customer|the user|users)'

@@ -1,0 +1,261 @@
+---
+extends: capitalization
+level: suggestion
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/headings/
+match: $sentence
+message: "Use sentence-style capitalization in '%s'."
+scope: heading
+# source: "IBM - Capitalization in headings and titles, p.16"
+indicators:
+  - ":"
+exceptions:
+  - API
+  - AWS
+  - Agroal
+  - Annobin
+  - Ansible
+  - Antora
+  - AppData
+  - AsciiDoc
+  - Asciidoctor
+  - AssertJ
+  - Azure
+  - Basic authentication
+  - Basic HTTP authentication
+  - BOM
+  - Bierner
+  - Bitbucket
+  - Bonjour
+  - Bouncy Castle
+  - Btrfs
+  - Bugzilla
+  - CDs
+  - CR
+  - CRD
+  - CRDs
+  - CRs
+  - Camel
+  - CapEx
+  - CentOS
+  - Ceph
+  - Certificate Authorities
+  - Che-Theia
+  - Ciphertext
+  - Civetweb
+  - ClassLoader
+  - Classloader
+  - Cloudbursting
+  - Cloudwashing
+  - CodeReady
+  - Community
+  - ConfigMap
+  - ConfigMaps
+  - Containerfile
+  - Containerfiles
+  - Cookiecutter
+  - Ctrl
+  - Cygmon
+  - DNS
+  - DaemonSet
+  - Datadog
+  - Dev
+  - DevOps
+  - DevWorkspace
+  - Dex
+  - Docker
+  - Dockerfile
+  - Dockerfiles
+  - Dotnet
+  - Dyninst
+  - Eclipse
+  - Electron
+  - Endevor
+  - Endian
+  - Esprima
+  - Exif
+  - Fabrice
+  - Failsafe
+  - Fernflower
+  - Flathub
+  - Flatpak
+  - Flatpak Builder
+  - Fluentd
+  - Flyway
+  - Fortran
+  - Funqy
+  - GCC
+  - GTKplus
+  - GUI
+  - Git
+  - GitHub
+  - GitHub Action
+  - GitLab
+  - GitLab Code Quality
+  - Gluster
+  - GraalVM
+  - Gradle
+  - GraphQL
+  - Graylog
+  - Grayscale
+  - GTK
+  - HTTP
+  - HTTPS
+  - Hashicorp
+  - Helgrind
+  - Helm
+  - Hibernate
+  - Homebrew
+  - IBM
+  - IBM Cloud
+  - ID
+  - IDE
+  - IDEs
+  - IDs
+  - IPSec
+  - ISeries
+  - InfiniBand
+  - Infinispan
+  - Intelephense
+  - IntelliJ
+  - Istio
+  - Itanium
+  - JAR file
+  - JBang
+  - JBoss Log Manager
+  - JBoss Logging
+  - JUnit
+  - JVM
+  - Jakarta
+  - Jandex
+  - Java
+  - Jave
+  - JetBrains
+  - Jira
+  - Jolokia
+  - Joyent
+  - Kibana
+  - Kind
+  - Knative
+  - Knowledgebase
+  - Kogito
+  - Kompose
+  - Kubespray
+  - Kylin
+  - Laravel
+  - Liquibase
+  - Logstash
+  - Lombok
+  - Makefile
+  - Mandrel
+  - Mattermost
+  - Maven
+  - MicroProfile
+  - Microsoft
+  - Middleware
+  - Minikube
+  - Minishift
+  - Mirantis
+  - Mockito
+  - MongoDB
+  - MySQL
+  - Nagios
+  - Narayana
+  - Neoverse
+  - NetcoredebugOutput
+  - Netty
+  - Newdoc
+  - Nginx
+  - Node.js
+  - NuGet
+  - OAuth
+  - ORM
+  - OmniSharp
+  - OpEx
+  - OpenID Connect
+  - OpenJDK
+  - OpenRewrite
+  - OpenShift
+  - OpenTelemetry
+  - OpenTracing
+  - OTel
+  - PHP
+  - Podman
+  - Podman Desktop
+  - PostScript
+  - PostgreSQL
+  - PowerPC
+  - PowerShell
+  - Productize
+  - Productized
+  - Prometheus
+  - Proof Key for Code Exchange
+  - Pytorch
+  - Qt
+  - Quarkiverse
+  - Quarkus
+  - Quiltflower
+  - Qute
+  - RESTEasy
+  - Red Hat
+  - RedBoot
+  - Redis
+  - Redistributions
+  - SCM
+  - SDK
+  - SELinux
+  - SVG
+  - Sakila
+  - Semeru
+  - Shadowman
+  - SmallRye
+  - Software Development Kit
+  - Software Development Kits
+  - Spotify
+  - StarOffice
+  - Suchow
+  - SysV
+  - System
+  - Technology Preview
+  - Tekton
+  - Telekom
+  - Temurin
+  - Tensorflow
+  - Texinfo
+  - Toolset
+  - Traefik
+  - URI
+  - URIs
+  - URL
+  - URLs
+  - Uber
+  - UltraSPARC
+  - Vale
+  - Valgrind
+  - Velero
+  - Vert.x
+  - WebAuthn
+  - WebSocket
+  - Webview
+  - Webviews
+  - WebView
+  - Wildfly
+  - Window Maker
+  - Windows
+  - Windows Subsystem for Linux
+  - Woopra
+  - Wordpress
+  - XEmacs
+  - Yana
+  - Yeoman
+  - Zowe
+  - cgroup
+  - eServer
+  - gRPC
+  - mutual TLS
+  - mTLS
+  - qeth
+  - startx
+  - vNIC
+  - vNUMA
+  - xDS
+  - xterm

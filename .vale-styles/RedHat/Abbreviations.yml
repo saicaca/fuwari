@@ -1,0 +1,9 @@
+---
+extends: existence
+level: error
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/abbreviations/
+message: "Do not use periods in all-uppercase abbreviations such as '%s'."
+nonword: true
+# source: "IBM - Periods with abbreviations, p. 5"
+tokens:
+  - '\b(?:[A-Z]\.){3,5}'

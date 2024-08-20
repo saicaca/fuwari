@@ -1,0 +1,12 @@
+---
+extends: existence
+level: suggestion
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/ellipses/
+message: "Avoid the ellipsis (...) except to indicate omitted words."
+nonword: true
+# source: "IBM - Ellipses, p.49"
+action:
+  name: remove
+tokens:
+  - '\.\.\.'
+  - "…"

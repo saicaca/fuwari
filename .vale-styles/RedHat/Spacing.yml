@@ -1,0 +1,10 @@
+---
+extends: existence
+level: error
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/spacing/
+message: "Keep one space between words in '%s'."
+nonword: true
+# source: https://docs.microsoft.com/en-us/style-guide/punctuation/periods
+tokens:
+  - '\w+[.?!]\s{2,}[A-Z]\w+'
+  - '\w+[.?!][A-Z]\w+'

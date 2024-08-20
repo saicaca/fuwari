@@ -1,0 +1,471 @@
+---
+extends: substitution
+ignorecase: true
+level: error
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/termserrors/
+message: "Use '%s' rather than '%s'."
+action:
+  name: replace
+# swap maps tokens in form of bad: good
+swap:
+  "(?<!-)healthcheck|health-check": health check
+  "(?<!-)pm": PM
+  "(?<!-|I )am": AM
+  "(?<!.)io": I/O
+  "(?<!as well )as per": according to|as|as in
+  "(?<!kernel )oops": kernel oops
+  "(?<!mobile |cell )phone": "telephone|cell phone|mobile phone"
+  "(?<!Mozilla )Firefox": Mozilla Firefox
+  "(?<!Mozilla )Thunderbird": Mozilla Thunderbird
+  "(?<!pseudo-)ops": operations
+  "(?<!self-)hosted engine|hosted-engine": self-hosted engine
+  "bare metal( clusters?| compute| configuration| controls?| environments?| equipment| events?| hardware| hosts?| infrastructure| installations?| installers?| machines?| media| nodes?| provisioning| servers?| workers?)": bare-metal $1
+  "bare-metal(?! clusters?| compute| configuration| controls?| environments?| equipment| events?| hardware| hosts?| infrastructure| installations?| installers?| machines?| media| nodes?| provisioning| servers?| workers?)": bare metal
+  "[bB]asic [aA]uth": Basic HTTP authentication|Basic authentication
+  "a lot(?: of)?": many|much
+  "best of breed|best-of-breed": best in class
+  "bottle neck|bottle-neck": bottleneck
+  "Christian name|forename|first name": given name
+  "down(?:-)?level": earlier|previous|not at the latest level
+  "IPI": installer-provisioned infrastructure
+  "pop-up (?:blocker|killer)": software to block pop-up ad windows
+  "re(?:-)?occur": recur
+  "sanity test|sanity check": test|evaluate|validate|verify
+  "single quote mark|single quote(?! mark)": single quotation mark
+  "sort(?:-|/)?merge": sort|merge
+  "top(?:-)?left": upper left|upper right|upper-left|upper-right
+  "top(?:-)?right": upper left|upper right|upper-left|upper-right
+  "UPI": user-provisioned infrastructure
+  "w/o": without
+  '(?<!IBM\s)S\/390|S90|S\s390': IBM S/390
+  'backwards?\scompatible': compatible with earlier versions
+  '(?<= )for instance(?=,)': for example
+  10BASE-2: 10BASE2
+  10BASET: 10BASE-T
+  24/7: 24x7
+  32-bit Windows operating system: Windows 32-bit operating system
+  a number of: several
+  abort: cancel|stop
+  ac: AC
+  accelerator key: keyboard shortcut
+  acknowledgement: acknowledgment
+  adapter card: adapter|card
+  adaptor: adapter
+  administrate: administer
+  adviser: advisor
+  air wall: air gap
+  aka: also known as
+  alphameric: alphanumeric
+  alphanumerical: alphanumeric
+  alright|all right: "correct|as expected"
+  amongst: among
+  analogue: analog
+  analyse: analyze
+  anticlockwise: counterclockwise
+  appendices: appendixes
+  application program interface: application programming interface
+  artefact: artifact
+  article-based information: topic-based information
+  as long as: if|provided that
+  autodetect: auto-detect
+  back slash: backslash
+  back-level: earlier|previous|not at the latest level
+  backside: back|rear
+  barcode: bar code
+  Bidi: bidi
+  Big Blue: IBM
+  bit map: bitmap
+  bitfield: bit field
+  bitness: bit version|bit value
+  bitrate: bit rate
+  bitstring: bit string
+  black hat hacker: attacker
+  blink: flash
+  blue screen of death: stop error
+  boot diskette: boot disk
+  bootloader: boot loader
+  breadcrumbing: breadcrumb trail
+  break point: breakpoint
+  bring up: start|power on|open|turn on
+  bufferpool: buffer pool
+  builtin|built in: built-in
+  busmaster: bus master
+  busses: buses
+  byte code: bytecode
+  Camelcase|CamelCase: camel case
+  cancelation: cancellation
+  cancelled: canceled
+  cancelling: canceling
+  canned: preplanned|preconfigured|predefined
+  cardreader: card reader
+  case insensitive: not case-sensitive
+  catalogue: catalog
+  catastrophic error: unrecoverable error
+  CBE: Common Base Event
+  CBTS: CICS BTS|BTS
+  CD burner|burner: CD writer
+  centre: center
+  check box: checkbox
+  check list: checklist
+  check mark: checkmark
+  chipset: chip set
+  chronologic: chronological
+  cipher text|cyphertext|cypher text|cipher-text|cypher-text: ciphertext
+  codepage: code page
+  codepoint: code point
+  codeset: code set
+  cold backup: offline backup
+  cold boot: hardware restart
+  cold start: hardware restart
+  colours?: color|colors
+  combo box: combination box
+  comes with: includes
+  CommServer: Communications Server
+  comprised of: consist of
+  computer farm|computer ranch: server cluster|server farm
+  connect with: connect to
+  containerised: containerized
+  context menu: menu|pop-up menu
+  contextual help: help|context-sensitive help
+  control point logical unit: control logical unit
+  controlling logical unit: control logical unit
+  convertor: converter
+  copy book: copybook
+  cyber attack: cyberattack
+  cyber attacker: cyberattacker
+  cyber crime: cybercrime
+  cyber defense: cyberdefense
+  cyber hacker: cyberhacker
+  cyber intelligence: cyberintelligence
+  cyber security: cybersecurity
+  cyber space: cyberspace
+  cyber terror: cyberterror
+  cyber threat: cyberthreat
+  cyberresilience: cyber resilience
+  data base: database
+  (?<!vCenter )datacenter|data-center|data centre|datacentre: data center
+  datafile: data file
+  dataflow: data flow
+  datamart: data mart
+  datamirroring|data-mirroring: data mirroring
+  datapath: data path
+  datapool: data pool
+  dataset: data set
+  datasheet: data sheet
+  datum: data
+  daylight savings time: Daylight Saving Time
+  dc: DC
+  DDNAME: ddname
+  deconfigure: unconfigure
+  deinstall: uninstall
+  deinstallation: uninstallation
+  demilitarized zone: DMZ
+  demon: daemon
+  demount: dismount|unmount
+  deployment configuration: deployment
+  depress: press|type
+  deregister: unregister
+  descendent: descendant
+  details pane: details view
+  diagnostic tests: diagnostics
+  different than|different to: different from
+  dismiss: close
+  disrupter: disruptor
+  domain mode: managed domain
+  DOS environment: DOS session
+  double quote: double quotation mark
+  double word: doubleword
+  down time: downtime
+  downwards? compatible: compatible with earlier versions
+  drill up: navigate
+  dualboot|dual boot: dual-boot
+  dumpfile: dump file
+  eFix|e-fix: fix|interim fix
+  Elastic Load Balancer: Elastic Load Balancing
+  emphasise: emphasize
+  end user: user
+  end-user interface: graphical interface|interface
+  enum: data enumeration
+  env: environment
+  EUI: graphical user interface|interface
+  evangelist: influencer|advocate|ambassador
+  fatal: unrecoverable
+  fill in: complete|enter|specify
+  finalise: finalize
+  fire up: start
+  fixed disk drive: hard disk drive
+  flavor: version|method
+  focussed: focused
+  forward compatible: compatible with later versions
+  freezes: hangs|stops responding
+  G11N|g11n: globalization
+  gage: gauge
+  grayed out: not displayed|unavailable
+  grey: gray
+  gzipped file: archive|compressed file
+  hard boot: restart
+  hard copy: hardcopy
+  hard file: hard disk|hard disk drive
+  hardcode: hard code
+  hardcoded: hard-coded
+  health care: healthcare
+  heart beat: heartbeat
+  hence: therefore
+  hostgroup: host group
+  hotkey: hot key
+  HOWTO: how-to
+  imbed: embed
+  in depth: in-depth
+  in other words: for example|that is
+  in spite of: regardless of|despite
+  in the event: in case|if|when
+  inactivate: deactivate
+  incent: motivate|encourage
+  incentivize: motivate|encourage
+  inch pound: inch-pound
+  information technology: IT
+  initial caps: initial capital letters
+  Internet address: IP address|URL|Internet email address|web address
+  Intranet: intranet
+  invoke: start|call
+  irrecoverable: unrecoverable
+  JavaBean: JavaBeans
+  joblog: job log
+  jobstream: job stream
+  judgement: judgment
+  keep in mind: remember
+  kernelspace: kernel-space
+  kick off: start
+  L10N|l10n: localization
+  labelled: labeled
+  labour: labor
+  large page|super page: huge page
+  last name: surname
+  learnings: lessons|training events|experiences
+  learnt: learned
+  leave out: omit
+  left most: leftmost
+  left-arrow key: Left Arrow key
+  left-hand: left
+  left-justified: left-aligned
+  left-justify: left-align
+  left-most: leftmost
+  line cord: power cable|power cord
+  link edit: link-edit
+  link editing: link-editing
+  live broker: master broker
+  live only: live-only
+  loadtime: load time|load-time
+  log into: log in to
+  log off of: log off from
+  log onto: log on to
+  logfile: log file
+  lots of|bunches of: many
+  main directory: root directory
+  make file: makefile
+  man day: person day
+  man hour: person hour|labor hour
+  manipulation button: right mouse button
+  manpage: man page
+  masterbrand: corporate brand
+  matrices: matrixes
+  memory stick: USB flash drive
+  menu driven|menudriven: menu-driven
+  menubar: menu bar
+  microcomputer: PC
+  motherboard: system board
+  mountpoint: mount point
+  mouse button 1: left mouse button
+  mouse button 2: right mouse button
+  mouse over: point to|move the mouse pointer over
+  multijobbing: multitasking
+  MV: major vector
+  nameserver: name server
+  network-centric computing: network computing
+  newsfeed: news feed
+  nextgen: next generation
+  nonrecoverable: unrecoverable
+  nonsecure|non-secure: insecure
+  notion: concept
+  NWSAA: NetWare for SAA
+  offline storage: auxiliary storage
+  on demand: on-demand
+  on ramp|on-ramp: access method
+  on the fly: dynamically|as needed|in real time|immediately
+  on the other hand: however|alternatively|conversely
+  openshit: OpenShift
+  opt into: opt in
+  opting into: opting in|opting in to
+  organise: organize
+  organised: organized
+  organising: organizing
+  orientate: orient
+  pain point: challenge|concern|difficulty|issue
+  parent task: parent process
+  parent/child: parent-child
+  peer-pod: peer pod
+  passive broker: slave broker
+  pathname: path name
+  PCOMM: Personal Communications
+  perfcounter: performance counter
+  perimeter network: DMZ
+  phillips screw: Phillips screw
+  phillips screwdriver: Phillips screwdriver
+  PL/1: PL/I
+  plaintext|plain-text|cleartext|clear text: plain text
+  planar board: system board
+  Plug-and-Play: plug-and-play
+  pod cast|Podcast|Pod Cast: podcast
+  pojo: data model
+  pop-up list: list
+  pop-up menu: menu
+  pop-up window: window
+  pops up: opens
+  pow wow: meeting|session
+  poweron: power-on
+  practise: practice
+  preventative: preventive
+  print friendly: printer friendly
+  prior to: before
+  program product: licensed program
+  programmed operator: program operator
+  Programming Language/I: PL/I
+  proof of concepts: proofs of concept
+  pub/sub|publish-subscribe: publish/subscribe
+  quickstart|Quickstart: quick start
+  read-write: read/write
+  recognise: recognize
+  Red Hat Java: Red Hat build of OpenJDK
+  Red Hat OpenJDK|RHOJDK|Red Hat Open Java Development Kit: Red Hat build of OpenJDK
+  regex: regular expression
+  requestor: requester
+  right now: now
+  right-hand: right
+  right-justified: right-aligned
+  right-justify: right-align
+  right-most: rightmost
+  round table: roundtable
+  round-robin task dispatching: round-robin scheduling
+  rule of thumb: rule
+  schemata: schemas
+  screencap: screen capture
+  screensaver: screen saver
+  scroll bar|scroll-bar: scrollbar
+  second name: surname
+  secondary storage: auxiliary storage
+  segregate: separate
+  segregation: separation|segmentation
+  selection button: left mouse button
+  send out: emit
+  serial database: nonpartitioned database environment
+  sharename|Sharename: share name
+  ships with|is shipped with: includes
+  short cut: shortcut
+  shortcut key: keyboard shortcut
+  shortcut menu: menu
+  sign into: sign in to
+  sign off of: sign off from
+  signoff: sign-off
+  signon: sign on to
+  Simple Object Access Protocol: SOAP
+  single signon: single sign-on
+  smartcard: smart card
+  smartpaper: smart paper
+  SME routine: session management exit routine
+  snapset|snapsets: snapshot set
+  so long as: if|when
+  sockets interface: socket interface
+  socksified: SOCKS-enabled
+  soft boot: restart the system
+  soft copy: softcopy
+  specfile: spec file
+  spelt: spelled
+  spend: expense|expenditure|outlay
+  standalone mode: standalone server
+  sunset: withdraw from service|withdraw from marketing|discontinue|no longer support
+  swapspace: swap space
+  switch off: turn off
+  synch: sync|synchronize
+  syncpoint: sync point
+  sysprep tool|sysprep process|sysprep function: sysprep
+  system engineer: systems engineer
+  tablespace: table space
+  TCP/IP network: Internet Protocol network|IP network
+  teleprocessing line: telecommunication line|transmission line
+  testcase: test case
+  the installer: installation program
+  thin provisioned|thinly provisioned|thinly-provisioned: thin-provisioned
+  third-party software vendor: independent software vendor
+  thru: through|throughput
+  thumb drive: USB flash drive
+  thumbstick: USB flash drive
+  tier-one|tier 1: tier-1
+  time box: timebox
+  time line: timeline
+  time stamp: timestamp
+  timeslice: time slice
+  timezone: time zone
+  toggle off: toggle
+  tool bar: toolbar
+  tool box: toolbox
+  tool kit: toolkit
+  tool tip: tooltip
+  ToolTip: tooltip
+  totalled: totaled
+  touch base: contact|communicate
+  touchscreen: touch-sensitive screen
+  trouble shoot: troubleshoot
+  trust store: truststore
+  try and: try to
+  twisty: twistie
+  TY-RAP: cable tie
+  typo: typing error|typographical error
+  unallocate: deallocate
+  uncheck: clear
+  uncompilation: decompilation
+  uncompile: decompile
+  uncompress: decompress
+  undeploy: remove|withdraw
+  underbar: underscore
+  unencrypt: decrypt
+  unselect: clear|deselect
+  untar: extract
+  unzip: extract|decompress
+  upgradable: upgradeable
+  upward compatible: compatible with later versions
+  USB thumb drive: USB flash drive
+  useable: usable
+  utilize: use
+  vanilla: uncustomized
+  versus: compared to
+  virtual diskette drive: virtual floppy drive
+  virtual diskette(?! drive): virtual floppy disk
+  virtual DOS machine: DOS session
+  virtual hard disk: virtual hard drive
+  virtual-equals-real: nonpageable
+  virtual-equals-virtual: pageable
+  wait condition: wait state
+  war room: center of operations|command center|control room
+  warmstart|warm boot: warm start
+  warning notice: attention notice
+  web cast: webcast
+  web site: website
+  web-enable: enable for the web
+  webmistress|web master: webmaster
+  white hat hacker: offensive security researcher
+  whitepaper: white paper
+  wild card: wildcard
+  wiring closet: telecommunications closet
+  wish: want
+  wish|would like: want
+  work flow: workflow
+  work group: workgroup
+  work load: workload
+  work space: workspace
+  work station: workstation
+  XSA: extended subarea addressing
+  xsite: cross-site replication
+  zero out: zero
+  zeroes: zeros
+  zonegroup|zone-group: zone group
+  Zulu time: Coordinated Universal Time

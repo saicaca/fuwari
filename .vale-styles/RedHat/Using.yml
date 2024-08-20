@@ -1,0 +1,14 @@
+---
+extends: sequence
+message: "Use 'by using' instead of 'using' when it follows a noun for clarity and grammatical correctness."
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/using/
+level: warning
+action:
+  name: edit
+  params:
+    - regex
+    - '(\w+)( using)' # pattern
+    - "$1 by using" # replace
+tokens:
+  - tag: NN|NNP|NNPS|NNS
+  - pattern: using

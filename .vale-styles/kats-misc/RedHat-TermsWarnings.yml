@@ -1,0 +1,73 @@
+---
+extends: substitution
+ignorecase: true
+level: warning
+link: https://redhat-documentation.github.io/vale-at-red-hat/docs/main/reference-guide/termswarnings/
+message: "Consider using '%s' rather than '%s' unless updating existing content that uses the term."
+action:
+  name: replace
+swap:
+  "(?:Ctrl|control)-click": press Ctrl and click
+  "(?<!make the )transition": "make the transition|move|migrate|change"
+  "bottom(?:-)?left": lower left|lower-left
+  "bottom(?:-)?right": lower right|lower-right
+  "non-English(?!-language?)": in languages other than English|non-English-language
+  '(?<!.-)like': such as
+  '(?<!\/)etc(?!\/)': and so on
+  '\b(?:eg)': for example
+  '\b(?:ie)': that is
+#  'I(?!/O)': you
+  'is updatable|are updatable': can be updated|can be changed
+  "(?<!the |the Red Hat )Hybrid Cloud Console|(?<!the )Red Hat Hybrid Cloud Console|(?<!the |Red Hat |Hybrid )Cloud Console|the Cloud Console": the Red Hat Hybrid Cloud Console|the Hybrid Cloud Console
+  all caps: uppercase
+  architected: designed
+  as well as(?! per): and
+  BIOS: firmware
+  bottom left: lower left
+  bottom right: lower right
+  bugfix: bug fix
+  call up: call
+  can not: cannot
+  carry on: continue
+  carry out: test|run
+  click on: click
+  deselect: clear
+  desired: needed|required
+  desire|wish: want|require|need
+  destroy|destroyed: delete|deleted
+  double click|double-click on: double-click
+  downgrade: upgrade|fallback|fall back|rollback|roll back
+  entitlement: repository|subscription
+  execute: run|issue|start|enter
+  find out: discover
+  hamburger|kebab menu|kebab: more options icon|options icon
+  he|she: you
+  host name: hostname
+  illegal: invalid|not allowed|incorrect
+  in order to: to
+  ingests?: import|load|obtain|process
+  insure: ensure
+  invokable: invocable
+  kill: end|stop
+  kilobytes?: KB|kB
+  leverage: use
+  look at: examine
+  may: might|can
+  on-premises|on-prem|on premise: on-premise|on-site|in-house
+  opt into|opting into: opt in
+  preload: preinstall
+  preloaded: preinstalled
+  print out: print
+  right double-click: double right-click
+  sane: accurate|valid|verified
+  shift-click: press Shift and click
+  spawn: create
+  start up: start
+  speed up: accelerate
+  speeds up: accelerates
+  switch on: turn on
+  tap on: tap
+  tarball: tar file
+  terminate: end|stop
+  tooling: tool|tools
+  vs: compared to
