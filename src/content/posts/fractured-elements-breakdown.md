@@ -10,9 +10,14 @@ draft: false
 
 :::caution[TODO]
 
+# TODO
+
 - [ ] link the github repo
 - [ ] turn the file names into links to the file on github
 - [ ] diagrams where possible
+- [ ] # Spawning projectiles at a specific moment in animation
+- [ ] generics thing for prefab switchers and internal controllers
+- [ ] what could i have done to solve it, composition / inheritance instead of generics
 
 :::
 
@@ -49,7 +54,7 @@ and various other games.
 ## Collaborative Efforts with Shashank Bhave
 
 Shashank Bhave was the key for the development of Fractured Elements.
-He took on key responsibilities including level design, sourcing game art and music, and creating the game’s lore.
+He took on key responsibilities including level design, sourcing game art and music, and creating the game's lore.
 His ability to independently research and execute these tasks allowed me
 to concentrate on the technical challenges of implementing the form-switching mechanic.
 This effective collaboration was crucial for meeting our project deadlines
@@ -59,16 +64,16 @@ and ensuring that the game's theme of continuous change was thoroughly integrate
 
 The project contains the following scripts:
 
-- BossController.cs
-- BossPrefabSwitcherOnTimer.cs
-- EnemyScript.cs
-- HealthScript.cs
-- InternalBossController.cs
-- InternalPlayerController.cs
-- LevelScript.cs
-- PlayerController.cs
-- PlayerPrefabSwitcherOnTimer.cs
-- ProjectileScript.cs
+- [BossController.cs](#todo)
+- [BossPrefabSwitcherOnTimer.cs](#todo)
+- [EnemyScript.cs](#todo)
+- [HealthScript.cs](#todo)
+- [InternalBossController.cs](#todo)
+- [InternalPlayerController.cs](#todo)
+- [LevelScript.cs](#todo)
+- [PlayerController.cs](#todo)
+- [PlayerPrefabSwitcherOnTimer.cs](#todo)
+- [ProjectileScript.cs](#todo)
 
 ## Important Scripts
 
@@ -156,7 +161,24 @@ I will explain it in the [Spawning projectiles at a specific moment in animation
 
 [Jump back](#important-scripts)
 
+The boss controller acts according to the below truth table
 
+| can attack | can chase | action       |
+|------------|-----------|--------------|
+| false      | false     | do nothing   |
+| true       | false     | not possible |
+| false      | true      | chase        |
+| true       | true      | attack       |
+
+The script also keeps track of two variables:
+1. `attackSuccess`
+2. `chaseSuccess`.
+
+These are returned by the functions from `InternalBossController`.
+If the boss successfully chases after the player, then the script exits early.
+Otherwise, the boss moves towards the player.
+
+Once the boss dead, the scene switches to the game win screen.
 
 ## Internal Boss Controller
 
