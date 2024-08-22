@@ -91,7 +91,7 @@ importers:
         specifier: ^2.13.0
         version: 2.13.0
       sharp:
-        specifier: ^0.33.0
+        specifier: ^0.33.4
         version: 0.33.4
       svelte:
         specifier: ^4.2.18
