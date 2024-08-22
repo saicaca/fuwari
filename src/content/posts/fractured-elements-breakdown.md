@@ -8,19 +8,6 @@ category: ''
 draft: false 
 ---
 
-:::caution[TODO]
-
-# TODO
-
-- [x] link the github repo
-- [x] turn the file names into links to the file on GitHub
-- [ ] diagrams where possible
-- [ ] # Spawning projectiles at a specific moment in animation
-- [ ] generics thing for prefab switchers and internal controllers
-- [ ] what could i have done to solve it, composition / inheritance instead of generics
-
-:::
-
 # Introduction
 
 In the previous post,
@@ -243,6 +230,13 @@ Once the boss is dead, it switches the scene to the win screen.
 
 [Jump back](#technical-challenges)
 
+:::caution[todo]
+
+add explanation
+
+:::
+
+
 > ![boss scripts hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--boss-scripts-hierarchy.svg)
 
 > ![player scripts hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--player-scripts-hierarchy.svg)
@@ -266,11 +260,27 @@ So, I resorted to digging around in the Unity docs.
 The function I used is 
 [AnimatorStateInfo.normalizedTime](https://docs.unity3d.com/ScriptReference/AnimatorStateInfo-normalizedTime.html).
 
+Every frame, the script checks whether the attack animation is being played,
+if it is being played then how far into the animation is it.
+If the animation is past the attack time point,
+and it is the first frame after the attack time point, then it spawns the attack projectile.
+
 ## Reusing the prefab switching code
 
 [Jump back](#technical-challenges)
 
+In the original scope for the game, the boss was also supposed to switch forms.
+In the finished product, everything is set up, so it is possible for the boss to switch forms as well.
+To do so, I wanted to use the same script I made for the player.
+In the switcher script however, there is an internal field that holds the internal controller for the player.
+This field is required to transfer messages from the player's root. 
 
+To make the switcher generic over the internal controller, I decided to use generics.
+This, however, is not possible in Unity.
+I could not find a way to make Unity recognize the script with generic, as a script.
+Thus, I ended up duplicating the code.
+
+I feel like I could have instead used composition via interfaces, but I am unsure of how.
 
 ## Boss AI
 
@@ -345,6 +355,9 @@ private bool InRange(Vector3 position)
 
 > ![boss](https://r2.sakurakat.systems/fractured-elements-breakdown--boss.png)
 
+In the above image, the red dot is `attackPosition` and the blue dot is `chasePosition`. 
+The white square is the boss.  
+
 ## Projectile spawning system
 
 [Jump back](#technical-challenges)
@@ -367,6 +380,67 @@ The player's axe attack and the boss' attack have 0 velocity,
 therefore they are stationary attacks, and their time to live is very low.
 
 On the other hand, the arrow has a velocity, and its time to live is long.
+
+# Final Outcome and Reflections
+
+The game jam submission is available [here](https://itch.io/jam/summer-school-24/rate/2856755). 
+
+## Reception of Fractured Elements
+
+### Results
+
+| Criteria     | Rank | Score* | Raw Score |
+|:-------------|:-----|:-------|:----------|
+| Gameplay     | #2   | 3.286  | 3.600     |
+| Presentation | #2   | 3.469  | 3.800     |
+| Creativity   | #3   | 2.739  | 3.000     |
+| Enjoyment    | #3   | 2.921  | 3.200     |
+
+### Rating Distribution
+
+| stars  | bar                  | percentage |
+|:-------|:---------------------|:-----------|
+| 5 star | 🟦🟦🟦⬜️⬜️⬜️⬜️⬜️⬜️⬜️ | 15%        |
+| 4 star | 🟦🟦🟦🟦🟦🟦🟦🟦⬜️⬜️ | 40%        |
+| 3 star | 🟦🟦🟦🟦⬜️⬜️⬜️⬜️⬜️⬜️ | 20%        |
+| 2 star | 🟦🟦🟦🟦⬜️⬜️⬜️⬜️⬜️⬜️ | 20%        |
+| 1 star | 🟦⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️⬜️ | 5%         |
+
+### Judge feedback
+
+:::note[note]
+
+Judge feedback is anonymous.
+
+:::
+
+> Visually nice platformer game with a pixel art approach
+> and switching characters that allow either melee or ranged attacks.
+> Multiple levels make it interesting and force the player to master their jumping and attacking skills.
+> There is a final boss for the finale.
+> One improvement I would suggest is that I was unsure what caused me to change between the characters -
+> I was not sure if it was timed, depending on where I was in the level or a button press.
+> Well done to all involved in the game and the hard work you put into it!
+
+## Personal Reflections on the Game Jam Experience
+
+:::caution[todo]
+
+---
+
+:::
+
+##  Asset Credits
+
+| Used where       | name                            | Author        | Link                                                | License                                         |
+|:-----------------|:--------------------------------|:--------------|:----------------------------------------------------|:------------------------------------------------|
+| tileset          | Cavernas                        | Adam Saltsman | https://adamatomic.itch.io/cavernas                 | Public domain                                   |
+| Player spites    | the elementals                  | chierit       | https://itch.io/c/1853936/elementals                | Creative Commons Attribution v4.0 International |
+| Common Enemies   | 2D Pixel Art Golems Asset Pack  | MonoPixelArt  | https://monopixelart.itch.io/golems-pack            | Unknown (not mentioned on the itch.io page)     |
+| Boss             | Boss: Frost Guardian            | chierit       | https://chierit.itch.io/boss-frost-guardian         | Creative Commons Attribution v4.0 International |
+| Logo             |                                 | me!           |                                                     | public domain                                   |
+| BG Music         | No Holding Back                 | estudiocafofo |                                                     | Unknown (owned, thanks humble bundle)           |
+| Boss fight music | Enemy Territory (LOOP)          | Steven Melin  | https://stevenmelin.itch.io/battle-quest-music-pack | Unknown (owned, thanks humble bundle)           |
 
 ---
 
