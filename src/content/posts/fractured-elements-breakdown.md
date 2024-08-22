@@ -12,8 +12,8 @@ draft: false
 
 # TODO
 
-- [ ] link the github repo
-- [ ] turn the file names into links to the file on github
+- [x] link the github repo
+- [x] turn the file names into links to the file on GitHub
 - [ ] diagrams where possible
 - [ ] # Spawning projectiles at a specific moment in animation
 - [ ] generics thing for prefab switchers and internal controllers
@@ -51,6 +51,12 @@ The game was inspired by
 [Terraria](https://terraria.org/),
 and various other games.
 
+The source code is available on GitHub
+
+::github{repo="pawarherschel/CovUniGJ2024"}
+
+and the game is available for download on [itch.io](https://pawarherschel.itch.io/fractured-elements)
+
 ## Collaborative Efforts with Shashank Bhave
 
 Shashank Bhave was the key for the development of Fractured Elements.
@@ -64,36 +70,36 @@ and ensuring that the game's theme of continuous change was thoroughly integrate
 
 The project contains the following scripts:
 
-- [BossController.cs](#todo)
-- [BossPrefabSwitcherOnTimer.cs](#todo)
-- [EnemyScript.cs](#todo)
-- [HealthScript.cs](#todo)
-- [InternalBossController.cs](#todo)
-- [InternalPlayerController.cs](#todo)
-- [LevelScript.cs](#todo)
-- [PlayerController.cs](#todo)
-- [PlayerPrefabSwitcherOnTimer.cs](#todo)
-- [ProjectileScript.cs](#todo)
+- [BossController.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/BossController.cs)
+- [BossPrefabSwitcherOnTimer.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/BossPrefabSwitcherOnTimer.cs)
+- [EnemyScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/EnemyScript.cs)
+- [HealthScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/HealthScript.cs)
+- [InternalBossController.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/InternalBossController.cs)
+- [InternalPlayerController.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/InternalPlayerController.cs)
+- [LevelScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/LevelScript.cs)
+- [PlayerController.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/PlayerController.cs)
+- [PlayerPrefabSwitcherOnTimer.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/PlayerPrefabSwitcherOnTimer.cs)
+- [ProjectileScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/ProjectileScript.cs)
 
 ## Important Scripts
 
 The scripts related to the core mechanic of Continuously Changing are these:
 
-| Player                         | Boss                         | Jump                                                                                                               |
-|--------------------------------|------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| PlayerPrefabSwitcherOnTimer.cs | BossPrefabSwitcherOnTimer.cs | [Prefab Switcher on Timer](#prefab-switcher-on-timer)                                                              |
-| PlayerController.cs            | BossController.cs            | [Player Controller](#player-controller) \| [Boss Controller](#boss-controller)                                     |
-| InternalPlayerController.cs    | InternalBossController.cs    | [Internal Player Controller](#internal-player-controller) \| [Internal Boss Controller](#internal-boss-controller) |
+| Player                                                                                                                                 | Boss                                                                                                                               | Jump                                                                                                               |
+|:---------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------|
+| [PlayerPrefabSwitcherOnTimer.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/PlayerPrefabSwitcherOnTimer.cs) | [BossPrefabSwitcherOnTimer.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/BossPrefabSwitcherOnTimer.cs) | [Prefab Switcher on Timer](#prefab-switcher-on-timer)                                                              |
+| [PlayerController.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/PlayerController.cs)                       | [BossController.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/BossController.cs)                       | [Player Controller](#player-controller) \| [Boss Controller](#boss-controller)                                     |
+| [InternalPlayerController.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/InternalPlayerController.cs)       | [InternalBossController.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/InternalBossController.cs)       | [Internal Player Controller](#internal-player-controller) \| [Internal Boss Controller](#internal-boss-controller) |
 
-Another special mention is the `ProjectileScript.cs` script used by both, the Player, and the Boss.
+Another special mention is the [ProjectileScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/ProjectileScript.cs) script used by both, the Player, and the Boss.
 
 ## Other Scripts
 
-| Script Name              | Description                                                                                                                                                                                                     |
-|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <br/>EnemyScript.cs<br/> | This script handles the AI for the normal enemies. <br/>The enemies have a `Circle Collider 2D` with trigger set to true. <br/>When this trigger is no longer being triggered, the enemy flips their direction. |
-| HealthScript.cs          | Sets the player's max health to the health configured in the editor, can be set per level.                                                                                                                      |
-| LevelScript.cs           | Checks if the number of enemies is zero, and then switches to the next level.                                                                                                                                   |
+| Script Name                                                                                                      | Description                                                                                                                                                                                                     |
+|:-----------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <br/>[EnemyScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/EnemyScript.cs)<br/> | This script handles the AI for the normal enemies. <br/>The enemies have a `Circle Collider 2D` with trigger set to true. <br/>When this trigger is no longer being triggered, the enemy flips their direction. |
+| [HealthScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/HealthScript.cs)                | Sets the player's max health to the health configured in the editor, can be set per level.                                                                                                                      |
+| [LevelScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/LevelScript.cs)           | Checks if the number of enemies is zero, and then switches to the next level.                                                                                                                                   |
 
 ## Prefab Switcher on Timer
 
@@ -127,7 +133,7 @@ Now, `CurrentInternalController` exposes functions required for the player contr
 ### Serialized Fields
 
 | Name                 | Type       | Usage                                                                                                                                                                                                                                                                                                                  |
-|----------------------|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:---------------------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | projectile           | GameObject | The projectile to spawn                                                                                                                                                                                                                                                                                                |
 | projectileLocation   | Transform  | The location where the projectile is spawned                                                                                                                                                                                                                                                                           |
 | projectileVelocity   | float      | The velocity of projectile when it's spawned                                                                                                                                                                                                                                                                           |
@@ -136,7 +142,7 @@ Now, `CurrentInternalController` exposes functions required for the player contr
 ### Animation Parameters
 
 | Parameter | Type    | Description                            |
-|-----------|---------|----------------------------------------|
+|:----------|:--------|:---------------------------------------|
 | attack    | trigger | plays the attack animation             |
 | jump      | trigger | plays the jump animation               |
 | run       | bool    | plays the running animation while true |
@@ -144,7 +150,7 @@ Now, `CurrentInternalController` exposes functions required for the player contr
 ### Public Functions
 
 | Name         | Return Type | Description                                                                                                      |
-|--------------|-------------|------------------------------------------------------------------------------------------------------------------|
+|:-------------|:------------|:-----------------------------------------------------------------------------------------------------------------|
 | SetRunning   | void        | Sets the animation parameter `running` boolean to `true`                                                         |
 | ResetRunning | void        | Sets the animation parameter `running` boolean to `false`                                                        |
 | Attack       | bool        | Sets the animation parameter `attack` trigger, returns false if the attack animation is playing, otherwise false |
@@ -164,21 +170,21 @@ I will explain it in the [Spawning projectiles at a specific moment in animation
 The boss controller acts according to the below truth table
 
 | can attack | can chase | action       |
-|------------|-----------|--------------|
-| false      | false     | do nothing   |
-| true       | false     | not possible |
-| false      | true      | chase        |
-| true       | true      | attack       |
+|:-----------|:----------|:-------------|
+| ❌false❌    | ❌false❌   | do nothing   |
+| ❌false❌    | ✅true✅    | chase        |
+| ✅true✅     | ❌false❌   | not possible |
+| ✅true✅     | ✅true✅    | attack       |
 
 The script also keeps track of two variables:
 1. `attackSuccess`
-2. `chaseSuccess`.
+2. `chaseSuccess`
 
 These are returned by the functions from `InternalBossController`.
 If the boss successfully chases after the player, then the script exits early.
 Otherwise, the boss moves towards the player.
 
-Once the boss dead, the scene switches to the game win screen.
+Once the boss is dead, the scene switches to the game win screen.
 
 ## Internal Boss Controller
 
@@ -187,7 +193,7 @@ Once the boss dead, the scene switches to the game win screen.
 ### Serialized Fields
 
 | Name               | Type       | Usage                                                                                                                                                                                                                                                                                                                                       |
-|--------------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:-------------------|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | attackTriggerTime  | float      | (same as player)<br/>The point of time in animation when the projectile is spawned.<br/>The time is normalized between 0 and 1, both inclusive.<br/>The script attempts to only spawn the projectile only once (due to how fragile the system is, sometimes the projectile doesn't spawn and other times it will be spawned multiple times) |
 | projectile         | GameObject | (same as player)<br/>The projectile to spawn                                                                                                                                                                                                                                                                                                |
 | projectileLocation | Transform  | (same as player)<br/>The location where the projectile is spawned                                                                                                                                                                                                                                                                           |
@@ -195,14 +201,14 @@ Once the boss dead, the scene switches to the game win screen.
 ### Animation Parameters
 
 | Parameter | Type    | Description                                     |
-|-----------|---------|-------------------------------------------------|
+|:----------|:--------|:------------------------------------------------|
 | attack    | trigger | (same as player)<br/>plays the attack animation |
 | chase     | bool    | plays the running animation while true          |
 
 ### Public Functions
 
 | Name            | Return Type | Description                                                                                                      |
-|-----------------|-------------|------------------------------------------------------------------------------------------------------------------|
+|:----------------|:------------|:-----------------------------------------------------------------------------------------------------------------|
 | Attack          | bool        | Sets the animation parameter `attack` trigger, returns false if the attack animation is playing, otherwise false |
 | Chase           | bool        | Returns `true` if the animation parameter `chase` boolean was set to `true`, otherwise returns false             |
 | StopChase       | void        | Sets the animation parameter `chase` boolean to `false`                                                          |
@@ -213,9 +219,154 @@ Once the boss dead, the scene switches to the game win screen.
 Boss attacks use the same system as player attack
 ([Spawning projectiles at a specific moment in animation](#spawning-projectiles-at-a-specific-moment-in-animation))
 
-Once the boss is killed, it switches the scene to the win screen.
+Once the boss is dead, it switches the scene to the win screen.
 
 
+# Level Design
+
+:::caution[TODO: Shashank]
+
+---
+
+:::
+
+
+# Technical Challenges
+
+1. [Switching prefabs](#switching-prefabs)
+2. [Spawning projectiles at a specific moment in animation](#spawning-projectiles-at-a-specific-moment-in-animation)
+3. [Reusing the prefab switching code](#reusing-the-prefab-switching-code)
+4. [Boss AI](#boss-ai)
+5. [Projectile spawning system](#projectile-spawning-system)
+
+## Switching prefabs
+
+[Jump back](#technical-challenges)
+
+> ![boss scripts hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--boss-scripts-hierarchy.svg)
+
+> ![player scripts hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--player-scripts-hierarchy.svg)
+
+> ![all scripts hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--all-scripts-hierarchy.svg)
+
+## Spawning projectiles at a specific moment in animation
+
+[Jump back](#technical-challenges)
+
+My first instinct was
+to check if I can just call functions on a specific frame similar to Godot [^godot-docs-call-method-track] .
+On a cursory search,
+I found out
+that I will need
+to use [AnimationEvent](https://docs.unity3d.com/Manual/script-AnimationWindowEvent.html) [^unity-discussions-call-a-function-dependent-on-frame-of-animation] .
+However, I didn't want to learn the unity animation event system,
+and the event system in general with the short timeline.
+So, I resorted to digging around in the Unity docs.
+
+The function I used is 
+[AnimatorStateInfo.normalizedTime](https://docs.unity3d.com/ScriptReference/AnimatorStateInfo-normalizedTime.html).
+
+## Reusing the prefab switching code
+
+[Jump back](#technical-challenges)
+
+
+
+## Boss AI
+
+[Jump back](#technical-challenges)
+
+The boss AI is not complex.
+The boss has two transforms attached to the root,
+one acts as a reference point for the boss' "vision," and the other one for the boss' attack range.
+
+The functions used to check are below
+
+:::note[CanChase]
+
+```c#
+private bool CanChase()
+{
+    var position = chasePosition.position;
+    var playerInRange = _player != null && Vector2.Distance(_player.transform.position, position) <
+        Vector2.Distance(Vector2.zero, position);
+
+    return playerInRange;
+}
+```
+
+:::
+
+:::note[CanAttack]
+
+```c#
+private bool CanAttack()
+{
+    var position = attackPosition.position;
+    var playerInRange = _player != null && Vector2.Distance(_player.transform.position, position) <
+        Vector2.Distance(Vector2.zero, position);
+
+    return playerInRange;
+}
+```
+
+:::
+
+As you might be able to see, both the functions are very similar.
+
+:::note[diff between `CanAttack` and `CanChase`]
+
+```diff
+- private bool CanAttack()
++ private bool CanChase()
+  {
+-     var position = attackPosition.position;
++     var position = chasePosition.position;
+      var playerInRange = _player != null && Vector2.Distance(_player.transform.position, position) <
+          Vector2.Distance(Vector2.zero, position);
+  
+      return playerInRange;
+  }
+```
+
+:::
+
+Looking at the code again, it can be refactored into this function.
+
+```c#
+private bool InRange(Vector3 position)
+{
+    var playerInRange = _player != null && Vector2.Distance(_player.transform.position, position) <
+        Vector2.Distance(Vector2.zero, position);
+
+    return playerInRange;
+}
+```
+
+> ![boss](https://r2.sakurakat.systems/fractured-elements-breakdown--boss.png)
+
+## Projectile spawning system
+
+[Jump back](#technical-challenges)
+
+I remember hearing about the way 
+[Terraria](https://terraria.org/)
+spawns projectiles,
+and I wanted to implement it the same way.
+
+The controller spawns the projectile, gives it a velocity, and then everything else is done in the projectile script.
+This way I can customize the behavior of projectiles depending on what the projectile needs to do.
+
+There are three projectiles in the game at the moment.
+
+1. player's axe attack
+2. player's bow and arrow's arrow
+3. boss' attack
+
+The player's axe attack and the boss' attack have 0 velocity,
+therefore they are stationary attacks, and their time to live is very low.
+
+On the other hand, the arrow has a velocity, and its time to live is long.
 
 ---
 
@@ -257,5 +408,12 @@ Once the boss is killed, it switches the scene to the win screen.
 ## Future Plans and Next Steps
 
 :::
+
+
+---
+
+[^godot-docs-call-method-track]: https://docs.godotengine.org/en/stable/tutorials/animation/animation_track_types.html#call-method-track
+[^unity-discussions-call-a-function-dependent-on-frame-of-animation]: https://discussions.unity.com/t/call-a-function-dependent-on-frame-of-animation/73890
+
 
 
