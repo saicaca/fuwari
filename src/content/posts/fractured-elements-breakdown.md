@@ -230,18 +230,45 @@ Once the boss is dead, it switches the scene to the win screen.
 
 [Jump back](#technical-challenges)
 
-:::caution[todo]
+> ![player scripts hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--player-scripts-hierarchy.svg)
 
-add explanation
+The player consists of three components,
+
+1. `PlayerController`: The root component. This component is responsible for all top level functionality, such as player controller, and health.
+2. `PlayerPrefabSwitcherOnTimer`: The component responsible for changing forms
+3. `InternalPlayerController`: The controller on prefabs, responsible for form specific behavior 
+
+:::note[Player Hierarchy]
+
+![player hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--player.svg)
 
 :::
 
+`PlayerController` contains `PlayerPrefabSwitcherOnTimer` as an internal property.<br>
+`InternalPlayerController` contains `ProjectileScript` as an internal property.<br>
+
+`PlayerPrefabSwitcherOnTimer` has a serialized field of type `GameObject[]`, this is where the prefabs are added via the editor.
+
+---
 
 > ![boss scripts hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--boss-scripts-hierarchy.svg)
 
-> ![player scripts hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--player-scripts-hierarchy.svg)
+Similar to the player, the boss also consists of three components,
 
-> ![all scripts hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--all-scripts-hierarchy.svg)
+1. `BossController`: The root component. This component is responsible for all top level functionality, such as AI, and health.
+2. `BossPrefabSwitcherOnTimer`: The component responsible for changing forms
+3. `InternalBossController`: The controller on prefabs, responsible for form specific behavior
+
+:::note[Boss Hierarchy]
+
+![boss hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--boss.svg)
+
+:::
+
+`BossController` contains `BossPrefabSwitcherOnTimer` as an internal property.<br>
+`InternalBossController` contains `ProjectileScript` as an internal property.<br>
+
+`BossPrefabSwitcherOnTimer` has a serialized field of type `GameObject[]`, this is where the prefabs are added via the editor.
 
 ## Spawning projectiles at a specific moment in animation
 
@@ -356,7 +383,13 @@ private bool InRange(Vector3 position)
 > ![boss](https://r2.sakurakat.systems/fractured-elements-breakdown--boss.png)
 
 In the above image, the red dot is `attackPosition` and the blue dot is `chasePosition`. 
-The white square is the boss.  
+The white square is the boss.
+
+> ![boss with overlay](https://r2.sakurakat.systems/fractured-elements-breakdown--boss-overlay.png)
+
+1. If the player is in the blue region, then the boss will chase the player.
+2. If the player is in the red region, then the boss will attack the player.
+3. If the player is in the green region, then the boss will turn around to face the player.
 
 ## Projectile spawning system
 
@@ -424,65 +457,27 @@ Judge feedback is anonymous.
 
 ## Personal Reflections on the Game Jam Experience
 
-:::caution[todo]
+I am decently happy with the architecture of the code
 
----
+> ![all scripts hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--all-scripts-hierarchy.svg)
 
-:::
+I managed to not over scope much unlike the last game jam.
+
+I do wish I would have invested some time into learning the events system in Unity beforehand, but it is what it is.
+
+I am pretty happy with how the logo turned out as well.
 
 ##  Asset Credits
 
-| Used where       | name                            | Author        | Link                                                | License                                         |
-|:-----------------|:--------------------------------|:--------------|:----------------------------------------------------|:------------------------------------------------|
-| tileset          | Cavernas                        | Adam Saltsman | https://adamatomic.itch.io/cavernas                 | Public domain                                   |
-| Player spites    | the elementals                  | chierit       | https://itch.io/c/1853936/elementals                | Creative Commons Attribution v4.0 International |
-| Common Enemies   | 2D Pixel Art Golems Asset Pack  | MonoPixelArt  | https://monopixelart.itch.io/golems-pack            | Unknown (not mentioned on the itch.io page)     |
-| Boss             | Boss: Frost Guardian            | chierit       | https://chierit.itch.io/boss-frost-guardian         | Creative Commons Attribution v4.0 International |
-| Logo             |                                 | me!           |                                                     | public domain                                   |
-| BG Music         | No Holding Back                 | estudiocafofo |                                                     | Unknown (owned, thanks humble bundle)           |
-| Boss fight music | Enemy Territory (LOOP)          | Steven Melin  | https://stevenmelin.itch.io/battle-quest-music-pack | Unknown (owned, thanks humble bundle)           |
-
----
-
-:::note[skeleton given by chatgpt]
-
----
-
-# Introduction
-## Overview of the Previous Post
-## Purpose of the Current Post
-
-# Concept and Design of Fractured Elements
-## Overview of Game Concept
-## Core Mechanics and Unique Features
-## Collaborative Efforts with Shashank Bhave
-
-# Implementation Details
-## Character Design and Form Switching
-## Combat and Platforming Mechanics
-## Integration of Continuous Change Theme
-
-# Level Design
-## Overview of Level Structure
-## Challenges Faced and Solutions
-## Shashank Bhave’s Role in Level Creation
-
-# Technical Challenges
-## Issues Encountered During Development
-## Strategies for Overcoming Technical Hurdles
-## Reflections on the Learning Process
-
-# Final Outcome and Reflections
-## Reception of Fractured Elements
-## Personal Reflections on the Game Jam Experience
-## Lessons Learned and Future Directions
-
-# Conclusion
-## Summary of Key Points
-## Future Plans and Next Steps
-
-:::
-
+| Used where       | Name                           | Author        | Link                                                | License                                         |
+|:-----------------|:-------------------------------|:--------------|:----------------------------------------------------|:------------------------------------------------|
+| Tileset          | Cavernas                       | Adam Saltsman | https://adamatomic.itch.io/cavernas                 | Public domain                                   |
+| Player spites    | the elementals                 | chierit       | https://itch.io/c/1853936/elementals                | Creative Commons Attribution v4.0 International |
+| Common Enemies   | 2D Pixel Art Golems Asset Pack | MonoPixelArt  | https://monopixelart.itch.io/golems-pack            | Unknown (not mentioned on the itch.io page)     |
+| Boss             | Boss: Frost Guardian           | chierit       | https://chierit.itch.io/boss-frost-guardian         | Creative Commons Attribution v4.0 International |
+| Logo             |                                | me!           |                                                     | public domain                                   |
+| BG Music         | No Holding Back                | estudiocafofo |                                                     | Unknown (owned, thanks humble bundle)           |
+| Boss fight music | Enemy Territory (LOOP)         | Steven Melin  | https://stevenmelin.itch.io/battle-quest-music-pack | Unknown (owned, thanks humble bundle)           |
 
 ---
 
