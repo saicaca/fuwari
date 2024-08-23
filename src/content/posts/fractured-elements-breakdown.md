@@ -1,10 +1,10 @@
 ---
-title: fractured-elements-breakdown
+title: Fractured Elements Breakdown
 published: 2024-08-18
-description: ''
+description: "The blog post delves into the technical aspects of creating the 2D platformer game 'Fractured Elements,' developed during a game jam at Coventry University's Summer School. It provides an overview of the game's concept, and discusses the challenges encountered during development, such as implementing the form-switching mechanic and boss AI."
 image: ''
-tags: []
-category: ''
+tags: ['Programming', 'Game Development', 'Unity', "CSharp", 'Level Design', 'breakdown', 'Collaborative']
+category: 'Programming'
 draft: false 
 ---
 
@@ -84,7 +84,7 @@ Another special mention is the [ProjectileScript.cs](https://github.com/pawarher
 
 | Script Name                                                                                                      | Description                                                                                                                                                                                                     |
 |:-----------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <br/>[EnemyScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/EnemyScript.cs)<br/> | This script handles the AI for the normal enemies. <br/>The enemies have a `Circle Collider 2D` with trigger set to true. <br/>When this trigger is no longer being triggered, the enemy flips their direction. |
+| <br/>[EnemyScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/EnemyScript.cs)<br/> | This script handles the AI for the common enemies. <br/>The enemies have a `Circle Collider 2D` with trigger set to true. <br/>When this trigger is no longer being triggered, the enemy flips their direction. |
 | [HealthScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/HealthScript.cs)                | Sets the player's max health to the health configured in the editor, can be set per level.                                                                                                                      |
 | [LevelScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/LevelScript.cs)           | Checks if the number of enemies is zero, and then switches to the next level.                                                                                                                                   |
 
