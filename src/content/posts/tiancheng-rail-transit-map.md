@@ -4,7 +4,7 @@ published: 2024-06-22
 description: ''
 image: 'https://act-webstatic.akio.top/2024/06/24/6678c9828f5fd.png'
 tags: [二创,天城轨道交通,BLUEAKIO,Akio Studio]
-category: ''
+category: '文创产品'
 draft: false 
 ---
 ![](https://act-webstatic.akio.top/2024/06/24/6678c9aa8fec2.png '亮色版')
