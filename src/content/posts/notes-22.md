@@ -3,8 +3,8 @@ title: 记录 2024 年第 80 天 | 没钱啦
 published: 2024-03-18
 description: ''
 image: ''
-tags: [手记]
-category: ''
+tags: []
+category: '手记'
 draft: false 
 ---
 因为购买了某套衣服的缘故，要开始购买美白相关产品，同时也要开始安排剃毛了

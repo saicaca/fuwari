@@ -3,8 +3,8 @@ title: Windsys Project 停止更新后的一些思考
 published: 2024-05-13
 description: '关于 Whatk 宣布 Windsys Project 停止更新后的想法'
 image: 'https://server.akio.top/api/v2/objects/icon/sscn6jcyt4anx9r4gj.jpeg'
-tags: [手记]
-category: ''
+tags: []
+category: '手记'
 draft: false 
 ---
 ![](https://server.akio.top/api/v2/objects/icon/sscn6jcyt4anx9r4gj.jpeg)

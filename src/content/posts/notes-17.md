@@ -4,7 +4,7 @@ published: 2024-01-12
 description: ''
 image: ''
 tags: [手记]
-category: ''
+category: '手记'
 draft: false 
 ---
 ## 个人网址的大迁移

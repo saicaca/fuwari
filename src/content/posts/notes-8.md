@@ -3,8 +3,8 @@ title: 记录 2023 年第 111 天 —— 折腾新手机
 published: 2023-04-21
 description: ''
 image: ''
-tags: [手记]
-category: ''
+tags: []
+category: '手记'
 draft: false 
 ---
 昨天到货的新手机，Redmi Note 12，能 5G（虽然他说能 5G 但是我是真的没看见按钮）

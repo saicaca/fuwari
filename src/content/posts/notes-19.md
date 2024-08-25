@@ -3,8 +3,8 @@ title: 记录 2024 年第 64 天
 published: 2024-03-04
 description: ''
 image: ''
-tags: [手记]
-category: ''
+tags: []
+category: '手记'
 draft: false 
 ---
 图一：cos 温迪，但是不会戴假发导致很丑，这是当时唯一的图

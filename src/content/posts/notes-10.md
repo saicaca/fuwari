@@ -3,8 +3,8 @@ title: 2023年的5月，接受摆烂的自己
 published: 2023-05-21
 description: ''
 image: ''
-tags: [手记]
-category: ''
+tags: []
+category: '手记'
 draft: false 
 ---
 看见 Innei 发了条关于自己近期的动态，想了想自己如此颓废的一个月，想杀死自己的心情都有了
