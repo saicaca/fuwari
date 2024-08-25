@@ -39,6 +39,11 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Archive,
     LinkPreset.About,
     {
+      name: '友链',
+      url: 'https://www.akio.top/friends',     // Internal links should not include the base path, as it is automatically added
+      external: true,                               // Show an external link icon and will open in a new tab
+    },
+    {
       name: '前往主站',
       url: 'https://www.akio.top',     // Internal links should not include the base path, as it is automatically added
       external: true,                               // Show an external link icon and will open in a new tab
@@ -49,19 +54,27 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
   avatar: 'https://webstatic.akio.top/user/NiuBoss123.jpg',  // Relative to the /src directory. Relative to the /public directory if it starts with '/'
   name: 'MisakaAkio 御坂秋生',
-  bio: '是落寞之人，是艦長，是旅行者，是開拓者，更是時時刻刻陪伴你的朋友',
+  bio: '是落寞之人，是舰长，是旅行者，是开拓者，更是时刻陪伴你的朋友',
   links: [
-    {
-      name: 'Twitter',
-      icon: 'fa6-brands:twitter',       // Visit https://icones.js.org/ for icon codes
-                                        // You will need to install the corresponding icon set if it's not already included
-                                        // `pnpm add @iconify-json/<icon-set-name>`
-      url: 'https://x.com/NiuBoss123',
-    },
     {
       name: 'GitHub',
       icon: 'fa6-brands:github',
       url: 'https://github.com/NiuBoss123',
+    },
+    {
+      name: "Bilibili",
+      icon: "fa6-brands:bilibili",
+      url: "https://space.bilibili.com/384459594",
+    },
+    {
+      name: '微博',
+      icon: 'fa6-brands:weibo',
+      url: 'https://weibo.com/7892649152',
+    },
+    {
+      name: 'Twitter',
+      icon: 'fa6-brands:x-twitter',
+      url: 'https://x.com/NiuBoss123',
     },
   ],
 }

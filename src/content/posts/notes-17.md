@@ -3,7 +3,7 @@ title: 记录 2024 年第 12 天
 published: 2024-01-12
 description: ''
 image: ''
-tags: [手记]
+tags: []
 category: '手记'
 draft: false 
 ---
