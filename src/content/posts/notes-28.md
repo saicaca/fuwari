@@ -13,7 +13,7 @@ draft: false
 
 蛮突然的，不是不能接受，而是在一种有需要的情况下发现我要的东西停止更新的那种感觉（LSPosed 那时候也是）
 
-我不知道抱着什么心情回了个评论，||发完才发现有错别字||
+我不知道抱着什么心情回了个评论，发完才发现有错别字
 
 ![](https://server.akio.top/api/v2/objects/icon/w02skn63fxdgk5ugrp.png)
 
