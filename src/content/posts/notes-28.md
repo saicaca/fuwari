@@ -1,5 +1,5 @@
 ---
-title: 今天是我的生日捏~
+title: Windsys Project 停止更新后的一些思考
 published: 2024-05-13
 description: 'https://server.akio.top/api/v2/objects/icon/sscn6jcyt4anx9r4gj.jpeg'
 image: ''
