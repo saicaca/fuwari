@@ -8,12 +8,13 @@
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
+    "type-check": "tsc --noEmit --isolatedDeclarations",
     "new-post": "node scripts/new-post.js",
     "format": "biome format --write ./src",
     "lint": "biome check --apply ./src"
   },
   "dependencies": {
-    "@astrojs/check": "^0.8.3",
+    "@astrojs/check": "^0.9.2",
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.1.6",
     "@astrojs/svelte": "^5.7.0",
@@ -21,7 +22,7 @@
     "@fontsource-variable/jetbrains-mono": "^5.0.21",
     "@fontsource/roboto": "^5.0.13",
     "@swup/astro": "^1.4.1",
-    "astro": "^4.12.2",
+    "astro": "^4.14.2",
     "astro-compress": "^2.3.0",
     "astro-icon": "1.1.0",
     "colorjs.io": "^0.5.2",
@@ -46,7 +47,7 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@astrojs/ts-plugin": "^1.9.0",
+    "@astrojs/ts-plugin": "^1.10.0",
     "@biomejs/biome": "1.8.3",
     "@iconify-json/fa6-brands": "^1.1.21",
     "@iconify-json/fa6-regular": "^1.1.21",
