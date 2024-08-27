@@ -41,7 +41,7 @@ const jsonLd = {
     url: Astro.site,
   },
   datePublished: formatDateToYYYYMMDD(entry.data.published),
-  inLanguage: siteConfig.lang.replace('_', '-'),
+  inLanguage: (entry.data.language ? entry.data.language.replace('_', '-') : siteConfig.lang.replace('_', '-')),
   // TODO include cover image here
 }
 ---
