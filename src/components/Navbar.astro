@@ -84,21 +84,31 @@ function switchTheme() {
 
 function loadButtonScript() {
     let switchBtn = document.getElementById("scheme-switch");
-    switchBtn!.addEventListener("click", function () {
-        switchTheme()
-    });
+    if (switchBtn) {
+        switchBtn.addEventListener("click", function () {
+            switchTheme()
+        });
+    }
 
     let settingBtn = document.getElementById("display-settings-switch");
-    settingBtn!.addEventListener("click", function () {
-        let settingPanel = document.getElementById("display-setting");
-        settingPanel!.classList.toggle("float-panel-closed");
-    });
+    if (settingBtn) {
+        settingBtn.addEventListener("click", function () {
+            let settingPanel = document.getElementById("display-setting");
+            if (settingPanel) {
+                settingPanel.classList.toggle("float-panel-closed");
+            }
+        });
+    }
 
     let menuBtn = document.getElementById("nav-menu-switch");
-    menuBtn!.addEventListener("click", function () {
-        let menuPanel = document.getElementById("nav-menu-panel");
-        menuPanel!.classList.toggle("float-panel-closed");
-    });
+    if (menuBtn) {
+        menuBtn.addEventListener("click", function () {
+            let menuPanel = document.getElementById("nav-menu-panel");
+            if (menuPanel) {
+                menuPanel.classList.toggle("float-panel-closed");
+            }
+        });
+    }
 }
 
 loadButtonScript();
