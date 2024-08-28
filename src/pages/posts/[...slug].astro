@@ -51,21 +51,27 @@ const jsonLd = {
         <div id="post-container" class:list={["card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ",
             {}
         ]}>
-            <!-- word count and reading time -->
-            <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation">
-                <div class="flex flex-row items-center">
-                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
-                        <Icon name="material-symbols:notes-rounded"></Icon>
-                    </div>
-                    <div class="text-sm">{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount)}</div>
-                </div>
-                <div class="flex flex-row items-center">
-                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
-                        <Icon name="material-symbols:schedule-outline-rounded"></Icon>
-                    </div>
-                    <div class="text-sm">{remarkPluginFrontmatter.minutes} {" " + i18n(I18nKey.minutesCount)}</div>
-                </div>
-            </div>
+			<!-- word count and reading time -->
+			<div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation">
+				<div class="flex flex-row items-center">
+					<div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+						<Icon name="material-symbols:notes-rounded"></Icon>
+					</div>
+					<div class="text-sm">
+						{remarkPluginFrontmatter.words} {" "}
+						{remarkPluginFrontmatter.words === 1 ? i18n(I18nKey.wordCount) : i18n(I18nKey.wordsCount)}
+					</div>
+				</div>
+				<div class="flex flex-row items-center">
+					<div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+						<Icon name="material-symbols:schedule-outline-rounded"></Icon>
+					</div>
+					<div class="text-sm">
+						{remarkPluginFrontmatter.minutes} {" "}
+						{remarkPluginFrontmatter.minutes === 1 ? i18n(I18nKey.minuteCount) : i18n(I18nKey.minutesCount)}
+					</div>
+				</div>
+			</div>
 
             <!-- title -->
             <div class="relative onload-animation">
