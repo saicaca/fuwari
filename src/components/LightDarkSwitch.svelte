@@ -11,7 +11,7 @@ import {
 } from '@utils/setting-utils.ts'
 import { onMount } from 'svelte'
 
-const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE, AUTO_MODE]
+const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE]
 let mode: LIGHT_DARK_MODE = AUTO_MODE
 
 onMount(() => {
@@ -37,13 +37,11 @@ function switchScheme(newMode: LIGHT_DARK_MODE) {
 }
 
 function toggleScheme() {
-  let i = 0
-  for (; i < seq.length; i++) {
-    if (seq[i] === mode) {
-      break
-    }
+  if (mode === AUTO_MODE) {
+    mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? DARK_MODE : LIGHT_MODE;
   }
-  switchScheme(seq[(i + 1) % seq.length])
+
+  switchScheme(mode === LIGHT_MODE ? DARK_MODE : LIGHT_MODE);
 }
 
 function showPanel() {
