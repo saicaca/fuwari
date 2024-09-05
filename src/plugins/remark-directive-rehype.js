@@ -4,7 +4,7 @@ import { visit } from 'unist-util-visit'
 
 export function parseDirectiveNode() {
   return (tree, { data }) => {
-    visit(tree, function (node) {
+    visit(tree, node => {
       if (
         node.type === 'containerDirective' ||
         node.type === 'leafDirective' ||

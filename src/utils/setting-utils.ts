@@ -1,20 +1,20 @@
+import type { LIGHT_DARK_MODE } from '@/types/config'
 import {
   AUTO_MODE,
   DARK_MODE,
   DEFAULT_THEME,
   LIGHT_MODE,
 } from '@constants/constants.ts'
-import type { LIGHT_DARK_MODE } from '@/types/config'
 
 export function getDefaultHue(): number {
   const fallback = '250'
   const configCarrier = document.getElementById('config-carrier')
-  return parseInt(configCarrier?.dataset.hue || fallback)
+  return Number.parseInt(configCarrier?.dataset.hue || fallback)
 }
 
 export function getHue(): number {
   const stored = localStorage.getItem('hue')
-  return stored ? parseInt(stored) : getDefaultHue()
+  return stored ? Number.parseInt(stored) : getDefaultHue()
 }
 
 export function setHue(hue: number): void {

@@ -11,15 +11,16 @@ interface Props {
   title?: string
   banner?: string
   description?: string
+  lang?: string
 }
 
-const { title, banner, description } = Astro.props
+const { title, banner, description, lang } = Astro.props
 const hasBannerCredit =
   siteConfig.banner.enable && siteConfig.banner.credit.enable
 const hasBannerLink = !!siteConfig.banner.credit.url
 ---
 
-<Layout title={title} banner={banner} description={description}>
+<Layout title={title} banner={banner} description={description} lang={lang}>
 <slot slot="head" name="head"></slot>
 <div class="max-w-[var(--page-width)] min-h-screen grid grid-cols-[17.5rem_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto]
     mx-auto gap-4 relative px-0 md:px-4"

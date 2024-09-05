@@ -21,9 +21,10 @@ interface Props {
   title?: string
   banner?: string
   description?: string
+  lang?: string
 }
 
-let { title, banner, description } = Astro.props
+let { title, banner, description, lang } = Astro.props
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
@@ -52,7 +53,11 @@ if (title) {
 const favicons: Favicon[] =
   siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons
 
-const siteLang = siteConfig.lang.replace('_', '-')
+// const siteLang = siteConfig.lang.replace('_', '-')
+if (!lang) {
+  lang = `${siteConfig.lang}`
+}
+const siteLang = lang.replace('_', '-')
 ---
 
 <!DOCTYPE html>
