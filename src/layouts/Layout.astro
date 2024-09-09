@@ -101,6 +101,12 @@ const siteLang = siteConfig.lang.replace('_', '-')
 						document.documentElement.classList.remove('dark');
 					}
 			}
+
+			// analytics code
+			const request = new Request(`https://spy.pawarherschel.workers.dev/${window.location.search}`, {
+				"method": "POST",
+			});
+			fetch(request);
 		</script>
 
 		<slot name="head"></slot>
