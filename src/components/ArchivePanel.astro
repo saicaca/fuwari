@@ -68,7 +68,7 @@ function formatTag(tag: string[]) {
 <div class="card-base px-8 py-6">
     {
         groups.map(group => (
-            <div key={group.year}>
+            <div>
                 <div class="flex flex-row w-full items-center h-[3.75rem]">
                     <div class="w-[15%] md:w-[10%] transition text-2xl font-bold text-right text-75">{group.year}</div>
                     <div class="w-[15%] md:w-[10%]">
@@ -79,8 +79,7 @@ function formatTag(tag: string[]) {
                     </div>
                 </div>
                 {group.posts.map(post => (
-                    <a 
-                        key={post.slug}
+                    <a
                         href={getPostUrlBySlug(post.slug)}
                         aria-label={post.data.title}
                         class="group btn-plain block h-10 w-full rounded-lg hover:text-[initial]"
