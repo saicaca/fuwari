@@ -34,8 +34,9 @@ Shashank will then share his insights on level design.
 
 ## Overview of Game Concept
 
+
 `Fractured Elements` is a 2D platformer where the core mechanic is the constant switching between different elemental forms.
-The player needs to juggle platforming, killing enemies, and the switching between forms.
+The player needs to juggle platforming, killing enemies, while they switch between elemental forms.
 
 :::caution[TODO]
 
@@ -420,7 +421,7 @@ This, however, is not possible in Unity.
 I could not find a way to make Unity recognize the script with generic, as a script.
 Thus, I ended up duplicating the code.
 
-I feel like I could have instead used composition via interfaces, but I am unsure of how.
+I have a hunch I could have instead used composition via interfaces, but I am unsure of how.
 
 ## Boss AI
 
@@ -534,7 +535,10 @@ I am decently happy with the architecture of the code
 
 I managed to not over scope much unlike the last game jam.
 
-I do wish I would have invested some time into learning the events system in Unity beforehand, but it is what it is.
+The game turned out to be too easy, but I feel like it is better that way.
+
+I do wish I would have invested some time into learning the events system in Unity beforehand, 
+but it is what it is.
 
 I am pretty happy with how the logo turned out as well.
 
