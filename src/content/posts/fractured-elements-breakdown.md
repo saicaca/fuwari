@@ -102,11 +102,6 @@ Another special mention is the [ProjectileScript.cs](https://github.com/pawarher
 
 ## Other Scripts
 
-| Script Name                                                                                                      | Description                                                                                                                                                                                                     |
-|:-----------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <br/>[EnemyScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/EnemyScript.cs)<br/> | This script handles the AI for the common enemies. <br/>The enemies have a `Circle Collider 2D` with trigger set to true. <br/>When this trigger is no longer being triggered, the enemy flips their direction. |
-| [HealthScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/HealthScript.cs)                | Sets the player's max health to the health configured in the editor, can be set per level.                                                                                                                      |
-| [LevelScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/LevelScript.cs)           | Checks if the number of enemies is zero, and then switches to the next level.                                                                                                                                   |
 | Script Name                                                                                                 | Description                                                                                |
 |:------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
 | [EnemyScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/EnemyScript.cs)<br/> | [Enemy Script](#enemy-script)                                                                          |
@@ -200,31 +195,25 @@ make this section easy to understand
 
 [//]: # (| run       | bool    | plays the running animation while true |)
 
-| Name                 | Type       | Usage                                                                                                                                                                                                                                                                                                                  |
-|:---------------------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| projectile           | GameObject | The projectile to spawn                                                                                                                                                                                                                                                                                                |
-| projectileLocation   | Transform  | The location where the projectile is spawned                                                                                                                                                                                                                                                                           |
-| projectileVelocity   | float      | The velocity of projectile when it's spawned                                                                                                                                                                                                                                                                           |
-| <br/>attackTimePoint | <br/>float | The point of time in animation when the projectile is spawned.<br/>The time is normalized between 0 and 1, both inclusive.<br/>The script attempts to only spawn the projectile only once (due to how fragile the system is, sometimes the projectile doesn't spawn and other times it will be spawned multiple times) |
+[//]: # ()
+[//]: # (### Public Functions)
 
-### Animation Parameters
+[//]: # ()
+[//]: # (| Name         | Return Type | Description                                                                                                      |)
 
-| Parameter | Type    | Description                            |
-|:----------|:--------|:---------------------------------------|
-| attack    | trigger | plays the attack animation             |
-| jump      | trigger | plays the jump animation               |
-| run       | bool    | plays the running animation while true |
+[//]: # (|:-------------|:------------|:-----------------------------------------------------------------------------------------------------------------|)
 
-### Public Functions
+[//]: # (| SetRunning   | void        | Sets the animation parameter `running` boolean to `true`                                                         |)
 
-| Name         | Return Type | Description                                                                                                      |
-|:-------------|:------------|:-----------------------------------------------------------------------------------------------------------------|
-| SetRunning   | void        | Sets the animation parameter `running` boolean to `true`                                                         |
-| ResetRunning | void        | Sets the animation parameter `running` boolean to `false`                                                        |
-| Attack       | bool        | Sets the animation parameter `attack` trigger, returns false if the attack animation is playing, otherwise false |
-| Jump         | bool        | If the player can jump, sets the animation parameter `jump` trigger and returns true, otherwise returns false    |
-| FaceRight    | void        | Sets sprite to face `right` and changes the projectile location appropriately                                    |
-| FaceLeft     | void        | Sets sprite to face `left` and changes the projectile location appropriately                                     |
+[//]: # (| ResetRunning | void        | Sets the animation parameter `running` boolean to `false`                                                        |)
+
+[//]: # (| Attack       | bool        | Sets the animation parameter `attack` trigger, returns false if the attack animation is playing, otherwise false |)
+
+[//]: # (| Jump         | bool        | If the player can jump, sets the animation parameter `jump` trigger and returns true, otherwise returns false    |)
+
+[//]: # (| FaceRight    | void        | Sets sprite to face `right` and changes the projectile location appropriately                                    |)
+
+[//]: # (| FaceLeft     | void        | Sets sprite to face `left` and changes the projectile location appropriately                                     |)
 
 ### Note
 
@@ -260,22 +249,19 @@ make animation of the truth table
 [//]: # ()
 [//]: # (The script also keeps track of two variables:)
 
-| can attack | can chase | action       |
-|:-----------|:----------|:-------------|
-| ❌false❌    | ❌false❌   | do nothing   |
-| ❌false❌    | ✅true✅    | chase        |
-| ✅true✅     | ❌false❌   | not possible |
-| ✅true✅     | ✅true✅    | attack       |
+[//]: # (1. `attackSuccess`)
 
-The script also keeps track of two variables:
-1. `attackSuccess`
-2. `chaseSuccess`
+[//]: # (2. `chaseSuccess`)
 
-These are returned by the functions from `InternalBossController`.
-If the boss successfully chases after the player, then the script exits early.
-Otherwise, the boss moves towards the player.
+[//]: # ()
+[//]: # (These are returned by the functions from `InternalBossController`.)
 
-Once the boss is dead, the scene switches to the game win screen.
+[//]: # (If the boss successfully chases after the player, then the script exits early.)
+
+[//]: # (Otherwise, the boss moves towards the player.)
+
+[//]: # ()
+[//]: # (Once the boss is dead, the scene switches to the game win screen.)
 
 ## Internal Boss Controller
 
@@ -298,27 +284,35 @@ make this section easy to understand
 
 [//]: # (| projectile         | GameObject | &#40;same as player&#41;<br/>The projectile to spawn                                                                                                                                                                                                                                                                                                |)
 
-| Name               | Type       | Usage                                                                                                                                                                                                                                                                                                                                       |
-|:-------------------|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| attackTriggerTime  | float      | (same as player)<br/>The point of time in animation when the projectile is spawned.<br/>The time is normalized between 0 and 1, both inclusive.<br/>The script attempts to only spawn the projectile only once (due to how fragile the system is, sometimes the projectile doesn't spawn and other times it will be spawned multiple times) |
-| projectile         | GameObject | (same as player)<br/>The projectile to spawn                                                                                                                                                                                                                                                                                                |
-| projectileLocation | Transform  | (same as player)<br/>The location where the projectile is spawned                                                                                                                                                                                                                                                                           |
+[//]: # (| projectileLocation | Transform  | &#40;same as player&#41;<br/>The location where the projectile is spawned                                                                                                                                                                                                                                                                           |)
 
-### Animation Parameters
+[//]: # ()
+[//]: # (### Animation Parameters)
 
-| Parameter | Type    | Description                                     |
-|:----------|:--------|:------------------------------------------------|
-| attack    | trigger | (same as player)<br/>plays the attack animation |
-| chase     | bool    | plays the running animation while true          |
+[//]: # ()
+[//]: # (| Parameter | Type    | Description                                     |)
 
-### Public Functions
+[//]: # (|:----------|:--------|:------------------------------------------------|)
 
-| Name            | Return Type | Description                                                                                                      |
-|:----------------|:------------|:-----------------------------------------------------------------------------------------------------------------|
-| Attack          | bool        | Sets the animation parameter `attack` trigger, returns false if the attack animation is playing, otherwise false |
-| Chase           | bool        | Returns `true` if the animation parameter `chase` boolean was set to `true`, otherwise returns false             |
-| StopChase       | void        | Sets the animation parameter `chase` boolean to `false`                                                          |
-| SpawnProjectile | void        | Spawns the attack projectile                                                                                     |
+[//]: # (| attack    | trigger | &#40;same as player&#41;<br/>plays the attack animation |)
+
+[//]: # (| chase     | bool    | plays the running animation while true          |)
+
+[//]: # ()
+[//]: # (### Public Functions)
+
+[//]: # ()
+[//]: # (| Name            | Return Type | Description                                                                                                      |)
+
+[//]: # (|:----------------|:------------|:-----------------------------------------------------------------------------------------------------------------|)
+
+[//]: # (| Attack          | bool        | Sets the animation parameter `attack` trigger, returns false if the attack animation is playing, otherwise false |)
+
+[//]: # (| Chase           | bool        | Returns `true` if the animation parameter `chase` boolean was set to `true`, otherwise returns false             |)
+
+[//]: # (| StopChase       | void        | Sets the animation parameter `chase` boolean to `false`                                                          |)
+
+[//]: # (| SpawnProjectile | void        | Spawns the attack projectile                                                                                     |)
 
 ### Note
 
@@ -448,18 +442,6 @@ one acts as a reference point for the boss' "vision," and the other one for the 
 redo the explaination, possibly with gifs
 
 :::
-
-Looking at the code again, it can be refactored into this function.
-
-```c#
-private bool InRange(Vector3 position)
-{
-    var playerInRange = _player != null && Vector2.Distance(_player.transform.position, position) <
-        Vector2.Distance(Vector2.zero, position);
-
-    return playerInRange;
-}
-```
 
 > ![boss](https://r2.sakurakat.systems/fractured-elements-breakdown--boss.png)
 
