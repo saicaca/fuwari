@@ -56,7 +56,15 @@ The source code is available on GitHub
 
 and the game is available for download on [itch.io](https://pawarherschel.itch.io/fractured-elements)
 
+Here is a video of the gameplay in ~10 seconds if you don't want to play it.
+
+<video controls width="540">
+  <source src="https://r2.sakurakat.systems/fractured-elements-breakdown--gameplay.mp4" type="video/mp4" />
+</video>
+
 ## Collaborative Efforts with Shashank Bhave
+
+![](https://r2.sakurakat.systems/fractured-elements-breakdown--us.jpg)
 
 Shashank Bhave was the key for the development of Fractured Elements.
 He took on key responsibilities including level design, sourcing game art and music, and creating the game's lore.
@@ -99,6 +107,27 @@ Another special mention is the [ProjectileScript.cs](https://github.com/pawarher
 | <br/>[EnemyScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/EnemyScript.cs)<br/> | This script handles the AI for the common enemies. <br/>The enemies have a `Circle Collider 2D` with trigger set to true. <br/>When this trigger is no longer being triggered, the enemy flips their direction. |
 | [HealthScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/HealthScript.cs)                | Sets the player's max health to the health configured in the editor, can be set per level.                                                                                                                      |
 | [LevelScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/LevelScript.cs)           | Checks if the number of enemies is zero, and then switches to the next level.                                                                                                                                   |
+| Script Name                                                                                                 | Description                                                                                |
+|:------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------|
+| [EnemyScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/EnemyScript.cs)<br/> | [Enemy Script](#enemy-script)                                                                          |
+| [HealthScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/HealthScript.cs)           | Sets the player's max health to the health configured in the editor, can be set per level. |
+| [LevelScript.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/LevelScript.cs)      | Checks if the number of enemies is zero, and then switches to the next level.              |
+
+## Enemy Script
+
+[Jump back](#other-scripts)
+
+This script handles the AI for the common enemies. 
+The enemies have a `Circle Collider 2D` with trigger set to true. 
+When this trigger is no longer being triggered, the enemy flips their direction.
+
+> ![visual representation of the enemy script](https://r2.sakurakat.systems/fractured-elements-breakdown--enemy-script.gif)
+
+:::note[Legend for the gif]
+
+![legend for the shapes and colors in the gif preceding](https://r2.sakurakat.systems/fractured-elements-breakdown--enemy-script-legend.png)
+
+:::
 
 ## Prefab Switcher on Timer
 
@@ -135,13 +164,41 @@ Now, `CurrentInternalController` exposes functions required for the player contr
 
 [Jump back](#important-scripts)
 
-### Serialized Fields
 :::caution[TODO]
 
 make this section easy to understand
 
 :::
 
+
+[//]: # (### Serialized Fields)
+
+[//]: # ()
+[//]: # (| Name                 | Type       | Usage                                                                                                                                                                                                                                                                                                                  |)
+
+[//]: # (|:---------------------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|)
+
+[//]: # (| projectile           | GameObject | The projectile to spawn                                                                                                                                                                                                                                                                                                |)
+
+[//]: # (| projectileLocation   | Transform  | The location where the projectile is spawned                                                                                                                                                                                                                                                                           |)
+
+[//]: # (| projectileVelocity   | float      | The velocity of projectile when it's spawned                                                                                                                                                                                                                                                                           |)
+
+[//]: # (| <br/>attackTimePoint | <br/>float | The point of time in animation when the projectile is spawned.<br/>The time is normalized between 0 and 1, both inclusive.<br/>The script attempts to only spawn the projectile only once &#40;due to how fragile the system is, sometimes the projectile doesn't spawn and other times it will be spawned multiple times&#41; |)
+
+[//]: # ()
+[//]: # (### Animation Parameters)
+
+[//]: # ()
+[//]: # (| Parameter | Type    | Description                            |)
+
+[//]: # (|:----------|:--------|:---------------------------------------|)
+
+[//]: # (| attack    | trigger | plays the attack animation             |)
+
+[//]: # (| jump      | trigger | plays the jump animation               |)
+
+[//]: # (| run       | bool    | plays the running animation while true |)
 
 | Name                 | Type       | Usage                                                                                                                                                                                                                                                                                                                  |
 |:---------------------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -178,7 +235,6 @@ I will explain it in the [Spawning projectiles at a specific moment in animation
 
 [Jump back](#important-scripts)
 
-The boss controller acts according to the below truth table
 :::caution[TODO]
 
 make this section easy to understand
@@ -186,6 +242,23 @@ make animation of the truth table
 
 :::
 
+[//]: # (The boss controller acts according to the below truth table)
+
+[//]: # ()
+[//]: # (| can attack | can chase | action       |)
+
+[//]: # (|:-----------|:----------|:-------------|)
+
+[//]: # (| ❌false❌    | ❌false❌   | do nothing   |)
+
+[//]: # (| ❌false❌    | ✅true✅    | chase        |)
+
+[//]: # (| ✅true✅     | ❌false❌   | not possible |)
+
+[//]: # (| ✅true✅     | ✅true✅    | attack       |)
+
+[//]: # ()
+[//]: # (The script also keeps track of two variables:)
 
 | can attack | can chase | action       |
 |:-----------|:----------|:-------------|
@@ -208,13 +281,22 @@ Once the boss is dead, the scene switches to the game win screen.
 
 [Jump back](#important-scripts)
 
-### Serialized Fields
 :::caution[TODO]
 
 make this section easy to understand
 
 :::
 
+[//]: # (### Serialized Fields)
+
+[//]: # ()
+[//]: # (| Name               | Type       | Usage                                                                                                                                                                                                                                                                                                                                       |)
+
+[//]: # (|:-------------------|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|)
+
+[//]: # (| attackTriggerTime  | float      | &#40;same as player&#41;<br/>The point of time in animation when the projectile is spawned.<br/>The time is normalized between 0 and 1, both inclusive.<br/>The script attempts to only spawn the projectile only once &#40;due to how fragile the system is, sometimes the projectile doesn't spawn and other times it will be spawned multiple times&#41; |)
+
+[//]: # (| projectile         | GameObject | &#40;same as player&#41;<br/>The projectile to spawn                                                                                                                                                                                                                                                                                                |)
 
 | Name               | Type       | Usage                                                                                                                                                                                                                                                                                                                                       |
 |:-------------------|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
