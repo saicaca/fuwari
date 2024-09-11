@@ -8,6 +8,12 @@ category: 'Programming'
 draft: false 
 ---
 
+:::caution[TODO]
+
+get normie eyes to read this
+
+:::
+
 # Introduction
 
 In the previous post,
@@ -30,6 +36,12 @@ Shashank will then share his insights on level design.
 
 `Fractured Elements` is a 2D platformer where the core mechanic is the constant switching between different elemental forms.
 The player needs to juggle platforming, killing enemies, and the switching between forms.
+
+:::caution[TODO]
+
+add concept art for the different forms
+
+:::
 
 The game was inspired by 
 [Celeste](https://www.celestegame.com/), 
@@ -92,6 +104,12 @@ Another special mention is the [ProjectileScript.cs](https://github.com/pawarher
 
 [Jump back](#important-scripts)
 
+:::caution[TODO]
+
+add the gif recorded from unity here
+
+:::
+
 These scripts have a serialized field called `prefabs`. It is an array of `GameObject`.
 
 This class is overly complex for the sake of being easy to use.
@@ -118,6 +136,12 @@ Now, `CurrentInternalController` exposes functions required for the player contr
 [Jump back](#important-scripts)
 
 ### Serialized Fields
+:::caution[TODO]
+
+make this section easy to understand
+
+:::
+
 
 | Name                 | Type       | Usage                                                                                                                                                                                                                                                                                                                  |
 |:---------------------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -155,6 +179,13 @@ I will explain it in the [Spawning projectiles at a specific moment in animation
 [Jump back](#important-scripts)
 
 The boss controller acts according to the below truth table
+:::caution[TODO]
+
+make this section easy to understand
+make animation of the truth table
+
+:::
+
 
 | can attack | can chase | action       |
 |:-----------|:----------|:-------------|
@@ -178,6 +209,12 @@ Once the boss is dead, the scene switches to the game win screen.
 [Jump back](#important-scripts)
 
 ### Serialized Fields
+:::caution[TODO]
+
+make this section easy to understand
+
+:::
+
 
 | Name               | Type       | Usage                                                                                                                                                                                                                                                                                                                                       |
 |:-------------------|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -311,60 +348,22 @@ I feel like I could have instead used composition via interfaces, but I am unsur
 
 ## Boss AI
 
+:::caution[TODO]
+
+move this to a better place, somewhere higher up
+
+:::
+
+
 [Jump back](#technical-challenges)
 
 The boss AI is not complex.
 The boss has two transforms attached to the root,
 one acts as a reference point for the boss' "vision," and the other one for the boss' attack range.
 
-The functions used to check are below
+:::caution[TODO]
 
-:::note[CanChase]
-
-```c#
-private bool CanChase()
-{
-    var position = chasePosition.position;
-    var playerInRange = _player != null && Vector2.Distance(_player.transform.position, position) <
-        Vector2.Distance(Vector2.zero, position);
-
-    return playerInRange;
-}
-```
-
-:::
-
-:::note[CanAttack]
-
-```c#
-private bool CanAttack()
-{
-    var position = attackPosition.position;
-    var playerInRange = _player != null && Vector2.Distance(_player.transform.position, position) <
-        Vector2.Distance(Vector2.zero, position);
-
-    return playerInRange;
-}
-```
-
-:::
-
-As you might be able to see, both the functions are very similar.
-
-:::note[diff between `CanAttack` and `CanChase`]
-
-```diff
-- private bool CanAttack()
-+ private bool CanChase()
-  {
--     var position = attackPosition.position;
-+     var position = chasePosition.position;
-      var playerInRange = _player != null && Vector2.Distance(_player.transform.position, position) <
-          Vector2.Distance(Vector2.zero, position);
-  
-      return playerInRange;
-  }
-```
+redo the explaination, possibly with gifs
 
 :::
 
@@ -394,6 +393,14 @@ The white square is the boss.
 ## Projectile spawning system
 
 [Jump back](#technical-challenges)
+
+
+:::caution[TODO]
+
+create gif for this
+
+:::
+
 
 I remember hearing about the way 
 [Terraria](https://terraria.org/)
