@@ -28,7 +28,7 @@ const hasBannerLink = !!siteConfig.banner.credit.url
     </div>
 </div>
 
-<div class="absolute top-[30vh] w-full">
+<div class="absolute w-full" class:list={[{"top-[30vh]": siteConfig.banner.enable, "top-[5.5rem]": !siteConfig.banner.enable}]}>
     <div class="relative max-w-[var(--page-width)] mx-auto">
         <div id="main-grid" class="transition duration-700 w-full left-0 right-0 grid grid-cols-[17.5rem_auto] grid-rows-[auto_1fr_auto] lg:grid-rows-[auto]
     mx-auto gap-4 px-0 md:px-4"
