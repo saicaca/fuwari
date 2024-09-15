@@ -76,6 +76,12 @@ and ensuring that the game's theme of continuous change was thoroughly integrate
 
 # Implementation Details
 
+:::caution[TODO]
+
+replace the list with graphic of the architecture instead
+
+:::
+
 The project contains the following scripts:
 
 - [BossController.cs](https://github.com/pawarherschel/CovUniGJ2024/blob/main/Assets/Script/BossController.cs)
@@ -119,9 +125,25 @@ When this trigger is no longer being triggered, the enemy flips their direction.
 
 > ![visual representation of the enemy script](https://r2.sakurakat.systems/fractured-elements-breakdown--enemy-script.gif)
 
+:::caution[TODO]
+
+reduce fps of gif from 5 to 4 or 3
+
+:::
+
+:::caution[TODO]
+
+make the player wobble / bobble / whatever so its feels a bit funny
+
+:::
+
 :::note[Legend for the gif]
 
 ![legend for the shapes and colors in the gif preceding](https://r2.sakurakat.systems/fractured-elements-breakdown--enemy-script-legend.png)
+
+:::caution[TODO]
+
+replace this unreadable version with table, image on left, descrition on right
 
 :::
 
@@ -140,6 +162,14 @@ These scripts have a serialized field called `prefabs`. It is an array of `GameO
 This class is overly complex for the sake of being easy to use.
 To switch prefabs, you need to change the `SpriteIndex`,
 everything else will be handled by a chain of getters and setters.
+
+:::caution[TODO]
+
+make a tree of whats affecting what
+
+like call graph or smt
+
+:::
 
 This script also has a `changeCooldown` field.
 This is the time in seconds after which the prefab will be switched automatically.
@@ -162,7 +192,7 @@ Now, `CurrentInternalController` exposes functions required for the player contr
 
 :::caution[TODO]
 
-make this section easy to understand
+make this section easy to understand or just remove it, esp if its internal controller
 
 :::
 
@@ -227,7 +257,7 @@ I will explain it in the [Spawning projectiles at a specific moment in animation
 
 :::caution[TODO]
 
-make this section easy to understand
+make this section easy to understand or just remove it, esp if its internal controller
 make animation of the truth table
 
 :::
@@ -270,7 +300,7 @@ make animation of the truth table
 
 :::caution[TODO]
 
-make this section easy to understand
+make this section easy to understand or just remove it, esp if its internal controller
 
 :::
 
@@ -344,6 +374,16 @@ Once the boss is dead, it switches the scene to the win screen.
 
 [Jump back](#technical-challenges)
 
+:::caution[TODO]
+
+maybe talk about theory here instead of implementation detail
+
+what went through my mind
+
+why i did it
+
+:::
+
 > ![player scripts hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--player-scripts-hierarchy.svg)
 
 The player consists of three components,
@@ -355,6 +395,10 @@ The player consists of three components,
 :::note[Player Hierarchy]
 
 ![player hierarchy](https://r2.sakurakat.systems/fractured-elements-breakdown--player.svg)
+
+:::caution[TODO]
+
+check if converting the breakdown to have nodes like blender's geometry nodes looks better
 
 :::
 
@@ -387,6 +431,12 @@ Similar to the player, the boss also consists of three components,
 ## Spawning projectiles at a specific moment in animation
 
 [Jump back](#technical-challenges)
+
+:::caution[TODO]
+
+this can be made into an animation
+
+:::
 
 My first instinct was
 to check if I can just call functions on a specific frame similar to Godot [^godot-docs-call-method-track] .
@@ -466,6 +516,12 @@ create gif for this
 
 :::
 
+:::caution[TODO]
+
+add credits to the video
+https://www.youtube.com/watch?v=k2pvAfU9Rsw
+
+:::
 
 I remember hearing about the way 
 [Terraria](https://terraria.org/)
