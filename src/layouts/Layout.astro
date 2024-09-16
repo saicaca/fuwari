@@ -234,6 +234,8 @@ function disableAnimation() {
 }
 */
 
+const bannerEnabled = !!document.getElementById('banner-wrapper')
+
 function setClickOutsideToClose(panel: string, ignores: string[]) {
 	document.addEventListener("click", event => {
 		let panelDom = document.getElementById(panel);
@@ -325,6 +327,9 @@ const setup = () => {
 		document.documentElement.style.setProperty('--content-delay', '0ms')
 
 		// prevent elements from overlapping the navbar
+		if (!bannerEnabled) {
+			return
+		}
 		let threshold = window.innerHeight * 0.30 - 72 - 16
 		let navbar = document.getElementById('navbar-wrapper')
 		if (!navbar || !document.body.classList.contains('lg:is-home')) {
@@ -372,7 +377,6 @@ if (window?.swup?.hooks) {
 }
 
 let backToTopBtn = document.getElementById('back-to-top-btn');
-const bannerEnable = !!document.getElementById('banner-wrapper')
 let navbar = document.getElementById('navbar-wrapper')
 function scrollFunction() {
 	if (backToTopBtn) {
@@ -383,7 +387,7 @@ function scrollFunction() {
 		}
 	}
 
-	if (!bannerEnable) return
+	if (!bannerEnabled) return
 	if (navbar) {
 		let threshold = window.innerHeight * 0.30 - 72 - 16
 		if (document.body.classList.contains('lg:is-home') && window.innerWidth >= 1024) {
