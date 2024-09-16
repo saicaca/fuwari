@@ -15,7 +15,7 @@ interface Props {
   setOGTypeArticle?: boolean;
 }
 
-const { title, banner, description, lang, setOGTypeArticle, setOGTypeArticle } = Astro.props
+const { title, banner, description, lang, setOGTypeArticle } = Astro.props
 const hasBannerCredit =
   siteConfig.banner.enable && siteConfig.banner.credit.enable
 const hasBannerLink = !!siteConfig.banner.credit.url
