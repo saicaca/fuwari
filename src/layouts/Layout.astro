@@ -139,8 +139,8 @@ const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'cente
 		<ConfigCarrier></ConfigCarrier>
 		<GlobalStyles>
 		{siteConfig.banner.enable && <div id="banner-wrapper" class="absolute -top-[30vh] w-full transition duration-700 overflow-hidden">
-			<ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700"]}
-					  src={siteConfig.banner.src} position={siteConfig.banner.position}
+			<ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
+						  src={siteConfig.banner.src} position={siteConfig.banner.position}
 			>
 			</ImageWrapper>
 		</div>}
@@ -305,11 +305,21 @@ function initCustomScrollbar() {
 	});
 }
 
+function showBanner() {
+	const banner = document.getElementById('banner')
+	if (!banner) {
+		console.error('Failed to find the banner element')
+		return
+	}
+	banner.classList.remove('opacity-0', 'scale-105')
+}
+
 function init() {
 	// disableAnimation()()		// TODO
 	loadTheme();
 	loadHue();
 	initCustomScrollbar();
+	showBanner();
 }
 
 /* Load settings when entering the site */
