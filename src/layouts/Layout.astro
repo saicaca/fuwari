@@ -70,7 +70,9 @@ const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'cente
 ---
 
 <!DOCTYPE html>
-<html lang={siteLang} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
+<html lang={siteLang} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]"
+	  data-overlayscrollbars-initialize
+>
 	<head>
 
 		<title>{pageTitle}</title>
@@ -131,7 +133,9 @@ const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'cente
 		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
 	</head>
-	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}>
+	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
+		  data-overlayscrollbars-initialize
+	>
 		<ConfigCarrier></ConfigCarrier>
 		<GlobalStyles>
 		{siteConfig.banner.enable && <div id="banner-wrapper" class="absolute -top-[30vh] w-full transition duration-700 overflow-hidden">
