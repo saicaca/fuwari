@@ -178,7 +178,7 @@ const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'cente
 		@apply h-[calc(var(--banner-height-home)_-_4.5rem)] transition-all duration-300
 	}
 	.enable-banner.is-home #sidebar-sticky {
-		@apply -top-[30vh]
+		@apply top-[calc(-30vh_+_1rem)]
 	}
 	.navbar-hidden {
 		@apply opacity-0 -translate-y-16
