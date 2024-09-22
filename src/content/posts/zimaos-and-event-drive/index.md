@@ -1,8 +1,17 @@
 ---
-title: "Zimaos 和事件驱动"
-description: AI 改变了一切
+title: "ZimaOS 和事件驱动"
+description: 在 ZimaOS 中, 我们是如何通过事件驱动来降低程序复杂度与解耦的
 published: 2024-09-05
 category: 技术
 draft: true
 tags: [ZimaOS] 
 ---
+
+# 新功能
+在 ZimaOS 中, 我们新增了一些有意思的功能, 用的就是事件驱动架构。
+
+# 什么是事件驱动架构
+在用户界面编程中，我们常提到事件驱动编程，但是在这里我们会更细化一些，是在微服务架构中通过预先定义好的 Schema 来驱动服务间的解耦和通信。相关的知识可以在 DDD与xxx 中找到。
+
+# 在 ZimaOS 中事件驱动架构的历史
+其实在 CasaOS 时，我们就引入了事件驱动的架构，就是这个 CasaOS Message Bus，我们改造前后端的一些通信，比如前端所拿到的 CPU、磁盘信息就是由后端主动推送的。而在最近的这些东西中，我们把把事件驱动架构用的更多了。
