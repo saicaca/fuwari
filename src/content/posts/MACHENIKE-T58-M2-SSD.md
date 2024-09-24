@@ -4,7 +4,7 @@ published: 2024-09-24
 description: ''
 image: ''
 tags: [MACHENIKE, T58-V, M2 SSD]
-category: '默认分支'
+category: '默认分类'
 draft: false 
 ---
 电脑实在是不够内存了，就想着加块盘，正好电脑有预留一个 M2 插槽和一个 SATA 插槽，果断京东白条买了个 1TB 的 [致态TiPlus5000](https://item.jd.com/100018551171.html)
