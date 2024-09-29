@@ -16,6 +16,8 @@ import {
 import { defaultFavicons } from '../constants/icon'
 import type { Favicon } from '../types/config'
 import { url, pathsEqual } from '../utils/url-utils'
+import PostHog from "../components/Posthog.astro";
+// import posthog from 'posthog-js'
 
 interface Props {
   title?: string
@@ -84,6 +86,8 @@ const siteLang = siteConfig.lang.replace('_', '-')
 				  media={favicon.theme && `(prefers-color-scheme: ${favicon.theme})`}
 			/>
 		))}
+		<!--POST HOG-->
+		<PostHog/>
 		<!-- Set the theme before the page is rendered to avoid a flash -->
 		<script is:inline define:vars={{DEFAULT_THEME: DEFAULT_THEME, LIGHT_MODE: LIGHT_MODE, DARK_MODE: DARK_MODE, AUTO_MODE: AUTO_MODE}}>
 			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
