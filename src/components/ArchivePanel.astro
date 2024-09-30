@@ -116,18 +116,3 @@ function formatTag(tag: string[]) {
         ))
     }
 </div>
-
-<style>
-    @tailwind components;
-    @tailwind utilities;
-
-    @layer components {
-        .dash-line {
-        }
-        .dash-line::before {
-            content: "";
-            @apply w-[10%] h-full absolute -top-1/2 left-[calc(50%_-_1px)] -top-[50%] border-l-[2px]
-            border-dashed pointer-events-none border-[var(--line-color)] transition
-        }
-    }
-</style>
