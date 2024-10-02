@@ -1,5 +1,5 @@
 ---
-title: Proxmox VE: 당신만의 가상화 서버를 구축하세요!
+title: "Proxmox VE: 당신만의 가상화 서버를 구축하세요!"
 published: 2023-10-27
 description: 강력한 기능과 사용 편의성을 자랑하는 무료 오픈소스 가상화 플랫폼 Proxmox VE를 소개합니다.
 image: proxmox_logo.png  # 이미지 파일 이름.  이 파일은 같은 디렉토리에 있어야 합니다.
