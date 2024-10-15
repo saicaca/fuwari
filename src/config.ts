@@ -8,7 +8,7 @@ import { LinkPreset } from './types/config'
 
 export const siteConfig: SiteConfig = {
   title: 'MisakaAkio Website',
-  subtitle: '不努力就只能听到别人的好消息',
+  subtitle: '不努力就只能听到别人的好消息 feedId:68983787134409728+userId:66354501543122944',
   lang: 'zh_CN',         // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko'
   themeColor: {
     hue: 250,         // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
