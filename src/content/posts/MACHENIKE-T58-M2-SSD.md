@@ -11,7 +11,7 @@ draft: false
 
 到手就直接装到电脑上了，然后就出现了此系列电脑固有的问题——卡开机图案
 
-![](https://act-webstatic.blueakio.com/2024/09/24/66f25cfca9b44.jpg)
+![](https://act-webstatic.akio.top/2024/10/15/670e5bbedb9ce.jpg)
 
 其实这个问题早在升级 Windows11 的时候就出现了，只不过当时使用的是将原有的硬盘换个插槽插（这也是网上最多的回答），但果然还是不能一劳永逸啊
 
