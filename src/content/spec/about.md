@@ -1,9 +1,14 @@
-# About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
+---
+title: 折乙
+published: 2024-10-25
+draft: false
+---
+# 折乙 
+> `zjut`在读大一小登
 
-::github{repo="saicaca/fuwari"}
+> 目前技术栈为`前端(vue)`  
+>可能大概会一点点`算法`
 
-> ### Sources of images used in this site
-> - [Unsplash](https://unsplash.com/)
-> - [星と少女](https://www.pixiv.net/artworks/108916539) by [Stella](https://www.pixiv.net/users/93273965)
-> - [Rabbit - v1.4 Showcase](https://civitai.com/posts/586908) by [Rabbit_YourMajesty](https://civitai.com/user/Rabbit_YourMajesty)
+# 游戏
+- 明日方舟
+- 炉石传说
