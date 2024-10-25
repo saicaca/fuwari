@@ -11,9 +11,9 @@ export async function GET(context: APIContext) {
   const blog = await getSortedPosts()
 
   return rss({
-    title: siteConfig.title,
-    description: siteConfig.subtitle || 'No description',
-    site: context.site ?? 'https://fuwari.vercel.app',
+    title: "折乙-Blog",
+    description: 'Orz 给✌🏻跪啦',
+    site: 'https://zheyi.in/',
     items: blog.map(post => {
       return {
         title: post.data.title,
