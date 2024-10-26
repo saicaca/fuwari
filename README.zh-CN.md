@@ -5,7 +5,7 @@
 [**🖥️在线预览（Vercel）**](https://fuwari.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**📦旧 Hexo 版本**](https://github.com/saicaca/hexo-theme-vivia)
 
-> README 版本：`2024-04-07`
+> README 版本：`2024-09-10`
 
 ![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
 
@@ -36,10 +36,11 @@
 title: My First Blog Post
 published: 2023-09-09
 description: This is the first post of my new Astro blog.
-image: /images/cover.jpg
+image: ./cover.jpg
 tags: [Foo, Bar]
 category: Front-end
 draft: false
+lang: jp      # 仅当文章语言与 `config.ts` 中的网站语言不同时需要设置
 ---
 ```
 

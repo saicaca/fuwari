@@ -1,9 +1,9 @@
 ---
+import { UNCATEGORIZED } from '@constants/constants'
+import I18nKey from '../i18n/i18nKey'
+import { i18n } from '../i18n/translation'
 import { getSortedPosts } from '../utils/content-utils'
 import { getPostUrlBySlug } from '../utils/url-utils'
-import { i18n } from '../i18n/translation'
-import I18nKey from '../i18n/i18nKey'
-import { UNCATEGORIZED } from '@constants/constants'
 
 interface Props {
   keyword?: string
@@ -30,7 +30,7 @@ if (Array.isArray(categories) && categories.length > 0) {
   )
 }
 
-const groups: { year: number; posts: typeof posts }[] = (function () {
+const groups: { year: number; posts: typeof posts }[] = (() => {
   const groupedPosts = posts.reduce(
     (grouped: { [year: number]: typeof posts }, post) => {
       const year = post.data.published.getFullYear()
@@ -45,8 +45,8 @@ const groups: { year: number; posts: typeof posts }[] = (function () {
 
   // convert the object to an array
   const groupedPostsArray = Object.keys(groupedPosts).map(key => ({
-    year: parseInt(key),
-    posts: groupedPosts[parseInt(key)],
+    year: Number.parseInt(key),
+    posts: groupedPosts[Number.parseInt(key)],
   }))
 
   // sort years by latest first
@@ -116,18 +116,3 @@ function formatTag(tag: string[]) {
         ))
     }
 </div>
-
-<style>
-    @tailwind components;
-    @tailwind utilities;
-
-    @layer components {
-        .dash-line {
-        }
-        .dash-line::before {
-            content: "";
-            @apply w-[10%] h-full absolute -top-1/2 left-[calc(50%_-_1px)] -top-[50%] border-l-[2px]
-            border-dashed pointer-events-none border-[var(--line-color)] transition
-        }
-    }
-</style>

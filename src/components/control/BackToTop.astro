@@ -25,7 +25,7 @@ import { Icon } from 'astro-icon/components'
     font-weight: bold
     border: none
     position: fixed
-    bottom: 15rem
+    bottom: 10rem
     opacity: 1
     cursor: pointer
     transform: translateX(5rem)
@@ -44,14 +44,4 @@ import { Icon } from 'astro-icon/components'
 function backToTop() {
     window.scroll({ top: 0, behavior: 'smooth' });
 }
-
-function scrollFunction() {
-    let btn = document.getElementById('back-to-top-btn');
-    if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
-        btn.classList.remove('hide')
-    } else {
-        btn.classList.add('hide')
-    }
-}
-window.onscroll = scrollFunction
 </script>

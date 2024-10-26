@@ -1,32 +1,31 @@
-import sitemap from '@astrojs/sitemap';
-import svelte from "@astrojs/svelte"
-import tailwind from "@astrojs/tailwind"
-import swup from '@swup/astro';
-import Compress from "astro-compress"
-import icon from "astro-icon"
-import { defineConfig } from "astro/config"
-import Color from "colorjs.io"
-import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import rehypeComponents from "rehype-components"; /* Render the custom directive content */
-import rehypeKatex from "rehype-katex"
-import rehypeSlug from "rehype-slug"
-import rehypeCitation from 'rehype-citation'
-import remarkDirective from "remark-directive" /* Handle directives */
-import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
-import remarkMath from "remark-math"
-import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs"
-import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs"
-import {parseDirectiveNode} from "./src/plugins/remark-directive-rehype.js";
-import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs"
-import {remarkExcerpt} from "./src/plugins/remark-excerpt.js";
+import sitemap from '@astrojs/sitemap'
+import svelte from '@astrojs/svelte'
+import tailwind from '@astrojs/tailwind'
+import swup from '@swup/astro'
+import Compress from 'astro-compress'
+import icon from 'astro-icon'
+import { defineConfig } from 'astro/config'
+import Color from 'colorjs.io'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeComponents from 'rehype-components' /* Render the custom directive content */
+import rehypeKatex from 'rehype-katex'
+import rehypeSlug from 'rehype-slug'
+import remarkDirective from 'remark-directive' /* Handle directives */
+import remarkGithubAdmonitionsToDirectives from 'remark-github-admonitions-to-directives'
+import remarkMath from 'remark-math'
+import { AdmonitionComponent } from './src/plugins/rehype-component-admonition.mjs'
+import { GithubCardComponent } from './src/plugins/rehype-component-github-card.mjs'
+import { parseDirectiveNode } from './src/plugins/remark-directive-rehype.js'
+import { remarkExcerpt } from './src/plugins/remark-excerpt.js'
+import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
 
-const oklchToHex = (str) => {
+const oklchToHex = str => {
   const DEFAULT_HUE = 250
   const regex = /-?\d+(\.\d+)?/g
   const matches = str.string.match(regex)
   const lch = [matches[0], matches[1], DEFAULT_HUE]
-  return new Color("oklch", lch).to("srgb").toString({
-    format: "hex",
+  return new Color('oklch', lch).to('srgb').toString({
+    format: 'hex',
   })
 }
 
@@ -42,7 +41,7 @@ export default defineConfig({
       animationClass: 'transition-swup-',   // see https://swup.js.org/options/#animationselector
                                             // the default value `transition-` cause transition delay
                                             // when the Tailwind class `transition-all` is used
-      containers: ['main'],
+      containers: ['main', '#toc'],
       smoothScrolling: true,
       cache: true,
       preload: true,
@@ -53,10 +52,10 @@ export default defineConfig({
     }),
     icon({
       include: {
-        "material-symbols": ["*"],
-        "fa6-brands": ["*"],
-        "fa6-regular": ["*"],
-        "fa6-solid": ["*"],
+        'material-symbols': ['*'],
+        'fa6-brands': ['*'],
+        'fa6-regular': ['*'],
+        'fa6-solid': ['*'],
       },
     }),
     svelte(),
@@ -65,48 +64,53 @@ export default defineConfig({
       CSS: false,
       Image: false,
       Action: {
-        Passed: async () => true,   // https://github.com/PlayForm/Compress/issues/376
+        Passed: async () => true, // https://github.com/PlayForm/Compress/issues/376
       },
     }),
   ],
   markdown: {
-    remarkPlugins: [remarkMath, remarkReadingTime, remarkExcerpt, remarkGithubAdmonitionsToDirectives, remarkDirective, parseDirectiveNode],
+    remarkPlugins: [
+      remarkMath,
+      remarkReadingTime,
+      remarkExcerpt,
+      remarkGithubAdmonitionsToDirectives,
+      remarkDirective,
+      parseDirectiveNode,
+    ],
     rehypePlugins: [
       rehypeKatex,
       rehypeSlug,
-      [rehypeCitation,{
-        bibliography: "bibliography.bib",
-        linkCitations: true,
-        // csl: "mla",
-      }],
-      [rehypeComponents, {
-        components: {
-          github: GithubCardComponent,
-          note: (x, y) => AdmonitionComponent(x, y, "note"),
-          tip: (x, y) => AdmonitionComponent(x, y, "tip"),
-          important: (x, y) => AdmonitionComponent(x, y, "important"),
-          caution: (x, y) => AdmonitionComponent(x, y, "caution"),
-          warning: (x, y) => AdmonitionComponent(x, y, "warning"),
+      [
+        rehypeComponents,
+        {
+          components: {
+            github: GithubCardComponent,
+            note: (x, y) => AdmonitionComponent(x, y, 'note'),
+            tip: (x, y) => AdmonitionComponent(x, y, 'tip'),
+            important: (x, y) => AdmonitionComponent(x, y, 'important'),
+            caution: (x, y) => AdmonitionComponent(x, y, 'caution'),
+            warning: (x, y) => AdmonitionComponent(x, y, 'warning'),
+          },
         },
-      }],
+      ],
       [
         rehypeAutolinkHeadings,
         {
-          behavior: "append",
+          behavior: 'append',
           properties: {
-            className: ["anchor"],
+            className: ['anchor'],
           },
           content: {
-            type: "element",
-            tagName: "span",
+            type: 'element',
+            tagName: 'span',
             properties: {
-              className: ["anchor-icon"],
+              className: ['anchor-icon'],
               'data-pagefind-ignore': true,
             },
             children: [
               {
-                type: "text",
-                value: "#",
+                type: 'text',
+                value: '#',
               },
             ],
           },
@@ -119,12 +123,15 @@ export default defineConfig({
       rollupOptions: {
         onwarn(warning, warn) {
           // temporarily suppress this warning
-          if (warning.message.includes("is dynamically imported by") && warning.message.includes("but also statically imported by")) {
-            return;
+          if (
+            warning.message.includes('is dynamically imported by') &&
+            warning.message.includes('but also statically imported by')
+          ) {
+            return
           }
-          warn(warning);
-        }
-      }
+          warn(warning)
+        },
+      },
     },
     css: {
       preprocessorOptions: {

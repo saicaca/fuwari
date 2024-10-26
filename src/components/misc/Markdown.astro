@@ -7,7 +7,7 @@ interface Props {
 }
 const className = Astro.props.class
 ---
-<div data-pagefind-body class=`prose dark:prose-invert prose-base max-w-none custom-md ${className}`>
+<div data-pagefind-body class=`prose dark:prose-invert prose-base !max-w-none custom-md ${className}`>
     <!--<div class="prose dark:prose-invert max-w-none custom-md">-->
     <!--<div class="max-w-none custom-md">-->
     <slot/>
@@ -64,40 +64,6 @@ const className = Astro.props.class
     observer.observe(document.body, { childList: true, subtree: true });
   }
 </script>
-
-<!-- Styles for copy-code-button -->
-<style lang="css" is:global>
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-
-    @layer components {
-        .btn-regular-dark {
-            @apply flex items-center justify-center
-            bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))] active:bg-[oklch(0.55_0.01_var(--hue))]
-            dark:bg-[oklch(0.30_0.02_var(--hue))] dark:hover:bg-[oklch(0.35_0.03_var(--hue))] dark:active:bg-[oklch(0.40_0.03_var(--hue))]
-        }
-        .btn-regular-dark.success {
-            @apply bg-[oklch(0.75_0.14_var(--hue))] dark:bg-[oklch(0.75_0.14_var(--hue))]
-        }
-
-        .copy-btn-icon {
-            @apply absolute top-1/2 left-1/2 transition -translate-x-1/2 -translate-y-1/2
-        }
-        .copy-btn .copy-icon {
-            @apply opacity-100 fill-white dark:fill-white/75
-        }
-        .copy-btn.success .copy-icon {
-            @apply opacity-0 fill-[var(--deep-text)]
-        }
-        .copy-btn .success-icon {
-            @apply opacity-0
-        }
-        .copy-btn.success .success-icon {
-            @apply opacity-100
-        }
-    }
-</style>
 
 <style lang="stylus" is:global>
   .custom-md
@@ -474,18 +440,5 @@ const className = Astro.props.class
     transition-property: all
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
     transition-duration: 0.15s
-
-</style>
-
-<style lang="css" is:global>
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-
-    @layer components {
-        .custom-md h1 {
-            @apply text-3xl
-        }
-    }
 
 </style>

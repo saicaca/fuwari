@@ -19,7 +19,7 @@ let links: NavBarLink[] = navBarConfig.links.map(
   },
 )
 ---
-<div id="navbar" class="sticky top-0 z-50 onload-animation">
+<div id="navbar" class="z-50 onload-animation">
     <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div> <!-- used for onload animation -->
     <div class:list={[
         className,
@@ -67,9 +67,6 @@ let links: NavBarLink[] = navBarConfig.links.map(
     </div>
 </div>
 
-<style lang="stylus">
-</style>
-
 <script>
 
 function switchTheme() {
@@ -84,21 +81,31 @@ function switchTheme() {
 
 function loadButtonScript() {
     let switchBtn = document.getElementById("scheme-switch");
-    switchBtn!.addEventListener("click", function () {
-        switchTheme()
-    });
+    if (switchBtn) {
+        switchBtn.addEventListener("click", function () {
+            switchTheme()
+        });
+    }
 
     let settingBtn = document.getElementById("display-settings-switch");
-    settingBtn!.addEventListener("click", function () {
-        let settingPanel = document.getElementById("display-setting");
-        settingPanel!.classList.toggle("float-panel-closed");
-    });
+    if (settingBtn) {
+        settingBtn.addEventListener("click", function () {
+            let settingPanel = document.getElementById("display-setting");
+            if (settingPanel) {
+                settingPanel.classList.toggle("float-panel-closed");
+            }
+        });
+    }
 
     let menuBtn = document.getElementById("nav-menu-switch");
-    menuBtn!.addEventListener("click", function () {
-        let menuPanel = document.getElementById("nav-menu-panel");
-        menuPanel!.classList.toggle("float-panel-closed");
-    });
+    if (menuBtn) {
+        menuBtn.addEventListener("click", function () {
+            let menuPanel = document.getElementById("nav-menu-panel");
+            if (menuPanel) {
+                menuPanel.classList.toggle("float-panel-closed");
+            }
+        });
+    }
 }
 
 loadButtonScript();

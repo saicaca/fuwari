@@ -60,18 +60,3 @@ const className = Astro.props.class
         </div>
     </div>
 </div>
-
-<style>
-@tailwind components;
-
-@layer components {
-    .meta-icon {
-        @apply w-8 h-8 transition rounded-md flex items-center justify-center bg-[var(--btn-regular-bg)]
-        text-[var(--btn-content)] mr-2
-    }
-    .with-divider {
-        @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-[var(--meta-divider)] before:text-sm
-        before:font-medium before:first-of-type:hidden before:transition
-    }
-}
-</style>

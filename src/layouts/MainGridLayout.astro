@@ -6,55 +6,80 @@ import SideBar from '@components/widget/SideBar.astro'
 import Layout from './Layout.astro'
 import { Icon } from 'astro-icon/components'
 import { siteConfig } from '../config'
+import type { MarkdownHeading } from 'astro'
+import TOC from "../components/widget/TOC.astro";
 
 interface Props {
   title?: string
   banner?: string
   description?: string
+  lang?: string
+  setOGTypeArticle?: boolean;
+  headings? : MarkdownHeading[]
 }
 
-const { title, banner, description } = Astro.props
+const { title, banner, description, lang, setOGTypeArticle, headings = [] } = Astro.props
 const hasBannerCredit =
   siteConfig.banner.enable && siteConfig.banner.credit.enable
 const hasBannerLink = !!siteConfig.banner.credit.url
 ---
 
-<Layout title={title} banner={banner} description={description}>
+<Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle}>
 <slot slot="head" name="head"></slot>
-<div class="max-w-[var(--page-width)] min-h-screen grid grid-cols-[17.5rem_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto]
-    mx-auto gap-4 relative px-0 md:px-4"
->
-    <div id="top-row" class="relative transition-all duration-700 col-span-2 grid-rows-1" class:list={[""]}>
+<div id="top-row" class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto" class:list={[""]}>
+    <div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all">
         <Navbar></Navbar>
+    </div>
+</div>
 
-        <!-- Banner image credit -->
-        {hasBannerCredit && <a href={siteConfig.banner.credit.url} id="banner-credit" target="_blank" rel="noopener" aria-label="Visit image source"
-                class:list={["group onload-animation transition-all absolute flex justify-center items-center rounded-full " +
-                "px-3 right-0 bottom-0 bg-black/60 hover:bg-black/70 h-9", {"hover:pr-9 active:bg-black/80": hasBannerLink}]}
+<div class="absolute w-full" class:list={[{"top-[30vh]": siteConfig.banner.enable, "top-[5.5rem]": !siteConfig.banner.enable}]}>
+    <div class="relative max-w-[var(--page-width)] mx-auto">
+        <div id="main-grid" class="transition duration-700 w-full left-0 right-0 grid grid-cols-[17.5rem_auto] grid-rows-[auto_1fr_auto] lg:grid-rows-[auto]
+    mx-auto gap-4 px-0 md:px-4"
         >
-            <Icon class="text-white/75 text-[1.25rem] mr-1" name="material-symbols:copyright-outline-rounded" ></Icon>
-            <div class="text-white/75 text-xs">{siteConfig.banner.credit.text}</div>
-            <Icon class:list={["transition absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0",
-                {"group-hover:opacity-100": hasBannerLink}]}
-                  name="fa6-solid:arrow-up-right-from-square">
-            </Icon>
-        </a>}
+            <!-- Banner image credit -->
+            {hasBannerCredit && <a href={siteConfig.banner.credit.url} id="banner-credit" target="_blank" rel="noopener" aria-label="Visit image source"
+                                   class:list={["group onload-animation transition-all absolute flex justify-center items-center rounded-full " +
+                                   "px-3 right-4 -top-[3.25rem] bg-black/60 hover:bg-black/70 h-9", {"hover:pr-9 active:bg-black/80": hasBannerLink}]}
+            >
+                <Icon class="text-white/75 text-[1.25rem] mr-1" name="material-symbols:copyright-outline-rounded" ></Icon>
+                <div class="text-white/75 text-xs">{siteConfig.banner.credit.text}</div>
+                <Icon class:list={["transition absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0",
+                    {"group-hover:opacity-100": hasBannerLink}]}
+                      name="fa6-solid:arrow-up-right-from-square">
+                </Icon>
+            </a>}
 
+
+            <SideBar class="mb-4 row-start-2 row-end-3 col-span-2 lg:row-start-1 lg:row-end-2 lg:col-span-1 lg:max-w-[17.5rem] onload-animation" headings={headings}></SideBar>
+
+            <main id="swup-container" class="transition-swup-fade col-span-2 lg:col-span-1 overflow-hidden">
+                <div id="content-wrapper" class="onload-animation">
+                    <!-- the overflow-hidden here prevent long text break the layout-->
+                    <!-- make id different from windows.swup global property -->
+                    <slot></slot>
+                    <div class="footer col-span-2 onload-animation hidden lg:block">
+                        <Footer></Footer>
+                    </div>
+                </div>
+            </main>
+
+            <div class="footer col-span-2 onload-animation block lg:hidden">
+                <Footer></Footer>
+            </div>
+        </div>
+
+        <!-- TOC component -->
+        <div id="toc-wrapper" class="transition absolute top-0 -right-[30rem] w-[30rem] flex items-center toc-hide">
+            <div id="toc-inner-wrapper" class="fixed top-14 w-96 h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
+                <div id="toc" class="w-full h-full transition-swup-fade">
+                    <div class="h-8 w-full"></div>
+                    <TOC headings={headings}></TOC>
+                    <div class="h-8 w-full"></div>
+                </div>
+            </div>
+        </div>
+        <BackToTop></BackToTop>
     </div>
-    <SideBar class="row-start-3 row-end-4 col-span-2 lg:row-start-2 lg:row-end-3 lg:col-span-1 lg:max-w-[17.5rem] onload-animation"></SideBar>
-
-    <div id="content-wrapper" class="row-start-2 row-end-3 col-span-2 lg:col-span-1 overflow-hidden onload-animation">
-        <!-- the overflow-hidden here prevent long text break the layout-->
-        <!-- make id different from windows.swup global property -->
-        <main id="swup-container" class="transition-swup-fade">
-            <slot></slot>
-        </main>
-
-    </div>
-
-    <div id="footer" class="grid-rows-3 col-span-2 mt-4 onload-animation">
-        <Footer></Footer>
-    </div>
-    <BackToTop></BackToTop>
 </div>
 </Layout>

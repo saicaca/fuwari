@@ -117,3 +117,9 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
         </a>
     {/each}
 </div>
+
+<style>
+  input:focus {
+    outline: 0;
+  }
+</style>

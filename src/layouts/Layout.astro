@@ -23,9 +23,11 @@ interface Props {
   title?: string
   banner?: string
   description?: string
+  lang?: string
+  setOGTypeArticle?: boolean
 }
 
-let { title, banner, description } = Astro.props
+let { title, banner, description, lang, setOGTypeArticle } = Astro.props
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
@@ -54,11 +56,25 @@ if (title) {
 const favicons: Favicon[] =
   siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons
 
-const siteLang = siteConfig.lang.replace('_', '-')
+// const siteLang = siteConfig.lang.replace('_', '-')
+if (!lang) {
+  lang = `${siteConfig.lang}`
+}
+const siteLang = lang.replace('_', '-')
+
+const bannerOffsetByPosition = {
+  top: '30vh',
+  center: '15vh',
+  bottom: '0',
+}
+const bannerOffset =
+  bannerOffsetByPosition[siteConfig.banner.position || 'center']
 ---
 
 <!DOCTYPE html>
-<html lang={siteLang} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]">
+<html lang={siteLang} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]"
+	  data-overlayscrollbars-initialize
+>
 	<head>
 
 		<title>{pageTitle}</title>
@@ -71,6 +87,11 @@ const siteLang = siteConfig.lang.replace('_', '-')
 		<meta property="og:url" content={Astro.url}>
 		<meta property="og:title" content={pageTitle}>
 		<meta property="og:description" content={description || pageTitle}>
+		{setOGTypeArticle ? (
+        <meta property="og:type" content="article" />
+        ) : (
+        <meta property="og:type" content="website" />
+        )}
 
 		<meta name="twitter:card" content="summary_large_image">
 		<meta property="twitter:url" content={Astro.url}>
@@ -120,45 +141,63 @@ const siteLang = siteConfig.lang.replace('_', '-')
 		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
 	</head>
-	<body class=" min-h-screen transition " class:list={[{"is-home": isHomePage, "enable-banner": enableBanner}]}>
+	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
+		  data-overlayscrollbars-initialize
+	>
 		<ConfigCarrier></ConfigCarrier>
 		<GlobalStyles>
-		<div id="banner-wrapper" class="absolute w-full transition-all duration-700">
-			<ImageWrapper id="boxtest" alt="Banner image of the blog" class:list={["object-cover h-full", {"hidden": !siteConfig.banner.enable}]}
-					  src={siteConfig.banner.src} position={siteConfig.banner.position}
+		{siteConfig.banner.enable && <div id="banner-wrapper" class="absolute -top-[30vh] w-full transition duration-700 overflow-hidden">
+			<ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
+						  src={siteConfig.banner.src} position={siteConfig.banner.position}
 			>
 			</ImageWrapper>
-		</div>
+		</div>}
 		<slot />
 		</GlobalStyles>
+
+		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
+		<div id="page-height-extend" class="hidden h-[300vh]"></div>
 	</body>
 </html>
+
 <style is:global>
 	:root {
 		--hue: var(--configHue);
 		--page-width: 75rem;
 	}
 </style>
-<style is:global>
-@tailwind components;
-@tailwind utilities;
 
+<style is:global define:vars={{ bannerOffset }}>
+@tailwind components;
 @layer components {
 	.enable-banner.is-home #banner-wrapper {
-		@apply h-[var(--banner-height)] md:h-[var(--banner-height-home)]
+		@apply h-[var(--banner-height-home)] translate-y-[30vh]
 	}
 	.enable-banner #banner-wrapper {
-		@apply h-[var(--banner-height)]
+		@apply h-[var(--banner-height-home)]
 	}
 
-	.enable-banner.is-home #top-row {
-		@apply h-[calc(var(--banner-height)_-_4.5rem)] md:h-[calc(var(--banner-height-home)_-_4.5rem)]
+	.enable-banner.is-home #banner {
+		@apply h-[var(--banner-height-home)] translate-y-0
+	}
+	.enable-banner #banner {
+		@apply h-[var(--banner-height-home)] translate-y-[var(--bannerOffset)]
+	}
+	.enable-banner.is-home #main-grid {
+		@apply translate-y-[30vh];
 	}
 	.enable-banner #top-row {
-		@apply h-[calc(var(--banner-height)_-_4.5rem)]
+		@apply h-[calc(var(--banner-height-home)_-_4.5rem)] transition-all duration-300
+	}
+	.enable-banner.is-home #sidebar-sticky {
+		@apply top-[calc(-30vh_+_1rem)]
+	}
+	.navbar-hidden {
+		@apply opacity-0 -translate-y-16
 	}
 }
 </style>
+
 <script>
 import 'overlayscrollbars/overlayscrollbars.css';
 import {
@@ -213,6 +252,8 @@ function disableAnimation() {
 	}
 }
 */
+
+const bannerEnabled = !!document.getElementById('banner-wrapper')
 
 function setClickOutsideToClose(panel: string, ignores: string[]) {
 	document.addEventListener("click", event => {
@@ -273,11 +314,21 @@ function initCustomScrollbar() {
 	});
 }
 
+function showBanner() {
+	const banner = document.getElementById('banner')
+	if (!banner) {
+		console.error('Failed to find the banner element')
+		return
+	}
+	banner.classList.remove('opacity-0', 'scale-105')
+}
+
 function init() {
 	// disableAnimation()()		// TODO
 	loadTheme();
 	loadHue();
 	initCustomScrollbar();
+	showBanner();
 }
 
 /* Load settings when entering the site */
@@ -300,27 +351,107 @@ const setup = () => {
 		}
 	})
 */
-	// Remove the delay for the first time page load
 	window.swup.hooks.on('link:click', () => {
+		// Remove the delay for the first time page load
 		document.documentElement.style.setProperty('--content-delay', '0ms')
+
+		// prevent elements from overlapping the navbar
+		if (!bannerEnabled) {
+			return
+		}
+		let threshold = window.innerHeight * 0.30 - 72 - 16
+		let navbar = document.getElementById('navbar-wrapper')
+		if (!navbar || !document.body.classList.contains('lg:is-home')) {
+			return
+		}
+		if (document.body.scrollTop >= threshold || document.documentElement.scrollTop >= threshold) {
+			navbar.classList.add('navbar-hidden')
+		}
 	})
 	window.swup.hooks.on('content:replace', initCustomScrollbar)
 	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
 		// change banner height immediately when a link is clicked
 		const bodyElement = document.querySelector('body')
 		if (pathsEqual(visit.to.url, url('/'))) {
-			bodyElement!.classList.add('is-home');
+			bodyElement!.classList.add('lg:is-home');
 		} else {
-			bodyElement!.classList.remove('is-home');
+			bodyElement!.classList.remove('lg:is-home');
+		}
+
+		// increase the page height during page transition to prevent the scrolling animation from jumping
+		const heightExtend = document.getElementById('page-height-extend')
+		if (heightExtend) {
+			heightExtend.classList.remove('hidden')
+		}
+
+		// Hide the TOC while scrolling back to top
+		let toc = document.getElementById('toc-wrapper');
+		if (toc) {
+			toc.classList.add('toc-not-ready')
 		}
 	});
+	window.swup.hooks.on('page:view', () => {
+		// hide the temp high element when the transition is done
+		const heightExtend = document.getElementById('page-height-extend')
+		if (heightExtend) {
+			heightExtend.classList.remove('hidden')
+		}
+	});
+	window.swup.hooks.on('visit:end', (visit: {to: {url: string}}) => {
+		// execute 1s later
+		setTimeout(() => {
+			const heightExtend = document.getElementById('page-height-extend')
+			if (heightExtend) {
+				heightExtend.classList.add('hidden')
+			}
+		}, 200)
 
+		const toc = document.getElementById('toc-wrapper');
+		if (toc) {
+			toc.classList.remove('toc-not-ready')
+		}
+	});
 }
 if (window?.swup?.hooks) {
 	setup()
 } else {
 	document.addEventListener('swup:enable', setup)
 }
+
+let backToTopBtn = document.getElementById('back-to-top-btn');
+let toc = document.getElementById('toc-wrapper');
+let navbar = document.getElementById('navbar-wrapper')
+function scrollFunction() {
+	if (backToTopBtn) {
+		if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+			backToTopBtn.classList.remove('hide')
+		} else {
+			backToTopBtn.classList.add('hide')
+		}
+	}
+
+	if (toc) {
+		if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+			toc.classList.remove('toc-hide')
+		} else {
+			toc.classList.add('toc-hide')
+		}
+	}
+
+	if (!bannerEnabled) return
+	if (navbar) {
+		let threshold = window.innerHeight * 0.30 - 72 - 16
+		if (document.body.classList.contains('lg:is-home') && window.innerWidth >= 1024) {
+			threshold = window.innerHeight * 0.60 - 72 - 16
+		}
+		if (document.body.scrollTop >= threshold || document.documentElement.scrollTop >= threshold) {
+			navbar.classList.add('navbar-hidden')
+		} else {
+			navbar.classList.remove('navbar-hidden')
+		}
+	}
+}
+window.onscroll = scrollFunction
 
 </script>
 
@@ -329,11 +460,12 @@ import PhotoSwipeLightbox from "photoswipe/lightbox"
 import "photoswipe/style.css"
 
 let lightbox: PhotoSwipeLightbox
+let pswp = import("photoswipe")
 
 function createPhotoSwipe() {
 	lightbox = new PhotoSwipeLightbox({
 		gallery: ".custom-md img, #post-cover img",
-		pswpModule: () => import("photoswipe"),
+		pswpModule: () => pswp,
 		closeSVG: '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M480-424 284-228q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536-480l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480-424Z"/></svg>',
 		zoomSVG: '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M340-540h-40q-17 0-28.5-11.5T260-580q0-17 11.5-28.5T300-620h40v-40q0-17 11.5-28.5T380-700q17 0 28.5 11.5T420-660v40h40q17 0 28.5 11.5T500-580q0 17-11.5 28.5T460-540h-40v40q0 17-11.5 28.5T380-460q-17 0-28.5-11.5T340-500v-40Zm40 220q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l224 224q11 11 11 28t-11 28q-11 11-28 11t-28-11L532-372q-30 24-69 38t-83 14Zm0-80q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>',
 		padding: { top: 20, bottom: 20, left: 20, right: 20 },
@@ -384,14 +516,3 @@ if (window.swup) {
 	document.addEventListener("swup:enable", setup)
 }
 </script>
-
-
-<style is:global lang="stylus">
-#banner-wrapper
-	top: 0
-	opacity: 1
-.banner-closed
-	#banner-wrapper
-		top: -120px
-		opacity: 0
-</style>
