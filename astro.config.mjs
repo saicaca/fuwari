@@ -38,10 +38,10 @@ export default defineConfig({
     tailwind(),
     swup({
       theme: false,
-      animationClass: 'transition-swup-', // see https://swup.js.org/options/#animationselector
-      // the default value `transition-` cause transition delay
-      // when the Tailwind class `transition-all` is used
-      containers: ['main'],
+      animationClass: 'transition-swup-',   // see https://swup.js.org/options/#animationselector
+                                            // the default value `transition-` cause transition delay
+                                            // when the Tailwind class `transition-all` is used
+      containers: ['main', '#toc'],
       smoothScrolling: true,
       cache: true,
       preload: true,

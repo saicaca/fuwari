@@ -1,0 +1,60 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  class?: string
+  headings: MarkdownHeading[]
+}
+
+const { headings = []  } = Astro.props;
+
+// generate random headings, for testing
+/*
+for (let i = 0; i < 50; i++) {
+    headings.push({
+        text: `Heading ${i + 1}`,
+        depth: Math.floor(Math.random() * 3) + 1,
+        slug: `heading-${i + 1}`
+    })
+}
+*/
+
+let minDepth = 10;
+for (const heading of headings) {
+    minDepth = Math.min(minDepth, heading.depth);
+}
+
+const className = Astro.props.class
+
+const removeTailingHash = (text: string) => {
+    let lastIndexOfHash = text.lastIndexOf('#');
+    if (lastIndexOfHash != text.length - 1) {
+        return text;
+    }
+
+    return text.substring(0, lastIndexOfHash);
+}
+
+let heading1Count = 1;
+---
+<div class:list={[className]}>
+    {headings.filter((heading) => heading.depth <= minDepth + 1).map((heading) =>
+            <a href={`#${heading.slug}`} class="px-2 transition flex w-full gap-2 h-9 rounded-xl items-center
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)]
+    ">
+                <div class:list={["w-5 h-5 rounded-lg text-xs flex items-center justify-center font-bold",
+                    {
+                        "bg-[var(--toc-badge-bg)] text-[var(--btn-content)]": heading.depth == minDepth,
+                    }
+                ]}
+                >
+                    {heading.depth == minDepth && heading1Count++}
+                    {heading.depth == minDepth + 1 && <div class="w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/5"></div>}
+                </div>
+                <div class:list={["text-sm", {
+                    "text-50": heading.depth == minDepth,
+                    "text-30": heading.depth == minDepth + 1,
+                }]}>{removeTailingHash(heading.text)}</div>
+            </a>
+    )}
+</div>
