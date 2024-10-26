@@ -7,6 +7,7 @@ import Layout from './Layout.astro'
 import { Icon } from 'astro-icon/components'
 import { siteConfig } from '../config'
 import type { MarkdownHeading } from 'astro'
+import TOC from "../components/widget/TOC.astro";
 
 interface Props {
   title?: string
@@ -17,7 +18,7 @@ interface Props {
   headings? : MarkdownHeading[]
 }
 
-const { title, banner, description, lang, setOGTypeArticle, headings } = Astro.props
+const { title, banner, description, lang, setOGTypeArticle, headings = [] } = Astro.props
 const hasBannerCredit =
   siteConfig.banner.enable && siteConfig.banner.credit.enable
 const hasBannerLink = !!siteConfig.banner.credit.url
@@ -65,6 +66,17 @@ const hasBannerLink = !!siteConfig.banner.credit.url
 
             <div class="footer col-span-2 onload-animation block lg:hidden">
                 <Footer></Footer>
+            </div>
+        </div>
+
+        <!-- TOC component -->
+        <div id="toc-wrapper" class="transition absolute top-0 -right-[30rem] w-[30rem] flex items-center toc-hide">
+            <div id="toc-inner-wrapper" class="fixed top-14 w-96 h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
+                <div id="toc" class="w-full h-full transition-swup-fade">
+                    <div class="h-8 w-full"></div>
+                    <TOC headings={headings}></TOC>
+                    <div class="h-8 w-full"></div>
+                </div>
             </div>
         </div>
         <BackToTop></BackToTop>

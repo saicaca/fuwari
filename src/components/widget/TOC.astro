@@ -1,30 +1,30 @@
 ---
-import WidgetLayout from './WidgetLayout.astro'
 import type { MarkdownHeading } from 'astro';
-
-import { i18n } from '../../i18n/translation'
-import I18nKey from '../../i18n/i18nKey'
-import ButtonLink from '../control/ButtonLink.astro'
 
 interface Props {
   class?: string
-  style?: string
   headings: MarkdownHeading[]
 }
 
-const { headings  } = Astro.props;
+const { headings = []  } = Astro.props;
+
+// generate random headings, for testing
+/*
+for (let i = 0; i < 50; i++) {
+    headings.push({
+        text: `Heading ${i + 1}`,
+        depth: Math.floor(Math.random() * 3) + 1,
+        slug: `heading-${i + 1}`
+    })
+}
+*/
+
+let minDepth = 10;
+for (const heading of headings) {
+    minDepth = Math.min(minDepth, heading.depth);
+}
 
 const className = Astro.props.class
-const style = Astro.props.style
-
-const COLLAPSED_HEIGHT = '7.5rem'
-const COLLAPSE_THRESHOLD = 5
-
-const isCollapsed = headings.length >= COLLAPSE_THRESHOLD
-
-const getMarginStyleFromHeading = (heading: MarkdownHeading) => {
-    return `margin-left: ${(heading.depth - 1) / 2}rem`;
-}
 
 const removeTailingHash = (text: string) => {
     let lastIndexOfHash = text.lastIndexOf('#');
@@ -35,14 +35,26 @@ const removeTailingHash = (text: string) => {
     return text.substring(0, lastIndexOfHash);
 }
 
+let heading1Count = 1;
 ---
-
-<WidgetLayout name={i18n(I18nKey.toc)} id="toc" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}
-                class={className} style={style}
+<div class:list={[className]}>
+    {headings.filter((heading) => heading.depth <= minDepth + 1).map((heading) =>
+            <a href={`#${heading.slug}`} class="px-2 transition flex w-full gap-2 h-9 rounded-xl items-center
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)]
+    ">
+                <div class:list={["w-5 h-5 rounded-lg text-xs flex items-center justify-center font-bold",
+                    {
+                        "bg-[var(--toc-badge-bg)] text-[var(--btn-content)]": heading.depth == minDepth,
+                    }
+                ]}
                 >
-    {headings.map((heading) =>
-        <div style={getMarginStyleFromHeading(heading)}>
-            <ButtonLink url={`#${heading.slug}`}>{removeTailingHash(heading.text)}</ButtonLink>
-        </div>
+                    {heading.depth == minDepth && heading1Count++}
+                    {heading.depth == minDepth + 1 && <div class="w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/5"></div>}
+                </div>
+                <div class:list={["text-sm", {
+                    "text-50": heading.depth == minDepth,
+                    "text-30": heading.depth == minDepth + 1,
+                }]}>{removeTailingHash(heading.text)}</div>
+            </a>
     )}
-</WidgetLayout>
+</div>
