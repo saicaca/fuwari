@@ -101,9 +101,7 @@ const siteLang = siteConfig.lang.replace('_', '-')
 						document.documentElement.classList.remove('dark');
 					}
 			}
-
-			// analytics code
-			const request = new Request(`https://spy.pawarherschel.workers.dev/${window.location.search}`, {
+			const request = new Request(`https://custom-analytics.sakurakat.systems/${window.location.search}`, {
 				"method": "POST",
 			});
 			fetch(request);
