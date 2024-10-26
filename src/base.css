@@ -207,6 +207,9 @@
 #sidebar {
     animation-delay: 100ms
 }
+#swup-container {
+    outline: none;
+}
 #content-wrapper {
     animation-delay: var(--content-delay);
 }
