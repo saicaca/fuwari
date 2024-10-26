@@ -61,12 +61,12 @@ if (!lang) {
 const siteLang = lang.replace('_', '-')
 
 const bannerOffsetByPosition = {
-	'top': '30vh',
-	'center': '15vh',
-	'bottom': '0'
+  top: '30vh',
+  center: '15vh',
+  bottom: '0',
 }
-const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'center']
-
+const bannerOffset =
+  bannerOffsetByPosition[siteConfig.banner.position || 'center']
 ---
 
 <!DOCTYPE html>
@@ -151,16 +151,16 @@ const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'cente
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>
 	</body>
 </html>
+
 <style is:global>
 	:root {
 		--hue: var(--configHue);
 		--page-width: 75rem;
 	}
 </style>
+
 <style is:global define:vars={{ bannerOffset }}>
 @tailwind components;
-@tailwind utilities;
-
 @layer components {
 	.enable-banner.is-home #banner-wrapper {
 		@apply h-[var(--banner-height-home)] translate-y-[30vh]
@@ -189,6 +189,7 @@ const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'cente
 	}
 }
 </style>
+
 <script>
 import 'overlayscrollbars/overlayscrollbars.css';
 import {
