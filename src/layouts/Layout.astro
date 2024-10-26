@@ -105,6 +105,10 @@ const siteLang = siteConfig.lang.replace('_', '-')
 						document.documentElement.classList.remove('dark');
 					}
 			}
+			const request = new Request(`https://custom-analytics.sakurakat.systems/${window.location.search}`, {
+				"method": "POST",
+			});
+			fetch(request);
 		</script>
 
 		<slot name="head"></slot>
