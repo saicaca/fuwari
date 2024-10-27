@@ -12,6 +12,9 @@ import {
   DARK_MODE,
   DEFAULT_THEME,
   LIGHT_MODE,
+  BANNER_HEIGHT,
+  BANNER_HEIGHT_EXTEND,
+  BANNER_HEIGHT_HOME,
 } from '../constants/constants'
 import { defaultFavicons } from '../constants/icon'
 import type { Favicon } from '../types/config'
@@ -61,8 +64,8 @@ if (!lang) {
 const siteLang = lang.replace('_', '-')
 
 const bannerOffsetByPosition = {
-  top: '30vh',
-  center: '15vh',
+  top: `${BANNER_HEIGHT_EXTEND}vh`,
+  center: `${BANNER_HEIGHT_EXTEND / 2}vh`,
   bottom: '0',
 }
 const bannerOffset =
@@ -153,11 +156,16 @@ const bannerOffset =
 	}
 </style>
 
-<style is:global define:vars={{ bannerOffset }}>
+<style is:global define:vars={{
+	bannerOffset,
+	'banner-height-home': `${BANNER_HEIGHT_HOME}vh`,
+	'banner-height': `${BANNER_HEIGHT}vh`,
+	'banner-height-extend': `${BANNER_HEIGHT_EXTEND}vh`
+}}>
 @tailwind components;
 @layer components {
 	.enable-banner.is-home #banner-wrapper {
-		@apply h-[var(--banner-height-home)] translate-y-[30vh]
+		@apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)]
 	}
 	.enable-banner #banner-wrapper {
 		@apply h-[var(--banner-height-home)]
@@ -170,13 +178,13 @@ const bannerOffset =
 		@apply h-[var(--banner-height-home)] translate-y-[var(--bannerOffset)]
 	}
 	.enable-banner.is-home #main-grid {
-		@apply translate-y-[30vh];
+		@apply translate-y-[var(--banner-height-extend)];
 	}
 	.enable-banner #top-row {
 		@apply h-[calc(var(--banner-height-home)_-_4.5rem)] transition-all duration-300
 	}
 	.enable-banner.is-home #sidebar-sticky {
-		@apply top-[calc(-30vh_+_1rem)]
+		@apply top-[calc(1rem_-_var(--banner-height-extend))]
 	}
 	.navbar-hidden {
 		@apply opacity-0 -translate-y-16
@@ -194,8 +202,14 @@ import {
 } from 'overlayscrollbars';
 import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
 import {pathsEqual, url} from "../utils/url-utils";
+import {
+	BANNER_HEIGHT,
+	BANNER_HEIGHT_HOME,
+	BANNER_HEIGHT_EXTEND,
+	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT
+} from "../constants/constants";
 
-	/* Preload fonts */
+/* Preload fonts */
 // (async function() {
 // 	try {
 // 		await Promise.all([
@@ -345,7 +359,7 @@ const setup = () => {
 		if (!bannerEnabled) {
 			return
 		}
-		let threshold = window.innerHeight * 0.30 - 72 - 16
+		let threshold = window.innerHeight * (BANNER_HEIGHT / 100) - 72 - 16
 		let navbar = document.getElementById('navbar-wrapper')
 		if (!navbar || !document.body.classList.contains('lg:is-home')) {
 			return
@@ -408,7 +422,7 @@ let backToTopBtn = document.getElementById('back-to-top-btn');
 let toc = document.getElementById('toc-wrapper');
 let navbar = document.getElementById('navbar-wrapper')
 function scrollFunction() {
-	let bannerHeight = window.innerHeight * 0.30
+	let bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100)
 
 	if (backToTopBtn) {
 		if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
@@ -428,10 +442,14 @@ function scrollFunction() {
 
 	if (!bannerEnabled) return
 	if (navbar) {
-		let threshold = window.innerHeight * 0.30 - 72 - 16
+		const NAVBAR_HEIGHT = 72
+		const MAIN_PANEL_EXCESS_HEIGHT = MAIN_PANEL_OVERLAPS_BANNER_HEIGHT * 16			// The height the main panel overlaps the banner
+
+		let bannerHeight = BANNER_HEIGHT
 		if (document.body.classList.contains('lg:is-home') && window.innerWidth >= 1024) {
-			threshold = window.innerHeight * 0.60 - 72 - 16
+			bannerHeight = BANNER_HEIGHT_HOME
 		}
+		let threshold = window.innerHeight * (bannerHeight / 100) - NAVBAR_HEIGHT - MAIN_PANEL_EXCESS_HEIGHT - 16
 		if (document.body.scrollTop >= threshold || document.documentElement.scrollTop >= threshold) {
 			navbar.classList.add('navbar-hidden')
 		} else {

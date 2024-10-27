@@ -9,6 +9,7 @@ import { siteConfig } from '../config'
 import type { MarkdownHeading } from 'astro'
 import TOC from "../components/widget/TOC.astro";
 import ImageWrapper from "../components/misc/ImageWrapper.astro";
+import {BANNER_HEIGHT, BANNER_HEIGHT_EXTEND, MAIN_PANEL_OVERLAPS_BANNER_HEIGHT} from "../constants/constants";
 
 interface Props {
   title?: string
@@ -23,6 +24,8 @@ const { title, banner, description, lang, setOGTypeArticle, headings = [] } = As
 const hasBannerCredit =
   siteConfig.banner.enable && siteConfig.banner.credit.enable
 const hasBannerLink = !!siteConfig.banner.credit.url
+
+const mainPanelTop = siteConfig.banner.enable ? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)` : "5.5rem"
 ---
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle}>
@@ -36,7 +39,7 @@ const hasBannerLink = !!siteConfig.banner.credit.url
 </div>
 
 <!-- Banner -->
-{siteConfig.banner.enable && <div id="banner-wrapper" class="absolute z-10 -top-[30vh] w-full transition duration-700 overflow-hidden">
+{siteConfig.banner.enable && <div id="banner-wrapper" class=`absolute z-10 w-full transition duration-700 overflow-hidden` style=`top: -${BANNER_HEIGHT_EXTEND}vh`>
     <ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
                   src={siteConfig.banner.src} position={siteConfig.banner.position}
     >
@@ -44,7 +47,7 @@ const hasBannerLink = !!siteConfig.banner.credit.url
 </div>}
 
 <!-- Main content -->
-<div class="absolute w-full z-30 pointer-events-none" class:list={[{"top-[30vh]": siteConfig.banner.enable, "top-[5.5rem]": !siteConfig.banner.enable}]}>
+<div class="absolute w-full z-30 pointer-events-none" style=`top: ${mainPanelTop}`>
     <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
     <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto">
         <div id="main-grid" class="transition duration-700 w-full left-0 right-0 grid grid-cols-[17.5rem_auto] grid-rows-[auto_1fr_auto] lg:grid-rows-[auto]
