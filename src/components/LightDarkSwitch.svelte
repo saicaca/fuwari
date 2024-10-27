@@ -12,7 +12,7 @@ import {
 import { onMount } from 'svelte'
 
 const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE, AUTO_MODE]
-let mode: LIGHT_DARK_MODE = AUTO_MODE
+let mode: LIGHT_DARK_MODE = LIGHT_MODE //折乙手动调整捏 原来是 AUTO_MODE 现在不许你动
 
 onMount(() => {
   mode = getStoredTheme()
