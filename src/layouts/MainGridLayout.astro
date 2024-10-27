@@ -8,6 +8,7 @@ import { Icon } from 'astro-icon/components'
 import { siteConfig } from '../config'
 import type { MarkdownHeading } from 'astro'
 import TOC from "../components/widget/TOC.astro";
+import ImageWrapper from "../components/misc/ImageWrapper.astro";
 
 interface Props {
   title?: string
@@ -25,6 +26,8 @@ const hasBannerLink = !!siteConfig.banner.credit.url
 ---
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle}>
+
+<!-- Navbar -->
 <slot slot="head" name="head"></slot>
 <div id="top-row" class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto" class:list={[""]}>
     <div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all">
@@ -32,8 +35,18 @@ const hasBannerLink = !!siteConfig.banner.credit.url
     </div>
 </div>
 
-<div class="absolute w-full" class:list={[{"top-[30vh]": siteConfig.banner.enable, "top-[5.5rem]": !siteConfig.banner.enable}]}>
-    <div class="relative max-w-[var(--page-width)] mx-auto">
+<!-- Banner -->
+{siteConfig.banner.enable && <div id="banner-wrapper" class="absolute z-10 -top-[30vh] w-full transition duration-700 overflow-hidden">
+    <ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
+                  src={siteConfig.banner.src} position={siteConfig.banner.position}
+    >
+    </ImageWrapper>
+</div>}
+
+<!-- Main content -->
+<div class="absolute w-full z-30 pointer-events-none" class:list={[{"top-[30vh]": siteConfig.banner.enable, "top-[5.5rem]": !siteConfig.banner.enable}]}>
+    <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
+    <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto">
         <div id="main-grid" class="transition duration-700 w-full left-0 right-0 grid grid-cols-[17.5rem_auto] grid-rows-[auto_1fr_auto] lg:grid-rows-[auto]
     mx-auto gap-4 px-0 md:px-4"
         >
@@ -69,6 +82,13 @@ const hasBannerLink = !!siteConfig.banner.credit.url
             </div>
         </div>
 
+        <BackToTop></BackToTop>
+    </div>
+</div>
+
+<!-- The things that should be under the banner, only the TOC for now -->
+<div class="absolute w-full z-0">
+    <div class="relative max-w-[var(--page-width)] mx-auto">
         <!-- TOC component -->
         <div id="toc-wrapper" class="transition absolute top-0 -right-[30rem] w-[30rem] flex items-center toc-hide">
             <div id="toc-inner-wrapper" class="fixed top-14 w-96 h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
@@ -79,7 +99,6 @@ const hasBannerLink = !!siteConfig.banner.credit.url
                 </div>
             </div>
         </div>
-        <BackToTop></BackToTop>
     </div>
 </div>
 </Layout>

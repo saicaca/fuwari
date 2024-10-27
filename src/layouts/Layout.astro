@@ -138,12 +138,6 @@ const bannerOffset =
 	>
 		<ConfigCarrier></ConfigCarrier>
 		<GlobalStyles>
-		{siteConfig.banner.enable && <div id="banner-wrapper" class="absolute -top-[30vh] w-full transition duration-700 overflow-hidden">
-			<ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
-						  src={siteConfig.banner.src} position={siteConfig.banner.position}
-			>
-			</ImageWrapper>
-		</div>}
 		<slot />
 		</GlobalStyles>
 
@@ -414,8 +408,10 @@ let backToTopBtn = document.getElementById('back-to-top-btn');
 let toc = document.getElementById('toc-wrapper');
 let navbar = document.getElementById('navbar-wrapper')
 function scrollFunction() {
+	let bannerHeight = window.innerHeight * 0.30
+
 	if (backToTopBtn) {
-		if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+		if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
 			backToTopBtn.classList.remove('hide')
 		} else {
 			backToTopBtn.classList.add('hide')
@@ -423,7 +419,7 @@ function scrollFunction() {
 	}
 
 	if (toc) {
-		if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+		if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
 			toc.classList.remove('toc-hide')
 		} else {
 			toc.classList.add('toc-hide')

@@ -45,11 +45,12 @@ let heading1Count = 1;
                 <div class:list={["w-5 h-5 rounded-lg text-xs flex items-center justify-center font-bold",
                     {
                         "bg-[var(--toc-badge-bg)] text-[var(--btn-content)]": heading.depth == minDepth,
+                        "ml-4": heading.depth == minDepth + 1,
                     }
                 ]}
                 >
                     {heading.depth == minDepth && heading1Count++}
-                    {heading.depth == minDepth + 1 && <div class="w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/5"></div>}
+                    {heading.depth == minDepth + 1 && <div class="w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10"></div>}
                 </div>
                 <div class:list={["text-sm", {
                     "text-50": heading.depth == minDepth,
