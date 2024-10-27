@@ -20,6 +20,10 @@ export type SiteConfig = {
       url?: string
     }
   }
+  toc: {
+    enable: boolean
+    depth: 1 | 2 | 3
+  }
 
   favicon: Favicon[]
 }
