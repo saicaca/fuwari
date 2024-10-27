@@ -109,7 +109,7 @@ const bannerOffset =
 			/>
 		))}
 		<!-- Set the theme before the page is rendered to avoid a flash -->
-		<script is:inline define:vars={{DEFAULT_THEME: DEFAULT_THEME, LIGHT_MODE: LIGHT_MODE, DARK_MODE: DARK_MODE, AUTO_MODE: AUTO_MODE}}>
+		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND}}>
 			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
 			switch (theme) {
 				case LIGHT_MODE:
@@ -125,6 +125,11 @@ const bannerOffset =
 						document.documentElement.classList.remove('dark');
 					}
 			}
+
+			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
+			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
+			offset = offset - offset % 4;
+			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
 		</script>
 
 		<slot name="head"></slot>
@@ -160,7 +165,6 @@ const bannerOffset =
 	bannerOffset,
 	'banner-height-home': `${BANNER_HEIGHT_HOME}vh`,
 	'banner-height': `${BANNER_HEIGHT}vh`,
-	'banner-height-extend': `${BANNER_HEIGHT_EXTEND}vh`
 }}>
 @tailwind components;
 @layer components {
@@ -458,6 +462,13 @@ function scrollFunction() {
 	}
 }
 window.onscroll = scrollFunction
+
+// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
+window.onresize = () => {
+	let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
+	offset = offset - offset % 4;
+	document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
+}
 
 </script>
 
