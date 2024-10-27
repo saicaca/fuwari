@@ -1,23 +1,33 @@
 ---
 import type { MarkdownHeading } from 'astro';
+import { siteConfig } from "../../config";
 
 interface Props {
   class?: string
   headings: MarkdownHeading[]
 }
 
-const { headings = []  } = Astro.props;
+let { headings = []  } = Astro.props;
 
 // generate random headings, for testing
-/*
-for (let i = 0; i < 50; i++) {
-    headings.push({
-        text: `Heading ${i + 1}`,
-        depth: Math.floor(Math.random() * 3) + 1,
-        slug: `heading-${i + 1}`
-    })
-}
-*/
+// headings = [
+//     { text: 'Heading 1', depth: 1, slug: 'heading-1' },
+//     { text: 'Heading 2', depth: 2, slug: 'heading-2' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 2', depth: 2, slug: 'heading-2' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 1', depth: 1, slug: 'heading-1' },
+//     { text: 'Heading 2', depth: 2, slug: 'heading-2' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 2', depth: 2, slug: 'heading-2' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+//     { text: 'Heading 3', depth: 3, slug: 'heading-3' },
+// ]
 
 let minDepth = 10;
 for (const heading of headings) {
@@ -36,9 +46,11 @@ const removeTailingHash = (text: string) => {
 }
 
 let heading1Count = 1;
+
+const maxLevel = siteConfig.toc.depth;
 ---
 <div class:list={[className]}>
-    {headings.filter((heading) => heading.depth <= minDepth + 1).map((heading) =>
+    {headings.filter((heading) => heading.depth < minDepth + maxLevel).map((heading) =>
             <a href={`#${heading.slug}`} class="px-2 transition flex w-full gap-2 h-9 rounded-xl items-center
         hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)]
     ">
@@ -46,15 +58,17 @@ let heading1Count = 1;
                     {
                         "bg-[var(--toc-badge-bg)] text-[var(--btn-content)]": heading.depth == minDepth,
                         "ml-4": heading.depth == minDepth + 1,
+                        "ml-8": heading.depth == minDepth + 2,
                     }
                 ]}
                 >
                     {heading.depth == minDepth && heading1Count++}
-                    {heading.depth == minDepth + 1 && <div class="w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10"></div>}
+                    {heading.depth == minDepth + 1 && <div class="w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div>}
+                    {heading.depth == minDepth + 2 && <div class="w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10"></div>}
                 </div>
                 <div class:list={["text-sm", {
-                    "text-50": heading.depth == minDepth,
-                    "text-30": heading.depth == minDepth + 1,
+                    "text-50": heading.depth == minDepth || heading.depth == minDepth + 1,
+                    "text-30": heading.depth == minDepth + 2,
                 }]}>{removeTailingHash(heading.text)}</div>
             </a>
     )}

@@ -93,7 +93,7 @@ const mainPanelTop = siteConfig.banner.enable ? `calc(${BANNER_HEIGHT}vh - ${MAI
 <div class="absolute w-full z-0">
     <div class="relative max-w-[var(--page-width)] mx-auto">
         <!-- TOC component -->
-        <div id="toc-wrapper" class="transition absolute top-0 -right-[30rem] w-[30rem] flex items-center toc-hide">
+        {siteConfig.toc.enable && <div id="toc-wrapper" class="transition absolute top-0 -right-[30rem] w-[30rem] flex items-center toc-hide">
             <div id="toc-inner-wrapper" class="fixed top-14 w-96 h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
                 <div id="toc" class="w-full h-full transition-swup-fade">
                     <div class="h-8 w-full"></div>
@@ -101,7 +101,10 @@ const mainPanelTop = siteConfig.banner.enable ? `calc(${BANNER_HEIGHT}vh - ${MAI
                     <div class="h-8 w-full"></div>
                 </div>
             </div>
-        </div>
+        </div>}
+
+        <!-- #toc needs to exist for Swup to work normally -->
+        {!siteConfig.toc.enable && <div id="toc"></div>}
     </div>
 </div>
 </Layout>
