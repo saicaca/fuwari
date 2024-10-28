@@ -51,10 +51,10 @@ const maxLevel = siteConfig.toc.depth;
 ---
 <div class:list={[className]}>
     {headings.filter((heading) => heading.depth < minDepth + maxLevel).map((heading) =>
-            <a href={`#${heading.slug}`} class="px-2 transition flex w-full gap-2 h-9 rounded-xl items-center
-        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)]
+            <a href={`#${heading.slug}`} class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
     ">
-                <div class:list={["w-5 h-5 rounded-lg text-xs flex items-center justify-center font-bold",
+                <div class:list={["w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold",
                     {
                         "bg-[var(--toc-badge-bg)] text-[var(--btn-content)]": heading.depth == minDepth,
                         "ml-4": heading.depth == minDepth + 1,
