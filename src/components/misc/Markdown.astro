@@ -31,7 +31,7 @@ const className = Astro.props.class
       wrapper.className = "relative code-block";
 
       let copyButton = document.createElement("button");
-      copyButton.className = "copy-btn btn-regular-dark absolute active:scale-90 h-8 w-8 top-2 right-2 opacity-75 text-sm p-1.5 rounded-lg transition-all ease-in-out";
+      copyButton.className = "copy-btn btn-regular-dark absolute active:scale-90 h-8 w-8 top-2 right-2 opacity-75 text-sm p-1.5 rounded-lg transition-all ease-in-out hidden";
 
       codeBlock.setAttribute("tabindex", "0");
       if (codeBlock.parentNode) {
@@ -43,8 +43,24 @@ const className = Astro.props.class
       copyButton.innerHTML = `<div>${copyIcon} ${successIcon}</div>
       `
 
+      let dataLang = document.createElement("div");
+      dataLang.className = "dataLang absolute h-8 w-auto top-0.5 right-2 text-xs text-right p-1.5 rounded-lg transition-all ease-in-out";
+      dataLang.innerHTML = `
+        <div>${codeBlock.getAttribute("data-language")}</div>
+      `;
+
       wrapper.appendChild(codeBlock);
       wrapper.appendChild(copyButton);
+      wrapper.appendChild(dataLang);
+
+      wrapper.onmouseover = (event) => {
+        copyButton.style.display = "block";
+        dataLang.style.display = "none";
+      }
+      wrapper.onmouseout = (event) => {
+        copyButton.style.display = "none";
+        dataLang.style.display = "block";
+      }
 
       let timeout: ReturnType<typeof setTimeout>;
       copyButton.addEventListener("click", async () => {
@@ -148,6 +164,7 @@ const className = Astro.props.class
     pre
       background: var(--codeblock-bg) !important
       border-radius: 0.75rem
+      padding-top: 1.25rem
       padding-left: 1.25rem
       padding-right: 1.25rem
 
@@ -162,6 +179,9 @@ const className = Astro.props.class
 
         span.br::selection
           background: var(--codeblock-selection)
+
+    .dataLang
+        color: var(--primary)
 
     ul
       li
