@@ -413,18 +413,18 @@ const setup = () => {
 		}
 	});
 	window.swup.hooks.on('visit:end', (visit: {to: {url: string}}) => {
-		// execute 1s later
 		setTimeout(() => {
 			const heightExtend = document.getElementById('page-height-extend')
 			if (heightExtend) {
 				heightExtend.classList.add('hidden')
 			}
-		}, 200)
 
-		const toc = document.getElementById('toc-wrapper');
-		if (toc) {
-			toc.classList.remove('toc-not-ready')
-		}
+            // Just make the transition looks better
+            const toc = document.getElementById('toc-wrapper');
+            if (toc) {
+                toc.classList.remove('toc-not-ready')
+            }
+        }, 200)
 	});
 }
 if (window?.swup?.hooks) {
@@ -447,7 +447,7 @@ function scrollFunction() {
 		}
 	}
 
-	if (toc) {
+	if (bannerEnabled && toc) {
 		if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
 			toc.classList.remove('toc-hide')
 		} else {

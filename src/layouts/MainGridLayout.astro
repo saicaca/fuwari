@@ -93,9 +93,11 @@ const mainPanelTop = siteConfig.banner.enable ? `calc(${BANNER_HEIGHT}vh - ${MAI
 <div class="absolute w-full z-0">
     <div class="relative max-w-[var(--page-width)] mx-auto">
         <!-- TOC component -->
-        {siteConfig.toc.enable && <div id="toc-wrapper" class="transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] flex items-center toc-hide">
+        {siteConfig.toc.enable && <div id="toc-wrapper" class:list={["transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] flex items-center",
+            {"toc-hide": siteConfig.banner.enable}]}
+        >
             <div id="toc-inner-wrapper" class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
-                <div id="toc" class="w-full h-full transition-swup-fade">
+                <div id="toc" class="w-full h-full transition-swup-fade ">
                     <div class="h-8 w-full"></div>
                     <TOC headings={headings}></TOC>
                     <div class="h-8 w-full"></div>
