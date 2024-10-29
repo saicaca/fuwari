@@ -50,8 +50,9 @@ $: if (hue || hue === 0) {
         height: 1.5rem;
         background-image: var(--color-selection-bar)
         transition: background-image 0.15s ease-in-out
-      /* Input Thumb */
-      ::-webkit-slider-thumb
+
+        /* Input Thumb */
+        ::-webkit-slider-thumb
         -webkit-appearance: none;
         height: 1rem;
         width: 0.5rem;
@@ -62,7 +63,7 @@ $: if (hue || hue === 0) {
           background: rgba(255, 255, 255, 0.8);
         &:active
           background: rgba(255, 255, 255, 0.6);
-      ::-moz-range-thumb
+          ::-moz-range-thumb
         -webkit-appearance: none;
         height: 1rem;
         width: 0.5rem;
@@ -74,7 +75,7 @@ $: if (hue || hue === 0) {
           background: rgba(255, 255, 255, 0.8);
         &:active
           background: rgba(255, 255, 255, 0.6);
-      &::-ms-thumb
+          &::-ms-thumb
         -webkit-appearance: none;
         height: 1rem;
         width: 0.5rem;
@@ -84,5 +85,5 @@ $: if (hue || hue === 0) {
         &:hover
           background: rgba(255, 255, 255, 0.8);
         &:active
-          background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.6);
 </style>
