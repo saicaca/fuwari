@@ -13,19 +13,19 @@ importers:
   .:
     dependencies:
       '@astrojs/check':
-        specifier: ^0.9.3
+        specifier: ^0.9.4
         version: 0.9.4(typescript@5.6.3)
       '@astrojs/rss':
-        specifier: ^4.0.7
+        specifier: ^4.0.9
         version: 4.0.9
       '@astrojs/sitemap':
-        specifier: ^3.1.6
+        specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/svelte':
-        specifier: ^5.7.1
+        specifier: ^5.7.2
         version: 5.7.2(astro@4.16.7(@types/node@22.8.1)(lightningcss@1.27.0)(rollup@2.79.2)(sass@1.80.4)(stylus@0.63.0)(terser@5.36.0)(typescript@5.6.3))(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.10(@types/node@22.8.1)(lightningcss@1.27.0)(sass@1.80.4)(stylus@0.63.0)(terser@5.36.0))
       '@astrojs/tailwind':
-        specifier: ^5.1.1
+        specifier: ^5.1.2
         version: 5.1.2(astro@4.16.7(@types/node@22.8.1)(lightningcss@1.27.0)(rollup@2.79.2)(sass@1.80.4)(stylus@0.63.0)(terser@5.36.0)(typescript@5.6.3))(tailwindcss@3.4.14)
       '@fontsource-variable/jetbrains-mono':
         specifier: ^5.0.22
@@ -37,7 +37,7 @@ importers:
         specifier: ^1.4.1
         version: 1.4.1(@types/babel__core@7.20.5)
       astro:
-        specifier: ^4.15.9
+        specifier: ^4.16.7
         version: 4.16.7(@types/node@22.8.1)(lightningcss@1.27.0)(rollup@2.79.2)(sass@1.80.4)(stylus@0.63.0)(terser@5.36.0)(typescript@5.6.3)
       astro-compress:
         specifier: ^2.3.1
@@ -107,7 +107,7 @@ importers:
         version: 5.0.0
     devDependencies:
       '@astrojs/ts-plugin':
-        specifier: ^1.10.2
+        specifier: ^1.10.4
         version: 1.10.4
       '@biomejs/biome':
         specifier: 1.8.3
