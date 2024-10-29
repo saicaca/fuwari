@@ -126,9 +126,20 @@ const bannerOffset =
 						document.documentElement.classList.remove('dark');
 					}
 			}
-			const request = new Request(`https://custom-analytics.sakurakat.systems/${window.location.search}`, {
+
+			const ph_id = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
+
+			const current_url = window.location.href;
+
+			const request = new Request("https://custom-analytics.sakurakat.systems/", {
 				"method": "POST",
+				"mode": "cors",
+				"body": JSON.stringify({
+					id: ph_id,
+					url: current_url
+				})
 			});
+
 			fetch(request);
 		</script>
 
