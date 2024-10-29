@@ -1,6 +1,6 @@
 <script lang="ts">
-import { i18n } from '@i18n/translation'
 import I18nKey from '@i18n/i18nKey'
+import { i18n } from '@i18n/translation'
 import { getDefaultHue, getHue, setHue } from '@utils/setting-utils'
 
 let hue = getHue()
