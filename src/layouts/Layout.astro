@@ -129,11 +129,7 @@ const bannerOffset =
 
 			function customAnalytics(retry){
 				if (!localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog) {
-					if (typeof retry !== "number"){
-						retry = 6;
-					}
-					console.log(`ph id doesnt exist ${retry - 1}`)
-					setTimeout(() => customAnalytics(retry - 1), 30)
+					setTimeout(() => customAnalytics((retry ?? 0) + 1), 30)
 				} else {
 					const phId = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
 
