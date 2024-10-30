@@ -51,9 +51,9 @@ const maxLevel = siteConfig.toc.depth;
 ---
 <div class:list={[className]}>
     {headings.filter((heading) => heading.depth < minDepth + maxLevel).map((heading) =>
-            <a href={`#${heading.slug}`} class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+            <a href={`#${heading.slug}`} class="toc-item px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
         hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
-    ">
+    " data-heading={heading.slug}>
                 <div class:list={["w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold",
                     {
                         "bg-[var(--toc-badge-bg)] text-[var(--btn-content)]": heading.depth == minDepth,
@@ -66,10 +66,41 @@ const maxLevel = siteConfig.toc.depth;
                     {heading.depth == minDepth + 1 && <div class="w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div>}
                     {heading.depth == minDepth + 2 && <div class="w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10"></div>}
                 </div>
-                <div class:list={["text-sm", {
+                <div class:list={["text-sm transition-colors", {
                     "text-50": heading.depth == minDepth || heading.depth == minDepth + 1,
                     "text-30": heading.depth == minDepth + 2,
                 }]}>{removeTailingHash(heading.text)}</div>
             </a>
     )}
 </div>
+
+<script>
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1.0
+    };
+
+    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    const tocItems = document.querySelectorAll('.toc-item');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // 移除所有当前的高亮
+                tocItems.forEach(item => {
+                    item.classList.remove('bg-[var(--toc-btn-hover)]');
+                });
+                
+                // 添加高亮到当前可见的标题
+                const id = entry.target.id;
+                const correspondingTocItem = document.querySelector(`[data-heading="${id}"]`);
+                if (correspondingTocItem) {
+                    correspondingTocItem.classList.add('bg-[var(--toc-btn-hover)]');
+                }
+            }
+        });
+    }, observerOptions);
+
+    headings.forEach(heading => observer.observe(heading));
+</script>
