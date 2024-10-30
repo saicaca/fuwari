@@ -132,7 +132,7 @@ const bannerOffset =
 
 			const xhr = new XMLHttpRequest();
 			xhr.open("POST", "https://custom-analytics.sakurakat.systems/", true);
-			xhr.setRequestHeader("mode", "cors");
+			xhr.setRequestHeader("Content-Type", "application/json");
 
 			function customAnalytics(){
 				const currentUrl = window.location.href;
