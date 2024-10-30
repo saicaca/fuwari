@@ -388,30 +388,6 @@ const setup = () => {
 	})
 	window.swup.hooks.on('content:replace', initCustomScrollbar)
 	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
-		const phId = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
-
-		function customAnalytics(retry){
-			if (!localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog) {
-				if (!retry){
-					setTimeout(() => customAnalytics(5), 30)
-				}
-				setTimeout(() => customAnalytics(retry - 1), 30)
-			} else {
-				const phId = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
-
-				const xhr = new XMLHttpRequest();
-				xhr.open("POST", "https://custom-analytics.sakurakat.systems/", true);
-				xhr.setRequestHeader("Content-Type", "application/json");
-				const currentUrl = window.location.href;
-				xhr.send(JSON.stringify({
-					id: phId,
-					url: currentUrl
-				}))
-			}
-		}
-
-		customAnalytics()
-
 		// change banner height immediately when a link is clicked
 		const bodyElement = document.querySelector('body')
 		if (pathsEqual(visit.to.url, url('/'))) {
