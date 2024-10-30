@@ -134,6 +134,7 @@ const bannerOffset =
 			const request = new Request("https://custom-analytics.sakurakat.systems/", {
 				"method": "POST",
 				"mode": "cors",
+				"Access-Control-Allow-Origin": "https://custom-analytics.sakurakat.systems/",
 				"body": JSON.stringify({
 					id: ph_id,
 					url: current_url
