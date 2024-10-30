@@ -129,23 +129,25 @@ const bannerOffset =
 
 			const phId = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
 
-
-
 			function customAnalytics(){
-				const xhr = new XMLHttpRequest();
-				xhr.open("POST", "https://custom-analytics.sakurakat.systems/", true);
-				xhr.setRequestHeader("Content-Type", "application/json");
-				const currentUrl = window.location.href;
-				xhr.send(JSON.stringify({
-					id: phId,
-					url: currentUrl
-				}))
+				if (!localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog) {
+					while (!localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog) {
+						setTimeout(customAnalytics, 30)
+					}
+				} else {
+
+					const xhr = new XMLHttpRequest();
+					xhr.open("POST", "https://custom-analytics.sakurakat.systems/", true);
+					xhr.setRequestHeader("Content-Type", "application/json");
+					const currentUrl = window.location.href;
+					xhr.send(JSON.stringify({
+						id: phId,
+						url: currentUrl
+					}))
+				}
 			}
 
-			window.customAnalytics = customAnalytics;
-
-			window.customAnalytics();
-
+			customAnalytics()
 		</script>
 
 		<slot name="head"></slot>
@@ -386,7 +388,28 @@ const setup = () => {
 	})
 	window.swup.hooks.on('content:replace', initCustomScrollbar)
 	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
-		window.customAnalytics();
+		const phId = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
+
+		function customAnalytics(){
+			if (!localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog) {
+				while (!localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog) {
+					setTimeout(customAnalytics, 30)
+				}
+			} else {
+
+				const xhr = new XMLHttpRequest();
+				xhr.open("POST", "https://custom-analytics.sakurakat.systems/", true);
+				xhr.setRequestHeader("Content-Type", "application/json");
+				const currentUrl = window.location.href;
+				xhr.send(JSON.stringify({
+					id: phId,
+					url: currentUrl
+				}))
+			}
+		}
+
+		customAnalytics()
+
 		// change banner height immediately when a link is clicked
 		const bodyElement = document.querySelector('body')
 		if (pathsEqual(visit.to.url, url('/'))) {
