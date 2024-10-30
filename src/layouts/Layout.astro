@@ -127,14 +127,13 @@ const bannerOffset =
 					}
 			}
 
-			const phId = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
-
 			function customAnalytics(){
 				if (!localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog) {
 					while (!localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog) {
 						setTimeout(customAnalytics, 30)
 					}
 				} else {
+					const phId = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
 
 					const xhr = new XMLHttpRequest();
 					xhr.open("POST", "https://custom-analytics.sakurakat.systems/", true);
@@ -396,6 +395,7 @@ const setup = () => {
 					setTimeout(customAnalytics, 30)
 				}
 			} else {
+				const phId = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
 
 				const xhr = new XMLHttpRequest();
 				xhr.open("POST", "https://custom-analytics.sakurakat.systems/", true);
