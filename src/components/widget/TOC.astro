@@ -1,12 +1,12 @@
 ---
-import type { MarkdownHeading } from 'astro';
+import type { MarkdownHeading } from 'astro'
 
 interface Props {
   class?: string
   headings: MarkdownHeading[]
 }
 
-const { headings = []  } = Astro.props;
+const { headings = [] } = Astro.props
 
 // generate random headings, for testing
 /*
@@ -19,23 +19,23 @@ for (let i = 0; i < 50; i++) {
 }
 */
 
-let minDepth = 10;
+let minDepth = 10
 for (const heading of headings) {
-    minDepth = Math.min(minDepth, heading.depth);
+  minDepth = Math.min(minDepth, heading.depth)
 }
 
 const className = Astro.props.class
 
 const removeTailingHash = (text: string) => {
-    let lastIndexOfHash = text.lastIndexOf('#');
-    if (lastIndexOfHash != text.length - 1) {
-        return text;
-    }
+  let lastIndexOfHash = text.lastIndexOf('#')
+  if (lastIndexOfHash != text.length - 1) {
+    return text
+  }
 
-    return text.substring(0, lastIndexOfHash);
+  return text.substring(0, lastIndexOfHash)
 }
 
-let heading1Count = 1;
+let heading1Count = 1
 ---
 <div class:list={[className]}>
     {headings.filter((heading) => heading.depth <= minDepth + 1).map((heading) =>

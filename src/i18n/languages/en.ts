@@ -1,5 +1,5 @@
-import Key from '../i18nKey';
-import type { Translation } from '../translation';
+import Key from '../i18nKey'
+import type { Translation } from '../translation'
 
 export const en: Translation = {
   [Key.home]: 'Home',
@@ -36,4 +36,4 @@ export const en: Translation = {
   [Key.author]: 'Author',
   [Key.publishedAt]: 'Published at',
   [Key.license]: 'License',
-};
+}

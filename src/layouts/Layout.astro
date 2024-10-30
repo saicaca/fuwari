@@ -16,7 +16,7 @@ import {
 import { defaultFavicons } from '../constants/icon'
 import type { Favicon } from '../types/config'
 import { url, pathsEqual } from '../utils/url-utils'
-import PostHog from "../components/Posthog.astro";
+import PostHog from '../components/Posthog.astro'
 // import posthog from 'posthog-js'
 
 interface Props {
@@ -129,9 +129,10 @@ const bannerOffset =
 
 			function customAnalytics(retry){
 				if (!localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog) {
-					if (!retry){
-						setTimeout(() => customAnalytics(5), 30)
+					if (typeof retry !== "number"){
+						retry = 6;
 					}
+					console.log(`ph id doesnt exist ${retry - 1}`)
 					setTimeout(() => customAnalytics(retry - 1), 30)
 				} else {
 					const phId = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
@@ -148,6 +149,8 @@ const bannerOffset =
 			}
 
 			customAnalytics()
+
+
 		</script>
 
 		<slot name="head"></slot>
@@ -388,6 +391,7 @@ const setup = () => {
 	})
 	window.swup.hooks.on('content:replace', initCustomScrollbar)
 	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
+
 		// change banner height immediately when a link is clicked
 		const bodyElement = document.querySelector('body')
 		if (pathsEqual(visit.to.url, url('/'))) {
@@ -409,7 +413,6 @@ const setup = () => {
 		}
 	});
 	window.swup.hooks.on('page:view', () => {
-		window.customAnalytics();
 		// hide the temp high element when the transition is done
 		const heightExtend = document.getElementById('page-height-extend')
 		if (heightExtend) {

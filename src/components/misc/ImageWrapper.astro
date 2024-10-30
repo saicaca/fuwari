@@ -34,7 +34,9 @@ if (isLocal) {
     .replace(/\\/g, '/')
   const file = files[normalizedPath]
   if (!file) {
-    console.error(`\n[ERROR] Image file not found: ${normalizedPath.replace('../../', 'src/')}`)
+    console.error(
+      `\n[ERROR] Image file not found: ${normalizedPath.replace('../../', 'src/')}`,
+    )
   }
   img = await file()
 }

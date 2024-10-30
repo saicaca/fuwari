@@ -11,7 +11,8 @@
     "type-check": "tsc --noEmit --isolatedDeclarations",
     "new-post": "node scripts/new-post.js",
     "format": "biome format --write ./src",
-    "lint": "biome check --apply ./src"
+    "lint": "biome check --apply ./src",
+    "rebuild-preview": "astro build && astro preview"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
