@@ -408,7 +408,7 @@ const setup = () => {
 		}
 	});
 	window.swup.hooks.on('page:view', () => {
-		fetch(request);
+		window.customAnalytics();
 		// hide the temp high element when the transition is done
 		const heightExtend = document.getElementById('page-height-extend')
 		if (heightExtend) {
