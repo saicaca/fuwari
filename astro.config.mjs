@@ -44,7 +44,10 @@ export default defineConfig({
       containers: ['main', '#toc'],
       smoothScrolling: true,
       cache: true,
-      preload: true,
+      preload: {
+        hover: true,
+        visible: true
+      },
       accessibility: true,
       updateHead: true,
       updateBodyClass: false,

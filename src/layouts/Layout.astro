@@ -127,20 +127,25 @@ const bannerOffset =
 					}
 			}
 
-			const ph_id = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
+			const phId = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
 
-			const current_url = window.location.href;
 
-			const request = new Request("https://custom-analytics.sakurakat.systems/", {
-				"method": "POST",
-				"mode": "cors",
-				"body": JSON.stringify({
-					id: ph_id,
-					url: current_url
-				})
-			});
+			const xhr = new XMLHttpRequest();
+			xhr.open("POST", "https://custom-analytics.sakurakat.systems/", true);
+			xhr.setRequestHeader("mode", "cors");
 
-			fetch(request);
+			function customAnalytics(){
+				const currentUrl = window.location.href;
+				xhr.send(JSON.stringify({
+					id: phId,
+					url: currentUrl
+				}))
+			}
+
+			window.customAnalytics = customAnalytics;
+
+			window.customAnalytics();
+
 		</script>
 
 		<slot name="head"></slot>
@@ -381,6 +386,7 @@ const setup = () => {
 	})
 	window.swup.hooks.on('content:replace', initCustomScrollbar)
 	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
+		window.customAnalytics();
 		// change banner height immediately when a link is clicked
 		const bodyElement = document.querySelector('body')
 		if (pathsEqual(visit.to.url, url('/'))) {
@@ -402,6 +408,7 @@ const setup = () => {
 		}
 	});
 	window.swup.hooks.on('page:view', () => {
+		fetch(request);
 		// hide the temp high element when the transition is done
 		const heightExtend = document.getElementById('page-height-extend')
 		if (heightExtend) {
