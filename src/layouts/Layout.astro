@@ -12,6 +12,10 @@ import {
   DARK_MODE,
   DEFAULT_THEME,
   LIGHT_MODE,
+  BANNER_HEIGHT,
+  BANNER_HEIGHT_EXTEND,
+  BANNER_HEIGHT_HOME,
+  PAGE_WIDTH,
 } from '../constants/constants'
 import { defaultFavicons } from '../constants/icon'
 import type { Favicon } from '../types/config'
@@ -61,12 +65,12 @@ if (!lang) {
 const siteLang = lang.replace('_', '-')
 
 const bannerOffsetByPosition = {
-	'top': '30vh',
-	'center': '15vh',
-	'bottom': '0'
+  top: `${BANNER_HEIGHT_EXTEND}vh`,
+  center: `${BANNER_HEIGHT_EXTEND / 2}vh`,
+  bottom: '0',
 }
-const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'center']
-
+const bannerOffset =
+  bannerOffsetByPosition[siteConfig.banner.position || 'center']
 ---
 
 <!DOCTYPE html>
@@ -105,8 +109,14 @@ const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'cente
 				  media={favicon.theme && `(prefers-color-scheme: ${favicon.theme})`}
 			/>
 		))}
+
+		<style define:vars={{
+			configHue,
+			'page-width': `${PAGE_WIDTH}rem`,
+		}}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
+
 		<!-- Set the theme before the page is rendered to avoid a flash -->
-		<script is:inline define:vars={{DEFAULT_THEME: DEFAULT_THEME, LIGHT_MODE: LIGHT_MODE, DARK_MODE: DARK_MODE, AUTO_MODE: AUTO_MODE}}>
+		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH}}>
 			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
 			switch (theme) {
 				case LIGHT_MODE:
@@ -122,6 +132,17 @@ const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'cente
 						document.documentElement.classList.remove('dark');
 					}
 			}
+
+			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
+			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
+			offset = offset - offset % 4;
+			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
+
+			// calculate the width of TOC widget
+			const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize)
+			const mainGridWidthPx = PAGE_WIDTH * rootFontSize
+			const tocWidth = (window.innerWidth - mainGridWidthPx) / 2 - rootFontSize
+			document.documentElement.style.setProperty('--toc-width', `${tocWidth}px`);
 		</script>
 
 		<slot name="head"></slot>
@@ -130,20 +151,12 @@ const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'cente
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
-		<style define:vars={{ configHue }}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
-
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
 		  data-overlayscrollbars-initialize
 	>
 		<ConfigCarrier></ConfigCarrier>
 		<GlobalStyles>
-		{siteConfig.banner.enable && <div id="banner-wrapper" class="absolute -top-[30vh] w-full transition duration-700 overflow-hidden">
-			<ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
-						  src={siteConfig.banner.src} position={siteConfig.banner.position}
-			>
-			</ImageWrapper>
-		</div>}
 		<slot />
 		</GlobalStyles>
 
@@ -151,19 +164,22 @@ const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'cente
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>
 	</body>
 </html>
+
 <style is:global>
 	:root {
 		--hue: var(--configHue);
-		--page-width: 75rem;
 	}
 </style>
-<style is:global define:vars={{ bannerOffset }}>
-@tailwind components;
-@tailwind utilities;
 
+<style is:global define:vars={{
+	bannerOffset,
+	'banner-height-home': `${BANNER_HEIGHT_HOME}vh`,
+	'banner-height': `${BANNER_HEIGHT}vh`,
+}}>
+@tailwind components;
 @layer components {
 	.enable-banner.is-home #banner-wrapper {
-		@apply h-[var(--banner-height-home)] translate-y-[30vh]
+		@apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)]
 	}
 	.enable-banner #banner-wrapper {
 		@apply h-[var(--banner-height-home)]
@@ -176,19 +192,20 @@ const bannerOffset = bannerOffsetByPosition[siteConfig.banner.position || 'cente
 		@apply h-[var(--banner-height-home)] translate-y-[var(--bannerOffset)]
 	}
 	.enable-banner.is-home #main-grid {
-		@apply translate-y-[30vh];
+		@apply translate-y-[var(--banner-height-extend)];
 	}
 	.enable-banner #top-row {
 		@apply h-[calc(var(--banner-height-home)_-_4.5rem)] transition-all duration-300
 	}
 	.enable-banner.is-home #sidebar-sticky {
-		@apply top-[calc(-30vh_+_1rem)]
+		@apply top-[calc(1rem_-_var(--banner-height-extend))]
 	}
 	.navbar-hidden {
 		@apply opacity-0 -translate-y-16
 	}
 }
 </style>
+
 <script>
 import 'overlayscrollbars/overlayscrollbars.css';
 import {
@@ -199,8 +216,15 @@ import {
 } from 'overlayscrollbars';
 import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
 import {pathsEqual, url} from "../utils/url-utils";
+import {
+	BANNER_HEIGHT,
+	BANNER_HEIGHT_HOME,
+	BANNER_HEIGHT_EXTEND,
+	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
+	PAGE_WIDTH
+} from "../constants/constants";
 
-	/* Preload fonts */
+/* Preload fonts */
 // (async function() {
 // 	try {
 // 		await Promise.all([
@@ -342,15 +366,15 @@ const setup = () => {
 		}
 	})
 */
-	// Remove the delay for the first time page load
 	window.swup.hooks.on('link:click', () => {
+		// Remove the delay for the first time page load
 		document.documentElement.style.setProperty('--content-delay', '0ms')
 
 		// prevent elements from overlapping the navbar
 		if (!bannerEnabled) {
 			return
 		}
-		let threshold = window.innerHeight * 0.30 - 72 - 16
+		let threshold = window.innerHeight * (BANNER_HEIGHT / 100) - 72 - 16
 		let navbar = document.getElementById('navbar-wrapper')
 		if (!navbar || !document.body.classList.contains('lg:is-home')) {
 			return
@@ -374,6 +398,12 @@ const setup = () => {
 		if (heightExtend) {
 			heightExtend.classList.remove('hidden')
 		}
+
+		// Hide the TOC while scrolling back to top
+		let toc = document.getElementById('toc-wrapper');
+		if (toc) {
+			toc.classList.add('toc-not-ready')
+		}
 	});
 	window.swup.hooks.on('page:view', () => {
 		// hide the temp high element when the transition is done
@@ -383,11 +413,18 @@ const setup = () => {
 		}
 	});
 	window.swup.hooks.on('visit:end', (visit: {to: {url: string}}) => {
-		// execute 1s later
-		const heightExtend = document.getElementById('page-height-extend')
-		if (heightExtend) {
-			heightExtend.classList.add('hidden')
-		}
+		setTimeout(() => {
+			const heightExtend = document.getElementById('page-height-extend')
+			if (heightExtend) {
+				heightExtend.classList.add('hidden')
+			}
+
+            // Just make the transition looks better
+            const toc = document.getElementById('toc-wrapper');
+            if (toc) {
+                toc.classList.remove('toc-not-ready')
+            }
+        }, 200)
 	});
 }
 if (window?.swup?.hooks) {
@@ -397,22 +434,37 @@ if (window?.swup?.hooks) {
 }
 
 let backToTopBtn = document.getElementById('back-to-top-btn');
+let toc = document.getElementById('toc-wrapper');
 let navbar = document.getElementById('navbar-wrapper')
 function scrollFunction() {
+	let bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100)
+
 	if (backToTopBtn) {
-		if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+		if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
 			backToTopBtn.classList.remove('hide')
 		} else {
 			backToTopBtn.classList.add('hide')
 		}
 	}
 
+	if (bannerEnabled && toc) {
+		if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
+			toc.classList.remove('toc-hide')
+		} else {
+			toc.classList.add('toc-hide')
+		}
+	}
+
 	if (!bannerEnabled) return
 	if (navbar) {
-		let threshold = window.innerHeight * 0.30 - 72 - 16
+		const NAVBAR_HEIGHT = 72
+		const MAIN_PANEL_EXCESS_HEIGHT = MAIN_PANEL_OVERLAPS_BANNER_HEIGHT * 16			// The height the main panel overlaps the banner
+
+		let bannerHeight = BANNER_HEIGHT
 		if (document.body.classList.contains('lg:is-home') && window.innerWidth >= 1024) {
-			threshold = window.innerHeight * 0.60 - 72 - 16
+			bannerHeight = BANNER_HEIGHT_HOME
 		}
+		let threshold = window.innerHeight * (bannerHeight / 100) - NAVBAR_HEIGHT - MAIN_PANEL_EXCESS_HEIGHT - 16
 		if (document.body.scrollTop >= threshold || document.documentElement.scrollTop >= threshold) {
 			navbar.classList.add('navbar-hidden')
 		} else {
@@ -421,6 +473,19 @@ function scrollFunction() {
 	}
 }
 window.onscroll = scrollFunction
+
+window.onresize = () => {
+	// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
+	let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
+	offset = offset - offset % 4;
+	document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
+
+	// calculate the width of TOC widget
+	const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize)
+	const mainGridWidthPx = PAGE_WIDTH * rootFontSize
+	const tocWidth = (window.innerWidth - mainGridWidthPx) / 2 - rootFontSize
+	document.documentElement.style.setProperty('--toc-width', `${tocWidth}px`);
+}
 
 </script>
 

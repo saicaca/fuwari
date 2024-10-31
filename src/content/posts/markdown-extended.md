@@ -8,7 +8,7 @@ category: 'Examples'
 draft: false 
 ---
 
-## GitHub repository cards
+## GitHub Repository Cards
 You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API. 
 
 ::github{repo="Fabrizz/MMM-OnSpotify"}
@@ -43,6 +43,8 @@ Critical content demanding immediate user attention due to potential risks.
 Negative potential consequences of an action.
 :::
 
+### Basic Syntax
+
 ```markdown
 :::note
 Highlights information that users should take into account, even when skimming.
@@ -52,6 +54,8 @@ Highlights information that users should take into account, even when skimming.
 Optional information to help a user be more successful.
 :::
 ```
+
+### Custom Titles
 
 The title of the admonition can be customized.
 
@@ -64,6 +68,8 @@ This is a note with a custom title.
 This is a note with a custom title.
 :::
 ```
+
+### GitHub Syntax
 
 > [!TIP]
 > [The GitHub syntax](https://github.com/orgs/community/discussions/16925) is also supported.
