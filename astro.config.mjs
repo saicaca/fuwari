@@ -31,16 +31,16 @@ const oklchToHex = str => {
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://fuwari.vercel.app/',
-  base: '/',
+  site: 'https://jikhei.github.io',
+  base: 'my-repo',
   trailingSlash: 'always',
   integrations: [
     tailwind(),
     swup({
       theme: false,
-      animationClass: 'transition-swup-',   // see https://swup.js.org/options/#animationselector
-                                            // the default value `transition-` cause transition delay
-                                            // when the Tailwind class `transition-all` is used
+      animationClass: 'transition-swup-', // see https://swup.js.org/options/#animationselector
+      // the default value `transition-` cause transition delay
+      // when the Tailwind class `transition-all` is used
       containers: ['main', '#toc'],
       smoothScrolling: true,
       cache: true,
