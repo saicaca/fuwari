@@ -24,6 +24,7 @@ export const siteConfig: SiteConfig = {
       url: ''                // (Optional) URL link to the original artwork or artist's page
     }
   },
+  ogImage: '/og.webp',    // Default Open Graph image, relative to the /public directory
   toc: {
     enable: true,           // Display the table of contents on the right side of the post
     depth: 2                // Maximum heading depth to show in the table, from 1 to 3
