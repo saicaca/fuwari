@@ -5,7 +5,6 @@ import swup from "@swup/astro";
 import Compress from "astro-compress";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
-import { vitePreprocess } from "@astrojs/svelte";
 import Color from "colorjs.io";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
@@ -35,8 +34,6 @@ export default defineConfig({
   site: "https://fuwari.vercel.app/",
   base: "/",
   trailingSlash: "always",
-  emitCSS: true,
-  preprocess: vitePreprocess(),
   integrations: [
     tailwind(),
     swup({
