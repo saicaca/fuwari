@@ -1,0 +1,44 @@
+---
+
+import MainGridLayout from '../layouts/MainGridLayout.astro'
+
+import { getEntry } from 'astro:content'
+import { i18n } from '../i18n/translation'
+import I18nKey from '../i18n/i18nKey'
+import Markdown from '@components/misc/Markdown.astro'
+
+const aboutPost = await getEntry('spec', 'about')
+const { Content } = await aboutPost.render()
+
+const friendlink=[
+    {name:"mgg",url:"https://mgg.name",description:"技术高手",img:"https://www.mggo.xyz/img/icon.png"},
+    {name:"蛋✌🏻",url:"https://dumbdaidai.github.io/",description:"文学大师 给🥚✌🏻👻🌶️😭",img:"https://img.picui.cn/free/2024/11/17/6739e695a8722.jpg"},
+    {name:"付✌🏻",url:"https://fufffh.icu/",description:"acm✌🏻",img:"https://img.picui.cn/free/2024/10/23/67191c08cae0f.png"},
+    {name:"666"},
+    {name:"666"},
+    {name:"666"},
+    {name:"666"},
+]
+---
+<MainGridLayout title={"友链"} description={"友链"}>
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+        {
+            friendlink.map((person)=>(
+            <div class="card-base flex flex-col px-4 py-6 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 space-y-4">
+        <div class="flex justify-center items-center mb-4">
+          <img 
+            src={person.img} 
+            alt={person.name} 
+            class="w-20 h-20 rounded-full object-cover mr-4"
+          />
+        </div>
+        <div class="text-center">
+          <h1 class="text-lg font-bold">{person.name}</h4>
+          <p class="text-sm text-gray-600 dark:text-gray-400">{person.description}</p>
+        </div>
+      </div>
+                )
+            )
+        }
+    </div>
+</MainGridLayout>

@@ -38,6 +38,11 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Home,
     LinkPreset.Archive,
     LinkPreset.About,
+    {
+      name: "友链",
+      url: "/friendlinks/",
+      external: false
+    }
     // {
     //   name: 'GitHub',
     //   url: 'https://github.com/saicaca/fuwari',     // Internal links should not include the base path, as it is automatically added
