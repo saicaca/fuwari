@@ -1,3 +1,13 @@
 ---
+import Contest from "./contest.vue"
+import Layout from "@layouts/Layout.astro"
 ---
-<h1>Contest Page</h1>
+<div id="contest">
+    <Contest client:only="vue" />
+</div>
+<style>
+#contest {
+    width: 100vw;
+    height: 100vh;
+}
+</style>
