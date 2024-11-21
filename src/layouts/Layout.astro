@@ -71,6 +71,8 @@ const bannerOffsetByPosition = {
 }
 const bannerOffset =
   bannerOffsetByPosition[siteConfig.banner.position || 'center']
+
+const gtagId = siteConfig.googleAnalytics? siteConfig.googleAnalytics.id : ''
 ---
 
 <!DOCTYPE html>
@@ -78,6 +80,16 @@ const bannerOffset =
 	  data-overlayscrollbars-initialize
 >
 	<head>
+		{gtagId.length > 0 &&
+			<!-- Google tag (gtag.js) -->
+			<script async src={`https://www.googletagmanager.com/gtag/js?id=${gtagId}`}></script>
+			<script is:inline define:vars={{gtagId}}>
+			  window.dataLayer = window.dataLayer || [];
+			  function gtag(){dataLayer.push(arguments);}
+			  gtag('js', new Date());
+	
+			  gtag('config', gtagId);
+			</script>}
 
 		<title>{pageTitle}</title>
 
