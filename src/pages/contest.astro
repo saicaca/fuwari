@@ -1,13 +1,95 @@
 ---
-import Contest from "./contest.vue"
-import Layout from "@layouts/Layout.astro"
+import Layout from "@layouts/Layout.astro";
+let extscore = 0;
+let basscore = 0;
+let resscore = 0;
+let enjscore = 0;
+let FinalScore = extscore + basscore + resscore + enjscore;
 ---
-<div id="contest">
-    <Contest client:only="vue" />
-</div>
+<Layout>
+    <div id="contest">
+        <div id="bigcontainer">
+            <div class="block flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+                <div class="card-base z-10 px-9 py-6 relative w-full ">
+
+                </div>
+            </div>
+            <div class="block flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+                <div class="card-base z-10 px-9 py-6 relative w-full ">
+
+                </div>
+            </div>
+            <div class="block flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+                <div class="card-base z-10 px-9 py-6 relative w-full ">
+
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="block flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+                <div class="content card-base z-10 px-9 py-6 relative w-full ">
+                    <h1>结算分:</h1>
+                    <input type="text" alt="结算分:" class="h-1/2">
+                </div>
+            </div>
+            <div class="block flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+                <div class="content card-base z-10 px-9 py-6 relative w-full ">
+                    <h1>观赏分:</h1>
+                    <input type="text" alt="观赏分:" class="h-1/2">
+                </div>
+            </div>
+            <div class="block flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+                <div class="content card-base z-10 px-9 py-6 relative w-full ">
+                    <h1>总分:{FinalScore}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let extscore = 0;
+        let basscore = 0;
+        let resscore = 0;
+        let enjscore = 0;
+        let FinalScore = extscore + basscore + resscore + enjscore;
+    </script>
+</Layout>
+
 <style>
+h1 {
+    font-weight: bold;
+    font-size:5vh;
+}
+input {
+    font-weight: bold;
+
+}
 #contest {
+    display: flex;
+    flex-direction: column;
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
+    justify-content: space-evenly;
+}
+#bigcontainer {
+    width: 100%;
+    height: 75%;
+    display: flex;
+    justify-content:space-evenly;
+    font-size: 100px;
+}
+#bottom {
+    display: flex;
+    justify-content:space-evenly;
+    width: 100%;
+    height: 20%;
+}
+.block {
+    width: 30%;
+    display: flex;
+}
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
