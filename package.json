@@ -69,7 +69,8 @@
   "packageManager": "pnpm@9.14.4",
   "pnpm": {
     "executionEnv": {
-      "nodeVersion": "v22.11.0"
+      "nodeVersion": "~22",
+      "pnpm": "~9"
     }
   }
 }
