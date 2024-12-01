@@ -67,10 +67,13 @@
     "@types/sanitize-html": "^2.13.0"
   },
   "packageManager": "pnpm@9.14.4",
+  "engines": {
+    "node": ">=22.11.0",
+    "pnpm": ">=9.14.4"
+  },
   "pnpm": {
     "executionEnv": {
-      "nodeVersion": "~22",
-      "pnpm": "~9"
+      "nodeVersion": ">=22.11.0"
     }
   }
 }
