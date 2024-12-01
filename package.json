@@ -66,14 +66,5 @@
     "@types/mdast": "^4.0.4",
     "@types/sanitize-html": "^2.13.0"
   },
-  "packageManager": "pnpm@9.14.4",
-  "engines": {
-    "node": ">=22.11.0",
-    "pnpm": ">=9.14.4"
-  },
-  "pnpm": {
-    "executionEnv": {
-      "nodeVersion": ">=22.11.0"
-    }
-  }
+  "packageManager": "pnpm@9.14.4"
 }
