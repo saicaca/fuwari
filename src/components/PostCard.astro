@@ -87,7 +87,7 @@ const { remarkPluginFrontmatter } = await entry.render()
     </a>}
 
     {!hasCover &&
-        <a href={url} aria-label={title} class="hidden md:flex btn-regular w-[3.25rem]
+        <a href={url} aria-label={title} class="!hidden md:!flex btn-regular w-[3.25rem]
          absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
          hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
         ">
@@ -99,5 +99,5 @@ const { remarkPluginFrontmatter } = await entry.render()
 </div>
 <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden"></div>
 
-<style lang="stylus" define:vars={{coverWidth}}>
+<style define:vars={{coverWidth}}>
 </style>
