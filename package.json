@@ -33,7 +33,6 @@
     "astro": "^4.16.13",
     "astro-compress": "^2.3.5",
     "astro-icon": "^1.1.1",
-    "colorjs.io": "^0.5.2",
     "hastscript": "^9.0.0",
     "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",
@@ -50,7 +49,6 @@
     "remark-github-admonitions-to-directives": "^1.0.5",
     "remark-math": "^6.0.0",
     "sanitize-html": "^2.13.1",
-    "sass": "^1.80.4",
     "sharp": "^0.33.5",
     "stylus": "^0.63.0",
     "svelte": "^5.2.2",
@@ -64,7 +62,9 @@
     "@rollup/plugin-yaml": "^4.1.2",
     "@types/markdown-it": "^14.1.2",
     "@types/mdast": "^4.0.4",
-    "@types/sanitize-html": "^2.13.0"
+    "@types/sanitize-html": "^2.13.0",
+    "postcss-import": "^16.1.0",
+    "postcss-nesting": "^13.0.1"
   },
   "packageManager": "pnpm@9.14.4"
 }
