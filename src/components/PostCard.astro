@@ -1,14 +1,15 @@
 ---
-import path from 'path'
+import path from 'node:path'
+import { Icon } from 'astro-icon/components'
+import I18nKey from '../i18n/i18nKey'
+import { i18n } from '../i18n/translation'
+import { getDir } from '../utils/url-utils'
 import PostMetadata from './PostMeta.astro'
 import ImageWrapper from './misc/ImageWrapper.astro'
-import { Icon } from 'astro-icon/components'
-import { i18n } from '../i18n/translation'
-import I18nKey from '../i18n/i18nKey'
-import { getDir } from '../utils/url-utils'
 
 interface Props {
   class?: string
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   entry: any
   title: string
   url: string

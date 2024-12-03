@@ -19,8 +19,8 @@ const VISIBLE = ADJ_DIST * 2 + 1
 
 // for test
 let count = 1
-let l = page.currentPage,
-  r = page.currentPage
+let l = page.currentPage
+let r = page.currentPage
 while (0 < l - 1 && r + 1 <= page.lastPage && count + 2 <= VISIBLE) {
   count += 2
   l--
@@ -35,17 +35,17 @@ while (r + 1 <= page.lastPage && count < VISIBLE) {
   r++
 }
 
-let pages: number[] = []
+const pages: number[] = []
 if (l > 1) pages.push(1)
-if (l == 3) pages.push(2)
+if (l === 3) pages.push(2)
 if (l > 3) pages.push(HIDDEN)
 for (let i = l; i <= r; i++) pages.push(i)
 if (r < page.lastPage - 2) pages.push(HIDDEN)
-if (r == page.lastPage - 2) pages.push(page.lastPage - 1)
+if (r === page.lastPage - 2) pages.push(page.lastPage - 1)
 if (r < page.lastPage) pages.push(page.lastPage)
 
 const getPageUrl = (p: number) => {
-  if (p == 1) return '/'
+  if (p === 1) return '/'
   return `/${p}/`
 }
 ---

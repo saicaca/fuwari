@@ -1,11 +1,11 @@
 ---
 
-import WidgetLayout from './WidgetLayout.astro'
-import ButtonTag from '../control/ButtonTag.astro'
-import { getTagList } from '../../utils/content-utils'
-import { i18n } from '../../i18n/translation'
 import I18nKey from '../../i18n/i18nKey'
+import { i18n } from '../../i18n/translation'
+import { getTagList } from '../../utils/content-utils'
 import { url } from '../../utils/url-utils'
+import ButtonTag from '../control/ButtonTag.astro'
+import WidgetLayout from './WidgetLayout.astro'
 
 const tags = await getTagList()
 
