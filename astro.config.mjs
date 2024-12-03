@@ -5,7 +5,6 @@ import swup from "@swup/astro";
 import Compress from "astro-compress";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
-import Color from "colorjs.io";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeKatex from "rehype-katex";
@@ -19,23 +18,17 @@ import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
-const oklchToHex = (str) => {
-  const DEFAULT_HUE = 250;
-  const regex = /-?\d+(\.\d+)?/g;
-  const matches = str.string.match(regex);
-  const lch = [matches[0], matches[1], DEFAULT_HUE];
-  return new Color("oklch", lch).to("srgb").toString({
-    format: "hex",
-  });
-};
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://fuwari.vercel.app/",
   base: "/",
   trailingSlash: "always",
   integrations: [
-    tailwind(),
+    tailwind(
+        {
+          nesting: true,
+        }
+    ),
     swup({
       theme: false,
       animationClass: "transition-swup-", // see https://swup.js.org/options/#animationselector
@@ -130,15 +123,6 @@ export default defineConfig({
             return;
           }
           warn(warning);
-        },
-      },
-    },
-    css: {
-      preprocessorOptions: {
-        stylus: {
-          define: {
-            oklchToHex: oklchToHex,
-          },
         },
       },
     },

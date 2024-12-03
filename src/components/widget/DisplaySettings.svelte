@@ -2,6 +2,7 @@
 import { i18n } from '@i18n/translation'
 import I18nKey from '@i18n/i18nKey'
 import { getDefaultHue, getHue, setHue } from '@utils/setting-utils'
+import Icon from '@iconify/svelte'
 
 let hue = getHue()
 const defaultHue = getDefaultHue()
@@ -25,7 +26,7 @@ $: if (hue || hue === 0) {
             <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                     class:opacity-0={hue === defaultHue} class:pointer-events-none={hue === defaultHue} on:click={resetHue}>
                 <div class="text-[var(--btn-content)]">
-                    <slot name="restore-icon"></slot>
+                    <Icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
                 </div>
             </button>
         </div>
