@@ -1,0 +1,89 @@
+.custom-md {
+    h1 {
+        @apply text-3xl;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        .anchor {
+            @apply transition -m-0.5 ml-[0.2ch] p-0.5 select-none opacity-0 no-underline !important;
+
+            .anchor-icon {
+                @apply mx-[0.45ch] !important;
+            }
+        }
+
+        &:hover {
+            .anchor {
+                @apply opacity-100 !important;
+            }
+        }
+    }
+
+    a:not(.no-styling) {
+        @apply relative bg-none link font-medium text-[var(--primary)]
+        underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4;
+
+        &:hover, &:active {
+            @apply decoration-transparent;
+        }
+    }
+
+    code {
+        @apply bg-[var(--inline-code-bg)] text-[var(--inline-code-color)] px-1 py-0.5 rounded-md overflow-hidden;
+
+        font-family: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+        &:before {
+            content:none;
+        }
+        &:after {
+            content:none;
+        }
+
+        counter-reset: line;
+        span.line {
+            &:before {
+                @apply text-white/25 mr-4 w-4 inline-block;
+                content: counter(line);
+                counter-increment: line;
+                direction: rtl;
+            }
+            &:last-child:empty, &:last-child:has(> span:empty:only-child) {
+                display: none;
+            }
+        }
+    }
+
+    pre {
+        @apply bg-[var(--codeblock-bg)] !important;
+        @apply rounded-xl px-5;
+
+        code {
+            @apply bg-transparent text-inherit text-sm p-0;
+
+            ::selection {
+                @apply bg-[var(--codeblock-selection)];
+            }
+        }
+    }
+
+    ul, ol {
+        li::marker {
+            @apply text-[var(--primary)];
+        }
+    }
+
+    blockquote {
+        @apply not-italic border-transparent relative;
+        font-weight: inherit;
+
+        &:before {
+            @apply content-[''] absolute -left-1 block transition bg-[var(--btn-regular-bg)] h-full w-1 rounded-full;
+        }
+
+        /* Remove the double quotes from default styles */
+        p:before, p:after {
+            @apply content-none;
+        }
+
+    }
+}

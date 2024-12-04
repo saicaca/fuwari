@@ -1,7 +1,4 @@
-/* The integration's default injected base.css file */
-@tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 @layer components {
     .card-base {
@@ -96,32 +93,6 @@
         @apply text-black/25 dark:text-white/25
     }
 
-    html.is-changing .transition-swup-fade {
-        @apply transition-all duration-200
-    }
-    html.is-animating .transition-swup-fade {
-        @apply opacity-0 translate-y-4
-    }
-
-    /* PhotoSwipe */
-    .pswp__button {
-        @apply transition bg-black/40 hover:bg-black/50 active:bg-black/60 flex items-center justify-center mr-0 w-12 h-12 !important;
-    }
-    .pswp__button--zoom, .pswp__button--close {
-        @apply mt-4 rounded-xl active:scale-90 !important;
-    }
-    .pswp__button--zoom {
-        @apply mr-2.5 !important;
-    }
-    .pswp__button--close {
-        @apply mr-4 !important;
-    }
-    .custom-md img, #post-cover img {
-        @apply cursor-zoom-in
-    }
-}
-
-@layer components {
     .meta-icon {
         @apply w-8 h-8 transition rounded-md flex items-center justify-center bg-[var(--btn-regular-bg)]
         text-[var(--btn-content)] mr-2
@@ -130,9 +101,7 @@
         @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-[var(--meta-divider)] before:text-sm
         before:font-medium before:first-of-type:hidden before:transition
     }
-}
 
-@layer components {
     .btn-regular-dark {
         @apply flex items-center justify-center
         bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))] active:bg-[oklch(0.55_0.01_var(--hue))]
@@ -159,65 +128,28 @@
     }
 }
 
-
-@layer components {
-    .dash-line {
-        position: relative;
-    }
-        
-    .dash-line::before {
-        content: "";
-        position: absolute;
-        width: 10%;
-        height: 100%;
-        top: 50%;
-        left: calc(50% - 1px);
-        border-left: 2px dashed var(--line-color);
-        pointer-events: none;
-        transition: all 0.3s;
-        transform: translateY(-50%);
-    }
+.custom-md img, #post-cover img {
+    @apply cursor-zoom-in
 }
 
-@layer components {
-    .custom-md h1 {
-        @apply text-3xl
-    }
+::selection {
+    background-color: var(--selection-bg)
 }
 
-@keyframes fade-in-up {
-    0% {
-        transform: translateY(2rem);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+.dash-line {
+    position: relative;
 }
 
-.onload-animation {
-    opacity: 0;
-    animation: 300ms fade-in-up;
-    animation-fill-mode: forwards;
-}
-#navbar {
-    animation-delay: 0ms
-}
-#sidebar {
-    animation-delay: 100ms
-}
-#swup-container {
-    outline: none;
-}
-#content-wrapper {
-    animation-delay: var(--content-delay);
-}
-.footer {
-    animation-delay: 250ms;
-}
-#banner-credit {
-    animation-delay: 400ms;
+.dash-line::before {
+    content: "";
+    position: absolute;
+    width: 10%;
+    height: 100%;
+    left: calc(50% - 1px);
+    border-left: 2px dashed var(--line-color);
+    pointer-events: none;
+    transition: all 0.3s;
+    transform: translateY(-50%);
 }
 
 .collapsed {
