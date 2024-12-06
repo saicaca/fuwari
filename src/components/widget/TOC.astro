@@ -49,7 +49,7 @@ let heading1Count = 1;
 
 const maxLevel = siteConfig.toc.depth;
 ---
-<div class:list={[className]}>
+<table-of-contents class:list={[className]}>
     {headings.filter((heading) => heading.depth < minDepth + maxLevel).map((heading) =>
             <a href={`#${heading.slug}`} class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
         hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
@@ -72,4 +72,196 @@ const maxLevel = siteConfig.toc.depth;
                 }]}>{removeTailingHash(heading.text)}</div>
             </a>
     )}
-</div>
+</table-of-contents>
+
+
+<script>
+interface HeadingPairInterface {
+    tocHeading: HTMLAnchorElement;
+    mdHeading: HTMLElement;
+}
+
+class TableOfContents extends HTMLElement {
+    tocEl: HTMLElement | null = null;
+    headingMap = new Map<string, HeadingPairInterface>();
+    elementsToObserve: HTMLElement[] = [];
+    visibleClass = "visible";
+    observer: IntersectionObserver;
+    anchorNavTarget: HTMLElement | null = null;
+
+    constructor() {
+        super();
+        this.observer = new IntersectionObserver(
+            this.markVisibleSection, { threshold: 0 }
+        );
+    }
+
+    markVisibleSection = (entries: IntersectionObserverEntry[]) => {
+        requestAnimationFrame(() => {
+            entries.forEach((entry) => {
+                const id = entry.target.children[0]?.getAttribute("id");
+
+                const pair = id ? this.headingMap.get(id) : undefined;
+
+                if (entry.isIntersecting && this.anchorNavTarget == entry.target)
+                    this.anchorNavTarget = null;
+
+                if (pair) 
+                    this.toggleActiveHeading(pair, entry.isIntersecting);
+            });
+
+            requestAnimationFrame(() => {
+                if (!document.querySelector(`#toc .${this.visibleClass}`)) {
+                    this.fallback();
+                }
+                this.scrollToActiveHeading();
+            });
+        });
+    };
+
+    toggleActiveHeading = (
+        headingPair: HeadingPairInterface,
+        flag: boolean
+    ) => {
+
+        headingPair.tocHeading.classList.toggle(this.visibleClass, flag);
+        headingPair.tocHeading.children[1].classList.toggle(
+            "!text-[var(--toc-item-active)]",
+            flag
+        );
+    };
+
+    scrollToActiveHeading = () => {
+        // If the TOC widget can accommodate both the topmost
+        // and bottommost items, scroll to the topmost item. 
+        // Otherwise, scroll to the bottommost one.
+
+        if (this.anchorNavTarget || !this.tocEl) return;
+        const activeHeading =
+            document.querySelectorAll<HTMLDivElement>("#toc .visible");
+        if (!activeHeading.length) return;
+
+        const topmost = activeHeading[0];
+        const bottommost = activeHeading[activeHeading.length - 1];
+        const tocHeight = this.tocEl.clientHeight;
+
+        let top;
+        if (bottommost.getBoundingClientRect().bottom -
+            topmost.getBoundingClientRect().top < 0.9 * tocHeight)
+            top = topmost.offsetTop - 20;
+        else
+            top = bottommost.offsetTop - tocHeight * 0.8;
+
+        this.tocEl.scrollTo({
+            top,
+            left: 0,
+            behavior: "smooth",
+        });
+    };
+
+    fallback = () => {
+        if (!this.headingMap.size) return;
+
+        let pairs = [];
+        let prevOffsetTop = -Infinity;
+
+        for (const [key, val] of this.headingMap) {
+            let offsetTop = val.mdHeading.getBoundingClientRect().top;
+
+            if (this.isInRange(prevOffsetTop, 0, window.innerHeight)
+                || (prevOffsetTop < 0 &&
+                    this.isInRange(offsetTop, 0, window.innerHeight))
+                || (prevOffsetTop < 0 && offsetTop > window.innerHeight)) {
+                const newPairs = this.markActiveHeading(key);
+                pairs.push(...newPairs);
+                prevOffsetTop = offsetTop;
+            }
+            else break;
+        }
+
+        requestAnimationFrame(() => {
+            pairs.forEach(pair => {
+                this.toggleActiveHeading(pair, true);
+            })
+        })
+    };
+
+    markActiveHeading = (activeHeadingKey: string)=> {
+        let sectionPairs: HeadingPairInterface[] = [];
+        let currentSection = this.headingMap.get(activeHeadingKey)
+            ?.mdHeading.closest("section");
+
+        while (currentSection && !currentSection.classList.contains("prose")) {
+            const id = currentSection.firstElementChild?.id;
+            const sectionPair = id ? this.headingMap.get(id) : undefined;
+
+            sectionPair && sectionPairs.push(sectionPair);
+
+            currentSection = currentSection.parentElement
+                ?.closest<HTMLElement>("section") || null;
+        }
+
+        return sectionPairs;
+    }
+
+    handleAnchorClick = (event: Event) => {
+        const anchor = event
+            .composedPath()
+            .find((element) => element instanceof HTMLAnchorElement);
+
+        if (anchor) {
+            const id = anchor.hash?.substring(1);
+            this.anchorNavTarget = this.headingMap.get(id)?.mdHeading || null;
+        }
+    };
+
+    isInRange(value: number, min: number, max: number) {
+        return min < value && value < max;
+    }
+
+    connectedCallback() {
+        this.tocEl = document.getElementById(
+            "toc-inner-wrapper"
+        );
+
+        if (!this.tocEl) return;
+
+        this.tocEl.addEventListener("click", this.handleAnchorClick, {
+            capture: true,
+        });
+
+        this.elementsToObserve = Array.from(
+            document.querySelectorAll("section")
+        );
+
+        const tocItems = Array.from(
+            document.querySelectorAll<HTMLAnchorElement>("#toc a[href^='#']")
+        );
+
+        tocItems.forEach((tocHeading) => {
+            const id = tocHeading.hash?.substring(1);
+            const mdHeading = document.getElementById(id)?.parentElement;
+            if (mdHeading instanceof HTMLElement)
+                this.headingMap.set(id, { tocHeading, mdHeading });
+        });
+
+        this.elementsToObserve.forEach((section) =>
+            this.observer.observe(section)
+        );
+
+        this.fallback();
+        this.scrollToActiveHeading();
+    }
+
+    disconnectedCallback() {
+        this.elementsToObserve.forEach((section) =>
+            this.observer.unobserve(section)
+        );
+        this.observer.disconnect();
+        this.tocEl?.removeEventListener("click", this.handleAnchorClick);
+    }
+}
+
+customElements.define("table-of-contents", TableOfContents);
+
+</script>
