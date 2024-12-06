@@ -52,7 +52,7 @@ const maxLevel = siteConfig.toc.depth;
                 }]}>{removeTailingHash(heading.text)}</div>
             </a>
     )}
-    <div id="active-indicator" class="-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 h-16 rounded-xl transition-all
+    <div id="active-indicator" class="-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 rounded-xl transition-all
         group-hover:bg-transparent border-2 border-[var(--toc-btn-hover)] group-hover:border-[var(--toc-btn-active)] border-dashed"></div>
 </table-of-contents>
 
@@ -198,6 +198,13 @@ class TableOfContents extends HTMLElement {
     }
 
     connectedCallback() {
+        // wait for the onload animation to finish, which makes the `getBoundingClientRect` return correct values
+        setTimeout(() => {
+            this.init();
+        }, 250);
+    }
+
+    init() {
         this.tocEl = document.getElementById(
             "toc-inner-wrapper"
         );
