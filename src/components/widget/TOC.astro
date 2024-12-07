@@ -57,8 +57,8 @@ let heading1Count = 1
                 }]}>{removeTailingHash(heading.text)}</div>
             </a>
     )}
-    <div id="active-indicator" class:list={[{'hidden': headings.length == 0}, "-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 rounded-xl transition-all " +
-        "group-hover:bg-transparent border-2 border-[var(--toc-btn-hover)] group-hover:border-[var(--toc-btn-active)] border-dashed"]}></div>
+    <div id="active-indicator" class="-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 rounded-xl transition-all
+        group-hover:bg-transparent border-2 border-[var(--toc-btn-hover)] group-hover:border-[var(--toc-btn-active)] border-dashed"></div>
 </table-of-contents>
 
 
@@ -188,7 +188,7 @@ class TableOfContents extends HTMLElement {
             .find((element) => element instanceof HTMLAnchorElement);
 
         if (anchor) {
-            const id = anchor.hash?.substring(1);
+            const id = decodeURIComponent(anchor.hash?.substring(1));
             const idx = this.headingIdxMap.get(id);
             if (idx !== undefined) {
                 this.anchorNavTarget = this.headings[idx];
@@ -222,20 +222,19 @@ class TableOfContents extends HTMLElement {
 
         this.activeIndicator = document.getElementById("active-indicator");
 
-        this.sections = Array.from(
-            document.querySelectorAll("section")
-        );
-
         this.tocEntries = Array.from(
             document.querySelectorAll<HTMLAnchorElement>("#toc a[href^='#']")
         );
 
+        this.sections = new Array(this.tocEntries.length);
         this.headings = new Array(this.tocEntries.length);
         for (let i = 0; i < this.tocEntries.length; i++) {
-            const id = this.tocEntries[i].hash?.substring(1);
-            const section = document.getElementById(id)?.parentElement;
-            if (section instanceof HTMLElement) {
-                this.headings[i] = section;
+            const id = decodeURIComponent(this.tocEntries[i].hash?.substring(1));
+            const heading = document.getElementById(id);
+            const section = heading?.parentElement;
+            if (heading instanceof HTMLElement && section instanceof HTMLElement) {
+                this.headings[i] = heading;
+                this.sections[i] = section;
                 this.headingIdxMap.set(id, i);
             }
         }
