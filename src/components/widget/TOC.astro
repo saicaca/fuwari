@@ -217,20 +217,19 @@ class TableOfContents extends HTMLElement {
 
         this.activeIndicator = document.getElementById("active-indicator");
 
-        this.sections = Array.from(
-            document.querySelectorAll("section")
-        );
-
         this.tocEntries = Array.from(
             document.querySelectorAll<HTMLAnchorElement>("#toc a[href^='#']")
         );
 
+        this.sections = new Array(this.tocEntries.length);
         this.headings = new Array(this.tocEntries.length);
         for (let i = 0; i < this.tocEntries.length; i++) {
             const id = decodeURIComponent(this.tocEntries[i].hash?.substring(1));
-            const section = document.getElementById(id)?.parentElement;
-            if (section instanceof HTMLElement) {
-                this.headings[i] = section;
+            const heading = document.getElementById(id);
+            const section = heading?.parentElement;
+            if (heading instanceof HTMLElement && section instanceof HTMLElement) {
+                this.headings[i] = heading;
+                this.sections[i] = section;
                 this.headingIdxMap.set(id, i);
             }
         }
