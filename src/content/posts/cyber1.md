@@ -1,8 +1,8 @@
 ---
 title: Introduce Myself.
 published: 2024-12-09
-description: ''
-image: ''
+description: Hello, my name is Joey.
+image: ./cyber1.png
 tags: [Blog]
 category: 'Blog'
 draft: false 
