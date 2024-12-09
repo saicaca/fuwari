@@ -13,6 +13,7 @@ interface Props {
   title: string
   url: string
   published: Date
+  updated?: Date
   tags: string[]
   category: string
   image: string
@@ -25,6 +26,7 @@ const {
   title,
   url,
   published,
+  updated,
   tags,
   category,
   image,
@@ -54,7 +56,7 @@ const { remarkPluginFrontmatter } = await entry.render()
         </a>
 
         <!-- metadata -->
-        <PostMetadata published={published} tags={tags} category={category} hideTagsForMobile={true} class="mb-4"></PostMetadata>
+        <PostMetadata published={published} updated={updated} tags={tags} category={category} hideTagsForMobile={true} hideUpdateDate={true} class="mb-4"></PostMetadata>
 
         <!-- description -->
         <div class:list={["transition text-75 mb-3.5 pr-4", {"line-clamp-2 md:line-clamp-1": !description}]}>
@@ -87,7 +89,7 @@ const { remarkPluginFrontmatter } = await entry.render()
     </a>}
 
     {!hasCover &&
-        <a href={url} aria-label={title} class="hidden md:flex btn-regular w-[3.25rem]
+        <a href={url} aria-label={title} class="!hidden md:!flex btn-regular w-[3.25rem]
          absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
          hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
         ">
@@ -99,5 +101,5 @@ const { remarkPluginFrontmatter } = await entry.render()
 </div>
 <div class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden"></div>
 
-<style lang="stylus" define:vars={{coverWidth}}>
+<style define:vars={{coverWidth}}>
 </style>

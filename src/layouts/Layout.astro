@@ -1,9 +1,7 @@
 ---
-import GlobalStyles from '@components/GlobalStyles.astro'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
-import ImageWrapper from '@components/misc/ImageWrapper.astro'
 
 import { profileConfig, siteConfig } from '@/config'
 import ConfigCarrier from '@components/ConfigCarrier.astro'
@@ -110,13 +108,9 @@ const bannerOffset =
 			/>
 		))}
 
-		<style define:vars={{
-			configHue,
-			'page-width': `${PAGE_WIDTH}rem`,
-		}}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
-
 		<!-- Set the theme before the page is rendered to avoid a flash -->
-		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH}}>
+		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue}}>
+			// Load the theme from local storage
 			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
 			switch (theme) {
 				case LIGHT_MODE:
@@ -133,17 +127,20 @@ const bannerOffset =
 					}
 			}
 
+			// Load the hue from local storage
+			const hue = localStorage.getItem('hue') || configHue;
+			document.documentElement.style.setProperty('--hue', hue);
+
 			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
 			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
 			offset = offset - offset % 4;
 			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
-
-			// calculate the width of TOC widget
-			const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize)
-			const mainGridWidthPx = PAGE_WIDTH * rootFontSize
-			const tocWidth = (window.innerWidth - mainGridWidthPx) / 2 - rootFontSize
-			document.documentElement.style.setProperty('--toc-width', `${tocWidth}px`);
 		</script>
+		<style define:vars={{
+			configHue,
+			'page-width': `${PAGE_WIDTH}rem`,
+		}}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
+
 
 		<slot name="head"></slot>
 
@@ -156,20 +153,12 @@ const bannerOffset =
 		  data-overlayscrollbars-initialize
 	>
 		<ConfigCarrier></ConfigCarrier>
-		<GlobalStyles>
 		<slot />
-		</GlobalStyles>
 
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
 		<div id="page-height-extend" class="hidden h-[300vh]"></div>
 	</body>
 </html>
-
-<style is:global>
-	:root {
-		--hue: var(--configHue);
-	}
-</style>
 
 <style is:global define:vars={{
 	bannerOffset,
@@ -479,12 +468,6 @@ window.onresize = () => {
 	let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
 	offset = offset - offset % 4;
 	document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
-
-	// calculate the width of TOC widget
-	const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize)
-	const mainGridWidthPx = PAGE_WIDTH * rootFontSize
-	const tocWidth = (window.innerWidth - mainGridWidthPx) / 2 - rootFontSize
-	document.documentElement.style.setProperty('--toc-width', `${tocWidth}px`);
 }
 
 </script>
