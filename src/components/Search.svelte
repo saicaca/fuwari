@@ -70,6 +70,7 @@ $: search(keywordDesktop, true)
 $: search(keywordMobile, false)
 </script>
 
+<div>
 <!-- search bar for desktop view -->
 <div id="search-bar" class="hidden lg:flex transition-all items-center h-11 mr-2 rounded-lg
       bg-black/[0.04] hover:bg-black/[0.06] focus-within:bg-black/[0.06]
@@ -117,6 +118,7 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
             </div>
         </a>
     {/each}
+</div>
 </div>
 
 <style>
