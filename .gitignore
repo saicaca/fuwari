@@ -28,3 +28,4 @@ yarn.lock
 .idea
 .vscode
 public/favicon/*.png
+/src/content/posts/scratch.md
