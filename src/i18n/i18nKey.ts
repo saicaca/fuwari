@@ -3,7 +3,7 @@ enum I18nKey {
   about = 'about',
   archive = 'archive',
   search = 'search',
-  cv = 'cv',
+  portfolio = 'portfolio',
 
   tags = 'tags',
   categories = 'categories',

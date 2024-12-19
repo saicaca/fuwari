@@ -1,11 +1,12 @@
 export interface CVData {
   metadata: Metadata
-  certificate: Certificate[]
+  certificates: Certificate[]
   education: Education[]
   projects: Project[]
   publications: Publication[]
   bibliography: Bibliography
   skills: Skill[]
+  others: Other[]
 }
 
 export type Certificate = CVHonor
@@ -13,12 +14,13 @@ export type Education = CVEntry
 export type Project = CVEntry
 export type Publication = CVEntry
 export type Skill = CVSkill
+export type Other = CVEntry
 
 export interface CVHonor {
   date: string
   title: string
   issuer: string
-  uri: string
+  url: string
   location: string
 }
 
@@ -33,6 +35,7 @@ export interface CVEntry {
   date: string
   location: string | Location
   description: string[]
+  preview: string
   logo: string
   tags: string[]
 }
@@ -61,7 +64,7 @@ export interface PersonalInfo {
 }
 
 export interface Location {
-  github: string
+  github?: string
 }
 
 export interface Bibliography {

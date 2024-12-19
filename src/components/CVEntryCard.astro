@@ -15,10 +15,27 @@ const { title, society, date, location, description, tags } = cv_entry
 // let {logo} = cv_entry;
 const className = Astro.props.class
 
-const logo = undefined
+let logo = undefined
+
+if (
+  cv_entry.logo !== '' &&
+  cv_entry.logo !== undefined &&
+  cv_entry.logo !== null
+) {
+  logo = cv_entry.logo
+} else if (
+  cv_entry.preview !== '' &&
+  cv_entry.preview !== undefined &&
+  cv_entry.preview !== null
+) {
+  logo = cv_entry.preview
+}
 
 const hasCover = logo !== '' && logo !== undefined
 function srcToPublicPath(src: string) {
+  if (src.startsWith('http')) {
+    return src
+  }
   src = src.replace('src', 'assets')
   console.log('src', src)
   return src
@@ -52,6 +69,7 @@ switch (typeof location) {
         active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
         before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
         before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
+        pr-3
         ">
           {title}
             <Icon class="inline text-[var(--primary)] md:hidden -translate-y-[0.15rem]"
@@ -61,17 +79,14 @@ switch (typeof location) {
 
         <!-- metadata -->
         <CVEntryMetadata date={date} tags={tags} society={society} hideTagsForMobile={false}
-                         class:list={{"mb-4": description, "mb-6": !description}}>
+                         class:list={{"mb-4 pr-3": description, "mb-6": !description}}>
         </CVEntryMetadata>
 
         <!-- description -->
-        <div class="transition text-75 mb-3.5">
-            <ul>
-              {
-                description.map(line => (
-                        <li>{line}</li>
-                ))}
-            </ul>
+        <div class="transition text-75 mb-3.5 pr-3">
+          <p>
+            {description.map(s => s.trim()).map(s => s.endsWith('.') ? s : `${s}.`).join(" ")}
+          </p>
         </div>
 
         <!-- word count and read time  -->
@@ -85,14 +100,14 @@ switch (typeof location) {
   {hasCover && <a aria-label={title}
                   class:list={["group",
                     "max-h-[20vh] md:max-h-none mx-4 mt-4 -mb-2 md:mb-0 md:mx-0 md:mt-0",
-                    "md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden active:scale-95"
+                    "md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden"
                   ]}>
-      <div class="absolute pointer-events-none z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition"></div>
-      <div class="absolute pointer-events-none z-20 w-full h-full flex items-center justify-center ">
-          <Icon name="material-symbols:chevron-right-rounded"
-                class="transition opacity-0 group-hover:opacity-100 text-white text-5xl">
-          </Icon>
-      </div>
+      <!--<div class="absolute pointer-events-none z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition"></div>-->
+      <!--<div class="absolute pointer-events-none z-20 w-full h-full flex items-center justify-center ">-->
+      <!--    <Icon name="material-symbols:chevron-right-rounded"-->
+      <!--          class="transition opacity-0 group-hover:opacity-100 text-white text-5xl">-->
+      <!--    </Icon>-->
+      <!--</div>-->
       <ImageWrapper src={image} alt="Cover Image of the Post"
                     class="w-full h-full object-center"
                     imgClass="md:w-full h-full object-contain object-center">
