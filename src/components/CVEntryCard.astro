@@ -57,6 +57,16 @@ switch (typeof location) {
     }
     break
 }
+
+const description_str = description.map(s => s.trim()).map(s => s.endsWith('.') ? s : `${s}.`)
+  .filter(s => !s.startsWith("My contribution"))
+  .join(" ")
+
+const highlight = description.map(s => s.trim())
+  .map(s => s.endsWith('.') ? s : `${s}.`)
+  .filter(s => s.startsWith("My contribution"))
+  .map(s => s.replace("My contribution: ", ""))
+  .join("")
 ---
 <div class:list={["card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative", className]}
      style={style}>
@@ -85,8 +95,15 @@ switch (typeof location) {
         <!-- description -->
         <div class="transition text-75 mb-3.5 pr-3">
           <p>
-            {description.map(s => s.trim()).map(s => s.endsWith('.') ? s : `${s}.`).join(" ")}
+            {description_str}
           </p>
+
+          {(highlight) &&
+            <span>
+              <br>
+              <span class="bg-[var(--selection-bg)]">> My contribution</span>: {highlight}
+            </span>
+          }
         </div>
 
         <!-- word count and read time  -->
