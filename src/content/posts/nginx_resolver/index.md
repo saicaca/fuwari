@@ -39,8 +39,8 @@ draft: false
     cd /usr/src && git clone https://github.com/GUI/nginx-upstream-dynamic-servers.git
     ```
 4. 配置和编译
-    ```bash
-    ./configure \
+   ```bash
+    cd /usr/local/src/nginx-1.26.2 && ./configure \
     --prefix=/usr/local/nginx \
     --user=www \
     --group=www \
