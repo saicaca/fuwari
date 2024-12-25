@@ -3,7 +3,7 @@ title: How to Install and Configure XAMPP Properly to Avoid Errors When You Clos
 published: 2024-11-14
 tags: [Windows, Software, Troubleshooting, XAMPP]
 image: 'banner.jpeg'
-category: Examples
+category: Configuration
 draft: false
 ---
 
