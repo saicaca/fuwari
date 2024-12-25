@@ -56,6 +56,21 @@ export const profileConfig: ProfileConfig = {
   bio: 'Researcher, Developer, and Writer',
   links: [
     {
+      name: 'LinkedIn',
+      icon: 'fa6-brands:linkedin',
+      url: 'https://www.linkedin.com/in/fahimfba/',
+    },
+     {
+      name: 'Website',
+      icon: 'icon-park-solid:circles-and-triangles',
+      url: 'https://www.fahimbinamin.com',
+    },
+    {
+      name: 'GitHub',
+      icon: 'fa6-brands:github',
+      url: 'https://github.com/FahimFBA',
+    },
+    {
       name: 'Twitter',
       icon: 'fa6-brands:twitter',       // Visit https://icones.js.org/ for icon codes
                                         // You will need to install the corresponding icon set if it's not already included
@@ -68,9 +83,9 @@ export const profileConfig: ProfileConfig = {
     //   url: 'https://store.steampowered.com',
     // },
     {
-      name: 'GitHub',
-      icon: 'fa6-brands:github',
-      url: 'https://github.com/FahimFBA',
+      name: 'Email',
+      icon: 'ic:baseline-mail',
+      url: 'mailto:fahimbinamin@gmail.com',
     },
   ],
 }
