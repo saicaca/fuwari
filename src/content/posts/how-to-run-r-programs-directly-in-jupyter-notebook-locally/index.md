@@ -16,13 +16,13 @@ In this tutorial, I’ll show you exactly how you can set up your local machine 
 ## Table of Contents
 
 - [Install Conda](#install-conda)
-- Create a New Environment
-- Activate Your Conda Environment
-- Install ipykernel and jupyter
-- Install R in the Conda Environment
-- Open the Jupyter Notebook
-- Run R in Jupyter Notebook
-- Conclusion
+- [Create a New Environment](#create-a-new-environment)
+- [Activate Your Conda Environment](#activate-your-conda-environment)
+- [Install ipykernel and jupyter](#install-ipykernel-and-jupyter)
+- [Install R in the Conda Environment](#install-r-in-the-conda-environment)
+- [Open the Jupyter Notebook](#open-the-jupyter-notebook)
+- [Run R in Jupyter Notebook](#run-r-in-jupyter-notebook)
+- [Conclusion](#conclusion)
 
 ## Install Conda
 
