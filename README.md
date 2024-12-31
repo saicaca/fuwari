@@ -9,6 +9,8 @@ A static blog template built with [Astro](https://astro.build).
 [**🌏 한국어**](https://github.com/saicaca/fuwari/blob/main/README.ko.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**🌏 Español**](https://github.com/saicaca/fuwari/blob/main/README.es.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**🌏 ไทย**](https://github.com/saicaca/fuwari/blob/main/README.th.md)
+[**🌏 Español**](https://github.com/saicaca/fuwari/blob/main/README.es.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+[**🌏 ไทย**](https://github.com/saicaca/fuwari/blob/main/README.th.md)
 
 > README version: `2024-09-10`
 
