@@ -80,30 +80,22 @@ class TableOfContents extends HTMLElement {
         this.observer = new IntersectionObserver(
             this.markVisibleSection, { threshold: 0 }
         );
-    }
+    };
 
     markVisibleSection = (entries: IntersectionObserverEntry[]) => {
-        requestAnimationFrame(() => {
-            entries.forEach((entry) => {
-                const id = entry.target.children[0]?.getAttribute("id");
+        entries.forEach((entry) => {
+            const id = entry.target.children[0]?.getAttribute("id");
+            const idx = id ? this.headingIdxMap.get(id) : undefined;
+            if (idx != undefined)
+                this.active[idx] = entry.isIntersecting;
 
-                const idx = id ? this.headingIdxMap.get(id) : undefined;
-
-                if (entry.isIntersecting && this.anchorNavTarget == entry.target)
-                    this.anchorNavTarget = null;
-
-                if (idx != undefined)
-                    this.active[idx] = entry.isIntersecting;
-            });
-
-            requestAnimationFrame(() => {
-                if (!document.querySelector(`#toc .${this.visibleClass}`)) {
-                    this.fallback();
-                }
-                this.toggleActiveHeading();
-                this.scrollToActiveHeading();
-            });
+            if (entry.isIntersecting && this.anchorNavTarget == entry.target.firstChild)
+                this.anchorNavTarget = null;
         });
+
+        if (!this.active.includes(true))
+            this.fallback();
+        this.update();
     };
 
     toggleActiveHeading = () => {
@@ -137,7 +129,7 @@ class TableOfContents extends HTMLElement {
 
         if (this.anchorNavTarget || !this.tocEl) return;
         const activeHeading =
-            document.querySelectorAll<HTMLDivElement>("#toc .visible");
+            document.querySelectorAll<HTMLDivElement>(`#toc .${this.visibleClass}`);
         if (!activeHeading.length) return;
 
         const topmost = activeHeading[0];
@@ -158,6 +150,15 @@ class TableOfContents extends HTMLElement {
         });
     };
 
+    update = () => {
+        requestAnimationFrame(() => {
+            this.toggleActiveHeading();
+            // requestAnimationFrame(() => {
+            this.scrollToActiveHeading();
+            // });
+        });
+    };
+
     fallback = () => {
         if (!this.sections.length) return;
 
@@ -167,20 +168,16 @@ class TableOfContents extends HTMLElement {
 
             if (this.isInRange(offsetTop, 0, window.innerHeight)
                 || this.isInRange(offsetBottom, 0, window.innerHeight)
-                || (offsetTop < 0 && offsetBottom > window.innerHeight)) {
+                || (offsetTop < 0 && offsetBottom > window.innerHeight)) {                    
                 this.markActiveHeading(i);
             }
-            else break;
+            else if (offsetTop > window.innerHeight) break;
         }
-
-        requestAnimationFrame(() => {
-            this.toggleActiveHeading();
-        })
     };
 
     markActiveHeading = (idx: number)=> {
         this.active[idx] = true;
-    }
+    };
 
     handleAnchorClick = (event: Event) => {
         const anchor = event
@@ -200,14 +197,19 @@ class TableOfContents extends HTMLElement {
 
     isInRange(value: number, min: number, max: number) {
         return min < value && value < max;
-    }
+    };
 
     connectedCallback() {
         // wait for the onload animation to finish, which makes the `getBoundingClientRect` return correct values
-        setTimeout(() => {
-            this.init();
-        }, 250);
-    }
+        const element = document.querySelector('.prose');
+        if (element) {
+            element.addEventListener('animationend', () => {
+                this.init();
+            }, { once: true });
+        } else {
+            console.warn('Animation element not found');
+        }
+    };
 
     init() {
         this.tocEl = document.getElementById(
@@ -225,6 +227,8 @@ class TableOfContents extends HTMLElement {
         this.tocEntries = Array.from(
             document.querySelectorAll<HTMLAnchorElement>("#toc a[href^='#']")
         );
+
+        if (this.tocEntries.length === 0) return;
 
         this.sections = new Array(this.tocEntries.length);
         this.headings = new Array(this.tocEntries.length);
@@ -245,8 +249,8 @@ class TableOfContents extends HTMLElement {
         );
 
         this.fallback();
-        this.scrollToActiveHeading();
-    }
+        this.update();
+    };
 
     disconnectedCallback() {
         this.sections.forEach((section) =>
@@ -254,7 +258,7 @@ class TableOfContents extends HTMLElement {
         );
         this.observer.disconnect();
         this.tocEl?.removeEventListener("click", this.handleAnchorClick);
-    }
+    };
 }
 
 customElements.define("table-of-contents", TableOfContents);
