@@ -77,7 +77,7 @@ function formatTag(tag: string[]) {
                     <div class="w-[70%] md:w-[80%] transition text-left text-50">{group.posts.length} {i18n(I18nKey.postsCount)}</div>
                 </div>
                 {group.posts.map(post => (
-                    <a href={getPostUrlBySlug(post.slug)}
+                    <a href={getPostUrlBySlug(post.id)}
                        aria-label={post.data.title}
                        class="group btn-plain !block h-10 w-full rounded-lg hover:text-[initial]"
                     >

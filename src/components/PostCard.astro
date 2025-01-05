@@ -1,5 +1,6 @@
 ---
 import path from 'path'
+import { render } from 'astro:content';
 import PostMetadata from './PostMeta.astro'
 import ImageWrapper from './misc/ImageWrapper.astro'
 import { Icon } from 'astro-icon/components'
@@ -39,7 +40,7 @@ const hasCover = image !== undefined && image !== null && image !== ''
 
 const coverWidth = '28%'
 
-const { remarkPluginFrontmatter } = await entry.render()
+const { remarkPluginFrontmatter } = await render(entry)
 ---
 <div class:list={["card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative", className]} style={style}>
     <div class:list={["pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative", {"w-full md:w-[calc(100%_-_52px_-_12px)]": !hasCover, "w-full md:w-[calc(100%_-_var(--coverWidth)_-_12px)]": hasCover}]}>
