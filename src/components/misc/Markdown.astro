@@ -14,10 +14,19 @@ const className = Astro.props.class
 </div>
 
 <script>
-  const observer = new MutationObserver(addPreCopyButton);
-  observer.observe(document.body, { childList: true, subtree: true });
+  import { siteConfig } from "@/config";
+  const externalLinkAttributes = siteConfig.externalLinkAttributes;
   
-  document.addEventListener("DOMContentLoaded", addPreCopyButton);
+  const observer = new MutationObserver(() => {
+    addPreCopyButton();
+    handleExternalLinks();
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    addPreCopyButton();
+    handleExternalLinks();
+  });
 
   function addPreCopyButton() {
     observer.disconnect();
@@ -62,5 +71,20 @@ const className = Astro.props.class
     }
     
     observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  function handleExternalLinks() {
+    observer.disconnect();
+    if (!externalLinkAttributes) return;
+    const links = document.querySelectorAll("a");
+    links.forEach(link => {
+      try {
+        const url = new URL(link.href);
+        if (url.hostname !== window.location.hostname) {
+          externalLinkAttributes.rel && link.setAttribute("rel", externalLinkAttributes.rel);
+          externalLinkAttributes.target && link.setAttribute("target", externalLinkAttributes.target);
+        }
+      } catch {}
+    });
   }
 </script>
