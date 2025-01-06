@@ -18,6 +18,7 @@ const className = Astro.props.class
   const externalLinkAttributes = siteConfig.externalLinkAttributes;
   
   const observer = new MutationObserver(() => {
+    observer.disconnect();
     addPreCopyButton();
     handleExternalLinks();
   });
@@ -29,8 +30,6 @@ const className = Astro.props.class
   });
 
   function addPreCopyButton() {
-    observer.disconnect();
-    
     let codeBlocks = Array.from(document.querySelectorAll("pre"));
 
     for (let codeBlock of codeBlocks) {
@@ -74,7 +73,6 @@ const className = Astro.props.class
   }
 
   function handleExternalLinks() {
-    observer.disconnect();
     if (!externalLinkAttributes) return;
     const links = document.querySelectorAll("a");
     links.forEach(link => {
