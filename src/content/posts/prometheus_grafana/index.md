@@ -407,34 +407,34 @@ server {
 }
 ```
 - 检验nginx文件并重启nginx
-```Bash
+```bash
 nginx -t && service nginx restart
 ```
 
 ## 为prometheus数据源端口配置防火墙
-```Bash
+```bash
 sudo apt -y update && apt install -y ufw && sudo ufw allow from <面板IP> to any port <prometheus端口> && sudo ufw deny <prometheus端口> 
 ```
 
 ## 启动服务
-```Bash
+```bash
 docker-compose up -d
 ```
 
 # 监控节点端
 
 ## 安装node_exporter
-```Bash
+```bash
 wget -qO- 'https://raw.githubusercontent.com/AhFeil/bash-script/main/install-node_exporter.sh' | sudo bash
 ```
 
 ## 安装blackbox_exporter
-```Bash
+```bash
 bash <(curl -sSLf "https://raw.githubusercontent.com/midori01/common-scripts/main/blackbox-exporter/install.sh")
 ```
 
 ## 配置防火墙
-```Bash
+```bash
 sudo apt -y update && apt install -y ufw && sudo ufw allow from <面板IP> to any port <node_exporter端口> && sudo ufw allow from <面板IP> to any port <blackbox_exporter端口> && sudo ufw deny <node_exporter端口> && sudo ufw deny <blackbox_exporter端口> && sudo ufw enable && sudo ufw reload
 ```
 
