@@ -1,12 +1,12 @@
 ---
 import path from 'node:path'
-import { getCollection } from 'astro:content'
+import { getCollection, render } from 'astro:content'
 import License from '@components/misc/License.astro'
 import Markdown from '@components/misc/Markdown.astro'
 import I18nKey from '@i18n/i18nKey'
 import { i18n } from '@i18n/translation'
 import MainGridLayout from '@layouts/MainGridLayout.astro'
-import { getDir, getPostUrlBySlug } from '@utils/url-utils'
+import { getDir, getPostUrlById } from '@utils/url-utils'
 import { Icon } from 'astro-icon/components'
 import { licenseConfig } from 'src/config'
 import PostMetadata from '../../components/PostMeta.astro'
@@ -19,15 +19,15 @@ export async function getStaticPaths() {
     return import.meta.env.PROD ? data.draft !== true : true
   })
   return blogEntries.map(entry => ({
-    params: { slug: entry.slug },
+    params: { id: entry.id },
     props: { entry },
   }))
 }
 
 const { entry } = Astro.props
-const { Content, headings } = await entry.render()
+const { Content, headings } = await render(entry)
 
-const { remarkPluginFrontmatter } = await entry.render()
+const { remarkPluginFrontmatter } = await render(entry)
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -94,9 +94,8 @@ const jsonLd = {
             </div>
 
             <!-- always show cover as long as it has one -->
-
             {entry.data.image &&
-                <ImageWrapper id="post-cover" src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl banner-container onload-animation"/>
+                <ImageWrapper id="post-cover" src={path.join(entry.id, entry.data.image)} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl banner-container onload-animation"/>
             }
 
 
@@ -104,15 +103,15 @@ const jsonLd = {
                 <Content />
             </Markdown>
 
-            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
+            {licenseConfig.enable && <License title={entry.data.title} id={entry.id} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
 
         </div>
     </div>
 
     <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
-        <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
-           class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.nextSlug}]}>
-            {entry.data.nextSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4" >
+        <a href={entry.data.nextId ? getPostUrlById(entry.data.nextId) : "#"}
+           class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.nextId}]}>
+            {entry.data.nextId && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4" >
                 <Icon name="material-symbols:chevron-left-rounded" class="text-[2rem] text-[var(--primary)]" />
                 <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
                     {entry.data.nextTitle}
@@ -120,9 +119,9 @@ const jsonLd = {
             </div>}
         </a>
 
-        <a href={entry.data.prevSlug ? getPostUrlBySlug(entry.data.prevSlug) : "#"}
-           class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.prevSlug}]}>
-            {entry.data.prevSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4">
+        <a href={entry.data.prevId ? getPostUrlById(entry.data.prevId) : "#"}
+           class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.prevId}]}>
+            {entry.data.prevId && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4">
                 <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
                     {entry.data.prevTitle}
                 </div>

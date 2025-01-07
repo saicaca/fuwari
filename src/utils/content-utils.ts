@@ -4,11 +4,11 @@ import I18nKey from '@i18n/i18nKey'
 import { i18n } from '@i18n/translation'
 
 export async function getSortedPosts(): Promise<
-  { body: string, data: BlogPostData; slug: string }[]
+  { body: string; data: BlogPostData; id: string }[]
 > {
   const allBlogPosts = (await getCollection('posts', ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true
-  })) as unknown as { body: string, data: BlogPostData; slug: string }[]
+  })) as unknown as { body: string; data: BlogPostData; id: string }[]
 
   const sorted = allBlogPosts.sort(
     (a: { data: BlogPostData }, b: { data: BlogPostData }) => {
@@ -19,11 +19,11 @@ export async function getSortedPosts(): Promise<
   )
 
   for (let i = 1; i < sorted.length; i++) {
-    sorted[i].data.nextSlug = sorted[i - 1].slug
+    sorted[i].data.nextId = sorted[i - 1].id
     sorted[i].data.nextTitle = sorted[i - 1].data.title
   }
   for (let i = 0; i < sorted.length - 1; i++) {
-    sorted[i].data.prevSlug = sorted[i + 1].slug
+    sorted[i].data.prevId = sorted[i + 1].id
     sorted[i].data.prevTitle = sorted[i + 1].data.title
   }
 

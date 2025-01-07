@@ -14,9 +14,12 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "quickfix.biome": "always",
-    "source.organizeImports.biome": "always"
+    // "source.fixAll": "explicit",
+    // "quickfix.biome": "always",
+    // "source.organizeImports.biome": "always"
   },
-  "frontMatter.dashboard.openOnStart": false
+  "frontMatter.dashboard.openOnStart": false,
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

@@ -10,6 +10,7 @@ interface Props {
 }
 import { Image } from 'astro:assets'
 import { url } from '../../utils/url-utils'
+import type { ImageMetadata } from 'astro'
 
 const { id, src, alt, position = 'center', basePath = '/' } = Astro.props
 const className = Astro.props.class
@@ -24,7 +25,7 @@ const isPublic = src.startsWith('/')
 
 // TODO temporary workaround for images dynamic import
 // https://github.com/withastro/astro/issues/3373
-let img
+let img: ImageMetadata | undefined
 if (isLocal) {
   const files = import.meta.glob<ImageMetadata>('../../**', {
     import: 'default',
@@ -32,11 +33,12 @@ if (isLocal) {
   let normalizedPath = path
     .normalize(path.join('../../', basePath, src))
     .replace(/\\/g, '/')
-  const file = files[normalizedPath]
+    const file = files[normalizedPath]
   if (!file) {
     console.error(`\n[ERROR] Image file not found: ${normalizedPath.replace('../../', 'src/')}`)
+  } else {
+    img = await file()
   }
-  img = await file()
 }
 
 const imageClass = 'w-full h-full object-cover'

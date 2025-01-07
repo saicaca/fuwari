@@ -7,12 +7,12 @@ import I18nKey from '../../i18n/i18nKey'
 
 interface Props {
   title: string
-  slug: string
+  id: string
   pubDate: Date
   class: string
 }
 
-const { title, slug, pubDate } = Astro.props
+const { title, id, pubDate } = Astro.props
 const className = Astro.props.class
 const profileConf = profileConfig
 const licenseConf = licenseConfig

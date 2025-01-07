@@ -82,7 +82,7 @@ export type BlogPostData = {
   image?: string
   category?: string
   prevTitle?: string
-  prevSlug?: string
+  prevId?: string
   nextTitle?: string
-  nextSlug?: string
+  nextId?: string
 }
