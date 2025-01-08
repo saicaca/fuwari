@@ -116,7 +116,7 @@ async function loadPagefind() {
     })
     pagefind.init()
     window.pagefind = pagefind
-    pagefind.search('')     // speed up the first search
+    await pagefind.search('')     // speed up the first search
 }
 loadPagefind()
 </script>}
