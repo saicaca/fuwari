@@ -79,8 +79,10 @@ export function GithubCardComponent(properties, children) {
           console.log("[GITHUB-CARD] Loaded card for ${repo} | ${cardUuid}.")
       }).catch(err => {
         const c = document.getElementById('${cardUuid}-card');
-        c.classList.add("fetch-error");
-         console.warn("[GITHUB-CARD] (Error) Loading card for ${repo} | ${cardUuid}.")
+        if(c !== null ) {
+          c.classList.add("fetch-error") : '';
+          console.warn("[GITHUB-CARD] (Error) Loading card for ${repo} | ${cardUuid}.")
+        }
       })
     `,
   )

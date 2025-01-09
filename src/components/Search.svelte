@@ -63,7 +63,7 @@ onMount(() => {
 
 const togglePanel = () => {
   let panel = document.getElementById('search-panel')
-  panel?.classList.toggle('float-panel-closed')
+  if (panel) panel?.classList.toggle('float-panel-closed')
 }
 
 $: search(keywordDesktop, true)
