@@ -9,15 +9,20 @@ import { profileConfig, siteConfig } from '@/config'
 import ConfigCarrier from '@components/ConfigCarrier.astro'
 import {
   AUTO_MODE,
+  BANNER_HEIGHT,
+  BANNER_HEIGHT_EXTEND,
+  BANNER_HEIGHT_HOME,
   DARK_MODE,
   DEFAULT_THEME,
   LIGHT_MODE,
+  PAGE_WIDTH,
 } from '../constants/constants'
 import { defaultFavicons } from '../constants/icon'
 import type { Favicon } from '../types/config'
 import { url, pathsEqual } from '../utils/url-utils'
 import PostHog from '../components/Posthog.astro'
 // import posthog from 'posthog-js'
+import 'katex/dist/katex.css'
 
 interface Props {
   title?: string
@@ -150,8 +155,6 @@ const bannerOffset =
 		</script>
 
 		<slot name="head"></slot>
-
-		<link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
