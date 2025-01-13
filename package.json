@@ -34,7 +34,7 @@
     "astro-compress": "^2.3.6",
     "astro-icon": "^1.1.5",
     "hastscript": "^9.0.0",
-    "katex": "^0.16.19",
+    "katex": "^0.16.20",
     "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",
     "overlayscrollbars": "^2.10.1",
