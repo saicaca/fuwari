@@ -51,6 +51,32 @@
                 display: none;
             }
         }
+
+        span.highlighted {
+            margin: 0 -1.25rem;
+            padding: 0 1.25rem;
+            @apply inline-block bg-[var(--codeblock-highlight-bg)];
+            width: calc(100% + 2.5rem);
+        }
+
+        span.diff {
+            margin: 0 -1.25rem;
+            padding: 0 1.25rem;
+            @apply inline-block;
+            width: calc(100% + 2.5rem);
+            &.add {
+                @apply bg-[var(--codeblock-diff-add)];
+                &::before {
+                    @apply text-[var(--codeblock-diff-add-text)];
+                }
+            }
+            &.remove {
+                @apply bg-[var(--codeblock-diff-remove)];
+                &::before {
+                    @apply text-[var(--codeblock-diff-remove-text)];
+                }
+            }
+        }
     }
 
     pre {
