@@ -66,6 +66,13 @@ for i in range(10):
     print i
 ```
 
+```ts
+let x: [string, number] // [!code highlight]
+console.log('hewwo') // [!code --]
+console.log('hello') // [!code ++]
+console.log('goodbye')
+```
+
 ### An h3 header
 
 Now a nested list:
