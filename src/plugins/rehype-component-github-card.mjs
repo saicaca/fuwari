@@ -73,7 +73,7 @@ export function GithubCardComponent(properties, children) {
         if (data.license?.spdx_id) {
           document.getElementById('${cardUuid}-license').innerText = data.license?.spdx_id
         } else {
-          document.getElementById('${cardUuid}-license').classList.add = "no-license"
+          document.getElementById('${cardUuid}-license').innerText = "no-license"
         };
           document.getElementById('${cardUuid}-card').classList.remove("fetch-waiting");
           console.log("[GITHUB-CARD] Loaded card for ${repo} | ${cardUuid}.")

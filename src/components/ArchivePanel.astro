@@ -79,7 +79,7 @@ function formatTag(tag: string[]) {
                 {group.posts.map(post => (
                     <a href={getPostUrlBySlug(post.slug)}
                        aria-label={post.data.title}
-                       class="group btn-plain block h-10 w-full rounded-lg hover:text-[initial]"
+                       class="group btn-plain !block h-10 w-full rounded-lg hover:text-[initial]"
                     >
                         <div class="flex flex-row justify-start items-center h-full">
                             <!-- date -->
@@ -116,18 +116,3 @@ function formatTag(tag: string[]) {
         ))
     }
 </div>
-
-<style>
-    @tailwind components;
-    @tailwind utilities;
-
-    @layer components {
-        .dash-line {
-        }
-        .dash-line::before {
-            content: "";
-            @apply w-[10%] h-full absolute -top-1/2 left-[calc(50%_-_1px)] -top-[50%] border-l-[2px]
-            border-dashed pointer-events-none border-[var(--line-color)] transition
-        }
-    }
-</style>

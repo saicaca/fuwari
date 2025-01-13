@@ -1,0 +1,261 @@
+---
+import type { MarkdownHeading } from 'astro';
+import { siteConfig } from "../../config";
+
+interface Props {
+  class?: string
+  headings: MarkdownHeading[]
+}
+
+let { headings = []  } = Astro.props;
+
+let minDepth = 10;
+for (const heading of headings) {
+    minDepth = Math.min(minDepth, heading.depth);
+}
+
+const className = Astro.props.class
+
+const removeTailingHash = (text: string) => {
+    let lastIndexOfHash = text.lastIndexOf('#');
+    if (lastIndexOfHash != text.length - 1) {
+        return text;
+    }
+
+    return text.substring(0, lastIndexOfHash);
+}
+
+let heading1Count = 1;
+
+const maxLevel = siteConfig.toc.depth;
+---
+<table-of-contents class:list={[className, "group"]}>
+    {headings.filter((heading) => heading.depth < minDepth + maxLevel).map((heading) =>
+            <a href={`#${heading.slug}`} class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
+        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
+    ">
+                <div class:list={["transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold",
+                    {
+                        "bg-[var(--toc-badge-bg)] text-[var(--btn-content)]": heading.depth == minDepth,
+                        "ml-4": heading.depth == minDepth + 1,
+                        "ml-8": heading.depth == minDepth + 2,
+                    }
+                ]}
+                >
+                    {heading.depth == minDepth && heading1Count++}
+                    {heading.depth == minDepth + 1 && <div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div>}
+                    {heading.depth == minDepth + 2 && <div class="transition w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10"></div>}
+                </div>
+                <div class:list={["transition text-sm", {
+                    "text-50": heading.depth == minDepth || heading.depth == minDepth + 1,
+                    "text-30": heading.depth == minDepth + 2,
+                }]}>{removeTailingHash(heading.text)}</div>
+            </a>
+    )}
+    <div id="active-indicator" class:list={[{'hidden': headings.length == 0}, "-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 rounded-xl transition-all " +
+        "group-hover:bg-transparent border-2 border-[var(--toc-btn-hover)] group-hover:border-[var(--toc-btn-active)] border-dashed"]}></div>
+</table-of-contents>
+
+
+<script>
+class TableOfContents extends HTMLElement {
+    tocEl: HTMLElement | null = null;
+    visibleClass = "visible";
+    observer: IntersectionObserver;
+    anchorNavTarget: HTMLElement | null = null;
+    headingIdxMap = new Map<string, number>();
+    headings: HTMLElement[] = [];
+    sections: HTMLElement[] = [];
+    tocEntries: HTMLAnchorElement[] = [];
+    active: boolean[] = [];
+    activeIndicator: HTMLElement | null = null;
+
+    constructor() {
+        super();
+        this.observer = new IntersectionObserver(
+            this.markVisibleSection, { threshold: 0 }
+        );
+    };
+
+    markVisibleSection = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry) => {
+            const id = entry.target.children[0]?.getAttribute("id");
+            const idx = id ? this.headingIdxMap.get(id) : undefined;
+            if (idx != undefined)
+                this.active[idx] = entry.isIntersecting;
+
+            if (entry.isIntersecting && this.anchorNavTarget == entry.target.firstChild)
+                this.anchorNavTarget = null;
+        });
+
+        if (!this.active.includes(true))
+            this.fallback();
+        this.update();
+    };
+
+    toggleActiveHeading = () => {
+        let i = this.active.length - 1;
+        let min = this.active.length - 1, max = 0;
+        while (i >= 0 && !this.active[i]) {
+            this.tocEntries[i].classList.remove(this.visibleClass);
+            i--;
+        }
+        while (i >= 0 && this.active[i]) {
+            this.tocEntries[i].classList.add(this.visibleClass);
+            min = Math.min(min, i);
+            max = Math.max(max, i);
+            i--;
+        }
+        while (i >= 0) {
+            this.tocEntries[i].classList.remove(this.visibleClass);
+            i--;
+        }
+        let parentOffset = this.tocEl?.getBoundingClientRect().top || 0;
+        let scrollOffset = this.tocEl?.scrollTop || 0;
+        let top = this.tocEntries[min].getBoundingClientRect().top - parentOffset + scrollOffset;
+        let bottom = this.tocEntries[max].getBoundingClientRect().bottom - parentOffset + scrollOffset;
+        this.activeIndicator?.setAttribute("style", `top: ${top}px; height: ${bottom - top}px`);
+    };
+
+    scrollToActiveHeading = () => {
+        // If the TOC widget can accommodate both the topmost
+        // and bottommost items, scroll to the topmost item. 
+        // Otherwise, scroll to the bottommost one.
+
+        if (this.anchorNavTarget || !this.tocEl) return;
+        const activeHeading =
+            document.querySelectorAll<HTMLDivElement>(`#toc .${this.visibleClass}`);
+        if (!activeHeading.length) return;
+
+        const topmost = activeHeading[0];
+        const bottommost = activeHeading[activeHeading.length - 1];
+        const tocHeight = this.tocEl.clientHeight;
+
+        let top;
+        if (bottommost.getBoundingClientRect().bottom -
+            topmost.getBoundingClientRect().top < 0.9 * tocHeight)
+            top = topmost.offsetTop - 32;
+        else
+            top = bottommost.offsetTop - tocHeight * 0.8;
+
+        this.tocEl.scrollTo({
+            top,
+            left: 0,
+            behavior: "smooth",
+        });
+    };
+
+    update = () => {
+        requestAnimationFrame(() => {
+            this.toggleActiveHeading();
+            // requestAnimationFrame(() => {
+            this.scrollToActiveHeading();
+            // });
+        });
+    };
+
+    fallback = () => {
+        if (!this.sections.length) return;
+
+        for (let i = 0; i < this.sections.length; i++) {
+            let offsetTop = this.sections[i].getBoundingClientRect().top;
+            let offsetBottom = this.sections[i].getBoundingClientRect().bottom;
+
+            if (this.isInRange(offsetTop, 0, window.innerHeight)
+                || this.isInRange(offsetBottom, 0, window.innerHeight)
+                || (offsetTop < 0 && offsetBottom > window.innerHeight)) {                    
+                this.markActiveHeading(i);
+            }
+            else if (offsetTop > window.innerHeight) break;
+        }
+    };
+
+    markActiveHeading = (idx: number)=> {
+        this.active[idx] = true;
+    };
+
+    handleAnchorClick = (event: Event) => {
+        const anchor = event
+            .composedPath()
+            .find((element) => element instanceof HTMLAnchorElement);
+
+        if (anchor) {
+            const id = decodeURIComponent(anchor.hash?.substring(1));
+            const idx = this.headingIdxMap.get(id);
+            if (idx !== undefined) {
+                this.anchorNavTarget = this.headings[idx];
+            } else {
+                this.anchorNavTarget = null;
+            }
+        }
+    };
+
+    isInRange(value: number, min: number, max: number) {
+        return min < value && value < max;
+    };
+
+    connectedCallback() {
+        // wait for the onload animation to finish, which makes the `getBoundingClientRect` return correct values
+        const element = document.querySelector('.prose');
+        if (element) {
+            element.addEventListener('animationend', () => {
+                this.init();
+            }, { once: true });
+        } else {
+            console.warn('Animation element not found');
+        }
+    };
+
+    init() {
+        this.tocEl = document.getElementById(
+            "toc-inner-wrapper"
+        );
+
+        if (!this.tocEl) return;
+
+        this.tocEl.addEventListener("click", this.handleAnchorClick, {
+            capture: true,
+        });
+
+        this.activeIndicator = document.getElementById("active-indicator");
+
+        this.tocEntries = Array.from(
+            document.querySelectorAll<HTMLAnchorElement>("#toc a[href^='#']")
+        );
+
+        if (this.tocEntries.length === 0) return;
+
+        this.sections = new Array(this.tocEntries.length);
+        this.headings = new Array(this.tocEntries.length);
+        for (let i = 0; i < this.tocEntries.length; i++) {
+            const id = decodeURIComponent(this.tocEntries[i].hash?.substring(1));
+            const heading = document.getElementById(id);
+            const section = heading?.parentElement;
+            if (heading instanceof HTMLElement && section instanceof HTMLElement) {
+                this.headings[i] = heading;
+                this.sections[i] = section;
+                this.headingIdxMap.set(id, i);
+            }
+        }
+        this.active = new Array(this.tocEntries.length).fill(false);
+
+        this.sections.forEach((section) =>
+            this.observer.observe(section)
+        );
+
+        this.fallback();
+        this.update();
+    };
+
+    disconnectedCallback() {
+        this.sections.forEach((section) =>
+            this.observer.unobserve(section)
+        );
+        this.observer.disconnect();
+        this.tocEl?.removeEventListener("click", this.handleAnchorClick);
+    };
+}
+
+customElements.define("table-of-contents", TableOfContents);
+
+</script>
