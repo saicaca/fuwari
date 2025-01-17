@@ -83,6 +83,13 @@ bash <(curl -sL kejilion.sh)
 
 ---
 
+# 哪吒探针Cloudflare版
+
+https://github.com/yumusb/nezha-new
+
+---
+
+
 # VPS一键魔法脚本
 - Hysteria2（UDP）：
 ```shell
