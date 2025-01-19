@@ -162,5 +162,14 @@ math should get its own line and be put in in double-dollarsigns:
 
 $$I = \int \rho R^{2} dV$$
 
+$$
+\begin{equation*}
+\pi
+=3.1415926535
+ \;8979323846\;2643383279\;5028841971\;6939937510\;5820974944
+ \;5923078164\;0628620899\;8628034825\;3421170679\;\ldots
+\end{equation*}
+$$
+
 And note that you can backslash-escape any punctuation characters
 which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.
