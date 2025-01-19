@@ -21,7 +21,7 @@ A static blog template built with [Astro](https://astro.build).
 - [x] Light / dark mode
 - [x] Customizable theme colors & banner
 - [x] Responsive design
-- [ ] Comments
+- [x] Comments
 - [x] Search
 - [ ] TOC
 

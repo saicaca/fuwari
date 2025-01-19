@@ -1,0 +1,26 @@
+---
+import { commentConfig } from '../../config'
+const twikooConfig = commentConfig.twikoo
+---
+{twikooConfig.enable && (
+  <div id="tcomment"></div>
+  <style>
+    .twikoo svg{
+      display: inline-block!important;
+    }
+  </style>
+   <script is:inline define:vars={{ twikooConfig }}>
+    window.twikooConfig=twikooConfig
+    window.initTwikoo=function initTwikoo() {
+    twikoo.init({
+      envId: window.twikooConfig.envId,
+      el: '#tcomment',
+      lang: window.twikooConfig.lang,
+    });
+  }
+ </script>     
+)}
+{twikooConfig.enable&&(twikooConfig.envId.startsWith('https://') || twikooConfig.envId.startsWith('http://'))&&(<script is:inline src='/js/twikoo@1.6.41/twikoo.min.js' async onload="initTwikoo()"></script>
+)}
+{twikooConfig.enable&&(!twikooConfig.envId.startsWith('https://') && !twikooConfig.envId.startsWith('http://'))&&(<script is:inline src='/js/twikoo@1.6.41/twikoo.all.min.js' async onload="initTwikoo()"></script>
+)}
