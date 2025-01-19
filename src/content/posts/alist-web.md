@@ -92,3 +92,5 @@ git push -f   //强制将更改提交到远程仓库
 
 3. Cloudflare Pages 会自动重新构建，等待新网页构建完成即可  
    ![QmNZemsDHz5QLxW3V2eANghmVkfBccEpe5vMAWUCLik4o6.webp](https://oss.onani.cn/fuwari-blog/img/863e5bb3ef65ec2a0af03303dd3afe13fb8dd8d4.webp)
+
+> 如果你遇到构建错误（找不到solid-route/src）的情况，可以尝试查看你fork的仓库通过本地拉取下来后根目录的 `solid-route` 文件夹是不是空的，如果是，请前往 https://github.com/alist-org/alist-web 手动将 `solid-route` 文件夹的目录搬到你的仓库中，然后尝试重新构建
