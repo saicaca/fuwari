@@ -95,4 +95,4 @@ git push -f   //强制将更改提交到远程仓库
 
 ### 疑难解答
 
-1. 如果你遇到构建错误（找不到solid-route/src）的情况，可以尝试查看你fork的仓库通过本地拉取下来后根目录的 `solid-route` 文件夹是不是空的，如果是，请前往 https://github.com/alist-org/alist-web 手动将 `solid-route` 文件夹的目录搬到你的仓库中，然后尝试重新构建
+1. 如果你遇到构建错误（找不到solid-route/src）的情况，可以尝试查看你fork的仓库通过本地拉取下来后根目录的 `solid-route` 文件夹是不是空的，如果是，请前往 https://github.com/alist-org/alist-web 手动将 `solid-route` 文件夹里的内容搬到你仓库中，然后尝试重新构建
