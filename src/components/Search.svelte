@@ -32,8 +32,10 @@ onMount(() => {
     let panel = document.getElementById('search-panel')
     if (!panel) return
 
-    if (!keyword && isDesktop) {
-      panel.classList.add('float-panel-closed')
+    if (!keyword) {
+      if (isDesktop) {
+        panel.classList.add('float-panel-closed')
+      }
       return
     }
 
