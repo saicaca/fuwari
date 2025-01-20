@@ -211,6 +211,7 @@ import {
 	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
 	PAGE_WIDTH
 } from "../constants/constants";
+import { siteConfig } from '../config';
 
 /* Preload fonts */
 // (async function() {
@@ -327,6 +328,9 @@ function initCustomScrollbar() {
 }
 
 function showBanner() {
+	if (!siteConfig.banner.enable) {
+		return;
+	}
 	const banner = document.getElementById('banner')
 	if (!banner) {
 		console.error('Failed to find the banner element')
