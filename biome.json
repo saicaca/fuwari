@@ -62,5 +62,18 @@
         "recommended": true
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "include": ["*.svelte", "*.astro"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useConst": "off",
+            "useImportType": "off"
+          }
+        }
+      }
+    }
+  ]
 }
