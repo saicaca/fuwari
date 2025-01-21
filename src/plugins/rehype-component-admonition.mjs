@@ -18,15 +18,18 @@ export function AdmonitionComponent(properties, children, type) {
       'Invalid admonition directive. (Admonition directives must be of block type ":::note{name="name"} <content> :::")',
     )
 
-  let label = null
-  if (properties && properties['has-directive-label']) {
-    label = children[0] // The first child is the label
-    children = children.slice(1)
-    label.tagName = 'div' // Change the tag <p> to <div>
-  }
+  const { label, childrenToReturn } = properties?.['has-directive-label']
+    ? {
+        label: { ...children[0], tagName: 'div' },
+        childrenToReturn: children.slice(1),
+      }
+    : {
+        label: null,
+        childrenToReturn: children,
+      }
 
-  return h(`blockquote`, { class: `admonition bdm-${type}` }, [
-    h('span', { class: `bdm-title` }, label ? label : type.toUpperCase()),
-    ...children,
+  return h('blockquote', { class: `admonition bdm-${type}` }, [
+    h('span', { class: 'bdm-title' }, label ? label : type.toUpperCase()),
+    ...childrenToReturn,
   ])
 }

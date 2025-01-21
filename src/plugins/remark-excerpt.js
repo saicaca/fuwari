@@ -1,4 +1,4 @@
-import { toString } from 'mdast-util-to-string'
+import { toString as mdastToString } from 'mdast-util-to-string'
 
 /* Use the post's first paragraph as the excerpt */
 export function remarkExcerpt() {
@@ -8,7 +8,7 @@ export function remarkExcerpt() {
       if (node.type !== 'paragraph') {
         continue
       }
-      excerpt = toString(node)
+      excerpt = mdastToString(node)
       break
     }
     data.astro.frontmatter.excerpt = excerpt

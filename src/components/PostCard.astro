@@ -1,5 +1,5 @@
 ---
-import path from 'path'
+import path from 'node:path'
 import PostMetadata from './PostMeta.astro'
 import ImageWrapper from './misc/ImageWrapper.astro'
 import { Icon } from 'astro-icon/components'
@@ -9,6 +9,7 @@ import { getDir } from '../utils/url-utils'
 
 interface Props {
   class?: string
+  // biome-ignore lint/suspicious/noExplicitAny: no idea what type it will be
   entry: any
   title: string
   url: string

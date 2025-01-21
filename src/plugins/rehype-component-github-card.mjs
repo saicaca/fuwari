@@ -32,7 +32,7 @@ export function GithubCardComponent(properties, children) {
     'Waiting...',
   )
 
-  const nTitle = h(`div`, { class: 'gc-titlebar' }, [
+  const nTitle = h('div', { class: 'gc-titlebar' }, [
     h('div', { class: 'gc-titlebar-left' }, [
       h('div', { class: 'gc-owner' }, [
         nAvatar,
