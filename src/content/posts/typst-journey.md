@@ -19,7 +19,9 @@ It first piqued my interest
 when I saw it's a modern replacement for LaTeX,
 especially since it's written in Rust!
 
-The first thing I made using Typst is my [CV](https://github.com/pawarherschel/Typst/blob/main/output/CV.pdf).
+The first thing I made using Typst is my CV 
+[Link to CV](https://github.com/pawarherschel/Typst/blob/main/output/CV.pdf)
+[Link to Repo](https://github.com/pawarherschel/Typst).
 ::github{repo="pawarherschel/Typst"}
 I just took an aesthetically pleasing enough template
 and just shoved the stuff I had made into it.
@@ -381,9 +383,8 @@ I want to remake my CV and make it aesthetically appealing.
 
 ---
 
-TODO: the link doesnt work in release version
-
-Typst file for the diagrams available [here](/typst-journey.typ)
+Typst file for the diagrams available 
+[here](/typst-journey.typ)!
 
 ---
 
