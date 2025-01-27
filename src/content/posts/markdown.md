@@ -171,5 +171,12 @@ $$
 \end{equation*}
 $$
 
+$$
+\begin{equation*}
+\pi
+=3+\frac{1^{2}}{6+\frac{3^{2}}{6+\frac{5^{2}}{6+\frac{7^{2}}{6+\frac{9^{2}}{6+\frac{11^{2}}{\ddots}}}}}}
+\end{equation*}
+$$
+
 And note that you can backslash-escape any punctuation characters
 which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.
