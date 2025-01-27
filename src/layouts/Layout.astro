@@ -131,27 +131,6 @@ const bannerOffset =
 						document.documentElement.classList.remove('dark');
 					}
 			}
-
-			function customAnalytics(retry){
-				if (!localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog) {
-					setTimeout(() => customAnalytics((retry ?? 0) + 1), 30)
-				} else {
-					const phId = JSON.parse(localStorage.ph_phc_XjLacmwERfhbH4YAs6rUCFUgIFudNibYFHst0g5tsOu_posthog).distinct_id;
-
-					const xhr = new XMLHttpRequest();
-					xhr.open("POST", "https://custom-analytics.sakurakat.systems/", true);
-					xhr.setRequestHeader("Content-Type", "application/json");
-					const currentUrl = window.location.href;
-					xhr.send(JSON.stringify({
-						id: phId,
-						url: currentUrl
-					}))
-				}
-			}
-
-			customAnalytics()
-
-
 		</script>
 
 		<slot name="head"></slot>
