@@ -1,5 +1,5 @@
 ---
-title: My journey with Typst
+title: My journey with Typst 
 published: 2025-01-06
 description: I applied to University of Aalto's game development and design program, and this blogpost covers the process of my journey with Typst with an emphasis on how i used Typst to make a 10+ minute draft which had some ideas to the condensed version which fit in the time limit of 2 minutes.
 tags: []
@@ -383,7 +383,7 @@ I want to remake my CV and make it aesthetically appealing.
 
 TODO: the link doesnt work in release version
 
-Typst file for the diagrams available [here](/public/typst-journey.typ)
+Typst file for the diagrams available [here](/typst-journey.typ)
 
 ---
 

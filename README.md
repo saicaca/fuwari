@@ -54,7 +54,7 @@ lang: jp      # Set only if the post's language differs from the site's language
 All commands are run from the root of the project, from a terminal:
 
 | Command                             | Action                                           |
-|:------------------------------------|:-------------------------------------------------|
+| :---------------------------------- | :----------------------------------------------- |
 | `pnpm install` AND `pnpm add sharp` | Installs dependencies                            |
 | `pnpm dev`                          | Starts local dev server at `localhost:4321`      |
 | `pnpm build`                        | Build your production site to `./dist/`          |
