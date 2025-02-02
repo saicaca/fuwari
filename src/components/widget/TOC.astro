@@ -232,6 +232,7 @@ class TableOfContents extends HTMLElement {
             const heading = document.getElementById(id);
             const section = heading?.parentElement;
             if (heading instanceof HTMLElement && section instanceof HTMLElement) {
+                this.matchTOCHeadingToMarkdown(heading, this.tocEntries[i]);
                 this.headings[i] = heading;
                 this.sections[i] = section;
                 this.headingIdxMap.set(id, i);
@@ -253,6 +254,22 @@ class TableOfContents extends HTMLElement {
         );
         this.observer.disconnect();
         this.tocEl?.removeEventListener("click", this.handleAnchorClick);
+    };
+
+    matchTOCHeadingToMarkdown(heading: HTMLElement, tocEntry: HTMLAnchorElement) {
+        const tocHeading = tocEntry.lastElementChild as HTMLElement;
+        const mdHeading = heading.cloneNode(true) as HTMLElement;
+        const headingAnchor = mdHeading.querySelector("a:last-of-type");
+
+        if (headingAnchor)
+            mdHeading.removeChild(headingAnchor);
+
+        if (tocHeading.innerHTML.length < mdHeading.innerHTML.length) {
+            mdHeading.querySelectorAll('a').forEach((anchor) => {
+                anchor.style.pointerEvents = "none";
+            });
+            tocHeading.innerHTML = mdHeading.innerHTML;
+        }
     };
 }
 
