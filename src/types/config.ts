@@ -26,6 +26,11 @@ export type SiteConfig = {
   }
 
   favicon: Favicon[]
+
+  externalLinkAttributes?: {
+    target?: string
+    rel?: string
+  }
 }
 
 export type Favicon = {
