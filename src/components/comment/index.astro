@@ -22,7 +22,7 @@ if (commentConfig?.disqus) {
   commentService = 'twikoo'
 }
 ---
-<div class="card-base p-6 mb-4">
+<div class="card-base p-6 mb-4 text-black/30 dark:text-white/30 transition">
   {commentService === 'disqus' && <Disqus identifier={id} url={url} title={data.title} />}
   {commentService === 'giscus' && <Giscus />}
   {commentService === 'twikoo' && <Twikoo path={path} />}
