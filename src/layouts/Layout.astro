@@ -7,17 +7,18 @@ import { profileConfig, siteConfig } from '@/config'
 import ConfigCarrier from '@components/ConfigCarrier.astro'
 import {
   AUTO_MODE,
-  DARK_MODE,
-  DEFAULT_THEME,
-  LIGHT_MODE,
   BANNER_HEIGHT,
   BANNER_HEIGHT_EXTEND,
   BANNER_HEIGHT_HOME,
+  DARK_MODE,
+  DEFAULT_THEME,
+  LIGHT_MODE,
   PAGE_WIDTH,
 } from '../constants/constants'
 import { defaultFavicons } from '../constants/icon'
 import type { Favicon } from '../types/config'
 import { url, pathsEqual } from '../utils/url-utils'
+import 'katex/dist/katex.css'
 
 interface Props {
   title?: string
@@ -143,8 +144,6 @@ const bannerOffset =
 
 
 		<slot name="head"></slot>
-
-		<link rel="stylesheet" href="https://cdn.staticfile.net/KaTeX/0.16.9/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
@@ -306,13 +305,22 @@ function initCustomScrollbar() {
 			autoHideSuspend: false,
 		},
 	});
-	document.querySelectorAll('pre').forEach((ele) => {
+	const preElements = document.querySelectorAll('pre');
+	preElements.forEach((ele) => {
 		OverlayScrollbars(ele, {
 			scrollbars: {
 				theme: 'scrollbar-base scrollbar-dark px-2',
 				autoHide: 'leave',
 				autoHideDelay: 500,
 				autoHideSuspend: false
+			}
+		});
+	});
+	const katexElements = document.querySelectorAll('.katex-display') as NodeListOf<HTMLElement>;
+	katexElements.forEach((ele) => {
+		OverlayScrollbars(ele, {
+			scrollbars: {
+				theme: 'scrollbar-base scrollbar-auto py-1',
 			}
 		});
 	});
@@ -337,10 +345,6 @@ function init() {
 
 /* Load settings when entering the site */
 init();
-
-/* Load settings before swapping */
-/* astro:after-swap event happened before swap animation */
-document.addEventListener('astro:after-swap', init);
 
 const setup = () => {
 	// TODO: temp solution to change the height of the banner
