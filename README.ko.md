@@ -39,6 +39,8 @@ image: /images/cover.jpg
 tags: [푸, 바, 오]
 category: 앞-끝
 draft: false
+pinned: false # Set only if the post is pinned
+
 ---
 ```
 

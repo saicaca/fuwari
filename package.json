@@ -26,6 +26,7 @@
     "@iconify-json/fa6-regular": "^1.2.2",
     "@iconify-json/fa6-solid": "^1.2.2",
     "@iconify-json/material-symbols": "^1.2.8",
+    "@iconify-json/mdi": "^1.2.3",
     "@iconify/svelte": "^4.0.2",
     "@swup/astro": "^1.5.0",
     "@tailwindcss/typography": "^0.5.15",
