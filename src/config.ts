@@ -8,7 +8,7 @@ import { LinkPreset } from './types/config'
 
 export const siteConfig: SiteConfig = {
   title: 'AcoFork - Blog',
-  subtitle: 'Cloudflare Page',
+  subtitle: '❤❤❤',
   lang: 'zh_CN',         // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th'
   themeColor: {
     hue: 255,         // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
@@ -41,13 +41,13 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Archive,
     LinkPreset.About,
     {
-      name: '随机图API',
+      name: 'R2 随机图API',
       url: 'https://pic.onani.cn',     // Internal links should not include the base path, as it is automatically added
       external: true,                               // Show an external link icon and will open in a new tab
     },
     {
-      name: 'Pixiv镜像站',
-      url: 'https://pxrank.onani.cn',     // Internal links should not include the base path, as it is automatically added
+      name: 'IPFS Pixiv',
+      url: 'https://ipfs-px.onani.cn',     // Internal links should not include the base path, as it is automatically added
       external: true,                               // Show an external link icon and will open in a new tab
     },
   ],
@@ -56,7 +56,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
   avatar: 'https://q2.qlogo.cn/headimg_dl?dst_uin=2973517380&amp;spec=5',  // Relative to the /src directory. Relative to the /public directory if it starts with '/'
   name: 'AcoFork',
-  bio: '爱你所爱！/Protect What You Love！',
+  bio: 'Protect What You Love！',
   links: [
     {
       name: 'GitHub',
