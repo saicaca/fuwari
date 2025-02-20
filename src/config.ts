@@ -41,6 +41,11 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.Archive,
     LinkPreset.About,
     {
+      name: 'AI Blog',
+      url: 'https://ai.onani.cn',     // Internal links should not include the base path, as it is automatically added
+      external: true,                               // Show an external link icon and will open in a new tab
+    },
+    {
       name: 'R2 随机图API',
       url: 'https://pic.onani.cn',     // Internal links should not include the base path, as it is automatically added
       external: true,                               // Show an external link icon and will open in a new tab
