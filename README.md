@@ -1,4 +1,13 @@
-# 🍥Fuwari
+# 🍥Fuwari - AcoFork Blog
+
+### 提交信息标准
+- post 发布新文章
+- post-up 更新文章
+- update 更新博客结构（含删除操作）
+- update-readme 更新自述文件
+从 2025/2/23 开始实行
+
+---
 
 A static blog template built with [Astro](https://astro.build).
 
