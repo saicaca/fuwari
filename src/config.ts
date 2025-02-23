@@ -68,6 +68,11 @@ export const profileConfig: ProfileConfig = {
       icon: 'fa6-brands:github',
       url: 'https://github.com/afoim',
     },
+    {
+      name: 'Telegram Group',
+      icon: 'fa6-brands:telegram',
+      url: 'https://t.me/+blyHrp_GihhhMWVl',
+    },
   ],
 }
 
