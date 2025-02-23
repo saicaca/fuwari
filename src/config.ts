@@ -30,7 +30,7 @@ export const siteConfig: SiteConfig = {
   },
   favicon: [    // Leave this array empty to use the default favicon
     {
-      src: 'https://q2.qlogo.cn/headimg_dl?dst_uin=2973517380&amp;spec=5',    // Path of the favicon, relative to the /public directory
+      src: 'https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=5',    // Path of the favicon, relative to the /public directory
     }
   ]
 }
