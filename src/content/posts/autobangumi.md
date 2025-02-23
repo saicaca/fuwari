@@ -22,8 +22,12 @@ lang: 'zh_CN'
 各系统安装方法各有不同。如果你安装的是非nox版本，记得在设置打开WebUI，并监听0.0.0.0:8080
 
 Windows：[SourceForge](https://sourceforge.net/projects/qbittorrent/files/qbittorrent-win32)
-  Linux：`apt/yum install qbittorrent-nox`
-  Docker：https://github.com/linuxserver/docker-qbittorrent
+
+Linux：`apt/yum install qbittorrent-nox`
+
+Docker：https://github.com/linuxserver/docker-qbittorrent
+
+Tracker服务器大全：[中国可用的 BT Tracker 服务器列表，每24小时自动更新 - 小小编程](https://www.yaozuopan.top/index.php/archives/1014/#:~:text=%E4%B8%AD%E5%9B%BD%E5%8F%AF%E7%94%A8%E7%9A%84%20BT%20T)
 
 ![8938ee430e5f74109c34c8c6d48e0e4f619cbeff.webp](https://oss.onani.cn/fuwari-blog/img/29e0e4c26c15463ff692aabcee747950e2d029d3.webp)
 
