@@ -99,7 +99,7 @@ AutoBangumi:
 
 > 四级目录：（番剧的哪一季的哪一集）：S01E01.MP4
 
-1. ~~前往Episode-ReName，克隆仓库~~  ~~（已被删库，可尝试[Episode-ReName.zip | Onani-AList](https://alist.onani.cn/Episode-ReName.zip) )~~ AList已死，请尝试天翼云盘： https://cloud.189.cn/web/share?code=iQVjUnzE7fQj（访问码：i8sk）
+1. ~~前往Episode-ReName，克隆仓库~~  ~~（已被删库，可尝试[Episode-ReName.zip | Onani-AList](https://alist.onani.cn/Episode-ReName.zip) )~~ AList已死，请尝试天翼云盘： https://cloud.189.cn/web/share?code=iQVjUnzE7fQj （访问码：i8sk）
 
 2. Win 可以通过右键菜单自动获取路径版.bat 通过右键一级目录选择自动剧集命名 。若使用.py 脚本则只能通过`python3 EpisodeReName.py "D:/qbdownloads/bangumi"`
 
