@@ -31,7 +31,7 @@ Tracker服务器大全：[中国可用的 BT Tracker 服务器列表，每24小�
 
 ![8938ee430e5f74109c34c8c6d48e0e4f619cbeff.webp](https://oss.onani.cn/fuwari-blog/img/29e0e4c26c15463ff692aabcee747950e2d029d3.webp)
 
-### 安装AutoBangumi
+### 安装[AutoBangumi](https://www.autobangumi.org/)
 
 > 用于获取你订阅的番剧并在更新时自动发起下载任务
 
@@ -40,24 +40,26 @@ Tracker服务器大全：[中国可用的 BT Tracker 服务器列表，每24小�
 2. 找一个你喜欢的文件夹创建`docker-compose.yaml` ，并写入内容：
 
 ```yaml
+version: "3.8"
+
 services:
-AutoBangumi:
-  image: "ghcr.io/estrellaxd/auto_bangumi:latest"
-  container_name: AutoBangumi
-  volumes:
-    - ./config:/app/config
-    - ./data:/app/data
-  ports:
-    - "7892:7892"
-  network_mode: bridge
-  restart: unless-stopped
-  dns:
-    - 223.5.5.5
-  environment:
-    - TZ=Asia/Shanghai
-    - PGID=$(id -g)
-    - PUID=$(id -u)
-    - UMASK=022
+  AutoBangumi:
+    image: "ghcr.io/estrellaxd/auto_bangumi:latest"
+    container_name: AutoBangumi
+    volumes:
+      - ./config:/app/config
+      - ./data:/app/data
+    ports:
+      - "7892:7892"
+    network_mode: bridge
+    restart: unless-stopped
+    dns:
+      - 223.5.5.5
+    environment:
+      - TZ=Asia/Shanghai
+      - PGID=$(id -g)
+      - PUID=$(id -u)
+      - UMASK=022
 ```
 
 3. 运行命令：docker compose up -d
