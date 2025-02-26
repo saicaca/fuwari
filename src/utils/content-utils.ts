@@ -87,3 +87,16 @@ export async function getCategoryList(): Promise<Category[]> {
   }
   return ret
 }
+
+export async function getPostSeries(
+  seriesName: string,
+): Promise<{ body: string; data: BlogPostData; slug: string }[]> {
+  const posts = (await getCollection('posts', ({ data }) => {
+    return (
+      (import.meta.env.PROD ? data.draft !== true : true) &&
+      data.series === seriesName
+    )
+  })) as unknown as { body: string; data: BlogPostData; slug: string }[]
+
+  return posts
+}

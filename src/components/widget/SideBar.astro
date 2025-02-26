@@ -4,14 +4,17 @@ import Tag from './Tags.astro'
 import Categories from './Categories.astro'
 import type { MarkdownHeading } from 'astro'
 import TOC from './TOC.astro'
+import Series from './Series.astro'
 
 interface Props {
     class? : string
     headings? : MarkdownHeading[]
+    series?: string
 }
 
 const className = Astro.props.class
 const headings = Astro.props.headings
+const series = Astro.props.series
 
 ---
 <div id="sidebar" class:list={[className, "w-full"]}>
@@ -19,6 +22,9 @@ const headings = Astro.props.headings
         <Profile></Profile>
     </div>
     <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4">
+        <div id="series" class="flex flex-col w-full gap-4">
+            { series && <Series series={ series }></Series> }
+        </div>
         <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
         <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
     </div>
