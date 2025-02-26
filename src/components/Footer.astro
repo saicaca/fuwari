@@ -1,20 +1,90 @@
 ---
-
 import { profileConfig } from '../config'
 import { url } from '../utils/url-utils'
 const currentYear = new Date().getFullYear()
+
+// 获取IP和地理位置（添加错误处理）
+let ipv4Info = { ip: "未知", address: "未知" };
+let ipv6Info = { ip: "未知", address: "未知" };
+
+try {
+    // 获取 IPv4 信息
+    const ipv4Response = await fetch('https://ipv4_cm.itdog.cn/');
+    const ipv4Data = await ipv4Response.json();
+    if (ipv4Data.type === "success") {
+        ipv4Info = {
+            ip: ipv4Data.ip,
+            address: decodeURIComponent(ipv4Data.address.replace(/\\u/g, '%u'))
+        };
+    }
+
+    // 获取 IPv6 信息
+    const ipv6Response = await fetch('https://ipv6.itdog.cn/');
+    const ipv6Data = await ipv6Response.json();
+    if (ipv6Data.type === "success") {
+        ipv6Info = {
+            ip: ipv6Data.ip,
+            address: decodeURIComponent(ipv6Data.address.replace(/\\u/g, '%u'))
+        };
+    }
+} catch (error) {
+    console.error('Failed to fetch IP info:', error);
+}
+
 ---
 
-<!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">-->
 <div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div>
-<!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">-->
 <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6">
     <div class="transition text-50 text-sm text-center">
         &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('rss.xml')}>RSS</a> /
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>Sitemap</a><br>
+        <div id="visitor-info" class="mt-2 text-neutral-500">
+            <div class="mb-1">IPv4: <span class="text-[var(--primary)]">{ipv4Info.ip}</span> | 位置: <span class="text-[var(--primary)]">{ipv4Info.address}</span></div>
+            <div class="mb-1">IPv6: <span class="text-[var(--primary)]">{ipv6Info.ip}</span> | 位置: <span class="text-[var(--primary)]">{ipv6Info.address}</span></div>
+            <div id="device-info"></div>
+        </div>
         Powered by
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
     </div>
 </div>
+
+<script>
+// 客户端检测设备和浏览器信息
+function getDeviceInfo() {
+    const ua = navigator.userAgent;
+    let deviceType = "未知设备";
+    let browserInfo = "未知浏览器";
+
+    // 检测设备类型
+    if (ua.includes("Windows NT 10.0")) deviceType = "Windows 10";
+    else if (ua.includes("Windows NT 11.0")) deviceType = "Windows 11";
+    else if (ua.includes("Android")) {
+        const match = ua.match(/Android\s+([\d.]+)/);
+        deviceType = match ? `Android ${match[1]}` : "Android";
+    }
+    else if (ua.includes("iPhone")) deviceType = "iPhone";
+    else if (ua.includes("iPad")) deviceType = "iPad";
+    else if (ua.includes("Mac OS")) deviceType = "MacOS";
+
+    // 检测浏览器
+    if (ua.includes("Chrome")) browserInfo = "Chrome";
+    else if (ua.includes("Firefox")) browserInfo = "Firefox";
+    else if (ua.includes("Safari")) browserInfo = "Safari";
+    else if (ua.includes("Edge")) browserInfo = "Edge";
+    else if (ua.includes("Opera")) browserInfo = "Opera";
+
+    const deviceInfoElement = document.getElementById('device-info');
+    if (deviceInfoElement) {
+        deviceInfoElement.innerHTML = `设备: <span class="text-[var(--primary)]">${deviceType}</span> | 浏览器: <span class="text-[var(--primary)]">${browserInfo}</span>`;
+    }
+}
+
+// 页面加载完成后执行
+document.addEventListener('DOMContentLoaded', getDeviceInfo);
+// Swup页面切换后也执行
+if (window.swup) {
+    window.swup.hooks.on('content:replace', getDeviceInfo);
+}
+</script>

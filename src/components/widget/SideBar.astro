@@ -13,10 +13,60 @@ interface Props {
 const className = Astro.props.class
 const headings = Astro.props.headings
 
+// 获取最新提交
+const response = await fetch('https://api-github-com.onani.cn/repos/afoim/fuwari-blog/commits/main');
+const commit = await response.json();
+
+// 计算相对时间
+function getRelativeTimeStr(date: Date): string {
+    const now = new Date();
+    const diff = now.getTime() - date.getTime();
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    
+    if (days === 0) {
+        return "今天";
+    } else if (days === 1) {
+        return "昨天";
+    } else if (days < 30) {
+        return `${days}天前`;
+    } else {
+        return "";  // 超过30天就只显示具体日期
+    }
+}
+
+const commitDate = new Date(commit.commit.author.date);
+const relativeTime = getRelativeTimeStr(commitDate);
+const latestCommit = {
+    message: commit.commit.message,
+    date: commitDate.toLocaleDateString(),
+    relativeTime: relativeTime,
+    author: commit.commit.author.name,
+    url: commit.html_url
+};
+
 ---
 <div id="sidebar" class:list={[className, "w-full"]}>
     <div class="flex flex-col w-full gap-4 mb-4">
         <Profile></Profile>
+        
+        <div class="card-base p-3">
+            <div class="px-2">
+                <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">最新提交</div>
+                <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
+                <a href={latestCommit.url} target="_blank" class="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition">
+                    <div class="text-sm mb-1">
+                        <span class="text-neutral-50 font-bold">提交者：</span>{latestCommit.author}
+                    </div>
+                    <div class="text-sm mb-1">
+                        <span class="text-neutral-50 font-bold">日期：</span>{latestCommit.date} 
+                        {latestCommit.relativeTime && <span class="text-neutral-500">（{latestCommit.relativeTime}）</span>}
+                    </div>
+                    <div class="text-sm break-words">
+                        <span class="text-neutral-50 font-bold">消息：</span>{latestCommit.message}
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
     <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4">
         <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
