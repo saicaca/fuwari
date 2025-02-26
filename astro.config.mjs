@@ -20,6 +20,7 @@ import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
 import expressiveCode from "astro-expressive-code";
+import rehypeExternalLinks from "rehype-external-links"
 
 // https://astro.build/config
 export default defineConfig({
@@ -105,6 +106,14 @@ export default defineConfig({
               },
             ],
           },
+        },
+      ],
+      [
+        rehypeExternalLinks,
+        {
+          // content: { type: 'text', value: '🔗' },
+          target: '_blank',
+          rel: ['noopener', 'noreferrer'],
         },
       ],
     ],

@@ -1,18 +1,23 @@
 ---
-import '@fontsource-variable/jetbrains-mono'
-import '@fontsource-variable/jetbrains-mono/wght-italic.css'
-
-interface Props {
-  class: string
-}
-const className = Astro.props.class
+title: 添加Expressive Code插件
+published: 2025-02-26
+description: ''
+image: ''
+tags: [Fuwari, Astro, Shiki, 博客]
+category: '前端'
+draft: true 
+lang: ''
+series: "改造博客"
 ---
-<div data-pagefind-body class=`prose dark:prose-invert prose-base !max-w-none custom-md ${className}`>
-    <!--<div class="prose dark:prose-invert max-w-none custom-md">-->
-    <!--<div class="max-w-none custom-md">-->
-    <slot/>
-</div>
 
+> `Expressive Code`是 shiki 代码块的一个增强插件<br>
+> 官网：https://expressive-code.com/installation/
+
+## 去除Fuwari自带的代码块样式
+
+注释掉以下代码
+
+```astro title="src\components\misc\Markdown.astro"
 <!-- <script>
   const observer = new MutationObserver(addPreCopyButton);
   observer.observe(document.body, { childList: true, subtree: true });
@@ -64,3 +69,72 @@ const className = Astro.props.class
     observer.observe(document.body, { childList: true, subtree: true });
   }
 </script> -->
+```
+```css title="src\styles\markdown.css"
+  /* pre {
+        @apply bg-[var(--codeblock-bg)] !important;
+        @apply rounded-xl px-5;
+
+        code {
+            @apply bg-transparent text-inherit text-sm p-0;
+
+            ::selection {
+                @apply bg-[var(--codeblock-selection)];
+            }
+        }
+    } */
+```
+```astro title="src\layouts\Layout.astro"
+	// const preElements = document.querySelectorAll('pre');
+	// preElements.forEach((ele) => {
+	// 	OverlayScrollbars(ele, {
+	// 		scrollbars: {
+	// 			theme: 'scrollbar-base scrollbar-dark px-2',
+	// 			autoHide: 'leave',
+	// 			autoHideDelay: 500,
+	// 			autoHideSuspend: false
+	// 		}
+	// 	});
+	// });
+```
+
+## 添加代码块的暗黑模式
+
+修改`LightDarkSwitch.svelte`文件中的`onMount`和`switchScheme`方法
+```svelte title="src\components\LightDarkSwitch.svelte" ins={4-8}
+onMount(() => {
+  mode = getStoredTheme()
+
+  if (mode === DARK_MODE) {
+    document.documentElement.setAttribute("data-theme", "github-dark");
+  } else {
+    document.documentElement.setAttribute("data-theme", "github-light");
+  }
+  
+  const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)')
+  const changeThemeWhenSchemeChanged: Parameters<
+    typeof darkModePreference.addEventListener<'change'>
+  >[1] = e => {
+    applyThemeToDocument(mode)
+  }
+  darkModePreference.addEventListener('change', changeThemeWhenSchemeChanged)
+  return () => {
+    darkModePreference.removeEventListener(
+      'change',
+      changeThemeWhenSchemeChanged,
+    )
+  }
+})
+```
+```svelte title="src\components\LightDarkSwitch.svelte" ins={5-9}
+function switchScheme(newMode: LIGHT_DARK_MODE) {
+  mode = newMode
+  setTheme(newMode)
+
+  if (mode === DARK_MODE) {
+    document.documentElement.setAttribute("data-theme", "github-dark");
+  } else {
+    document.documentElement.setAttribute("data-theme", "github-light");
+  }
+}
+```
