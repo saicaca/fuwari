@@ -1,6 +1,7 @@
 ---
 title: 添加Expressive Code插件
 published: 2025-02-26
+updated: 2025-02-27
 description: '代码块增强'
 image: ''
 tags: [Fuwari, Astro, Shiki, 博客]
@@ -84,10 +85,30 @@ series: "改造博客"
         }
     } */
 ```
-```astro title="src\layouts\Layout.astro"
+```astro title="src\layouts\Layout.astro" collapse={2-19}
+function initCustomScrollbar() {
+  const bodyElement = document.querySelector('body');
+	if (!bodyElement) return;
+	OverlayScrollbars(
+		// docs say that a initialization to the body element would affect native functionality like window.scrollTo
+		// but just leave it here for now
+		{
+			target: bodyElement,
+			cancel: {
+				nativeScrollbarsOverlaid: true,    // don't initialize the overlay scrollbar if there is a native one
+			}
+		}, {
+		scrollbars: {
+			theme: 'scrollbar-base scrollbar-auto py-1',
+			autoHide: 'move',
+			autoHideDelay: 500,
+			autoHideSuspend: false,
+		},
+	});
+
 	// const preElements = document.querySelectorAll('pre');
 	// preElements.forEach((ele) => {
-	// 	OverlayScrollbars(ele, {
+  // OverlayScrollbars(ele, {
 	// 		scrollbars: {
 	// 			theme: 'scrollbar-base scrollbar-dark px-2',
 	// 			autoHide: 'leave',
@@ -96,9 +117,35 @@ series: "改造博客"
 	// 		}
 	// 	});
 	// });
+
+  const katexElements = document.querySelectorAll('.katex-display') as NodeListOf<HTMLElement>;
+	katexElements.forEach((ele) => {
+		OverlayScrollbars(ele, {
+			scrollbars: {
+				theme: 'scrollbar-base scrollbar-auto py-1',
+			}
+		});
+	});
+}
 ```
 
 ## 添加代码块的暗黑模式
+
+> 官方主题：https://expressive-code.com/guides/themes/
+
+在配置文件中添加双主题
+
+```mjs title="astro.config.mjs" ins={6}
+export default defineConfig({
+  // ...
+  integrations: [
+    // ...
+    expressiveCode({
+      themes: ["catppuccin-frappe", "light-plus"],
+    })
+  ]
+})
+```
 
 修改`LightDarkSwitch.svelte`文件中的`onMount`和`switchScheme`方法
 ```svelte title="src\components\LightDarkSwitch.svelte" ins={4-8}
@@ -106,9 +153,9 @@ onMount(() => {
   mode = getStoredTheme()
 
   if (mode === DARK_MODE) {
-    document.documentElement.setAttribute("data-theme", "github-dark");
+    document.documentElement.setAttribute("data-theme", "catppuccin-frappe");
   } else {
-    document.documentElement.setAttribute("data-theme", "github-light");
+    document.documentElement.setAttribute("data-theme", "light-plus");
   }
   
   const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)')
@@ -132,9 +179,9 @@ function switchScheme(newMode: LIGHT_DARK_MODE) {
   setTheme(newMode)
 
   if (mode === DARK_MODE) {
-    document.documentElement.setAttribute("data-theme", "github-dark");
+    document.documentElement.setAttribute("data-theme", "catppuccin-frappe");
   } else {
-    document.documentElement.setAttribute("data-theme", "github-light");
+    document.documentElement.setAttribute("data-theme", "light-plus");
   }
 }
 ```

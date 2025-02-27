@@ -20,7 +20,7 @@ onMount(() => {
   if (mode === DARK_MODE) {
     document.documentElement.setAttribute("data-theme", "catppuccin-frappe");
   } else {
-    document.documentElement.setAttribute("data-theme", "catppuccin-latte");
+    document.documentElement.setAttribute("data-theme", "light-plus");
   }
   
   const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)')
@@ -45,7 +45,7 @@ function switchScheme(newMode: LIGHT_DARK_MODE) {
   if (mode === DARK_MODE) {
     document.documentElement.setAttribute("data-theme", "catppuccin-frappe");
   } else {
-    document.documentElement.setAttribute("data-theme", "catppuccin-latte");
+    document.documentElement.setAttribute("data-theme", "light-plus");
   }
 }
 

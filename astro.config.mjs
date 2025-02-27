@@ -20,7 +20,8 @@ import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
 import expressiveCode from "astro-expressive-code";
-import rehypeExternalLinks from "rehype-external-links"
+import rehypeExternalLinks from "rehype-external-links";
+import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections';
 
 // https://astro.build/config
 export default defineConfig({
@@ -58,7 +59,8 @@ export default defineConfig({
       Passed: async () => true, // https://github.com/PlayForm/Compress/issues/376
     },
   }), expressiveCode({
-    themes: ["catppuccin-frappe", "catppuccin-latte"],
+    themes: ["catppuccin-frappe", "light-plus"],
+    plugins: [pluginCollapsibleSections()],
   })],
   markdown: {
     remarkPlugins: [
