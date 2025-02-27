@@ -16,6 +16,9 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^5.1.4
     version: 5.1.4(astro@5.1.6)(tailwindcss@3.4.16)
+  '@expressive-code/plugin-collapsible-sections':
+    specifier: ^0.40.2
+    version: 0.40.2
   '@fontsource-variable/jetbrains-mono':
     specifier: ^5.1.1
     version: 5.1.1
@@ -2135,6 +2138,12 @@ packages:
       postcss-nested: 6.2.0(postcss@8.5.3)
       unist-util-visit: 5.0.0
       unist-util-visit-parents: 6.0.1
+    dev: false
+
+  /@expressive-code/plugin-collapsible-sections@0.40.2:
+    resolution: {integrity: sha512-EtfuluXKk3CdFMAeCJoDsUJo/s+Yh9b+kX0hNHeFlZ/W2/H8FmdZ9Pu+Qel41vw4yP6AyiQpsamquO7bzlakug==}
+    dependencies:
+      '@expressive-code/core': 0.40.2
     dev: false
 
   /@expressive-code/plugin-frames@0.40.2:
