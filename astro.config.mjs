@@ -58,6 +58,7 @@ export default defineConfig({
       Passed: async () => true, // https://github.com/PlayForm/Compress/issues/376
     },
   }), expressiveCode({
+    themes: ["catppuccin-frappe", "catppuccin-latte"],
   })],
   markdown: {
     remarkPlugins: [

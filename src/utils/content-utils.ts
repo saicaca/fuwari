@@ -98,5 +98,6 @@ export async function getPostSeries(
     )
   })) as unknown as { body: string; data: BlogPostData; slug: string }[]
 
+  posts.reverse()
   return posts
 }

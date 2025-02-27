@@ -1,11 +1,11 @@
 ---
 title: 添加Expressive Code插件
 published: 2025-02-26
-description: ''
+description: '代码块增强'
 image: ''
 tags: [Fuwari, Astro, Shiki, 博客]
 category: '前端'
-draft: true 
+draft: false 
 lang: ''
 series: "改造博客"
 ---

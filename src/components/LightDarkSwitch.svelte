@@ -18,9 +18,9 @@ onMount(() => {
   mode = getStoredTheme()
 
   if (mode === DARK_MODE) {
-    document.documentElement.setAttribute("data-theme", "github-dark");
+    document.documentElement.setAttribute("data-theme", "catppuccin-frappe");
   } else {
-    document.documentElement.setAttribute("data-theme", "github-light");
+    document.documentElement.setAttribute("data-theme", "catppuccin-latte");
   }
   
   const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)')
@@ -43,9 +43,9 @@ function switchScheme(newMode: LIGHT_DARK_MODE) {
   setTheme(newMode)
   
   if (mode === DARK_MODE) {
-    document.documentElement.setAttribute("data-theme", "github-dark");
+    document.documentElement.setAttribute("data-theme", "catppuccin-frappe");
   } else {
-    document.documentElement.setAttribute("data-theme", "github-light");
+    document.documentElement.setAttribute("data-theme", "catppuccin-latte");
   }
 }
 
