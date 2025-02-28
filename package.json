@@ -21,6 +21,7 @@
     "@astrojs/svelte": "7.0.3",
     "@astrojs/tailwind": "^5.1.4",
     "@expressive-code/plugin-collapsible-sections": "^0.40.2",
+    "@expressive-code/plugin-line-numbers": "^0.40.2",
     "@fontsource-variable/jetbrains-mono": "^5.1.1",
     "@fontsource/roboto": "^5.1.0",
     "@iconify-json/fa6-brands": "^1.2.3",
