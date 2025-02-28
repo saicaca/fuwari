@@ -6,18 +6,18 @@ import { getEntry } from 'astro:content'
 import { i18n } from '../i18n/translation'
 import I18nKey from '../i18n/i18nKey'
 import Markdown from '@components/misc/Markdown.astro'
+import Comments from '@components/widget/Comments.svelte'
 
 const friendsPost = await getEntry('spec', 'friends')
 
 const { Content } = await friendsPost.render()
 const items = [
-//   {  
-//     title: 'Astro',  
-//     imgurl: 'https://avatars.githubusercontent.com/u/44914786?s=48&v=4',  
-//     desc: 'The web framework for content-driven websites. ⭐️ Star to support our work!',  
-//     siteurl: 'https://github.com/withastro/astro',  
-//     tags: ['框架'],  
-//   },
+  {  
+    title: 'AULyPcのBlog',
+    imgurl: 'https://blog.aulypc0x0.online/favicon/favicon_amiya.webp',
+    desc: '今日も生きててえらい ☁',
+    siteurl: 'https://blog.aulypc0x0.online',
+  },
 ]
 ---
 <MainGridLayout title={i18n(I18nKey.friends)} description={i18n(I18nKey.friends)}>
@@ -41,7 +41,7 @@ const items = [
                                     <span class="transition text-50 text-sm font-medium">
                                         {tag}
                                     </span>))}
-                                    {!(item.tags && item.tags.length > 0) && <div class="transition text-50 text-sm font-medium">{i18n(I18nKey.noTags)}</div>}
+                                    {/* {!(item.tags && item.tags.length > 0) && <div class="transition text-50 text-sm font-medium">{i18n(I18nKey.noTags)}</div>} */}
                                 </div>
                             </div>
                         </div>
@@ -58,4 +58,6 @@ const items = [
             </Markdown>
         </div>
     </div>
+
+    <Comments client:only></Comments>
 </MainGridLayout>
