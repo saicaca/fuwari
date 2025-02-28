@@ -29,6 +29,13 @@ export default defineConfig({
   site: "https://ikamusume7.org/",
   base: "/",
   trailingSlash: "always",
+  redirects: {
+    "/posts/前端/在博客中添加系列栏/":"/posts/frontend/add_series_field/",
+    "/posts/前端/改造博客的代码块/":"/posts/frontend/old_code_block/",
+    "/posts/前端/增强代码块功能/":"/posts/frontend/code_block_ex/",
+    "/posts/前端/从头开整Fuwari/":"/posts/frontend/recreate_repository/",
+    "/posts/前端/带黑暗模式的评论功能/":"/posts/frontend/comments_with_darkmode/",
+  },
   integrations: [tailwind(
       {
         nesting: true,
