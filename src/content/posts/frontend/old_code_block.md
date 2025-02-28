@@ -6,7 +6,7 @@ description: "增加更多的功能（已抛弃）"
 image: ""
 tags: [Fawari, Astro, Shiki, 博客]
 category: "前端"
-draft: true
+draft: false
 lang: ""
 ---
 
