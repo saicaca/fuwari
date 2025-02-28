@@ -22,6 +22,7 @@ import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import expressiveCode from "astro-expressive-code";
 import rehypeExternalLinks from "rehype-external-links";
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections';
+import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 
 // https://astro.build/config
 export default defineConfig({
@@ -60,7 +61,7 @@ export default defineConfig({
     },
   }), expressiveCode({
     themes: ["catppuccin-frappe", "light-plus"],
-    plugins: [pluginCollapsibleSections()],
+    plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
   })],
   markdown: {
     remarkPlugins: [
