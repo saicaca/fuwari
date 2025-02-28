@@ -12,7 +12,7 @@ lang: ""
 
 :::caution
 因为有更好的方案，该做法已被抛弃<br>
-请参考 [增强代码块功能](/posts/前端/增强代码块功能/)
+请参考 [增强代码块功能](/posts/frontend/code_block_ex/)
 :::
 
 ## 添加 shiki 官方的 transformers
