@@ -26,7 +26,7 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://fuwari.vercel.app/",
+  site: "https://ikamusume7.org/",
   base: "/",
   trailingSlash: "always",
   integrations: [tailwind(

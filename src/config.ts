@@ -73,6 +73,11 @@ export const profileConfig: ProfileConfig = {
       icon: 'fa6-brands:github',
       url: 'https://github.com/ikamusume7',
     },
+    {
+      name: 'RSS',
+      icon: 'material-symbols:rss-feed-rounded',
+      url: '/rss.xml',
+    },
   ],
 }
 
