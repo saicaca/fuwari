@@ -18,6 +18,11 @@
 
 博客[羽毛笔](https://icons8.com/icon/hGBTBdUownyO/%E7%BE%BD%E6%AF%9B%E7%AC%94) 图标来自[Icons8](https://icons8.com)
 
+## 博客字体
+
+来自[MiSans](https://hyperos.mi.com/font/zh/)，导入参考[《在Fuwari使用自定义字体》
+](https://blog.aulypc0x0.online/posts/use_custom_fonts_in_fuwari/)
+
 ## 关于我
 
 宅男
