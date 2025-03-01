@@ -158,7 +158,7 @@
 
 @font-face {
     font-family: 'MiSans';
-    src: url('/fonts/MiSans-Normal.woff') format('woff');
+    src: url('/fonts/MiSans-Normal.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -166,7 +166,7 @@
 
 @font-face {
     font-family: 'MiSans';
-    src: url('/fonts/MiSans-Regular.woff') format('woff');
+    src: url('/fonts/MiSans-Regular.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -174,7 +174,7 @@
 
 @font-face {
     font-family: 'MiSans';
-    src: url('/fonts/MiSans-Medium.woff') format('woff');
+    src: url('/fonts/MiSans-Medium.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -182,7 +182,7 @@
 
 @font-face {
     font-family: 'MiSans';
-    src: url('/fonts/MiSans-Semibold.woff') format('woff');
+    src: url('/fonts/MiSans-Semibold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
