@@ -1,5 +1,5 @@
 ---
-title: 带黑暗模式的评论功能
+title: 在Fuwari中添加带黑暗模式的评论功能
 published: 2025-02-28
 description: '使用giscus'
 image: ''

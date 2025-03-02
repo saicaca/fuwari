@@ -2,7 +2,7 @@
 title: 改造博客的代码块
 published: 2024-10-25
 updated: 2025-02-28
-description: "增加更多的功能（已抛弃）"
+description: "增加更多的功能（已废弃）"
 image: ""
 tags: [Fawari, Astro, Shiki, 博客]
 category: "前端"
@@ -11,7 +11,7 @@ lang: ""
 ---
 
 :::caution
-因为有更好的方案，该做法已被抛弃<br>
+因为有更好的方案，该做法已被废弃<br>
 请参考 [增强代码块功能](/posts/frontend/code_block_ex/)
 :::
 

@@ -1,5 +1,5 @@
 ---
-title: 在博客中添加系列栏
+title: 在Fuwari中添加系列栏
 published: 2024-10-23
 updated: 2025-02-28
 description: 方便查看同系列相关文章
