@@ -8,6 +8,7 @@ tags: [Fuwari]
 category: '前端'
 draft: false 
 lang: ''
+series: 杂谈
 ---
 
 `Fuwari`最新版更新了目录功能，然而之前改了太多东西，合并起来很麻烦，
