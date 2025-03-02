@@ -1,5 +1,5 @@
 ---
-title: 在博客中添加系列页面
+title: 在Fuwari中添加系列页面
 published: 2025-03-02
 description: '一个可以查看所有系列的页面'
 image: ''

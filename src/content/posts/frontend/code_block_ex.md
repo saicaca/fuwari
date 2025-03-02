@@ -1,5 +1,5 @@
 ---
-title: 增强代码块功能
+title: 增强Fuwari的代码块功能
 published: 2025-02-26
 updated: 2025-02-28
 description: '安装Expressive Code插件'
