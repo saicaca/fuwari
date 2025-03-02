@@ -2,7 +2,7 @@
 title: Galgame回忆录
 published: 2024-11-01
 description: ''
-image: '藤堂こより.jpg'
+image: '藤堂こより.webp'
 tags: [Galgame]
 category: '回想'
 draft: true 
