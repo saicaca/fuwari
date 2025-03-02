@@ -194,7 +194,7 @@ const isCollapsed = series.length >= 10
                 <!-- post title -->
                 <div class="w-[85%] text-left font-bold
                     group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
-                    text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden"
+                    text-75 pr-15 whitespace-nowrap overflow-ellipsis overflow-hidden"
                 >
                         {t.data.title}
                 </div>
