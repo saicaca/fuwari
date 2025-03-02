@@ -2,8 +2,9 @@
 title: Draft Example
 published: 2022-07-01
 tags: [Markdown, Blogging, Demo]
-category: Examples
+category: 指南
 draft: true
+series: 指南
 ---
 
 # This Article is a Draft
