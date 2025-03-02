@@ -101,7 +101,7 @@ const friendsPost = await getEntry('spec', 'friends')
         crossorigin="anonymous"
         async>
 </script>
-<Comments client:only></Comments>
+<Comments client:only="svelte"></Comments>
 
 </MainGridLayout>
 ```

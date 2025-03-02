@@ -5,8 +5,9 @@ updated: 2024-11-29
 description: 'Read more about Markdown features in Fuwari'
 image: ''
 tags: [Demo, Example, Markdown, Fuwari]
-category: 'Examples'
+category: '指南'
 draft: true 
+series: 指南
 ---
 
 ## GitHub Repository Cards
