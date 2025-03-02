@@ -12,6 +12,10 @@ export async function getSortedPosts(): Promise<
 
   const sorted = allBlogPosts.sort(
     (a: { data: BlogPostData }, b: { data: BlogPostData }) => {
+      // 首先按置顶状态排序
+      if (a.data.pinned && !b.data.pinned) return -1;
+      if (!a.data.pinned && b.data.pinned) return 1;
+      // 然后按发布时间排序
       const dateA = new Date(a.data.published)
       const dateB = new Date(b.data.published)
       return dateA > dateB ? -1 : 1
