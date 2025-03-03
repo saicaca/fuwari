@@ -45,8 +45,8 @@ export const navBarConfig: NavBarConfig = {
     LinkPreset.About,
     LinkPreset.Friends,
     {
-      name: 'GitHub',
-      url: 'https://github.com/ikamusume7/fuwari',     // Internal links should not include the base path, as it is automatically added
+      name: '开往',
+      url: 'https://www.travellings.cn/go.html',     // Internal links should not include the base path, as it is automatically added
       external: true,                               // Show an external link icon and will open in a new tab
     },
   ],
