@@ -23,6 +23,7 @@ import expressiveCode from "astro-expressive-code";
 import rehypeExternalLinks from "rehype-external-links";
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
+import fuwariLinkCard from "./src/plugins/fuwari-link-card.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -70,7 +71,9 @@ export default defineConfig({
   }), expressiveCode({
     themes: ["catppuccin-frappe", "light-plus"],
     plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
-  })],
+  }), fuwariLinkCard({
+    internalLink: { enabled: true },
+  }),],
   markdown: {
     remarkPlugins: [
       remarkMath,

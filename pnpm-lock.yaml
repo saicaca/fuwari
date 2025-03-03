@@ -22,6 +22,9 @@ dependencies:
   '@expressive-code/plugin-line-numbers':
     specifier: ^0.40.2
     version: 0.40.2
+  '@fastify/deepmerge':
+    specifier: ^2.0.2
+    version: 2.0.2
   '@fontsource-variable/jetbrains-mono':
     specifier: ^5.1.1
     version: 5.1.1
@@ -76,6 +79,9 @@ dependencies:
   mdast-util-to-string:
     specifier: ^4.0.0
     version: 4.0.0
+  open-graph-scraper:
+    specifier: ^6.9.0
+    version: 6.9.0
   overlayscrollbars:
     specifier: ^2.10.1
     version: 2.10.1
@@ -85,6 +91,9 @@ dependencies:
   photoswipe:
     specifier: ^5.4.4
     version: 5.4.4
+  punycode:
+    specifier: ^2.3.1
+    version: 2.3.1
   reading-time:
     specifier: ^1.5.0
     version: 1.5.0
@@ -136,6 +145,9 @@ dependencies:
   typescript:
     specifier: ^5.7.2
     version: 5.7.2
+  unified:
+    specifier: ^11.0.5
+    version: 11.0.5
   unist-util-visit:
     specifier: ^5.0.0
     version: 5.0.0
@@ -156,6 +168,9 @@ devDependencies:
   '@types/mdast':
     specifier: ^4.0.4
     version: 4.0.4
+  '@types/punycode':
+    specifier: ^2.1.4
+    version: 2.1.4
   '@types/sanitize-html':
     specifier: ^2.13.0
     version: 2.13.0
@@ -2177,6 +2192,10 @@ packages:
       '@expressive-code/core': 0.40.2
     dev: false
 
+  /@fastify/deepmerge@2.0.2:
+    resolution: {integrity: sha512-3wuLdX5iiiYeZWP6bQrjqhrcvBIf0NHbQH1Ur1WbHvoiuTYUEItgygea3zs8aHpiitn0lOB8gX20u1qO+FDm7Q==}
+    dev: false
+
   /@fontsource-variable/jetbrains-mono@5.1.1:
     resolution: {integrity: sha512-V+1aRFRvuZ66PpO30s8l/2aADKzpV9VRsO3kSZE+rTMvi4vab3cUcPHMN2z+wAvjkYJO71Yf+g3/Y6pSMmQpVQ==}
     dev: false
@@ -3254,6 +3273,10 @@ packages:
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
     dev: false
 
+  /@types/punycode@2.1.4:
+    resolution: {integrity: sha512-trzh6NzBnq8yw5e35f8xe8VTYjqM3NE7bohBtvDVf/dtUer3zYTLK1Ka3DG3p7bdtoaOHZucma6FfVKlQ134pQ==}
+    dev: true
+
   /@types/resolve@1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
     dependencies:
@@ -3961,6 +3984,10 @@ packages:
 
   /character-reference-invalid@2.0.1:
     resolution: {integrity: sha512-iBZ4F4wRbyORVsu0jPV7gXkOsGYjGHPmAyv+HiHG8gi5PtC9KI2j1+v8/tlibRvjoWX027ypmG/n0HtO5t7unw==}
+    dev: false
+
+  /chardet@2.1.0:
+    resolution: {integrity: sha512-bNFETTG/pM5ryzQ9Ad0lJOTa6HWD/YsScAR3EnCPZRPlQh77JocYktSHOUHelyhm8IARL+o4c4F1bP5KVOjiRA==}
     dev: false
 
   /cheerio-select@2.1.0:
@@ -7028,6 +7055,16 @@ packages:
       regex-recursion: 5.1.1
     dev: false
 
+  /open-graph-scraper@6.9.0:
+    resolution: {integrity: sha512-1KoV5v6GT0/MqlryrVGQROhEAD4u8wC3VjYOxsnhj3mWeGJ6N6nF/rbrcZREFr+kiYm9I5LMrzdK9t9hBMbL2Q==}
+    engines: {node: '>=18.0.0'}
+    dependencies:
+      chardet: 2.1.0
+      cheerio: 1.0.0
+      iconv-lite: 0.6.3
+      undici: 6.21.1
+    dev: false
+
   /open@8.4.2:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
@@ -7853,6 +7890,11 @@ packages:
 
   /punycode.js@2.3.1:
     resolution: {integrity: sha512-uxFIHU0YlHYhDQtV4R9J6a52SLx28BCjT+4ieh7IGbgwVJWO+km431c4yRlREUAsAmt/uMjQUyQHNEPf0M39CA==}
+    engines: {node: '>=6'}
+    dev: false
+
+  /punycode@2.3.1:
+    resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
     dev: false
 
