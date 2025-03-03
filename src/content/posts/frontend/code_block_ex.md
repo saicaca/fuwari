@@ -2,9 +2,9 @@
 title: 增强Fuwari的代码块功能
 published: 2025-02-26
 updated: 2025-02-28
-description: '安装Expressive Code插件'
+description: '安装Expressive Code插件，使代码块支持多主题高亮、增减标记等功能'
 image: 'https://expressive-code.com/open-graph/index.png'
-tags: [Fuwari, Astro, Shiki, 博客]
+tags: [Fuwari, Astro, 博客]
 category: '前端'
 draft: false 
 lang: ''
@@ -13,7 +13,7 @@ series: "改造博客"
 
 :::note[前言]
 这是代替[旧方案](/posts/frontend/old_code_block/)的新方案<br>
-`Expressive Code`是 shiki 代码块的一个增强插件<br>
+`Expressive Code`是Astro代码块的一个增强插件<br>
 :::
 
 https://expressive-code.com/
@@ -22,9 +22,9 @@ https://expressive-code.com/
 Fuwari的版本不同可能会导致代码位置和本博文中描述的不一致
 :::
 
-## 去除Fuwari自带的代码块样式
+## 注释Fuwari自带的代码块样式
 
-注释掉以下代码
+由于Fuwari自带的代码块样式会干扰到插件的样式，所以先要把以下代码**注释掉**
 
 ```astro title="src\components\misc\Markdown.astro"
 <!-- <script>
@@ -138,11 +138,12 @@ function initCustomScrollbar() {
 ```
 
 ## 导入Expressive Code
+
 直接参考 https://expressive-code.com/installation/#astro
 
 ## 添加代码块的黑暗模式
 
-> 官方主题：https://expressive-code.com/guides/themes/
+> 官方主题列表：https://expressive-code.com/guides/themes/#available-themes
 
 在配置文件中添加双主题
 
@@ -197,7 +198,7 @@ function switchScheme(newMode: LIGHT_DARK_MODE) {
 }
 ```
 :::note
-需要重启项目才能应用
+需要**重启**项目才能应用
 :::
 
 ## 部分功能测试
@@ -244,7 +245,7 @@ function demo() {
 ### 文本标记
 
 ````text
-```text "c" ins="csharp" del="ruby"
+```text "c c++" ins="csharp" del="ruby"
 c c++ java
 javascript python csharp
 rust ruby golang
