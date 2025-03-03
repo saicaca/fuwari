@@ -21,7 +21,7 @@ So in this article, I am going to discuss the methods in detail. I have also cre
 
 ## Video Tutorial
 
-<iframe width="893" height="502" src="https://www.youtube.com/watch?v=A45lWrndVHA" title="How To Run LaTeX Projects Locally (for FREE!) On Windows Operating System" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="893" height="502" src="https://www.youtube.com/embed/A45lWrndVHA" title="How To Run LaTeX Projects Locally (for FREE!) On Windows Operating System" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Resources You’ll Need:
 
