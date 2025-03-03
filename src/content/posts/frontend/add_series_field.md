@@ -3,7 +3,7 @@ title: 在Fuwari中添加系列栏
 published: 2024-10-23
 updated: 2025-02-28
 description: 方便查看同系列相关文章
-image: ""
+image: "https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/7aa86014-a0d0-4089-1139-88c8a95dd000/public"
 tags: [Fuwari, Astro, 博客]
 category: "前端"
 draft: false
@@ -11,7 +11,11 @@ lang: ""
 series: "改造博客"
 ---
 
-> 如果是同一个系列（series）的文章，在名片栏下方增加一个系列栏，显示系列内所有文章的链接
+> 封面图来源：[かぷりちお(アズレン３人組)🔗](https://www.pixiv.net/artworks/68126580)
+
+:::note[前言]
+如果是同一个系列（series）的文章，在名片栏下方增加一个系列栏，显示系列内所有文章的链接
+:::
 
 ## 改动点
 

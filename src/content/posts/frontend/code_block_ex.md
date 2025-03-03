@@ -3,7 +3,7 @@ title: 增强Fuwari的代码块功能
 published: 2025-02-26
 updated: 2025-02-28
 description: '安装Expressive Code插件'
-image: ''
+image: 'https://expressive-code.com/open-graph/index.png'
 tags: [Fuwari, Astro, Shiki, 博客]
 category: '前端'
 draft: false 
@@ -11,8 +11,10 @@ lang: ''
 series: "改造博客"
 ---
 
-> 这是代替[旧方案](/posts/frontend/old_code_block/)的新方案<br>
-> `Expressive Code`是 shiki 代码块的一个增强插件<br>
+:::note[前言]
+这是代替[旧方案](/posts/frontend/old_code_block/)的新方案<br>
+`Expressive Code`是 shiki 代码块的一个增强插件<br>
+:::
 
 https://expressive-code.com/
 
