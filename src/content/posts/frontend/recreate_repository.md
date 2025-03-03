@@ -14,6 +14,8 @@ series: 杂谈
 `Fuwari`最新版更新了目录功能，然而之前改了太多东西，合并起来很麻烦，
 而且也找到了增强代码块的[新方案](/posts/frontend/code_block_ex/)，所以直接重开了一个项目。
 
+[/posts/frontend/code_block_ex/](/posts/frontend/code_block_ex/)
+
 还增加了文章的`更新时间`
 ```yml ins={4}
 ---

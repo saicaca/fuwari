@@ -3,7 +3,7 @@ title: 在Fuwari中添加系列页面
 published: 2025-03-02
 updated: 2025-03-03
 description: '一个可以查看所有系列的页面'
-image: ''
+image: 'https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/908f4a2b-4886-4b55-9ed0-5f125bcb6500/public'
 tags: [Fuwari, Astro, 博客]
 category: '前端'
 draft: false 
@@ -11,8 +11,14 @@ lang: ''
 series: 改造博客
 ---
 
-> 接上回 [在博客中添加系列栏](/posts/frontend/add_series_field/)<br>
-> 加一个系列页面，用来查看所有系列，在导航栏点击进入
+> 封面图来源：[伍長(アズールレーン初期艦4人)🔗](https://www.pixiv.net/artworks/69752377)
+
+:::note[前言]
+接上回 *《在Fuwari中添加系列栏》*<br>
+加一个系列页面，用来查看所有系列，在导航栏点击进入
+:::
+
+[/posts/frontend/add_series_field/](/posts/frontend/add_series_field/)
 
 ## 改动点
 
