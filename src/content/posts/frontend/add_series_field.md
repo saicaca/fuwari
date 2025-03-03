@@ -2,7 +2,7 @@
 title: 在Fuwari中添加系列栏
 published: 2024-10-23
 updated: 2025-02-28
-description: 方便查看同系列相关文章
+description: 可以将同一分类下有关联的文章归类为同一个系列
 image: "https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/7aa86014-a0d0-4089-1139-88c8a95dd000/public"
 tags: [Fuwari, Astro, 博客]
 category: "前端"
@@ -14,8 +14,29 @@ series: "改造博客"
 > 封面图来源：[かぷりちお(アズレン３人組)🔗](https://www.pixiv.net/artworks/68126580)
 
 :::note[前言]
-如果是同一个系列（series）的文章，在名片栏下方增加一个系列栏，显示系列内所有文章的链接
+**系列**相当于是对同一分类下的文章进行再细分<br>
+当查看某篇文章时，如果它属于某一个系列，在名片栏与分类栏中间会多出一个**系列栏**，<br>
+里面会列出同系列的所有文章
 :::
+
+## 示例
+
+在`md`文件上方配置项中添加`series`，只要系列名相同就会被归类为同一系列
+
+```yml ins={11}
+---
+title: 在Fuwari中添加系列栏
+published: 2024-10-23
+updated: 2025-02-28
+description: 可以将同一分类下有关联的文章归类为同一个系列
+image: "https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/7aa86014-a0d0-4089-1139-88c8a95dd000/public"
+tags: [Fuwari, Astro, 博客]
+category: "前端"
+draft: false
+lang: ""
+series: "改造博客"
+---
+```
 
 ## 改动点
 

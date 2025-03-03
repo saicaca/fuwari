@@ -1,7 +1,7 @@
 ---
 title: 在Fuwari中添加评论功能(带黑暗模式)
 published: 2025-02-28
-description: '使用giscus'
+description: '使用Giscus实现评论功能'
 image: 'https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/7340422d-781d-4f27-9912-f554680e6600/public'
 tags: [Astro, Fuwari, Giscus, 博客]
 category: '前端'
@@ -23,7 +23,8 @@ https://blog.aulypc0x0.online/posts/add_comment_for_your_website_in_fuwari/
 https://www.maxpou.fr/blog/giscus-with-astro/
 
 :::important[前提条件]
-必须先做完[《利用giscus给你的网站添加评论功能》](https://blog.aulypc0x0.online/posts/add_comment_for_your_website_in_fuwari/)中的操作
+导入Giscus的部分请参考[《利用giscus给你的网站添加评论功能》](https://blog.aulypc0x0.online/posts/add_comment_for_your_website_in_fuwari/)<br>
+本文中写的改动点只涉及到增加**黑暗模式**
 :::
 
 ## 改动点
