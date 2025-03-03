@@ -14,6 +14,10 @@ series: '改造博客'
 > [《利用giscus给你的网站添加评论功能》](https://blog.aulypc0x0.online/posts/add_comment_for_your_website_in_fuwari/) by AULyPc<br>
 > [《How to integrate Giscus to your Astro Blog》](https://www.maxpou.fr/blog/giscus-with-astro/) by Maxence Poutord
 
+https://blog.aulypc0x0.online/posts/add_comment_for_your_website_in_fuwari/
+
+https://www.maxpou.fr/blog/giscus-with-astro/
+
 :::important[前提条件]
 必须先做完[《利用giscus给你的网站添加评论功能》](https://blog.aulypc0x0.online/posts/add_comment_for_your_website_in_fuwari/)中的操作
 :::

@@ -13,7 +13,8 @@ series: "改造博客"
 
 > 这是代替[旧方案](/posts/frontend/old_code_block/)的新方案<br>
 > `Expressive Code`是 shiki 代码块的一个增强插件<br>
-> 官网：https://expressive-code.com/installation/
+
+https://expressive-code.com/
 
 :::important[重要]
 Fuwari的版本不同可能会导致代码位置和本博文中描述的不一致
