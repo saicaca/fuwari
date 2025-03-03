@@ -58,6 +58,11 @@ export const profileConfig: ProfileConfig = {
   bio: '又菜有爱学',
   links: [
     {
+      name: 'GitHub',
+      icon: 'fa6-brands:github',
+      url: 'https://github.com/ikamusume7',
+    },
+    {
       name: 'Twitter',
       icon: 'fa6-brands:twitter',       // Visit https://icones.js.org/ for icon codes
                                         // You will need to install the corresponding icon set if it's not already included
@@ -68,11 +73,6 @@ export const profileConfig: ProfileConfig = {
       name: 'Steam',
       icon: 'fa6-brands:steam',
       url: 'https://steamcommunity.com/profiles/76561198180590390/',
-    },
-    {
-      name: 'GitHub',
-      icon: 'fa6-brands:github',
-      url: 'https://github.com/ikamusume7',
     },
     {
       name: 'RSS',
