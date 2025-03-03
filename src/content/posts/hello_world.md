@@ -2,7 +2,7 @@
 title: Hello World
 published: 2025-03-02
 description: '欢迎来到本博客'
-image: 'https://s2.loli.net/2025/03/03/UxQmqWF7E3XilvJ.webp'
+image: 'https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/18ea2692-7add-42ac-f0ed-f9d926c68c00/public'
 tags: []
 category: ''
 draft: false 
