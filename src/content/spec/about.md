@@ -2,7 +2,9 @@
 
 ## 博客框架
 
-使用了 `Fuwari`，一个基于 Astro 开发的静态博客模板。
+使用了 `Fuwari`，一个基于 `Astro` 开发的静态博客模板。
+
+::github{repo="withastro/astro"}
 
 ::github{repo="saicaca/fuwari"}
 
