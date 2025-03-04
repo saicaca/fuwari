@@ -24,6 +24,7 @@ import { getStoredTheme } from '@utils/setting-utils.ts'
 const mode = writable(AUTO_MODE)
 onMount(() => {
   mode.set(getStoredTheme())
+  updateAstroSvg()
 })
 
 function updateGiscusTheme() {
