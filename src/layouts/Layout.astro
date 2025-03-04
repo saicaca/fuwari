@@ -328,14 +328,14 @@ function initCustomScrollbar() {
 	const processKatexElement = (element: HTMLElement) => {
 		if (!element.parentNode) return;
 		if (element.hasAttribute('data-scrollbar-initialized')) return;
-		
+
 		const container = document.createElement('div');
 		container.className = 'katex-display-container';
 		container.setAttribute('aria-label', 'scrollable container for formulas');
-		
+
 		element.parentNode.insertBefore(container, element);
 		container.appendChild(element);
-		
+
 		OverlayScrollbars(container, {
 			scrollbars: {
 				theme: 'scrollbar-base scrollbar-auto',
@@ -344,7 +344,7 @@ function initCustomScrollbar() {
 				autoHideSuspend: false
 			}
 		});
-		
+
 		element.setAttribute('data-scrollbar-initialized', 'true');
 	};
 
@@ -364,13 +364,13 @@ function initCustomScrollbar() {
 
 function showBanner() {
 	if (!siteConfig.banner.enable) return;
-	
+
 	const banner = document.getElementById('banner');
 	if (!banner) {
 		console.error('Banner element not found');
 		return;
 	}
-	
+
 	banner.classList.remove('opacity-0', 'scale-105');
 }
 
