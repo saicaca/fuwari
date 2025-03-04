@@ -102,7 +102,7 @@ export default defineConfig({
 
 :::warning
 不过有些标识图标不适用双主题，比如 Astro<br>
-下面是博主的临时解决办法
+下面是博主的临时解决办法（针对Astro）
 :::
 
 ```svelte title="src\components\widget\Comments.svelte" ins={8, 18-32, 39}
