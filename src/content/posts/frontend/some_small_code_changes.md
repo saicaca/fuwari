@@ -1,7 +1,8 @@
 ---
 title: 对Fuwari进行一些小的改动
 published: 2025-03-03
-description: '字体、置顶文章、链接卡片'
+updated: 2025-03-04
+description: '字体、置顶文章、链接卡片、代码块标识'
 image: ''
 tags: [Fuwari, Astro, 博客]
 category: '前端'
@@ -68,3 +69,117 @@ module.exports = {
 ## 链接卡片
 
 参考了[feat: add link-card feature](https://github.com/saicaca/fuwari/pull/324/commits)
+
+## 代码块标识
+
+一个`expressive-code`的插件，增加代码块的语言标识图标
+
+https://github.com/xt0rted/expressive-code-file-icons
+
+这是博主的设置
+
+```js title="astro.config.mjs" ins={1, 8-11}
+import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
+
+export default defineConfig({
+  // ...
+  integrations: [
+    // ...
+    , expressiveCode({
+    themes: ["catppuccin-frappe", "light-plus"],
+    plugins: [pluginCollapsibleSections(), pluginLineNumbers(), 
+      pluginFileIcons({
+        iconClass: "text-4 w-5 inline mr-1 mb-1",
+        titleClass: ""
+      })
+    ],
+  }),
+  ]
+})
+```
+
+:::warning
+不过有些标识图标不适用双主题，比如 Astro<br>
+下面是博主的临时解决办法
+:::
+
+```svelte title="src\components\widget\Comments.svelte" ins={1-15, 22}
+function updateAstroSvg(){
+  const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+  const spans = document.querySelectorAll('figcaption > .title')
+  spans.forEach(span => {
+    if (!span || !span.innerHTML.includes('astro')) return
+
+    const paths = span.querySelectorAll('svg > path')
+    if (theme === 'dark'){
+      paths[1].setAttribute('fill', '#fff')
+    }
+    else{
+      paths[1].setAttribute('fill', '#000')
+    }
+  })
+}
+
+const observer = new MutationObserver(updateGiscusTheme)
+observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+
+window.onload = () => {
+  updateGiscusTheme()
+  updateAstroSvg()
+}
+```
+```svelte title="src\components\LightDarkSwitch.svelte" ins={9, 36, 39-52} collapse={12-23}
+onMount(() => {
+  mode = getStoredTheme()
+
+  if (mode === DARK_MODE) {
+    document.documentElement.setAttribute("data-theme", "catppuccin-frappe");
+  } else {
+    document.documentElement.setAttribute("data-theme", "light-plus");
+  }
+  updateAstroSvg(mode)
+  
+  const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)')
+  const changeThemeWhenSchemeChanged: Parameters<
+    typeof darkModePreference.addEventListener<'change'>
+  >[1] = e => {
+    applyThemeToDocument(mode)
+  }
+  darkModePreference.addEventListener('change', changeThemeWhenSchemeChanged)
+  return () => {
+    darkModePreference.removeEventListener(
+      'change',
+      changeThemeWhenSchemeChanged,
+    )
+  }
+})
+
+
+function switchScheme(newMode: LIGHT_DARK_MODE) {
+  mode = newMode
+  setTheme(newMode)
+  
+  if (mode === DARK_MODE) {
+    document.documentElement.setAttribute("data-theme", "catppuccin-frappe");
+  } else {
+    document.documentElement.setAttribute("data-theme", "light-plus");
+  }
+  updateAstroSvg(mode)
+}
+
+function updateAstroSvg(mode: LIGHT_DARK_MODE) {
+  const spans = document.querySelectorAll('figcaption > .title')
+  spans.forEach(span => {
+    if (!span || !span.innerHTML.includes('astro')) return
+
+    const paths = span.querySelectorAll('svg > path')
+    if (mode === DARK_MODE){
+      paths[1].setAttribute('fill', '#fff')
+    }
+    else{
+      paths[1].setAttribute('fill', '#000')
+    }
+  })
+}
+```
+
