@@ -78,7 +78,7 @@ https://github.com/xt0rted/expressive-code-file-icons
 
 这是博主的设置
 
-```js title="astro.config.mjs" ins={1, 8-11}
+```js title="astro.config.mjs" ins={1, 10-13}
 import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
 
 export default defineConfig({
