@@ -22,6 +22,7 @@ onMount(() => {
   } else {
     document.documentElement.setAttribute("data-theme", "light-plus");
   }
+  updateAstroSvg(mode)
   
   const darkModePreference = window.matchMedia('(prefers-color-scheme: dark)')
   const changeThemeWhenSchemeChanged: Parameters<
@@ -38,6 +39,7 @@ onMount(() => {
   }
 })
 
+
 function switchScheme(newMode: LIGHT_DARK_MODE) {
   mode = newMode
   setTheme(newMode)
@@ -47,6 +49,22 @@ function switchScheme(newMode: LIGHT_DARK_MODE) {
   } else {
     document.documentElement.setAttribute("data-theme", "light-plus");
   }
+  updateAstroSvg(mode)
+}
+
+function updateAstroSvg(mode: LIGHT_DARK_MODE) {
+  const spans = document.querySelectorAll('figcaption > .title')
+  spans.forEach(span => {
+    if (!span || !span.innerHTML.includes('astro')) return
+
+    const paths = span.querySelectorAll('svg > path')
+    if (mode === DARK_MODE){
+      paths[1].setAttribute('fill', '#fff')
+    }
+    else{
+      paths[1].setAttribute('fill', '#000')
+    }
+  })
 }
 
 function toggleScheme() {
