@@ -76,7 +76,7 @@ module.exports = {
 
 https://github.com/xt0rted/expressive-code-file-icons
 
-这是博主的设置
+这是博主的设置，修改样式后需**删除**项目里的`📁.astro`，并**重启项目**才能看到效果
 
 ```js title="astro.config.mjs" ins={1, 10-13}
 import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
