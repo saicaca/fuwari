@@ -23,7 +23,7 @@ series: "改造博客"
 
 在`md`文件上方配置项中添加`series`，只要系列名相同就会被归类为同一系列
 
-```yml ins={11}
+```md title="demo.md" ins={11}
 ---
 title: 在Fuwari中添加系列栏
 published: 2024-10-23
