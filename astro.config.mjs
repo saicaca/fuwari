@@ -24,6 +24,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections';
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 import fuwariLinkCard from "./src/plugins/fuwari-link-card.ts";
+import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
 
 // https://astro.build/config
 export default defineConfig({
@@ -70,7 +71,12 @@ export default defineConfig({
     },
   }), expressiveCode({
     themes: ["catppuccin-frappe", "light-plus"],
-    plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
+    plugins: [pluginCollapsibleSections(), pluginLineNumbers(), 
+      pluginFileIcons({
+        iconClass: "text-4 w-5 inline mr-1 mb-1",
+        titleClass: ""
+      })
+    ],
   }), fuwariLinkCard({
     internalLink: { enabled: true },
   }),],

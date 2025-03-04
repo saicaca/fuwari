@@ -33,6 +33,7 @@
     "@iconify/svelte": "^4.0.2",
     "@swup/astro": "^1.5.0",
     "@tailwindcss/typography": "^0.5.15",
+    "@xt0rted/expressive-code-file-icons": "^1.0.0",
     "astro": "5.1.6",
     "astro-compress": "^2.3.5",
     "astro-expressive-code": "^0.40.2",
