@@ -103,7 +103,24 @@ export default defineConfig({
 下面是博主的临时解决办法
 :::
 
-```svelte title="src\components\widget\Comments.svelte" ins={1-15, 22}
+```svelte title="src\components\widget\Comments.svelte" ins={8, 18-32, 39}
+import { AUTO_MODE, DARK_MODE } from '@constants/constants.ts'
+import { onMount } from 'svelte'
+import { writable } from 'svelte/store';
+import { getStoredTheme } from '@utils/setting-utils.ts'
+const mode = writable(AUTO_MODE)
+onMount(() => {
+  mode.set(getStoredTheme())
+  updateAstroSvg()
+})
+
+function updateGiscusTheme() {
+  const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+  const iframe = document.querySelector('iframe.giscus-frame')
+  if (!iframe) return
+  iframe.contentWindow.postMessage({ giscus: { setConfig: { theme } } }, 'https://giscus.app')
+}
+
 function updateAstroSvg(){
   const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
   const spans = document.querySelectorAll('figcaption > .title')
