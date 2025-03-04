@@ -3,13 +3,15 @@ title: 对Fuwari进行一些小的改动
 published: 2025-03-03
 updated: 2025-03-04
 description: '字体、置顶文章、链接卡片、代码块标识'
-image: ''
+image: 'https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/a1554848-a4ca-4c22-f526-2c0a4b0ccf00/public'
 tags: [Fuwari, Astro, 博客]
 category: '前端'
 draft: false 
 lang: ''
 series: '改造博客'
 ---
+
+> 封面图来源：[いのふとん(おそろいの)🔗](https://www.pixiv.net/artworks/68673127)
 
 ## 字体
 
