@@ -53,19 +53,6 @@
         }
     }
 
-    pre {
-        @apply bg-[var(--codeblock-bg)] !important;
-        @apply rounded-xl px-5;
-
-        code {
-            @apply bg-transparent text-inherit text-sm p-0;
-
-            ::selection {
-                @apply bg-[var(--codeblock-selection)];
-            }
-        }
-    }
-
     ul, ol {
         li::marker {
             @apply text-[var(--primary)];
