@@ -1,7 +1,7 @@
 ---
 title: Galgame回忆录
-published: 2024-11-01
-description: ''
+published: 2025-03-04
+description: '为这段美好的回忆做个纪念'
 image: 'https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/b489b055-d01c-4fac-9e3e-3025f0da8400/public'
 tags: [Galgame]
 category: '回想'

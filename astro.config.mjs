@@ -25,6 +25,7 @@ import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-s
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 import fuwariLinkCard from "./src/plugins/fuwari-link-card.ts";
 import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
+import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
@@ -79,6 +80,10 @@ export default defineConfig({
     ],
   }), fuwariLinkCard({
     internalLink: { enabled: true },
+  }), partytown({
+    config: {
+      forward: ["dataLayer.push"],
+    },
   }),],
   markdown: {
     remarkPlugins: [
