@@ -7,6 +7,6 @@
 ```text title="友链格式"
 title: '伊卡的记事本',
 imgurl: 'https://ikamusume7.org/avatar.webp',
-desc: '又菜有爱学',
+desc: '又菜又爱学',
 siteurl: 'https://ikamusume7.org',
 ```
