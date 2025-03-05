@@ -1,7 +1,7 @@
 <section>
     <script src="https://giscus.app/client.js"
-        data-repo="ikamusume7/Ikas-Notepad"
-        data-repo-id="R_kgDON_mXew"
+        data-repo="ikamusume7/Blog-Comments"
+        data-repo-id="R_kgDOODnX6w"
         data-category="Announcements"
         data-category-id="DIC_kwDON_mXe84CnbUc"
         data-mapping="pathname"
