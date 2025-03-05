@@ -3,7 +3,7 @@
         data-repo="ikamusume7/Blog-Comments"
         data-repo-id="R_kgDOODnX6w"
         data-category="Announcements"
-        data-category-id="DIC_kwDON_mXe84CnbUc"
+        data-category-id="DIC_kwDOODnX684Cnlse"
         data-mapping="pathname"
         data-strict="0"
         data-reactions-enabled="1"
