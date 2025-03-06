@@ -18,6 +18,7 @@ import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
+import { rehypeWrapperSpan } from "./src/plugins/rehype-wrapper-span.js";
 
 // https://astro.build/config
 export default defineConfig({
@@ -111,6 +112,7 @@ export default defineConfig({
           },
         },
       ],
+      rehypeWrapperSpan,
     ],
   },
   vite: {
