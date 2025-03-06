@@ -30,13 +30,14 @@ series: 游戏回忆
 后来才知道它的制作公司是feng社，不过已经倒闭了（悲。
 
 :::note
-不过这个最近出的游戏里开发商写了feng（喜？
+不过这个最近出的[游戏](https://store.steampowered.com/widget/1961760/)里开发商写了feng（喜？
+<!-- https://store.steampowered.com/widget/1961760/ -->
 <iframe src="https://store.steampowered.com/widget/1961760/" frameborder="0" width="646" height="190" style="margin: auto 0px"></iframe>
 :::
 
 <img width="400px" alt="あかね色に染まる坂_logo" src="https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/7fcb7b12-668d-4c9e-2530-04959e702e00/public">
 
-《夕阳染红的街道》[^2]也是有玩的，选的傲娇大小姐片桐優姫，而且动画版的声优是钉宫（钉宫厨狂喜。
+《夕阳染红的街道》[^2]也是有玩的，选的傲娇大小姐片桐優姫，动画版的声优是钉宫（钉宫厨狂喜。
 
 ## 承
 
