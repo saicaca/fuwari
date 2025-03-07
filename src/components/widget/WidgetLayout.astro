@@ -54,5 +54,7 @@ const className = Astro.props.class
         }
     }
 
-    customElements.define('widget-layout', WidgetLayout);
+    if (!customElements.get("widget-layout")) {
+        customElements.define("widget-layout", WidgetLayout);
+    }
 </script>
