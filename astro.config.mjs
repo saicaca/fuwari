@@ -61,6 +61,11 @@ export default defineConfig({
     sitemap(),
     Compress({
       CSS: false,
+      HTML: {
+        'html-minifier-terser': {
+          minifyCSS: false, // Explicitly set to avoid interfering with Expressive Code.
+        },
+      },
       Image: false,
       Action: {
         Passed: async () => true, // https://github.com/PlayForm/Compress/issues/376
