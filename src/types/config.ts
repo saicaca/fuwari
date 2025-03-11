@@ -86,6 +86,7 @@ export type BlogPostData = {
   prevSlug?: string
   nextTitle?: string
   nextSlug?: string
+}
 
 export type CommentConfig = {
   twikoo?: TwikooConfig

@@ -1,3 +1,4 @@
+---
 import { getCollection } from 'astro:content';
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import ImageWrapper from "../../components/misc/ImageWrapper.astro";
@@ -7,7 +8,7 @@ import {i18n} from "@i18n/translation";
 import I18nKey from "@i18n/i18nKey";
 import {getDir, getPostUrlBySlug} from "@utils/url-utils";
 import License from "@components/misc/License.astro";
-import {licenseConfig} from "src/config";
+import {licenseConfig, siteConfig} from "src/config";
 import Markdown from "@components/misc/Markdown.astro";
 import path from "path";
 import {profileConfig} from "../../config";
