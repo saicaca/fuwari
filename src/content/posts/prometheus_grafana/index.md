@@ -435,7 +435,7 @@ bash <(curl -sSLf "https://raw.githubusercontent.com/midori01/common-scripts/mai
 
 ## 配置防火墙
 ```bash
-sudo apt -y update && apt install -y ufw && sudo ufw allow from <面板IP> to any port <node_exporter端口> && sudo ufw allow from <面板IP> to any port <blackbox_exporter端口> && sudo ufw deny <node_exporter端口> && sudo ufw deny <blackbox_exporter端口> && sudo ufw enable && sudo ufw reload
+sudo apt -y update && apt install -y ufw && sudo ufw default deny  && ufw allow 22 && sudo ufw allow from <面板IP> to any port <node_exporter端口> && sudo ufw allow from <面板IP> to any port <blackbox_exporter端口> && sudo ufw enable && sudo ufw reload
 ```
 
 # 常见问题
