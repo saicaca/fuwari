@@ -446,31 +446,33 @@ const generateNode = (data: Data, options: Options): Text => {
                     punycode.toUnicode(data.domainName),
                   ]),
                 ]),
-                data.date
-                  ? h('span', { class: 'link-card__date' }, [data.date])
-                  : null,
+                ...(data.date
+                  ? [h('span', { class: 'link-card__date' }, [data.date])]
+                  : []),
               ]),
             ]),
-            data.thumbnailSrc
-              ? h(
-                  'div',
-                  {
-                    class:
-                      `link-card__thumbnail ${data.hasThumbnail ? '' : 'link-card__thumbnail--default'}`.trim(),
-                  },
-                  [
-                    h(
-                      'img',
-                      {
-                        class: 'link-card__image',
-                        src: data.thumbnailSrc,
-                        alt: data.thumbnailAlt,
-                      },
-                      [],
-                    ),
-                  ],
-                )
-              : null,
+            ...(data.thumbnailSrc
+              ? [
+                  h(
+                    'div',
+                    {
+                      class:
+                        `link-card__thumbnail ${data.hasThumbnail ? '' : 'link-card__thumbnail--default'}`.trim(),
+                    },
+                    [
+                      h(
+                        'img',
+                        {
+                          class: 'link-card__image',
+                          src: data.thumbnailSrc,
+                          alt: data.thumbnailAlt,
+                        },
+                        [],
+                      ),
+                    ],
+                  ),
+                ]
+              : []),
           ],
         ),
       ],
