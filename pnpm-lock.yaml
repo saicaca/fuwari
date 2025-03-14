@@ -5,8 +5,8 @@ dependencies:
     specifier: ^0.9.4
     version: 0.9.4(typescript@5.7.2)
   '@astrojs/partytown':
-    specifier: ^2.1.3
-    version: 2.1.3
+    specifier: ^2.1.4
+    version: 2.1.4
   '@astrojs/rss':
     specifier: ^4.0.11
     version: 4.0.11
@@ -300,8 +300,8 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/partytown@2.1.3:
-    resolution: {integrity: sha512-pkGsV6/GUTph4oLgvrpbrGnu4+9JuG8fOCzBCI2dQKtpBYQ6XAZKHrPA3evQoB5vDbfUZGVCoWe95MnSoPbVtQ==}
+  /@astrojs/partytown@2.1.4:
+    resolution: {integrity: sha512-loUrAu0cGYFDC6dHVRiomdsBJ41VjDYXPA+B3Br51V5hENFgDSOLju86OIj1TvBACcsB22UQV7BlppODDG5gig==}
     dependencies:
       '@qwik.dev/partytown': 0.11.0
       mrmime: 2.0.1
