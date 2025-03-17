@@ -5,19 +5,27 @@ import { Icon } from 'astro-icon/components'
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Not found">
-  <div class="rounded-[var(--radius-large)] overflow-hidden relative w-[40rem] h-[20rem] m-auto">
-    <div class="card-base z-10 px-9 py-6 relative w-full text-black/75 dark:text-white/75">
-      <div class="flex items-center gap-4">
-        <h1 class="text-[5rem] font-bold">404</h1>
-        <p class="text-[2rem]">Not found</p>
-      </div>
-      <a href={url("/")} class:list={["font-bold overflow-hidden active:scale-95"]}>
-        <div class="btn-plain transition max-w-fit rounded-2xl h-[3.75rem] px-4 flex items-center justify-start gap-2">
-            Return to top page
-          <Icon name="material-symbols:chevron-right-rounded" class="text-[1.75rem]" />
+<Layout title="Page Not Found">
+  <MainGridLayout>
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+      <div class="card-base z-10 px-9 py-6 relative w-full">
+        <div class="flex items-center gap-4 mb-6">
+          <h1 class="text-[5rem] font-bold text-[var(--primary)] dark:text-[var(--primary)] animate-bounce">404</h1>
+          <p class="text-[2rem] dark:text-neutral-50">Page Not found</p>
         </div>
-      </a>
+        <p class="text-neutral-400 mb-8">
+          The page you are looking for does not exist or has been moved.
+        </p>
+        <a
+          href={url("/")}
+          class="font-bold overflow-hidden active:scale-95 transition-transform duration-200 hover:scale-105 inline-block"
+        >
+          <div class="btn-plain transition max-w-fit rounded-2xl h-[3.75rem] px-6 flex items-center justify-center gap-2 bg-[var(--primary)] text-[var(--btn-content)] hover:bg-[var(--primary-hover)]">
+            Back to Home
+            <Icon name="material-symbols:chevron-right-rounded" class="text-[1.75rem]" />
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
+  </MainGridLayout>
 </Layout>
