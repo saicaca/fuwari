@@ -229,7 +229,7 @@ const isCollapsed = series.length >= 10
 </WidgetLayout>
 ```
 
-7. 在`SideBar`组件中导入`Series`组件，接收`series`并将其出入`Series`组件
+7. 在`SideBar`组件中导入`Series`组件，接收`series`并将其传入`Series`组件
 
 ```astro title="src\components\widget\SideBar.astro" ins={7, 12, 17, 25-27}
 ---
