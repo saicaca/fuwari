@@ -33,6 +33,15 @@ https://www.neputa-note.net/2024/07/astro-image-caption/
 | ![シオン(诗音)](/avatar.webp) | ![シオン(诗音)](/avatar.webp) |
 |------------------------------|------------------------------|
 
+:::tip[补充]
+表格的边界可通过`thead`调整
+```css title="src\styles\main.css"
+thead {
+  border: none;
+}
+```
+:::
+
 ### 操作步骤
 1. 安装两个插件
 
