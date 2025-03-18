@@ -196,6 +196,10 @@
   font-display: swap;
 }
 
+thead {
+  border: none;
+}
+
 figure {
   width: fit-content;
 }
