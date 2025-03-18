@@ -44,7 +44,7 @@ thead {
 ```
 :::
 
-### 操作步骤
+### 改动点
 1. 安装两个插件
 
 ```cmd
@@ -96,7 +96,7 @@ https://github.com/Microflash/remark-figure-caption
 
 ![シオン(诗音) width:50%](/avatar.webp)
 
-### 操作步骤
+### 改动点
 
 1. 在`📁src\plugins`里新增`remark-image-width.js`
 
@@ -157,7 +157,7 @@ export default defineConfig({
 
 > 在主页的文章卡片列表里添加每篇文章的更新时间
 
-### 操作步骤
+### 改动点
 
 ```astro title="src\components\PostCard.astro" /hideUpdateDate={[a-z]*}/ ins={3-4} del={1-2}
 <PostMetadata published={published} updated={updated} tags={tags}
