@@ -71,13 +71,15 @@
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.4",
     "@biomejs/biome": "1.8.3",
+    "@microflash/remark-figure-caption": "^2.0.2",
     "@rollup/plugin-yaml": "^4.1.2",
     "@types/markdown-it": "^14.1.2",
     "@types/mdast": "^4.0.4",
     "@types/punycode": "^2.1.4",
     "@types/sanitize-html": "^2.13.0",
     "postcss-import": "^16.1.0",
-    "postcss-nesting": "^13.0.1"
+    "postcss-nesting": "^13.0.1",
+    "remark-gfm": "^4.0.1"
   },
   "packageManager": "pnpm@9.14.4"
 }
