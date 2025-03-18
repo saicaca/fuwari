@@ -35,7 +35,12 @@ series: 游戏回忆
 <iframe src="https://store.steampowered.com/widget/1961760/" frameborder="0" width="646" height="190" style="margin: auto 0px"></iframe>
 :::
 
-<img width="400px" alt="あかね色に染まる坂_logo" src="https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/7fcb7b12-668d-4c9e-2530-04959e702e00/public">
+<figure>
+    <img width="400px" alt="あかね色に染まる坂_logo" src="https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/7fcb7b12-668d-4c9e-2530-04959e702e00/public">
+    <figcaption>あかね色に染まる坂_logo</figcaption>
+</figure>
+
+<!-- <components/FigureCaption width="400px" alt="あかね色に染まる坂_logo" src="https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/7fcb7b12-668d-4c9e-2530-04959e702e00/public"/> -->
 
 《夕阳染红的街道》[^2]也是有玩的，选的傲娇大小姐片桐優姫，动画版的声优是钉宫（钉宫厨狂喜。
 
