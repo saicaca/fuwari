@@ -17,13 +17,15 @@ series: '改造博客'
 
 https://www.neputa-note.net/2024/07/astro-image-caption/
 
-### 例
+### 例1
 
 ```md title="demo1.md"
 ![シオン(诗音)](/avatar.webp)
 ```
 
 ![シオン(诗音)](/avatar.webp)
+
+### 例2
 
 ```md title="demo2.md"
 | ![シオン(诗音)](/avatar.webp) | ![シオン(诗音)](/avatar.webp) |
