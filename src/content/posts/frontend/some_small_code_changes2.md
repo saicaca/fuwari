@@ -76,9 +76,10 @@ figure {
   width: fit-content;
 }
 
-figure > div {
+figure > figcaption {
   text-align: center;
 }
+
 ```
 
 ## 调整图片大小
