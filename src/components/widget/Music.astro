@@ -1,0 +1,20 @@
+---
+import WidgetLayout from './WidgetLayout.astro'
+import APlayer from './APlayer.svelte'
+
+const COLLAPSED_HEIGHT = '7.5rem'
+
+interface Props {
+  class?: string
+  style?: string
+}
+const className = Astro.props.class
+const style = Astro.props.style
+
+const isCollapsed = false
+---
+<WidgetLayout name="音乐" id="music" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT} class={className} style={style}>
+    <div class="flex flex-col gap-1">
+        <APlayer client:only="svelte"/>
+    </div>
+</WidgetLayout>

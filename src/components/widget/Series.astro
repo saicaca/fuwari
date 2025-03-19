@@ -5,7 +5,7 @@ import { getPostSeries } from '../../utils/content-utils'
 import { getPostUrlBySlug } from '../../utils/url-utils'
 import WidgetLayout from './WidgetLayout.astro'
 
-const COLLAPSED_HEIGHT = '7.5rem'
+const COLLAPSED_HEIGHT = '14rem'
 
 interface Props {
   class?: string
@@ -18,7 +18,7 @@ const seriesName = Astro.props.series
 
 const series = await getPostSeries(seriesName)
 
-const isCollapsed = series.length >= 10
+const isCollapsed = series.length >= 5
 ---
 <WidgetLayout name={i18n(I18nKey.series) + " - " + series[0].data.series} id="series" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT} class={className} style={style}>
     <div class="flex flex-col gap-1">
