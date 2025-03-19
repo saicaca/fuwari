@@ -1,6 +1,7 @@
 ---
 title: 对Fuwari进行一些小的改动（二）
 published: 2025-03-18
+updated: 2025-03-19
 description: '图片标题、调整图片大小、更新时间'
 image: ''
 tags: [Fuwari, Astro, 博客]
@@ -28,17 +29,17 @@ https://www.neputa-note.net/2024/07/astro-image-caption/
 ### 例2
 
 ```md title="demo2.md"
-| ![シオン(诗音)](/avatar.webp) | ![シオン(诗音)](/avatar.webp) |
-|------------------------------|------------------------------|
+![シオン(诗音)](/avatar.webp) | ![シオン(诗音)](/avatar.webp)
+-----------------------------|----------------------------
 ```
 
-| ![シオン(诗音)](/avatar.webp) | ![シオン(诗音)](/avatar.webp) |
-|------------------------------|------------------------------|
+![シオン(诗音)](/avatar.webp) | ![シオン(诗音)](/avatar.webp)
+-----------------------------|-----------------------------
 
 :::tip[补充]
 表格的边界可通过`thead`调整
 ```css title="src\styles\main.css"
-thead {
+thead:has(figure) {
   border: none;
 }
 ```
