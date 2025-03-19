@@ -13,7 +13,7 @@ series: '改造博客'
 ## 图片标题
 
 > 可在图片的下方显示标题<br>
-> 参考了《Astro Blog記事の画像にキャプションを付ける》文章中的第一种方式
+> 参考了 **《Astro Blog記事の画像にキャプションを付ける》** 文章中的第一种方式
 
 https://www.neputa-note.net/2024/07/astro-image-caption/
 
@@ -84,17 +84,17 @@ figure > figcaption {
 
 ## 调整图片大小
 
-> 参考了`remark-figure-caption`的写法
+> 参考了`remark-figure-caption`的代码
 
 https://github.com/Microflash/remark-figure-caption
 
 ### 例
 
 ```md title="demo3.md" " width:50%"
-![シオン(诗音) width:50%](/avatar.webp)
+![シオン(诗音) w:50%](/avatar.webp)
 ```
 
-![シオン(诗音) width:50%](/avatar.webp)
+![シオン(诗音) w:50%](/avatar.webp)
 
 ### 改动点
 
@@ -105,16 +105,17 @@ import { visit } from "unist-util-visit";
 
 export default function remarkImageWidth() {
     return (tree) => {
-        var regex = / width:([0-9]+)%/;
+        var regex = / w:([0-9]+)%/;
         
         visit(
 			tree,
 			(node) => node.type === "image",
 			(node, index, parent) => {
-                if (node.alt.search(regex) != -1) {
-                    var width = `${node.alt.match(regex)[1]}%`;
+                var alt = node.alt;
+                if (alt.search(regex) != -1) {
+                    var width = `${alt.match(regex)[1]}%`;
                     node.data = {hProperties: {width: width}};
-                    node.alt = node.alt.replace(regex, "");
+                    node.alt = alt.replace(regex, "");
                 }
 			}
 		);
@@ -123,10 +124,11 @@ export default function remarkImageWidth() {
 			tree,
 			(node) => node.type === 'figcaption',
 			(node, index, parent) => {
-                if (parent.alt.search(regex) != -1) {
-                    var width = `${parent.alt.match(regex)[1]}%`;
+                var text = node.children[0].value
+                if (text.search(regex) != -1) {
+                    var width = `${text.match(regex)[1]}%`;
                     node.data = {hName: "figcaption", hProperties: {style: `width: ${width};`}};
-                    node.children[0].value = parent.alt.replace(regex, "");
+                    node.children[0].value = text.replace(regex, "");
                 }
 			}
 		);
