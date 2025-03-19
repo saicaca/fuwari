@@ -37,7 +37,7 @@ https://www.neputa-note.net/2024/07/astro-image-caption/
 -----------------------------|-----------------------------
 
 :::tip[补充]
-表格的边界可通过`thead`调整
+表格头的下边界可通过`css`调整
 ```css title="src\styles\main.css"
 thead:has(figure) {
   border: none;
