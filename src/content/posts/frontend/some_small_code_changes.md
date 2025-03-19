@@ -3,7 +3,7 @@ title: 对Fuwari进行一些小的改动
 published: 2025-03-03
 updated: 2025-03-04
 description: '字体、置顶文章、链接卡片、代码块标识'
-image: 'https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/a1554848-a4ca-4c22-f526-2c0a4b0ccf00/public'
+image: 'https://img.ikamusume7.org/%E3%81%8A%E3%81%9D%E3%82%8D%E3%81%84%E3%81%AE.webp'
 tags: [Fuwari, Astro, 博客]
 category: '前端'
 draft: false 
@@ -13,7 +13,7 @@ series: '改造博客'
 
 > 封面图来源：[いのふとん(おそろいの)🔗](https://www.pixiv.net/artworks/68673127)
 
-## 字体
+## 一、字体
 
 字体修改参考了 *《在Fuwari使用自定义字体》* by AULyPc，感谢
 
@@ -64,17 +64,17 @@ module.exports = {
 
 ```
 
-## 置顶文章
+## 二、置顶文章
 
 参考了[feat: add post pinning feature and fix icon dependencies](https://github.com/saicaca/fuwari/pull/317)
 
-## 链接卡片
+## 三、链接卡片
 
 参考了[feat: add link-card feature](https://github.com/saicaca/fuwari/pull/324/commits)
 
-## 代码块标识
+## 四、代码块标识
 
-一个`expressive-code`的插件，增加代码块的语言标识图标
+这是一个`Expressive Code`的插件，增加代码块的语言标识图标
 
 https://github.com/xt0rted/expressive-code-file-icons
 
@@ -100,7 +100,7 @@ export default defineConfig({
 })
 ```
 
-:::warning
+:::warning[提醒]
 不过有些标识图标不适用双主题，比如 Astro<br>
 下面是博主的临时解决办法（针对Astro）
 :::
