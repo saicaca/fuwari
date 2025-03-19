@@ -196,7 +196,7 @@
   font-display: swap;
 }
 
-thead {
+thead:has(figure) {
   border: none;
 }
 
