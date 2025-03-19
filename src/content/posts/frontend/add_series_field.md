@@ -3,7 +3,7 @@ title: 在Fuwari中添加系列栏
 published: 2024-10-23
 updated: 2025-02-28
 description: 可以将同一分类下有关联的文章归类为同一个系列
-image: "https://imagedelivery.net/yqyTMQ7rzpPmnK0CN8a9vA/7aa86014-a0d0-4089-1139-88c8a95dd000/public"
+image: "https://img.ikamusume7.org/%E3%82%A2%E3%82%BA%E3%83%AC%E3%83%B3%EF%BC%93%E4%BA%BA%E7%B5%84.webp"
 tags: [Fuwari, Astro, 博客]
 category: "前端"
 draft: false

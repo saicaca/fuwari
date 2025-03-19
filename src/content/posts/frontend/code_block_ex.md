@@ -22,7 +22,7 @@ https://expressive-code.com/
 Fuwari的版本不同可能会导致代码位置和本博文中描述的不一致
 :::
 
-## 注释Fuwari自带的代码块样式
+## 一、注释Fuwari自带的代码块样式
 
 由于Fuwari自带的代码块样式会干扰到插件的样式，所以先要把以下代码**注释掉**
 
@@ -137,15 +137,15 @@ function initCustomScrollbar() {
 }
 ```
 
-## 导入Expressive Code
+## 二、导入Expressive Code
 
 直接参考 https://expressive-code.com/installation/#astro
 
-## 添加代码块的黑暗模式
+## 三、添加代码块的黑暗模式
 
 > 官方主题列表：https://expressive-code.com/guides/themes/#available-themes
 
-在配置文件中添加双主题
+1. 在配置文件中添加双主题
 
 ```js title="astro.config.mjs" ins={6}
 export default defineConfig({
@@ -159,7 +159,7 @@ export default defineConfig({
 })
 ```
 
-修改`LightDarkSwitch.svelte`文件中的`onMount`和`switchScheme`方法
+2. 修改`LightDarkSwitch.svelte`文件中的`onMount`和`switchScheme`方法
 ```svelte title="src\components\LightDarkSwitch.svelte" ins={4-8}
 onMount(() => {
   mode = getStoredTheme()
@@ -201,9 +201,9 @@ function switchScheme(newMode: LIGHT_DARK_MODE) {
 需要**重启**项目才能应用
 :::
 
-## 部分功能测试
+## 四、部分功能测试
 
-### 代码块标题
+### 4.1 代码块标题
 ````text
 ```js title="demo.js"
 function demo() {
@@ -217,7 +217,7 @@ function demo() {
   
 }
 ```
-### 行标记
+### 4.2 行标记
 ````text
 ```text {1, 5-6} ins={2-3} del={8}
 第1行
@@ -242,7 +242,7 @@ function demo() {
 第8行
 ``` 
 
-### 文本标记
+### 4.3 文本标记
 
 ````text
 ```text "c c++" ins="csharp" del="ruby"
@@ -258,7 +258,7 @@ javascript python csharp
 rust ruby golang
 ```
 
-### 代码折叠
+### 4.4 代码折叠
 
 :::note
 需要额外安装 https://expressive-code.com/plugins/collapsible-sections/
@@ -292,7 +292,7 @@ public int Demo()
 }
 ```
 
-### 显示代码行数
+### 4.5 显示代码行数
 
 :::note
 需要额外安装 https://expressive-code.com/plugins/line-numbers/

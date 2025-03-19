@@ -11,28 +11,30 @@ lang: ''
 series: '改造博客'
 ---
 
-## 图片标题
+## 一、图片标题
 
 > 可在图片的下方显示标题<br>
 > 参考了 **《Astro Blog記事の画像にキャプションを付ける》** 文章中的第一种方式
 
 https://www.neputa-note.net/2024/07/astro-image-caption/
 
-### 例1
+### 1.1 示例
 
+代码：
 ```md title="demo1.md"
 ![シオン(诗音)](/avatar.webp)
 ```
 
+结果：
 ![シオン(诗音)](/avatar.webp)
 
-### 例2
-
+代码：
 ```md title="demo2.md"
 ![シオン(诗音)](/avatar.webp) | ![シオン(诗音)](/avatar.webp)
 -----------------------------|----------------------------
 ```
 
+结果：
 ![シオン(诗音)](/avatar.webp) | ![シオン(诗音)](/avatar.webp)
 -----------------------------|-----------------------------
 
@@ -45,7 +47,7 @@ thead:has(figure) {
 ```
 :::
 
-### 改动点
+### 1.2 改动点
 1. 安装两个插件
 
 ```cmd
@@ -83,23 +85,25 @@ figure > figcaption {
 
 ```
 
-## 调整图片大小
+## 二、调整图片大小
 
 > 参考了`remark-figure-caption`的代码
 
 https://github.com/Microflash/remark-figure-caption
 
-### 例
+### 2.1 示例
 
+代码：
 ```md title="demo3.md" " width:50%"
 ![シオン(诗音) w:50%](/avatar.webp)
 ```
 
+结果：
 ![シオン(诗音) w:50%](/avatar.webp)
 
-### 改动点
+### 2.2 改动点
 
-1. 在`📁src\plugins`里新增`remark-image-width.js`
+1. 在`📁src\plugins`里新建`remark-image-width.js`文件，代码如下
 
 ```js title="src\plugins\remark-image-width.js"
 import { visit } from "unist-util-visit";
@@ -156,12 +160,12 @@ export default defineConfig({
 })
 ```
 
-## 更新时间
+## 三、更新时间
 
 > 在主页的文章卡片列表里添加每篇文章的更新时间
 
-### 改动点
-
+### 3.1 改动点
+更改`PostCard.astro`文件里的`PostMetadata`组件属性设置
 ```astro title="src\components\PostCard.astro" /hideUpdateDate={[a-z]*}/ ins={3-4} del={1-2}
 <PostMetadata published={published} updated={updated} tags={tags}
     category={category} hideTagsForMobile={true} hideUpdateDate={false} class="mb-4"></PostMetadata>
