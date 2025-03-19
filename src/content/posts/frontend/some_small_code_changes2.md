@@ -2,7 +2,7 @@
 title: 对Fuwari进行一些小的改动（二）
 published: 2025-03-18
 updated: 2025-03-19
-description: '图片标题、调整图片大小、更新时间'
+description: '图片标题、调整图片大小、更新时间、音乐播放器'
 image: ''
 tags: [Fuwari, Astro, 博客]
 category: '前端'
@@ -171,4 +171,92 @@ export default defineConfig({
     category={category} hideTagsForMobile={true} hideUpdateDate={false} class="mb-4"></PostMetadata>
 <PostMetadata published={published} updated={updated} tags={tags} 
     category={category} hideTagsForMobile={true} hideUpdateDate={true} class="mb-4"></PostMetadata>
+```
+
+## 四、音乐播放器
+
+:::warning[提醒]
+目前播放器会有加载不出来或者一次性加载出来多个的问题
+:::
+
+### 4.1 改动点
+
+1. 新增`APlayer.svelte`组件和`Music.astro`组件
+```svelte title="src\components\widget\APlayer.svelte"
+<div class="meting" id="meting">
+    <!-- require APlayer -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+    <!-- require MetingJS -->
+    <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    <meting-js
+        server="netease"
+        type="playlist"
+        id="7245850391"
+        order="random"
+        list-folded="true">
+    </meting-js>
+</div>
+```
+
+```astro title="src\components\widget\Music.astro"
+---
+import WidgetLayout from './WidgetLayout.astro'
+import APlayer from './APlayer.svelte'
+
+const COLLAPSED_HEIGHT = '7.5rem'
+
+interface Props {
+  class?: string
+  style?: string
+}
+const className = Astro.props.class
+const style = Astro.props.style
+
+const isCollapsed = false
+---
+<WidgetLayout name="音乐" id="music" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT} class={className} style={style}>
+    <div class="flex flex-col gap-1">
+        <APlayer client:only="svelte"/>
+    </div>
+</WidgetLayout>
+```
+
+2. 导入`Music.astro`组件
+```astro title="src\components\widget\SideBar.astro" ins={8, 31-33} collapse={2-6, 10-18}
+---
+import Profile from './Profile.astro'
+import Tag from './Tags.astro'
+import Categories from './Categories.astro'
+import type { MarkdownHeading } from 'astro'
+import TOC from './TOC.astro'
+import Series from './Series.astro'
+import Music from './Music.astro'
+
+interface Props {
+    class? : string
+    headings? : MarkdownHeading[]
+    series?: string
+}
+
+const className = Astro.props.class
+const headings = Astro.props.headings
+const series = Astro.props.series
+
+---
+<div id="sidebar" class:list={[className, "w-full"]}>
+    <div class="flex flex-col w-full gap-4 mb-4">
+        <Profile></Profile>
+    </div>
+    <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4">
+        <div id="series" class="flex flex-col w-full gap-4">
+            { series && <Series series={ series }></Series> }
+        </div>
+        <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
+        <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
+        <div id="music" class="flex flex-col w-full gap-4">
+            <Music></Music>
+        </div>
+    </div>
+</div>
 ```
