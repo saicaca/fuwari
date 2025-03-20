@@ -199,11 +199,3 @@
 thead:has(figure) {
   border: none;
 }
-
-figure {
-  width: fit-content;
-}
-
-figure > figcaption {
-  text-align: center;
-}

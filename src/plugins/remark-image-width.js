@@ -2,17 +2,27 @@ import { visit } from "unist-util-visit";
 
 export default function remarkImageWidth() {
     return (tree) => {
-        var regex = / w:([0-9]+)%/;
+        var regex1 = / w-([0-9]+)%/;
+        var regex2 = / m-auto/;
         
         visit(
 			tree,
 			(node) => node.type === "image",
 			(node, index, parent) => {
                 var alt = node.alt;
-                if (alt.search(regex) != -1) {
-                    var width = `${alt.match(regex)[1]}%`;
-                    node.data = {hProperties: {width: width}};
-                    node.alt = alt.replace(regex, "");
+                node.data = {hProperties: {}};
+                if (parent.type === "figure") {
+                    parent.data.hProperties = {style: "width: fit-content;"};
+                }
+                if (alt.search(regex1) != -1) {
+                    node.data.hProperties.width = `${alt.match(regex1)[1]}%`;
+                    node.alt = node.alt.replace(regex1, "");
+                } else if (alt.search(regex2) != -1) {
+                    node.data.hProperties.style = "margin-inline: auto;";
+                    node.alt = node.alt.replace(regex2, "");
+                    if (parent.type === "figure") {
+                        parent.data.hProperties.style = null;
+                    }
                 }
 			}
 		);
@@ -22,10 +32,13 @@ export default function remarkImageWidth() {
 			(node) => node.type === 'figcaption',
 			(node, index, parent) => {
                 var text = node.children[0].value
-                if (text.search(regex) != -1) {
-                    var width = `${text.match(regex)[1]}%`;
-                    node.data = {hName: "figcaption", hProperties: {style: `width: ${width};`}};
-                    node.children[0].value = text.replace(regex, "");
+                node.data.hProperties = { style: "text-align: center;" };
+                if (text.search(regex1) != -1) {
+                    node.data.hProperties.style = node.data.hProperties.style + `width: ${text.match(regex1)[1]}%;`;
+                    node.children[0].value = node.children[0].value.replace(regex1, "");
+                }
+                if (text.search(regex2) != -1) {
+                    node.children[0].value = node.children[0].value.replace(regex2, "");
                 }
 			}
 		);
