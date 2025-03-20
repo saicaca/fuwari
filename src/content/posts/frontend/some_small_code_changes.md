@@ -43,10 +43,6 @@ https://hyperos.mi.com/font/zh/
     font-style: normal;
     font-display: swap;
 }
-
-.prose-base {
-  font-size: 18px;
-}
 ```
 
 

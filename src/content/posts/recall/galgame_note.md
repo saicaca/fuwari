@@ -14,7 +14,7 @@ series: 游戏回忆
 
 :::note[前言]
 博主玩过且通关的Galgame，估计两只手都能数得过来<br>
-写这篇博文的目的，只是对这段美好的回忆做个纪念
+不过还是留个纪念吧
 :::
 
 ## 一、启蒙
@@ -30,7 +30,7 @@ series: 游戏回忆
 后来才知道它的制作公司是feng社，不过已经倒闭了（悲。
 
 :::note[补充]
-不过这个最近出的[游戏](https://store.steampowered.com/widget/1961760/)里开发商写了feng
+这个最近出的[游戏](https://store.steampowered.com/widget/1961760/)里开发商写了feng，不太清楚是怎么回事
 <!-- https://store.steampowered.com/widget/1961760/ -->
 <iframe src="https://store.steampowered.com/widget/1961760/" frameborder="0" width="646" height="190" style="margin: auto 0px"></iframe>
 :::
