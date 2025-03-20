@@ -183,7 +183,7 @@
 
 @font-face {
   font-family: "MiSans";
-  src: url("/fonts/MiSans-Regular.woff2") format("woff2");
+  src: url("/fonts/MiSans-Normal.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -194,6 +194,10 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+.prose-base {
+  font-size: 18px;
 }
 
 thead:has(figure) {

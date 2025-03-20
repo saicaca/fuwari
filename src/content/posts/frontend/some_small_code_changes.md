@@ -1,7 +1,7 @@
 ---
 title: 对Fuwari进行一些小的改动
 published: 2025-03-03
-updated: 2025-03-04
+updated: 2025-03-20
 description: '字体、置顶文章、链接卡片、代码块标识'
 image: 'https://img.ikamusume7.org/%E3%81%8A%E3%81%9D%E3%82%8D%E3%81%84%E3%81%AE.webp'
 tags: [Fuwari, Astro, 博客]
@@ -19,7 +19,7 @@ series: '改造博客'
 
 https://blog.aulypc0x0.online/posts/use_custom_fonts_in_fuwari/
 
-博主这里引入了两种粗细的`MiSans`字体
+博主这里引入了两种粗细的`MiSans`字体，顺便还把文章字体改大的了（老人模式
 
 https://hyperos.mi.com/font/zh/
 
@@ -31,7 +31,7 @@ https://hyperos.mi.com/font/zh/
 
 @font-face {
     font-family: 'MiSans';
-    src: url('/fonts/MiSans-Regular.woff2') format('woff2');
+    src: url('/fonts/MiSans-Normal.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -43,7 +43,13 @@ https://hyperos.mi.com/font/zh/
     font-style: normal;
     font-display: swap;
 }
+
+.prose-base {
+  font-size: 18px;
+}
 ```
+
+
 
 ```js title="tailwind.config.cjs" ins={10} del={9}
 /** @type {import('tailwindcss').Config} */

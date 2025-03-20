@@ -1,7 +1,7 @@
 ---
 title: Galgame小记
 published: 2025-03-19
-description: '给自己的Galgame游玩历史做个小记'
+description: '简单回忆一下自己的Galgame经历'
 image: 'https://img.ikamusume7.org/%E8%97%A4%E5%A0%82%E3%81%93%E3%82%88%E3%82%8A.webp'
 tags: [Galgame]
 category: '回想'
@@ -17,11 +17,11 @@ series: 游戏回忆
 写这篇博文的目的，只是对这段美好的回忆做个纪念
 :::
 
-## 启蒙
+## 一、启蒙
 
-![星空へ架かる橋_logo m-auto](https://img.ikamusume7.org/h1_hoshikaka-logos.webp)
+![架向星空之桥 logo m-auto](https://img.ikamusume7.org/h1_hoshikaka-logos.webp)
 
-**最初**应该是在我哥家玩电脑的时候吧，也不知怎的就从网上下了一个叫《架向星空之桥》[^1]的游戏。
+最初应该是在我哥家玩电脑的时候吧，也不知怎的就从网上下了一个叫《架向星空之桥》[^1]的游戏。
 
 当时还不知道这种类型叫做Galgame，只是觉得里面的角色都很可爱，就一直玩。
 
@@ -30,26 +30,26 @@ series: 游戏回忆
 后来才知道它的制作公司是feng社，不过已经倒闭了（悲。
 
 :::note[补充]
-不过这个最近出的[游戏](https://store.steampowered.com/widget/1961760/)里开发商写了feng（喜？
+不过这个最近出的[游戏](https://store.steampowered.com/widget/1961760/)里开发商写了feng
 <!-- https://store.steampowered.com/widget/1961760/ -->
 <iframe src="https://store.steampowered.com/widget/1961760/" frameborder="0" width="646" height="190" style="margin: auto 0px"></iframe>
 :::
 
-![あかね色に染まる坂_logo w-50% m-auto](https://img.ikamusume7.org/akaneiro-logo.webp)
+![夕阳染红的街道 logo w-50% m-auto](https://img.ikamusume7.org/akaneiro-logo.webp)
 
-《夕阳染红的街道》[^2]也是有玩的，选的傲娇大小姐片桐優姫，动画版的声优是钉宫（钉宫厨狂喜。
+《夕阳染红的街道》[^2]也是有玩的，选的傲娇大小姐片桐優姫，动画版的声优是钉宫（钉宫厨狂喜，不过其他就记不得了。
 
-## 承接
+## 二、承接
 
 遥仰凰华[^3]
 
 晓之护卫[^4]
 
-## 转大人
+## 三、转大人
 
 Flyable Heart[^5]
 
-## 和解
+## 四、和解
 
 [^1]: [《星空へ架かる橋》](https://ja.wikipedia.org/wiki/%E6%98%9F%E7%A9%BA%E3%81%B8%E6%9E%B6%E3%81%8B%E3%82%8B%E6%A9%8B) from wikipedia
 [^2]: [《あかね色に染まる坂》](https://ja.wikipedia.org/wiki/%E3%81%82%E3%81%8B%E3%81%AD%E8%89%B2%E3%81%AB%E6%9F%93%E3%81%BE%E3%82%8B%E5%9D%82) from wikipedia
