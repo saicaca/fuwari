@@ -28,7 +28,7 @@ import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
 import partytown from "@astrojs/partytown";
 import remarkGfm from 'remark-gfm'
 import remarkFigureCaption from '@microflash/remark-figure-caption'
-import remarkImageWidth from './src/plugins/remark-image-width.js'
+import remarkImageAttr from './src/plugins/remark-image-attr.js'
 
 // https://astro.build/config
 export default defineConfig({
@@ -99,7 +99,7 @@ export default defineConfig({
       parseDirectiveNode,
       remarkFigureCaption,
       remarkGfm,
-      remarkImageWidth,
+      remarkImageAttr,
     ],
     rehypePlugins: [
       rehypeKatex,
