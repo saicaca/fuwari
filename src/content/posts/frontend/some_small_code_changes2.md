@@ -1,7 +1,7 @@
 ---
 title: 对Fuwari进行一些小的改动（二）
 published: 2025-03-18
-updated: 2025-03-19
+updated: 2025-03-20
 description: '图片标题、调整图片大小、更新时间、音乐播放器'
 image: ''
 tags: [Fuwari, Astro, 博客]
@@ -95,11 +95,11 @@ https://github.com/Microflash/remark-figure-caption
 
 代码：
 ```md title="demo3.md" " width:50%"
-![シオン(诗音) w:50%](/avatar.webp)
+![シオン(诗音) w-50%](/avatar.webp)
 ```
 
 结果：
-![シオン(诗音) w:50%](/avatar.webp)
+![シオン(诗音) w-50% m-auto](/avatar.webp)
 
 ### 2.2 改动点
 
@@ -110,7 +110,7 @@ import { visit } from "unist-util-visit";
 
 export default function remarkImageWidth() {
     return (tree) => {
-        var regex = / w:([0-9]+)%/;
+        var regex = / w-([0-9]+)%/;
         
         visit(
 			tree,
@@ -159,6 +159,71 @@ export default defineConfig({
     }
 })
 ```
+
+:::note[补充]
+这里可以把 **1.2** 里添加的样式写到`remark-image-width.js`文件里<br>
+顺便还可以加一个图片居中功能，不过**缩小图片和图片居中好像不能并存**
+
+改动后的`remark-image-width.js`文件：
+```js title="src\plugins\remark-image-width.js"
+import { visit } from "unist-util-visit";
+
+export default function remarkImageWidth() {
+    return (tree) => {
+        var regex1 = / w-([0-9]+)%/;
+        var regex2 = / m-auto/;
+        
+        visit(
+			tree,
+			(node) => node.type === "image",
+			(node, index, parent) => {
+                var alt = node.alt;
+                node.data = {hProperties: {}};
+                if (parent.type === "figure") {
+                    parent.data.hProperties = {style: "width: fit-content;"};
+                }
+                if (alt.search(regex1) != -1) {
+                    node.data.hProperties.width = `${alt.match(regex1)[1]}%`;
+                    node.alt = node.alt.replace(regex1, "");
+                } else if (alt.search(regex2) != -1) {
+                    node.data.hProperties.style = "margin-inline: auto;";
+                    node.alt = node.alt.replace(regex2, "");
+                    if (parent.type === "figure") {
+                        parent.data.hProperties.style = null;
+                    }
+                }
+			}
+		);
+
+        visit(
+			tree,
+			(node) => node.type === 'figcaption',
+			(node, index, parent) => {
+                var text = node.children[0].value
+                node.data.hProperties = { style: "text-align: center;" };
+                if (text.search(regex1) != -1) {
+                    node.data.hProperties.style = node.data.hProperties.style + `width: ${text.match(regex1)[1]}%;`;
+                    node.children[0].value = node.children[0].value.replace(regex1, "");
+                }
+                if (text.search(regex2) != -1) {
+                    node.children[0].value = node.children[0].value.replace(regex2, "");
+                }
+			}
+		);
+
+    }
+}
+```
+
+代码：
+```md title="demo4.md"
+![シオン(诗音) m-auto](/avatar.webp)
+```
+
+结果：
+![シオン(诗音) m-auto](/avatar.webp)
+
+:::
 
 ## 三、更新时间
 
