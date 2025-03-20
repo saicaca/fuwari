@@ -93,7 +93,7 @@ https://github.com/Microflash/remark-figure-caption
 ### 2.1 示例
 
 代码：
-```md title="demo3.md" " width:50%"
+```md title="demo3.md"
 ![シオン(诗音) w-50%](/avatar.webp)
 ```
 
@@ -109,7 +109,7 @@ https://github.com/Microflash/remark-figure-caption
 ![シオン(诗音) m-auto](/avatar.webp)
 
 代码：
-```md title="demo3.md" " width:50%"
+```md title="demo3.md"
 ![シオン(诗音) w-30% m-auto](/avatar.webp)
 ```
 
@@ -130,12 +130,12 @@ figure > figcaption {
 }
 ```
 
-2. 在`📁src\plugins`里新建`remark-image-width.js`，代码如下
+2. 在`📁src\plugins`里新建`remark-image-attr.js`，代码如下
 
-```js title="src\plugins\remark-image-width.js"
+```js title="src\plugins\remark-image-attr.js"
 import { visit } from "unist-util-visit";
 
-export default function remarkImageWidth() {
+export default function remarkImageAttr() {
     return (tree) => {
         var regex1 = / w-([0-9]+)%/;
         var regex2 = / m-auto/;
@@ -188,7 +188,7 @@ export default function remarkImageWidth() {
 2. 导入
 
 ```js title="astro.config.mjs" ins={1, 10}
-import remarkImageWidth from './src/plugins/remark-image-width.js'
+import remarkImageAttr from './src/plugins/remark-image-attr.js'
 
 export default defineConfig({
     // ...
@@ -197,7 +197,7 @@ export default defineConfig({
             // ...
             remarkFigureCaption,
             remarkGfm,
-            remarkImageWidth,
+            remarkImageAttr,
         ]
     }
 })

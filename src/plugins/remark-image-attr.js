@@ -1,6 +1,6 @@
 import { visit } from "unist-util-visit";
 
-export default function remarkImageWidth() {
+export default function remarkImageAttr() {
     return (tree) => {
         var regex1 = / w-([0-9]+)%/;
         var regex2 = / m-auto/;
