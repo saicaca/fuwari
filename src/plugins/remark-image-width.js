@@ -17,7 +17,8 @@ export default function remarkImageWidth() {
                 if (alt.search(regex1) != -1) {
                     node.data.hProperties.width = `${alt.match(regex1)[1]}%`;
                     node.alt = node.alt.replace(regex1, "");
-                } else if (alt.search(regex2) != -1) {
+                }
+                if (alt.search(regex2) != -1) {
                     node.data.hProperties.style = "margin-inline: auto;";
                     node.alt = node.alt.replace(regex2, "");
                     if (parent.type === "figure") {
@@ -34,7 +35,9 @@ export default function remarkImageWidth() {
                 var text = node.children[0].value
                 node.data.hProperties = { style: "text-align: center;" };
                 if (text.search(regex1) != -1) {
-                    node.data.hProperties.style = node.data.hProperties.style + `width: ${text.match(regex1)[1]}%;`;
+                    if (text.search(regex2) == -1) {
+                        node.data.hProperties.style = node.data.hProperties.style + `width: ${text.match(regex1)[1]}%;`;
+                    }
                     node.children[0].value = node.children[0].value.replace(regex1, "");
                 }
                 if (text.search(regex2) != -1) {

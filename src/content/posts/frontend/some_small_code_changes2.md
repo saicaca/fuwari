@@ -99,7 +99,7 @@ https://github.com/Microflash/remark-figure-caption
 ```
 
 结果：
-![シオン(诗音) w-50% m-auto](/avatar.webp)
+![シオン(诗音) w-50%](/avatar.webp)
 
 代码：
 ```md title="demo4.md"
@@ -109,14 +109,22 @@ https://github.com/Microflash/remark-figure-caption
 结果：
 ![シオン(诗音) m-auto](/avatar.webp)
 
+代码：
+```md title="demo3.md" " width:50%"
+![シオン(诗音) w-30% m-auto](/avatar.webp)
+```
+
+结果：
+![シオン(诗音) w-30% m-auto](/avatar.webp)
+
 ### 2.2 改动点
 
 
 1. 在`📁src\plugins`里新建`remark-image-width.js`文件，代码如下
 
 :::important[重要]
-这里把 **1.2** 里在`main.css`中添加的样式也写到`remark-image-width.js`中了<br>
-所以需要把`main.css`中添加的样式**删除**<br>
+这里把 **1.2** 里在`main.css`中添加的样式也写到了`remark-image-width.js`中<br>
+所以需要**删除**之前在`main.css`中添加的样式<br>
 :::
 
 
@@ -140,7 +148,8 @@ export default function remarkImageWidth() {
                 if (alt.search(regex1) != -1) {
                     node.data.hProperties.width = `${alt.match(regex1)[1]}%`;
                     node.alt = node.alt.replace(regex1, "");
-                } else if (alt.search(regex2) != -1) {
+                }
+                if (alt.search(regex2) != -1) {
                     node.data.hProperties.style = "margin-inline: auto;";
                     node.alt = node.alt.replace(regex2, "");
                     if (parent.type === "figure") {
@@ -157,7 +166,9 @@ export default function remarkImageWidth() {
                 var text = node.children[0].value
                 node.data.hProperties = { style: "text-align: center;" };
                 if (text.search(regex1) != -1) {
-                    node.data.hProperties.style = node.data.hProperties.style + `width: ${text.match(regex1)[1]}%;`;
+                    if (text.search(regex2) == -1) {
+                        node.data.hProperties.style = node.data.hProperties.style + `width: ${text.match(regex1)[1]}%;`;
+                    }
                     node.children[0].value = node.children[0].value.replace(regex1, "");
                 }
                 if (text.search(regex2) != -1) {
@@ -187,10 +198,6 @@ export default defineConfig({
     }
 })
 ```
-
-:::warning[提醒]
-**调整图片大小和图片居中不能并存**
-:::
 
 ## 三、更新时间
 
