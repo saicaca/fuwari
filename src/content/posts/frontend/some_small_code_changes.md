@@ -2,7 +2,7 @@
 title: 对Fuwari进行一些小的改动
 published: 2025-03-03
 updated: 2025-03-20
-description: '字体、置顶文章、链接卡片、代码块标识'
+description: '字体、置顶文章、链接卡片、代码块标识图标'
 image: 'https://img.ikamusume7.org/%E3%81%8A%E3%81%9D%E3%82%8D%E3%81%84%E3%81%AE.webp'
 tags: [Fuwari, Astro, 博客]
 category: '前端'
@@ -12,6 +12,10 @@ series: '改造博客'
 ---
 
 > 封面图来源：[いのふとん(おそろいの)🔗](https://www.pixiv.net/artworks/68673127)
+
+:::tip
+改动点包括替换默认字体、新增文章置顶功能、添加链接卡片以及增加代码块标识图标
+:::
 
 ## 一、字体
 
