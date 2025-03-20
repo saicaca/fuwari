@@ -19,7 +19,7 @@ series: '改造博客'
 
 https://blog.aulypc0x0.online/posts/use_custom_fonts_in_fuwari/
 
-博主这里引入了两种粗细的`MiSans`字体，顺便还把文章字体改大的了（老人模式
+博主这里引入了两种粗细的`MiSans`字体
 
 https://hyperos.mi.com/font/zh/
 
