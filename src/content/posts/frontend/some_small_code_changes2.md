@@ -2,7 +2,7 @@
 title: 对Fuwari进行一些小的改动（二）
 published: 2025-03-18
 updated: 2025-03-20
-description: '图片标题、调整图片大小、更新时间、音乐播放器'
+description: '图片标题、调整图片大小、图片居中、更新时间、音乐播放器'
 image: ''
 tags: [Fuwari, Astro, 博客]
 category: '前端'
@@ -85,9 +85,9 @@ figure > figcaption {
 
 ```
 
-## 二、调整图片大小
+## 二、调整图片大小与图片居中
 
-> 参考了`remark-figure-caption`的代码
+> 参考了`remark-figure-caption`的部分代码
 
 https://github.com/Microflash/remark-figure-caption
 
@@ -101,70 +101,25 @@ https://github.com/Microflash/remark-figure-caption
 结果：
 ![シオン(诗音) w-50% m-auto](/avatar.webp)
 
+代码：
+```md title="demo4.md"
+![シオン(诗音) m-auto](/avatar.webp)
+```
+
+结果：
+![シオン(诗音) m-auto](/avatar.webp)
+
 ### 2.2 改动点
+
 
 1. 在`📁src\plugins`里新建`remark-image-width.js`文件，代码如下
 
-```js title="src\plugins\remark-image-width.js"
-import { visit } from "unist-util-visit";
+:::important[重要]
+这里把 **1.2** 里在`main.css`中添加的样式也写到`remark-image-width.js`中了<br>
+所以需要把`main.css`中添加的样式**删除**<br>
+:::
 
-export default function remarkImageWidth() {
-    return (tree) => {
-        var regex = / w-([0-9]+)%/;
-        
-        visit(
-			tree,
-			(node) => node.type === "image",
-			(node, index, parent) => {
-                var alt = node.alt;
-                if (alt.search(regex) != -1) {
-                    var width = `${alt.match(regex)[1]}%`;
-                    node.data = {hProperties: {width: width}};
-                    node.alt = alt.replace(regex, "");
-                }
-			}
-		);
 
-        visit(
-			tree,
-			(node) => node.type === 'figcaption',
-			(node, index, parent) => {
-                var text = node.children[0].value
-                if (text.search(regex) != -1) {
-                    var width = `${text.match(regex)[1]}%`;
-                    node.data = {hName: "figcaption", hProperties: {style: `width: ${width};`}};
-                    node.children[0].value = text.replace(regex, "");
-                }
-			}
-		);
-
-    }
-}
-```
-
-2. 导入
-
-```js title="astro.config.mjs" ins={1, 10}
-import remarkImageWidth from './src/plugins/remark-image-width.js'
-
-export default defineConfig({
-    // ...
-    markdown: {
-        remarkPlugins: [
-            // ...
-            remarkFigureCaption,
-            remarkGfm,
-            remarkImageWidth,
-        ]
-    }
-})
-```
-
-:::note[补充]
-这里可以把 **1.2** 里添加的样式写到`remark-image-width.js`文件里<br>
-顺便还可以加一个图片居中功能，不过**缩小图片和图片居中好像不能并存**
-
-改动后的`remark-image-width.js`文件：
 ```js title="src\plugins\remark-image-width.js"
 import { visit } from "unist-util-visit";
 
@@ -215,14 +170,26 @@ export default function remarkImageWidth() {
 }
 ```
 
-代码：
-```md title="demo4.md"
-![シオン(诗音) m-auto](/avatar.webp)
+2. 导入
+
+```js title="astro.config.mjs" ins={1, 10}
+import remarkImageWidth from './src/plugins/remark-image-width.js'
+
+export default defineConfig({
+    // ...
+    markdown: {
+        remarkPlugins: [
+            // ...
+            remarkFigureCaption,
+            remarkGfm,
+            remarkImageWidth,
+        ]
+    }
+})
 ```
 
-结果：
-![シオン(诗音) m-auto](/avatar.webp)
-
+:::warning[提醒]
+**调整图片大小和图片居中不能并存**
 :::
 
 ## 三、更新时间
