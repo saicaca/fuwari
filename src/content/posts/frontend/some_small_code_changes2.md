@@ -82,7 +82,6 @@ figure {
 figure > figcaption {
   text-align: center;
 }
-
 ```
 
 ## 二、调整图片大小与图片居中
@@ -119,14 +118,19 @@ https://github.com/Microflash/remark-figure-caption
 
 ### 2.2 改动点
 
+1. 删除之前在`main.css`中添加的样式（如果有的话）
 
-1. 在`📁src\plugins`里新建`remark-image-width.js`文件，代码如下
+```css title="src\styles\main.css" del={1-7}
+figure {
+  width: fit-content;
+}
 
-:::important[重要]
-这里把 **1.2** 里在`main.css`中添加的样式也写到了`remark-image-width.js`中<br>
-所以需要**删除**之前在`main.css`中添加的样式<br>
-:::
+figure > figcaption {
+  text-align: center;
+}
+```
 
+2. 在`📁src\plugins`里新建`remark-image-width.js`，代码如下
 
 ```js title="src\plugins\remark-image-width.js"
 import { visit } from "unist-util-visit";
