@@ -196,10 +196,6 @@
   font-display: swap;
 }
 
-.prose-base {
-  font-size: 18px;
-}
-
 thead:has(figure) {
   border: none;
 }
