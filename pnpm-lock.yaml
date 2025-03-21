@@ -23,6 +23,9 @@ importers:
       '@astrojs/tailwind':
         specifier: ^5.1.4
         version: 5.1.4(astro@5.1.6(@types/node@22.10.1)(jiti@1.21.6)(lightningcss@1.27.0)(rollup@2.79.2)(sass@1.80.4)(stylus@0.63.0)(terser@5.36.0)(typescript@5.7.2)(yaml@2.6.1))(tailwindcss@3.4.16)
+      '@fastify/deepmerge':
+        specifier: ^3.0.0
+        version: 3.0.0
       '@fontsource-variable/jetbrains-mono':
         specifier: ^5.1.1
         version: 5.1.1
@@ -1171,6 +1174,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@fastify/deepmerge@3.0.0':
+    resolution: {integrity: sha512-VW7srTEkCzbfqoRBn+k7s/nP9WVFmKSfeHBbMZLLrOYDQoShHWuEi5V6Jgz1Q0fm3pMYsiC+EVMvhZyI3hKzkw==}
 
   '@fontsource-variable/jetbrains-mono@5.1.1':
     resolution: {integrity: sha512-V+1aRFRvuZ66PpO30s8l/2aADKzpV9VRsO3kSZE+rTMvi4vab3cUcPHMN2z+wAvjkYJO71Yf+g3/Y6pSMmQpVQ==}
@@ -6204,6 +6210,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.24.2':
     optional: true
+
+  '@fastify/deepmerge@3.0.0': {}
 
   '@fontsource-variable/jetbrains-mono@5.1.1': {}
 
