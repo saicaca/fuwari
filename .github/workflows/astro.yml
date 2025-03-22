@@ -36,7 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: PNPM Install
-        -id: pnpm-install
+        id: pnpm-install
         run: npm install -g pnpm
       - name: Detect package manager
         id: detect-package-manager
