@@ -54,7 +54,7 @@ export const profileConfig: ProfileConfig = {
   avatar: 'assets/images/avatar.svg',  // Relative to the /src directory. Relative to the /public directory if it starts with '/'
   name: 'Eduardo Souza (MrTheDuts)',
   company: 'Belfar Dev',
-  bio: 'Indie delevoper @ Belfar Dev',
+  bio: 'Indie developer @ Belfar Dev',
   links: [
     // {
     //   name: 'Twitter',
