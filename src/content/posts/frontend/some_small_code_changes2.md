@@ -2,7 +2,7 @@
 title: 对Fuwari进行一些小的改动（二）改
 published: 2025-03-18
 updated: 2025-03-23
-description: '图片标题、调整图片大小、更新时间、音乐播放器'
+description: '图片标题（改）、调整图片大小（改）、更新时间、音乐播放器'
 image: ''
 tags: [Fuwari, Astro, 博客]
 category: '前端'
@@ -260,13 +260,13 @@ export default defineConfig({
 </details>
 
 
-## 一、图片标题
+## 一、图片标题（改）
 感谢`Hasenpfote`大佬的代码，直接照着改动点改就可以<br>
 [feat: add image-caption feature](https://github.com/saicaca/fuwari/pull/351)
 
 目前该代码还没有合并到`Fuwari`的主分支内
 
-## 二、调整图片大小
+## 二、调整图片大小（改）
 
 > 在加入图片标题功能后，增加调整图片大小的功能
 
