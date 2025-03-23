@@ -23,7 +23,7 @@
     "@astrojs/tailwind": "^6.0.2",
     "@expressive-code/plugin-collapsible-sections": "^0.40.2",
     "@expressive-code/plugin-line-numbers": "^0.40.2",
-    "@fastify/deepmerge": "^2.0.2",
+    "@fastify/deepmerge": "^3.0.0",
     "@fontsource-variable/jetbrains-mono": "^5.2.5",
     "@fontsource/roboto": "^5.2.5",
     "@iconify-json/fa6-brands": "^1.2.5",
@@ -70,20 +70,14 @@
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.4",
-<<<<<<< HEAD
     "@biomejs/biome": "1.9.4",
-=======
-    "@biomejs/biome": "1.8.3",
-    "@microflash/remark-figure-caption": "^2.0.2",
->>>>>>> 6e9429e (编写《对Fuwari进行一些小的改动（二）》)
     "@rollup/plugin-yaml": "^4.1.2",
     "@types/markdown-it": "^14.1.2",
     "@types/mdast": "^4.0.4",
     "@types/punycode": "^2.1.4",
     "@types/sanitize-html": "^2.13.0",
     "postcss-import": "^16.1.0",
-    "postcss-nesting": "^13.0.1",
-    "remark-gfm": "^4.0.1"
+    "postcss-nesting": "^13.0.1"
   },
   "packageManager": "pnpm@9.14.4"
 }
