@@ -324,7 +324,7 @@ function findImgNodes(node, imgNodes = []) {
 
 2. 导入
 
-```js title="astro.config.mjs" ins={1, 10}
+```js title="astro.config.mjs" ins={1, 9}
 import remarkImageWidth from './src/plugins/remark-image-width.js'
 
 export default defineConfig({
@@ -332,9 +332,10 @@ export default defineConfig({
     markdown: {
         remarkPlugins: [
             // ...
-            parseDirectiveNode,
             remarkImageCaption,
-            remarkImageAttr,
+            remarkImageWidth,
+            remarkSectionize,
+            parseDirectiveNode,
         ]
     }
 })

@@ -94,10 +94,10 @@ export default defineConfig({
       remarkExcerpt,
       remarkGithubAdmonitionsToDirectives,
       remarkDirective,
-      remarkSectionize,
-      parseDirectiveNode,
       remarkImageCaption,
       remarkImageWidth,
+      remarkSectionize,
+      parseDirectiveNode,
     ],
     rehypePlugins: [
       rehypeKatex,
