@@ -274,12 +274,12 @@ export default defineConfig({
 
 代码：
 ```md title="demo.md"
-![シオン(诗音)的头像 w-50%](/avatar.webp "シオン(诗音)")
+![博主的头像 w-50%](/avatar.webp "シオン(诗音)")
 ```
 
 结果：
 
-![シオン(诗音)的头像 w-50%](/avatar.webp "シオン(诗音)")
+![博主的头像 w-50%](/avatar.webp "シオン(诗音)")
 
 ### 2.2 改动点
 
