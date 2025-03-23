@@ -26,9 +26,8 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 import fuwariLinkCard from "./src/plugins/fuwari-link-card.ts";
 import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
 import partytown from "@astrojs/partytown";
-import remarkGfm from 'remark-gfm'
-import remarkFigureCaption from '@microflash/remark-figure-caption'
-import remarkImageAttr from './src/plugins/remark-image-attr.js'
+import remarkImageCaption from "./src/plugins/remark-image-caption.ts";
+import remarkImageWidth from './src/plugins/remark-image-width.js'
 
 // https://astro.build/config
 export default defineConfig({
@@ -97,9 +96,8 @@ export default defineConfig({
       remarkDirective,
       remarkSectionize,
       parseDirectiveNode,
-      remarkFigureCaption,
-      remarkGfm,
-      remarkImageAttr,
+      remarkImageCaption,
+      remarkImageWidth,
     ],
     rehypePlugins: [
       rehypeKatex,

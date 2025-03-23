@@ -1,8 +1,8 @@
 ---
-title: 对Fuwari进行一些小的改动（二）
+title: 对Fuwari进行一些小的改动（二）改
 published: 2025-03-18
-updated: 2025-03-20
-description: '图片标题、调整图片大小、图片居中、更新时间、音乐播放器'
+updated: 2025-03-23
+description: '图片标题、调整图片大小、更新时间、音乐播放器'
 image: ''
 tags: [Fuwari, Astro, 博客]
 category: '前端'
@@ -11,10 +11,16 @@ lang: ''
 series: '改造博客'
 ---
 
-:::tip
-改动点包括增加可添加图片标题的功能、增加可调整图片大小与使图片居中的功能、在文章列表卡片中添加更新时间、给fuwari添加音乐播放器
+:::important[重要]
+2025年3月23日 文章有较大改动，故更改标题，原标题为《对Fuwari进行一些小的改动（二）》<br>
+
+文章内容包括增加可添加图片标题的功能、增加可调整图片大小、在文章列表卡片中添加更新时间、给fuwari添加音乐播放器
 :::
 
+<details>
+<summary>原先的添加图片标题与调整图片大小的方案，现已废弃❌</summary>
+
+````md title="old.md"
 ## 一、图片标题
 
 > 可在图片的下方显示标题<br>
@@ -206,6 +212,134 @@ export default defineConfig({
     }
 })
 ```
+````
+
+</details>
+
+<details>
+<summary>补充知识</summary>
+
+1. `<details></details>`是`html`的语法，用来折叠内容，可以直接写在md文档里
+
+代码：
+```md title="demo.md"
+<details>
+  <summary>Details</summary>
+  Something small enough to escape casual notice.
+</details>
+```
+
+结果：
+<details>
+  <summary>Details</summary>
+  Something small enough to escape casual notice.
+</details>
+
+详细说明：[\<details\>: The Details disclosure element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)
+
+2. 可以用 \`\`\`\` 包裹住 \`\`\`，以此类推
+
+代码：
+``````md title="demo.md"
+`````md title="demo2.md"
+````text
+```md title="demo3.md"
+```
+````
+`````
+``````
+
+结果：
+`````md title="demo2.md"
+````text
+```md title="demo3.md"
+```
+````
+`````
+
+</details>
+
+
+## 一、图片标题
+感谢`Hasenpfote`大佬的代码，直接照着改动点改就可以<br>
+[feat: add image-caption feature](https://github.com/saicaca/fuwari/pull/351)
+
+目前该代码还没有合并到`Fuwari`的主分支内
+
+## 二、调整图片大小
+
+> 在加入图片标题功能后，增加调整图片大小的功能
+
+### 2.1 示例
+
+代码：
+```md title="demo.md"
+![シオン(诗音)的头像 w-50%](/avatar.webp "シオン(诗音)")
+```
+
+结果：
+
+![シオン(诗音)的头像 w-50%](/avatar.webp "シオン(诗音)")
+
+### 2.2 改动点
+
+1. 新增`remark-image-width.js`文件，文件内容如下：
+
+```js title="src\plugins\remark-image-width.js"
+import { visit } from "unist-util-visit";
+
+export default function remarkImageWidth() {
+        var regex = / w-([0-9]+)%/
+        const transformer = async tree => {
+            const visitor = (paragraphNode, index, parent) => {
+                if (index === undefined || parent === undefined) return
+
+                parent.children.forEach((node, index, parent) => {
+                    if (node.type === 'text' && node.data !== undefined && node.data.hName === 'figure') {
+                        findImgNodes(node).forEach(imgNode => {
+                            if (imgNode.properties.alt.search(regex) != -1) {
+                                imgNode.properties.width = `${imgNode.properties.alt.match(regex)[1]}%`
+                                imgNode.properties.alt = imgNode.properties.alt.replace(regex, "")
+                            }
+                        })
+                    }
+                })
+            }
+        visit(tree, 'paragraph', visitor)
+    }
+    return transformer
+}
+
+function findImgNodes(node, imgNodes = []) {
+    if (node.tagName === 'img') {
+        imgNodes.push(node)
+    } else if (node.data !== undefined && node.data.hChildren !== undefined) {
+        node.data.hChildren.forEach(child => findImgNodes(child, imgNodes))
+    } else if (node.children !== undefined) {
+        node.children.forEach(child => findImgNodes(child, imgNodes))
+    }
+    return imgNodes
+}
+```
+
+2. 导入
+
+```js title="astro.config.mjs" ins={1, 10}
+import remarkImageWidth from './src/plugins/remark-image-width.js'
+
+export default defineConfig({
+    // ...
+    markdown: {
+        remarkPlugins: [
+            // ...
+            parseDirectiveNode,
+            remarkImageCaption,
+            remarkImageAttr,
+        ]
+    }
+})
+```
+
 
 ## 三、更新时间
 

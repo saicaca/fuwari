@@ -19,7 +19,7 @@ series: 游戏回忆
 
 ## 一、启蒙
 
-![架向星空之桥 logo m-auto](https://img.ikamusume7.org/h1_hoshikaka-logos.webp)
+![架向星空之桥 logo](https://img.ikamusume7.org/h1_hoshikaka-logos.webp "架向星空之桥")
 
 最初应该是在我哥家玩电脑的时候吧，也不知怎的就从网上下了一个叫《架向星空之桥》[^1]的游戏。
 
@@ -35,13 +35,13 @@ series: 游戏回忆
 <iframe src="https://store.steampowered.com/widget/1961760/" frameborder="0" width="646" height="190" style="margin: auto 0px"></iframe>
 :::
 
-![夕阳染红的街道 logo w-50% m-auto](https://img.ikamusume7.org/akaneiro-logo.webp)
+![夕阳染红的街道 logo w-50%](https://img.ikamusume7.org/akaneiro-logo.webp "夕阳染红的街道")
 
 《夕阳染红的街道》[^2]也是有玩的，走的是傲娇大小姐片桐優姫路线。动画版的声优记得是钉宫理惠（钉宫厨狂喜，不过其他就没什么印象了。
 
 ## 二、承接
 
-![遥仰凰华 logo w-50% m-auto](https://img.ikamusume7.org/kanishino-logo.webp)
+![遥仰凰华 logo w-50%](https://img.ikamusume7.org/kanishino-logo.webp "遥仰凰华")
 
 遥仰凰华[^3]
 
