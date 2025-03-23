@@ -1,6 +1,13 @@
 import deepmerge from '@fastify/deepmerge'
 import { type Child, type Properties, h } from 'hastscript'
-import type { Image, Link, Paragraph, Root, RootContent } from 'mdast'
+import type {
+  Image,
+  Link,
+  Paragraph,
+  PhrasingContent,
+  Root,
+  RootContent,
+} from 'mdast'
 import type { Plugin, Transformer } from 'unified'
 import { visit } from 'unist-util-visit'
 import type { Visitor } from 'unist-util-visit'
@@ -50,12 +57,14 @@ const remarkImageCaption: Plugin<[], Root> = (options?: UserOptions) => {
   return transformer
 }
 
+const isSoftBreak = (node: PhrasingContent): boolean => {
+  return node.type === 'text' && (node.value === '\n' || node.value === '\r\n')
+}
+
 const extractValidImageNodes = (paragraphNode: Paragraph): Image[] | null => {
   const hasImages = paragraphNode.children.every(
     child =>
-      child.type === 'image' ||
-      child.type === 'break' ||
-      (child.type === 'text' && child.value === '\n'),
+      child.type === 'image' || child.type === 'break' || isSoftBreak(child),
   )
 
   return hasImages
@@ -73,7 +82,7 @@ const extractValidImageLinkNodes = (
         subChild =>
           subChild.type === 'image' ||
           subChild.type === 'break' ||
-          (subChild.type === 'text' && subChild.value === '\n'),
+          isSoftBreak(subChild),
       ),
   )
 
