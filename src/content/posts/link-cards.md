@@ -56,7 +56,7 @@ You can specify the options in the `astro.config.mjs` file.
 
 ```javascript
 ...
-import fuwariLinkCard from "./src/plugins/fuwari-link-card.js"
+import fuwariLinkCard from "./src/plugins/fuwari-link-card.ts"
 ...
 export default defineConfig({
   ...
@@ -70,7 +70,7 @@ If the order of plugins is complex, you can also specify it as a remark plugin.
 
 ```javascript
 ...
-import remarkLinkCard from "./src/plugins/remark-link-card.js"
+import remarkLinkCard from "./src/plugins/remark-link-card.ts"
 ...
 export default defineConfig({
   ...
@@ -85,6 +85,7 @@ export default defineConfig({
 | Name             | Type            | Default                                                                                                                                        | Description                                                                                                                                                                                                                                                                    |
 | ---------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | devMode          | boolean         | [import.meta.env.DEV](https://docs.astro.build/en/guides/environment-variables/#default-environment-variables "Default environment variables") | Enable or disable development mode.                                                                                                                                                                                                                                            |
+| excludedUrls     | Array<string \| RegExp> | []                                                                                                                                             | A list of strings or regular expressions to exclude specific URLs from processing. This can also help prevent conflicts with other plugins.                                                                                                                                    |
 | linkAttributes   | Object          | { target: '', rel: '' }                                                                                                                        | Set the target and relationship attributes for external links. These attributes can also be left unset to delegate handling to other plugins.                                                                                                                                  |
 | rewriteRules     | Array\<Object\> | []                                                                                                                                             | Rewrite specific metadata attributes fetched from links, such as the title and description.                                                                                                                                                                                    |
 | base             | string          | '/'                                                                                                                                            | Specify the same base path as Astro's. For details, refer [here](https://docs.astro.build/en/reference/configuration-reference/#base "Configuration Reference"). **When used as an integration, if not specified, this option will be determined automatically.**              |

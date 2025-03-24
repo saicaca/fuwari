@@ -54,6 +54,7 @@ interface Cache {
 
 interface Options {
   devMode: boolean
+  excludedUrls: (string | RegExp)[]
   linkAttributes: LinkAttributes
   rewriteRules: RewriteRule[]
   base: string
@@ -84,6 +85,7 @@ interface Data {
 
 const defaultOptions: Options = {
   devMode: import.meta.env.DEV,
+  excludedUrls: [],
   linkAttributes: { target: '', rel: '' },
   rewriteRules: [],
   base: '/',
@@ -131,7 +133,8 @@ const remarkLinkCard: Plugin<[], Root> = (options?: UserOptions) => {
 
       visit(paragraphNode, 'link', linkNode => {
         const bareLink = getBareLink(linkNode, mergedOptions)
-        if (!bareLink) return
+
+        if (!bareLink || isExcludedUrl(bareLink.url.href, mergedOptions)) return
 
         const url = linkNode.url
 
@@ -207,6 +210,18 @@ const getBareLink = (linkNode: Link, options: Options): BareLink | null => {
   if (!isValidUrl(parsedUrl.href)) return null
 
   return { url: parsedUrl, isInternal: isInternal }
+}
+
+const isExcludedUrl = (url: string, options: Options): boolean => {
+  for (const excludedUrl of options.excludedUrls) {
+    if (typeof excludedUrl === 'string') {
+      if (url.includes(excludedUrl)) return true
+    } else if (excludedUrl instanceof RegExp) {
+      if (excludedUrl.test(url)) return true
+    }
+  }
+
+  return false
 }
 
 const fetchMetadata = async (
