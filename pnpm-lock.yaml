@@ -131,6 +131,9 @@ importers:
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
+      unified:
+        specifier: ^11.0.5
+        version: 11.0.5
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
