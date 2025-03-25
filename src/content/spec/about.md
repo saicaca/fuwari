@@ -25,9 +25,9 @@
 来自[MiSans](https://hyperos.mi.com/font/zh/)，导入参考[《在Fuwari使用自定义字体》
 ](https://blog.aulypc0x0.online/posts/use_custom_fonts_in_fuwari/)。
 
-## 音乐播放器歌单
+<!-- ## 音乐播放器歌单
 
-来着大名鼎鼎的 [Lofi Girl](https://www.youtube.com/@LofiGirl) ♪
+来着大名鼎鼎的 [Lofi Girl](https://www.youtube.com/@LofiGirl) ♪ -->
 
 ## 关于我
 
