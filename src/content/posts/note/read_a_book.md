@@ -1,13 +1,13 @@
 ---
-title: 其他零碎的笔记
+title: 读一本书
 published: 2025-03-21
-description: ''
+description: '《如何阅读一本书》和《快速阅读术》的笔记'
 image: ''
-tags: [零碎, 笔记]
+tags: [笔记，阅读]
 category: '笔记'
 draft: true 
 lang: ''
-series: '其他'
+series: '阅读'
 ---
 
 ## 一、《快速阅读术》
