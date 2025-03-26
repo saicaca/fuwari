@@ -57,6 +57,10 @@ const remarkImageCaption: Plugin<[], Root> = (options?: UserOptions) => {
   return transformer
 }
 
+const isRelativePath = (path: string): boolean => {
+  return !/^(?:[a-zA-Z]+:)?\//.test(path)
+}
+
 const isSoftBreak = (node: PhrasingContent): boolean => {
   return node.type === 'text' && (node.value === '\n' || node.value === '\r\n')
 }
@@ -64,7 +68,9 @@ const isSoftBreak = (node: PhrasingContent): boolean => {
 const extractValidImageNodes = (paragraphNode: Paragraph): Image[] | null => {
   const hasImages = paragraphNode.children.every(
     child =>
-      child.type === 'image' || child.type === 'break' || isSoftBreak(child),
+      (child.type === 'image' && !isRelativePath(child.url)) ||
+      child.type === 'break' ||
+      isSoftBreak(child),
   )
 
   return hasImages
@@ -80,7 +86,7 @@ const extractValidImageLinkNodes = (
       child.type === 'link' &&
       child.children.every(
         subChild =>
-          subChild.type === 'image' ||
+          (subChild.type === 'image' && !isRelativePath(subChild.url)) ||
           subChild.type === 'break' ||
           isSoftBreak(subChild),
       ),
