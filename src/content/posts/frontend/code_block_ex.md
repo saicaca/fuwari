@@ -1,7 +1,7 @@
 ---
 title: 增强Fuwari的代码块功能
 published: 2025-02-26
-updated: 2025-02-28
+updated: 2025-03-26
 description: '安装Expressive Code插件，使代码块支持多主题高亮、增减标记等功能'
 image: 'https://expressive-code.com/open-graph/index.png'
 tags: [Fuwari, Astro, 博客]
@@ -19,7 +19,12 @@ series: "改造博客"
 https://expressive-code.com/
 
 :::important[重要]
-Fuwari的版本不同可能会导致代码位置和本博文中描述的不一致
+2025年3月26日更新
+
+目前`Hasenpfote`大佬已经将该功能提交到`Fwrari`的 PR 里（还没有合并到主分支）<br>
+可以优先参考他的代码
+
+[feat: improve code block feature with Expressive Code](https://github.com/saicaca/fuwari/pull/330)
 :::
 
 ## 一、注释Fuwari自带的代码块样式
