@@ -1,7 +1,7 @@
 ---
 title: Galgame小记
 published: 2025-03-19
-description: '简单回忆一下自己的Galgame经历'
+description: '记录一下早期玩过的一些Galgame'
 image: 'https://img.ikamusume7.org/%E8%97%A4%E5%A0%82%E3%81%93%E3%82%88%E3%82%8A.webp'
 tags: [Galgame]
 category: '回想'
@@ -12,12 +12,9 @@ series: 游戏回忆
 
 > 封面图来源：[藤堂こより(切り絵)🔗](https://www.pixiv.net/artworks/18895882)
 
-:::note[前言]
-博主玩过且通关的Galgame，估计两只手都能数得过来<br>
-不过还是留个纪念吧
-:::
-
 ## 一、启蒙
+
+### 架向星空之桥
 
 ![架向星空之桥 logo](https://img.ikamusume7.org/h1_hoshikaka-logos.webp "架向星空之桥")
 
@@ -27,27 +24,52 @@ series: 游戏回忆
 
 但要说走的哪条路线就有点记不得了，只记得走的不是中津川初（第一女主）的路线。~~我玩的大部分Gal好像都没有选第一女主的路线。~~
 
+![日向伊吹](https://img.ikamusume7.org/%E6%97%A5%E5%90%91%E4%BC%8A%E5%90%B9.jpg "可能是这两位中的其中一位吧")
+![藤堂こより](https://img.ikamusume7.org/%E8%97%A4%E5%A0%82%E3%81%93%E3%82%88%E3%82%8A.jpg)
+
 后来才知道它的制作公司是feng社，不过已经倒闭了（悲。
 
 :::note[补充]
-这个最近出的[游戏](https://store.steampowered.com/widget/1961760/)里开发商写了feng，不太清楚是怎么回事
+不过这个最近出的[游戏](https://store.steampowered.com/widget/1961760/)里开发商写了feng，不太清楚是怎么回事
 <!-- https://store.steampowered.com/widget/1961760/ -->
+
 <iframe src="https://store.steampowered.com/widget/1961760/" frameborder="0" width="646" height="190" style="margin: auto 0px"></iframe>
 :::
+
+### 夕阳染红的街道
 
 ![夕阳染红的街道 logo w-50%](https://img.ikamusume7.org/akaneiro-logo.webp "夕阳染红的街道")
 
 《夕阳染红的街道》[^2]也是有玩的，走的是傲娇大小姐片桐優姫路线。动画版的声优记得是钉宫理惠（钉宫厨狂喜，不过其他就没什么印象了。
 
+![片桐優姫](https://img.ikamusume7.org/%E7%89%87%E6%A1%90%E5%84%AA%E5%A7%AB.jpg "片桐優姫")
+
 ## 二、承接
+
+### 遥仰凰华
 
 ![遥仰凰华 logo w-50%](https://img.ikamusume7.org/kanishino-logo.webp "遥仰凰华")
 
-遥仰凰华[^3]
+《遥仰凰华》[^3]里本校分校的路线选择让我纠结了一会儿，不过最后为了攻略风祭雅选择了本校路线。
 
-晓之护卫[^4]
+![風祭みやび 立绘](https://img.ikamusume7.org/%E9%A2%A8%E7%A5%AD%E3%81%BF%E3%82%84%E3%81%B31.jpg "立绘")
+![風祭みやび 中指](https://img.ikamusume7.org/%E9%A2%A8%E7%A5%AD%E3%81%BF%E3%82%84%E3%81%B32.webp "好孩子，千万不要模仿哦")
+
+![暁の護衛 logo](https://img.ikamusume7.org/%E6%9A%81%E3%81%AE%E8%AD%B7%E8%A1%9B%20logo.jpg "晓之护卫")
+
+### 晓之护卫
+
+《晓之护卫》[^4]里虽然两位大小姐也很有魅力，不过我最后还是选了月（ツキ）线。
+
+![ツキ](https://img.ikamusume7.org/%E3%83%84%E3%82%AD.webp "月")
+
+从官方投票结果看，大家都很喜欢毒舌女仆啊
+
+![ツキ No.1](https://img.ikamusume7.org/%E3%83%84%E3%82%AD%20No.1.webp "官方投票第1名")
 
 ## 三、转大人
+
+### Flyable Heart
 
 Flyable Heart[^5]
 
