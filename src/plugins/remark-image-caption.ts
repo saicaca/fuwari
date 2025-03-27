@@ -65,13 +65,16 @@ const isSoftBreak = (node: PhrasingContent): boolean => {
   return node.type === 'text' && (node.value === '\n' || node.value === '\r\n')
 }
 
-const extractValidImageNodes = (paragraphNode: Paragraph): Image[] | null => {
-  const hasImages = paragraphNode.children.every(
-    child =>
-      (child.type === 'image' && !isRelativePath(child.url)) ||
-      child.type === 'break' ||
-      isSoftBreak(child),
+const isRelevantNode = (node: PhrasingContent): boolean => {
+  return (
+    (node.type === 'image' && !isRelativePath(node.url)) ||
+    node.type === 'break' ||
+    isSoftBreak(node)
   )
+}
+
+const extractValidImageNodes = (paragraphNode: Paragraph): Image[] | null => {
+  const hasImages = paragraphNode.children.every(child => isRelevantNode(child))
 
   return hasImages
     ? paragraphNode.children.filter(child => child.type === 'image')
@@ -85,12 +88,7 @@ const extractValidImageLinkNodes = (
     child =>
       child.type === 'link' &&
       child.children.length > 0 &&
-      child.children.every(
-        subChild =>
-          (subChild.type === 'image' && !isRelativePath(subChild.url)) ||
-          subChild.type === 'break' ||
-          isSoftBreak(subChild),
-      ),
+      child.children.every(subChild => isRelevantNode(subChild)),
   )
 
   return hasImageLinks
