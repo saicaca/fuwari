@@ -46,6 +46,7 @@ tags: [Foo, Bar]
 category: Front-end
 draft: false
 lang: jp      # Set only if the post's language differs from the site's language in `config.ts`
+pinned: false # Set only if the post is pinned
 ---
 ```
 
