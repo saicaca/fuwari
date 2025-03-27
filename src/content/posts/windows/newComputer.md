@@ -14,6 +14,8 @@ draft: true
 
 ### 系统镜像
 
+#### 官网
+* https://www.microsoft.com/zh-cn/software-download/windows11
 #### ITELLYOU
 
 * 官网 <https://next.itellyou.cn/Original>
@@ -49,6 +51,13 @@ draft: true
 #### GeekUninstaller
 
 * 官网：<https://geekuninstaller.com/download>
+
+
+
+
+## 教程
+
+<iframe width="100%" height="468" src="//player.bilibili.com/player.html?bvid=BV1vT4y1n7JX&p=1&autoplay=0&muted=0&danmaku=false" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 <!-- 
 # 驱动工具

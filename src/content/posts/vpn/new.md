@@ -22,9 +22,18 @@ draft: false
 
 ::github{repo="2dust/v2rayN"}
 
-> widnwos下 Ctrl+E  测速
+>  Ctrl/command+E  测速
 
 #### nthLink
 
 * 官网：<https://www.nthlink.com/>
 * telegram:  nthLinkVPN
+
+### ios 共享账号
+#### AneeoBlog
+* 官网：https://ios.aneeo.com/
+* 暗号获取：t.me/Aneeoblog
+#### 帕克加速.com
+ 
+#### 苹果帝
+*  https://appledi.com/
