@@ -84,6 +84,7 @@ const extractValidImageLinkNodes = (
   const hasImageLinks = paragraphNode.children.every(
     child =>
       child.type === 'link' &&
+      child.children.length > 0 &&
       child.children.every(
         subChild =>
           (subChild.type === 'image' && !isRelativePath(subChild.url)) ||
