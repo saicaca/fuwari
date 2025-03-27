@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "pnpm"
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "daily"
@@ -9,14 +9,14 @@ updates:
         patterns:
           - "*"
         update-types:
-          - "version-update:semver-patch"
+          - "patch"
       minor-updates:
         patterns:
           - "*"
         update-types:
-          - "version-update:semver-minor"
+          - "minor"
     pull-request-branch-name:
       separator: "-"
     ignore:
       - dependency-name: "*"
-        update-types: ["version-update:semver-major"]
+        update-types: ["major"]
