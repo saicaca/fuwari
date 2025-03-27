@@ -23,6 +23,8 @@ export const th: Translation = {
   [Key.minutesCount]: 'นาที',
   [Key.postCount]: 'โพสต์',
   [Key.postsCount]: 'โพสต์',
+  [Key.viewCount]: 'views',
+  [Key.viewsCount]: 'views',
 
   [Key.themeColor]: 'สีของธีม',
 

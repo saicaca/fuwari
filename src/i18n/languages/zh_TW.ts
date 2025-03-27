@@ -23,6 +23,8 @@ export const zh_TW: Translation = {
   [Key.minutesCount]: '分鐘',
   [Key.postCount]: '篇文章',
   [Key.postsCount]: '篇文章',
+  [Key.viewCount]: 'views',
+  [Key.viewsCount]: 'views',
 
   [Key.themeColor]: '主題色',
 

@@ -1,0 +1,109 @@
+---
+
+export interface Props {
+  url: string;
+  language: string;
+}
+const { url = "", language = "" } = Astro.props;
+
+const encodedUrl = encodeURIComponent(url);
+const counterUrl = `https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=${encodedUrl}&count_bg=%234E763000&title_bg=%237A464600&icon=&icon_color=%23E7E7E7&title=Reads+%28Today+%2F+All+Time%29+%3A&edge_flat=true`;
+---
+
+<div class="flex gap-1 opacity-80">
+  <span id="views-count" class="inline-flex items-end">
+    <span class="loading-dot">.</span>
+    <span class="loading-dot">.</span>
+    <span class="loading-dot">.</span>
+  </span>
+  <div class="text-sm"> {language}</div>
+</div>
+
+<style>
+  @keyframes loadingDots {
+    0% {
+      opacity: 0.2;
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.2;
+    }
+  }
+
+  .loading-dot {
+    animation: loadingDots 1.4s infinite;
+    animation-fill-mode: both;
+  }
+
+  .loading-dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .loading-dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+</style>
+
+<script define:vars={{ counterUrl }}>
+  function animateNumber(start, end, duration, element) {
+    const startTime = performance.now();
+    const startNumber = parseInt(start);
+    const targetNumber = parseInt(end);
+    const difference = targetNumber - startNumber;
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      const easedProgress = easeOutCubic(progress);
+      const currentNumber = Math.round(startNumber + (difference * easedProgress));
+
+      // Format number with commas for better readability
+      element.textContent = currentNumber.toLocaleString();
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  async function fetchWithProxy(targetUrl) {
+    const proxyUrl = "https://corsproxy.io/?" + encodeURIComponent(targetUrl);
+    const response = await fetch(proxyUrl);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    return response.text();
+  }
+
+  async function updateViewCount() {
+    const viewsCount = document.getElementById("views-count");
+    if (!viewsCount) return;
+
+    try {
+      const svgText = await fetchWithProxy(counterUrl);
+      const match = svgText.match(
+        /<text[^>]*fill="#fff"[^>]*>([\d\s/]+)<\/text>/
+      );
+
+      if (match && match[1]) {
+        const count = match[1].trim();
+        const totalViews = count.split("/")[1].trim();
+        viewsCount.textContent = "0"; // Start from zero
+        animateNumber(0, totalViews, 1000, viewsCount); // Animate to actual count over 1 second
+      } else {
+        viewsCount.textContent = "N/A";
+      }
+    } catch {
+      viewsCount.textContent = "N/A";
+    }
+  }
+
+  updateViewCount();
+</script>
