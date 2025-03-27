@@ -19,4 +19,4 @@ updates:
       separator: "-"
     ignore:
       - dependency-name: "*"
-        update-types: ["major"]
+        update-types: ["version-update:semver-major"]
