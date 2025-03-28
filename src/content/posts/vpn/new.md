@@ -22,7 +22,7 @@ draft: false
 
 ::github{repo="2dust/v2rayN"}
 
->  Ctrl/command+E  测速
+> Ctrl/command+E  测速
 
 #### nthLink
 
@@ -30,10 +30,35 @@ draft: false
 * telegram:  nthLinkVPN
 
 ### ios 共享账号
+
 #### AneeoBlog
-* 官网：https://ios.aneeo.com/
+
+* 官网：<https://ios.aneeo.com/>
 * 暗号获取：t.me/Aneeoblog
+
 #### 帕克加速.com
- 
+
 #### 苹果帝
-*  https://appledi.com/
+
+* <https://appledi.com/>
+
+## 订阅地址
+
+### <https://nodefree.org/>
+
+### v2ray
+
+* <https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.txt>
+* <https://www.xrayvip.com/free.txt>
+* <https://client-sub.jingfan.life/s/152e5f80993e1ee8054095c39fb8ade8>
+* <https://raw.githubusercontent.com/aiboboxx/v2rayfree/main/v2>
+* <https://chromego-sub.netlify.app/sub/base64.txt>
+
+### clash
+
+* <https://www.xrayvip.com/free.yaml>
+* <https://chromego-sub.netlify.app/sub/base64.txt>
+* <https://github.com/aiboboxx/clashfree/blob/main/clash.yml>
+* <https://raw.githubusercontent.com/mfuu/v2ray/master/clash.yaml>
+* <https://raw.githubusercontent.com/anaer/Sub/main/clash.yaml>
+* <https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml>

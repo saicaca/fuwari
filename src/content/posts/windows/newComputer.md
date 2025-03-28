@@ -15,7 +15,9 @@ draft: true
 ### 系统镜像
 
 #### 官网
-* https://www.microsoft.com/zh-cn/software-download/windows11
+
+* <https://www.microsoft.com/zh-cn/software-download/windows11>
+
 #### ITELLYOU
 
 * 官网 <https://next.itellyou.cn/Original>
@@ -25,6 +27,14 @@ draft: true
 #### 微PE工具箱
 
 * 官网  <https://www.wepe.com.cn/>
+
+#### FirPE
+
+* 官网  <https://firpe.cn/>
+
+#### Ventoy
+
+::github{repo="ventoy/Ventoy"}
 
 ### 硬盘工具
 
@@ -51,9 +61,6 @@ draft: true
 #### GeekUninstaller
 
 * 官网：<https://geekuninstaller.com/download>
-
-
-
 
 ## 教程
 
