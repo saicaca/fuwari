@@ -51,7 +51,7 @@
     "remark-sectionize": "^2.1.0",
     "sanitize-html": "^2.15.0",
     "sharp": "^0.33.5",
-    "stylus": "^0.63.0",
+    "stylus": "^0.64.0",
     "svelte": "^5.25.3",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.2",
@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.4",
-    "@biomejs/biome": "1.8.3",
+    "@biomejs/biome": "1.9.4",
     "@rollup/plugin-yaml": "^4.1.2",
     "@types/markdown-it": "^14.1.2",
     "@types/mdast": "^4.0.4",
