@@ -5,7 +5,7 @@ description: "How to use this blog template."
 image: "./cover.jpeg"
 tags: ["demo"]
 category: demo
-draft: false
+draft: true
 ---
 
 > Cover image source: [Source](https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/208fc754-890d-4adb-9753-2c963332675d/width=2048/01651-1456859105-(colour_1.5),girl,_Blue,yellow,green,cyan,purple,red,pink,_best,8k,UHD,masterpiece,male%20focus,%201boy,gloves,%20ponytail,%20long%20hair,.jpeg)
@@ -38,8 +38,6 @@ draft: false
 
 ## Where to Place the Post Files
 
-
-
 Your post files should be placed in `src/content/posts/` directory. You can also create sub-directories to better organize your posts and assets.
 
 ```
@@ -49,8 +47,6 @@ src/content/posts/
     ├── cover.png
     └── index.md
 ```
-
-
 
 # An h1 header
 
@@ -219,10 +215,9 @@ $$
 And note that you can backslash-escape any punctuation characters
 which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.
 
-
-
 ## GitHub Repository Cards
-You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API. 
+
+You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API.
 
 ::github{repo="Fabrizz/MMM-OnSpotify"}
 
@@ -295,7 +290,6 @@ This is a note with a custom title.
 > The GitHub syntax is also supported.
 ```
 
-
 Just copy the embed code from YouTube or other platforms, and paste it in the markdown file.
 
 ```yaml
@@ -311,4 +305,3 @@ published: 2023-10-19
 ## YouTube
 
 <iframe width="100%" height="468" src="https://www.youtube.com/embed/5gIf0_xpFPI?si=N1WTorLKL0uwLsU_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
- 
