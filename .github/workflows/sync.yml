@@ -9,7 +9,7 @@ jobs:
   repo-sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: TG908/fork-sync@v1.1
+      - uses: tgymnich/fork-sync@v2.0.10
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # 这个 token action 会默认配置, 这里只需这样写就行
           owner: ikamusume7 # fork 上游项目 owner
