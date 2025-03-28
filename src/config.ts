@@ -65,11 +65,24 @@ export const profileConfig: ProfileConfig = {
       icon: 'fa6-brands:github',
       url: 'https://github.com/kongdf',
     }, {
-      name: 'GitHub',
+      name: '技术博客',
       icon: 'logos:blogger',
       url: 'https://blog.kongdf.com',
     },
 
+    // Visit https://icones.js.org/ for icon codes
+    // You will need to install the corresponding icon set if it's not already included
+    // `pnpm add @iconify-json/<icon-set-name>`
+  ], links2: [
+    {
+      name: 'GitHub',
+      icon: 'fa6-brands:github',
+      url: 'https://github.com/kongdf',
+    }, {
+      name: '技术博客',
+      icon: 'logos:blogger',
+      url: 'https://blog.kongdf.com',
+    },
 
     // Visit https://icones.js.org/ for icon codes
     // You will need to install the corresponding icon set if it's not already included

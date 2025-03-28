@@ -1,0 +1,20 @@
+---
+
+ 
+
+import WidgetLayout from './WidgetLayout.astro'
+
+const COLLAPSED_HEIGHT = '7.5rem'
+
+interface Props {
+  class?: string
+  style?: string
+}
+const className = Astro.props.class
+const style = Astro.props.style
+---
+<WidgetLayout name="是" id="ShowMe" isCollapsed={false} collapsedHeight={COLLAPSED_HEIGHT} class={className} style={style}>
+    <div class="flex gap-2 flex-wrap">
+        <p>123123</p>
+    </div>
+</WidgetLayout>
