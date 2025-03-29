@@ -42,7 +42,13 @@ const remarkImageCaption: Plugin<[], Root> = (options?: UserOptions) => {
 
   const transformer: Transformer<Root> = async tree => {
     const visitor: Visitor<Paragraph> = (paragraphNode, index, parent) => {
-      if (index === undefined || parent === undefined) return
+      if (
+        index === undefined ||
+        parent === undefined ||
+        parent.type !== 'root' ||
+        paragraphNode.data !== undefined
+      )
+        return
 
       const customNodes = createCustomNodes(paragraphNode, mergedOptions)
 
