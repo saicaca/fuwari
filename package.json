@@ -63,7 +63,7 @@
     "@rollup/plugin-yaml": "^4.1.2",
     "@types/markdown-it": "^14.1.2",
     "@types/mdast": "^4.0.4",
-    "@types/sanitize-html": "^2.13.0",
+    "@types/sanitize-html": "^2.15.0",
     "postcss-import": "^16.1.0",
     "postcss-nesting": "^13.0.1"
   },
