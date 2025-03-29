@@ -46,7 +46,7 @@ const remarkImageCaption: Plugin<[], Root> = (options?: UserOptions) => {
 
       const customNodes = createCustomNodes(paragraphNode, mergedOptions)
 
-      if (customNodes.length > 0) {
+      if (customNodes.length) {
         parent.children.splice(index, 1, ...customNodes)
       }
     }
@@ -73,21 +73,19 @@ const isRelevantNode = (node: PhrasingContent): boolean => {
   )
 }
 
-const extractValidImageNodes = (paragraphNode: Paragraph): Image[] | null => {
+const extractValidImageNodes = (paragraphNode: Paragraph): Image[] => {
   const hasImages = paragraphNode.children.every(child => isRelevantNode(child))
 
   return hasImages
     ? paragraphNode.children.filter(child => child.type === 'image')
-    : null
+    : []
 }
 
-const extractValidImageLinkNodes = (
-  paragraphNode: Paragraph,
-): Link[] | null => {
+const extractValidImageLinkNodes = (paragraphNode: Paragraph): Link[] => {
   const hasImageLinks = paragraphNode.children.every(
     child =>
       child.type === 'link' &&
-      child.children.length > 0 &&
+      child.children.length &&
       child.children.every(subChild => isRelevantNode(subChild)),
   )
 
@@ -96,7 +94,7 @@ const extractValidImageLinkNodes = (
         ...child,
         children: child.children.filter(subChild => subChild.type === 'image'),
       })) as Link[])
-    : null
+    : []
 }
 
 const createImageProperties = (
@@ -213,10 +211,9 @@ const createCustomNodes = (
 ): RootContent[] => {
   const nodes: RootContent[] = []
 
-  let extractedNodes: Image[] | Link[] | null =
-    extractValidImageNodes(paragraphNode)
+  let extractedNodes: Image[] | Link[] = extractValidImageNodes(paragraphNode)
 
-  if (extractedNodes) {
+  if (extractedNodes.length) {
     const newNode = createFigureFromImages(extractedNodes, options)
     nodes.push(newNode)
     return nodes
@@ -224,8 +221,8 @@ const createCustomNodes = (
 
   extractedNodes = extractValidImageLinkNodes(paragraphNode)
 
-  if (extractedNodes) {
-    for (const extractedNode of extractedNodes || []) {
+  if (extractedNodes.length) {
+    for (const extractedNode of extractedNodes) {
       const newNode = createFigureFromLink(extractedNode, options)
       nodes.push(newNode)
     }
