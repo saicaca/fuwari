@@ -39,7 +39,6 @@ series: 游戏回忆
 ### 夕阳染红的街道
 
 ![夕阳染红的街道 logo w-50%](https://img.ikamusume7.org/akaneiro-logo.webp "夕阳染红的街道")
-![夕阳染红的街道 logo w-50%](https://img.ikamusume7.org/akaneiro-logo.webp)
 
 《夕阳染红的街道》[^2]也是有玩的，走的是傲娇大小姐片桐優姫路线。动画版的声优记得是钉宫理惠（钉宫厨狂喜，不过其他就没什么印象了。
 

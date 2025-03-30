@@ -13,7 +13,7 @@ export default function remarkImageWidth() {
                         if (imgNode.properties.alt.search(regex) != -1) {
                             if (parentNode !== undefined && parentNode.tagName === 'figure') {
                                 imgNode.properties.width = `${imgNode.properties.alt.match(regex)[1]}%`
-                                parentNode.properties.style = `width: ${imgNode.properties.width};`
+                                parentNode.properties.style = `justify-items: center;`
                             }
                             imgNode.properties.alt = imgNode.properties.alt.replace(regex, "")
                         }
