@@ -27,7 +27,8 @@ import fuwariLinkCard from "./src/plugins/fuwari-link-card.ts";
 import { pluginFileIcons } from "@xt0rted/expressive-code-file-icons";
 import partytown from "@astrojs/partytown";
 import remarkImageCaption from "./src/plugins/remark-image-caption.ts";
-import remarkImageWidth from './src/plugins/remark-image-width.js'
+import remarkImageWidth from './src/plugins/remark-image-width.js';
+import remarkEmbed from "./src/plugins/remark-embed.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -96,6 +97,63 @@ export default defineConfig({
       remarkDirective,
       remarkImageCaption,
       remarkImageWidth,
+      [
+        remarkEmbed,
+        {
+          sources: [
+            {
+              contentUrl:
+                /^https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)$/,
+              embedUrl: 'https://www.youtube.com/embed/${1}',
+              iframeAttributes: {
+                loading: 'lazy',
+                title: 'YouTube video player',
+                allow:
+                  'fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share',
+                referrerpolicy: 'strict-origin-when-cross-origin',
+              },
+            },
+            {
+              contentUrl:
+                /https:\/\/www.bilibili.com\/video\/([a-zA-Z0-9]+)\/?/,
+              embedUrl: '//player.bilibili.com/player.html',
+              queryParams: {
+                poster: 1,
+                autoplay: 0,
+                bvid: '${1}',
+                p: 1,
+              },
+              iframeAttributes: {
+                loading: 'lazy',
+                allow: 'fullscreen',
+              },
+            },
+            {
+              contentUrl:
+                /^https:\/\/www\.desmos\.com\/calculator\/(?:[a-zA-Z0-9]+)$/,
+              queryParams: {
+                embed: '',
+              },
+              iframeAttributes: {
+                loading: 'lazy',
+              },
+            },
+            {
+              contentUrl:
+                /^https:\/\/store.steampowered\.com\/widget\/(?:[a-zA-Z0-9]+)\/$/,
+              queryParams: {
+                embed: '',
+              },
+              iframeAttributes: {
+                frameborder: 0,
+                width: 646,
+                height: 190,
+                style: 'margin: auto 0px;',
+              },
+            }
+          ],
+        },
+      ],
       remarkSectionize,
       parseDirectiveNode,
     ],

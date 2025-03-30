@@ -42,11 +42,17 @@ const remarkImageCaption: Plugin<[], Root> = (options?: UserOptions) => {
 
   const transformer: Transformer<Root> = async tree => {
     const visitor: Visitor<Paragraph> = (paragraphNode, index, parent) => {
-      if (index === undefined || parent === undefined) return
+      if (
+        index === undefined ||
+        parent === undefined ||
+        parent.type !== 'root' ||
+        paragraphNode.data !== undefined
+      )
+        return
 
       const customNodes = createCustomNodes(paragraphNode, mergedOptions)
 
-      if (customNodes.length > 0) {
+      if (customNodes.length) {
         parent.children.splice(index, 1, ...customNodes)
       }
     }
@@ -57,33 +63,36 @@ const remarkImageCaption: Plugin<[], Root> = (options?: UserOptions) => {
   return transformer
 }
 
+const isRelativePath = (path: string): boolean => {
+  return !/^(?:[a-zA-Z]+:)?\//.test(path)
+}
+
 const isSoftBreak = (node: PhrasingContent): boolean => {
   return node.type === 'text' && (node.value === '\n' || node.value === '\r\n')
 }
 
-const extractValidImageNodes = (paragraphNode: Paragraph): Image[] | null => {
-  const hasImages = paragraphNode.children.every(
-    child =>
-      child.type === 'image' || child.type === 'break' || isSoftBreak(child),
+const isRelevantNode = (node: PhrasingContent): boolean => {
+  return (
+    (node.type === 'image' && !isRelativePath(node.url)) ||
+    node.type === 'break' ||
+    isSoftBreak(node)
   )
+}
+
+const extractValidImageNodes = (paragraphNode: Paragraph): Image[] => {
+  const hasImages = paragraphNode.children.every(child => isRelevantNode(child))
 
   return hasImages
     ? paragraphNode.children.filter(child => child.type === 'image')
-    : null
+    : []
 }
 
-const extractValidImageLinkNodes = (
-  paragraphNode: Paragraph,
-): Link[] | null => {
+const extractValidImageLinkNodes = (paragraphNode: Paragraph): Link[] => {
   const hasImageLinks = paragraphNode.children.every(
     child =>
       child.type === 'link' &&
-      child.children.every(
-        subChild =>
-          subChild.type === 'image' ||
-          subChild.type === 'break' ||
-          isSoftBreak(subChild),
-      ),
+      child.children.length &&
+      child.children.every(subChild => isRelevantNode(subChild)),
   )
 
   return hasImageLinks
@@ -91,7 +100,7 @@ const extractValidImageLinkNodes = (
         ...child,
         children: child.children.filter(subChild => subChild.type === 'image'),
       })) as Link[])
-    : null
+    : []
 }
 
 const createImageProperties = (
@@ -208,10 +217,9 @@ const createCustomNodes = (
 ): RootContent[] => {
   const nodes: RootContent[] = []
 
-  let extractedNodes: Image[] | Link[] | null =
-    extractValidImageNodes(paragraphNode)
+  let extractedNodes: Image[] | Link[] = extractValidImageNodes(paragraphNode)
 
-  if (extractedNodes) {
+  if (extractedNodes.length) {
     const newNode = createFigureFromImages(extractedNodes, options)
     nodes.push(newNode)
     return nodes
@@ -219,8 +227,8 @@ const createCustomNodes = (
 
   extractedNodes = extractValidImageLinkNodes(paragraphNode)
 
-  if (extractedNodes) {
-    for (const extractedNode of extractedNodes || []) {
+  if (extractedNodes.length) {
+    for (const extractedNode of extractedNodes) {
       const newNode = createFigureFromLink(extractedNode, options)
       nodes.push(newNode)
     }

@@ -1,7 +1,7 @@
 ---
 title: 对Fuwari进行一些小的改动（二）改
 published: 2025-03-18
-updated: 2025-03-23
+updated: 2025-03-30
 description: '图片标题（改）、调整图片大小（改）、更新时间、音乐播放器'
 image: ''
 tags: [Fuwari, Astro, 博客]
@@ -296,9 +296,13 @@ export default function remarkImageWidth() {
 
             parent.children.forEach((node, index, parent) => {
                 if (node.type === 'text' && node.data !== undefined && node.data.hName === 'figure') {
-                    findImgNodes(node).forEach(imgNode => {
+                    findImgNodes(node).forEach(img => {
+                        const { parentNode, imgNode } = img
                         if (imgNode.properties.alt.search(regex) != -1) {
-                            imgNode.properties.width = `${imgNode.properties.alt.match(regex)[1]}%`
+                            if (parentNode !== undefined && parentNode.tagName === 'figure') {
+                                imgNode.properties.width = `${imgNode.properties.alt.match(regex)[1]}%`
+                                parentNode.properties.style = `width: ${imgNode.properties.width};`
+                            }
                             imgNode.properties.alt = imgNode.properties.alt.replace(regex, "")
                         }
                     })
@@ -310,13 +314,13 @@ export default function remarkImageWidth() {
     return transformer
 }
 
-function findImgNodes(node, imgNodes = []) {
+function findImgNodes(node, parent = undefined, imgNodes = []) {
     if (node.tagName === 'img') {
-        imgNodes.push(node)
+        imgNodes.push({'parentNode': parent, 'imgNode': node})
     } else if (node.data !== undefined && node.data.hChildren !== undefined) {
-        node.data.hChildren.forEach(child => findImgNodes(child, imgNodes))
+        node.data.hChildren.forEach(child => findImgNodes(child, node, imgNodes))
     } else if (node.children !== undefined) {
-        node.children.forEach(child => findImgNodes(child, imgNodes))
+        node.children.forEach(child => findImgNodes(child, node, imgNodes))
     }
     return imgNodes
 }

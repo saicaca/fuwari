@@ -30,15 +30,16 @@ series: 游戏回忆
 后来才知道它的制作公司是feng社，不过已经倒闭了（悲。
 
 :::note[补充]
-不过这个最近出的[游戏](https://store.steampowered.com/widget/1961760/)里开发商写了feng，不太清楚是怎么回事
+不过这个最近出的[游戏](https://store.steampowered.com/app/1961760/My_Girlfriends_Special_Place/)里开发商写了feng，不太清楚是怎么回事
 <!-- https://store.steampowered.com/widget/1961760/ -->
 
-<iframe src="https://store.steampowered.com/widget/1961760/" frameborder="0" width="646" height="190" style="margin: auto 0px"></iframe>
+[](https://store.steampowered.com/widget/1961760/)
 :::
 
 ### 夕阳染红的街道
 
 ![夕阳染红的街道 logo w-50%](https://img.ikamusume7.org/akaneiro-logo.webp "夕阳染红的街道")
+![夕阳染红的街道 logo w-50%](https://img.ikamusume7.org/akaneiro-logo.webp)
 
 《夕阳染红的街道》[^2]也是有玩的，走的是傲娇大小姐片桐優姫路线。动画版的声优记得是钉宫理惠（钉宫厨狂喜，不过其他就没什么印象了。
 
