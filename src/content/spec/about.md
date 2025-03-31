@@ -10,7 +10,26 @@ Ever since, I remember having the urge to create a game of sorts. I designed it 
 
 But the paper accepts everything, as well as the lonely nights spent tinkering with various ideas to get nowhere.
 
-## Why are we here?
+## Why Belfar?
+That is a good one, but we'll have to delve into some portuguese words, if you don't mind. As well in some background story for the background story.
+
+The year was 2017. A little adult full of problems - that's me - but spilling creative energy, free time and a handful of friends decides to start what would became an almost ten years tabletop RPG campaign. If everything goes right, you will read about the closing session of this epic story, as it is still running every other year. And once you do, please do take your time to savor the reading, as I will not accomplish such a similar thing anywhere near in the future.
+
+Going back to the creation of the RPG world: I needed a name for the desert jewel city, home to all merchants around the globe, a oasis for the weary. What would correctly represent the vision I had for it? The focus would be commerce, and so, I started searching for words that would be related to it. That's when I stumbled across:
+
+> Bufarinheiro: Street vendor of trinkets.
+
+That's the kind of old, weird word I'd like to mutate into something of my own creation. Searched a bit more:
+
+> Belfarinheiro: Corruption of bufarinheiro.
+
+Belfarinheiro was even better, it was more pleasant to the ears. Just had to make it shorter: Bufarim, Belfarei, Belfara... Belfar.
+
+_Belfar_.
+
+That works. And here we are!
+
+## And why are we here?
 
 The very existence of this blog quenches two needs of mine: writing and developing games.
 
