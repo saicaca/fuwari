@@ -41,17 +41,17 @@ export const navBarConfig: NavBarConfig = {
   links: [
     LinkPreset.Home,
     LinkPreset.Archive,
-    LinkPreset.About,
-    {
-      name: 'GitHub',
-      url: '/posts/vpn/new/',     // Internal links should not include the base path, as it is automatically added
-      external: false,                               // Show an external link icon and will open in a new tab
-    },
-    {
-      name: '技术博客',
-      url: 'https://blog.kongdf.com',     // Internal links should not include the base path, as it is automatically added
-      external: true,                               // Show an external link icon and will open in a new tab
-    },
+    LinkPreset.About
+    // {
+    //   name: 'GitHub',
+    //   url: '/posts/vpn/new/',     // Internal links should not include the base path, as it is automatically added
+    //   external: false,                               // Show an external link icon and will open in a new tab
+    // },
+    // {
+    //   name: '技术博客',
+    //   url: 'https://blog.kongdf.com',     // Internal links should not include the base path, as it is automatically added
+    //   external: true,                               // Show an external link icon and will open in a new tab
+    // },
   ],
 }
 
@@ -68,26 +68,12 @@ export const profileConfig: ProfileConfig = {
       name: '技术博客',
       icon: 'logos:blogger',
       url: 'https://blog.kongdf.com',
-    },
+    }
 
     // Visit https://icones.js.org/ for icon codes
     // You will need to install the corresponding icon set if it's not already included
     // `pnpm add @iconify-json/<icon-set-name>`
-  ], links2: [
-    {
-      name: 'GitHub',
-      icon: 'fa6-brands:github',
-      url: 'https://github.com/kongdf',
-    }, {
-      name: '技术博客',
-      icon: 'logos:blogger',
-      url: 'https://blog.kongdf.com',
-    },
-
-    // Visit https://icones.js.org/ for icon codes
-    // You will need to install the corresponding icon set if it's not already included
-    // `pnpm add @iconify-json/<icon-set-name>`
-  ],
+  ]
 }
 
 export const licenseConfig: LicenseConfig = {
