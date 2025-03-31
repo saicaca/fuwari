@@ -3,7 +3,7 @@ title: There and here again
 published: 2025-03-22
 description: 'The will to create is born anew'
 image: 'cover.png'
-tags: [Blogging, Project Marbles]
+tags: [Project Marbles]
 category: 'Game Dev Log'
 draft: false 
 lang: ''
