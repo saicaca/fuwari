@@ -9,7 +9,7 @@ interface Props {
 const className = Astro.props.class
 const font = Astro.props.font
 ---
-<div data-pagefind-body class=`prose dark:prose-invert prose-base !max-w-none custom-md ${className}` style={font ? `font-family: ${font};` : ''}>
+<div data-pagefind-body class=`prose dark:prose-invert prose-base !max-w-none custom-md ${className}` style={font ? `font-family: ${font};font-size: 1.0625rem;` : ''}>
     <!--<div class="prose dark:prose-invert max-w-none custom-md">-->
     <!--<div class="max-w-none custom-md">-->
     <slot/>

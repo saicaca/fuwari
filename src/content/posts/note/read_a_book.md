@@ -8,6 +8,7 @@ category: '笔记'
 draft: true 
 lang: ''
 series: '阅读'
+font: 'Kai'
 ---
 
 ## 一、《快速阅读术》

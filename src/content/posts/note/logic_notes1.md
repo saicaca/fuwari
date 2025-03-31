@@ -8,6 +8,7 @@ category: '笔记'
 draft: true 
 lang: ''
 series: '逻辑学'
+font: 'Kai'
 ---
 
 ## 一、《逻辑新引》
