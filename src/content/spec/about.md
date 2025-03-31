@@ -25,6 +25,8 @@
 来自[MiSans](https://hyperos.mi.com/font/zh/)，导入参考[《在Fuwari使用自定义字体》
 ](https://blog.aulypc0x0.online/posts/use_custom_fonts_in_fuwari/)。
 
+部分文章使用字体：[霞鹜文楷 GB](https://github.com/lxgw/LxgwWenkaiGB)
+
 <!-- ## 音乐播放器歌单
 
 来着大名鼎鼎的 [Lofi Girl](https://www.youtube.com/@LofiGirl) ♪ -->

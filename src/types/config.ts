@@ -85,6 +85,7 @@ export type BlogPostData = {
   category?: string
   series?: string
   pinned?: boolean
+  font?: string
   prevTitle?: string
   prevSlug?: string
   nextTitle?: string
