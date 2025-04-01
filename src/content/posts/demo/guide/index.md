@@ -3,8 +3,8 @@ title: demo
 published: 2024-04-01
 description: "How to use this blog template."
 image: "./cover.jpeg"
-tags: ["demo"]
-category: demo
+tags: ["学习笔记"]
+category: 学习笔记
 draft: true
 ---
 

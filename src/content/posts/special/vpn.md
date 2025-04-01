@@ -5,7 +5,7 @@ image: https://s21.ax1x.com/2025/03/27/pEDxjnP.png
 
 published: 2025-03-27
 tags: [指北]
-category: 科学上网
+category: 玩机指北
 draft: false
  
 ---

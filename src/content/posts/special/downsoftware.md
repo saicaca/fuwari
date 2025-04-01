@@ -4,7 +4,7 @@ description: 软件下载
 image: https://s21.ax1x.com/2025/03/27/pEDxjnP.png 
 published: 2025-03-27
 tags: [下载,资源]
-category: 软件
+category: 玩机指北
 draft: false
  
 ---

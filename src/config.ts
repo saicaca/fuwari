@@ -39,14 +39,26 @@ export const siteConfig: SiteConfig = {
 
 export const navBarConfig: NavBarConfig = {
   links: [
-    LinkPreset.Home,
-    LinkPreset.Archive,
-    LinkPreset.About
+    LinkPreset.Home, {
+      name: '玩机指北',
+      url: '/archive/category/玩机指北/',     // Internal links should not include the base path, as it is automatically added
+      external: false,                               // Show an external link icon and will open in a new tab
+    },
+    {
+      name: '学习笔记',
+      url: '/archive/category/学习笔记/',     // Internal links should not include the base path, as it is automatically added
+      external: false,                               // Show an external link icon and will open in a new tab
+    },
+    LinkPreset.About,
+
+    // LinkPreset.Archive,
     // {
-    //   name: 'GitHub',
-    //   url: '/posts/vpn/new/',     // Internal links should not include the base path, as it is automatically added
+    //   name: '学习笔记',
+    //   url: '/archive/category/前端笔记/',     // Internal links should not include the base path, as it is automatically added
     //   external: false,                               // Show an external link icon and will open in a new tab
     // },
+
+
     // {
     //   name: '技术博客',
     //   url: 'https://blog.kongdf.com',     // Internal links should not include the base path, as it is automatically added
@@ -64,11 +76,12 @@ export const profileConfig: ProfileConfig = {
       name: 'GitHub',
       icon: 'fa6-brands:github',
       url: 'https://github.com/kongdf',
-    }, {
-      name: '技术博客',
-      icon: 'logos:blogger',
-      url: 'https://blog.kongdf.com',
     }
+    // , {
+    //   name: '技术博客',
+    //   icon: 'logos:blogger',
+    //   url: 'https://blog.kongdf.com',
+    // }
 
     // Visit https://icones.js.org/ for icon codes
     // You will need to install the corresponding icon set if it's not already included

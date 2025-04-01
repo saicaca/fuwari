@@ -4,7 +4,7 @@ description:  PC/Switch/ios
 image: https://s21.ax1x.com/2025/03/28/pErV57j.png
 published: 2025-03-31
 tags: [游戏]
-category: 游戏
+category: 玩机指北
 draft: false
  
 ---

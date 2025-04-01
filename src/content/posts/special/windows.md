@@ -5,7 +5,7 @@ image: https://s21.ax1x.com/2025/03/27/pEDvNqK.png
 
 published: 2025-03-17
 tags: [指北]
-category: Windows
+category: 玩机指北
 draft: false
  
 ---
