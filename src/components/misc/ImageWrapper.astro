@@ -1,5 +1,5 @@
 ---
-import path from 'path'
+import path from 'node:path'
 interface Props {
   id?: string
   src: string
@@ -34,6 +34,7 @@ const isPublic = src.startsWith('/')
 
 // TODO temporary workaround for images dynamic import
 // https://github.com/withastro/astro/issues/3373
+// biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
 let img
 if (isLocal) {
   const files = import.meta.glob<ImageMetadata>('../../**', {
