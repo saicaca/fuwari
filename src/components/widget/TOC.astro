@@ -18,7 +18,7 @@ const className = Astro.props.class
 
 const removeTailingHash = (text: string) => {
     let lastIndexOfHash = text.lastIndexOf('#');
-    if (lastIndexOfHash != text.length - 1) {
+    if (lastIndexOfHash !== text.length - 1) {
         return text;
     }
 
