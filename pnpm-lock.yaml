@@ -19,7 +19,7 @@ importers:
         version: 3.3.0
       '@astrojs/svelte':
         specifier: 7.0.9
-        version: 7.0.9(@types/node@22.13.14)(astro@5.5.6(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(svelte@5.25.5)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0)
+        version: 7.0.9(@types/node@22.13.14)(astro@5.5.6(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(svelte@5.25.6)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0)
       '@astrojs/tailwind':
         specifier: ^6.0.2
         version: 6.0.2(astro@5.5.6(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(tailwindcss@3.4.17)
@@ -43,7 +43,7 @@ importers:
         version: 1.2.17
       '@iconify/svelte':
         specifier: ^4.2.0
-        version: 4.2.0(svelte@5.25.5)
+        version: 4.2.0(svelte@5.25.6)
       '@swup/astro':
         specifier: ^1.5.0
         version: 1.5.0(@types/babel__core@7.20.5)
@@ -120,8 +120,8 @@ importers:
         specifier: ^0.64.0
         version: 0.64.0
       svelte:
-        specifier: ^5.25.5
-        version: 5.25.5
+        specifier: ^5.25.6
+        version: 5.25.6
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -2397,8 +2397,8 @@ packages:
   esm-env@1.2.2:
     resolution: {integrity: sha512-Epxrv+Nr/CaL4ZcFGPJIYLWFom+YeV1DqMLHJoEd9SYRxNbaFruBwfEX/kkHUJf55j2+TUbmDcmuilbP1TmXHA==}
 
-  esrap@1.4.5:
-    resolution: {integrity: sha512-CjNMjkBWWZeHn+VX+gS8YvFwJ5+NDhg8aWZBSFJPR8qQduDNjbJodA2WcwCm7uQa5Rjqj+nZvVmceg1RbHFB9g==}
+  esrap@1.4.6:
+    resolution: {integrity: sha512-F/D2mADJ9SHY3IwksD4DAXjTt7qt7GWUf3/8RhCNWmC/67tyb55dpimHmy7EplakFaflV0R/PC+fdSPqrRHAQw==}
 
   estree-walker@0.6.1:
     resolution: {integrity: sha512-SqmZANLWS0mnatqbSfRP5g8OXZC12Fgg1IwNtLsyHDzJizORW4khDfjPqJZsemPWBB2uqykUah5YpQ6epsqC/w==}
@@ -4432,8 +4432,8 @@ packages:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
 
-  svelte@5.25.5:
-    resolution: {integrity: sha512-ULi9rkVWQJyJYZSpy6SIgSTchWadyWG1QYAUx3JAXL2gXrnhdXtoB20KmXGSNdtNyquq3eYd/gkwAkLcL5PGWw==}
+  svelte@5.25.6:
+    resolution: {integrity: sha512-RGkaeAXDuJdvhA1fdSM5GgD++vYfJYijZL0uN6kM2s/TRJ663jktBhZlF0qjzAJGR/34PtaeT3G8MKJY1EKeqg==}
     engines: {node: '>=18'}
 
   svgo@2.8.0:
@@ -5098,12 +5098,12 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.24.2
 
-  '@astrojs/svelte@7.0.9(@types/node@22.13.14)(astro@5.5.6(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(svelte@5.25.5)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0)':
+  '@astrojs/svelte@7.0.9(@types/node@22.13.14)(astro@5.5.6(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(svelte@5.25.6)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0)':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.25.5)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.25.6)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0))
       astro: 5.5.6(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(rollup@2.79.2)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0)
-      svelte: 5.25.5
-      svelte2tsx: 0.7.35(svelte@5.25.5)(typescript@5.8.2)
+      svelte: 5.25.6
+      svelte2tsx: 0.7.35(svelte@5.25.6)(typescript@5.8.2)
       typescript: 5.8.2
       vite: 6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0)
     transitivePeerDependencies:
@@ -6038,10 +6038,10 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify/svelte@4.2.0(svelte@5.25.5)':
+  '@iconify/svelte@4.2.0(svelte@5.25.6)':
     dependencies:
       '@iconify/types': 2.0.0
-      svelte: 5.25.5
+      svelte: 5.25.6
 
   '@iconify/tools@4.1.2':
     dependencies:
@@ -6454,23 +6454,23 @@ snapshots:
     dependencies:
       acorn: 8.14.1
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.25.5)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0)))(svelte@5.25.5)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.25.6)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0)))(svelte@5.25.6)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.25.5)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.25.6)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0))
       debug: 4.4.0
-      svelte: 5.25.5
+      svelte: 5.25.6
       vite: 6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.25.5)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0))':
+  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.25.6)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.25.5)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0)))(svelte@5.25.5)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.25.6)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0)))(svelte@5.25.6)(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0))
       debug: 4.4.0
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.17
-      svelte: 5.25.5
+      svelte: 5.25.6
       vite: 6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0)
       vitefu: 1.0.6(vite@6.2.4(@types/node@22.13.14)(jiti@1.21.7)(lightningcss@1.29.3)(sass@1.80.4)(stylus@0.64.0)(terser@5.39.0)(yaml@2.7.0))
     transitivePeerDependencies:
@@ -7680,7 +7680,7 @@ snapshots:
 
   esm-env@1.2.2: {}
 
-  esrap@1.4.5:
+  esrap@1.4.6:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
 
@@ -10181,14 +10181,14 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte2tsx@0.7.35(svelte@5.25.5)(typescript@5.8.2):
+  svelte2tsx@0.7.35(svelte@5.25.6)(typescript@5.8.2):
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
-      svelte: 5.25.5
+      svelte: 5.25.6
       typescript: 5.8.2
 
-  svelte@5.25.5:
+  svelte@5.25.6:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -10199,7 +10199,7 @@ snapshots:
       axobject-query: 4.1.0
       clsx: 2.1.1
       esm-env: 1.2.2
-      esrap: 1.4.5
+      esrap: 1.4.6
       is-reference: 3.0.3
       locate-character: 3.0.0
       magic-string: 0.30.17
