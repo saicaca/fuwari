@@ -14,11 +14,19 @@ interface Props {
   hideTagsForMobile?: boolean
   hideUpdateDate?: boolean
 }
-const { published, updated, tags, category, hideTagsForMobile = false, hideUpdateDate = false } = Astro.props
+const { published, updated, tags, category, hideTagsForMobile = false, hideUpdateDate = false,top=false } = Astro.props
 const className = Astro.props.class
 ---
 
 <div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>
+       <!-- top -->
+        {top&&( <div class="flex items-center" >
+            <div class="meta-icon"
+            >
+                <Icon name="fa6-regular:star" class="text-xl"></Icon>
+            </div>
+            <span class="text-50 text-sm font-medium">置顶</span>
+        </div>)} 
     <!-- publish date -->
     <div class="flex items-center">
         <div class="meta-icon"
