@@ -13,11 +13,10 @@ import PostMetadata from '../../components/PostMeta.astro'
 import ImageWrapper from '../../components/misc/ImageWrapper.astro'
 import { profileConfig, siteConfig } from '../../config'
 import { formatDateToYYYYMMDD } from '../../utils/date-utils'
+import { getSortedPosts } from '@utils/content-utils'
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('posts', ({ data }) => {
-    return import.meta.env.PROD ? data.draft !== true : true
-  })
+  const blogEntries = await getSortedPosts();
   return blogEntries.map(entry => ({
     params: { slug: entry.slug },
     props: { entry },
