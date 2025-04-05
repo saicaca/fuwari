@@ -18,7 +18,7 @@ const className = Astro.props.class
 
 const removeTailingHash = (text: string) => {
     let lastIndexOfHash = text.lastIndexOf('#');
-    if (lastIndexOfHash != text.length - 1) {
+    if (lastIndexOfHash !== text.length - 1) {
         return text;
     }
 
@@ -256,6 +256,7 @@ class TableOfContents extends HTMLElement {
     };
 }
 
-customElements.define("table-of-contents", TableOfContents);
-
+if (!customElements.get("table-of-contents")) {
+    customElements.define("table-of-contents", TableOfContents);
+}
 </script>
