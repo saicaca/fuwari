@@ -74,7 +74,6 @@ export default defineConfig({
         remarkImageCaption,
         {
           className: 'image-caption',
-          excludedPaths: [/^(?![a-zA-Z]+:\/|\/)/],
         },
       ],
       remarkSectionize,
