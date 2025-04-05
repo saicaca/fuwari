@@ -256,6 +256,7 @@ class TableOfContents extends HTMLElement {
     };
 }
 
-customElements.define("table-of-contents", TableOfContents);
-
+if (!customElements.get("table-of-contents")) {
+    customElements.define("table-of-contents", TableOfContents);
+}
 </script>
