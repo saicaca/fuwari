@@ -19,14 +19,15 @@ export function AdmonitionComponent(properties, children, type) {
     )
 
   let label = null
-  if (properties && properties['has-directive-label']) {
+  if (properties?.['has-directive-label']) {
     label = children[0] // The first child is the label
+    // biome-ignore lint/style/noParameterAssign: <explanation>
     children = children.slice(1)
     label.tagName = 'div' // Change the tag <p> to <div>
   }
 
-  return h(`blockquote`, { class: `admonition bdm-${type}` }, [
-    h('span', { class: `bdm-title` }, label ? label : type.toUpperCase()),
+  return h("blockquote", { class: `admonition bdm-${type}` }, [
+    h('span', { class: "bdm-title" }, label ? label : type.toUpperCase()),
     ...children,
   ])
 }
