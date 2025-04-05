@@ -318,9 +318,17 @@ function initCustomScrollbar() {
 	});
 	const katexElements = document.querySelectorAll('.katex-display') as NodeListOf<HTMLElement>;
 	katexElements.forEach((ele) => {
-		OverlayScrollbars(ele, {
+		if (!ele.parentNode) return;
+		const container = document.createElement('div');
+		container.className = 'katex-display-container';
+		ele.parentNode.insertBefore(container, ele);
+		container.appendChild(ele);
+		OverlayScrollbars(container, {
 			scrollbars: {
-				theme: 'scrollbar-base scrollbar-auto py-1',
+				theme: 'scrollbar-base scrollbar-auto',
+				autoHide: 'leave',
+				autoHideDelay: 500,
+				autoHideSuspend: false
 			}
 		});
 	});
