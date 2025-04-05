@@ -16,6 +16,7 @@ import remarkSectionize from "remark-sectionize";
 import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs";
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
+import remarkEmbed from "./src/plugins/remark-embed.ts";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
@@ -69,6 +70,51 @@ export default defineConfig({
       remarkExcerpt,
       remarkGithubAdmonitionsToDirectives,
       remarkDirective,
+      [
+        remarkEmbed,
+        {
+          className: "embed",
+          sources: [
+            {
+              contentUrl:
+                /^https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)$/,
+              embedUrl: 'https://www.youtube.com/embed/${1}',
+              iframeAttributes: {
+                loading: 'lazy',
+                title: 'YouTube video player',
+                allow:
+                  'fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share',
+                referrerpolicy: 'strict-origin-when-cross-origin',
+              },
+            },
+            {
+              contentUrl:
+                /^https:\/\/www.bilibili.com\/video\/([a-zA-Z0-9]+)\/?/,
+              embedUrl: '//player.bilibili.com/player.html',
+              queryParams: {
+                poster: 1,
+                autoplay: 0,
+                bvid: '${1}',
+                p: 1,
+              },
+              iframeAttributes: {
+                loading: 'lazy',
+                allow: 'fullscreen',
+              },
+            },
+            {
+              contentUrl:
+                /^https:\/\/www\.desmos\.com\/calculator\/(?:[a-zA-Z0-9]+)$/,
+              queryParams: {
+                embed: '',
+              },
+              iframeAttributes: {
+                loading: 'lazy',
+              },
+            },
+          ],
+        },
+      ],
       remarkSectionize,
       parseDirectiveNode,
     ],
