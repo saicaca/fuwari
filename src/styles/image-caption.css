@@ -1,0 +1,47 @@
+figure.image-caption {
+  inline-size: fit-content;
+  margin-inline: auto;
+
+  > a,
+  > div {
+    @apply flex flex-wrap justify-center gap-2 sm:gap-4;
+
+    > figure {
+      @apply m-0;
+
+      inline-size: fit-content;
+    }
+
+    > img,
+    > figure > img {
+      @apply min-w-[150px] max-w-[150px] sm:max-w-[300px] m-0;
+    }
+
+    > img:only-of-type,
+    > figure:only-of-type > img {
+      @apply min-w-[300px] max-w-[300px] sm:max-w-[600px];
+    }
+  }
+
+  > a:has(> img:nth-of-type(2)),
+  > a:has(> figure:nth-of-type(2)) {
+    @apply max-w-[316px] sm:max-w-[624px];
+  }
+
+  > div:has(> img:nth-of-type(2)),
+  > div:has(> figure:nth-of-type(2)) {
+    @apply max-w-[308px] sm:max-w-[616px];
+  }
+}
+
+figure.image-caption > a img {
+  @apply pointer-events-none;
+}
+
+figure.image-caption figcaption {
+  @apply break-words;
+
+  inline-size: 0;
+  min-inline-size: fit-content;
+  margin-inline: auto;
+}
