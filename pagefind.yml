@@ -1,0 +1,3 @@
+exclude_selectors:
+  - "span.katex"
+  - "span.katex-display"
