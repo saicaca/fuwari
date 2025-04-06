@@ -1,22 +1,22 @@
 ---
-import { getCategoryList } from '@utils/content-utils'
-import MainGridLayout from '@layouts/MainGridLayout.astro'
-import ArchivePanel from '@components/ArchivePanel.astro'
-import { i18n } from '@i18n/translation'
-import I18nKey from '@i18n/i18nKey'
+import ArchivePanel from "@components/ArchivePanel.astro";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getCategoryList } from "@utils/content-utils";
 
 export async function getStaticPaths() {
-  const categories = await getCategoryList()
-  return categories.map(category => {
-    return {
-      params: {
-        category: category.name,
-      },
-    }
-  })
+	const categories = await getCategoryList();
+	return categories.map((category) => {
+		return {
+			params: {
+				category: category.name,
+			},
+		};
+	});
 }
 
-const category = Astro.params.category as string
+const category = Astro.params.category as string;
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)} description={i18n(I18nKey.archive)}>
