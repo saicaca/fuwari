@@ -13,48 +13,128 @@ Simply write a link, and the external site will be embedded automatically.
 
 ## Usage
 
-### Embedding a Site
+### Single Embed
+
+#### With Caption
+
+Markdown:
 
 ```markdown
-[](https://www.youtube.com/watch?v=5gIf0_xpFPI)
+[](url "A title")
 ```
 
-[](https://www.youtube.com/watch?v=5gIf0_xpFPI)
+HTML:
+
+```html
+<figure>
+  <div>
+    <figure>
+      <iframe src="url"></iframe>
+      <figcaption>A title</figcaption>
+    </figure>
+  </div>
+</figure>
+```
+
+[](https://www.youtube.com/watch?v=5gIf0_xpFPI "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+
+#### Without Caption
+
+Markdown:
 
 ```markdown
-[](https://www.bilibili.com/video/BV1fK4y1s7Qf/ "A title")
+[](url)
 ```
 
-[](https://www.bilibili.com/video/BV1fK4y1s7Qf/ "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+HTML:
 
-### Embedding Multiple Sites
+```html
+<figure>
+  <div>
+    <iframe src="url"></iframe>
+  </div>
+</figure>
+```
+
+[](https://www.bilibili.com/video/BV1fK4y1s7Qf/)
+
+### Multiple Embeds
 
 When you include only links within a paragraph, they will be grouped together. Hard or soft breaks can also be used.
 
+#### With Captions
+
+Markdown:
+
 ```markdown
-[](https://www.desmos.com/calculator/3kshfiqwha)  
-[](https://www.desmos.com/calculator/hek5x4fsyk)  
-[](https://www.desmos.com/calculator/d738hcma3w)
+[](url1 "Title 1")  
+[](url2 "Title 2")
 ```
 
-[](https://www.desmos.com/calculator/3kshfiqwha)  
-[](https://www.desmos.com/calculator/hek5x4fsyk)  
-[](https://www.desmos.com/calculator/d738hcma3w)
+HTML:
 
-```markdown
-[](https://www.desmos.com/calculator/3kshfiqwha "Title 1")  
-[](https://www.desmos.com/calculator/hek5x4fsyk "Title 2")  
-[](https://www.desmos.com/calculator/d738hcma3w "Title 3")
+```html
+<figure>
+  <div>
+    <figure>
+      <iframe src="url1"></iframe>
+      <figcaption>Title 1</figcaption>
+    </figure>
+    <figure>
+      <iframe src="url2"></iframe>
+      <figcaption>Title 2</figcaption>
+    </figure>
+  </div>
+</figure>
 ```
 
-[](https://www.desmos.com/calculator/3kshfiqwha "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")  
-[](https://www.desmos.com/calculator/hek5x4fsyk "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")  
-[](https://www.desmos.com/calculator/d738hcma3w "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+[](https://www.youtube.com/watch?v=5gIf0_xpFPI  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")  
+[](https://www.bilibili.com/video/BV1fK4y1s7Qf/ "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
+
+#### Without Captions
+
+Markdown:
 
 ```markdown
-[](https://www.desmos.com/calculator/3kshfiqwha "Here becomes the caption")  
-[](https://www.desmos.com/calculator/hek5x4fsyk)  
-[](https://www.desmos.com/calculator/d738hcma3w)
+[](url1)  
+[](url2)
+```
+
+HTML:
+
+```html
+<figure>
+  <div>
+    <iframe src="url1"></iframe>
+    <iframe src="url2"></iframe>
+  </div>
+</figure>
+```
+
+[](https://www.youtube.com/watch?v=5gIf0_xpFPI)  
+[](https://www.bilibili.com/video/BV1fK4y1s7Qf/)
+
+#### With Shared Caption
+
+Markdown:
+
+```markdown
+[](url1 "This becomes the caption")  
+[](url2)  
+[](url3)
+```
+
+HTML:
+
+```html
+<figure>
+  <div>
+    <iframe src="url1"></iframe>
+    <iframe src="url2"></iframe>
+    <iframe src="url3"></iframe>
+  </div>
+  <figcaption>This becomes the caption</figcaption>
+</figure>
 ```
 
 [](https://www.desmos.com/calculator/3kshfiqwha "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")  
@@ -123,7 +203,7 @@ Below are configuration examples for embedding specific websites. For parameter 
 {
   sources: [
     {
-      contentUrl: /https:\/\/www.bilibili.com\/video\/([a-zA-Z0-9]+)\/?/,
+      contentUrl: /^https:\/\/www.bilibili.com\/video\/([a-zA-Z0-9]+)\/?$/,
       embedUrl: '//player.bilibili.com/player.html',
       queryParams: {
         poster: 1,
