@@ -1,3 +1,4 @@
+---
 title: 빠르고 쉬운 API 개발: FastAPI 소개
 published: 2025-04-07 # 실제 발행일로 변경하세요
 description: 파이썬 기반의 현대적이고 빠른 웹 프레임워크 FastAPI의 특징과 장점을 알아봅니다.
