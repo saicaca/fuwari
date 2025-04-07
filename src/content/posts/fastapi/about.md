@@ -1,6 +1,6 @@
 ---
 title: "빠르고 강력한 API 개발: FastAPI 소개"
-published: "2023-10-27" # 실제 발행일에 맞게 수정하세요
+published: 2025-04-07 # 실제 발행일에 맞게 수정하세요
 description: "현대적인 고성능 웹 API를 파이썬으로 쉽게 구축할 수 있는 FastAPI 프레임워크를 소개합니다."
 image: "" # 관련 이미지가 있다면 경로를 지정하세요 (예: ./fastapi-logo.png)
 tags: ["Python", "FastAPI", "Web Framework", "API"]
