@@ -52,9 +52,9 @@
     "sanitize-html": "^2.15.0",
     "sharp": "^0.33.5",
     "stylus": "^0.64.0",
-    "svelte": "^5.25.6",
+    "svelte": "^5.25.8",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.8.2",
+    "typescript": "^5.8.3",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
