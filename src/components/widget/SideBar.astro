@@ -3,7 +3,6 @@ import Profile from './Profile.astro'
 import Tag from './Tags.astro'
 import Categories from './Categories.astro'
 import type { MarkdownHeading } from 'astro'
-import TOC from './TOC.astro'
 
 interface Props {
     class? : string
@@ -11,7 +10,6 @@ interface Props {
 }
 
 const className = Astro.props.class
-const headings = Astro.props.headings
 
 ---
 <div id="sidebar" class:list={[className, "w-full"]}>
