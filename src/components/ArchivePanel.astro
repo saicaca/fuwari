@@ -10,7 +10,7 @@ interface Props {
   tags?: string[]
   categories?: string[]
 }
-const { keyword, tags, categories } = Astro.props
+const { tags, categories } = Astro.props
 
 let posts = await getSortedPosts()
 
