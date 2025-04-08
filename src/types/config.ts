@@ -24,6 +24,9 @@ export type SiteConfig = {
     enable: boolean
     depth: 1 | 2 | 3
   }
+  googleAnalytics?: {
+    id: string
+  }
 
   favicon: Favicon[]
 }
