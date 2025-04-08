@@ -16,7 +16,7 @@ Un tema estático para blogs construido con [Astro](https://astro.build).
 - [x] Modo claro / oscuro
 - [x] Colores del tema y banner personalizables
 - [x] Diseño responsivo
-- [ ] Comentarios
+- [x] Comentarios
 - [x] Buscador
 - [ ] TOC (Tabla de Contenidos)
 
