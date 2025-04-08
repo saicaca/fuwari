@@ -1,29 +1,29 @@
 ---
-import type { MarkdownHeading } from 'astro';
+import type { MarkdownHeading } from "astro";
 import { siteConfig } from "../../config";
 
 interface Props {
-  class?: string
-  headings: MarkdownHeading[]
+	class?: string;
+	headings: MarkdownHeading[];
 }
 
-let { headings = []  } = Astro.props;
+let { headings = [] } = Astro.props;
 
 let minDepth = 10;
 for (const heading of headings) {
-    minDepth = Math.min(minDepth, heading.depth);
+	minDepth = Math.min(minDepth, heading.depth);
 }
 
-const className = Astro.props.class
+const className = Astro.props.class;
 
 const removeTailingHash = (text: string) => {
-    let lastIndexOfHash = text.lastIndexOf('#');
-    if (lastIndexOfHash !== text.length - 1) {
-        return text;
-    }
+	let lastIndexOfHash = text.lastIndexOf("#");
+	if (lastIndexOfHash !== text.length - 1) {
+		return text;
+	}
 
-    return text.substring(0, lastIndexOfHash);
-}
+	return text.substring(0, lastIndexOfHash);
+};
 
 let heading1Count = 1;
 
