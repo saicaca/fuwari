@@ -1,31 +1,44 @@
 ---
-import Footer from '@components/Footer.astro'
-import Navbar from '@components/Navbar.astro'
-import BackToTop from '@components/control/BackToTop.astro'
-import SideBar from '@components/widget/SideBar.astro'
-import Layout from './Layout.astro'
-import { Icon } from 'astro-icon/components'
-import { siteConfig } from '../config'
-import type { MarkdownHeading } from 'astro'
-import TOC from "../components/widget/TOC.astro";
+import Footer from "@components/Footer.astro";
+import Navbar from "@components/Navbar.astro";
+import BackToTop from "@components/control/BackToTop.astro";
+import SideBar from "@components/widget/SideBar.astro";
+import type { MarkdownHeading } from "astro";
+import { Icon } from "astro-icon/components";
 import ImageWrapper from "../components/misc/ImageWrapper.astro";
-import {BANNER_HEIGHT, BANNER_HEIGHT_EXTEND, MAIN_PANEL_OVERLAPS_BANNER_HEIGHT} from "../constants/constants";
+import TOC from "../components/widget/TOC.astro";
+import { siteConfig } from "../config";
+import {
+	BANNER_HEIGHT,
+	BANNER_HEIGHT_EXTEND,
+	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
+} from "../constants/constants";
+import Layout from "./Layout.astro";
 
 interface Props {
-  title?: string
-  banner?: string
-  description?: string
-  lang?: string
-  setOGTypeArticle?: boolean;
-  headings? : MarkdownHeading[]
+	title?: string;
+	banner?: string;
+	description?: string;
+	lang?: string;
+	setOGTypeArticle?: boolean;
+	headings?: MarkdownHeading[];
 }
 
-const { title, banner, description, lang, setOGTypeArticle, headings = [] } = Astro.props
+const {
+	title,
+	banner,
+	description,
+	lang,
+	setOGTypeArticle,
+	headings = [],
+} = Astro.props;
 const hasBannerCredit =
-  siteConfig.banner.enable && siteConfig.banner.credit.enable
-const hasBannerLink = !!siteConfig.banner.credit.url
+	siteConfig.banner.enable && siteConfig.banner.credit.enable;
+const hasBannerLink = !!siteConfig.banner.credit.url;
 
-const mainPanelTop = siteConfig.banner.enable ? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)` : "5.5rem"
+const mainPanelTop = siteConfig.banner.enable
+	? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
+	: "5.5rem";
 ---
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle}>
