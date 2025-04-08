@@ -1,0 +1,18 @@
+name: Code quality
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout
+          uses: actions/checkout@85e6279cec87321a52edac9c87bce653a07cf6c2
+      - name: Setup Biome
+        uses: biomejs/setup-biome@7038851ddd145227cdce1362b1485aea6497567a
+        with:
+          version: latest
+      - name: Run Biome
+        run: biome ci ./src --reporter=github
