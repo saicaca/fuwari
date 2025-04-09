@@ -1,21 +1,28 @@
 ---
-import { formatDateToYYYYMMDD } from '../utils/date-utils'
-import { Icon } from 'astro-icon/components'
-import { i18n } from '../i18n/translation'
-import I18nKey from '../i18n/i18nKey'
-import { url } from '../utils/url-utils'
+import { Icon } from "astro-icon/components";
+import I18nKey from "../i18n/i18nKey";
+import { i18n } from "../i18n/translation";
+import { formatDateToYYYYMMDD } from "../utils/date-utils";
+import { url } from "../utils/url-utils";
 
 interface Props {
-  class: string
-  published: Date
-  updated?: Date
-  tags: string[]
-  category: string
-  hideTagsForMobile?: boolean
-  hideUpdateDate?: boolean
+	class: string;
+	published: Date;
+	updated?: Date;
+	tags: string[];
+	category: string;
+	hideTagsForMobile?: boolean;
+	hideUpdateDate?: boolean;
 }
-const { published, updated, tags, category, hideTagsForMobile = false, hideUpdateDate = false } = Astro.props
-const className = Astro.props.class
+const {
+	published,
+	updated,
+	tags,
+	category,
+	hideTagsForMobile = false,
+	hideUpdateDate = false,
+} = Astro.props;
+const className = Astro.props.class;
 ---
 
 <div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>

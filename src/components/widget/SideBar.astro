@@ -1,18 +1,15 @@
 ---
-import Profile from './Profile.astro'
-import Tag from './Tags.astro'
-import Categories from './Categories.astro'
-import type { MarkdownHeading } from 'astro'
-import TOC from './TOC.astro'
+import type { MarkdownHeading } from "astro";
+import Categories from "./Categories.astro";
+import Profile from "./Profile.astro";
+import Tag from "./Tags.astro";
 
 interface Props {
-    class? : string
-    headings? : MarkdownHeading[]
+	class?: string;
+	headings?: MarkdownHeading[];
 }
 
-const className = Astro.props.class
-const headings = Astro.props.headings
-
+const className = Astro.props.class;
 ---
 <div id="sidebar" class:list={[className, "w-full"]}>
     <div class="flex flex-col w-full gap-4 mb-4">
