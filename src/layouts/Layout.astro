@@ -208,8 +208,7 @@ import {
 	BANNER_HEIGHT,
 	BANNER_HEIGHT_HOME,
 	BANNER_HEIGHT_EXTEND,
-	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
-	PAGE_WIDTH
+	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT
 } from "../constants/constants";
 import { siteConfig } from '../config';
 
@@ -328,15 +327,15 @@ function initCustomScrollbar() {
 }
 
 function showBanner() {
-	if (!siteConfig.banner.enable) {
+	if (!siteConfig.banner.enable) return;
+	
+	const banner = document.getElementById('banner');
+	if (!banner) {
+		console.error('Banner element not found');
 		return;
 	}
-	const banner = document.getElementById('banner')
-	if (!banner) {
-		console.error('Failed to find the banner element')
-		return
-	}
-	banner.classList.remove('opacity-0', 'scale-105')
+	
+	banner.classList.remove('opacity-0', 'scale-105');
 }
 
 function init() {
