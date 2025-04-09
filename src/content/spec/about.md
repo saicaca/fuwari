@@ -1,9 +1,6 @@
-# About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
+# 🚀 About Me
+Salutations! My name is Chris "Futz" Gonzalez, but you can just call me Santi or Chris. I'm a somewhat recent Dickinson College grad, class of 2024 (Yikes! How fast times flies). I graduated my alma mater with a B.S in Computer Science and a B.A in Spanish Language and Literature. Back home in Maryland, I'm seeking opportunities to further my CS career. I've served as a web developer for [FarmData2](https://github.com/DickinsonCollege/FarmData2) and contributed to [Mermaid.js](https://github.com/mermaid-js/mermaid). As a fan of Minecraft, I've also found myself contributing to Hardel's [NeoEnchant+](https://github.com/Hardel-DW/NeoEnchant). I'm currently looking to work on independent projects as my career journey continues. 
 
-::github{repo="saicaca/fuwari"}
-
-> ### Sources of images used in this site
-> - [Unsplash](https://unsplash.com/)
-> - [星と少女](https://www.pixiv.net/artworks/108916539) by [Stella](https://www.pixiv.net/users/93273965)
-> - [Rabbit - v1.4 Showcase](https://civitai.com/posts/586908) by [Rabbit_YourMajesty](https://civitai.com/user/Rabbit_YourMajesty)
+> ## Sources of images used in this site
+> - PFP || [Fuze's That Time I Got Reincarnated as a Slime](https://myanimelist.net/manga/87609/Tensei_shitara_Slime_Datta_Ken?q=That%20Time%20I%20Got&cat=manga)
+> - Banner || [Hyper Light Drifter](https://www.heartmachine.com/) 
