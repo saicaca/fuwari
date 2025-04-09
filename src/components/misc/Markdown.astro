@@ -1,11 +1,11 @@
 ---
-import '@fontsource-variable/jetbrains-mono'
-import '@fontsource-variable/jetbrains-mono/wght-italic.css'
+import "@fontsource-variable/jetbrains-mono";
+import "@fontsource-variable/jetbrains-mono/wght-italic.css";
 
 interface Props {
-  class: string
+	class: string;
 }
-const className = Astro.props.class
+const className = Astro.props.class;
 ---
 <div data-pagefind-body class=`prose dark:prose-invert prose-base !max-w-none custom-md ${className}`>
     <!--<div class="prose dark:prose-invert max-w-none custom-md">-->
@@ -17,8 +17,6 @@ const className = Astro.props.class
   const observer = new MutationObserver(addPreCopyButton);
   observer.observe(document.body, { childList: true, subtree: true });
   
-  document.addEventListener("DOMContentLoaded", addPreCopyButton);
-
   function addPreCopyButton() {
     observer.disconnect();
     
