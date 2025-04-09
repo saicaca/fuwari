@@ -25,7 +25,7 @@ export default defineConfig({
   site: "https://futz.vercel.app/",
   base: "/",
   trailingSlash: "always",
-  output: 'server',
+  output: 'static',
   adapter: vercel(),
   integrations: [
     tailwind(
