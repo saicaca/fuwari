@@ -16,6 +16,8 @@ for (const heading of headings) {
 
 const className = Astro.props.class;
 
+const isPostsRoute = Astro.url.pathname.startsWith("/posts/");
+
 const removeTailingHash = (text: string) => {
 	let lastIndexOfHash = text.lastIndexOf("#");
 	if (lastIndexOfHash !== text.length - 1) {
@@ -29,6 +31,7 @@ let heading1Count = 1;
 
 const maxLevel = siteConfig.toc.depth;
 ---
+{isPostsRoute &&
 <table-of-contents class:list={[className, "group"]}>
     {headings.filter((heading) => heading.depth < minDepth + maxLevel).map((heading) =>
             <a href={`#${heading.slug}`} class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
@@ -54,8 +57,7 @@ const maxLevel = siteConfig.toc.depth;
     )}
     <div id="active-indicator" class:list={[{'hidden': headings.length == 0}, "-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 rounded-xl transition-all " +
         "group-hover:bg-transparent border-2 border-[var(--toc-btn-hover)] group-hover:border-[var(--toc-btn-active)] border-dashed"]}></div>
-</table-of-contents>
-
+</table-of-contents>}
 
 <script>
 class TableOfContents extends HTMLElement {
@@ -202,7 +204,7 @@ class TableOfContents extends HTMLElement {
                 this.init();
             }, { once: true });
         } else {
-            console.warn('Animation element not found');
+            console.debug('Animation element not found');
         }
     };
 
