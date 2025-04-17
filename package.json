@@ -29,7 +29,7 @@
     "@iconify/svelte": "^4.2.0",
     "@swup/astro": "^1.6.0",
     "@tailwindcss/typography": "^0.5.16",
-    "astro": "5.7.0",
+    "astro": "5.7.2",
     "astro-compress": "^2.3.8",
     "astro-icon": "^1.1.5",
     "hastscript": "^9.0.1",
