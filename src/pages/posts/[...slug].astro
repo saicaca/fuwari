@@ -105,25 +105,30 @@ const jsonLd = {
             </Markdown>
 
             {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
-
-            <!-- Waline -->
-            {entry.data.comments !== false && (
-                <>
-                    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
-                    <div id="waline" class="mb-8" />
-                    <script type="module" is:inline define:vars={{ walineConfig }}>
-                    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
-                    init({
-                        el: '#waline',
-                        serverURL: walineConfig.serverURL,
-                        login: walineConfig.login,
-                        path: location.pathname,
-                    });
-                    </script>
-                </>
-            )}
+            
         </div>
     </div>
+
+    <!-- Waline -->
+    {entry.data.comments !== false && (
+        <div class="card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full mb-4">
+            <div id="waline" />
+            <script type="module" is:inline define:vars={{ walineConfig }}>
+            import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+            function loadWaline() {
+                init({
+                    el: '#waline',
+                    serverURL: walineConfig.serverURL,
+                    login: walineConfig.login,
+                    path: location.pathname,
+                    wordLimit: ["2", "1000"],
+                    dark: '.dark',
+                });
+            }
+            loadWaline();
+            </script>
+        </div>
+    )}
 
     <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
         <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
