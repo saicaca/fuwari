@@ -21,7 +21,7 @@
 - [ ] 목차
 ## 🚀 사용하는 방법
 
-1. 이 템플릿에서 [새 저장소를 생성](https://github.com/saicaca/fuwari/generate)하거나 이 저장소를 포크하세요.
+1. 이 템플릿에서 [새 저장소를 생성](https://github.com/runwezh/fuwari/generate)하거나 이 저장소를 포크하세요.
 2. 블로그를 로컬에서 편집하려면 저장소를 복제하고 `pnpm install` 및 `pnpm add sharp`를 실행하여 종속성을 설치하세요.  
    - 아직 [pnpm](https://pnpm.io)을 설치하지 않았다면 `npm install -g pnpm`을 실행하여 [pnpm](https://pnpm.io)을 설치하세요.
 3. 블로그를 사용자 정의하려면 `src/config.ts` 구성 파일을 편집하세요.

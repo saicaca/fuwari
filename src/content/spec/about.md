@@ -1,5 +1,5 @@
 # About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
+This is the demo site for [Fuwari](https://github.com/runwezh/fuwari).
 
 ::github{repo="saicaca/fuwari"}
 

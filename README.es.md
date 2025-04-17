@@ -22,7 +22,7 @@ Un tema estático para blogs construido con [Astro](https://astro.build).
 
 ## 🚀 Cómo Usar
 
-1. [Genera un nuevo repositorio](https://github.com/saicaca/fuwari/generate) desde esta plantilla o haz un fork de este repositorio.
+1. [Genera un nuevo repositorio](https://github.com/runwezh/fuwari/generate) desde esta plantilla o haz un fork de este repositorio.
 2. Para editar tu blog localmente, clona tu repositorio, ejecuta `pnpm install` y `pnpm add sharp` para instalar las dependencias.
    - Instala [pnpm](https://pnpm.io) `npm install -g pnpm` si aún no lo tienes.
 3. Edita el archivo de configuración `src/config.ts` para personalizar tu blog.

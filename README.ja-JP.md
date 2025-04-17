@@ -22,7 +22,7 @@
 
 ## 🚀 使用方法
 
-1. [テンプレート](https://github.com/saicaca/fuwari/generate)から新しいリポジトリを作成するかCloneをします。
+1. [テンプレート](https://github.com/runwezh/fuwari/generate)から新しいリポジトリを作成するかCloneをします。
 2. ブログをローカルで編集するには、リポジトリをクローンした後、`pnpm install` と `pnpm add sharp` を実行して依存関係をインストールします。  
    - [pnpm](https://pnpm.io) がインストールされていない場合は `npm install -g pnpm` で導入可能です。
 3. `src/config.ts` ファイルを編集する事でブログを自分好みにカスタマイズ出来ます。
