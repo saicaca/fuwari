@@ -1,9 +1,13 @@
 # About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
 
-::github{repo="saicaca/fuwari"}
+::github{repo="y-non/personal-web"}
 
 > ### Sources of images used in this site
 > - [Unsplash](https://unsplash.com/)
-> - [星と少女](https://www.pixiv.net/artworks/108916539) by [Stella](https://www.pixiv.net/users/93273965)
-> - [Rabbit - v1.4 Showcase](https://civitai.com/posts/586908) by [Rabbit_YourMajesty](https://civitai.com/user/Rabbit_YourMajesty)
+> - [Avatar](https://www.facebook.com/photo.php?fbid=1328394261363548&set=pb.100025789598181.-2207520000&type=3) by [Nguyễn Trang](https://www.facebook.com/miku.nguyen.5203)
+> - [Banner](https://www.pixiv.net/en/artworks/129037951) by [JUUUUUBOT_7](https://www.pixiv.net/en/users/8637927)
+
+> ### Link to my social media
+> - [Github](https://github.com/y-non/)
+> - [Facebook](https://www.facebook.com/yonnonnn/)
+> - [Telegram](https://t.me/yonnonn)
