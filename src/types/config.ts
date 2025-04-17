@@ -79,6 +79,7 @@ export type BlogPostData = {
   description: string
   tags: string[]
   draft?: boolean
+  comments?: boolean
   image?: string
   category?: string
   prevTitle?: string

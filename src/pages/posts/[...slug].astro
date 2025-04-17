@@ -6,14 +6,15 @@ import Markdown from '@components/misc/Markdown.astro'
 import I18nKey from '@i18n/i18nKey'
 import { i18n } from '@i18n/translation'
 import MainGridLayout from '@layouts/MainGridLayout.astro'
+import { getSortedPosts } from '@utils/content-utils'
 import { getDir, getPostUrlBySlug } from '@utils/url-utils'
 import { Icon } from 'astro-icon/components'
 import { licenseConfig } from 'src/config'
+import { walineConfig } from 'src/config'
 import PostMetadata from '../../components/PostMeta.astro'
 import ImageWrapper from '../../components/misc/ImageWrapper.astro'
 import { profileConfig, siteConfig } from '../../config'
 import { formatDateToYYYYMMDD } from '../../utils/date-utils'
-import { getSortedPosts } from '@utils/content-utils'
 
 export async function getStaticPaths() {
   const blogEntries = await getSortedPosts();
@@ -105,6 +106,22 @@ const jsonLd = {
 
             {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
 
+            <!-- Waline -->
+            {entry.data.comments !== false && (
+                <>
+                    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css" />
+                    <div id="waline" class="mb-8" />
+                    <script type="module" is:inline define:vars={{ walineConfig }}>
+                    import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+                    init({
+                        el: '#waline',
+                        serverURL: walineConfig.serverURL,
+                        login: walineConfig.login,
+                        path: location.pathname,
+                    });
+                    </script>
+                </>
+            )}
         </div>
     </div>
 
