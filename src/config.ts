@@ -7,7 +7,7 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "喝咖啡也不能提神",
+	title: "THINK BIG AND DREAM BIGGER",
 	subtitle: "一个自由自在的个人博客",
 	lang: "zh_CN", // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th'
 	themeColor: {
@@ -54,7 +54,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/dark-avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "Alfred Zhao",
-	bio: "爱好很广，愿望很多，实现很少，一直在路上~", // Markdown supported
+	bio: "“Success is not just about making money. It’s about making a difference. ”____ Donald Trump", // Markdown supported
 	links: [
 		{
 			name: "Email",
