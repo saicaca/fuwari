@@ -1,0 +1,81 @@
+.gsc-main {
+    gap: 1rem !important;
+}
+
+.gsc-comments {
+    gap: 1rem !important;
+
+    .gsc-header {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem!important;
+    }
+
+    .gsc-comment {
+        > div {
+            border: none !important;
+            border-radius: 1rem !important;
+            padding: 1rem !important;
+            background-color: var(--color-canvas-inset);
+        }
+
+        .gsc-comment-author,
+        .gsc-reply-author {
+            > div span {
+                border-color: var(--color-accent-emphasis);
+                background-color: var(--color-accent-subtle);
+            }
+        }
+
+        .gsc-replies {
+            padding-top: 0 !important;
+            padding-bottom: 0.75rem !important;
+            margin-bottom: 0.75rem;
+            border-radius: 0.5rem !important;
+            border: none !important;
+
+            .gsc-reply {
+                padding-top: 0.75rem !important;
+                padding-bottom: 0.5rem!important;
+            }
+        }
+
+        .gsc-reply-box {
+            border: none !important;
+            border-radius: 0.5rem !important;
+            padding-inline-start: 0.5rem !important;
+            padding-inline-end: 0.5rem !important;
+            background-color: var(--color-canvas-default);
+            button {
+                border: none !important;
+            }
+        }
+
+        .gsc-comment-box {
+            border: none !important;
+            border-radius: 0.5rem !important;
+            button {
+                border: none !important;
+            }
+        }
+    }
+
+    .gsc-comment-box {
+        border-radius: 1rem !important;
+        overflow: hidden;
+    }
+}
+
+.gsc-reactions-popover {
+    margin-top: 0 !important;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    border-radius: 1rem;
+    background-color: var(--color-canvas-default);
+}
+
+.gsc-reactions-popover::before {
+    display: none;
+}
+
+.gsc-reactions-popover::after {
+    display: none;
+}
