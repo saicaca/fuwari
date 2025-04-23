@@ -23,7 +23,7 @@ A static blog template built with [Astro](https://astro.build).
 - [x] Responsive design
 - [ ] Comments
 - [x] Search
-- [ ] TOC
+- [x] TOC
 
 ## 🚀 How to Use
 

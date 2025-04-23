@@ -18,7 +18,7 @@ Un tema estático para blogs construido con [Astro](https://astro.build).
 - [x] Diseño responsivo
 - [ ] Comentarios
 - [x] Buscador
-- [ ] TOC (Tabla de Contenidos)
+- [x] TOC (Tabla de Contenidos)
 
 ## 🚀 Cómo Usar
 
