@@ -5,7 +5,7 @@ Un tema estático para blogs construido con [Astro](https://astro.build).
 [**🖥️ Demostración en Vivo (Vercel)**](https://fuwari.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**📦 Versión Antigua de Hexo**](https://github.com/saicaca/hexo-theme-vivia)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 
-> Versión del README: `2024-04-07`
+> Versión del README: `2025-04-24`
 
 ![Imagen de Vista Previa](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
 

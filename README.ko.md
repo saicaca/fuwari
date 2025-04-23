@@ -5,7 +5,7 @@
 [**🖥️미리보기 (Vercel)**](https://fuwari.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**📦Old Hexo Version**](https://github.com/saicaca/hexo-theme-vivia)
 
-> README 버전: `2024-04-07`
+> README 버전: `2025-04-24`
 
 ![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
 
