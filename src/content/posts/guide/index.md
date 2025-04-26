@@ -23,6 +23,7 @@ image: ./cover.jpg
 tags: [Foo, Bar]
 category: Front-end
 draft: false
+pinned: false
 ---
 ```
 
@@ -35,6 +36,7 @@ draft: false
 | `tags`        | The tags of the post.                                                                                                                                                                                       |
 | `category`    | The category of the post.                                                                                                                                                                                   |
 | `draft`        | If this post is still a draft, which won't be displayed.                                                                                                                                                    |
+| `pinned`       | If set to `true`, the post will be pinned to the top of the blog listing, regardless of its publication date.                                                                                                |
 
 ## Where to Place the Post Files
 
