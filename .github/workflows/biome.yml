@@ -17,4 +17,4 @@ jobs:
         with:
           version: latest
       - name: Run Biome
-        run: biome ci ./src --reporter=github
+        run: biome ci ./src --write --reporter=github
