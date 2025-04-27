@@ -54,7 +54,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/dark-avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "Alfred Zhao",
-	bio: "“Success is not just about making money. It’s about making a difference. ”____ Donald Trump", // Markdown supported
+	bio: "“Success is not just about making money. It’s about making a difference! ”", // Markdown supported
 	links: [
 		{
 			name: "Email",
