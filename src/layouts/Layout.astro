@@ -1,75 +1,75 @@
 ---
-import '@fontsource/roboto/400.css'
-import '@fontsource/roboto/500.css'
-import '@fontsource/roboto/700.css'
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
-import { profileConfig, siteConfig } from '@/config'
-import ConfigCarrier from '@components/ConfigCarrier.astro'
+import { profileConfig, siteConfig } from "@/config";
+import ConfigCarrier from "@components/ConfigCarrier.astro";
 import {
-  AUTO_MODE,
-  BANNER_HEIGHT,
-  BANNER_HEIGHT_EXTEND,
-  BANNER_HEIGHT_HOME,
-  DARK_MODE,
-  DEFAULT_THEME,
-  LIGHT_MODE,
-  PAGE_WIDTH,
-} from '../constants/constants'
-import { defaultFavicons } from '../constants/icon'
-import type { Favicon } from '../types/config'
-import { url, pathsEqual } from '../utils/url-utils'
-import 'katex/dist/katex.css'
+	AUTO_MODE,
+	BANNER_HEIGHT,
+	BANNER_HEIGHT_EXTEND,
+	BANNER_HEIGHT_HOME,
+	DARK_MODE,
+	DEFAULT_THEME,
+	LIGHT_MODE,
+	PAGE_WIDTH,
+} from "../constants/constants";
+import { defaultFavicons } from "../constants/icon";
+import type { Favicon } from "../types/config";
+import { url, pathsEqual } from "../utils/url-utils";
+import "katex/dist/katex.css";
 
 interface Props {
-  title?: string
-  banner?: string
-  description?: string
-  lang?: string
-  setOGTypeArticle?: boolean
+	title?: string;
+	banner?: string;
+	description?: string;
+	lang?: string;
+	setOGTypeArticle?: boolean;
 }
 
-let { title, banner, description, lang, setOGTypeArticle } = Astro.props
+let { title, banner, description, lang, setOGTypeArticle } = Astro.props;
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
 // so use Swup hooks instead to change the height immediately when a link is clicked
-const isHomePage = pathsEqual(Astro.url.pathname, url('/'))
+const isHomePage = pathsEqual(Astro.url.pathname, url("/"));
 
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
-const configHue = siteConfig.themeColor.hue
-if (!banner || typeof banner !== 'string' || banner.trim() === '') {
-  banner = siteConfig.banner.src
+const configHue = siteConfig.themeColor.hue;
+if (!banner || typeof banner !== "string" || banner.trim() === "") {
+	banner = siteConfig.banner.src;
 }
 
 // TODO don't use post cover as banner for now
-banner = siteConfig.banner.src
+banner = siteConfig.banner.src;
 
-const enableBanner = siteConfig.banner.enable
+const enableBanner = siteConfig.banner.enable;
 
-let pageTitle: string
+let pageTitle: string;
 if (title) {
-  pageTitle = `${title} - ${siteConfig.title}`
+	pageTitle = `${title} - ${siteConfig.title}`;
 } else {
-  pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`
+	pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`;
 }
 
 const favicons: Favicon[] =
-  siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons
+	siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons;
 
 // const siteLang = siteConfig.lang.replace('_', '-')
 if (!lang) {
-  lang = `${siteConfig.lang}`
+	lang = `${siteConfig.lang}`;
 }
-const siteLang = lang.replace('_', '-')
+const siteLang = lang.replace("_", "-");
 
 const bannerOffsetByPosition = {
-  top: `${BANNER_HEIGHT_EXTEND}vh`,
-  center: `${BANNER_HEIGHT_EXTEND / 2}vh`,
-  bottom: '0',
-}
+	top: `${BANNER_HEIGHT_EXTEND}vh`,
+	center: `${BANNER_HEIGHT_EXTEND / 2}vh`,
+	bottom: "0",
+};
 const bannerOffset =
-  bannerOffsetByPosition[siteConfig.banner.position || 'center']
+	bannerOffsetByPosition[siteConfig.banner.position || "center"];
 ---
 
 <!DOCTYPE html>
@@ -208,9 +208,9 @@ import {
 	BANNER_HEIGHT,
 	BANNER_HEIGHT_HOME,
 	BANNER_HEIGHT_EXTEND,
-	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
-	PAGE_WIDTH
+	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT
 } from "../constants/constants";
+import { siteConfig } from '../config';
 
 /* Preload fonts */
 // (async function() {
@@ -327,12 +327,15 @@ function initCustomScrollbar() {
 }
 
 function showBanner() {
-	const banner = document.getElementById('banner')
+	if (!siteConfig.banner.enable) return;
+	
+	const banner = document.getElementById('banner');
 	if (!banner) {
-		console.error('Failed to find the banner element')
-		return
+		console.error('Banner element not found');
+		return;
 	}
-	banner.classList.remove('opacity-0', 'scale-105')
+	
+	banner.classList.remove('opacity-0', 'scale-105');
 }
 
 function init() {
@@ -405,7 +408,7 @@ const setup = () => {
 			heightExtend.classList.remove('hidden')
 		}
 	});
-	window.swup.hooks.on('visit:end', (visit: {to: {url: string}}) => {
+	window.swup.hooks.on('visit:end', (_visit: {to: {url: string}}) => {
 		setTimeout(() => {
 			const heightExtend = document.getElementById('page-height-extend')
 			if (heightExtend) {
