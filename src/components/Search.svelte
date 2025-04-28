@@ -1,97 +1,95 @@
 <script lang="ts">
-import type { SearchResult } from '@/global'
-import I18nKey from '@i18n/i18nKey'
-import { i18n } from '@i18n/translation'
-import Icon from '@iconify/svelte'
-import { url } from '@utils/url-utils.ts'
-import { onMount } from 'svelte'
+import type { SearchResult } from "@/global";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import Icon from "@iconify/svelte";
+import { url } from "@utils/url-utils.ts";
+import { onMount } from "svelte";
 
-// biome-ignore lint/style/useConst: <explanation>
-let keywordDesktop = ''
-// biome-ignore lint/style/useConst: <explanation>
-let keywordMobile = ''
-let result: SearchResult[] = []
-let isSearching = false
-let pagefindLoaded = false
+let keywordDesktop = "";
+let keywordMobile = "";
+let result: SearchResult[] = [];
+let isSearching = false;
+let pagefindLoaded = false;
 
 const fakeResult: SearchResult[] = [
-  {
-    url: url('/'),
-    meta: {
-      title: 'This Is a Fake Search Result',
-    },
-    excerpt:
-      'Because the search cannot work in the <mark>dev</mark> environment.',
-  },
-  {
-    url: url('/'),
-    meta: {
-      title: 'If You Want to Test the Search',
-    },
-    excerpt: 'Try running <mark>npm build && npm preview</mark> instead.',
-  },
-]
+	{
+		url: url("/"),
+		meta: {
+			title: "This Is a Fake Search Result",
+		},
+		excerpt:
+			"Because the search cannot work in the <mark>dev</mark> environment.",
+	},
+	{
+		url: url("/"),
+		meta: {
+			title: "If You Want to Test the Search",
+		},
+		excerpt: "Try running <mark>npm build && npm preview</mark> instead.",
+	},
+];
 
 const togglePanel = () => {
-  const panel = document.getElementById('search-panel')
-  panel?.classList.toggle('float-panel-closed')
-}
+	const panel = document.getElementById("search-panel");
+	panel?.classList.toggle("float-panel-closed");
+};
 
 const setPanelVisibility = (show: boolean, isDesktop: boolean): void => {
-  const panel = document.getElementById('search-panel')
-  if (!panel || !isDesktop) return
+	const panel = document.getElementById("search-panel");
+	if (!panel || !isDesktop) return;
 
-  if (show) {
-    panel.classList.remove('float-panel-closed')
-  } else {
-    panel.classList.add('float-panel-closed')
-  }
-}
+	if (show) {
+		panel.classList.remove("float-panel-closed");
+	} else {
+		panel.classList.add("float-panel-closed");
+	}
+};
 
 const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
-  if (!keyword) {
-    setPanelVisibility(false, isDesktop)
-    result = []
-    return
-  }
+	if (!keyword) {
+		setPanelVisibility(false, isDesktop);
+		result = [];
+		return;
+	}
 
-  isSearching = true
+	isSearching = true;
 
-  try {
-    let searchResults: SearchResult[] = []
+	try {
+		let searchResults: SearchResult[] = [];
 
-    if (import.meta.env.PROD && pagefindLoaded) {
-      const response = await window.pagefind.search(keyword)
-      searchResults = await Promise.all(
-        response.results.map(item => item.data()),
-      )
-    } else {
-      searchResults = fakeResult
-    }
+		if (import.meta.env.PROD && pagefindLoaded) {
+			const response = await window.pagefind.search(keyword);
+			searchResults = await Promise.all(
+				response.results.map((item) => item.data()),
+			);
+		} else {
+			searchResults = fakeResult;
+		}
 
-    result = searchResults
-    setPanelVisibility(result.length > 0, isDesktop)
-  } catch (error) {
-    console.error('Search error:', error)
-    result = []
-    setPanelVisibility(false, isDesktop)
-  } finally {
-    isSearching = false
-  }
-}
+		result = searchResults;
+		setPanelVisibility(result.length > 0, isDesktop);
+	} catch (error) {
+		console.error("Search error:", error);
+		result = [];
+		setPanelVisibility(false, isDesktop);
+	} finally {
+		isSearching = false;
+	}
+};
 
 onMount(async () => {
-  pagefindLoaded = typeof window !== 'undefined' && 'pagefind' in window
+	pagefindLoaded = typeof window !== "undefined" && "pagefind" in window;
 
-  if (import.meta.env.DEV) {
-    console.log(
-      'Pagefind is not available in development mode. Using mock data.',
-    )
-  }
-})
+	if (import.meta.env.DEV) {
+		console.log(
+			"Pagefind is not available in development mode. Using mock data.",
+		);
+	}
+});
 
-$: search(keywordDesktop, true)
-$: search(keywordMobile, false)
+$: search(keywordDesktop, true);
+$: search(keywordMobile, false);
 </script>
 
 <!-- search bar for desktop view -->
