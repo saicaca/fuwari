@@ -79,7 +79,7 @@ function formatTag(tag: string[]) {
                 {group.posts.map(post => (
                     <a href={getPostUrlBySlug(post.slug)}
                        aria-label={post.data.title}
-                       class="group btn-plain !block h-10 w-full rounded-lg hover:text-[initial]"
+                       class="group btn-plain block! h-10 w-full rounded-lg hover:text-[initial]"
                     >
                         <div class="flex flex-row justify-start items-center h-full">
                             <!-- date -->
@@ -100,13 +100,13 @@ function formatTag(tag: string[]) {
                             <!-- post title -->
                             <div class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
                                 group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
-                                text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden"
+                                text-75 pr-8 whitespace-nowrap text-ellipsis overflow-hidden"
                             >
                                     {post.data.title}
                             </div>
                             <!-- tag list -->
                             <div class="hidden md:block md:w-[15%] text-left text-sm transition
-                            whitespace-nowrap overflow-ellipsis overflow-hidden
+                            whitespace-nowrap text-ellipsis overflow-hidden
                             text-30"
                             >{formatTag(post.data.tags)}</div>
                         </div>
