@@ -30,7 +30,6 @@
     "@swup/astro": "^1.6.0",
     "@tailwindcss/typography": "^0.5.16",
     "astro": "5.7.5",
-    "astro-compress": "^2.3.8",
     "astro-icon": "^1.1.5",
     "hastscript": "^9.0.1",
     "katex": "^0.16.22",
