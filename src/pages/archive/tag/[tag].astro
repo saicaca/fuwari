@@ -19,12 +19,12 @@ export async function getStaticPaths() {
 
 	return allTagsArray.map((tag) => ({
 		params: {
-			tag: tag,
+			tag: encodeURIComponent(tag),
 		},
 	}));
 }
 
-const tag = Astro.params.tag as string;
+const tag = decodeURIComponent(Astro.params.tag as string);
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)} description={i18n(I18nKey.archive)}>
