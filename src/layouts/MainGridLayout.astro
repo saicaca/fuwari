@@ -52,7 +52,7 @@ const mainPanelTop = siteConfig.banner.enable
 </div>
 
 <!-- Banner -->
-{siteConfig.banner.enable && <div id="banner-wrapper" class=`absolute z-10 w-full transition duration-700 overflow-hidden` style=`top: -${BANNER_HEIGHT_EXTEND}vh`>
+{siteConfig.banner.enable && <div id="banner-wrapper" class={`absolute z-10 w-full transition duration-700 overflow-hidden`} style={`top: -${BANNER_HEIGHT_EXTEND}vh`}>
     <ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
                   src={siteConfig.banner.src} position={siteConfig.banner.position}
     >
@@ -60,7 +60,7 @@ const mainPanelTop = siteConfig.banner.enable
 </div>}
 
 <!-- Main content -->
-<div class="absolute w-full z-30 pointer-events-none" style=`top: ${mainPanelTop}`>
+<div class="absolute w-full z-30 pointer-events-none" style={`top: ${mainPanelTop}`}>
     <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
     <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto">
         <div id="main-grid" class="transition duration-700 w-full left-0 right-0 grid grid-cols-[17.5rem_auto] grid-rows-[auto_1fr_auto] lg:grid-rows-[auto]
