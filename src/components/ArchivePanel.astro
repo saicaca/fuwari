@@ -4,6 +4,7 @@ import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import { getSortedPosts } from "../utils/content-utils";
 import { getPostUrlBySlug } from "../utils/url-utils";
+import { Icon } from "astro-icon/components";
 
 interface Props {
 	keyword?: string;
@@ -102,7 +103,10 @@ function formatTag(tag: string[]) {
                                 group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
                                 text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden"
                             >
+                                <div class="flex items-center">
+                                    {post.data.pinned && <Icon name="material-symbols:push-pin" class="text-[var(--primary)] text-sm mr-1" />}
                                     {post.data.title}
+                                </div>
                             </div>
                             <!-- tag list -->
                             <div class="hidden md:block md:w-[15%] text-left text-sm transition
