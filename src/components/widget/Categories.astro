@@ -29,7 +29,7 @@ const style = Astro.props.style;
         <ButtonLink
             url={getCategoryUrl(c.name)}
             badge={String(c.count)}
-            label=`View all posts in the ${c.name} category`
+            label={`View all posts in the ${c.name} category`}
         >
             {c.name}
         </ButtonLink>
