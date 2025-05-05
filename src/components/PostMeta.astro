@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import { formatDateToYYYYMMDD } from "../utils/date-utils";
-import { url } from "../utils/url-utils";
+import { url, getTagUrl } from "../utils/url-utils";
 
 interface Props {
 	class: string;
@@ -70,10 +70,10 @@ const className = Astro.props.class;
         <div class="flex flex-row flex-nowrap items-center">
             {(tags && tags.length > 0) && tags.map((tag, i) => (
                 <div class:list={[{"hidden": i == 0}, "mx-1.5 text-[var(--meta-divider)] text-sm"]}>/</div>
-                <a href={url(`/archive/tag/${encodeURIComponent(tag)}/`)} aria-label={`View all posts with the ${tag} tag`}
+                <a href={getTagUrl(tag.trim())} aria-label={`View all posts with the ${tag.trim()} tag`}
                    class="link-lg transition text-50 text-sm font-medium
                                 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
-                    {tag}
+                    {tag.trim()}
                 </a>
             ))}
             {!(tags && tags.length > 0) && <div class="transition text-50 text-sm font-medium">{i18n(I18nKey.noTags)}</div>}
