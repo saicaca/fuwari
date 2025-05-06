@@ -145,8 +145,8 @@ importers:
         specifier: ^4.0.4
         version: 4.0.4
       '@types/sanitize-html':
-        specifier: ^2.15.0
-        version: 2.15.0
+        specifier: ^2.16.0
+        version: 2.16.0
       postcss-import:
         specifier: ^16.1.0
         version: 16.1.0(postcss@8.5.3)
@@ -335,6 +335,11 @@ packages:
 
   '@babel/parser@7.27.1':
     resolution: {integrity: sha512-I0dZ3ZpCrJ1c04OqlNsQcKiZlsrXf/kkE4FXzID9rIOYICsAbA8mMDzhW/luRNAHdCNt7os/u8wenklZDlUVUQ==}
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+
+  '@babel/parser@7.27.2':
+    resolution: {integrity: sha512-QYLs8299NA7WM/bZAdp+CviYYkVoYXlDW2rzliy3chxd1PQjej7JORuMJDJXJUb9g0TT+B99EwaVLKmX+sPXWw==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -1796,8 +1801,8 @@ packages:
   '@types/resolve@1.17.1':
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
 
-  '@types/sanitize-html@2.15.0':
-    resolution: {integrity: sha512-71Z6PbYsVKfp4i6Jvr37s5ql6if1Q/iJQT80NbaSi7uGaG8CqBMXP0pk/EsURAOuGdk5IJCd/vnzKrR7S3Txsw==}
+  '@types/sanitize-html@2.16.0':
+    resolution: {integrity: sha512-l6rX1MUXje5ztPT0cAFtUayXF06DqPhRyfVXareEN5gGCFaP/iwsxIyKODr9XDhfxPpN6vXUFNfo5kZMXCxBtw==}
 
   '@types/sax@1.2.7':
     resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
@@ -5459,6 +5464,11 @@ snapshots:
     dependencies:
       '@babel/types': 7.27.1
 
+  '@babel/parser@7.27.2':
+    dependencies:
+      '@babel/types': 7.27.1
+    optional: true
+
   '@babel/plugin-bugfix-firefox-class-in-computed-class-key@7.25.9(@babel/core@7.26.10)':
     dependencies:
       '@babel/core': 7.26.10
@@ -6859,7 +6869,7 @@ snapshots:
 
   '@types/babel__core@7.20.5':
     dependencies:
-      '@babel/parser': 7.27.1
+      '@babel/parser': 7.27.2
       '@babel/types': 7.27.1
       '@types/babel__generator': 7.27.0
       '@types/babel__template': 7.4.4
@@ -6873,7 +6883,7 @@ snapshots:
 
   '@types/babel__template@7.4.4':
     dependencies:
-      '@babel/parser': 7.27.1
+      '@babel/parser': 7.27.2
       '@babel/types': 7.27.1
     optional: true
 
@@ -6931,7 +6941,7 @@ snapshots:
     dependencies:
       '@types/node': 22.14.1
 
-  '@types/sanitize-html@2.15.0':
+  '@types/sanitize-html@2.16.0':
     dependencies:
       htmlparser2: 8.0.2
 
