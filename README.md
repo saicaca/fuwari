@@ -10,7 +10,7 @@ A static blog template built with [Astro](https://astro.build).
 [**🌏 Español**](https://github.com/saicaca/fuwari/blob/main/README.es.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**🌏 ไทย**](https://github.com/saicaca/fuwari/blob/main/README.th.md)
 
-> README version: `2024-09-10`
+> README version: `2025-04-24`
 
 ![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
 
@@ -23,7 +23,7 @@ A static blog template built with [Astro](https://astro.build).
 - [x] Responsive design
 - [ ] Comments
 - [x] Search
-- [ ] TOC
+- [x] TOC
 
 ## 🚀 How to Use
 
