@@ -29,7 +29,7 @@
     "@iconify/svelte": "^4.2.0",
     "@swup/astro": "^1.6.0",
     "@tailwindcss/typography": "^0.5.16",
-    "astro": "5.7.12",
+    "astro": "5.7.13",
     "astro-icon": "^1.1.5",
     "hastscript": "^9.0.1",
     "katex": "^0.16.22",
@@ -51,7 +51,7 @@
     "sanitize-html": "^2.16.0",
     "sharp": "^0.34.1",
     "stylus": "^0.64.0",
-    "svelte": "^5.28.3",
+    "svelte": "^5.28.6",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
     "unist-util-visit": "^5.0.0"
