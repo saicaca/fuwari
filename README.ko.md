@@ -5,7 +5,7 @@
 [**🖥️미리보기 (Vercel)**](https://fuwari.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**📦Old Hexo Version**](https://github.com/saicaca/hexo-theme-vivia)
 
-> README 버전: `2024-04-07`
+> README 버전: `2025-04-24`
 
 ![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
 
@@ -18,7 +18,7 @@
 - [x] 반응형 디자인
 - [ ] 댓글
 - [x] 검색
-- [ ] 목차
+- [x] 목차
 ## 🚀 사용하는 방법
 
 1. 이 템플릿에서 [새 저장소를 생성](https://github.com/saicaca/fuwari/generate)하거나 이 저장소를 포크하세요.
