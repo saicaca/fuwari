@@ -25,7 +25,7 @@
     "@iconify-json/fa6-brands": "^1.2.5",
     "@iconify-json/fa6-regular": "^1.2.3",
     "@iconify-json/fa6-solid": "^1.2.3",
-    "@iconify-json/material-symbols": "^1.2.20",
+    "@iconify-json/material-symbols": "^1.2.21",
     "@iconify/svelte": "^4.2.0",
     "@swup/astro": "^1.6.0",
     "@tailwindcss/typography": "^0.5.16",
