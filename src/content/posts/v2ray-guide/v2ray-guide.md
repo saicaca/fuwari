@@ -3,7 +3,7 @@ title: Bypassing ISP Data Packages with V2Ray
 published: 2025-05-14
 description: 'Step-by-step guide to bypass ISP restrictions using V2Ray, especially useful for Zoom-based data packages in Sri Lanka.'
 image: './v2ray.jpg'
-tags: ["v2ray","Dialog","Sri Lanka","Data Packages Bypass"]
+tags: ["v2ray","Dialog","SriLanka","DataPackagesBypass"]
 category: 'Networking'
 draft: false 
 lang: 'en'
