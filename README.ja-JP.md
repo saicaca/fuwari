@@ -5,7 +5,7 @@
 [**🖥️ライブデモ (Vercel)**](https://fuwari.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**📦旧 Hexo バージョン**](https://github.com/saicaca/hexo-theme-vivia)
 
-> README バージョン：`2024-04-07` 
+> README バージョン：`2025-04-24`
 
 ![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
 
@@ -18,9 +18,39 @@
 - [x] レスポンシブデザイン
 - [ ] コメント機能
 - [x] 検索機能
-- [ ] 目次
+- [x] 目次
 
-## 🚀 使用方法
+## 👀 以下が必要
+
+- Node.js <= 22
+- pnpm <= 9
+
+## 🚀 使用方法 1
+
+[create-fuwari](https://github.com/L4Ph/create-fuwari)を使用して、ローカルにプロジェクトを初期化します。
+
+```sh
+# npm
+npm create fuwari@latest
+
+# yarn
+yarn create fuwari
+
+# pnpm
+pnpm create fuwari@latest
+
+# bun
+bun create fuwari@latest
+
+# deno
+deno run -A npm:create-fuwari@latest
+```
+
+1. `src/config.ts` ファイルを編集する事でブログを自分好みにカスタマイズ出来ます。
+2. `pnpm new-post <filename>` で新しい記事を作成し、`src/content/posts/`.フォルダ内で編集します。
+3. 作成したブログをVercel、Netlify、GitHub Pagesなどにデプロイするには[ガイド](https://docs.astro.build/ja/guides/deploy/)に従って下さい。加えて、別途デプロイを行う前に `astro.config.mjs` を編集してサイト構成を変更する必要があります。
+
+## 🚀 使用方法 2
 
 1. [テンプレート](https://github.com/saicaca/fuwari/generate)から新しいリポジトリを作成するかCloneをします。
 2. ブログをローカルで編集するには、リポジトリをクローンした後、`pnpm install` と `pnpm add sharp` を実行して依存関係をインストールします。  
