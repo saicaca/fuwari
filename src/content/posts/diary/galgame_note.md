@@ -4,7 +4,7 @@ published: 2025-03-19
 description: '记录一下早期玩过的一些Galgame'
 image: 'https://img.ikamusume7.org/%E8%97%A4%E5%A0%82%E3%81%93%E3%82%88%E3%82%8A.webp'
 tags: [Galgame]
-category: '回想'
+category: '日常'
 draft: true 
 lang: ''
 series: 游戏回忆
