@@ -70,6 +70,47 @@ draft: false
     headscale user list
     ```
    
+## 反向代理
+- nginx 配置
+   ```conf
+   map $http_upgrade $connection_upgrade {
+       default      upgrade;
+       ''           close;
+   }
+   
+   server {
+       listen 443 ssl;
+       ssl_certificate /etc/ssl/<domain>/cert.pem;
+       ssl_certificate_key /etc/ssl/<domain>/key.pem;
+   
+       server_name <server_name>;
+       charset utf-8;
+   
+       location / {
+           proxy_http_version 1.1;
+           proxy_set_header Upgrade $http_upgrade;
+           proxy_set_header Connection $connection_upgrade;
+           proxy_set_header Host $server_name;
+           proxy_redirect http:// https://;
+           proxy_buffering off;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           proxy_set_header X-Forwarded-Proto $scheme;
+           add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
+           proxy_pass http://localhost:8080;
+       }
+       // 若不部署下面的 Web UI 管理面板可忽略以下配置
+       location /admin {
+           proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           proxy_set_header X-Forwarded-Proto $scheme;
+           proxy_pass http://localhost:8000/admin;
+           proxy_read_timeout 90s;
+       }
+   }
+   ```
+   
 # Headscale Web UI控制面板（可选）
 1. 部署面板
     ```bash
