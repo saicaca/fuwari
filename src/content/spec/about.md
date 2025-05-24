@@ -1,3 +1,3 @@
 # About
 
-[随便搭建的服务](https://sites-status.beocean.net/status/self-host)
+这个人很懒，什么都没有留下～
