@@ -1,12 +1,12 @@
 ---
 title: CJK edge case for test
 published: 2025-05-04
-updated: 2025-05-04
+updated: 2025-05-25
 description: 'CJK Test'
 image: ''
 tags: [C#, テスト, 技术, Fuwari]
 category: '技术'
-draft: true 
+draft: true
 ---
 
 CJK Test
