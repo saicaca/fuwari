@@ -23,12 +23,12 @@ export function getTagUrl(tag: string): string {
 	// use common encoding function
 	const encodedTag = encodePathSegment(tag);
 	const tagUrl = `/archive/tag/${encodedTag}/`;
-	console.log(`Generating URL for tag "${tag.trim()}" => "${tagUrl}"`);
+	// console.log(`Generating URL for tag "${tag.trim()}" => "${tagUrl}"`);
 	return url(tagUrl);
 }
 
 export function getCategoryUrl(category: string): string {
-	console.log(`category: ${category}`);
+	// console.log(`category: ${category}`);
 	if (!category) return url("/archive/category/");
 
 	const trimmedCategory = category.trim();
