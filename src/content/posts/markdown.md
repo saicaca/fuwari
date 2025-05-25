@@ -5,6 +5,7 @@ description: A simple example of a Markdown blog post.
 tags: [Markdown, Blogging, Demo]
 category: Examples
 draft: false
+updated: 2025-05-25
 ---
 
 # An h1 header
