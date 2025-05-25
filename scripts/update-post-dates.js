@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import crypto from "crypto";
 
-// 存储文件内容哈希的文件路径
+// Path to store the content hash cache file
 const HASH_CACHE_PATH = path.resolve(process.cwd(), 'scripts', '.content-hashes.json');
 
 function formatDate(date) {
@@ -15,24 +15,24 @@ function formatDate(date) {
   return `${year}-${month}-${day}`;
 }
 
-// 计算内容的哈希值，用于检测实际内容变化
+// Calculate the hash of the content to detect actual content changes
 function calculateHash(content) {
   return crypto.createHash('md5').update(content).digest('hex');
 }
 
-// 获取或创建哈希缓存
+// Get or create the hash cache
 function getHashCache() {
   try {
     if (fs.existsSync(HASH_CACHE_PATH)) {
       return JSON.parse(fs.readFileSync(HASH_CACHE_PATH, 'utf-8'));
     }
   } catch (e) {
-    console.log('创建新的内容哈希缓存');
+    console.log('Creating new content hash cache');
   }
   return {};
 }
 
-// 保存哈希缓存
+// Save the hash cache
 function saveHashCache(cache) {
   fs.writeFileSync(HASH_CACHE_PATH, JSON.stringify(cache, null, 2));
 }
@@ -72,10 +72,8 @@ function parseFrontmatter(content) {
     }
   });
   
-  // 获取原始文件中frontmatter之后的内容，保留所有空行和格式
-  // 找到匹配的整个frontmatter部分的末尾位置
+  // Get the content after frontmatter, preserving all blank lines and formatting
   const matchEndPosition = match.index + match[0].length;
-  // 提取frontmatter之后的所有内容，不做trim处理
   const actualContent = content.substring(matchEndPosition);
   
   return { data, content: actualContent };
@@ -96,18 +94,18 @@ function stringifyFrontmatter(data, content) {
   
   frontmatterStr += "---";
   
-  // 确保内容部分保留原始的格式，包括开头的空行
+  // Ensure the content part retains its original formatting, including leading blank lines
   return frontmatterStr + content;
 }
 
 async function main() {
-  // 获取哈希缓存
+  // Get hash cache
   const hashCache = getHashCache();
   
   // Get all markdown files in posts directory
   const postsDir = "./src/content/posts/";
   
-  // Use a simpler alternative without external dependencies
+  // Use a simple alternative without external dependencies
   const postFiles = [];
   
   function findMarkdownFiles(dir) {
@@ -127,14 +125,14 @@ async function main() {
   
   // Start recursive search
   findMarkdownFiles(postsDir);
-  console.log(`找到 ${postFiles.length} 个 markdown 文件`);
+  console.log(`Found ${postFiles.length} markdown files`);
   
-  // 清理不再存在的文件的哈希值
+  // Clean up hash values for files that no longer exist
   const existingFiles = new Set(postFiles);
   const filesToRemove = Object.keys(hashCache).filter(filePath => !existingFiles.has(filePath));
   
   if (filesToRemove.length > 0) {
-    console.log(`清理 ${filesToRemove.length} 个不再存在的文件的哈希值`);
+    console.log(`Cleaning up hash values for ${filesToRemove.length} files that no longer exist`);
     filesToRemove.forEach(filePath => {
       delete hashCache[filePath];
     });
@@ -145,66 +143,66 @@ async function main() {
 
   for (const filePath of postFiles) {
     try {
-      // 读取文件内容
+      // Read file content
       const fileContent = fs.readFileSync(filePath, "utf8");
       
-      // 解析frontmatter
+      // Parse frontmatter
       const { data, content } = parseFrontmatter(fileContent);
       
-      // 计算内容哈希值（不包括frontmatter）
+      // Calculate content hash (excluding frontmatter)
       const contentHash = calculateHash(content);
       const previousHash = hashCache[filePath];
       
-      // 如果内容哈希相同，说明内容没有实际变化
+      // If the content hash is the same, the content has not actually changed
       if (previousHash === contentHash) {
         unchangedCount++;
         continue;
       }
       
-      // 内容确实变化了，更新哈希缓存
+      // Content has changed, update hash cache
       hashCache[filePath] = contentHash;
       
-      // 获取文件最后修改时间
+      // Get file last modification time
       const stats = fs.statSync(filePath);
       const lastModified = stats.mtime;
       
-      // 转换日期为字符串格式进行比较
+      // Convert date to string for comparison
       const lastModifiedDate = formatDate(lastModified);
       const publishedDate = data.published ? formatDate(new Date(data.published)) : null;
       
-      // 跳过新创建的文件（发布日期等于最后修改日期）
+      // Skip newly created files (publish date equals last modified date)
       if (publishedDate === lastModifiedDate) {
         continue;
       }
       
-      // 更新frontmatter
+      // Update frontmatter
       data.updated = lastModified;
       
-      // 序列化回文件
+      // Serialize back to file
       const updatedFileContent = stringifyFrontmatter(data, content);
       
-      // 检查内容是否为空，如果为空则不覆盖原文件
+      // If content is empty, do not overwrite the original file
       if (content.trim() === '') {
-        console.log(`跳过更新文件 '${path.basename(filePath)}': 内容为空`);
+        console.log(`Skip updating file '${path.basename(filePath)}': content is empty`);
         continue;
       }
       
       fs.writeFileSync(filePath, updatedFileContent);
       
       updatedCount++;
-      console.log(`更新了文件 '${path.basename(filePath)}' 的最后修改日期: ${lastModifiedDate}`);
+      console.log(`Updated last modified date for file '${path.basename(filePath)}': ${lastModifiedDate}`);
       
     } catch (error) {
-      console.error(`处理文件 ${filePath} 时出错:`, error);
+      console.error(`Error processing file ${filePath}:`, error);
     }
   }
 
-  // 保存哈希缓存
+  // Save hash cache
   saveHashCache(hashCache);
   
-  console.log(`\n更新完成：`);
-  console.log(`- 更新了 ${updatedCount} 个文件`);
-  console.log(`- ${unchangedCount} 个文件未变化`);
+  console.log(`\nUpdate complete:`);
+  console.log(`- Updated ${updatedCount} files`);
+  console.log(`- ${unchangedCount} files unchanged`);
 }
 
 main().catch(console.error); 
