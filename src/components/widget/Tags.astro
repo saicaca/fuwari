@@ -3,7 +3,8 @@
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 import { getTagList } from "../../utils/content-utils";
-import { getTagUrl } from "../../utils/url-utils";
+import { encodePathSegment } from "../../utils/encoding-utils";
+import { url as url_util } from "../../utils/url-utils";
 import ButtonTag from "../control/ButtonTag.astro";
 import WidgetLayout from "./WidgetLayout.astro";
 
@@ -22,10 +23,13 @@ const style = Astro.props.style;
 ---
 <WidgetLayout name={i18n(I18nKey.tags)} id="tags" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT} class={className} style={style}>
     <div class="flex gap-2 flex-wrap">
-        {tags.map(t => (
-            <ButtonTag href={getTagUrl(t.name.trim())} label={`View all posts with the ${t.name.trim()} tag`}>
-                {t.name.trim()}
-            </ButtonTag>
-        ))}
+        {tags.map(t => {
+            const encodedTag = encodePathSegment(t.name);
+            return (
+                <ButtonTag href={url_util(`/archive/tag/${encodedTag}/`)} label={`View all posts with the ${t.name} tag`}>
+                    {t.name}
+                </ButtonTag>
+            );
+        })}
     </div>
 </WidgetLayout>

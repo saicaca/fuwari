@@ -10,47 +10,33 @@ export async function getStaticPaths() {
 	const posts = await getSortedPosts();
 
 	const allTags = posts.reduce<Set<string>>((acc, post) => {
-		if (Array.isArray(post.data.tags)) {
-			// biome-ignore lint/complexity/noForEach: <explanation>
-			post.data.tags.forEach((tag) => {
-				if (typeof tag === "string") {
-					acc.add(tag.trim());
-				} else {
-					acc.add(String(tag).trim());
-				}
-			});
-		} else if (post.data.tags && typeof post.data.tags === "string") {
-			// biome-ignore lint/complexity/noForEach: <explanation>
-			(post.data.tags as string)
-				.split(",")
-				.forEach((tag) => acc.add(tag.trim()));
+		for (const tag of post.data.tags) {
+			acc.add(tag);
 		}
 		return acc;
 	}, new Set());
 
 	const allTagsArray = Array.from(allTags);
 
-	// judge if the string is CJK
-	const isCJK = (str: string) =>
-		/[\u3000-\u9fff\uac00-\ud7af\u4e00-\u9faf]/.test(str);
-
 	const standardPaths = allTagsArray.map((tag) => ({
 		params: {
 			tag: encodePathSegment(tag),
 		},
 		props: {
-			decodedTag: tag,
+			decodedTag: tag.trim(),
 		},
 	}));
 
-	const nonEncodedCJKPaths = allTagsArray.filter(isCJK).map((tag) => ({
-		params: {
-			tag: tag, // keep CJK characters unencoded
-		},
-		props: {
-			decodedTag: tag,
-		},
-	}));
+	const nonEncodedCJKPaths = allTagsArray
+		.filter((tag) => /[\u3000-\u9fff\uac00-\ud7af\u4e00-\u9faf]/.test(tag))
+		.map((tag) => ({
+			params: {
+				tag: tag.trim(), // Do not encode CJK characters
+			},
+			props: {
+				decodedTag: tag.trim(),
+			},
+		}));
 
 	return [...standardPaths, ...nonEncodedCJKPaths];
 }
