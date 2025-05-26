@@ -31,6 +31,19 @@ const CHAR_REPLACEMENT_MAP: Record<string, string> = {
   // Example: "%": "_percent", // % is "unreserved" but often encoded, might want custom map
 };
 
+
+// Define a map for specific, multi-character string replacements.
+// These replacements will be applied *first* to catch specific terms.
+const SPECIFIC_STRING_REPLACEMENT_MAP: Record<string, string> = {
+  "C#": "Csharp", // Example: "C#" to "Csharp"
+  "F#": "Fsharp", // Example: "F#" to "Fsharp"
+  "C++": "Cpp",   // Example: "C++" to "Cpp" (or "Cplusplus" if you prefer)
+  "++": "plusplus", // This can catch "A++" if it's a tag, or be combined with C++
+  "R&D": "RD",    // Example: "R&D" to "RD"
+  "A.I.": "AI",   // Example: "A.I." to "AI"
+  // Add more as needed. Remember to order them carefully if there are overlaps (more specific first).
+};
+
 /**
  * Pre-processes a string to apply custom character remapping and general slugification rules.
  * Handles CJK character preservation.
@@ -44,7 +57,19 @@ function preprocessForSlug(value: string): string {
   // 1. Normalize and remove diacritics (e.g., é -> e)
   let processed = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-  // 2. Apply CHAR_REPLACEMENT_MAP for individual problematic characters
+
+  // 2. Apply SPECIFIC_STRING_REPLACEMENT_MAP for multi-character replacements.
+  //    This must happen BEFORE single-character replacements.
+  for (const key in SPECIFIC_STRING_REPLACEMENT_MAP) {
+    // Create a RegExp for the key to handle global replacement and case-insensitivity if desired.
+    // For exact match, just use `replace(key, value)`. For robustness, a regex is better.
+    // Escape special regex characters in the 'key' for use in RegExp constructor
+    const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(escapedKey, "g"); // Global flag for all occurrences
+    processed = processed.replace(regex, SPECIFIC_STRING_REPLACEMENT_MAP[key]);
+  }
+	
+  // 3. Apply CHAR_REPLACEMENT_MAP for individual problematic characters
   // This needs to be done carefully to avoid issues with regex special characters in keys.
   for (const char in CHAR_REPLACEMENT_MAP) {
     // Escape special regex characters in the 'char' key for use in RegExp constructor
@@ -53,11 +78,11 @@ function preprocessForSlug(value: string): string {
     processed = processed.replace(regex, CHAR_REPLACEMENT_MAP[char]);
   }
 
-  // 3. Convert Latin parts to lowercase, leave CJK as is
+  // 4. Convert Latin parts to lowercase, leave CJK as is
   // This regex ensures we only lowercase Latin letters, leaving CJK untouched.
   processed = processed.replace(/[a-zA-Z]/g, (char) => char.toLowerCase());
 
-  // 4. Replace any remaining non-alphanumeric (that weren't mapped, or CJK/hyphen/underscore)
+  // 5. Replace any remaining non-alphanumeric (that weren't mapped, or CJK/hyphen/underscore)
   //    characters with a single hyphen. This catches anything not explicitly mapped,
   //    and ensures only alphanumeric, hyphen, underscore, or CJK characters remain.
   processed = processed.replace(
@@ -65,7 +90,7 @@ function preprocessForSlug(value: string): string {
     "-"
   );
 
-  // 5. Replace spaces with hyphens, consolidate multiple hyphens/underscores,
+  // 6. Replace spaces with hyphens, consolidate multiple hyphens/underscores,
   //    and trim leading/trailing ones.
   processed = processed
     .trim()
