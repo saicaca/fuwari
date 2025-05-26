@@ -64,46 +64,87 @@ let links: NavBarLink[] = navBarConfig.links.map(
 </div>
 
 <script>
-function switchTheme() {
-    if (localStorage.theme === 'dark') {
-        document.documentElement.classList.remove('dark');
-        localStorage.theme = 'light';
-    } else {
-        document.documentElement.classList.add('dark');
-        localStorage.theme = 'dark';
-    }
-}
-
-function loadButtonScript() {
-    let switchBtn = document.getElementById("scheme-switch");
-    if (switchBtn) {
-        switchBtn.addEventListener("click", function () {
-            switchTheme()
-        });
+document.addEventListener('DOMContentLoaded', function() {
+    // ============= 1. 切换主题逻辑 =============
+    function switchTheme() {
+        if (localStorage.theme === 'dark') {
+            document.documentElement.classList.remove('dark');
+            localStorage.theme = 'light';
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.theme = 'dark';
+        }
     }
 
-    let settingBtn = document.getElementById("display-settings-switch");
-    if (settingBtn) {
-        settingBtn.addEventListener("click", function () {
-            let settingPanel = document.getElementById("display-setting");
-            if (settingPanel) {
-                settingPanel.classList.toggle("float-panel-closed");
-            }
-        });
-    }
+    // ============= 2. 修复菜单按钮核心问题 =============
+    function setupMenuButton() {
+        const menuBtn = document.getElementById("nav-menu-switch");
+        if (!menuBtn) return;
 
-    let menuBtn = document.getElementById("nav-menu-switch");
-    if (menuBtn) {
-        menuBtn.addEventListener("click", function () {
-            let menuPanel = document.getElementById("nav-menu-panel");
+        const toggleMenu = (e) => {
+            // 关键修复1：阻止事件冒泡和默认行为
+            e.stopPropagation();
+            e.preventDefault();
+
+            const menuPanel = document.getElementById("nav-menu-panel");
             if (menuPanel) {
-                menuPanel.classList.toggle("float-panel-closed");
+                // 关键修复2：直接切换状态（不依赖其他逻辑）
+                const isClosed = menuPanel.classList.toggle("float-panel-closed");
+                console.log("菜单状态:", isClosed ? "已关闭" : "已打开");
+            }
+        };
+
+        // 关键修复3：移动端优先使用 touchstart，避免双击冲突
+        menuBtn.addEventListener("touchstart", toggleMenu, { passive: false });
+        // 桌面端保留 click
+        menuBtn.addEventListener("click", toggleMenu);
+
+        // 关键修复4：阻止面板内部的点击事件冒泡（如果面板内有交互元素）
+        const menuPanel = document.getElementById("nav-menu-panel");
+        if (menuPanel) {
+            menuPanel.addEventListener("click", (e) => e.stopPropagation());
+        }
+    }
+
+    // ============= 3. 全局点击关闭面板逻辑（可选） =============
+    function setupGlobalCloseListener() {
+        document.addEventListener("click", (e) => {
+            const menuPanel = document.getElementById("nav-menu-panel");
+            if (!menuPanel || menuPanel.classList.contains("float-panel-closed")) return;
+
+            // 如果点击的不是菜单按钮或面板内部，则关闭面板
+            const isMenuBtn = (e.target as Element)?.closest("#nav-menu-switch");
+            const isInsidePanel = (e.target as Element)?.closest("#nav-menu-panel");
+            
+            if (!isMenuBtn && !isInsidePanel) {
+                menuPanel.classList.add("float-panel-closed");
+                console.log("点击外部，关闭菜单");
             }
         });
     }
-}
 
-loadButtonScript();
+    // ============= 4. 初始化所有功能 =============
+    function init() {
+        setupMenuButton();
+        setupGlobalCloseListener(); // 如果需要点击外部关闭功能则启用
+        // 其他按钮初始化
+        const switchBtn = document.getElementById("scheme-switch");
+        if (switchBtn) switchBtn.addEventListener("click", switchTheme);
+
+        const settingBtn = document.getElementById("display-settings-switch");
+        if (settingBtn) {
+            settingBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                document.getElementById("display-setting")?.classList.toggle("float-panel-closed");
+            });
+        }
+    }
+
+    // 首次加载执行
+    init();
+    // SPA 路由切换后重新初始化
+    window.addEventListener('astro:after-swap', init);
+});
 </script>
 
 {import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
