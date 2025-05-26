@@ -30,30 +30,19 @@ export async function getStaticPaths() {
 
 	const allTagsArray = Array.from(allTags);
 
-	// judge if the string is CJK
-	const isCJK = (str: string) =>
-		/[\u3000-\u9fff\uac00-\ud7af\u4e00-\u9faf]/.test(str);
+	const paths = allTagsArray.map((tag) => {
+    const originalTag = tag.trim();
+    return {
+      params: {
+        tag: encodePathSegment(originalTag), // This now uses the RFC-3986 aware slugification
+      },
+      props: {
+        decodedTag: originalTag, // Always pass the ORIGINAL tag for display
+      },
+    };
+  });
 
-	const standardPaths = allTagsArray.map((tag) => ({
-		params: {
-			tag: encodePathSegment(tag),
-		},
-		props: {
-			decodedTag: tag,
-		},
-	}));
-
-	const nonEncodedCJKPaths = allTagsArray.filter(isCJK).map((tag) => ({
-		params: {
-			tag: tag, // keep CJK characters unencoded
-		},
-		props: {
-			decodedTag: tag,
-		},
-	}));
-
-	return [...standardPaths, ...nonEncodedCJKPaths];
-}
+  return paths;
 
 const { decodedTag } = Astro.props;
 const tag = decodedTag || decodePathSegment(Astro.params.tag as string);
