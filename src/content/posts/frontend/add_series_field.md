@@ -3,14 +3,13 @@ title: 在Fuwari中添加系列栏
 published: 2024-10-23
 updated: 2025-02-28
 description: 可以将同一分类下有关联的文章归类为同一个系列
-image: "https://img.ikamusume7.org/%E3%82%A2%E3%82%BA%E3%83%AC%E3%83%B3%EF%BC%93%E4%BA%BA%E7%B5%84.webp"
+image: "https://pan.ikamusume7.org:16666/p/IkasNotepad/%E3%82%A2%E3%82%BA%E3%83%AC%E3%83%B3%EF%BC%93%E4%BA%BA%E7%B5%84.webp?sign=qF3c0JStyMhdO1eBIRQdTWnEUSKNY67X4kTm4CGbwGc=:0"
 tags: [Fuwari, Astro, 博客]
 category: "前端"
 draft: false
 lang: ""
 series: "改造博客"
 ---
-
 > 封面图来源：[かぷりちお(アズレン３人組)🔗](https://www.pixiv.net/artworks/68126580)
 
 :::note[前言]

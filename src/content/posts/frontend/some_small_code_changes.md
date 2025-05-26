@@ -3,7 +3,7 @@ title: 对Fuwari进行一些小的改动
 published: 2025-03-03
 updated: 2025-03-20
 description: '字体、置顶文章、链接卡片、代码块标识图标'
-image: 'https://img.ikamusume7.org/%E3%81%8A%E3%81%9D%E3%82%8D%E3%81%84%E3%81%AE.webp'
+image: 'https://pan.ikamusume7.org:16666/p/IkasNotepad/%E3%81%8A%E3%81%9D%E3%82%8D%E3%81%84%E3%81%AE.webp?sign=muH82o4mkfOmimLoFbMOwmry2onMhUngzhStN0QOa2w=:0'
 tags: [Fuwari, Astro, 博客]
 category: '前端'
 draft: false 

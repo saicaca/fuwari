@@ -22,7 +22,7 @@ font: 'Kai'
 **人格类型**： 调停者 (INFP-A)<br/>
 **人格特征**：<span style="color: #4298b4;">内向</span> – 80%、<span style="color: #e4ae3a;">天马行空</span> – 60%、<span style="color: #33a474;">情感细腻</span> – 59%、<span style="color: #88619a;">随机应变</span> – 63%、<span style="color: #f25e62;">自信果断</span> – 60%
 
-![人格特征](/MBTI.png "人格特征截图")
+![人格特征](https://pan.ikamusume7.org:16666/p/IkasNotepad/MBTI.webp?sign=wID6eJh_OkeFqIexRRRbJ1B_ExulH1BDjLXE6QaMSpw=:0 "人格特征截图")
 
 看的出来，除了**内向**这一点表现明显以外，其他离中位都比较近。
 

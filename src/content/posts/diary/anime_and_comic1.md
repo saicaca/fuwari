@@ -2,7 +2,7 @@
 title: 最近看的一些动画和漫画
 published: 2025-05-23
 description: '最近看的一些动画和漫画'
-image: 'ゴブリンスレイヤーさん.png'
+image: 'https://pan.ikamusume7.org:16666/p/IkasNotepad/%E3%82%B4%E3%83%96%E3%83%AA%E3%83%B3%E3%82%B9%E3%83%AC%E3%82%A4%E3%83%A4%E3%83%BC%E3%81%95%E3%82%93.webp?sign=tTq7M8-PaYVt9TMt1NJ4DLSA3i5zD47mjXIjtEgK7z4=:0'
 tags: [动画, 漫画]
 category: '日常'
 draft: false 
