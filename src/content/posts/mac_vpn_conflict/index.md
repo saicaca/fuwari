@@ -22,3 +22,6 @@ draft: false
    ![rule.png](images/rule.png)
    ![add_rule.png](images/add_rule.png)
 
+# 注意事项
+1. 完成上述修改后仍然不行的情况下，可以尝试重启电脑。
+
