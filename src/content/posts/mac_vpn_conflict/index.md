@@ -5,7 +5,7 @@ description: 让 mac 在同时打开 Shadowrocket 和 tailscale 时，能够正�
 image: ./cover.jpg
 tags: [tailscale, Shadowrocket, vpn]
 category: Record
-draft: true
+draft: false
 ---
 # 背景
 > 刚部署完 headscale 后当我的 mac 同时打开 Shadowrocket 和 tailscale 时，发现只能正常科学，但是无法连接到其他 tailscale 的节点
