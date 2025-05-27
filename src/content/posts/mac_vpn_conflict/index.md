@@ -18,5 +18,7 @@ draft: true
    ![delete_config.png](images/delete_config.png)
 3. 从「TUN旁路路由」中删除该网段，点击保存
    ![delete.png](images/delete.png)
-4. 现在即可同时使用两者
+4. 现在可以同时使用，但是现在在 Shadowrocket 中 `100.64.0.0/10` 该网段为`代理`连接，我们可以在规则中加一个`IP-CIDR`规则，使其直连
+   ![rule.png](images/rule.png)
+   ![add_rule.png](images/add_rule.png)
 
