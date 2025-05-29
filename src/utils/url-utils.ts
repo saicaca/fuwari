@@ -1,7 +1,3 @@
-import i18nKey from "@i18n/i18nKey";
-import { i18n } from "@i18n/translation";
-import { encodePathSegment } from "./encoding-utils";
-
 export function pathsEqual(path1: string, path2: string) {
 	const normalizedPath1 = path1.replace(/^\/|\/$/g, "").toLowerCase();
 	const normalizedPath2 = path2.replace(/^\/|\/$/g, "").toLowerCase();
@@ -18,26 +14,13 @@ export function getPostUrlBySlug(slug: string): string {
 }
 
 export function getTagUrl(tag: string): string {
-	if (!tag) return url("/archive/tag/");
-
-	// use common encoding function
-	const encodedTag = encodePathSegment(tag);
-	const tagUrl = `/archive/tag/${encodedTag}/`;
-	console.log(`Generating URL for tag "${tag.trim()}" => "${tagUrl}"`);
-	return url(tagUrl);
+	if (!tag) return url("/archive/");
+	return url(`/archive/?tag=${encodeURIComponent(tag.trim())}`);
 }
 
 export function getCategoryUrl(category: string): string {
-	console.log(`category: ${category}`);
-	if (!category) return url("/archive/category/");
-
-	const trimmedCategory = category.trim();
-	if (trimmedCategory === i18n(i18nKey.uncategorized))
-		return url("/archive/category/uncategorized/");
-
-	return url(
-		`/archive/category/${encodeURIComponent(trimmedCategory).replace(/%20/g, "+")}/`,
-	);
+	if (!category) return url("/archive/");
+	return url(`/archive/?category=${encodeURIComponent(category.trim())}`);
 }
 
 export function getDir(path: string): string {

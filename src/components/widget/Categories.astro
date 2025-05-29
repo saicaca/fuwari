@@ -27,7 +27,7 @@ const style = Astro.props.style;
 >
     {categories.map((c) =>
         <ButtonLink
-            url={getCategoryUrl(c.name.trim())}
+            url={getCategoryUrl(c.name)}
             badge={String(c.count)}
             label={`View all posts in the ${c.name.trim()} category`}
         >
