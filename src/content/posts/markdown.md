@@ -2,7 +2,7 @@
 title: Markdown Example
 published: 2023-10-01
 description: A simple example of a Markdown blog post.
-tags: [Markdown, Blogging, Demo]
+tags: [Mark?down, Blogging&, Demo#, 中文#字&符, 中文字符]
 category: Examples
 draft: false
 ---
