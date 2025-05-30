@@ -1,3 +1,6 @@
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+
 export function pathsEqual(path1: string, path2: string) {
 	const normalizedPath1 = path1.replace(/^\/|\/$/g, "").toLowerCase();
 	const normalizedPath2 = path2.replace(/^\/|\/$/g, "").toLowerCase();
@@ -19,7 +22,12 @@ export function getTagUrl(tag: string): string {
 }
 
 export function getCategoryUrl(category: string): string {
-	if (!category) return url("/archive/");
+	if (
+		!category ||
+		category.trim() === "" ||
+		category.trim().toLowerCase() === i18n(I18nKey.uncategorized).toLowerCase()
+	)
+		return url("/archive/");
 	return url(`/archive/?category=${encodeURIComponent(category.trim())}`);
 }
 
