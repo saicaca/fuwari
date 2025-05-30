@@ -68,7 +68,7 @@ const getPageUrl = (p: number) => {
                 >
                     {p}
                 </div>
-            return <a href={url(getPageUrl(p))} aria-label=`Page ${p}`
+            return <a href={url(getPageUrl(p))} aria-label={`Page ${p}`}
                 class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]"
             >{p}</a>
         })}

@@ -1,4 +1,4 @@
-import i18nKey from "@i18n/i18nKey";
+import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 
 export function pathsEqual(path1: string, path2: string) {
@@ -16,10 +16,19 @@ export function getPostUrlBySlug(slug: string): string {
 	return url(`/posts/${slug}/`);
 }
 
-export function getCategoryUrl(category: string): string {
-	if (category === i18n(i18nKey.uncategorized))
-		return url("/archive/category/uncategorized/");
-	return url(`/archive/category/${category}/`);
+export function getTagUrl(tag: string): string {
+	if (!tag) return url("/archive/");
+	return url(`/archive/?tag=${encodeURIComponent(tag.trim())}`);
+}
+
+export function getCategoryUrl(category: string | null): string {
+	if (
+		!category ||
+		category.trim() === "" ||
+		category.trim().toLowerCase() === i18n(I18nKey.uncategorized).toLowerCase()
+	)
+		return url("/archive/?uncategorized=true");
+	return url(`/archive/?category=${encodeURIComponent(category.trim())}`);
 }
 
 export function getDir(path: string): string {
