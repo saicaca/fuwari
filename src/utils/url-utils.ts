@@ -21,7 +21,7 @@ export function getTagUrl(tag: string): string {
 	return url(`/archive/?tag=${encodeURIComponent(tag.trim())}`);
 }
 
-export function getCategoryUrl(category: string): string {
+export function getCategoryUrl(category: string | null): string {
 	if (
 		!category ||
 		category.trim() === "" ||
