@@ -4,7 +4,6 @@ import WidgetLayout from "./WidgetLayout.astro";
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 import { getCategoryList } from "../../utils/content-utils";
-import { getCategoryUrl } from "../../utils/url-utils";
 import ButtonLink from "../control/ButtonLink.astro";
 
 const categories = await getCategoryList();
@@ -27,7 +26,7 @@ const style = Astro.props.style;
 >
     {categories.map((c) =>
         <ButtonLink
-            url={getCategoryUrl(c.name)}
+            url={c.url}
             badge={String(c.count)}
             label={`View all posts in the ${c.name.trim()} category`}
         >
