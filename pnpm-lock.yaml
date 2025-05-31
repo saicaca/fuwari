@@ -138,6 +138,9 @@ importers:
       '@rollup/plugin-yaml':
         specifier: ^4.1.2
         version: 4.1.2(rollup@2.79.2)
+      '@types/hast':
+        specifier: ^3.0.4
+        version: 3.0.4
       '@types/markdown-it':
         specifier: ^14.1.2
         version: 14.1.2

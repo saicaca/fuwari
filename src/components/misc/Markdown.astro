@@ -12,3 +12,24 @@ const className = Astro.props.class;
     <!--<div class="max-w-none custom-md">-->
     <slot/>
 </div>
+
+<script>
+let timeout: ReturnType<typeof setTimeout>;
+document.addEventListener("click", function (e) {
+    if (e.target && e.target?.classList.contains("copy-btn")) {
+        const preEle = e.target.closest("pre");
+        const codeEle = preEle?.querySelector("code");
+        const code = Array.from(codeEle.querySelectorAll(".code:not(summary *)"))
+            .map(e => e.textContent)
+            .map(t => t === "\n" ? "" : t)
+            .join("\n");
+        navigator.clipboard.writeText(code);
+        e.target.classList.add("success");
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(() => {
+            e.target.classList.remove("success");
+        }, 1000);}
+});
+</script>

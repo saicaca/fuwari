@@ -64,6 +64,7 @@
     "@astrojs/ts-plugin": "^1.10.4",
     "@biomejs/biome": "1.9.4",
     "@rollup/plugin-yaml": "^4.1.2",
+    "@types/hast": "^3.0.4",
     "@types/markdown-it": "^14.1.2",
     "@types/mdast": "^4.0.4",
     "@types/sanitize-html": "^2.16.0",
