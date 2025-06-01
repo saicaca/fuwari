@@ -1,9 +1,9 @@
 import type {
+	ExpressiveCodeConfig,
 	LicenseConfig,
 	NavBarConfig,
 	ProfileConfig,
 	SiteConfig,
-    ExpressiveCodeConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
 
@@ -84,5 +84,5 @@ export const licenseConfig: LicenseConfig = {
 };
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {
-    themes: "github-dark",
-}
+	themes: "github-dark",
+};

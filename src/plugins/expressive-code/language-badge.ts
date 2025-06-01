@@ -1,17 +1,17 @@
 /**
  * Based on the discussion at https://github.com/expressive-code/expressive-code/issues/153#issuecomment-2282218684
  */
-import { definePlugin } from '@expressive-code/core'
+import { definePlugin } from "@expressive-code/core";
 
 export function pluginLanguageBadge() {
-  return definePlugin({
-    name: 'Language Badge',
-    baseStyles: ({ cssVar }) => `
+	return definePlugin({
+		name: "Language Badge",
+		baseStyles: ({ cssVar }) => `
       [data-language]::before {
         position: absolute;
         z-index: 2;
-        right: calc(${cssVar('borderWidth')} + ${cssVar('uiPaddingInline')} / 2);
-        top: calc(${cssVar('borderWidth')} + 0.35rem);
+        right: calc(${cssVar("borderWidth")} + ${cssVar("uiPaddingInline")} / 2);
+        top: calc(${cssVar("borderWidth")} + 0.35rem);
         padding: 0.1rem 0.5rem;
         content: attr(data-language);
         font-size: 0.75rem;
@@ -44,5 +44,5 @@ export function pluginLanguageBadge() {
         }
       }
     `,
-  })
+	});
 }
