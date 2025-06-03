@@ -58,18 +58,37 @@
         }
     }
 
-    pre {
-        @apply bg-[var(--codeblock-bg)] !important;
-        @apply rounded-xl px-5;
+    .copy-btn {
+        all: initial;
+        @apply btn-regular-dark opacity-0 shadow-lg shadow-black/50 absolute active:scale-90 h-8 w-8 top-3 right-3 text-sm rounded-lg transition-all ease-in-out z-20 cursor-pointer;
+    }
+    .frame:hover .copy-btn {
+        opacity: 1;
+    }
 
-        code {
-            @apply bg-transparent text-inherit text-sm p-0;
+    .copy-btn-icon {
+        @apply absolute top-1/2 left-1/2 transition -translate-x-1/2 -translate-y-1/2 w-4 h-4 fill-white pointer-events-none;
+    }
+    .copy-btn .copy-icon {
+        @apply opacity-100 fill-white dark:fill-white/75;
+    }
+    .copy-btn.success .copy-icon {
+        @apply opacity-0 fill-[var(--deep-text)]
+    }
+    .copy-btn .success-icon {
+        @apply opacity-0 fill-white;
+    }
+    .copy-btn.success .success-icon {
+        @apply opacity-100
+    }
 
-            ::selection {
-                @apply bg-[var(--codeblock-selection)];
-            }
+    .expressive-code {
+        @apply my-4;
+        ::selection {
+            @apply bg-[var(--codeblock-selection)];
         }
     }
+
 
     ul, ol {
         li::marker {
