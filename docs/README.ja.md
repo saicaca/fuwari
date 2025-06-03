@@ -2,10 +2,7 @@
 
 [Astro](https://astro.build) で構築された静的ブログテンプレート
 
-[**🖥️ライブデモ (Vercel)**](https://fuwari.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**📦旧 Hexo バージョン**](https://github.com/saicaca/hexo-theme-vivia)
-
-> README バージョン：`2025-04-24`
+[**🖥️ライブデモ (Vercel)**](https://fuwari.vercel.app)
 
 ![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
 
