@@ -10,8 +10,8 @@ export function pluginLanguageBadge() {
       [data-language]::before {
         position: absolute;
         z-index: 2;
-        right: calc(${cssVar("borderWidth")} + ${cssVar("uiPaddingInline")} / 2);
-        top: calc(${cssVar("borderWidth")} + 0.35rem);
+        right: 0.5rem;
+        top: 0.5rem;
         padding: 0.1rem 0.5rem;
         content: attr(data-language);
         font-size: 0.75rem;
@@ -21,7 +21,7 @@ export function pluginLanguageBadge() {
         background: oklch(0.33 0.035 var(--hue));
         border-radius: 0.5rem;
         pointer-events: none;
-        transition: opacity 0.2s;
+        transition: opacity 0.3s;
         opacity: 0;
       }
       .frame:not(.has-title):not(.is-terminal) {
