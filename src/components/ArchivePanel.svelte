@@ -15,7 +15,7 @@ categories = params.has("category") ? params.getAll("category") : [];
 const uncategorized = params.get("uncategorized");
 
 interface Post {
-	slug: string;
+	id: string;
 	data: {
 		title: string;
 		tags: string[];
