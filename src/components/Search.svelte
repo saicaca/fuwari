@@ -11,6 +11,7 @@ let keywordMobile = "";
 let result: SearchResult[] = [];
 let isSearching = false;
 let pagefindLoaded = false;
+let initialized = false;
 
 const fakeResult: SearchResult[] = [
 	{
@@ -53,6 +54,10 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 		return;
 	}
 
+	if (!initialized) {
+		return;
+	}
+
 	isSearching = true;
 
 	try {
@@ -63,8 +68,11 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 			searchResults = await Promise.all(
 				response.results.map((item) => item.data()),
 			);
-		} else {
+		} else if (import.meta.env.DEV) {
 			searchResults = fakeResult;
+		} else {
+			searchResults = [];
+			console.error("Pagefind is not available in production environment.");
 		}
 
 		result = searchResults;
@@ -79,31 +87,74 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 };
 
 onMount(() => {
-	pagefindLoaded = typeof window !== "undefined" && "pagefind" in window;
+	const checkPagefind = () => {
+		return (
+			typeof window !== "undefined" &&
+			"pagefind" in window &&
+			window.pagefind &&
+			typeof window.pagefind.search === "function"
+		);
+	};
+
+	pagefindLoaded = checkPagefind();
 
 	if (import.meta.env.DEV) {
 		console.log(
 			"Pagefind is not available in development mode. Using mock data.",
 		);
+		initialized = true;
 	} else if (pagefindLoaded) {
 		console.log("Pagefind is loaded successfully.");
+		initialized = true;
 	} else {
-		console.warn(
-			"Pagefind is not loaded. Search functionality will be limited.",
-		);
+		console.log("Waiting for Pagefind to load...");
+		let retryCount = 0;
+		const maxRetries = 10;
+
+		const checkInterval = setInterval(() => {
+			pagefindLoaded = checkPagefind();
+			retryCount++;
+
+			if (pagefindLoaded) {
+				console.log("Pagefind loaded successfully after retry.");
+				clearInterval(checkInterval);
+				initialized = true;
+			} else if (retryCount >= maxRetries) {
+				console.warn(
+					"Pagefind failed to load after maximum retries. Search functionality will be limited.",
+				);
+				clearInterval(checkInterval);
+				initialized = true;
+			}
+		}, 100);
 	}
 
-	if (keywordDesktop) search(keywordDesktop, true);
-	if (keywordMobile) search(keywordMobile, false);
+	const delayedInit = () => {
+		if (keywordDesktop) search(keywordDesktop, true);
+		if (keywordMobile) search(keywordMobile, false);
+	};
+
+	if (initialized) {
+		delayedInit();
+	} else {
+		const waitForInit = () => {
+			if (initialized) {
+				delayedInit();
+			} else {
+				setTimeout(waitForInit, 100);
+			}
+		};
+		waitForInit();
+	}
 });
 
-$: if (pagefindLoaded && keywordDesktop) {
+$: if (initialized && pagefindLoaded && keywordDesktop) {
 	(async () => {
 		await search(keywordDesktop, true);
 	})();
 }
 
-$: if (pagefindLoaded && keywordMobile) {
+$: if (initialized && pagefindLoaded && keywordMobile) {
 	(async () => {
 		await search(keywordMobile, false);
 	})();

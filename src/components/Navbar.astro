@@ -105,13 +105,38 @@ loadButtonScript();
 
 {import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
 async function loadPagefind() {
-    const pagefind = await import(scriptUrl)
-    await pagefind.options({
-        'excerptLength': 20
-    })
-    pagefind.init()
-    window.pagefind = pagefind
-    pagefind.search('')     // speed up the first search
+    try {
+        const response = await fetch(scriptUrl, { method: 'HEAD' });
+        if (!response.ok) {
+            throw new Error(`Pagefind script not found: ${response.status}`);
+        }
+
+        const pagefind = await import(scriptUrl);
+
+        await pagefind.options({
+            'excerptLength': 20
+        });
+
+        pagefind.init();
+
+        window.pagefind = pagefind;
+
+        await pagefind.search('');
+        
+        console.log('Pagefind loaded and initialized successfully');
+    } catch (error) {
+        console.error('Failed to load Pagefind:', error);
+        window.pagefind = {
+            search: () => Promise.resolve({ results: [] }),
+            options: () => Promise.resolve(),
+            init: () => {}
+        };
+    }
 }
-loadPagefind()
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadPagefind);
+} else {
+    loadPagefind();
+}
 </script>}
