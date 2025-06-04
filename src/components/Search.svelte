@@ -78,7 +78,7 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 	}
 };
 
-onMount(async () => {
+onMount(() => {
 	pagefindLoaded = typeof window !== "undefined" && "pagefind" in window;
 
 	if (import.meta.env.DEV) {
@@ -86,10 +86,22 @@ onMount(async () => {
 			"Pagefind is not available in development mode. Using mock data.",
 		);
 	}
+
+	if (keywordDesktop) search(keywordDesktop, true);
+	if (keywordMobile) search(keywordMobile, false);
 });
 
-$: search(keywordDesktop, true);
-$: search(keywordMobile, false);
+$: if (pagefindLoaded && keywordDesktop) {
+	(async () => {
+		await search(keywordDesktop, true);
+	})();
+}
+
+$: if (pagefindLoaded && keywordMobile) {
+	(async () => {
+		await search(keywordMobile, false);
+	})();
+}
 </script>
 
 <!-- search bar for desktop view -->
