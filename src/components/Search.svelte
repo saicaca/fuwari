@@ -85,6 +85,12 @@ onMount(() => {
 		console.log(
 			"Pagefind is not available in development mode. Using mock data.",
 		);
+	} else if (pagefindLoaded) {
+		console.log("Pagefind is loaded successfully.");
+	} else {
+		console.warn(
+			"Pagefind is not loaded. Search functionality will be limited.",
+		);
 	}
 
 	if (keywordDesktop) search(keywordDesktop, true);
