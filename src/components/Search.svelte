@@ -63,7 +63,7 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 	try {
 		let searchResults: SearchResult[] = [];
 
-		if (import.meta.env.PROD && pagefindLoaded) {
+		if (import.meta.env.PROD && pagefindLoaded && window.pagefind) {
 			const response = await window.pagefind.search(keyword);
 			searchResults = await Promise.all(
 				response.results.map((item) => item.data()),
@@ -87,74 +87,51 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 };
 
 onMount(() => {
-	const checkPagefind = () => {
-		return (
+	const initializeSearch = () => {
+		initialized = true;
+		pagefindLoaded =
 			typeof window !== "undefined" &&
-			"pagefind" in window &&
-			window.pagefind &&
-			typeof window.pagefind.search === "function"
-		);
+			!!window.pagefind &&
+			typeof window.pagefind.search === "function";
+		console.log("Pagefind status on init:", pagefindLoaded);
+		if (keywordDesktop) search(keywordDesktop, true);
+		if (keywordMobile) search(keywordMobile, false);
 	};
-
-	pagefindLoaded = checkPagefind();
 
 	if (import.meta.env.DEV) {
 		console.log(
 			"Pagefind is not available in development mode. Using mock data.",
 		);
-		initialized = true;
-	} else if (pagefindLoaded) {
-		console.log("Pagefind is loaded successfully.");
-		initialized = true;
+		initializeSearch();
 	} else {
-		console.log("Waiting for Pagefind to load...");
-		let retryCount = 0;
-		const maxRetries = 10;
+		document.addEventListener("pagefindready", () => {
+			console.log("Pagefind ready event received.");
+			initializeSearch();
+		});
+		document.addEventListener("pagefindloaderror", () => {
+			console.warn(
+				"Pagefind load error event received. Search functionality will be limited.",
+			);
+			initializeSearch(); // Initialize with pagefindLoaded as false
+		});
 
-		const checkInterval = setInterval(() => {
-			pagefindLoaded = checkPagefind();
-			retryCount++;
-
-			if (pagefindLoaded) {
-				console.log("Pagefind loaded successfully after retry.");
-				clearInterval(checkInterval);
-				initialized = true;
-			} else if (retryCount >= maxRetries) {
-				console.warn(
-					"Pagefind failed to load after maximum retries. Search functionality will be limited.",
-				);
-				clearInterval(checkInterval);
-				initialized = true;
+		// Fallback in case events are not caught or pagefind is already loaded by the time this script runs
+		setTimeout(() => {
+			if (!initialized) {
+				console.log("Fallback: Initializing search after timeout.");
+				initializeSearch();
 			}
-		}, 100);
-	}
-
-	const delayedInit = () => {
-		if (keywordDesktop) search(keywordDesktop, true);
-		if (keywordMobile) search(keywordMobile, false);
-	};
-
-	if (initialized) {
-		delayedInit();
-	} else {
-		const waitForInit = () => {
-			if (initialized) {
-				delayedInit();
-			} else {
-				setTimeout(waitForInit, 100);
-			}
-		};
-		waitForInit();
+		}, 2000); // Adjust timeout as needed
 	}
 });
 
-$: if (initialized && pagefindLoaded && keywordDesktop) {
+$: if (initialized && keywordDesktop) {
 	(async () => {
 		await search(keywordDesktop, true);
 	})();
 }
 
-$: if (initialized && pagefindLoaded && keywordMobile) {
+$: if (initialized && keywordMobile) {
 	(async () => {
 		await search(keywordMobile, false);
 	})();

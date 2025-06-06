@@ -114,23 +114,21 @@ async function loadPagefind() {
         const pagefind = await import(scriptUrl);
 
         await pagefind.options({
-            'excerptLength': 20
+            excerptLength: 20
         });
-
-        pagefind.init();
 
         window.pagefind = pagefind;
 
-        await pagefind.search('');
-        
-        console.log('Pagefind loaded and initialized successfully');
+        document.dispatchEvent(new CustomEvent('pagefindready'));
+        console.log('Pagefind loaded and initialized successfully, event dispatched.');
     } catch (error) {
         console.error('Failed to load Pagefind:', error);
         window.pagefind = {
             search: () => Promise.resolve({ results: [] }),
             options: () => Promise.resolve(),
-            init: () => {}
         };
+        document.dispatchEvent(new CustomEvent('pagefindloaderror'));
+        console.log('Pagefind load error, event dispatched.');
     }
 }
 
