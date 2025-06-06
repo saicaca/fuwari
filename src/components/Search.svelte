@@ -11,6 +11,7 @@ let keywordMobile = "";
 let result: SearchResult[] = [];
 let isSearching = false;
 let pagefindLoaded = false;
+let initialized = false;
 
 const fakeResult: SearchResult[] = [
 	{
@@ -53,18 +54,25 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 		return;
 	}
 
+	if (!initialized) {
+		return;
+	}
+
 	isSearching = true;
 
 	try {
 		let searchResults: SearchResult[] = [];
 
-		if (import.meta.env.PROD && pagefindLoaded) {
+		if (import.meta.env.PROD && pagefindLoaded && window.pagefind) {
 			const response = await window.pagefind.search(keyword);
 			searchResults = await Promise.all(
 				response.results.map((item) => item.data()),
 			);
-		} else {
+		} else if (import.meta.env.DEV) {
 			searchResults = fakeResult;
+		} else {
+			searchResults = [];
+			console.error("Pagefind is not available in production environment.");
 		}
 
 		result = searchResults;
@@ -78,18 +86,56 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 	}
 };
 
-onMount(async () => {
-	pagefindLoaded = typeof window !== "undefined" && "pagefind" in window;
+onMount(() => {
+	const initializeSearch = () => {
+		initialized = true;
+		pagefindLoaded =
+			typeof window !== "undefined" &&
+			!!window.pagefind &&
+			typeof window.pagefind.search === "function";
+		console.log("Pagefind status on init:", pagefindLoaded);
+		if (keywordDesktop) search(keywordDesktop, true);
+		if (keywordMobile) search(keywordMobile, false);
+	};
 
 	if (import.meta.env.DEV) {
 		console.log(
 			"Pagefind is not available in development mode. Using mock data.",
 		);
+		initializeSearch();
+	} else {
+		document.addEventListener("pagefindready", () => {
+			console.log("Pagefind ready event received.");
+			initializeSearch();
+		});
+		document.addEventListener("pagefindloaderror", () => {
+			console.warn(
+				"Pagefind load error event received. Search functionality will be limited.",
+			);
+			initializeSearch(); // Initialize with pagefindLoaded as false
+		});
+
+		// Fallback in case events are not caught or pagefind is already loaded by the time this script runs
+		setTimeout(() => {
+			if (!initialized) {
+				console.log("Fallback: Initializing search after timeout.");
+				initializeSearch();
+			}
+		}, 2000); // Adjust timeout as needed
 	}
 });
 
-$: search(keywordDesktop, true);
-$: search(keywordMobile, false);
+$: if (initialized && keywordDesktop) {
+	(async () => {
+		await search(keywordDesktop, true);
+	})();
+}
+
+$: if (initialized && keywordMobile) {
+	(async () => {
+		await search(keywordMobile, false);
+	})();
+}
 </script>
 
 <!-- search bar for desktop view -->
