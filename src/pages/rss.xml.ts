@@ -18,7 +18,6 @@ export async function GET(context: APIContext) {
 		eager: true,
 	});
 	const posts = Object.values(postImportResult) as Post[];
-	console.log("posts", posts);
 
 	const filtered = posts.filter((post) =>
 		import.meta.env.PROD ? post.frontmatter.draft !== true : true,
@@ -33,11 +32,10 @@ export async function GET(context: APIContext) {
 	const postsWithUrls = sorted.map((post) => {
 		const contentPath = path.relative(process.cwd(), post.file);
 		let url = contentPath
-			.replace(/^src\/content/, "")
+			.replace(/\\/g, "/")
+			.replace(/^src\/content\/posts/, "")
 			.replace(/\.md$/, "")
-			.replace(/index$/, "");
-
-		url = url.replace(/\\/g, "/");
+			.replace(/\/index$/, "");
 		if (!url.startsWith("/")) {
 			url = `/${url}`;
 		}
