@@ -6,11 +6,31 @@ const postsCollection = defineCollection({
 		published: z.date(),
 		updated: z.date().optional(),
 		draft: z.boolean().optional().default(false),
-		description: z.string().nullable().transform(val => val ?? ""),
-		image: z.string().nullable().transform(val => val ?? ""),
-		tags: z.array(z.string()).nullable().transform(val => val ?? []),
-		category: z.string().nullable().transform(val => val ?? ""),
-		lang: z.string().nullable().transform(val => val ?? ""),
+		description: z
+			.string()
+			.optional()
+			.nullable()
+			.transform((val) => val ?? ""),
+		image: z
+			.string()
+			.optional()
+			.nullable()
+			.transform((val) => val ?? ""),
+		tags: z
+			.array(z.string())
+			.optional()
+			.nullable()
+			.transform((val) => val ?? []),
+		category: z
+			.string()
+			.optional()
+			.nullable()
+			.transform((val) => val ?? ""),
+		lang: z
+			.string()
+			.optional()
+			.nullable()
+			.transform((val) => val ?? ""),
 
 		/* For internal use */
 		prevTitle: z.string().default(""),
