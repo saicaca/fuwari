@@ -33,7 +33,7 @@
     "@iconify/svelte": "^4.2.0",
     "@swup/astro": "^1.6.0",
     "@tailwindcss/typography": "^0.5.16",
-    "astro": "5.9.2",
+    "astro": "5.9.4",
     "astro-expressive-code": "^0.41.2",
     "astro-icon": "^1.1.5",
     "hastscript": "^9.0.1",
@@ -69,7 +69,7 @@
     "@types/markdown-it": "^14.1.2",
     "@types/mdast": "^4.0.4",
     "@types/sanitize-html": "^2.16.0",
-    "postcss-import": "^16.1.0",
+    "postcss-import": "^16.1.1",
     "postcss-nesting": "^13.0.2"
   },
   "packageManager": "pnpm@9.14.4"
