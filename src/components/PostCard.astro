@@ -66,9 +66,13 @@ const { remarkPluginFrontmatter } = await entry.render();
 
         <!-- word count and read time  -->
         <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition">
-            <div>{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount)}</div>
+            <div>
+                {remarkPluginFrontmatter.words} {" " + i18n(remarkPluginFrontmatter.words === 1 ? I18nKey.wordCount : I18nKey.wordsCount)}
+            </div>
             <div>|</div>
-            <div>{remarkPluginFrontmatter.minutes} {" " + i18n(I18nKey.minutesCount)}</div>
+            <div>
+                {remarkPluginFrontmatter.minutes} {" " + i18n(remarkPluginFrontmatter.minutes === 1 ? I18nKey.minuteCount : I18nKey.minutesCount)}
+            </div>
         </div>
 
     </div>
