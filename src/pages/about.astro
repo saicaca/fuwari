@@ -1,12 +1,10 @@
 ---
 
-import MainGridLayout from "../layouts/MainGridLayout.astro";
-
-import { getEntry } from "astro:content";
-import { render } from "astro:content";
+import { getEntry, render } from "astro:content";
 import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
 
 const aboutPost = await getEntry("spec", "about");
 
