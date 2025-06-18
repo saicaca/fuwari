@@ -1,5 +1,6 @@
 ---
 import path from "node:path";
+
 interface Props {
 	id?: string;
 	src: string;
@@ -8,6 +9,7 @@ interface Props {
 	position?: string;
 	basePath?: string;
 }
+
 import { Image } from "astro:assets";
 import { url } from "../../utils/url-utils";
 
@@ -24,7 +26,7 @@ const isPublic = src.startsWith("/");
 
 // TODO temporary workaround for images dynamic import
 // https://github.com/withastro/astro/issues/3373
-// biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
+// biome-ignore lint/suspicious/noImplicitAnyLet: <check later>
 let img;
 if (isLocal) {
 	const files = import.meta.glob<ImageMetadata>("../../**", {
@@ -50,4 +52,3 @@ const imageStyle = `object-position: ${position}`;
     {isLocal && img && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle}/>}
     {!isLocal && <img src={isPublic ? url(src) : src} alt={alt || ""} class={imageClass} style={imageStyle}/>}
 </div>
-
