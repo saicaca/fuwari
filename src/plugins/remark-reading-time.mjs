@@ -1,4 +1,4 @@
-// biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
+// biome-ignore lint/suspicious/noShadowRestrictedNames: <toString from mdast-util-to-string>
 import { toString } from "mdast-util-to-string";
 import getReadingTime from "reading-time";
 
