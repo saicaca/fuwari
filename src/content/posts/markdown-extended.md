@@ -28,7 +28,7 @@ You can also add dynamic cards that show a GitLab repository, on page load, the 
 
 Create a GitHub repository card with the code `::gitlab{repo="<owner>/<repo>"}`.
 
-```markdown
+```mdx
 ::gitlab{repo="gitlab-org/gitlab"}
 ```
 
