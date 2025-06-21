@@ -37,7 +37,7 @@ export function GitlabCardComponent(properties, children) {
 			h("div", { class: "gc-divider" }, "/"),
 			h(`div#${cardUuid}-repo`, { class: "gc-repo" }, repo.split("/")[1]),
 		]),
-		h("div", { class: "github-logo" }),
+		h("div", { class: "gitlab-logo" }),
 	]);
 
 	const nDescription = h(
