@@ -59,8 +59,8 @@ export function GitlabCardComponent(properties, children) {
         document.getElementById('${cardUuid}-forks').innerText = Intl.NumberFormat('en-us', { notation: "compact", maximumFractionDigits: 1 }).format(data.forks_count).replaceAll("\u202f", '');
         document.getElementById('${cardUuid}-stars').innerText = Intl.NumberFormat('en-us', { notation: "compact", maximumFractionDigits: 1 }).format(data.star_count).replaceAll("\u202f", '');
         const avatarEl = document.getElementById('${cardUuid}-avatar');
-        avatarEl.style.backgroundImage = 'url(' + data.namespace.avatar_url + ')';
-        avatarEl.style.backgroundColor = 'transparent';
+        document.getElementById('${cardUuid}-avatar').style.backgroundImage = 'url(' + data.namespace.avatar_url + ')';
+        document.getElementById('${cardUuid}-avatar').style.backgroundColor = 'transparent';
         document.getElementById('${cardUuid}-card').classList.remove("fetch-waiting");
         console.log("[GITLAB-CARD] Loaded card for ${repo} | ${cardUuid}.")
       }).catch(err => {
