@@ -27,11 +27,6 @@ export function GitlabCardComponent(properties, children) {
 	const cardUuid = `GC${Math.random().toString(36).slice(-6)}`; // Collisions are not important
 
 	const nAvatar = h(`div#${cardUuid}-avatar`, { class: "gc-avatar" });
-	// const nLanguage = h(
-	// 	`span#${cardUuid}-language`,
-	// 	{ class: "gc-language" },
-	// 	"Waiting...",
-	// );
 
 	const nTitle = h("div", { class: "gc-titlebar" }, [
 		h("div", { class: "gc-titlebar-left" }, [
@@ -40,7 +35,7 @@ export function GitlabCardComponent(properties, children) {
 				h("div", { class: "gc-user" }, repo.split("/")[0]),
 			]),
 			h("div", { class: "gc-divider" }, "/"),
-			h("div", { class: "gc-repo" }, repo.split("/")[1]),
+			h("div", { class: `gc-repo ${cardUuid}-repo` }, repo.split("/")[1]),
 		]),
 		h("div", { class: "github-logo" }),
 	]);
@@ -53,24 +48,21 @@ export function GitlabCardComponent(properties, children) {
 
 	const nStars = h(`div#${cardUuid}-stars`, { class: "gc-stars" }, "00K");
 	const nForks = h(`div#${cardUuid}-forks`, { class: "gc-forks" }, "0K");
-	// const nLicense = h(`div#${cardUuid}-license`, { class: "gc-license" }, "0K");
-
-	console.log(`https://gitlab.com/api/v4/projects/${repoE}`);
 
 	const nScript = h(
 		`script#${cardUuid}-script`,
 		{ type: "text/javascript", defer: true },
 		`
-      fetch('https://gitlab.com/api/v4/projects/${repoE}', { referrerPolicy: "no-referrer" }).then(response => response.json()).then(data => {
+      fetch('https://gitlab.com/api/v4/projects/${repoE}').then(response => response.json()).then(data => {
 		console.log(data);
+		document.getElementsByClassName('${cardUuid}-repo')[0].innerText = data.name;
         document.getElementById('${cardUuid}-description').innerText = data.description?.replace(/:[a-zA-Z0-9_]+:/g, '') || "Description not set";
-        document.getElementById('${cardUuid}-language').innerText = data.language;
+        // document.getElementById('${cardUuid}-language').innerText = data.language;
         document.getElementById('${cardUuid}-forks').innerText = Intl.NumberFormat('en-us', { notation: "compact", maximumFractionDigits: 1 }).format(data.forks_count).replaceAll("\u202f", '');
         document.getElementById('${cardUuid}-stars').innerText = Intl.NumberFormat('en-us', { notation: "compact", maximumFractionDigits: 1 }).format(data.star_count).replaceAll("\u202f", '');
         const avatarEl = document.getElementById('${cardUuid}-avatar');
-        avatarEl.style.backgroundImage = 'url(' + data.owner.avatar_url + ')';
+        avatarEl.style.backgroundImage = 'url(' + data.namespace.avatar_url + ')';
         avatarEl.style.backgroundColor = 'transparent';
-        // document.getElementById('${cardUuid}-license').innerText = data.license?.spdx_id || "no-license";
         document.getElementById('${cardUuid}-card').classList.remove("fetch-waiting");
         console.log("[GITLAB-CARD] Loaded card for ${repo} | ${cardUuid}.")
       }).catch(err => {
