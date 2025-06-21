@@ -54,7 +54,6 @@ export function GitlabCardComponent(properties, children) {
 		{ type: "text/javascript", defer: true },
 		`
       fetch('https://gitlab.com/api/v4/projects/${repoE}').then(response => response.json()).then(data => {
-		console.log(data);
 		document.getElementById('${cardUuid}-repo').innerText = data.name;
         document.getElementById('${cardUuid}-description').innerText = data.description?.replace(/:[a-zA-Z0-9_]+:/g, '') || "Description not set";
         document.getElementById('${cardUuid}-forks').innerText = Intl.NumberFormat('en-us', { notation: "compact", maximumFractionDigits: 1 }).format(data.forks_count).replaceAll("\u202f", '');
