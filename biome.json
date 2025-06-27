@@ -1,60 +1,41 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
-	"vcs": {
-		"enabled": false,
-		"clientKind": "git",
-		"useIgnoreFile": false
-	},
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
 	"files": {
-		"ignoreUnknown": false,
-		"ignore": [
-			"**",
-			"!**/src/**/*.css",
-			"!**/src/public/**/*",
-			"!**/dist/**/*",
-			"!**/node_modules/**/*"
-		]
+		"ignore": ["*.snap", "dist", "node_modules"]
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab"
+		"formatWithErrors": false,
+		"indentStyle": "tab",
+		"indentWidth": 2,
+		"lineWidth": 80
 	},
-	"organizeImports": {
-		"enabled": true
+	"javascript": {
+		"formatter": {
+			"arrowParentheses": "always",
+			"bracketSameLine": false,
+			"bracketSpacing": true,
+			"jsxQuoteStyle": "double",
+			"quoteProperties": "asNeeded",
+			"semicolons": "always",
+			"trailingCommas": "all"
+		},
+		"parser": {
+			"unsafeParameterDecoratorsEnabled": true
+		},
+		"organizeImports": {}
 	},
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
-			"style": {
-				"noParameterAssign": "error",
-				"useAsConstAssertion": "error",
-				"useDefaultParameterLast": "error",
-				"useEnumInitializers": "error",
-				"useSelfClosingElements": "error",
-				"useSingleVarDeclarator": "error",
-				"noUnusedTemplateLiteral": "error",
-				"useNumberNamespace": "error",
-				"noInferrableTypes": "error",
-				"noUselessElse": "error"
-			}
-		}
-	},
-	"javascript": {
-		"formatter": {
-			"quoteStyle": "double"
+			"recommended": true
 		}
 	},
 	"overrides": [
 		{
-			"include": ["**/*.svelte", "**/*.astro", "**/*.vue"],
-			"linter": {
-				"rules": {
-					"style": {
-						"useConst": "off",
-						"useImportType": "off"
-					}
-				}
+			"include": ["*.ts", "*.tsx"],
+			"organizeImports": {
+				"enabled": true
 			}
 		}
 	]

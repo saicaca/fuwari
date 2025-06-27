@@ -8,11 +8,11 @@ html.is-animating .transition-swup-fade {
 
 /* Fade-in animations for components */
 @keyframes fade-in-up {
-    0% {
+    from {
         transform: translateY(2rem);
         opacity: 0;
     }
-    100% {
+    to {
         transform: translateY(0);
         opacity: 1;
     }
@@ -50,4 +50,3 @@ html.is-animating .transition-swup-fade {
 #post-container :nth-child(4) { animation-delay: calc(var(--content-delay) + 175ms) }
 #post-container :nth-child(5) { animation-delay: calc(var(--content-delay) + 250ms) }
 #post-container :nth-child(6) { animation-delay: calc(var(--content-delay) + 325ms) }
-
