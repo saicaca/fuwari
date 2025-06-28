@@ -188,11 +188,38 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
 </div>
 
 <style>
-  input:focus {
-    outline: 0;
-  }
-  .search-panel {
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-  }
+	input:focus {
+		outline: 0;
+	}
+	.search-panel {
+		max-height: calc(100vh - 100px);
+		overflow-y: auto;
+	}
+	.search-panel::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	.search-panel::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.search-panel::-webkit-scrollbar-thumb {
+		background: #c1c1c1;
+		border-radius: 10px;
+		border: 3px solid transparent;
+		background-clip: content-box;
+	}
+
+	.search-panel::-webkit-scrollbar-thumb:hover {
+		background: #a8a8a8;
+		background-clip: content-box;
+	}
+
+	:global(.dark) .search-panel::-webkit-scrollbar-thumb {
+		background: #555;
+	}
+
+	:global(.dark) .search-panel::-webkit-scrollbar-thumb:hover {
+		background: #777;
+	}
 </style>
