@@ -4,7 +4,9 @@ import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import { url } from "@utils/url-utils.ts";
 import { onMount } from "svelte";
+// biome-ignore lint/style/useConst: These are bind variables
 let keywordDesktop = "";
+// biome-ignore lint/style/useConst: These are bind variables
 let keywordMobile = "";
 let result = [];
 const fakeResult = [
@@ -29,7 +31,7 @@ let search = (keyword: string, isDesktop: boolean) => {};
 
 onMount(() => {
 	search = async (keyword: string, isDesktop: boolean) => {
-		let panel = document.getElementById("search-panel");
+		const panel = document.getElementById("search-panel");
 		if (!panel) return;
 
 		if (!keyword && isDesktop) {
@@ -62,7 +64,7 @@ onMount(() => {
 });
 
 const togglePanel = () => {
-	let panel = document.getElementById("search-panel");
+	const panel = document.getElementById("search-panel");
 	panel?.classList.toggle("float-panel-closed");
 };
 

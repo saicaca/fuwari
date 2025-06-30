@@ -5,6 +5,7 @@ import PostCard from "./PostCard.astro";
 
 const { page } = Astro.props;
 
+// biome-ignore lint/style/useConst: `delay` is modified in the template
 let delay = 0;
 const interval = 50;
 ---
