@@ -1,5 +1,10 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
 	"formatter": {
 		"enabled": true,
 		"formatWithErrors": true,
@@ -28,7 +33,6 @@
 		}
 	},
 	"files": {
-		"maxSize": 4194304,
-		"ignore": ["**/*.styl", "dist", ".astro", "**/*.css"]
+		"maxSize": 4194304
 	}
 }
