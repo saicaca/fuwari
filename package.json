@@ -8,10 +8,15 @@
 		"build": "astro build && pagefind --site dist",
 		"preview": "astro preview",
 		"astro": "astro",
-		"type-check": "tsc --noEmit --isolatedDeclarations",
+		"type-check": "tsc --noEmit",
+		"astro-check": "astro check",
 		"new-post": "node scripts/new-post.js",
-		"format": "biome format --write ./src",
-		"lint": "biome check --write ./src",
+		"format": "prettier --write \"src/**/*.{astro,ts,tsx,js,jsx,md}\"",
+		"format:check": "prettier --check \"src/**/*.{astro,ts,tsx,js,jsx,md}\"",
+		"lint": "eslint src --ext .ts,.tsx,.js,.jsx,.astro",
+		"lint:fix": "eslint src --ext .ts,.tsx,.js,.jsx,.astro --fix",
+		"lint:warn-only": "eslint src --ext .ts,.tsx,.js,.jsx,.astro --max-warnings 999",
+		"check": "pnpm run type-check && pnpm run astro-check && pnpm run lint:warn-only && pnpm run format:check",
 		"preinstall": "npx only-allow pnpm"
 	},
 	"dependencies": {
@@ -60,14 +65,20 @@
 	},
 	"devDependencies": {
 		"@astrojs/ts-plugin": "^1.10.4",
-		"@biomejs/biome": "2.0.5",
 		"@iconify-json/skill-icons": "^1.2.0",
 		"@rollup/plugin-yaml": "^4.1.2",
 		"@types/markdown-it": "^14.1.2",
 		"@types/mdast": "^4.0.4",
 		"@types/sanitize-html": "^2.15.0",
+		"@typescript-eslint/eslint-plugin": "^8.35.1",
+		"@typescript-eslint/parser": "^8.35.1",
+		"eslint": "^9.30.1",
+		"eslint-plugin-astro": "^1.3.1",
+		"eslint-plugin-jsx-a11y": "^6.10.2",
 		"postcss-import": "^16.1.0",
-		"postcss-nesting": "^13.0.1"
+		"postcss-nesting": "^13.0.1",
+		"prettier": "^3.6.2",
+		"prettier-plugin-astro": "^0.14.1"
 	},
 	"packageManager": "pnpm@9.14.4"
 }

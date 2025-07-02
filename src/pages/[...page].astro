@@ -1,10 +1,11 @@
 ---
 import type { GetStaticPaths } from "astro";
-import PostPage from "../components/PostPage.astro";
 import Pagination from "../components/control/Pagination.astro";
+import PostPage from "../components/PostPage.astro";
 import { PAGE_SIZE } from "../constants/constants";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
+import { siteConfig } from "../config";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
@@ -13,11 +14,22 @@ export const getStaticPaths = (async ({ paginate }) => {
 // https://github.com/withastro/astro/issues/6507#issuecomment-1489916992
 
 const { page } = Astro.props;
-
 const len = page.data.length;
 ---
 
-<MainGridLayout>
-    <PostPage page={page}></PostPage>
-    <Pagination class="mx-auto onload-animation" page={page} style=`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`></Pagination>
+<MainGridLayout title={siteConfig.title} description={siteConfig.subtitle}>
+    {len === 0 ? (
+        <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+            <div class="card-base z-10 px-9 py-6 relative w-full">
+                <div class="text-[var(--primary)] text-center py-8">
+                    No posts found.
+                </div>
+            </div>
+        </div>
+    ) : (
+        <>
+            <PostPage page={page} />
+            <Pagination page={page} class="mb-4" />
+        </>
+    )}
 </MainGridLayout>

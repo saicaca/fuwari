@@ -4,6 +4,7 @@ import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import { url } from "@utils/url-utils.ts";
 import { onMount } from "svelte";
+
 // biome-ignore lint/style/useConst: These are bind variables
 let keywordDesktop = "";
 // biome-ignore lint/style/useConst: These are bind variables

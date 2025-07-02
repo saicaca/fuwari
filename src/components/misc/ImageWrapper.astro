@@ -1,5 +1,6 @@
 ---
 import path from "node:path";
+
 interface Props {
 	id?: string;
 	src: string;
@@ -8,6 +9,7 @@ interface Props {
 	position?: string;
 	basePath?: string;
 }
+
 import { Image } from "astro:assets";
 import { url } from "../../utils/url-utils";
 
@@ -27,6 +29,7 @@ const isPublic = src.startsWith("/");
 // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
 let img;
 if (isLocal) {
+	// eslint-disable-next-line no-undef
 	const files = import.meta.glob<ImageMetadata>("../../**", {
 		import: "default",
 	});

@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+.astro/
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Package manager files
+package-lock.json
+yarn.lock
+
+# Generated files
+CNAME
+pagefind/
+
+# Temporarily ignore files with formatting issues
+# Most Astro files and Markdown posts need careful handling
+src/components/**/*.astro
+src/layouts/**/*.astro
+src/pages/**/*.astro
+src/content/posts/**/*.md
+src/content/spec/**/*.md
+
+# Keep specific files that we know work well
+!src/components/LightDarkSwitch.svelte
+!src/components/Search.svelte
+!src/components/widget/DisplaySettings.svelte

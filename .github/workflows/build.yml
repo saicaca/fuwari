@@ -37,6 +37,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Run Code Quality Check
+        run: pnpm run check
+
       - name: Run Astro Check
         run: pnpm astro check
 
@@ -62,6 +65,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Run Code Quality Check
+        run: pnpm run check
 
       - name: Run Astro Build
         run: pnpm astro build
