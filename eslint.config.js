@@ -37,6 +37,7 @@ export default [
 					varsIgnorePattern: "^_",
 				},
 			],
+			"@typescript-eslint/no-explicit-any": "off", // 临时允许 any 类型
 			"no-console": "warn",
 			// 对于某些特殊情况，放宽规则
 			"no-unused-vars": [

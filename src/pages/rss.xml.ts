@@ -14,7 +14,7 @@ export async function GET(context: APIContext) {
 		title: siteConfig.title,
 		description: siteConfig.subtitle || "No description",
 		site: context.site ?? "https://fuwari.vercel.app",
-		items: blog.map((post) => {
+		items: blog.map((post: any) => {
 			const content =
 				typeof post.body === "string" ? post.body : String(post.body || "");
 
