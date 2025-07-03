@@ -2,6 +2,7 @@
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { ViewTransitions } from "astro:transitions";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { profileConfig, siteConfig } from "@/config";
@@ -146,6 +147,8 @@ const bannerOffset =
 		<slot name="head"></slot>
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
+
+		<ViewTransitions />
 
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
@@ -349,85 +352,61 @@ function init() {
 /* Load settings when entering the site */
 init();
 
-const setup = () => {
-	// TODO: temp solution to change the height of the banner
-/*
-	window.swup.hooks.on('animation:out:start', () => {
-		const path = window.location.pathname
-		const body = document.querySelector('body')
-		if (path[path.length - 1] === '/' && !body.classList.contains('is-home')) {
-			body.classList.add('is-home')
-		} else if (path[path.length - 1] !== '/' && body.classList.contains('is-home')) {
-			body.classList.remove('is-home')
-		}
-	})
-*/
-	window.swup.hooks.on('link:click', () => {
-		// Remove the delay for the first time page load
-		document.documentElement.style.setProperty('--content-delay', '0ms')
+// Astro View Transitions event handlers
+document.addEventListener('astro:page-load', () => {
+	// Initialize custom scrollbar after page load
+	initCustomScrollbar();
+	
+	// Hide the temp high element when the transition is done
+	const heightExtend = document.getElementById('page-height-extend')
+	if (heightExtend) {
+		heightExtend.classList.add('hidden')
+	}
+	
+	// Show TOC after page load
+	const toc = document.getElementById('toc-wrapper');
+	if (toc) {
+		toc.classList.remove('toc-not-ready')
+	}
+});
 
-		// prevent elements from overlapping the navbar
-		if (!bannerEnabled) {
-			return
-		}
+document.addEventListener('astro:before-preparation', (e) => {
+	// Remove the delay for the first time page load
+	document.documentElement.style.setProperty('--content-delay', '0ms')
+	
+	// Change banner height immediately when a link is clicked
+	const bodyElement = document.querySelector('body')
+	const newPath = e.to.pathname;
+	
+	if (pathsEqual(newPath, url('/'))) {
+		bodyElement!.classList.add('lg:is-home');
+	} else {
+		bodyElement!.classList.remove('lg:is-home');
+	}
+	
+	// Increase the page height during page transition to prevent the scrolling animation from jumping
+	const heightExtend = document.getElementById('page-height-extend')
+	if (heightExtend) {
+		heightExtend.classList.remove('hidden')
+	}
+	
+	// Hide the TOC while scrolling back to top
+	let toc = document.getElementById('toc-wrapper');
+	if (toc) {
+		toc.classList.add('toc-not-ready')
+	}
+	
+	// Handle navbar visibility
+	if (bannerEnabled) {
 		let threshold = window.innerHeight * (BANNER_HEIGHT / 100) - 72 - 16
 		let navbar = document.getElementById('navbar-wrapper')
-		if (!navbar || !document.body.classList.contains('lg:is-home')) {
-			return
-		}
-		if (document.body.scrollTop >= threshold || document.documentElement.scrollTop >= threshold) {
-			navbar.classList.add('navbar-hidden')
-		}
-	})
-	window.swup.hooks.on('content:replace', initCustomScrollbar)
-	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
-		// change banner height immediately when a link is clicked
-		const bodyElement = document.querySelector('body')
-		if (pathsEqual(visit.to.url, url('/'))) {
-			bodyElement!.classList.add('lg:is-home');
-		} else {
-			bodyElement!.classList.remove('lg:is-home');
-		}
-
-		// increase the page height during page transition to prevent the scrolling animation from jumping
-		const heightExtend = document.getElementById('page-height-extend')
-		if (heightExtend) {
-			heightExtend.classList.remove('hidden')
-		}
-
-		// Hide the TOC while scrolling back to top
-		let toc = document.getElementById('toc-wrapper');
-		if (toc) {
-			toc.classList.add('toc-not-ready')
-		}
-	});
-	window.swup.hooks.on('page:view', () => {
-		// hide the temp high element when the transition is done
-		const heightExtend = document.getElementById('page-height-extend')
-		if (heightExtend) {
-			heightExtend.classList.remove('hidden')
-		}
-	});
-	window.swup.hooks.on('visit:end', (_visit: {to: {url: string}}) => {
-		setTimeout(() => {
-			const heightExtend = document.getElementById('page-height-extend')
-			if (heightExtend) {
-				heightExtend.classList.add('hidden')
+		if (navbar && document.body.classList.contains('lg:is-home')) {
+			if (document.body.scrollTop >= threshold || document.documentElement.scrollTop >= threshold) {
+				navbar.classList.add('navbar-hidden')
 			}
-
-            // Just make the transition looks better
-            const toc = document.getElementById('toc-wrapper');
-            if (toc) {
-                toc.classList.remove('toc-not-ready')
-            }
-        }, 200)
-	});
-}
-if (window?.swup?.hooks) {
-	setup()
-} else {
-	document.addEventListener('swup:enable', setup)
-}
+		}
+	}
+});
 
 let backToTopBtn = document.getElementById('back-to-top-btn');
 let toc = document.getElementById('toc-wrapper');
@@ -517,26 +496,12 @@ function createPhotoSwipe() {
 	lightbox.init()
 }
 
-const setup = () => {
-	if (!lightbox) {
-		createPhotoSwipe()
-	}
-	window.swup.hooks.on("page:view", () => {
-		createPhotoSwipe()
-	})
+// Initialize PhotoSwipe with Astro View Transitions
+document.addEventListener('astro:page-load', () => {
+	createPhotoSwipe()
+});
 
-	window.swup.hooks.on(
-		"content:replace",
-		() => {
-			lightbox?.destroy?.()
-		},
-		{ before: true },
-	)
-}
-
-if (window.swup) {
-	setup()
-} else {
-	document.addEventListener("swup:enable", setup)
-}
+document.addEventListener('astro:before-swap', () => {
+	lightbox?.destroy?.();
+});
 </script>

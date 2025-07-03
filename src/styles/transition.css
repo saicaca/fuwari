@@ -1,9 +1,27 @@
-/* Page transition animations with Swup */
-html.is-changing .transition-swup-fade {
-	@apply transition-all duration-200;
+/* Page transition animations with Astro View Transitions */
+::view-transition-old(main-content),
+::view-transition-new(main-content) {
+	animation-duration: 300ms;
+	animation-timing-function: ease-in-out;
 }
-html.is-animating .transition-swup-fade {
-	@apply opacity-0 translate-y-4;
+
+::view-transition-old(main-content) {
+	animation-name: fade-out-up;
+}
+
+::view-transition-new(main-content) {
+	animation-name: fade-in-up;
+}
+
+@keyframes fade-out-up {
+	from {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateY(-1rem);
+		opacity: 0;
+	}
 }
 
 /* Fade-in animations for components */
@@ -30,7 +48,7 @@ html.is-animating .transition-swup-fade {
 #sidebar {
 	animation-delay: 100ms;
 }
-#swup-container {
+#main-content {
 	outline: none;
 }
 #content-wrapper {

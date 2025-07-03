@@ -1,8 +1,4 @@
-import type { AstroIntegration } from "@swup/astro";
-
+// Global type declarations
 declare global {
-	interface Window {
-		// type from '@swup/astro' is incorrect
-		swup: AstroIntegration;
-	}
+	// Add any global type declarations here if needed
 }
