@@ -1,6 +1,9 @@
 # build output
 dist/
 
+# Mac directories
+.DS_Store
+
 # generated types
 .astro/
 
