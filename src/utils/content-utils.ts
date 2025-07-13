@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils.ts";
@@ -26,19 +26,19 @@ export async function getSortedPosts() {
 	return sorted;
 }
 export type PostForList = {
-    slug: string;
-    data: CollectionEntry<'posts'>['data'];
-}
+	slug: string;
+	data: CollectionEntry<"posts">["data"];
+};
 export async function getSortedPostsList(): Promise<PostForList[]> {
-    const sortedFullPosts = await getSortedPosts();
-    
-    // 剔除 post.body 
-	const sortedPostsList = sortedFullPosts.map(post => ({
+	const sortedFullPosts = await getSortedPosts();
+
+	// 剔除 post.body
+	const sortedPostsList = sortedFullPosts.map((post) => ({
 		slug: post.slug,
 		data: post.data,
 	}));
 
-    return sortedPostsList;
+	return sortedPostsList;
 }
 export type Tag = {
 	name: string;
