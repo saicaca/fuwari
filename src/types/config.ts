@@ -19,6 +19,18 @@ export type SiteConfig = {
 			text: string;
 			url?: string;
 		};
+		typewriter: {
+			enable: boolean;
+			texts: string[];
+			speed?: number;
+			delay?: number;
+			fontSize?: string;
+			fontFamily?: string;
+			fontWeight?: string;
+			color?: string;
+			cursorColor?: string;
+			textAlign?: string;
+		};
 	};
 	toc: {
 		enable: boolean;

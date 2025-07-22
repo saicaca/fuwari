@@ -24,6 +24,23 @@ export const siteConfig: SiteConfig = {
 			text: "", // Credit text to be displayed
 			url: "", // (Optional) URL link to the original artwork or artist's page
 		},
+		typewriter: {
+			enable: false,
+			texts: [
+				"Welcome to Life Compiler.",
+				"My morning starts at 5. Compiled last night.",
+				"Reclaim time through code.",
+				"Refactor your day, recompile your habits.",
+			],
+			speed: 100, // Typing speed in milliseconds
+			delay: 2000, // Delay between texts in milliseconds
+			fontSize: "3rem",
+			fontFamily: "'Fira Code', 'JetBrains Mono', Consolas, monospace", 
+			fontWeight: "700", // (100-900 or normal, bold)
+			color: "#ffffffff",
+			cursorColor: "#f78fb3",
+			textAlign: "center",
+		},
 	},
 	toc: {
 		enable: true, // Display the table of contents on the right side of the post

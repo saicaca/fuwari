@@ -2,6 +2,7 @@
 import BackToTop from "@components/control/BackToTop.astro";
 import Footer from "@components/Footer.astro";
 import Navbar from "@components/Navbar.astro";
+import TypewriterText from "@components/TypewriterText.svelte";
 import SideBar from "@components/widget/SideBar.astro";
 import type { MarkdownHeading } from "astro";
 import { Icon } from "astro-icon/components";
@@ -57,6 +58,24 @@ const mainPanelTop = siteConfig.banner.enable
                   src={siteConfig.banner.src} position={siteConfig.banner.position}
     >
     </ImageWrapper>
+    
+    <!-- Typewriter Text Overlay -->
+    {siteConfig.banner.typewriter.enable && (
+        <div class="absolute inset-0 flex items-center justify-center z-20">
+            <TypewriterText 
+                texts={siteConfig.banner.typewriter.texts}
+                speed={siteConfig.banner.typewriter.speed || 100}
+                delay={siteConfig.banner.typewriter.delay || 2000}
+                fontSize={siteConfig.banner.typewriter.fontSize || "2.5rem"}
+                fontFamily={siteConfig.banner.typewriter.fontFamily || "inherit"}
+                fontWeight={siteConfig.banner.typewriter.fontWeight || "600"}
+                color={siteConfig.banner.typewriter.color || "#ffffff"}
+                cursorColor={siteConfig.banner.typewriter.cursorColor || "#00ff88"}
+                textAlign={siteConfig.banner.typewriter.textAlign || "center"}
+                client:load
+            />
+        </div>
+    )}
 </div>}
 
 <!-- Main content -->
