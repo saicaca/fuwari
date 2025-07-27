@@ -1,6 +1,7 @@
 ---
 import type { MarkdownHeading } from "astro";
 import { siteConfig } from "../../config";
+import { url } from "../../utils/url-utils";
 
 interface Props {
 	class?: string;
@@ -15,8 +16,7 @@ for (const heading of headings) {
 }
 
 const className = Astro.props.class;
-
-const isPostsRoute = Astro.url.pathname.startsWith("/posts/");
+const isPostsRoute = Astro.url.pathname.startsWith(url("/posts/"));
 
 const removeTailingHash = (text: string) => {
 	let lastIndexOfHash = text.lastIndexOf("#");
