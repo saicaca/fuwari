@@ -8,7 +8,7 @@ import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@utils/content-utils";
 import { getDir, getPostUrlBySlug } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
-import { licenseConfig } from "src/config";
+import { commentConfig, licenseConfig } from "src/config";
 import ImageWrapper from "../../components/misc/ImageWrapper.astro";
 import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
@@ -110,6 +110,78 @@ const jsonLd = {
 
         </div>
     </div>
+                
+    {commentConfig.enable && (
+        <div class="card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full mb-4">
+            <div id="tcomment" class="twikoo-comment"></div>
+            <script is:inline define:vars={{ commentConfig }}>
+                function initTwikoo() {
+                    twikoo.init({
+                        envId: commentConfig.twikoo.envId,
+                        el: '#tcomment',
+                        region: commentConfig.twikoo.region,
+                        path: location.pathname,
+                        lang: commentConfig.twikoo.lang,
+                        onCommentLoaded: function() {
+                            console.log('Twikoo comments loaded successfully');
+                        }
+                    });
+    
+                    // 防止 twikoo 内部 a 标签 href="#" 导致页面跳到顶部
+                    // todo: 不知道为啥会导致页面跳到顶部，暂时先用这种方式解决
+                    const commentContainer = document.getElementById('twikoo');
+                    if (commentContainer) {
+                        commentContainer.addEventListener('click', function (e) {
+                            // 检查是否包含以 tk-action- 开头的 class
+                            const hasActionClass = Array.from(e.target.classList).some(cls => cls.startsWith('tk-action-'));
+                
+                            if (e.target.tagName === 'path' ||
+                                e.target.tagName === 'svg' ||
+                                (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') ||
+                                hasActionClass
+                            ) {
+                                console.log('Twikoo action clicked, preventing default behavior');
+                                e.preventDefault();
+                                e.stopPropagation();
+                            }
+                        });
+                    }
+                }
+                // https://twikoo.js.org/frontend.html CDN指南
+                var script = document.createElement('script');
+                script.src = 'https://registry.npmmirror.com/twikoo/1.6.44/files/dist/twikoo.min.js'
+                script.onload = function() {
+                initTwikoo();
+            };
+            document.head.appendChild(script);
+            </script>
+            <style>
+                .twikoo-comment { min-height: 200px; }
+                .error {
+                    display: flex; align-items: center; justify-content: center;
+                    padding: 2rem; color: #ef4444; background: #fef2f2;
+                    border: 1px solid #fecaca; border-radius: var(--radius-large);
+                }
+                :global(.twikoo-comment .twikoo) { font-family: inherit; }
+                :global(.twikoo-comment .twikoo .twikoo-panel) { background: transparent; border: none; }
+                :global(.twikoo-comment .twikoo .twikoo-comment) {
+                    background: var(--card-bg); border: 1px solid var(--line-divider);
+                    border-radius: var(--radius); margin-bottom: 1rem; padding: 1rem;
+                }
+                :global(.twikoo-comment .twikoo .twikoo-comment .twikoo-comment-body) { color: var(--text-primary); }
+                :global(.twikoo-comment .twikoo .twikoo-comment .twikoo-comment-meta) { color: var(--text-secondary); }
+                :global(.twikoo-comment .twikoo .twikoo-input) {
+                    background: var(--card-bg); border: 1px solid var(--line-divider);
+                    border-radius: var(--radius); color: var(--text-primary);
+                }
+                :global(.twikoo-comment .twikoo .twikoo-btn) {
+                    background: var(--primary); border: none; border-radius: var(--radius);
+                    color: white; padding: 0.5rem 1rem; cursor: pointer; transition: opacity 0.2s;
+                }
+                :global(.twikoo-comment .twikoo .twikoo-btn:hover) { opacity: 0.8; }
+            </style>
+        </div>
+    )}
 
     <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
         <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
