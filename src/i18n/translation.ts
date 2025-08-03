@@ -5,6 +5,7 @@ import { es } from "./languages/es";
 import { ja } from "./languages/ja";
 import { ko } from "./languages/ko";
 import { th } from "./languages/th";
+import { tr } from "./languages/tr";
 import { vi } from "./languages/vi";
 import { zh_CN } from "./languages/zh_CN";
 import { zh_TW } from "./languages/zh_TW";
@@ -31,6 +32,8 @@ const map: { [key: string]: Translation } = {
 	th_th: th,
 	vi: vi,
 	vi_vn: vi,
+	tr: tr,
+	tr_tr: tr,
 };
 
 export function getTranslation(lang: string): Translation {

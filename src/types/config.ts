@@ -4,7 +4,7 @@ export type SiteConfig = {
 	title: string;
 	subtitle: string;
 
-	lang: string;
+	lang: "en" | "zh_CN" | "zh_TW" | "ja" | "ko" | "es" | "th" | "vi" | "tr";
 
 	themeColor: {
 		hue: number;
