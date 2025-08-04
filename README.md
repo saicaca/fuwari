@@ -16,7 +16,8 @@ A static blog template built with [Astro](https://astro.build).
 [**한국어**](https://github.com/saicaca/fuwari/blob/main/docs/README.ko.md) /
 [**Español**](https://github.com/saicaca/fuwari/blob/main/docs/README.es.md) /
 [**ไทย**](https://github.com/saicaca/fuwari/blob/main/docs/README.th.md) /
-[**Tiếng Việt**](https://github.com/saicaca/fuwari/blob/main/docs/README.vi.md) (Provided by the community and may not always be up-to-date)
+[**Tiếng Việt**](https://github.com/saicaca/fuwari/blob/main/docs/README.vi.md) /
+[**Bahasa Indonesia**](https://github.com/saicaca/fuwari/blob/main/docs/README.id.md) (Provided by the community and may not always be up-to-date)
 
 ## ✨ Features
 
