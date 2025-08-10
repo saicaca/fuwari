@@ -139,3 +139,24 @@
 .collapsed {
     height: var(--collapsedHeight);
 }
+
+/* Category tree icon styles */
+.category-toggle {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-toggle.rotate-90 {
+    transform: rotate(90deg);
+}
+
+.category-node .category-children {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-toggle:hover {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+:root.dark .category-toggle:hover {
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.1));
+}

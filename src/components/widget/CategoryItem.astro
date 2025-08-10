@@ -1,0 +1,72 @@
+---
+import type { CategoryNode } from "../../utils/content-utils";
+import CategoryBranch from "./CategoryBranch.astro";
+
+interface Props {
+	category: CategoryNode;
+}
+const { category } = Astro.props;
+---
+<div class="category-item">
+    <CategoryBranch node={category} />
+</div>
+
+<script>
+        // 全局事件委托（兼容 swup/局部刷新），只初始化一次
+        (function initCategoryTree(){
+            if ((window as any).__catTreeInited) return; // 避免重复绑定
+            (window as any).__catTreeInited = true;
+            const LOG_PREFIX = '[CategoryTree]';
+            function log(...args:any[]){ if (typeof console !== 'undefined') console.debug(LOG_PREFIX, ...args); }
+
+            function toggleNode(toggleEl: HTMLElement) {
+                const node = toggleEl.closest('.category-node');
+                if (!node) return;
+                const children = node.querySelector(':scope > .category-children') as HTMLElement | null;
+                if (!children) return;
+                
+                const isExpanded = children.classList.contains('grid-rows-[1fr]');
+                log('toggle', { name: toggleEl.getAttribute('aria-label'), expanded: !isExpanded });
+                
+                if (isExpanded) {
+                    // 收起
+                    children.classList.remove('grid-rows-[1fr]');
+                    children.classList.add('grid-rows-[0fr]');
+                    toggleEl.classList.remove('rotate-90');
+                    toggleEl.setAttribute('aria-expanded', 'false');
+                } else {
+                    // 展开
+                    children.classList.remove('grid-rows-[0fr]');
+                    children.classList.add('grid-rows-[1fr]');
+                    toggleEl.classList.add('rotate-90');
+                    toggleEl.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            // 点击委托
+            document.addEventListener('click', (e) => {
+                const target = (e.target as HTMLElement).closest('.category-toggle-container') as HTMLElement | null;
+                if (target) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const icon = target.querySelector('.category-toggle') as HTMLElement | null;
+                    if (icon) {
+                        toggleNode(icon);
+                    }
+                }
+            });
+            
+            // 键盘
+            document.addEventListener('keydown', (e) => {
+                if ((e.key === 'Enter' || e.key === ' ') && (e.target as HTMLElement).classList?.contains('category-toggle-container')) {
+                    e.preventDefault();
+                    const icon = (e.target as HTMLElement).querySelector('.category-toggle') as HTMLElement | null;
+                    if (icon) {
+                        toggleNode(icon);
+                    }
+                }
+            });
+
+            log('initialized');
+        })();
+</script>

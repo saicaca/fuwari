@@ -53,9 +53,16 @@ onMount(async () => {
 	}
 
 	if (categories.length > 0) {
-		filteredPosts = filteredPosts.filter(
-			(post) => post.data.category && categories.includes(post.data.category),
-		);
+		filteredPosts = filteredPosts.filter((post) => {
+			if (!post.data.category) return false;
+			const postCategory = post.data.category;
+			// 检查文章的分类是否以任何筛选分类开头（包含子分类）
+			return categories.some(
+				(filterCategory) =>
+					postCategory === filterCategory ||
+					postCategory.startsWith(filterCategory + "/"),
+			);
+		});
 	}
 
 	if (uncategorized) {
