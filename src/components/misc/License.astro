@@ -9,10 +9,11 @@ interface Props {
 	title: string;
 	slug: string;
 	pubDate: Date;
+    lastUpdated?: Date;
 	class: string;
 }
 
-const { title, pubDate } = Astro.props;
+const { title, pubDate, lastUpdated } = Astro.props;
 const className = Astro.props.class;
 const profileConf = profileConfig;
 const licenseConf = licenseConfig;
@@ -34,6 +35,12 @@ const postUrl = decodeURIComponent(Astro.url.toString());
             <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.publishedAt)}</div>
             <div class="transition text-black/75 dark:text-white/75 line-clamp-2">{formatDateToYYYYMMDD(pubDate)}</div>
         </div>
+        {lastUpdated instanceof Date && (
+        <div>
+            <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.lastUpdatedAt)}</div>
+            <div class="transition text-black/75 dark:text-white/75 line-clamp-2">{formatDateToYYYYMMDD(lastUpdated)}</div>
+        </div>
+        )}
         <div>
             <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.license)}</div>
             <a href={licenseConf.url} target="_blank" class="link text-[var(--primary)] line-clamp-2">{licenseConf.name}</a>
