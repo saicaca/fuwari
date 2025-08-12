@@ -13,14 +13,14 @@ export function pluginLanguageBadge() {
         z-index: 2;
         right: 0.5rem;
         top: 0.5rem;
-        padding: 0.1rem 0.5rem;
+        padding: 0.2rem 0.5rem 0.1rem;
         content: attr(data-language);
         font-family: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         font-size: 0.75rem;
         font-weight: bold;
         text-transform: uppercase;
-        color: oklch(0.75 0.1 var(--hue));
-        background: oklch(0.33 0.035 var(--hue));
+        color: var(--codeblock-badge-color);
+        background: var(--codeblock-badge-bg);
         border-radius: 0.5rem;
         pointer-events: none;
         transition: opacity 0.3s;
