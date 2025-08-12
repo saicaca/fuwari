@@ -13,7 +13,7 @@ export function pluginLanguageBadge() {
         z-index: 2;
         right: 0.5rem;
         top: 0.5rem;
-        padding: 0.2rem 0.5rem 0.1rem;
+        padding: 0.3rem 0.5rem 0.1rem;
         content: attr(data-language);
         font-family: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         font-size: 0.75rem;
