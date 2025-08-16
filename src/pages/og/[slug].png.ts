@@ -32,9 +32,8 @@ export async function GET({
 	const avatarBase64 = `data:image/png;base64,${avatarBuffer.toString("base64")}`;
 
 	let iconPath = "./public/favicon/favicon-dark-192.png";
-	const darkFavicon = siteConfig.favicon.find((f) => f.theme === "dark");
-	if (darkFavicon) {
-		iconPath = `./public${darkFavicon.src}`;
+	if (siteConfig.favicon.length > 0) {
+		iconPath = `./public${siteConfig.favicon[0].src}`;
 	}
 	const iconBuffer = fs.readFileSync(iconPath);
 	const iconBase64 = `data:image/png;base64,${iconBuffer.toString("base64")}`;
