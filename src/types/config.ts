@@ -34,7 +34,7 @@ export type SiteConfig = {
 		enable: boolean;
 		depth: 1 | 2 | 3;
 	};
-
+	generateOgImages: boolean;
 	favicon: Favicon[];
 };
 
