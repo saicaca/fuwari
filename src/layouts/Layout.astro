@@ -26,9 +26,10 @@ interface Props {
 	description?: string;
 	lang?: string;
 	setOGTypeArticle?: boolean;
+	postSlug?: string;
 }
 
-let { title, banner, description, lang, setOGTypeArticle } = Astro.props;
+let { title, banner, description, lang, setOGTypeArticle, postSlug } = Astro.props;
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
@@ -52,6 +53,13 @@ if (title) {
 	pageTitle = `${title} - ${siteConfig.title}`;
 } else {
 	pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`;
+}
+
+let ogImageUrl;
+if (siteConfig.generateOgImages && postSlug) {
+	ogImageUrl = new URL(`/og/${postSlug}.png`, Astro.site).toString();
+} else if (siteConfig.banner.enable && siteConfig.banner.src) {
+	ogImageUrl = new URL(url(siteConfig.banner.src), Astro.site).toString();
 }
 
 const favicons: Favicon[] =
@@ -88,6 +96,7 @@ const bannerOffset =
 		<meta property="og:url" content={Astro.url}>
 		<meta property="og:title" content={pageTitle}>
 		<meta property="og:description" content={description || pageTitle}>
+		{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
 		{setOGTypeArticle ? (
         <meta property="og:type" content="article" />
         ) : (
@@ -565,3 +574,4 @@ if (window.swup) {
 	document.addEventListener("swup:enable", setup)
 }
 </script>
+
