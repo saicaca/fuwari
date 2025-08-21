@@ -1,5 +1,11 @@
 @reference "tailwindcss";
 
-.expressive-code .frame {
-  @apply !shadow-none;
+.expressive-code {
+    .frame {
+        @apply !shadow-none;
+    }
+
+    .title {
+        font-family: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
 }
