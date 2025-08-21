@@ -139,3 +139,14 @@
 .collapsed {
     height: var(--collapsedHeight);
 }
+
+.custom-md spoiler {
+  @apply bg-[var(--codeblock-bg)] hover:bg-transparent px-1 py-0.5 overflow-hidden rounded-md transition-all duration-150;
+
+  &:not(:hover) {
+    color: var(--codeblock-bg);
+    * {
+        color: var(--codeblock-bg);
+    }
+  }
+}
