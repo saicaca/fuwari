@@ -1,10 +1,11 @@
-import type { APIContext, GetStaticPaths } from "astro";
-import { getCollection, type CollectionEntry } from "astro:content";
 import fs from "node:fs";
 import satori from "satori";
 import sharp from "sharp";
-
+import { getCollection } from "astro:content";
 import { profileConfig, siteConfig } from "../../config";
+
+import type { APIContext, GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
 
 export const prerender = true;
 
@@ -22,13 +23,65 @@ export const getStaticPaths: GetStaticPaths = async () => {
 	}));
 };
 
+async function fetchNotoSansSCFonts() {
+	try {
+		const cssResp = await fetch(
+			"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap",
+		);
+		if (!cssResp.ok) throw new Error("Failed to fetch Google Fonts CSS");
+		const cssText = await cssResp.text();
+
+		const getUrlForWeight = (weight: number) => {
+			const blockRe = new RegExp(
+				`@font-face\\s*{[^}]*font-weight:\\s*${weight}[^}]*}`,
+				"g",
+			);
+			const match = cssText.match(blockRe);
+			if (!match || match.length === 0) return null;
+			const urlMatch = match[0].match(/url\((https:[^\)]+)\)/);
+			return urlMatch ? urlMatch[1] : null;
+		};
+
+		const regularUrl = getUrlForWeight(400);
+		const boldUrl = getUrlForWeight(700);
+
+		if (!regularUrl || !boldUrl) {
+			console.warn(
+				"Could not find font urls in Google Fonts CSS; falling back to no fonts.",
+			);
+			return { regular: null, bold: null };
+		}
+
+		const [rResp, bResp] = await Promise.all([
+			fetch(regularUrl),
+			fetch(boldUrl),
+		]);
+		if (!rResp.ok || !bResp.ok) {
+			console.warn(
+				"Failed to download font files from Google; falling back to no fonts.",
+			);
+			return { regular: null, bold: null };
+		}
+
+		const rBuf = Buffer.from(await rResp.arrayBuffer());
+		const bBuf = Buffer.from(await bResp.arrayBuffer());
+
+		return { regular: rBuf, bold: bBuf };
+	} catch (err) {
+		console.warn("Error fetching fonts:", err);
+		return { regular: null, bold: null };
+	}
+}
+
 export async function GET({
 	props,
 }: APIContext<{ post: CollectionEntry<"posts"> }>) {
 	const { post } = props;
 
-	const fontRegular = fs.readFileSync("./public/fonts/NotoSansSC-Regular.ttf");
-	const fontBold = fs.readFileSync("./public/fonts/NotoSansSC-Bold.ttf");
+	// Try to fetch fonts from Google Fonts (woff2) at runtime.
+	const { regular: fontRegular, bold: fontBold } = await fetchNotoSansSCFonts();
+
+	// Avatar + icon: still read from disk (small assets)
 	const avatarBuffer = fs.readFileSync(`./src/${profileConfig.avatar}`);
 	const avatarBase64 = `data:image/png;base64,${avatarBuffer.toString("base64")}`;
 
@@ -63,7 +116,8 @@ export async function GET({
 				display: "flex",
 				flexDirection: "column",
 				backgroundColor: backgroundColor,
-				fontFamily: '"Noto Sans SC"',
+				fontFamily:
+					'"Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
 				padding: "60px",
 			},
 			children: [
@@ -231,13 +285,28 @@ export async function GET({
 		},
 	};
 
+	const fonts: any[] = [];
+	if (fontRegular) {
+		fonts.push({
+			name: "Noto Sans SC",
+			data: fontRegular,
+			weight: 400,
+			style: "normal",
+		});
+	}
+	if (fontBold) {
+		fonts.push({
+			name: "Noto Sans SC",
+			data: fontBold,
+			weight: 700,
+			style: "normal",
+		});
+	}
+
 	const svg = await satori(template, {
 		width: 1200,
 		height: 630,
-		fonts: [
-			{ name: "Noto Sans SC", data: fontRegular, weight: 400, style: "normal" },
-			{ name: "Noto Sans SC", data: fontBold, weight: 700, style: "normal" },
-		],
+		fonts,
 	});
 
 	const png = await sharp(Buffer.from(svg)).png().toBuffer();
