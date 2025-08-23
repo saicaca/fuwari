@@ -1,12 +1,21 @@
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import fs from "node:fs";
+import type { APIContext, GetStaticPaths } from "astro";
 import satori from "satori";
 import sharp from "sharp";
-import { getCollection } from "astro:content";
+
 import { profileConfig, siteConfig } from "../../config";
 
-import type { APIContext, GetStaticPaths } from "astro";
-import type { CollectionEntry } from "astro:content";
-
+type Weight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+type FontStyle = "normal" | "italic";
+interface FontOptions {
+	data: Buffer | ArrayBuffer;
+	name: string;
+	weight?: Weight;
+	style?: FontStyle;
+	lang?: string;
+}
 export const prerender = true;
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -38,7 +47,7 @@ async function fetchNotoSansSCFonts() {
 			);
 			const match = cssText.match(blockRe);
 			if (!match || match.length === 0) return null;
-			const urlMatch = match[0].match(/url\((https:[^\)]+)\)/);
+			const urlMatch = match[0].match(/url\((https:[^)]+)\)/);
 			return urlMatch ? urlMatch[1] : null;
 		};
 
@@ -285,7 +294,7 @@ export async function GET({
 		},
 	};
 
-	const fonts: any[] = [];
+	const fonts: FontOptions[] = [];
 	if (fontRegular) {
 		fonts.push({
 			name: "Noto Sans SC",
