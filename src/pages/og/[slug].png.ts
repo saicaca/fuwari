@@ -1,9 +1,10 @@
 import type { APIContext, GetStaticPaths } from "astro";
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import fs from "node:fs";
 import satori from "satori";
 import sharp from "sharp";
-import { siteConfig, profileConfig } from "../../config";
+
+import { profileConfig, siteConfig } from "../../config";
 
 export const prerender = true;
 
