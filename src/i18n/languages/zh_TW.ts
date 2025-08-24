@@ -34,5 +34,6 @@ export const zh_TW: Translation = {
 
 	[Key.author]: "作者",
 	[Key.publishedAt]: "發佈於",
+	[Key.lastUpdatedAt]: "最後更新於",
 	[Key.license]: "許可協議",
 };
