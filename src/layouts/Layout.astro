@@ -136,12 +136,87 @@ const bannerOffset =
 			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
 			offset = offset - offset % 4;
 			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
-		</script>
+       
+       // 背景图片加载检测
+      const bgUrl = getComputedStyle(document.documentElement).getPropertyValue('--bg-url').trim();
+      const bgEnable = getComputedStyle(document.documentElement).getPropertyValue('--bg-enable').trim();
+
+      if (bgUrl && bgUrl !== 'none' && bgEnable === '1') {
+        const img = new Image();
+        const urlMatch = bgUrl.match(/url\(["']?([^"')]+)["']?\)/);
+        if (urlMatch) {
+          img.onload = function() {
+// 背景图片完全加载后，显示背景并启用卡片透明效果
+            document.body.classList.add('bg-loaded');
+            document.documentElement.style.setProperty('--card-bg', 'var(--card-bg-transparent)');
+            document.documentElement.style.setProperty('--float-panel-bg', 'var(--float-panel-bg-transparent)');
+          };
+          img.onerror = function() {
+// Keep cards opaque if background image fails to load
+            console.warn('Background image failed to load, keeping cards opaque');
+          };
+          img.src = urlMatch[1];
+        }
+      }
+
+ </script>
 		<style define:vars={{
 			configHue,
 			'page-width': `${PAGE_WIDTH}rem`,
-		}}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
+             //新增透明背景颜色变量
+			'bg-url': siteConfig.background.src ? `url(${siteConfig.background.src})` : 'none',
+			'bg-enable': siteConfig.background.enable ? '1' : '0',
+			'bg-position': siteConfig.background.position || 'center',
+			'bg-size': siteConfig.background.size || 'cover',
+			'bg-repeat': siteConfig.background.repeat || 'no-repeat',
+			'bg-attachment': siteConfig.background.attachment || 'fixed',
+			'bg-opacity': (siteConfig.background.opacity || 0.3).toString()
+		}}>
+			:root {
+				--bg-url: var(--bg-url);
+				--bg-enable: var(--bg-enable);
+				--bg-position: var(--bg-position);
+				--bg-size: var(--bg-size);
+				--bg-repeat: var(--bg-repeat);
+				--bg-attachment: var(--bg-attachment);
+				--bg-opacity: var(--bg-opacity);
+			}
+			
+			/* Background image configuration */
+			body {
+				--bg-url: var(--bg-url);
+				--bg-enable: var(--bg-enable);
+				--bg-position: var(--bg-position);
+				--bg-size: var(--bg-size);
+				--bg-repeat: var(--bg-repeat);
+				--bg-attachment: var(--bg-attachment);
+				--bg-opacity: var(--bg-opacity);
+			}
+			
+			body::before {
+				content: '' !important;
+				position: fixed !important;
+				top: 0 !important;
+				left: 0 !important;
+				width: 100% !important;
+				height: 100% !important;
+				background-image: var(--bg-url) !important;
+				background-position: var(--bg-position) !important;
+				background-size: var(--bg-size) !important;
+				background-repeat: var(--bg-repeat) !important;
+				background-attachment: var(--bg-attachment) !important;
+				opacity: 0 !important;
+				pointer-events: none !important;
+				z-index: -1 !important;
+				display: block !important;
+				transition: opacity 0.3s ease-in-out !important;
+			}
+			
+			body.bg-loaded::before {
+				opacity: calc(var(--bg-opacity) * var(--bg-enable)) !important;
+			}
 
+			}}></style>  <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
 		<slot name="head"></slot>
 
@@ -151,7 +226,7 @@ const bannerOffset =
     <script defer src="https://cloud.umami.is/script.js" data-website-id="02de1ecf-391d-4161-b1e1-b3ae0579603e"></script>
 
 	</head>
-	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
+	<body class=" min-h-screen transition " class:list={[{"lg。:is-home": isHomePage, "enable-banner": enableBanner}]}
 		  data-overlayscrollbars-initialize
 	>
 		<ConfigCarrier></ConfigCarrier>
