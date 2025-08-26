@@ -111,6 +111,24 @@ const jsonLd = {
         </div>
     </div>
 
+<!-- Giscus 评论区 -->
+<script src="https://giscus.app/client.js"
+        data-repo="ShiMahiru/fuwari-Giscus"
+        data-repo-id="R_kgDOPiR5sQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOPiR5sc4Cud8d"
+        data-mapping="pathname"
+        data-strict="1"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="dark_protanopia"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
     <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
         <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
            class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.nextSlug}]}>
