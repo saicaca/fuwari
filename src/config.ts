@@ -43,7 +43,7 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
-		LinkPreset。About,
+		LinkPreset.About,
       {
 			name: "统计",
 			url: "https://cloud.umami.is/share/UkL9T8i5y8H8kRyq/www.yuln.fun", // Internal links should not include the base path, as it is automatically added
