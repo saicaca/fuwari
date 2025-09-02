@@ -2,7 +2,7 @@
 title: 在Fuwari中添加评论功能(带黑暗模式)
 published: 2025-02-28
 description: '使用Giscus实现评论功能'
-image: 'https://pan.ikamusume7.org:16666/p/IkasNotepad/%E9%89%84%E8%A1%80%E5%85%AC%E5%9B%BD%E3%81%AE%E6%8A%80%E8%A1%93%E3%81%8C%E4%B8%96%E7%95%8C%E4%B8%80%E3%82%A3%EF%BC%81.webp?sign=mVpC0D6g9JSIdjvNVvfgWHecCWYlOEaiq6suuAy4-Ag=:0'
+image: 'https://pan.ikamusume7.org:16666/p/IkasNotepad/%E9%89%84%E8%A1%80%E5%85%AC%E5%9B%BD%E3%81%AE%E6%8A%80%E8%A1%93%E3%81%8C%E4%B8%96%E7%95%8C%E4%B8%80%E3%82%A3%EF%BC%81.webp?sign=7SRB99n0LUidq3E4vda_--Iv5l6hOhyVdALkkL-L5lU=:0'
 tags: [Astro, Fuwari, Giscus, 博客]
 category: '前端'
 draft: false 

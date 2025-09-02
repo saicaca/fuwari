@@ -2,7 +2,7 @@
 title: Galgame小记
 published: 2025-03-19
 description: '记录一下早期玩过的一些Galgame'
-image: 'https://pan.ikamusume7.org:16666/p/IkasNotepad/%E8%97%A4%E5%A0%82%E3%81%93%E3%82%88%E3%82%8A.webp?sign=4jDk8VyweIPCIGj9b9QVtqsK_QtFGcSn3uq69x9s7cs=:0'
+image: 'https://pan.ikamusume7.org:16666/p/IkasNotepad/%E8%97%A4%E5%A0%82%E3%81%93%E3%82%88%E3%82%8A.webp?sign=Rk29qDExV_6K7WRvsN-jZy3QkMJIyQKxa5j5Kmqlwts=:0'
 tags: [Galgame]
 category: '日常'
 draft: true 
@@ -17,7 +17,7 @@ font: 'Kai'
 
 ### 架向星空之桥
 
-![架向星空之桥 logo](https://pan.ikamusume7.org:16666/p/IkasNotepad/h1_hoshikaka-logos.webp?sign=nwRkKj84_3wydwbUKNGUN-Wc8OQR0DeX6gqAMl-90oA=:0 "架向星空之桥")
+![架向星空之桥 logo](https://pan.ikamusume7.org:16666/p/IkasNotepad/h1_hoshikaka-logos.webp?sign=YaI985R83o_rwx5a-k21iTKSqSmQ_pGWi0dH2qBmAcc=:0 "架向星空之桥")
 
 最初应该是在我哥家玩电脑的时候吧，也不知怎的就从网上下了一个叫《架向星空之桥》[^1]的游戏。
 
@@ -25,8 +25,8 @@ font: 'Kai'
 
 但要说走的哪条路线就有点记不得了，只记得走的不是中津川初（第一女主）的路线。~~我玩的大部分Gal好像都没有选第一女主的路线。~~
 
-![日向伊吹](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E6%97%A5%E5%90%91%E4%BC%8A%E5%90%B9.jpg?sign=4tPvLM-gTtgK4S6TyAZQfv9BZFGPGvN1zSuhf5sLfCE=:0 "可能是这两位中的其中一位吧")
-![藤堂こより](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E8%97%A4%E5%A0%82%E3%81%93%E3%82%88%E3%82%8A.jpg?sign=Y50VQ6mv01QOy3sNf5pwk8pkLorwES0R6tzMkbFOwC8=:0)
+![日向伊吹](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E6%97%A5%E5%90%91%E4%BC%8A%E5%90%B9.jpg?sign=iWUtXUv-_G4tz3wfcidquQh8SCPNamwXfnkpkwUDqrA=:0 "可能是这两位中的其中一位吧")
+![藤堂こより](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E8%97%A4%E5%A0%82%E3%81%93%E3%82%88%E3%82%8A.jpg?sign=S49v8eJ9TbRy1u5OngcqZaU1uY_pZAp9BmwELO7PdLE=:0)
 
 后来才知道它的制作公司是feng社，不过已经倒闭了（悲。
 
@@ -39,34 +39,34 @@ font: 'Kai'
 
 ### 夕阳染红的街道
 
-![夕阳染红的街道 logo w-50%](https://pan.ikamusume7.org:16666/p/IkasNotepad/akaneiro-logo.webp?sign=xN-qIAA0mkEYOQKr1Y-JldsGtKvAcG0Gm632CeIltWk=:0 "夕阳染红的街道")
+![夕阳染红的街道 logo w-50%](https://pan.ikamusume7.org:16666/p/IkasNotepad/akaneiro-logo.webp?sign=ZQoCZa7nqwsI9aKqOuWm075cGtjr05_hbwEAq2XVe70=:0 "夕阳染红的街道")
 
 《夕阳染红的街道》[^2]也是有玩的，走的是傲娇大小姐片桐優姫路线。动画版的声优记得是钉宫理惠（钉宫厨狂喜，不过其他就没什么印象了。
 
-![片桐優姫](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E7%89%87%E6%A1%90%E5%84%AA%E5%A7%AB.jpg?sign=nsarm5GMpfUSMokWjnuGLaEof7Nhs0aKshgpOJoJPP0=:0 "片桐優姫")
+![片桐優姫](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E7%89%87%E6%A1%90%E5%84%AA%E5%A7%AB.jpg?sign=XKmTrf5I-MOHemYKhKdgaUguUJB-iktqfQ3FuIb7jU8=:0 "片桐優姫")
 
 ## 二、承接
 
 ### 遥仰凰华
 
-![遥仰凰华 logo w-50%](https://pan.ikamusume7.org:16666/p/IkasNotepad/kanishino-logo.webp?sign=mDryWXJ0HnUFfkCfqv4BLEqMco5Q8XBXJRi_MKqotdE=:0 "遥仰凰华")
+![遥仰凰华 logo w-50%](https://pan.ikamusume7.org:16666/p/IkasNotepad/kanishino-logo.webp?sign=YrNfGaz5dG6JPzo9O-lZHMdjvmo1kDA5xj35vilrV6c=:0 "遥仰凰华")
 
 《遥仰凰华》[^3]里本校分校的路线选择让我纠结了一会儿，不过最后为了攻略风祭雅选择了本校路线。
 
-![風祭みやび 立绘](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E9%A2%A8%E7%A5%AD%E3%81%BF%E3%82%84%E3%81%B31.jpg?sign=Dz8HnbwzaYCjyy19Q0TNj6lo_2mo0V9pOaD_ujEY9_M=:0 "立绘")
-![風祭みやび 中指](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E9%A2%A8%E7%A5%AD%E3%81%BF%E3%82%84%E3%81%B32.webp?sign=kN7sVdJk5d8MeRuTIWIatBK2Yz85AViHP6P5jbJp46w=:0 "好孩子千万不要模仿哦")
+![風祭みやび 立绘](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E9%A2%A8%E7%A5%AD%E3%81%BF%E3%82%84%E3%81%B31.jpg?sign=Yg5pUbWsXYnP8QFrmjrwszZ_GPXRx2MLUZj66VAyay4=:0 "立绘")
+![風祭みやび 中指](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E9%A2%A8%E7%A5%AD%E3%81%BF%E3%82%84%E3%81%B32.webp?sign=V6333RG7WSlBjkrVQouKwcQo1mC0yD3Jrt5SVG0PGq8=:0 "好孩子千万不要模仿哦")
 
-![暁の護衛 logo](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E6%9A%81%E3%81%AE%E8%AD%B7%E8%A1%9B%20logo.jpg?sign=9tLa3xSsF786cbVqT_45cc1YCPrFZiIqFLYP_PdTP-o=:0 "晓之护卫")
+![暁の護衛 logo](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E6%9A%81%E3%81%AE%E8%AD%B7%E8%A1%9B%20logo.jpg?sign=vLjdAfydKp3HIl4ezqe9aSlktqM7sp5OFI2soQZps-Q=:0 "晓之护卫")
 
 ### 晓之护卫
 
 《晓之护卫》[^4]里虽然两位大小姐也很有魅力，不过我最后还是选了月（ツキ）线。
 
-![ツキ](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E3%83%84%E3%82%AD.webp?sign=mGIaj35oAOvhKnnxnl0zQ0WF0xxqWAWdcaYS_Mnuqw0=:0 "月")
+![ツキ](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E3%83%84%E3%82%AD.webp?sign=oEWoQKcyP1fY7QtBeeC1GfHMPWrT0a1HF8VCNtxFHww=:0 "月")
 
 从官方投票结果看，大家都很喜欢毒舌女仆啊
 
-![ツキ No.1](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E3%83%84%E3%82%AD%20No.1.webp?sign=KiKqCEisT5xR9_5Fez5_6PZxrNdfCWwx3FRl1GrFuJ8=:0 "官方投票第1名")
+![ツキ No.1](https://pan.ikamusume7.org:16666/p/IkasNotepad/%E3%83%84%E3%82%AD%20No.1.webp?sign=KlRZwGZd6PBMuuSh5hc70uEpoPXnFAtz2bcchU5T4Jw=:0 "官方投票第1名")
 
 ## 三、转大人
 
