@@ -10,6 +10,12 @@ async function getRawSortedPosts() {
 	});
 
 	const sorted = allBlogPosts.sort((a, b) => {
+
+    // 如果一个是置顶一个不是置顶，置顶的排在前面
+    if (a.data.pinned !== b.data.pinned) {
+      return a.data.pinned ? -1 : 1;
+    }
+    // 都是置顶或都不是置顶，按发布日期时间排序（包含小时分钟秒）
 		const dateA = new Date(a.data.published);
 		const dateB = new Date(b.data.published);
 		return dateA > dateB ? -1 : 1;
