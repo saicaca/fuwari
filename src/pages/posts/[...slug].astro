@@ -79,6 +79,13 @@ const jsonLd = {
                     md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
                     before:absolute before:top-[0.75rem] before:left-[-1.125rem]
                 ">
+
+            {entry.data.pinned && (
+            <span class="inline-flex items-center mr-3 px-2.5 py-1 text-sm font-medium bg-[oklch(95%_0.2_var(--hue))] dark:bg-[oklch(25%_0.2_var(--hue))] text-[oklch(55%_0.2_var(--hue))] dark:text-[oklch(85%_0.2_var(--hue))] rounded">
+                <Icon name="material-symbols:push-pin" class="mr-1.5 text-base" /> 置顶
+            </span>
+        )}
+
                     {entry.data.title}
                 </div>
             </div>
@@ -106,7 +113,45 @@ const jsonLd = {
                 <Content />
             </Markdown>
 
+        <!-- 文章帮助反馈区域 -->
+        <div class="mb-4 p-3 rounded-lg bg-[var(--license-block-bg)] border border-[var(--line-divider)] onload-animation">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="h-4 w-4 rounded bg-[var(--primary)] flex items-center justify-center">
+                        <Icon name="material-symbols:help-outline" class="text-[0.75rem] text-white dark:text-black/70"></Icon>
+                    </div>
+                    <p class="text-black/80 dark:text-white/80 text-sm">这篇文章是否对你有帮助？</p>
+                </div>
+                <div class="flex gap-2">
+                    <a href="路径" class="group flex items-center gap-1 px-3 py-1.5 rounded bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)] text-[var(--btn-content)] text-xs font-medium transition-all active:scale-95">
+                        <Icon name="material-symbols:contact-mail-outline" class="text-[0.875rem] group-hover:scale-110 transition-transform"></Icon>
+                        联系
+                    </a>
+                    <a href="路径" class="group flex items-center gap-1 px-3 py-1.5 rounded bg-[var(--primary)] hover:bg-[oklch(0.65_0.16_var(--hue))] active:bg-[oklch(0.60_0.18_var(--hue))] text-white dark:text-black/80 text-xs font-medium transition-all active:scale-95">
+                        <Icon name="material-symbols:favorite-outline" class="text-[0.875rem] group-hover:scale-110 transition-transform"></Icon>
+                        赞助
+                 </a>
+          </div>
+
             {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
+
+            <!-- Giscus 评论区 -->
+        <script src="https://giscus.app/client.js"
+                data-repo="ShiMahiru/fuwari-Giscus"
+                data-repo-id="R_kgDOPiR5sQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOPiR5sc4Cud8d"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="zh-CN"
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async>
+        </script>
 
         </div>
     </div>
