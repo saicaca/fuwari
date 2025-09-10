@@ -38,6 +38,16 @@ export type SiteConfig = {
 	favicon: Favicon[];
 };
 
+ background: {
+   enable: boolean;
+   src: string;
+   position?: "top" | "center" | "bottom";
+   size?: "cover" | "contain" | "auto";
+   repeat?: "no-repeat" | "repeat" | "repeat-x" | "repeat-y";
+   attachment?: "fixed" | "scroll" | "local";
+   opacity?: number;
+};
+
 export type Favicon = {
 	src: string;
 	theme?: "light" | "dark";
