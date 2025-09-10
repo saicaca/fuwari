@@ -35,10 +35,7 @@ export type SiteConfig = {
 		depth: 1 | 2 | 3;
 	};
 
-	favicon: Favicon[];
-};
-
- background: {
+background: {
    enable: boolean;
    src: string;
    position?: "top" | "center" | "bottom";
@@ -46,6 +43,9 @@ export type SiteConfig = {
    repeat?: "no-repeat" | "repeat" | "repeat-x" | "repeat-y";
    attachment?: "fixed" | "scroll" | "local";
    opacity?: number;
+};
+
+	favicon: Favicon[];
 };
 
 export type Favicon = {
