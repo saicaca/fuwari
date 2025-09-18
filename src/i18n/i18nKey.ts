@@ -31,6 +31,8 @@ enum I18nKey {
 
 	author = "author",
 	publishedAt = "publishedAt",
+	lastUpdatedAt = 'lastUpdatedAt',
+
 	license = "license",
 }
 
