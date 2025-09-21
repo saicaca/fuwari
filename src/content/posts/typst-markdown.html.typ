@@ -1,0 +1,104 @@
+//# Typst HTML demo replicating the Markdown Example post
+#import "../typ/fuwari-html.typ": *
+
+#let desc = [Replicate common Markdown features using Typst + HTML elements]
+#metadata((
+  title: "Markdown Features in Typst (HTML)",
+  published: "2025-09-24",
+  description: desc,
+  tags: ("Markdown", "Examples", "Typst"),
+  category: "Examples",
+))<frontmatter>
+
+= An h1 header
+
+Paragraphs are separated by a blank line.
+
+_Italic_, *also italic*, *_mix_*, and `monospace`.
+
+== Unordered list
+
+#fw_ul[
+  #fw_li[this one]
+  #fw_li[that one]
+  #fw_li[the other one]
+]
+
+== Blockquote
+
+#fw_blockquote[
+  #fw_p[Block quotes are written like so.]
+  #fw_p[They can span multiple paragraphs, if you like.]
+]
+
+Use 3 dashes for an em-dash. Use 2 dashes for ranges (ex., "it's all in chapters 12--14"). Three dots ... will be converted to an ellipsis. Unicode is supported. ☺
+
+== An h2 header
+
+Here's a numbered list:
+
+#fw_ol[
+  #fw_li[first item]
+  #fw_li[second item]
+  #fw_li[third item]
+]
+
+Here's an indented code sample:
+
+#fw_ec("text", "# Let me re-iterate ...\nfor i in 1 .. 10 { do-something(i) }")
+
+Delimited code block with syntax highlighting:
+
+#fw_ec(
+  "python",
+  "import time\n# Quick, count to ten!\nfor i in range(10):\n    # (but not *too* quick)\n    time.sleep(0.5)\n    print(i)",
+)
+
+=== Nested list
+
+#fw_ol[
+  #fw_li[First, get these ingredients:
+    #fw_ul[
+      #fw_li[carrots]
+      #fw_li[celery]
+      #fw_li[lentils]
+    ]
+  ]
+  #fw_li[Boil some water.]
+  #fw_li[Dump everything in the pot and follow this algorithm:]
+]
+
+Here's a link to #fw_a("http://foo.bar")[a website], to a #fw_a("local-doc.html")[local doc], and to a #fw_a("#an-h2-header")[section heading in the current doc]. Here's a footnote #html.elem("sup")[#html.elem("a", attrs: (href: "#user-content-fn-1", id: "user-content-fnref-1", "data-footnote-ref": "", "aria-describedby": "footnote-label"))[1]].
+
+== Tables
+
+#fw_table_cls("markdown-table")[
+  #fw_thead[
+    #fw_tr[
+      #fw_th[size]
+      #fw_th[material]
+      #fw_th[color]
+    ]
+  ]
+  #fw_tbody[
+    #fw_tr[ #fw_td[9]  #fw_td[leather]        #fw_td[brown] ]
+    #fw_tr[ #fw_td[10] #fw_td[hemp canvas]    #fw_td[natural] ]
+    #fw_tr[ #fw_td[11] #fw_td[glass]          #fw_td[transparent] ]
+  ]
+]
+
+#fw_p[#html.elem("em")[Table: Shoes, their sizes, and what they're made of]]
+
+#fw_hr()
+
+Images:
+
+#fw_img("https://placehold.co/800x480/png", "An exemplary image", "100%")
+
+Display math example (use a Typst SVG file for true rendering):
+
+#fw_tfile("src/content/posts/typst-math.svg.typ", "inline", "typst-math")
+
+#fw_hr()
+
+#html.elem("p")[Footnotes: #html.elem("a", attrs: (id: "fn1"))[1] Footnote text goes here.]

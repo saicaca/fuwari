@@ -6,21 +6,21 @@ import { formatDateToYYYYMMDD } from "../utils/date-utils";
 import { getCategoryUrl, getTagUrl } from "../utils/url-utils";
 
 interface Props {
-	class: string;
-	published: Date;
-	updated?: Date;
-	tags: string[];
-	category: string | null;
-	hideTagsForMobile?: boolean;
-	hideUpdateDate?: boolean;
+  class: string;
+  published: Date;
+  updated?: Date;
+  tags: string[];
+  category: string | null;
+  hideTagsForMobile?: boolean;
+  hideUpdateDate?: boolean;
 }
 const {
-	published,
-	updated,
-	tags,
-	category,
-	hideTagsForMobile = false,
-	hideUpdateDate = false,
+  published,
+  updated,
+  tags,
+  category,
+  hideTagsForMobile = false,
+  hideUpdateDate = false,
 } = Astro.props;
 const className = Astro.props.class;
 ---

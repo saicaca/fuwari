@@ -2,12 +2,12 @@
 import path from "node:path";
 
 interface Props {
-	id?: string;
-	src: string;
-	class?: string;
-	alt?: string;
-	position?: string;
-	basePath?: string;
+  id?: string;
+  src: string;
+  class?: string;
+  alt?: string;
+  position?: string;
+  basePath?: string;
 }
 
 import { Image } from "astro:assets";
@@ -17,10 +17,10 @@ const { id, src, alt, position = "center", basePath = "/" } = Astro.props;
 const className = Astro.props.class;
 
 const isLocal = !(
-	src.startsWith("/") ||
-	src.startsWith("http") ||
-	src.startsWith("https") ||
-	src.startsWith("data:")
+  src.startsWith("/") ||
+  src.startsWith("http") ||
+  src.startsWith("https") ||
+  src.startsWith("data:")
 );
 const isPublic = src.startsWith("/");
 
@@ -29,19 +29,15 @@ const isPublic = src.startsWith("/");
 // biome-ignore lint/suspicious/noImplicitAnyLet: <check later>
 let img;
 if (isLocal) {
-	const files = import.meta.glob<ImageMetadata>("../../**", {
-		import: "default",
-	});
-	let normalizedPath = path
-		.normalize(path.join("../../", basePath, src))
-		.replace(/\\/g, "/");
-	const file = files[normalizedPath];
-	if (!file) {
-		console.error(
-			`\n[ERROR] Image file not found: ${normalizedPath.replace("../../", "src/")}`,
-		);
-	}
-	img = await file();
+  const files = import.meta.glob<ImageMetadata>("../../**", {
+    import: "default",
+  });
+  let normalizedPath = path.normalize(path.join("../../", basePath, src)).replace(/\\/g, "/");
+  const file = files[normalizedPath];
+  if (!file) {
+    console.error(`\n[ERROR] Image file not found: ${normalizedPath.replace("../../", "src/")}`);
+  }
+  img = await file();
 }
 
 const imageClass = "w-full h-full object-cover";

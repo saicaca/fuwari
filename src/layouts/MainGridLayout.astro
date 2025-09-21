@@ -9,36 +9,28 @@ import ImageWrapper from "../components/misc/ImageWrapper.astro";
 import TOC from "../components/widget/TOC.astro";
 import { siteConfig } from "../config";
 import {
-	BANNER_HEIGHT,
-	BANNER_HEIGHT_EXTEND,
-	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
+  BANNER_HEIGHT,
+  BANNER_HEIGHT_EXTEND,
+  MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
 } from "../constants/constants";
 import Layout from "./Layout.astro";
 
 interface Props {
-	title?: string;
-	banner?: string;
-	description?: string;
-	lang?: string;
-	setOGTypeArticle?: boolean;
-	headings?: MarkdownHeading[];
+  title?: string;
+  banner?: string;
+  description?: string;
+  lang?: string;
+  setOGTypeArticle?: boolean;
+  headings?: MarkdownHeading[];
 }
 
-const {
-	title,
-	banner,
-	description,
-	lang,
-	setOGTypeArticle,
-	headings = [],
-} = Astro.props;
-const hasBannerCredit =
-	siteConfig.banner.enable && siteConfig.banner.credit.enable;
+const { title, banner, description, lang, setOGTypeArticle, headings = [] } = Astro.props;
+const hasBannerCredit = siteConfig.banner.enable && siteConfig.banner.credit.enable;
 const hasBannerLink = !!siteConfig.banner.credit.url;
 
 const mainPanelTop = siteConfig.banner.enable
-	? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
-	: "5.5rem";
+  ? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
+  : "5.5rem";
 ---
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle}>
@@ -73,7 +65,7 @@ const mainPanelTop = siteConfig.banner.enable
             >
                 <Icon class="text-white/75 text-[1.25rem] mr-1" name="material-symbols:copyright-outline-rounded" ></Icon>
                 <div class="text-white/75 text-xs">{siteConfig.banner.credit.text}</div>
-                <Icon class:list={["transition absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0",
+                <Icon class:list={["transition absolute text-[var(--primary)] right-4 text-[0.75rem] opacity-0",
                     {"group-hover:opacity-100": hasBannerLink}]}
                       name="fa6-solid:arrow-up-right-from-square">
                 </Icon>
@@ -120,6 +112,56 @@ const mainPanelTop = siteConfig.banner.enable
 
         <!-- #toc needs to exist for Swup to work normally -->
         {!siteConfig.toc.enable && <div id="toc"></div>}
-    </div>
 </div>
+</div>
+
+<script is:inline define:vars={{ TOC_MAX_LEVEL: siteConfig.toc.depth }}>
+// Fallback TOC for Typst HTML pages: build anchors client-side and re-init scroll spy
+(function(){
+  function buildTocFromDom(){
+    var tocRoot = document.querySelector('#toc table-of-contents');
+    if (!tocRoot) return;
+    if (tocRoot.querySelector('a')) return; // already rendered by SSR
+    var scope = document.querySelector('.markdown-content') || document;
+    var nodes = Array.prototype.slice.call(scope.querySelectorAll('h1, h2, h3'));
+    if (!nodes.length) return;
+    var depths = nodes.map(function(n){ return parseInt(n.tagName.substring(1)) || 0; }).filter(function(d){ return d>0; });
+    if (!depths.length) return;
+    var min = Math.min.apply(null, depths);
+    var MAX_LEVEL = TOC_MAX_LEVEL;
+    var h1Count = 1;
+    var frag = document.createDocumentFragment();
+    for (var i=0;i<nodes.length;i++){
+      var n = nodes[i];
+      var depth = parseInt(n.tagName.substring(1));
+      if (!(depth < min + MAX_LEVEL)) continue;
+      var text = (n.textContent || '').trim();
+      if (!text) continue;
+      if (!n.id){ var gen = text.toLowerCase().trim().replace(/\s+/g,'-'); if (!gen) continue; n.id = gen; }
+      var a = document.createElement('a');
+      a.setAttribute('href','#'+encodeURIComponent(n.id));
+      a.setAttribute('class','px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2');
+      var b = document.createElement('div');
+      b.setAttribute('class','transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold');
+      if (depth===min){ b.classList.add('bg-[var(--toc-badge-bg)]'); b.classList.add('text-[var(--btn-content)]'); b.textContent=String(h1Count++); }
+      else if (depth===min+1){ b.classList.add('ml-4'); var d1=document.createElement('div'); d1.setAttribute('class','transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]'); b.appendChild(d1); }
+      else if (depth===min+2){ b.classList.add('ml-8'); var d2=document.createElement('div'); d2.setAttribute('class','transition w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10'); b.appendChild(d2); }
+      var lbl=document.createElement('div');
+      lbl.setAttribute('class','transition text-sm');
+      if (depth===min || depth===min+1) lbl.classList.add('text-50');
+      if (depth===min+2) lbl.classList.add('text-30');
+      lbl.textContent = text.replace(/#+$/,'').trim();
+      a.appendChild(b); a.appendChild(lbl); frag.appendChild(a);
+    }
+    var indicator=document.getElementById('active-indicator');
+    tocRoot.insertBefore(frag, indicator||null);
+    var el=document.querySelector('table-of-contents');
+    try{ el && typeof el.init==='function' && el.init(); }catch(_){ }
+  }
+  var prose=document.querySelector('.prose');
+  if (prose){ prose.addEventListener('animationend', function(){ buildTocFromDom(); }, { once:true }); }
+  else { if (document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', buildTocFromDom, { once:true }); } else { buildTocFromDom(); } }
+})();
+</script>
+
 </Layout>

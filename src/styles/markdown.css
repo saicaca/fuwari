@@ -1,121 +1,104 @@
-.custom-md {
-    h1 {
-        @apply text-3xl;
-    }
+/* Flattened Markdown styles (scoped to .custom-md) */
 
-    h1, h2, h3, h4, h5, h6 {
-        .anchor {
-            @apply transition -m-0.5 ml-[0.2ch] p-0.5 select-none opacity-0 no-underline !important;
-
-            .anchor-icon {
-                @apply mx-[0.45ch] !important;
-            }
-        }
-
-        &:hover {
-            .anchor {
-                @apply opacity-100 !important;
-            }
-        }
-    }
-
-    a:not(.no-styling) {
-        @apply relative bg-none link font-medium text-[var(--primary)]
-        underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4;
-        box-decoration-break: clone;
-        -webkit-box-decoration-break: clone;
-        display: inline-block;
-    
-        &:hover, &:active {
-            @apply decoration-transparent;
-            background: var(--btn-plain-bg-hover);
-            border-bottom: 1px dashed var(--link-hover);
-            text-decoration: none;
-        }
-    }
-
-    code {
-        @apply bg-[var(--inline-code-bg)] text-[var(--inline-code-color)] px-1 py-0.5 rounded-md overflow-hidden;
-
-        font-family: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-        &:before {
-            content:none;
-        }
-        &:after {
-            content:none;
-        }
-
-        counter-reset: line;
-        span.line {
-            &:before {
-                @apply text-white/25 mr-4 w-4 inline-block;
-                content: counter(line);
-                counter-increment: line;
-                direction: rtl;
-            }
-            &:last-child:empty, &:last-child:has(> span:empty:only-child) {
-                display: none;
-            }
-        }
-    }
-
-    .copy-btn {
-        all: initial;
-        @apply btn-regular-dark opacity-0 shadow-lg shadow-black/50 absolute active:scale-90 h-8 w-8 top-3 right-3 text-sm rounded-lg transition-all ease-in-out z-20 cursor-pointer;
-    }
-    .frame:hover .copy-btn {
-        opacity: 1;
-    }
-
-    .copy-btn-icon {
-        @apply absolute top-1/2 left-1/2 transition -translate-x-1/2 -translate-y-1/2 w-4 h-4 fill-white pointer-events-none;
-    }
-    .copy-btn .copy-icon {
-        @apply opacity-100 fill-white dark:fill-white/75;
-    }
-    .copy-btn.success .copy-icon {
-        @apply opacity-0 fill-[var(--deep-text)]
-    }
-    .copy-btn .success-icon {
-        @apply opacity-0 fill-white;
-    }
-    .copy-btn.success .success-icon {
-        @apply opacity-100
-    }
-
-    .expressive-code {
-        @apply my-4;
-        ::selection {
-            @apply bg-[var(--codeblock-selection)];
-        }
-    }
-
-
-    ul, ol {
-        li::marker {
-            @apply text-[var(--primary)];
-        }
-    }
-
-    blockquote {
-        @apply not-italic border-transparent relative;
-        font-weight: inherit;
-
-        &:before {
-            @apply content-[''] absolute -left-1 block transition bg-[var(--btn-regular-bg)] h-full w-1 rounded-full;
-        }
-
-        /* Remove the double quotes from default styles */
-        p:before, p:after {
-            @apply content-none;
-        }
-
-    }
-
-    .katex-display-container {
-        max-width: 100%;
-        overflow-x: auto;
-        margin: 1em 0;
-    }
-    
+.custom-md h1 {
+  @apply text-3xl;
 }
+
+.custom-md h1 .anchor,
+.custom-md h2 .anchor,
+.custom-md h3 .anchor,
+.custom-md h4 .anchor,
+.custom-md h5 .anchor,
+.custom-md h6 .anchor {
+  @apply transition -m-0.5 ml-[0.2ch] p-0.5 select-none opacity-0 no-underline !important;
+}
+
+.custom-md h1 .anchor .anchor-icon,
+.custom-md h2 .anchor .anchor-icon,
+.custom-md h3 .anchor .anchor-icon,
+.custom-md h4 .anchor .anchor-icon,
+.custom-md h5 .anchor .anchor-icon,
+.custom-md h6 .anchor .anchor-icon {
+  @apply mx-[0.45ch] !important;
+}
+
+.custom-md h1:hover .anchor,
+.custom-md h2:hover .anchor,
+.custom-md h3:hover .anchor,
+.custom-md h4:hover .anchor,
+.custom-md h5:hover .anchor,
+.custom-md h6:hover .anchor {
+  @apply opacity-100 !important;
+}
+
+.custom-md a:not(.no-styling) {
+  @apply relative bg-none link font-medium text-[var(--primary)] underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  display: inline-block;
+}
+
+.custom-md a:not(.no-styling):hover,
+.custom-md a:not(.no-styling):active {
+  @apply decoration-transparent;
+  background: var(--btn-plain-bg-hover);
+  border-bottom: 1px dashed var(--link-hover);
+  text-decoration: none;
+}
+
+.custom-md code {
+  @apply bg-[var(--inline-code-bg)] text-[var(--inline-code-color)] px-1 py-0.5 rounded-md overflow-hidden;
+  font-family: var(--mono-font);
+  counter-reset: line;
+}
+
+.custom-md code:before { content: none; }
+.custom-md code:after { content: none; }
+
+.custom-md code span.line:before {
+  @apply text-white/25 mr-4 w-4 inline-block;
+  content: counter(line);
+  counter-increment: line;
+  direction: rtl;
+}
+
+.custom-md code span.line:last-child:empty,
+.custom-md code span.line:last-child:has(> span:empty:only-child) {
+  display: none;
+}
+
+.custom-md .copy-btn {
+  all: initial;
+  @apply btn-regular-dark opacity-0 shadow-lg shadow-black/50 absolute active:scale-90 h-8 w-8 top-3 right-3 text-sm rounded-lg transition-all ease-in-out z-20 cursor-pointer;
+}
+
+.custom-md .frame:hover .copy-btn { opacity: 1; }
+
+.custom-md .copy-btn-icon {
+  @apply absolute top-1/2 left-1/2 transition -translate-x-1/2 -translate-y-1/2 w-4 h-4 fill-white pointer-events-none;
+}
+.custom-md .copy-btn .copy-icon { @apply opacity-100 fill-white dark:fill-white/75; }
+.custom-md .copy-btn.success .copy-icon { @apply opacity-0 fill-[var(--deep-text)]; }
+.custom-md .copy-btn .success-icon { @apply opacity-0 fill-white; }
+.custom-md .copy-btn.success .success-icon { @apply opacity-100; }
+
+.custom-md .expressive-code { @apply my-4; }
+.custom-md .expressive-code ::selection { @apply bg-[var(--codeblock-selection)]; }
+
+/* Removed legacy EC fallback (.ec-standalone) — now using Expressive Code engine */
+
+.custom-md ul li::marker,
+.custom-md ol li::marker { @apply text-[var(--primary)]; }
+
+.custom-md blockquote {
+  @apply not-italic border-transparent relative;
+  font-weight: inherit;
+}
+
+.custom-md blockquote:before {
+  @apply content-[""] absolute -left-1 block transition bg-[var(--btn-regular-bg)] h-full w-1 rounded-full;
+}
+
+/* Remove the double quotes from default styles */
+.custom-md blockquote p:before,
+.custom-md blockquote p:after { @apply content-none; }

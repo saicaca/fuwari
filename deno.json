@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "lib": ["deno.ns", "deno.window"],
+    "strict": true
+  },
+  "fmt": {
+    "lineWidth": 100,
+    "useTabs": false
+  },
+  "imports": {
+    "@std/path": "jsr:@std/path@^1.1.2",
+    "ec/collapsible": "npm:@expressive-code/plugin-collapsible-sections@0.41.3",
+    "ec/core": "npm:@expressive-code/core@0.41.3",
+    "ec/frames": "npm:@expressive-code/plugin-frames@0.41.3",
+    "ec/line-numbers": "npm:@expressive-code/plugin-line-numbers@0.41.3",
+    "ec/shiki": "npm:@expressive-code/plugin-shiki@0.41.3",
+    "ec/text-markers": "npm:@expressive-code/plugin-text-markers@0.41.3"
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  },
+  "nodeModulesDir": "auto",
+  "tasks": {
+    "astro": "deno run -A npm:astro@5.13.8",
+    "build": "deno run -A npm:astro@5.13.8 build && deno run -A npm:pagefind@1.4.0 --site dist",
+    "check": "deno run -A npm:astro@5.13.8 check && deno run -A npm:@biomejs/biome check --write",
+    "dev": "deno run -A npm:astro@5.13.8 dev",
+    "format": "deno run -A npm:@biomejs/biome format --write",
+    "lint": "deno run -A npm:@biomejs/biome check --write",
+    "new-post": "deno run -A scripts/new-post.ts",
+    "preview": "deno run -A npm:astro@5.13.8 preview",
+    "type-check": "deno run -A npm:typescript@5.9.2/tsc --noEmit --isolatedDeclarations"
+  }
+}

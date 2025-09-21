@@ -14,9 +14,13 @@
     "editor.defaultFormatter": "biomejs.biome"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "quickfix.biome": "always",
-    "source.organizeImports.biome": "always"
+    "source.fixAll.biome": "explicit"
   },
-  "frontMatter.dashboard.openOnStart": false
+  "frontMatter.dashboard.openOnStart": false,
+  "deno.enable": true,
+  "deno.config": "deno.json",
+  "deno.suggest.imports.hosts": {
+    "jsr:": true,
+    "https://deno.land": true
+  }
 }

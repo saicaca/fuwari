@@ -1,0 +1,37 @@
+/* Typst rendering styles (inline SVG docs + dark-mode adaptation) */
+
+/* Invert only inline SVG Typst docs in dark mode */
+.dark svg.typst-doc {
+  filter: invert(1) hue-rotate(180deg);
+}
+/* Keep photos/icons inside the SVG looking normal */
+.dark svg.typst-doc image,
+.dark svg.typst-doc img,
+.dark svg.typst-doc foreignObject img {
+  filter: invert(1) hue-rotate(180deg);
+}
+/* Never invert when the Typst doc itself is an <img> */
+.dark img.typst-doc {
+  filter: none !important;
+}
+
+/* Typst theming variables (read by inline SVGs). Controlled by document's `dark` class. */
+:root, :host {
+  --typst-text: #0f172a;      /* slate-900 */
+  --typst-bg: #ffffff;        /* white (or neutral background) */
+  --typst-stroke: #374151;    /* gray-700 */
+}
+html.dark, :root.dark {
+  --typst-text: #e5e7eb;      /* gray-200 */
+  --typst-bg: transparent;    /* keep background transparent on dark */
+  --typst-stroke: #9ca3af;    /* gray-400 */
+}
+
+/* Ensure Typst inline SVG fits container and doesn't overflow */
+.typst-doc {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+

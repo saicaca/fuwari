@@ -8,11 +8,11 @@ let hue = getHue();
 const defaultHue = getDefaultHue();
 
 function resetHue() {
-	hue = getDefaultHue();
+  hue = getDefaultHue();
 }
 
 $: if (hue || hue === 0) {
-	setHue(hue);
+  setHue(hue);
 }
 </script>
 
@@ -37,57 +37,65 @@ $: if (hue || hue === 0) {
             </div>
         </div>
     </div>
-    <div class="w-full h-6 px-1 bg-[oklch(0.80_0.10_0)] dark:bg-[oklch(0.70_0.10_0)] rounded select-none">
+    <div class="w-full h-6 rounded select-none overflow-hidden" style="background: var(--btn-regular-bg)">
         <input aria-label={i18n(I18nKey.themeColor)} type="range" min="0" max="360" bind:value={hue}
-               class="slider" id="colorSlider" step="5" style="width: 100%">
+               class="slider block w-full" id="colorSlider" step="5">
     </div>
 </div>
 
 
-<style lang="stylus">
-    #display-setting
-      input[type="range"]
-        -webkit-appearance none
-        height 1.5rem
-        background-image var(--color-selection-bar)
-        transition background-image 0.15s ease-in-out
+<style>
+  #display-setting input[type="range"] {
+    -webkit-appearance: none;
+    height: 1.5rem;
+    background-image: var(--color-selection-bar);
+    transition: background-image 0.15s ease-in-out;
+  }
 
-        /* Input Thumb */
-        &::-webkit-slider-thumb
-          -webkit-appearance none
-          height 1rem
-          width 0.5rem
-          border-radius 0.125rem
-          background rgba(255, 255, 255, 0.7)
-          box-shadow none
-          &:hover
-            background rgba(255, 255, 255, 0.8)
-          &:active
-            background rgba(255, 255, 255, 0.6)
+  /* Input Thumb */
+  #display-setting input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 1rem;
+    width: 0.5rem;
+    border-radius: 0.125rem;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: none;
+  }
+  #display-setting input[type="range"]::-webkit-slider-thumb:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  #display-setting input[type="range"]::-webkit-slider-thumb:active {
+    background: rgba(255, 255, 255, 0.6);
+  }
 
-        &::-moz-range-thumb
-          -webkit-appearance none
-          height 1rem
-          width 0.5rem
-          border-radius 0.125rem
-          border-width 0
-          background rgba(255, 255, 255, 0.7)
-          box-shadow none
-          &:hover
-            background rgba(255, 255, 255, 0.8)
-          &:active
-            background rgba(255, 255, 255, 0.6)
+  #display-setting input[type="range"]::-moz-range-thumb {
+    -webkit-appearance: none;
+    height: 1rem;
+    width: 0.5rem;
+    border-radius: 0.125rem;
+    border-width: 0;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: none;
+  }
+  #display-setting input[type="range"]::-moz-range-thumb:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  #display-setting input[type="range"]::-moz-range-thumb:active {
+    background: rgba(255, 255, 255, 0.6);
+  }
 
-        &::-ms-thumb
-          -webkit-appearance none
-          height 1rem
-          width 0.5rem
-          border-radius 0.125rem
-          background rgba(255, 255, 255, 0.7)
-          box-shadow none
-          &:hover
-            background rgba(255, 255, 255, 0.8)
-          &:active
-            background rgba(255, 255, 255, 0.6)
-
+  #display-setting input[type="range"]::-ms-thumb {
+    -webkit-appearance: none;
+    height: 1rem;
+    width: 0.5rem;
+    border-radius: 0.125rem;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: none;
+  }
+  #display-setting input[type="range"]::-ms-thumb:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  #display-setting input[type="range"]::-ms-thumb:active {
+    background: rgba(255, 255, 255, 0.6);
+  }
 </style>

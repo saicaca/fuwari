@@ -2,9 +2,9 @@ name: Build and Check
 
 on:
   push:
-    branches: [ main ] # Adjust branches as needed
+    branches: [main] # Adjust branches as needed
   pull_request:
-    branches: [ main ] # Adjust branches as needed
+    branches: [main] # Adjust branches as needed
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -17,7 +17,7 @@ jobs:
   check:
     strategy:
       matrix:
-        node: [ 22, 23 ]
+        node: [22, 23]
     runs-on: ubuntu-latest
     name: Astro Check for Node.js ${{ matrix.node }}
     steps:
@@ -43,7 +43,7 @@ jobs:
   build:
     strategy:
       matrix:
-        node: [ 22, 23 ]
+        node: [22, 23]
     runs-on: ubuntu-latest
     name: Astro Build for Node.js ${{ matrix.node }} # Corrected job name
     steps:

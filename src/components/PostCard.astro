@@ -1,46 +1,58 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import path from "node:path";
+import { render } from "astro:content";
+// import path from "node:path";
 import { Icon } from "astro-icon/components";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
-import { getDir } from "../utils/url-utils";
+import type { RemarkFrontmatter } from "../utils/typst-stats.ts";
+// import { getDir } from "../utils/url-utils";
 import ImageWrapper from "./misc/ImageWrapper.astro";
 import PostMetadata from "./PostMeta.astro";
 
 interface Props {
-	class?: string;
-	entry: CollectionEntry<"posts">;
-	title: string;
-	url: string;
-	published: Date;
-	updated?: Date;
-	tags: string[];
-	category: string | null;
-	image: string;
-	description: string;
-	draft: boolean;
-	style: string;
+  class?: string;
+  entry: CollectionEntry<"posts">;
+  title: string;
+  url: string;
+  published: Date;
+  updated?: Date;
+  tags: string[];
+  category: string | null;
+  image: string;
+  description: unknown;
+  draft: boolean;
+  style: string;
 }
-const {
-	entry,
-	title,
-	url,
-	published,
-	updated,
-	tags,
-	category,
-	image,
-	description,
-	style,
-} = Astro.props;
+const { entry, title, url, published, updated, tags, category, image, description, style } =
+  Astro.props;
 const className = Astro.props.class;
 
 const hasCover = image !== undefined && image !== null && image !== "";
 
+const { deriveContentBasePath } = await import("../utils/url-utils.ts");
+const basePath = deriveContentBasePath(entry.id, entry.filePath);
+
 const coverWidth = "28%";
 
-const { remarkPluginFrontmatter } = await entry.render();
+const rendered = await render(entry);
+const rfUnknown = (rendered as { remarkPluginFrontmatter?: unknown }).remarkPluginFrontmatter;
+const rfAny =
+  typeof rfUnknown === "object" && rfUnknown !== null
+    ? (rfUnknown as Partial<RemarkFrontmatter>)
+    : undefined;
+let remarkPluginFrontmatter: RemarkFrontmatter = {
+  words: rfAny?.words ?? 0,
+  minutes: rfAny?.minutes ?? 0,
+  excerpt: rfAny?.excerpt ?? "",
+};
+// Fallback for Typst entries: compute reading-time if missing
+{
+  const { computeTypstStatsIfMissing } = await import("../utils/typst-stats.ts");
+  remarkPluginFrontmatter = await computeTypstStatsIfMissing(entry, remarkPluginFrontmatter);
+}
+const safeDescription: string =
+  typeof description === "string" ? description : (remarkPluginFrontmatter?.excerpt ?? "");
 ---
 <div class:list={["card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative", className]} style={style}>
     <div class:list={["pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative", {"w-full md:w-[calc(100%_-_52px_-_12px)]": !hasCover, "w-full md:w-[calc(100%_-_var(--coverWidth)_-_12px)]": hasCover}]}>
@@ -60,8 +72,8 @@ const { remarkPluginFrontmatter } = await entry.render();
         <PostMetadata published={published} updated={updated} tags={tags} category={category} hideTagsForMobile={true} hideUpdateDate={true} class="mb-4"></PostMetadata>
 
         <!-- description -->
-        <div class:list={["transition text-75 mb-3.5 pr-4", {"line-clamp-2 md:line-clamp-1": !description}]}>
-            { description || remarkPluginFrontmatter.excerpt }
+        <div class:list={["transition text-75 mb-3.5 pr-4", {"line-clamp-2 md:line-clamp-1": !safeDescription}]}>
+            { safeDescription }
         </div>
 
         <!-- word count and read time  -->
@@ -88,7 +100,7 @@ const { remarkPluginFrontmatter } = await entry.render();
                   class="transition opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 text-white text-5xl">
             </Icon>
         </div>
-        <ImageWrapper src={image} basePath={path.join("content/posts/", getDir(entry.id))} alt="Cover Image of the Post"
+        <ImageWrapper src={image} basePath={basePath} alt="Cover Image of the Post"
                   class="w-full h-full">
         </ImageWrapper>
     </a>}

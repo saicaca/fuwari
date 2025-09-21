@@ -1,3 +1,14 @@
+/* Compatibility: Tailwind preflight sets only -webkit-text-size-adjust.
+   Add the standard property to satisfy modern engines and audits. */
+html, :host {
+    text-size-adjust: 100%;
+}
+
+/* Global UI font: Source Han Sans / Noto Sans SC with common CJK fallbacks */
+html, body {
+    font-family: "Noto Sans SC", "Source Han Sans SC", "Source Han Sans", "PingFang SC", "Microsoft YaHei", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
 @tailwind components;
 
 @layer components {
@@ -21,7 +32,8 @@
         @apply transition rounded-md p-1.5 -m-1.5 expand-animation;
     }
     .float-panel {
-        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
+        top: var(--panel-top-offset);
+        @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
     }
     .float-panel-closed {
         @apply -translate-y-1 opacity-0 pointer-events-none
@@ -40,15 +52,13 @@
     .btn-plain {
         @apply transition relative flex items-center justify-center bg-none
         text-black/75 hover:text-[var(--primary)] dark:text-white/75 dark:hover:text-[var(--primary)];
-        &:not(.scale-animation) {
-            @apply hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
-        }
-        &.scale-animation {
-            @apply expand-animation;
-            &.current-theme-btn {
-                @apply before:scale-100 before:opacity-100 before:bg-[var(--btn-plain-bg-hover)] text-[var(--primary)]
-            }
-        }
+    }
+    .btn-plain:not(.scale-animation) {
+        @apply hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)];
+    }
+    .btn-plain.scale-animation { @apply expand-animation; }
+    .btn-plain.scale-animation.current-theme-btn {
+        @apply before:scale-100 before:opacity-100 before:bg-[var(--btn-plain-bg-hover)] text-[var(--primary)];
     }
     .btn-regular {
         @apply transition flex items-center justify-center bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)]
@@ -103,12 +113,37 @@
     }
 
     .btn-regular-dark {
-        @apply flex items-center justify-center
-        bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))] active:bg-[oklch(0.55_0.01_var(--hue))]
-        dark:bg-[oklch(0.30_0.02_var(--hue))] dark:hover:bg-[oklch(0.35_0.03_var(--hue))] dark:active:bg-[oklch(0.40_0.03_var(--hue))]
+        @apply flex items-center justify-center;
+        background: var(--btn-regular-dark-bg);
     }
-    .btn-regular-dark.success {
-        @apply bg-[oklch(0.75_0.14_var(--hue))] dark:bg-[oklch(0.75_0.14_var(--hue))]
+    .btn-regular-dark:hover { background: var(--btn-regular-dark-hover); }
+    .btn-regular-dark:active { background: var(--btn-regular-dark-active); }
+    .btn-regular-dark.success { background: var(--btn-regular-dark-success); }
+
+    /* Banner layout rules (moved from Layout.astro) */
+    .enable-banner.is-home #banner-wrapper {
+        @apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)]
+    }
+    .enable-banner #banner-wrapper {
+        @apply h-[var(--banner-height-home)]
+    }
+    .enable-banner.is-home #banner {
+        @apply h-[var(--banner-height-home)] translate-y-0
+    }
+    .enable-banner #banner {
+        @apply h-[var(--banner-height-home)] translate-y-[var(--bannerOffset)]
+    }
+    .enable-banner.is-home #main-grid {
+        @apply translate-y-[var(--banner-height-extend)];
+    }
+    .enable-banner #top-row {
+        @apply h-[calc(var(--banner-height-home)_-_4.5rem)] transition-all duration-300
+    }
+    .enable-banner.is-home #sidebar-sticky {
+        @apply top-[calc(1rem_-_var(--banner-height-extend))]
+    }
+    .navbar-hidden {
+        @apply opacity-0 -translate-y-16
     }
 }
 
@@ -127,10 +162,10 @@
 .dash-line::before {
     content: "";
     position: absolute;
-    width: 10%;
+    width: var(--dashline-width-percent);
     height: 100%;
     left: calc(50% - 1px);
-    border-left: 2px dashed var(--line-color);
+    border-left: var(--dashline-border-thickness) dashed var(--line-color);
     pointer-events: none;
     transition: all 0.3s;
     transform: translateY(-50%);
@@ -142,11 +177,6 @@
 
 .custom-md spoiler {
   @apply bg-[var(--codeblock-bg)] hover:bg-transparent px-1 py-0.5 overflow-hidden rounded-md transition-all duration-150;
-
-  &:not(:hover) {
-    color: var(--codeblock-bg);
-    * {
-        color: var(--codeblock-bg);
-    }
-  }
 }
+.custom-md spoiler:not(:hover) { color: var(--codeblock-bg); }
+.custom-md spoiler:not(:hover) * { color: var(--codeblock-bg); }

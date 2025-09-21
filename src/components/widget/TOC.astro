@@ -4,27 +4,27 @@ import { siteConfig } from "../../config";
 import { url } from "../../utils/url-utils";
 
 interface Props {
-	class?: string;
-	headings: MarkdownHeading[];
+  class?: string;
+  headings: MarkdownHeading[];
 }
 
 let { headings = [] } = Astro.props;
 
 let minDepth = 10;
 for (const heading of headings) {
-	minDepth = Math.min(minDepth, heading.depth);
+  minDepth = Math.min(minDepth, heading.depth);
 }
 
 const className = Astro.props.class;
 const isPostsRoute = Astro.url.pathname.startsWith(url("/posts/"));
 
 const removeTailingHash = (text: string) => {
-	let lastIndexOfHash = text.lastIndexOf("#");
-	if (lastIndexOfHash !== text.length - 1) {
-		return text;
-	}
+  let lastIndexOfHash = text.lastIndexOf("#");
+  if (lastIndexOfHash !== text.length - 1) {
+    return text;
+  }
 
-	return text.substring(0, lastIndexOfHash);
+  return text.substring(0, lastIndexOfHash);
 };
 
 let heading1Count = 1;
@@ -81,12 +81,13 @@ class TableOfContents extends HTMLElement {
 
     markVisibleSection = (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry) => {
-            const id = entry.target.children[0]?.getAttribute("id");
+            const target = entry.target as HTMLElement;
+            const id = target.getAttribute("id") || (target.children[0] as HTMLElement | undefined)?.getAttribute("id");
             const idx = id ? this.headingIdxMap.get(id) : undefined;
             if (idx != undefined)
                 this.active[idx] = entry.isIntersecting;
 
-            if (entry.isIntersecting && this.anchorNavTarget == entry.target.firstChild)
+            if (entry.isIntersecting && (this.anchorNavTarget == (entry.target as HTMLElement).firstChild || this.anchorNavTarget == entry.target))
                 this.anchorNavTarget = null;
         });
 
@@ -119,7 +120,8 @@ class TableOfContents extends HTMLElement {
             let scrollOffset = this.tocEl?.scrollTop || 0;
             let top = this.tocEntries[min].getBoundingClientRect().top - parentOffset + scrollOffset;
             let bottom = this.tocEntries[max].getBoundingClientRect().bottom - parentOffset + scrollOffset;
-            this.activeIndicator?.setAttribute("style", `top: ${top}px; height: ${bottom - top}px`);
+            this.activeIndicator?.classList.remove('hidden');
+            this.activeIndicator?.setAttribute("style", `opacity: 1; top: ${top}px; height: ${bottom - top}px`);
         }
     };
 
@@ -230,18 +232,54 @@ class TableOfContents extends HTMLElement {
         );
 
         if (this.tocEntries.length === 0) return;
+        this.activeIndicator?.classList.remove('hidden');
 
         this.sections = new Array(this.tocEntries.length);
         this.headings = new Array(this.tocEntries.length);
         for (let i = 0; i < this.tocEntries.length; i++) {
             const id = decodeURIComponent(this.tocEntries[i].hash?.substring(1));
             const heading = document.getElementById(id);
-            const section = heading?.parentElement;
-            if (heading instanceof HTMLElement && section instanceof HTMLElement) {
+            // Prefer closest <section> like remark-sectionize; if absent (e.g., Typst HTML),
+            // we will synthesize a section wrapper in a second pass.
+            let section: HTMLElement | null = null;
+            if (heading instanceof HTMLElement) {
+                section = heading.closest('section');
+            }
+            if (heading instanceof HTMLElement) {
                 this.headings[i] = heading;
-                this.sections[i] = section;
+                if (section instanceof HTMLElement) this.sections[i] = section;
                 this.headingIdxMap.set(id, i);
             }
+        }
+
+        // For content without remark-sectionize (e.g., Typst-rendered HTML),
+        // create lightweight <section> wrappers so a section stays "active"
+        // until all of its content leaves the viewport — same behavior as Markdown.
+        for (let i = 0; i < this.headings.length; i++) {
+            if (this.sections[i]) continue; // already has a section
+            const start = this.headings[i];
+            if (!(start instanceof HTMLElement)) continue;
+            const end = this.headings[i + 1] as HTMLElement | undefined;
+
+            const parent = start.parentNode;
+            if (!parent) {
+                // Fallback: at least observe the heading itself
+                this.sections[i] = start;
+                continue;
+            }
+
+            const wrapper = document.createElement('section');
+            wrapper.setAttribute('data-toc-section', '');
+            parent.insertBefore(wrapper, start);
+
+            // Move nodes from current heading until (but not including) the next heading
+            let cursor: ChildNode | null = start;
+            while (cursor && cursor !== end) {
+                const nextNode: ChildNode | null = cursor.nextSibling as ChildNode | null;
+                wrapper.appendChild(cursor);
+                cursor = nextNode;
+            }
+            this.sections[i] = wrapper;
         }
         this.active = new Array(this.tocEntries.length).fill(false);
 

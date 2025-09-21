@@ -1,67 +1,67 @@
 {
   "$schema": "https://frontmatter.codes/frontmatter.schema.json",
-  "frontMatter.framework.id": "astro",
-  "frontMatter.preview.host": "http://localhost:4321",
-  "frontMatter.content.publicFolder": "public",
   "frontMatter.content.pageFolders": [
     {
-      "title": "posts",
-      "path": "[[workspace]]/src/content/posts"
+      "path": "[[workspace]]/src/content/posts",
+      "title": "posts"
     }
   ],
+  "frontMatter.content.publicFolder": "public",
+  "frontMatter.framework.id": "astro",
+  "frontMatter.preview.host": "http://localhost:4321",
   "frontMatter.taxonomy.contentTypes": [
     {
-      "name": "default",
-      "pageBundle": true,
-      "previewPath": "'blog'",
-      "filePrefix": null,
       "clearEmpty": true,
       "fields": [
         {
-          "title": "title",
           "name": "title",
-          "type": "string",
-          "single": true
-        },
-        {
-          "title": "description",
-          "name": "description",
+          "single": true,
+          "title": "title",
           "type": "string"
         },
         {
-          "title": "published",
-          "name": "published",
-          "type": "datetime",
+          "name": "description",
+          "title": "description",
+          "type": "string"
+        },
+        {
           "default": "{{now}}",
-          "isPublishDate": true
+          "isPublishDate": true,
+          "name": "published",
+          "title": "published",
+          "type": "datetime"
         },
         {
-          "title": "preview",
+          "isPreviewImage": true,
           "name": "image",
-          "type": "image",
-          "isPreviewImage": true
+          "title": "preview",
+          "type": "image"
         },
         {
-          "title": "tags",
           "name": "tags",
+          "title": "tags",
           "type": "list"
         },
         {
-          "title": "category",
           "name": "category",
+          "title": "category",
           "type": "string"
         },
         {
-          "title": "draft",
           "name": "draft",
+          "title": "draft",
           "type": "boolean"
         },
         {
-          "title": "language",
           "name": "language",
+          "title": "language",
           "type": "string"
         }
-      ]
+      ],
+      "filePrefix": null,
+      "name": "default",
+      "pageBundle": true,
+      "previewPath": "'blog'"
     }
   ]
 }

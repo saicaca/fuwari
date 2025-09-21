@@ -1,51 +1,73 @@
 ---
-import path from "node:path";
+import { render } from "astro:content";
+// path not used
 import License from "@components/misc/License.astro";
 import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@utils/content-utils";
-import { getDir, getPostUrlBySlug } from "@utils/url-utils";
+import { deriveContentBasePath, getPostUrlBySlug } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
 import { licenseConfig } from "src/config";
 import ImageWrapper from "../../components/misc/ImageWrapper.astro";
 import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
+import type { RemarkFrontmatter as TypstRemarkFrontmatter } from "../../utils/typst-stats.ts";
 
 export async function getStaticPaths() {
-	const blogEntries = await getSortedPosts();
-	return blogEntries.map((entry) => ({
-		params: { slug: entry.slug },
-		props: { entry },
-	}));
+  const blogEntries = await getSortedPosts();
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
 }
 
 const { entry } = Astro.props;
-const { Content, headings } = await entry.render();
+const renderedModule = await render(entry);
+const { Content, headings } = renderedModule;
+type RemarkFrontmatter = TypstRemarkFrontmatter;
+function hasRemarkFrontmatter(x: unknown): x is {
+  remarkPluginFrontmatter: RemarkFrontmatter;
+} {
+  return typeof x === "object" && x !== null && "remarkPluginFrontmatter" in x;
+}
+let remarkPluginFrontmatter: RemarkFrontmatter = hasRemarkFrontmatter(renderedModule)
+  ? (renderedModule.remarkPluginFrontmatter as RemarkFrontmatter)
+  : { words: 0, minutes: 0, excerpt: "" };
 
-const { remarkPluginFrontmatter } = await entry.render();
+// Fallback for Typst pages: compute reading-time directly if missing.
+{
+  const { computeTypstStatsIfMissing } = await import("../../utils/typst-stats.ts");
+  remarkPluginFrontmatter = await computeTypstStatsIfMissing(entry, remarkPluginFrontmatter);
+}
+const metaDescription: string =
+  typeof entry.data.description === "string"
+    ? entry.data.description
+    : (remarkPluginFrontmatter?.excerpt ?? entry.data.title);
+
+const basePath = deriveContentBasePath(entry.id, entry.filePath);
 
 const jsonLd = {
-	"@context": "https://schema.org",
-	"@type": "BlogPosting",
-	headline: entry.data.title,
-	description: entry.data.description || entry.data.title,
-	keywords: entry.data.tags,
-	author: {
-		"@type": "Person",
-		name: profileConfig.name,
-		url: Astro.site,
-	},
-	datePublished: formatDateToYYYYMMDD(entry.data.published),
-	inLanguage: entry.data.lang
-		? entry.data.lang.replace("_", "-")
-		: siteConfig.lang.replace("_", "-"),
-	// TODO include cover image here
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: entry.data.title,
+  description: entry.data.description || entry.data.title,
+  keywords: entry.data.tags,
+  author: {
+    "@type": "Person",
+    name: profileConfig.name,
+    url: Astro.site,
+  },
+  datePublished: formatDateToYYYYMMDD(entry.data.published),
+  inLanguage: entry.data.lang
+    ? entry.data.lang.replace("_", "-")
+    : siteConfig.lang.replace("_", "-"),
+  // TODO include cover image here
 };
 ---
-<MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} lang={entry.data.lang} setOGTypeArticle={true} headings={headings}>
+<MainGridLayout banner={entry.data.image} title={entry.data.title} description={metaDescription} lang={entry.data.lang} setOGTypeArticle={true} headings={headings}>
     <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
         <div id="post-container" class:list={["card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ",
@@ -98,7 +120,7 @@ const jsonLd = {
             <!-- always show cover as long as it has one -->
 
             {entry.data.image &&
-                <ImageWrapper id="post-cover" src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} class="mb-8 rounded-xl banner-container onload-animation"/>
+                <ImageWrapper id="post-cover" src={entry.data.image} basePath={basePath} class="mb-8 rounded-xl banner-container onload-animation"/>
             }
 
 
@@ -106,7 +128,7 @@ const jsonLd = {
                 <Content />
             </Markdown>
 
-            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
+            {licenseConfig.enable && <License title={entry.data.title} slug={entry.id} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
 
         </div>
     </div>

@@ -15,73 +15,71 @@ categories = params.has("category") ? params.getAll("category") : [];
 const uncategorized = params.get("uncategorized");
 
 interface Post {
-	slug: string;
-	data: {
-		title: string;
-		tags: string[];
-		category?: string;
-		published: Date;
-	};
+  id: string;
+  data: {
+    title: string;
+    tags: string[];
+    category?: string;
+    published: Date;
+  };
 }
 
 interface Group {
-	year: number;
-	posts: Post[];
+  year: number;
+  posts: Post[];
 }
 
 let groups: Group[] = [];
 
 function formatDate(date: Date) {
-	const month = (date.getMonth() + 1).toString().padStart(2, "0");
-	const day = date.getDate().toString().padStart(2, "0");
-	return `${month}-${day}`;
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${month}-${day}`;
 }
 
 function formatTag(tagList: string[]) {
-	return tagList.map((t) => `#${t}`).join(" ");
+  return tagList.map((t) => `#${t}`).join(" ");
 }
 
 onMount(async () => {
-	let filteredPosts: Post[] = sortedPosts;
+  let filteredPosts: Post[] = sortedPosts;
 
-	if (tags.length > 0) {
-		filteredPosts = filteredPosts.filter(
-			(post) =>
-				Array.isArray(post.data.tags) &&
-				post.data.tags.some((tag) => tags.includes(tag)),
-		);
-	}
+  if (tags.length > 0) {
+    filteredPosts = filteredPosts.filter(
+      (post) => Array.isArray(post.data.tags) && post.data.tags.some((tag) => tags.includes(tag)),
+    );
+  }
 
-	if (categories.length > 0) {
-		filteredPosts = filteredPosts.filter(
-			(post) => post.data.category && categories.includes(post.data.category),
-		);
-	}
+  if (categories.length > 0) {
+    filteredPosts = filteredPosts.filter(
+      (post) => post.data.category && categories.includes(post.data.category),
+    );
+  }
 
-	if (uncategorized) {
-		filteredPosts = filteredPosts.filter((post) => !post.data.category);
-	}
+  if (uncategorized) {
+    filteredPosts = filteredPosts.filter((post) => !post.data.category);
+  }
 
-	const grouped = filteredPosts.reduce(
-		(acc, post) => {
-			const year = post.data.published.getFullYear();
-			if (!acc[year]) {
-				acc[year] = [];
-			}
-			acc[year].push(post);
-			return acc;
-		},
-		{} as Record<number, Post[]>,
-	);
+  const grouped = filteredPosts.reduce(
+    (acc, post) => {
+      const year = post.data.published.getFullYear();
+      if (!acc[year]) {
+        acc[year] = [];
+      }
+      acc[year].push(post);
+      return acc;
+    },
+    {} as Record<number, Post[]>,
+  );
 
-	const groupedPostsArray = Object.keys(grouped).map((yearStr) => ({
-		year: Number.parseInt(yearStr, 10),
-		posts: grouped[Number.parseInt(yearStr, 10)],
-	}));
+  const groupedPostsArray = Object.keys(grouped).map((yearStr) => ({
+    year: Number.parseInt(yearStr, 10),
+    posts: grouped[Number.parseInt(yearStr, 10)],
+  }));
 
-	groupedPostsArray.sort((a, b) => b.year - a.year);
+  groupedPostsArray.sort((a, b) => b.year - a.year);
 
-	groups = groupedPostsArray;
+  groups = groupedPostsArray;
 });
 </script>
 
@@ -105,7 +103,7 @@ onMount(async () => {
 
             {#each group.posts as post}
                 <a
-                        href={getPostUrlBySlug(post.slug)}
+                        href={getPostUrlBySlug(post.id)}
                         aria-label={post.data.title}
                         class="group btn-plain !block h-10 w-full rounded-lg hover:text-[initial]"
                 >
@@ -119,7 +117,7 @@ onMount(async () => {
                         <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center">
                             <div
                                     class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
-                       bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
+                       bg-[var(--timeline-dot)] group-hover:bg-[var(--primary)]
                        outline outline-4 z-50
                        outline-[var(--card-bg)]
                        group-hover:outline-[var(--btn-plain-bg-hover)]
