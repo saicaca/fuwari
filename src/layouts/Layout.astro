@@ -75,6 +75,7 @@ const bannerOffset =
 <!DOCTYPE html>
 <html lang={siteLang} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]"
 	  data-overlayscrollbars-initialize
+	  dir={siteConfig.rtl ? 'rtl' : 'ltr'}
 >
 	<head>
 
@@ -191,6 +192,9 @@ const bannerOffset =
 	.navbar-hidden {
 		@apply opacity-0 -translate-y-16
 	}
+}
+html[dir="rtl"] .meta-icon {
+	@apply mr-0 ml-2;
 }
 </style>
 
