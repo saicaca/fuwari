@@ -49,17 +49,13 @@ export function TypstFileComponent(props) {
       }
     });
     if (!filePath) {
-      return h(
-        "span",
-        { class: "hidden" },
-        `tfile: file not found: ${file}`,
-      );
+      return h("span", { class: "hidden" }, `tfile: file not found: ${file}`);
     }
 
     const ext = path.extname(filePath).toLowerCase();
     const isTyp = ext === ".typ";
-    const isSvg = ext === ".svg";
-    const isRaster = [".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp", ".avif"].includes(ext);
+    const _isSvg = ext === ".svg";
+    const _isRaster = [".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp", ".avif"].includes(ext);
     const mimeOf = (p) => {
       switch (path.extname(p).toLowerCase()) {
         case ".svg":

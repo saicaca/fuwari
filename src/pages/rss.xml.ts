@@ -2,11 +2,9 @@ import rss from "@astrojs/rss";
 import { getSortedPosts } from "@utils/content-utils";
 import { url } from "@utils/url-utils";
 import type { APIRoute } from "astro";
-import MarkdownIt from "markdown-it";
 import sanitizeHtml from "sanitize-html";
 import { siteConfig } from "@/config";
-
-const parser = new MarkdownIt();
+import { extractTypstExcerpt } from "../typst/reading-time.ts";
 
 function stripInvalidXmlChars(str: string): string {
   // Use RegExp constructor to avoid deno-lint no-control-regex on literals.
@@ -24,21 +22,24 @@ export const GET: APIRoute = async (context) => {
     title: siteConfig.title,
     description: siteConfig.subtitle || "No description",
     site: context.site ?? "https://fuwari.vercel.app",
-    items: blog.map((post) => {
-      const content = typeof post.body === "string" ? post.body : String(post.body || "");
-      const cleanedContent = stripInvalidXmlChars(content);
-      const description: string =
-        typeof post.data.description === "string" ? post.data.description : post.data.title;
-      return {
-        title: post.data.title,
-        pubDate: post.data.published,
-        description,
-        link: url(`/posts/${post.id}/`),
-        content: sanitizeHtml(parser.render(cleanedContent), {
-          allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
-        }),
-      };
-    }),
+    items: await Promise.all(
+      blog.map(async (post) => {
+        // For Typst entries, compile a lightweight text excerpt for RSS content
+        const excerpt = await extractTypstExcerpt(post.filePath || "");
+        const cleanedContent = stripInvalidXmlChars(excerpt);
+        const description: string =
+          typeof post.data.description === "string" ? post.data.description : post.data.title;
+        return {
+          title: post.data.title,
+          pubDate: post.data.published,
+          description,
+          link: url(`/posts/${post.id}/`),
+          content: sanitizeHtml(cleanedContent, {
+            allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
+          }),
+        };
+      }),
+    ),
     customData: `<language>${siteConfig.lang}</language>`,
   });
 };

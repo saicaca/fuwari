@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { render } from "astro:content";
 // import path from "node:path";
 import { Icon } from "astro-icon/components";
 import I18nKey from "../i18n/i18nKey";
@@ -35,22 +34,9 @@ const basePath = deriveContentBasePath(entry.id, entry.filePath);
 
 const coverWidth = "28%";
 
-const rendered = await render(entry);
-const rfUnknown = (rendered as { remarkPluginFrontmatter?: unknown }).remarkPluginFrontmatter;
-const rfAny =
-  typeof rfUnknown === "object" && rfUnknown !== null
-    ? (rfUnknown as Partial<RemarkFrontmatter>)
-    : undefined;
-let remarkPluginFrontmatter: RemarkFrontmatter = {
-  words: rfAny?.words ?? 0,
-  minutes: rfAny?.minutes ?? 0,
-  excerpt: rfAny?.excerpt ?? "",
-};
-// Fallback for Typst entries: compute reading-time if missing
-{
-  const { computeTypstStatsIfMissing } = await import("../utils/typst-stats.ts");
-  remarkPluginFrontmatter = await computeTypstStatsIfMissing(entry, remarkPluginFrontmatter);
-}
+let remarkPluginFrontmatter: RemarkFrontmatter = { words: 0, minutes: 0, excerpt: "" };
+const { computeTypstStatsIfMissing } = await import("../utils/typst-stats.ts");
+remarkPluginFrontmatter = await computeTypstStatsIfMissing(entry, remarkPluginFrontmatter);
 const safeDescription: string =
   typeof description === "string" ? description : (remarkPluginFrontmatter?.excerpt ?? "");
 ---

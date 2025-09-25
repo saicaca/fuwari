@@ -2,12 +2,13 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const postsCollection = defineCollection({
-  // Support Markdown/MDX/Typst in the posts collection
+  // Typst-only blog: support only .typ files in the posts collection
   // Note: base is resolved from project root
   // Exclude Typst SVG target files from posts collection; they are imported by HTML posts.
   loader: glob({
     base: "./src/content/posts",
-    pattern: ["**/*.{md,mdx,typ}", "!**/*.svg.typ"],
+    // Typst-only blog: include only .typ sources and exclude SVG targets
+    pattern: ["**/*.typ", "!**/*.svg.typ"],
   }),
   schema: z.object({
     title: z.string(),

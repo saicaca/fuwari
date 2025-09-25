@@ -1,6 +1,6 @@
 //# Typst HTML demo replicating the Markdown Example post
 #import "../typ/fuwari-html.typ": *
-
+#show raw.where(block: true): it => { html.elem("ec", attrs: (lang: it.lang, code: it.text)) }
 #let desc = [Replicate common Markdown features using Typst + HTML elements]
 #metadata((
   title: "Markdown Features in Typst (HTML)",
@@ -9,23 +9,22 @@
   tags: ("Markdown", "Examples", "Typst"),
   category: "Examples",
 ))<frontmatter>
-
 = An h1 header
-
-Paragraphs are separated by a blank line.
+```rust
+fn main()
+```
+Paragraphs are separated by a blank line.```rust fn main()```
 
 _Italic_, *also italic*, *_mix_*, and `monospace`.
 
 == Unordered list
-
 #fw_ul[
   #fw_li[this one]
   #fw_li[that one]
   #fw_li[the other one]
 ]
-
+123
 == Blockquote
-
 #fw_blockquote[
   #fw_p[Block quotes are written like so.]
   #fw_p[They can span multiple paragraphs, if you like.]

@@ -35,3 +35,24 @@ html.dark, :root.dark {
   display: block;
 }
 
+/* Typst HTML target sometimes outputs a nested <body>. Remove its default margin to avoid extra top gap */
+.markdown-content body {
+  margin: 0;
+}
+
+/*
+ * Normalize spacing for nested lists produced by Typst HTML:
+ * Without this, a <li> that contains a <p> followed by a nested <ul>
+ * gets the paragraph's bottom margin plus the list's top margin, which
+ * looks much larger than the gap between sibling <li> items.
+ */
+.markdown-content li > p {
+  margin-top: 0;            /* avoid extra space above paragraph inside list item */
+  margin-bottom: 0.25rem;   /* keep a small gap before nested list */
+}
+.markdown-content li > ul,
+.markdown-content li > ol {
+  margin-top: 0.25rem;      /* reduce stacked margins with preceding <p> */
+  margin-bottom: 0.5rem;    /* consistent space before next list item */
+}
+

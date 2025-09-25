@@ -9,9 +9,6 @@ import { typst } from "astro-typst";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeSlug from "rehype-slug";
-import remarkDirective from "remark-directive"; /* Handle directives */
-import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
-import remarkSectionize from "remark-sectionize";
 import { expressiveCodeConfig } from "./src/config.ts";
 import { componentMap } from "./src/plugins/components-map.mjs";
 import {
@@ -21,9 +18,8 @@ import {
 } from "./src/plugins/expressive-code/shared-config.ts";
 import { rehypeTypstEc } from "./src/plugins/rehype-typst-ec.mjs";
 import { rehypeTypstFootnotes } from "./src/plugins/rehype-typst-footnotes.mjs";
-import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
-import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
-import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
+import { rehypeTypstNormalize } from "./src/plugins/rehype-typst-normalize.mjs";
+import { rehypeTypstTfile } from "./src/plugins/rehype-typst-tfile.mjs";
 import { typstOptions, typstTarget } from "./src/typst/targets.mjs";
 
 // https://astro.build/config
@@ -86,17 +82,15 @@ export default defineConfig({
     sitemap(),
   ],
   markdown: {
-    remarkPlugins: [
-      remarkReadingTime,
-      remarkExcerpt,
-      remarkGithubAdmonitionsToDirectives,
-      remarkDirective,
-      remarkSectionize,
-      parseDirectiveNode,
-    ],
+    // Typst-only: no remark (Markdown) plugins needed
+    remarkPlugins: [],
     rehypePlugins: [
+      // Normalize Typst HTML before slugging/autolinking
+      rehypeTypstNormalize,
       rehypeSlug,
       [rehypeComponents, { components: componentMap }],
+      // Ensure <tfile> is rendered even without rehype-components
+      rehypeTypstTfile,
       // Transform Typst <ec> nodes to fully rendered Expressive Code blocks
       rehypeTypstEc,
       // Normalize simple Typst footnotes paragraph to a semantic footnotes section

@@ -19,7 +19,7 @@
 )
 #show emph: text.with(font: ((name: "Libertinus Serif", covers: "latin-in-cjk"), "LXGW WenKai"))
 #show raw: text.with(font: "Maple Mono NF")
-#image("guide/cover.jpeg")
+#image("../../assets/images/demo-avatar.png")
 = Typst Math Demo
 你好 _你不好_ *你好好* 123 _*123你*_ we
 

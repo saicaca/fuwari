@@ -1,8 +1,8 @@
 ---
 import { render } from "astro:content";
+import ContentWrapper from "@components/misc/Content.astro";
 // path not used
 import License from "@components/misc/License.astro";
-import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
@@ -14,7 +14,7 @@ import ImageWrapper from "../../components/misc/ImageWrapper.astro";
 import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
-import type { RemarkFrontmatter as TypstRemarkFrontmatter } from "../../utils/typst-stats.ts";
+import type { RemarkFrontmatter } from "../../utils/typst-stats.ts";
 
 export async function getStaticPaths() {
   const blogEntries = await getSortedPosts();
@@ -27,21 +27,9 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const renderedModule = await render(entry);
 const { Content, headings } = renderedModule;
-type RemarkFrontmatter = TypstRemarkFrontmatter;
-function hasRemarkFrontmatter(x: unknown): x is {
-  remarkPluginFrontmatter: RemarkFrontmatter;
-} {
-  return typeof x === "object" && x !== null && "remarkPluginFrontmatter" in x;
-}
-let remarkPluginFrontmatter: RemarkFrontmatter = hasRemarkFrontmatter(renderedModule)
-  ? (renderedModule.remarkPluginFrontmatter as RemarkFrontmatter)
-  : { words: 0, minutes: 0, excerpt: "" };
-
-// Fallback for Typst pages: compute reading-time directly if missing.
-{
-  const { computeTypstStatsIfMissing } = await import("../../utils/typst-stats.ts");
-  remarkPluginFrontmatter = await computeTypstStatsIfMissing(entry, remarkPluginFrontmatter);
-}
+let remarkPluginFrontmatter: RemarkFrontmatter = { words: 0, minutes: 0, excerpt: "" };
+const { computeTypstStatsIfMissing } = await import("../../utils/typst-stats.ts");
+remarkPluginFrontmatter = await computeTypstStatsIfMissing(entry, remarkPluginFrontmatter);
 const metaDescription: string =
   typeof entry.data.description === "string"
     ? entry.data.description
@@ -124,9 +112,9 @@ const jsonLd = {
             }
 
 
-            <Markdown class="mb-6 markdown-content onload-animation">
+            <ContentWrapper class="mb-6 markdown-content onload-animation">
                 <Content />
-            </Markdown>
+            </ContentWrapper>
 
             {licenseConfig.enable && <License title={entry.data.title} slug={entry.id} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
 

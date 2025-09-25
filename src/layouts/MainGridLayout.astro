@@ -3,7 +3,6 @@ import BackToTop from "@components/control/BackToTop.astro";
 import Footer from "@components/Footer.astro";
 import Navbar from "@components/Navbar.astro";
 import SideBar from "@components/widget/SideBar.astro";
-import type { MarkdownHeading } from "astro";
 import { Icon } from "astro-icon/components";
 import ImageWrapper from "../components/misc/ImageWrapper.astro";
 import TOC from "../components/widget/TOC.astro";
@@ -13,6 +12,7 @@ import {
   BANNER_HEIGHT_EXTEND,
   MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
 } from "../constants/constants";
+import type { Heading } from "../types/heading";
 import Layout from "./Layout.astro";
 
 interface Props {
@@ -21,7 +21,7 @@ interface Props {
   description?: string;
   lang?: string;
   setOGTypeArticle?: boolean;
-  headings?: MarkdownHeading[];
+  headings?: Heading[];
 }
 
 const { title, banner, description, lang, setOGTypeArticle, headings = [] } = Astro.props;

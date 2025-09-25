@@ -1,0 +1,41 @@
+---
+import "@fontsource-variable/jetbrains-mono";
+import "@fontsource-variable/jetbrains-mono/wght-italic.css";
+
+interface Props {
+  class: string;
+}
+const className = Astro.props.class;
+---
+<div data-pagefind-body class={`prose dark:prose-invert prose-base !max-w-none custom-md ${className}`}>
+  <slot />
+</div>
+
+<script>
+document.addEventListener("click", function (e: MouseEvent) {
+  const target = e.target as Element | null;
+  if (target && target.classList.contains("copy-btn")) {
+    const preEle = target.closest("pre");
+    const codeEle = preEle?.querySelector("code");
+    const code = Array.from(codeEle?.querySelectorAll(".code:not(summary *)") ?? [])
+      .map(el => el.textContent)
+      .map(t => t === "\n" ? "" : t)
+      .join("\n");
+    navigator.clipboard.writeText(code);
+
+    const timeoutId = target.getAttribute("data-timeout-id");
+    if (timeoutId) {
+      clearTimeout(parseInt(timeoutId));
+    }
+
+    target.classList.add("success");
+
+    const newTimeoutId = setTimeout(() => {
+      target.classList.remove("success");
+    }, 1000);
+
+    target.setAttribute("data-timeout-id", newTimeoutId.toString());
+  }
+});
+</script>
+

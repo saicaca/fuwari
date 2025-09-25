@@ -57,7 +57,7 @@ Image mode (base64 <img>):
 
 // Place <tfile> directly (not wrapped in a <p>) so the
 // rehype pipeline doesn't drop or reorder it.
-#fw_tfile("../posts/guide/cover.jpeg", "img", "typst-embedded")
+#fw_tfile("src/assets/images/demo-banner.png", "img", "typst-embedded")
 
 == Spoiler
 

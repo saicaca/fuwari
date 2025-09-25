@@ -3,7 +3,7 @@
  *
  * Usage:
  *   deno run -A scripts/new-post.ts <filename>
- *   # If no extension is provided, .md will be added.
+ *   # If no extension is provided, .html.typ will be added.
  */
 
 // Prefer import-map alias from deno.json for better editor support
@@ -17,9 +17,15 @@ function getDate(): string {
   return `${year}-${month}-${day}`;
 }
 
-function hasMarkdownExt(name: string): boolean {
+function ensureTypstName(name: string): string {
   const ext = extname(name).toLowerCase();
-  return ext === ".md" || ext === ".mdx";
+  if (ext === ".typ") return name;
+  if (ext === "") return `${name}.html.typ`;
+  if (ext === ".md" || ext === ".mdx") {
+    return `${name.slice(0, -ext.length)}.html.typ`;
+  }
+  // Any other extension -> append .html.typ
+  return `${name}.html.typ`;
 }
 
 const args = [...Deno.args];
@@ -32,8 +38,7 @@ if (args.length === 0) {
 }
 
 const rawName = args[0];
-let fileName = rawName;
-if (!hasMarkdownExt(fileName)) fileName += ".md";
+const fileName = ensureTypstName(rawName);
 
 const targetDir = "./src/content/posts/";
 const fullPath = join(targetDir, fileName);
@@ -50,17 +55,7 @@ try {
 // Ensure directory exists (recursive for nested paths)
 await Deno.mkdir(dirname(fullPath), { recursive: true });
 
-const content =
-  "---\n" +
-  `title: ${rawName}\n` +
-  `published: ${getDate()}\n` +
-  `description: ''\n` +
-  `image: ''\n` +
-  "tags: []\n" +
-  `category: ''\n` +
-  "draft: false \n" +
-  `lang: ''\n` +
-  "---\n";
+const content = `//# New Typst post for Fuwari (HTML target)\n#let desc = [Replace this with a short description]\n#metadata((\n  title: "${rawName}",\n  published: "${getDate()}",\n  description: desc,\n  image: "",\n  tags: (),\n  category: "",\n  draft: false,\n  lang: "",\n),)<frontmatter>\n\n= ${rawName}\n\nYour content here.\n`;
 
 await Deno.writeTextFile(fullPath, content);
 

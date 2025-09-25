@@ -1,4 +1,4 @@
-/* Flattened Markdown styles (scoped to .custom-md) */
+/* Content styles for Typst HTML output (scoped to .custom-md) */
 
 .custom-md h1 {
   @apply text-3xl;

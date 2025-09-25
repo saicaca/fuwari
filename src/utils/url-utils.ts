@@ -45,7 +45,7 @@ export function url(path: string): string {
 }
 
 // Derive content base path (e.g., for images) from an entry id and optional filePath.
-// Handles Windows paths and nested posts like content/posts/foo/index.md or .typ
+// Handles Windows paths and nested posts like content/posts/foo/index.typ
 export function deriveContentBasePath(entryId: string, filePath?: string): string {
   if (!filePath || typeof filePath !== "string") {
     const slash = entryId.lastIndexOf("/");

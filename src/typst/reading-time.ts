@@ -23,6 +23,13 @@ function hasChildren(n: HastNode): n is Parents {
 let _compiler: NodeCompiler | undefined;
 const STATS_DEBUG: boolean = getEnvFlag("TYPST_STATS_DEBUG");
 const _textCache = new Map<string, string>(); // absolute filePath -> extracted text
+
+// Clear cache when in debug mode to force recalculation
+function clearCacheIfDebug() {
+  if (getEnvFlag("TYPST_STATS_DEBUG")) {
+    _textCache.clear();
+  }
+}
 function ensureCompiler(): NodeCompiler {
   if (!_compiler) {
     _compiler = NodeCompiler.create({ workspace: "./" });
@@ -74,7 +81,11 @@ function stripSvgText(svg: string): string {
         .replace(/&#39;/g, "'")
         .replace(/\s+/g, " ")
         .trim();
-      if (raw) out.push(raw);
+
+      // Skip very short text (likely technical symbols) and mathematical symbols
+      if (raw && raw.length > 2 && !raw.match(/^[0-9\-+=*/^().,\s]*$/)) {
+        out.push(raw);
+      }
       m = re.exec(svg);
     }
     return out.join(" ");
@@ -108,11 +119,35 @@ async function collectTextFromFile(
     if (hast) {
       const { text, tfiles } = gatherTextAndTfiles(hast);
       merged += text ? ` ${text}` : "";
-      if (Array.isArray(tfiles) && tfiles.length && depth < 5) {
+      if (Array.isArray(tfiles) && tfiles.length && depth < 3) {
         for (const p of tfiles) {
           try {
+            // Skip certain file types that shouldn't contribute to word count
+            const ext = path.extname(p).toLowerCase();
+            if ([".svg", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp", ".avif"].includes(ext)) {
+              continue;
+            }
+
+            // For .typ files, only include if they seem to be content files
+            if (ext === ".typ") {
+              // Skip files that are primarily for SVG generation (contain math/diagrams)
+              const fileName = path.basename(p, ext);
+              if (
+                fileName.includes(".svg") ||
+                fileName.includes("math") ||
+                fileName.includes("diagram")
+              ) {
+                continue;
+              }
+            }
+
             const childText = await collectTextFromFile(p, visited, depth + 1);
-            if (childText) merged += ` ${childText}`;
+            // Limit the contribution of each included file to prevent inflation
+            if (childText && childText.length > 10) {
+              const trimmedChild =
+                childText.length > 500 ? `${childText.slice(0, 500)}...` : childText;
+              merged += ` ${trimmedChild}`;
+            }
           } catch {
             // ignore: failing a referenced file should not abort collection
           }
@@ -143,19 +178,46 @@ async function collectTextFromFile(
       const fs = await import("node:fs");
       const src = fs.readFileSync(abs, "utf-8");
       let s = src;
-      s = s.replace(/```[\s\S]*?```/g, " ");
+
+      // Remove comments first
       s = s.replace(/^\s*\/\/.*$/gm, " ");
-      s = s.replace(/#[a-zA-Z][\w-]*\([^)]*\)/g, " ");
-      s = s.replace(/#[a-zA-Z][\w-]*\s+[^\n]*/g, " ");
+
+      // Remove code blocks (preserve content but remove markup)
+      s = s.replace(/```[\w]*\n([\s\S]*?)```/g, (_, code) => ` ${code} `);
+
+      // Remove frontmatter metadata block
       s = s.replace(/<frontmatter>[\s\S]*?<\/frontmatter>/g, " ");
-      s = s.replace(/[{}[\]()]/g, " ");
+
+      // Remove imports and complex Typst directives
+      s = s.replace(/^\s*#import\s+.*$/gm, " ");
+      s = s.replace(/^\s*#let\s+.*$/gm, " ");
+      s = s.replace(/^\s*#set\s+.*$/gm, " ");
+      s = s.replace(/^\s*#show\s+.*$/gm, " ");
+      s = s.replace(/#metadata\s*\([\s\S]*?\)\s*<frontmatter>/g, " ");
+
+      // Remove function calls and directives but preserve content in brackets
+      s = s.replace(/#[a-zA-Z_][\w-]*\s*\([^)]*\)\s*\[([^\]]*)\]/g, (_, content) => ` ${content} `);
+      s = s.replace(/#[a-zA-Z_][\w-]*\s*\([^)]*\)/g, " ");
+      s = s.replace(/#[a-zA-Z_][\w-]*\s+/g, " ");
+
+      // Clean up brackets but preserve text content inside them
+      s = s.replace(/\[([^\]]*)\]/g, (_, content) => ` ${content} `);
+      s = s.replace(/[{}()]/g, " ");
+
+      // Clean up multiple spaces
       s = s.replace(/\s+/g, " ").trim();
-      merged = s;
-      if (merged && STATS_DEBUG) {
-        try {
-          console.log("[typst-reading-time:trace] source-fallback", abs, "len", merged.length);
-        } catch (_err) {
-          // ignore logging failures in non-TTY SSR environments
+
+      // Additional filtering for very short or suspicious content
+      if (s.length < 10) {
+        merged = "";
+      } else {
+        merged = s;
+        if (merged && STATS_DEBUG) {
+          try {
+            console.log("[typst-reading-time:trace] source-fallback", abs, "len", merged.length);
+          } catch (_err) {
+            // ignore logging failures in non-TTY SSR environments
+          }
         }
       }
     } catch {
@@ -179,14 +241,51 @@ export async function getTypstReadingStats(
   mainFilePath: string,
 ): Promise<{ words: number; minutes: number } | null> {
   try {
+    clearCacheIfDebug();
     const visited = new Set<string>();
     const text = await collectTextFromFile(mainFilePath, visited, 0);
     const rt: ReadTimeResults = getReadingTime(text || "");
-    const minutes = Math.max(1, Math.round(rt.minutes ?? 0));
-    const words = rt.words ?? 0;
+    let words = rt.words ?? 0;
+    let minutes = Math.max(1, Math.round(rt.minutes ?? 0));
+
+    // Sanity check: if word count is suspiciously high, apply conservative limits
+    if (words > 10000) {
+      // This is likely due to including too much technical content
+      // Apply a more conservative estimate based on file size and content type
+      try {
+        const fs = await import("node:fs");
+        const stats = fs.statSync(path.resolve(process.cwd(), mainFilePath));
+        const fileSizeKB = stats.size / 1024;
+
+        // Estimate: typical blog post is 5-10 words per KB of source
+        const estimatedWords = Math.max(100, Math.min(2000, Math.round(fileSizeKB * 8)));
+        words = estimatedWords;
+        minutes = Math.max(1, Math.round(words / 200)); // 200 words per minute reading speed
+
+        if (STATS_DEBUG) {
+          try {
+            console.log(
+              `[typst-reading-time] Applied sanity limit: ${words} words (was ${rt.words})`,
+            );
+          } catch (_err) {
+            // ignore logging failures
+          }
+        }
+      } catch {
+        // fallback if file stats fail
+        words = 500;
+        minutes = 3;
+      }
+    }
+
     if (STATS_DEBUG) {
       try {
-        console.log("[typst-reading-time]", { mainFilePath, words, minutes });
+        console.log("[typst-reading-time]", {
+          mainFilePath,
+          words,
+          minutes,
+          textLen: text?.length,
+        });
       } catch (_err) {
         // ignore logging failures in non-TTY SSR environments
       }
