@@ -1,4 +1,5 @@
 import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants";
+import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
 
 export type SiteConfig = {
 	title: string;
@@ -97,6 +98,13 @@ export type BlogPostData = {
 	nextSlug?: string;
 };
 
+// This type isn't exposed directly, only through a transitive dependency that isn't accessible
+type UnwrapArray<T> = T extends (infer U)[] ? U : T;
+export type ThemeObjectOrShikiThemeName = UnwrapArray<
+	NonNullable<AstroExpressiveCodeOptions["themes"]>
+>;
+
 export type ExpressiveCodeConfig = {
-	theme: string;
+	darkTheme: ThemeObjectOrShikiThemeName;
+	lightTheme: ThemeObjectOrShikiThemeName;
 };
