@@ -11,6 +11,7 @@ export const siteConfig: SiteConfig = {
 	title: "Fuwari",
 	subtitle: "Demo Site",
 	lang: "en", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
+	rtl: false, // Enable right-to-left layout
 	themeColor: {
 		hue: 250, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
 		fixed: false, // Hide the theme color picker for visitors
