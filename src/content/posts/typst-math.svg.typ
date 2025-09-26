@@ -13,7 +13,7 @@
 
 #set page(margin: 0em, height: auto)
 #set text(
-  font: ((name: "Libertinus Serif", covers: "latin-in-cjk"), "Noto Serif SC"),
+  font: ((name: "Noto Sans SC", covers: "latin-in-cjk"), "Noto Serif SC"),
   lang: "zh",
   region: "cn",
 )

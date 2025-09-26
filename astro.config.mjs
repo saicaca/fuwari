@@ -20,6 +20,7 @@ import { rehypeTypstEc } from "./src/plugins/rehype-typst-ec.mjs";
 import { rehypeTypstFootnotes } from "./src/plugins/rehype-typst-footnotes.mjs";
 import { rehypeTypstNormalize } from "./src/plugins/rehype-typst-normalize.mjs";
 import { rehypeTypstTfile } from "./src/plugins/rehype-typst-tfile.mjs";
+import { rehypeTypstTsvg } from "./src/plugins/rehype-typst-tsvg.mjs";
 import { typstOptions, typstTarget } from "./src/typst/targets.mjs";
 
 // https://astro.build/config
@@ -91,6 +92,8 @@ export default defineConfig({
       [rehypeComponents, { components: componentMap }],
       // Ensure <tfile> is rendered even without rehype-components
       rehypeTypstTfile,
+      // Ensure <tsvg> (inline math/doc) renders even without rehype-components
+      rehypeTypstTsvg,
       // Transform Typst <ec> nodes to fully rendered Expressive Code blocks
       rehypeTypstEc,
       // Normalize simple Typst footnotes paragraph to a semantic footnotes section

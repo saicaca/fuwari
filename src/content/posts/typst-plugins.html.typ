@@ -44,8 +44,9 @@ This page demonstrates using original Fuwari components in Typst when targeting 
 
 #github("saicaca/fuwari")
 
-// Note: inline formula (<tsvg>) support has been removed.
-// Use full Typst documents via <tfile> instead.
+// Inline formula via <tsvg>:
+//   #fw_tsvg_code("$ a^2 + b^2 = c^2 $")
+// For complex layouts, still prefer full Typst documents via <tfile>.
 
 == Import another Typst post (SVG)
 

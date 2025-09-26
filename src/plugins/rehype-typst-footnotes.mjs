@@ -114,7 +114,9 @@ function transformFootnoteNode(targetNode, targetIndex, targetParent, DEBUG) {
     if (DEBUG) {
       try {
         console.warn("[rehype-typst-footnotes] failed to replace footnotes", e);
-      } catch {}
+      } catch (_e) {
+        /* ignore logging errors */
+      }
     }
   }
 }
@@ -131,7 +133,9 @@ export function rehypeTypstFootnotes() {
     if (DEBUG) {
       try {
         console.log("[rehype-typst-footnotes] run transformer");
-      } catch {}
+      } catch (_e) {
+        /* ignore logging errors */
+      }
     }
     let pLogged = 0;
     visit(tree, (node, index, parent) => {
@@ -144,11 +148,15 @@ export function rehypeTypstFootnotes() {
           if (/Footnotes/i.test(textFull)) {
             try {
               console.log("[rehype-typst-footnotes] p contains Footnotes:", textFull.slice(0, 160));
-            } catch {}
+            } catch (_e) {
+              /* ignore logging errors */
+            }
           } else if (pLogged < 3) {
             try {
               console.log("[rehype-typst-footnotes] p:", textFull.slice(0, 80));
-            } catch {}
+            } catch (_e) {
+              /* ignore logging errors */
+            }
             pLogged++;
           }
         }

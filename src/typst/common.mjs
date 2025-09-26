@@ -36,22 +36,4 @@ export function makeInlineDocElements({ id, className, svg, tag = "div" }) {
   return [holder, script];
 }
 
-export function makeInlineMathElements({
-  id,
-  className = "typst-math-holder",
-  svg,
-  size,
-  plainText = "",
-  tag = "span",
-}) {
-  const attrs = { id, class: className, "data-svg": toBase64(svg) };
-  if (typeof size === "string" && size) attrs["data-size"] = size;
-  if (typeof plainText === "string") attrs["data-plain"] = plainText;
-  const holder = h(tag, attrs);
-  const script = h(
-    "script",
-    { type: "text/javascript", defer: true },
-    `(()=>{try{const el=document.getElementById('${id}');if(!el)return;const data=el.getAttribute('data-svg');if(!data)return;const bin=atob(data);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);const text=new TextDecoder('utf-8').decode(bytes);el.innerHTML=text;const root=el.querySelector('svg');if(root){root.classList.add('typst-math-svg');root.removeAttribute('width');root.removeAttribute('height');const sz=el.getAttribute('data-size');if(sz){root.style.height=sz;}else{root.style.height='var(--typst-math-size, 2em)';}}const plain=el.getAttribute('data-plain')||'';el.addEventListener('copy',function(ev){try{const sel=window.getSelection();if(sel&&el.contains(sel.anchorNode)){ev.clipboardData.setData('text/plain',plain);ev.preventDefault();}}catch(e){}});}catch(e){console.warn('[typst-inline] error',e)}})();`,
-  );
-  return [holder, script];
-}
+// Removed legacy inline-math support in favor of full-doc inline SVG

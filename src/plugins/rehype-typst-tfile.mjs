@@ -18,7 +18,9 @@ export function rehypeTypstTfile() {
       } catch (e) {
         try {
           console.warn("[rehype-typst-tfile] failed to render tfile", e);
-        } catch {}
+        } catch (_e) {
+          /* ignore logging errors */
+        }
       }
     });
   };

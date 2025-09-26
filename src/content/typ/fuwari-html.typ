@@ -128,3 +128,9 @@
     framespacing: framespacing,
   ),
 )
+
+// ------------------------------------------------------------
+// Inline Typst -> SVG
+// 现已统一为 full doc 内联方式：
+//   #html.elem("tsvg", attrs: (code: "#set page(margin: 0em, height: auto)\n..."))
+// 或者将完整文档放入 code 属性，不再提供专门的“行内公式”包装宏。
