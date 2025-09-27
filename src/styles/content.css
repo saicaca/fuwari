@@ -183,7 +183,7 @@
   position: relative;
   margin: .5rem 0;
   background: var(--license-block-bg);
-  border: none;
+  border: 2px solid var(--primary);
   border-radius: var(--radius-large);
   padding: 1.1rem 1.5rem;
   color: var(--tw-prose-body, inherit);
