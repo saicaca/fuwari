@@ -1,6 +1,6 @@
 import { visit } from "unist-util-visit";
 
-// Normalize Typst-generated HTML fragments so they blend with Markdown:
+// Normalize Typst-generated HTML fragments:
 // - Unwrap any nested <body> element that slips into the content tree
 // - Normalize heading levels so the smallest becomes <h1>
 export function rehypeTypstNormalize() {

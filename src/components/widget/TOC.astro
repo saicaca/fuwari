@@ -34,10 +34,8 @@ const maxLevel = siteConfig.toc.depth;
 {isPostsRoute &&
 <table-of-contents class:list={[className, "group"]}>
     {headings.filter((heading) => heading.depth < minDepth + maxLevel).map((heading) =>
-            <a href={`#${heading.slug}`} class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl
-        hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2
-    ">
-                <div class:list={["transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold",
+            <a href={`#${heading.slug}`} class="toc-entry">
+                <div class:list={["toc-badge",
                     {
                         "bg-[var(--toc-badge-bg)] text-[var(--btn-content)]": heading.depth == minDepth,
                         "ml-4": heading.depth == minDepth + 1,
@@ -46,8 +44,8 @@ const maxLevel = siteConfig.toc.depth;
                 ]}
                 >
                     {heading.depth == minDepth && heading1Count++}
-                    {heading.depth == minDepth + 1 && <div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div>}
-                    {heading.depth == minDepth + 2 && <div class="transition w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10"></div>}
+                    {heading.depth == minDepth + 1 && <div class="toc-dot"></div>}
+                    {heading.depth == minDepth + 2 && <div class="toc-subdot"></div>}
                 </div>
                 <div class:list={["transition text-sm", {
                     "text-50": heading.depth == minDepth || heading.depth == minDepth + 1,
@@ -55,7 +53,7 @@ const maxLevel = siteConfig.toc.depth;
                 }]}>{removeTailingHash(heading.text)}</div>
             </a>
     )}
-    <div id="active-indicator" style="opacity: 0" class:list={[{'hidden': headings.length == 0}, "-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 rounded-xl transition-all " +
+    <div id="active-indicator" style="opacity: 0" class:list={[{'hidden': headings.length == 0}, "-z-10 absolute bg-[var(--toc-btn-hover)] left-0 right-0 radius-xl transition-all " +
         "group-hover:bg-transparent border-2 border-[var(--toc-btn-hover)] group-hover:border-[var(--toc-btn-active)] border-dashed"]}></div>
 </table-of-contents>}
 
@@ -254,7 +252,7 @@ class TableOfContents extends HTMLElement {
 
         // For content without remark-sectionize (e.g., Typst-rendered HTML),
         // create lightweight <section> wrappers so a section stays "active"
-        // until all of its content leaves the viewport — same behavior as Markdown.
+        // until all of its content leaves the viewport.
         for (let i = 0; i < this.headings.length; i++) {
             if (this.sections[i]) continue; // already has a section
             const start = this.headings[i];

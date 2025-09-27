@@ -57,7 +57,7 @@
 
 // ------------------------------------------------------------
 // HTML convenience wrappers (common elements)
-// Import as:  #import "../typ/fuwari-html.typ": fw_a, fw_p, fw_ul, fw_ol, fw_li, fw_img, fw_hr, fw_blockquote, fw_pre, fw_table, fw_thead, fw_tbody, fw_tr, fw_th, fw_td, fw_sup, fw_span, fw_ec, fw_ec_titled, fw_tfile, fw_spoiler
+// Import as:  #import "../typ/fuwari-html.typ": fw_a, fw_p, fw_ul, fw_ol, fw_li, fw_img, fw_hr, fw_blockquote, fw_pre, fw_sup, fw_span, fw_ec, fw_ec_titled, fw_tfile, fw_spoiler
 
 #let fw_a(href, body) = html.elem("a", attrs: (href: href))[#body]
 #let fw_p(body) = html.elem("p")[#body]
@@ -74,13 +74,8 @@
 }
 #let fw_hr() = html.elem("hr")
 
-// Tables
-#let fw_table(body) = html.elem("table")[#body]
-#let fw_thead(body) = html.elem("thead")[#body]
-#let fw_tbody(body) = html.elem("tbody")[#body]
-#let fw_tr(body) = html.elem("tr")[#body]
-#let fw_th(body) = html.elem("th")[#body]
-#let fw_td(body) = html.elem("td")[#body]
+// Tables support has been removed on purpose to simplify styling footprint.
+// If used by older posts, consider converting them to lists.
 
 // Expressive Code helper (simple forms)
 #let fw_ec(lang, code) = html.elem("ec", attrs: (lang: lang, code: code))
@@ -98,7 +93,7 @@
 #let fw_dd(body) = html.elem("dd")[#body]
 
 // Variants
-#let fw_table_cls(cls, body) = html.elem("table", attrs: (class: cls))[#body]
+// #let fw_table_cls was removed together with tables.
 #let fw_a_target(href, target, body) = html.elem("a", attrs: (href: href, target: target))[#body]
 
 // Iframe helper for video embeds

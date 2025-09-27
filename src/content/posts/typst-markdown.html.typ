@@ -58,8 +58,8 @@ Delimited code block with syntax highlighting:
 #fw_ol[
   #fw_li[First, get these ingredients:
     #fw_ul[
-      #fw_li[carrots]
-      #fw_li[celery]
+      #fw_li[#fw_img("https://placehold.co/800x480/png", "An exemplary image", "100%")]
+      #fw_li[#fw_tfile("src/content/posts/typst-math.svg.typ", "inline", "typst-math")]
       #fw_li[lentils]
     ]
   ]
@@ -69,26 +69,7 @@ Delimited code block with syntax highlighting:
 
 Here's a link to #fw_a("http://foo.bar")[a website], to a #fw_a("local-doc.html")[local doc], and to a #fw_a("#an-h2-header")[section heading in the current doc]. Here's a footnote #html.elem("sup")[#html.elem("a", attrs: (href: "#user-content-fn-1", id: "user-content-fnref-1", "data-footnote-ref": "", "aria-describedby": "footnote-label"))[1]].
 
-== Tables
-
-#fw_table_cls("markdown-table")[
-  #fw_thead[
-    #fw_tr[
-      #fw_th[size]
-      #fw_th[material]
-      #fw_th[color]
-    ]
-  ]
-  #fw_tbody[
-    #fw_tr[ #fw_td[9]  #fw_td[leather]        #fw_td[brown] ]
-    #fw_tr[ #fw_td[10] #fw_td[hemp canvas]    #fw_td[natural] ]
-    #fw_tr[ #fw_td[11] #fw_td[glass]          #fw_td[transparent] ]
-  ]
-]
-
-#fw_p[#html.elem("em")[Table: Shoes, their sizes, and what they're made of]]
-
-#fw_hr()
+/* Tables section removed intentionally: this site no longer renders tables. */
 
 Images:
 
@@ -157,5 +138,7 @@ $M = mat(
 )
 ",
 ))
+
+= 123
 
 #html.elem("p")[Footnotes: #html.elem("a", attrs: (id: "fn1"))[1] Footnote text goes here.]

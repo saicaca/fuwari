@@ -1,7 +1,7 @@
 //# Typst HTML demo mirroring Expressive Code Markdown examples
 #import "../typ/fuwari-html.typ": *
 
-#let desc = [Typst equivalents of the Expressive Code (EC) Markdown examples. Each block uses #html.elem("ec") so that the rehype-typst-ec plugin renders fully styled EC blocks.]
+#let desc = [Typst equivalents of the Expressive Code (EC) examples. Each block uses ec so that the rehype-typst-ec plugin renders fully styled EC blocks.]
 #metadata((
   title: "Expressive Code (Typst HTML Examples)",
   published: "2025-09-23",

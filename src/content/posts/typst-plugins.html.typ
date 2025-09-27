@@ -11,6 +11,7 @@
     description: desc,
     tags: ("Typst", "Fuwari", "Plugins"),
     category: "Demo",
+    image: "../../assets/images/demo-banner.png",
   ),
 )<frontmatter>
 

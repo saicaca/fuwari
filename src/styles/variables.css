@@ -1,7 +1,10 @@
 /* Replaces variables.styl with plain CSS variables (light/dark pairs). */
 
 :root {
-  --radius-large: 1rem;
+  --radius-sm: 0.375rem; /* ~6px */
+  --radius-md: 0.5rem;   /* ~8px */
+  --radius-lg: 0.75rem;  /* ~12px */
+  --radius-large: 1rem;  /* historical name, equals xl */
   --content-delay: 150ms;
 
   /* Shared font stacks */
@@ -40,9 +43,6 @@
   --btn-card-bg-hover: oklch(0.98 0.005 var(--hue));
   --btn-card-bg-active: oklch(0.9 0.03 var(--hue));
 
-  --enter-btn-bg: var(--btn-regular-bg);
-  --enter-btn-bg-hover: var(--btn-regular-bg-hover);
-  --enter-btn-bg-active: var(--btn-regular-bg-active);
 
   --deep-text: oklch(0.25 0.02 var(--hue));
   --title-active: oklch(0.6 0.1 var(--hue));
@@ -93,6 +93,7 @@
   --toc-btn-active: oklch(0.90 0.015 var(--hue));
   --toc-width: calc((100vw - var(--page-width)) / 2 - 1rem);
   --toc-item-active: oklch(0.70 0.13 var(--hue));
+  --toc-subdot-bg: rgba(0, 0, 0, 0.05);
 
   /* Layout helpers */
   --panel-top-offset: 5.25rem;
@@ -114,6 +115,8 @@
 
   /* Footer border color */
   --footer-border: oklch(0.85 0.01 var(--hue));
+
+  /* (Removed table variables) */
 }
 
 :root.dark {
@@ -166,6 +169,7 @@
   --toc-btn-hover: oklch(0.22 0.02 var(--hue));
   --toc-btn-active: oklch(0.25 0.02 var(--hue));
   --toc-item-active: oklch(0.35 0.07 var(--hue));
+  --toc-subdot-bg: rgba(255, 255, 255, 0.10);
 
   --btn-regular-dark-bg: oklch(0.30 0.02 var(--hue));
   --btn-regular-dark-hover: oklch(0.35 0.03 var(--hue));
@@ -177,4 +181,6 @@
 
   --timeline-dot: oklch(0.35 0.07 var(--hue));
   --footer-border: rgba(255, 255, 255, 0.15);
+
+  /* (Removed table variables for dark mode) */
 }

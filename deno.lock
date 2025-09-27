@@ -52,6 +52,7 @@
     "npm:sharp@~0.34.4": "0.34.4",
     "npm:svelte@^5.39.5": "5.39.5_acorn@8.15.0",
     "npm:tailwindcss@^3.4.17": "3.4.17_postcss@8.5.6",
+    "npm:typescript@5.9.2": "5.9.2",
     "npm:typescript@^5.9.2": "5.9.2",
     "npm:unist-util-visit@5": "5.0.0"
   },

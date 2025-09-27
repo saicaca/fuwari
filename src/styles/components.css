@@ -1,0 +1,132 @@
+@tailwind components;
+
+@layer components {
+  /* Cards & containers */
+  .card-base   { @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition; }
+  .card-shadow { @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)]; }
+
+  /* Common paddings inside cards/panels */
+  .inset-md { @apply pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6; }
+
+  /* Links */
+  .expand-animation {
+    @apply relative before:ease-out before:transition active:bg-none hover:before:bg-[var(--btn-plain-bg-hover)] active:before:bg-[var(--btn-plain-bg-active)] z-0
+      before:absolute before:rounded-[inherit] before:inset-0 before:scale-[0.85] hover:before:scale-100 before:-z-10;
+  }
+  .link    { @apply transition rounded-md p-1   -m-1   expand-animation; }
+  .link-lg { @apply transition rounded-md p-1.5 -m-1.5 expand-animation; }
+
+  /* Plain text button */
+  .btn-plain { @apply transition relative flex items-center justify-center bg-none hover:text-[var(--primary)] text-black/75; }
+  .dark .btn-plain { @apply text-white/75; }
+  .btn-plain:not(.scale-animation) { @apply hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]; }
+  .btn-plain.scale-animation { @apply expand-animation; }
+  .btn-plain.scale-animation.current-theme-btn { @apply before:scale-100 before:opacity-100 before:bg-[var(--btn-plain-bg-hover)] text-[var(--primary)]; }
+
+  /* Regular button */
+  .btn-regular { @apply transition flex items-center justify-center bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)] text-[var(--btn-content)]; }
+
+  /* Regular button – dark surface variant (copy buttons etc.) */
+  .btn-regular-dark { @apply flex items-center justify-center; background: var(--btn-regular-dark-bg); }
+  .btn-regular-dark:hover  { background: var(--btn-regular-dark-hover); }
+  .btn-regular-dark:active { background: var(--btn-regular-dark-active); }
+  .btn-regular-dark.success { background: var(--btn-regular-dark-success); }
+
+  /* Card-style button */
+  .btn-card { @apply transition flex items-center justify-center bg-[var(--card-bg)] hover:bg-[var(--btn-card-bg-hover)] active:bg-[var(--btn-card-bg-active)]; }
+  .btn-card.disabled { @apply pointer-events-none opacity-40; }
+
+  /* Size helpers for square icon buttons */
+  .btn-square-10 { @apply h-10 w-10; }
+  .btn-square-11 { @apply h-11 w-11; }
+
+  /* Convenience presets for common icon buttons */
+  .btn-icon { @apply btn-regular rounded-[var(--radius-md)] btn-square-10 active:scale-90; }
+  .btn-icon-text { @apply btn-regular rounded-[var(--radius-md)] h-10 gap-2 px-3 font-bold active:scale-95; }
+
+  /* Floating panels */
+  .float-panel { top: var(--panel-top-offset); @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none; }
+  .float-panel-closed { @apply -translate-y-1 opacity-0 pointer-events-none; }
+  .search-panel mark { @apply bg-transparent text-[var(--primary)]; }
+  .search-panel { max-height: calc(100vh - 100px); overflow-y: auto; }
+
+  /* TOC */
+  .toc-hide, .toc-not-ready { @apply opacity-0 pointer-events-none; }
+  #toc-inner-wrapper { mask-image: linear-gradient(to bottom, transparent 0%, black 2rem, black calc(100% - 2rem), transparent 100%); }
+  .toc-entry { @apply px-2 flex gap-2 relative transition w-full min-h-9 rounded-[var(--radius-large)] py-2 hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)]; }
+  .toc-badge { @apply transition w-5 h-5 shrink-0 text-xs flex items-center justify-center font-bold; border-radius: var(--radius-md); }
+  .toc-dot    { width: 0.5rem; height: 0.5rem; border-radius: 0.1875rem; background: var(--toc-badge-bg); }
+  .toc-subdot { width: 0.375rem; height: 0.375rem; border-radius: 0.125rem; background: var(--toc-subdot-bg); }
+
+  /* Post metadata */
+  .meta-icon { @apply w-8 h-8 transition rounded-md flex items-center justify-center bg-[var(--btn-regular-bg)] text-[var(--btn-content)] mr-2; }
+  .meta-link { @apply link-lg transition text-sm font-medium hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap; }
+  /* theme-aware base color for meta links */
+  .meta-link { color: rgba(0,0,0,0.5); }
+  .dark .meta-link { color: rgba(255,255,255,0.5); }
+  .meta-subtle-row { @apply text-sm flex gap-4 transition text-black/30; }
+  .dark .meta-subtle-row { @apply text-white/30; }
+
+  /* Title link used in PostCard */
+  .title-link {
+    @apply transition w-full block font-bold mb-3 text-3xl hover:text-[var(--primary)] active:text-[var(--title-active)] text-black/90;
+  }
+  .dark .title-link {
+    @apply text-white/90;
+  }
+  /* Navbar link & icon presets */
+  .btn-nav { @apply btn-plain scale-animation rounded-[var(--radius-md)] h-11 font-bold px-5 active:scale-95; }
+  .btn-nav-icon { @apply btn-plain scale-animation rounded-[var(--radius-md)] btn-square-11 active:scale-90; }
+
+  /* List-like menu item (e.g., mobile nav menu) */
+  .btn-list-item { @apply btn-plain rounded-[var(--radius-md)] h-10 w-full flex !justify-between items-center py-2 pl-3 pr-1 gap-8; }
+
+  /* Decorative left bar for title link (md and up) */
+  .title-link::before {
+    content: "";
+    position: absolute;
+    width: 0.25rem; /* w-1 */
+    height: 1.25rem; /* h-5 */
+    border-radius: 0.375rem; /* rounded-md */
+    background: var(--primary);
+    top: 35px;
+    left: 18px;
+    display: none;
+  }
+  @media (min-width: 768px) { /* md */
+    .title-link::before { display: block; }
+  }
+
+  /* Footer container */
+  .footer-container { @apply transition border-dashed border-[var(--footer-border)] rounded-[var(--radius-large)] mb-12 flex flex-col items-center justify-center px-6; }
+
+  /* Badge (numeric pill, e.g., Categories count) */
+  .badge {
+    @apply transition px-2 h-7 ml-4 min-w-[2rem] text-sm font-bold flex items-center justify-center;
+    border-radius: var(--radius-md);
+    color: var(--btn-content);
+    background: var(--btn-regular-bg);
+  }
+  :root.dark .badge { color: var(--deep-text); background: var(--primary); }
+
+  /* Misc */
+  .dash-line { position: relative; }
+  .dash-line::before {
+    content: "";
+    position: absolute;
+    width: var(--dashline-width-percent);
+    height: 100%;
+    left: calc(50% - 1px);
+    border-left: var(--dashline-border-thickness) dashed var(--line-color);
+    pointer-events: none;
+    transition: all 0.3s;
+    transform: translateY(-50%);
+  }
+  .collapsed { height: var(--collapsedHeight); }
+
+  /* Back to Top */
+  .back-to-top-wrapper { width: 3.75rem; height: 3.75rem; position: absolute; right: 0; top: 0; pointer-events: none; }
+  .back-to-top-btn { color: var(--primary); font-size: 2.25rem; font-weight: 700; border: none; position: fixed; bottom: 10rem; opacity: 1; cursor: pointer; transform: translateX(5rem); pointer-events: auto; }
+  .back-to-top-btn.hide { transform: translateX(5rem) scale(0.9); opacity: 0; pointer-events: none; }
+  .back-to-top-btn:active { transform: translateX(5rem) scale(0.9); }
+}

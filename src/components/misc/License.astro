@@ -19,7 +19,7 @@ const licenseConf = licenseConfig;
 const postUrl = decodeURIComponent(Astro.url.toString());
 ---
 <div class={`relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 ${className}`}>
-    <div class="transition font-bold text-black/75 dark:text-white/75">
+    <div class="transition font-bold text-75">
         {title}
     </div>
     <a href={postUrl} class="link text-[var(--primary)]">
@@ -27,15 +27,15 @@ const postUrl = decodeURIComponent(Astro.url.toString());
     </a>
     <div class="flex gap-6 mt-2">
         <div>
-            <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.author)}</div>
-            <div class="transition text-black/75 dark:text-white/75 line-clamp-2">{profileConf.name}</div>
+            <div class="transition text-30 text-sm">{i18n(I18nKey.author)}</div>
+            <div class="transition text-75 line-clamp-2">{profileConf.name}</div>
         </div>
         <div>
-            <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.publishedAt)}</div>
-            <div class="transition text-black/75 dark:text-white/75 line-clamp-2">{formatDateToYYYYMMDD(pubDate)}</div>
+            <div class="transition text-30 text-sm">{i18n(I18nKey.publishedAt)}</div>
+            <div class="transition text-75 line-clamp-2">{formatDateToYYYYMMDD(pubDate)}</div>
         </div>
         <div>
-            <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.license)}</div>
+            <div class="transition text-30 text-sm">{i18n(I18nKey.license)}</div>
             <a href={licenseConf.url} target="_blank" class="link text-[var(--primary)] line-clamp-2">{licenseConf.name}</a>
         </div>
     </div>

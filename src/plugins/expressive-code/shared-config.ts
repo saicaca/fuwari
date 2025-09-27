@@ -10,14 +10,17 @@ import { expressiveCodeConfig } from "../../config.ts";
 import { pluginCustomCopyButton } from "./custom-copy-button.ts";
 import { pluginLanguageBadge } from "./language-badge.ts";
 
-export const ecTheme = expressiveCodeConfig.theme;
+export const ecTheme: string = expressiveCodeConfig.theme;
 
-export const ecDefaultProps = {
+export const ecDefaultProps: {
+  wrap: boolean;
+  overridesByLang: Record<string, { showLineNumbers?: boolean }>;
+} = {
   wrap: true,
   overridesByLang: { shellsession: { showLineNumbers: false } },
 };
 
-export const ecStyleOverrides = {
+export const ecStyleOverrides: Record<string, unknown> = {
   codeBackground: "var(--codeblock-bg)",
   borderRadius: "0.75rem",
   borderColor: "none",
@@ -41,7 +44,7 @@ export const ecStyleOverrides = {
 // Plugin presets for the two contexts we use:
 
 // - Astro integration (astro-expressive-code) augments a default set.
-export function ecAstroPlugins() {
+export function ecAstroPlugins(): unknown[] {
   return [
     pluginCollapsibleSections(),
     pluginLineNumbers(),
@@ -51,7 +54,7 @@ export function ecAstroPlugins() {
 }
 
 // - Raw engine in rehype (needs full set for parity with astro-expressive-code)
-export function ecEnginePlugins() {
+export function ecEnginePlugins(): unknown[] {
   return [
     pluginFrames({ showCopyToClipboardButton: false }),
     pluginTextMarkers(),

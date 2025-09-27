@@ -1,0 +1,41 @@
+@tailwind utilities;
+
+@layer utilities {
+  /* Text color utilities mapped to theme variables */
+  .text-90 { @apply text-black/90 dark:text-white/90; }
+  .text-75 { @apply text-black/75 dark:text-white/75; }
+  .text-50 { @apply text-black/50 dark:text-white/50; }
+  .text-30 { @apply text-black/30 dark:text-white/30; }
+  .text-25 { @apply text-black/25 dark:text-white/25; }
+
+  /* Radius helpers mapped to CSS variables */
+  .radius-sm { border-radius: var(--radius-sm); }
+  .radius-md { border-radius: var(--radius-md); }
+  .radius-lg { border-radius: var(--radius-lg); }
+  .radius-xl { border-radius: var(--radius-large); }
+
+  /* Semantic icon sizes to reduce magic numbers in templates */
+  .icon-xl  { @apply text-[1.75rem]; }
+  .icon-2xl { @apply text-[2rem]; }
+  .icon-md  { @apply text-[1.25rem]; }
+  .icon-lg  { @apply text-[1.5rem]; }
+
+  /* Hide native scrollbars inside scrollable panes */
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* Link underline styling */
+  .link-underline {
+    @apply transition underline decoration-2 decoration-dashed decoration-[var(--link-underline)]
+      hover:decoration-[var(--link-hover)] active:decoration-[var(--link-active)] underline-offset-[0.25rem];
+  }
+
+  /* Simple divider dot for inline lists */
+  .with-divider {
+    @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-[var(--meta-divider)] before:text-sm
+      before:font-medium before:first-of-type:hidden before:transition;
+  }
+}

@@ -30,10 +30,10 @@ const { Content, headings } = renderedModule;
 let remarkPluginFrontmatter: RemarkFrontmatter = { words: 0, minutes: 0, excerpt: "" };
 const { computeTypstStatsIfMissing } = await import("../../utils/typst-stats.ts");
 remarkPluginFrontmatter = await computeTypstStatsIfMissing(entry, remarkPluginFrontmatter);
+const { coerceDescriptionToString } = await import("../../utils/desc-utils.ts");
+const metaDescriptionCandidate = coerceDescriptionToString(entry.data.description);
 const metaDescription: string =
-  typeof entry.data.description === "string"
-    ? entry.data.description
-    : (remarkPluginFrontmatter?.excerpt ?? entry.data.title);
+  metaDescriptionCandidate || (remarkPluginFrontmatter?.excerpt ?? entry.data.title);
 
 const basePath = deriveContentBasePath(entry.id, entry.filePath);
 
@@ -41,7 +41,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: entry.data.title,
-  description: entry.data.description || entry.data.title,
+  description: metaDescription || entry.data.title,
   keywords: entry.data.tags,
   author: {
     "@type": "Person",
@@ -62,15 +62,15 @@ const jsonLd = {
             {}
         ]}>
             <!-- word count and reading time -->
-            <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation">
+            <div class="flex flex-row text-30 gap-5 mb-3 transition onload-animation">
                 <div class="flex flex-row items-center">
-                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+                    <div class="transition h-6 w-6 rounded-md bg-[var(--btn-regular-bg)] text-50 flex items-center justify-center mr-2">
                         <Icon name="material-symbols:notes-rounded"></Icon>
                     </div>
                     <div class="text-sm">{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount)}</div>
                 </div>
                 <div class="flex flex-row items-center">
-                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+                    <div class="transition h-6 w-6 rounded-md bg-[var(--btn-regular-bg)] text-50 flex items-center justify-center mr-2">
                         <Icon name="material-symbols:schedule-outline-rounded"></Icon>
                     </div>
                     <div class="text-sm">
@@ -85,7 +85,7 @@ const jsonLd = {
                     data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title"
                     class="transition w-full block font-bold mb-3
                     text-3xl md:text-[2.25rem]/[2.75rem]
-                    text-black/90 dark:text-white/90
+                    text-90
                     md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
                     before:absolute before:top-[0.75rem] before:left-[-1.125rem]
                 ">
@@ -108,15 +108,15 @@ const jsonLd = {
             <!-- always show cover as long as it has one -->
 
             {entry.data.image &&
-                <ImageWrapper id="post-cover" src={entry.data.image} basePath={basePath} class="mb-8 rounded-xl banner-container onload-animation"/>
+                <ImageWrapper id="post-cover" src={entry.data.image} basePath={basePath} class="mb-8 radius-xl banner-container onload-animation"/>
             }
 
 
-            <ContentWrapper class="mb-6 markdown-content onload-animation">
+            <ContentWrapper class="mb-6 typst-content onload-animation">
                 <Content />
             </ContentWrapper>
 
-            {licenseConfig.enable && <License title={entry.data.title} slug={entry.id} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
+            {licenseConfig.enable && <License title={entry.data.title} slug={entry.id} pubDate={entry.data.published} class="mb-6 radius-xl license-container onload-animation"></License>}
 
         </div>
     </div>
@@ -124,9 +124,9 @@ const jsonLd = {
     <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
         <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
            class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.nextSlug}]}>
-            {entry.data.nextSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4" >
-                <Icon name="material-symbols:chevron-left-rounded" class="text-[2rem] text-[var(--primary)]" />
-                <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
+            {entry.data.nextSlug && <div class="btn-card radius-xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4" >
+                <Icon name="material-symbols:chevron-left-rounded" class="icon-2xl text-[var(--primary)]" />
+                <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-75">
                     {entry.data.nextTitle}
                 </div>
             </div>}
@@ -134,11 +134,11 @@ const jsonLd = {
 
         <a href={entry.data.prevSlug ? getPostUrlBySlug(entry.data.prevSlug) : "#"}
            class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !entry.data.prevSlug}]}>
-            {entry.data.prevSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4">
-                <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
+            {entry.data.prevSlug && <div class="btn-card radius-xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4">
+                <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-75">
                     {entry.data.prevTitle}
                 </div>
-                <Icon name="material-symbols:chevron-right-rounded" class="text-[2rem] text-[var(--primary)]" />
+                <Icon name="material-symbols:chevron-right-rounded" class="icon-2xl text-[var(--primary)]" />
             </div>}
         </a>
     </div>

@@ -63,7 +63,7 @@ const mainPanelTop = siteConfig.banner.enable
                                    class:list={["group onload-animation transition-all absolute flex justify-center items-center rounded-full " +
                                    "px-3 right-4 -top-[3.25rem] bg-black/60 hover:bg-black/70 h-9", {"hover:pr-9 active:bg-black/80": hasBannerLink}]}
             >
-                <Icon class="text-white/75 text-[1.25rem] mr-1" name="material-symbols:copyright-outline-rounded" ></Icon>
+                <Icon class="text-white/75 icon-md mr-1" name="material-symbols:copyright-outline-rounded" ></Icon>
                 <div class="text-white/75 text-xs">{siteConfig.banner.credit.text}</div>
                 <Icon class:list={["transition absolute text-[var(--primary)] right-4 text-[0.75rem] opacity-0",
                     {"group-hover:opacity-100": hasBannerLink}]}
@@ -122,7 +122,7 @@ const mainPanelTop = siteConfig.banner.enable
     var tocRoot = document.querySelector('#toc table-of-contents');
     if (!tocRoot) return;
     if (tocRoot.querySelector('a')) return; // already rendered by SSR
-    var scope = document.querySelector('.markdown-content') || document;
+    var scope = document.querySelector('.typst-content') || document;
     var nodes = Array.prototype.slice.call(scope.querySelectorAll('h1, h2, h3'));
     if (!nodes.length) return;
     var depths = nodes.map(function(n){ return parseInt(n.tagName.substring(1)) || 0; }).filter(function(d){ return d>0; });
@@ -140,12 +140,12 @@ const mainPanelTop = siteConfig.banner.enable
       if (!n.id){ var gen = text.toLowerCase().trim().replace(/\s+/g,'-'); if (!gen) continue; n.id = gen; }
       var a = document.createElement('a');
       a.setAttribute('href','#'+encodeURIComponent(n.id));
-      a.setAttribute('class','px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2');
+      a.setAttribute('class','toc-entry');
       var b = document.createElement('div');
-      b.setAttribute('class','transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold');
+      b.setAttribute('class','toc-badge');
       if (depth===min){ b.classList.add('bg-[var(--toc-badge-bg)]'); b.classList.add('text-[var(--btn-content)]'); b.textContent=String(h1Count++); }
-      else if (depth===min+1){ b.classList.add('ml-4'); var d1=document.createElement('div'); d1.setAttribute('class','transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]'); b.appendChild(d1); }
-      else if (depth===min+2){ b.classList.add('ml-8'); var d2=document.createElement('div'); d2.setAttribute('class','transition w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10'); b.appendChild(d2); }
+      else if (depth===min+1){ b.classList.add('ml-4'); var d1=document.createElement('div'); d1.setAttribute('class','toc-dot'); b.appendChild(d1); }
+      else if (depth===min+2){ b.classList.add('ml-8'); var d2=document.createElement('div'); d2.setAttribute('class','toc-subdot'); b.appendChild(d2); }
       var lbl=document.createElement('div');
       lbl.setAttribute('class','transition text-sm');
       if (depth===min || depth===min+1) lbl.classList.add('text-50');

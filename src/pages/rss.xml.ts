@@ -27,8 +27,9 @@ export const GET: APIRoute = async (context) => {
         // For Typst entries, compile a lightweight text excerpt for RSS content
         const excerpt = await extractTypstExcerpt(post.filePath || "");
         const cleanedContent = stripInvalidXmlChars(excerpt);
+        const { coerceDescriptionToString } = await import("../utils/desc-utils.ts");
         const description: string =
-          typeof post.data.description === "string" ? post.data.description : post.data.title;
+          coerceDescriptionToString(post.data.description) || post.data.title;
         return {
           title: post.data.title,
           pubDate: post.data.published,

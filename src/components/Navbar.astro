@@ -23,20 +23,20 @@ let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset)
     <div class:list={[
         className,
         "card-base !overflow-visible max-w-[var(--page-width)] h-[4.5rem] !rounded-t-none mx-auto flex items-center justify-between px-4"]}>
-        <a href={url('/')} class="btn-plain scale-animation rounded-lg h-[3.25rem] px-5 font-bold active:scale-95">
+        <a href={url('/')} class="btn-plain scale-animation radius-md h-[3.25rem] px-5 font-bold active:scale-95">
             <div class="flex flex-row text-[var(--primary)] items-center text-md">
-                <Icon name="material-symbols:home-outline-rounded" class="text-[1.75rem] mb-1 mr-2" />
+                <Icon name="material-symbols:home-outline-rounded" class="icon-xl mb-1 mr-2" />
                 {siteConfig.title}
             </div>
         </a>
         <div class="hidden md:flex">
             {links.map((l) => {
                 return <a aria-label={l.name} href={l.external ? l.url : url(l.url)} target={l.external ? "_blank" : null}
-                          class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95"
+                          class="btn-nav"
                 >
                     <div class="flex items-center">
                         {l.name}
-                        {l.external && <Icon name="fa6-solid:arrow-up-right-from-square" class="text-[0.875rem] transition -translate-y-[1px] ml-1 text-black/[0.2] dark:text-white/[0.2]"></Icon>}
+                        {l.external && <Icon name="fa6-solid:arrow-up-right-from-square" class="text-[0.875rem] transition -translate-y-[1px] ml-1 text-25"></Icon>}
                     </div>
                 </a>;
             })}
@@ -45,13 +45,13 @@ let links: NavBarLink[] = navBarConfig.links.map((item: NavBarLink | LinkPreset)
             <!--<SearchPanel client:load>-->
             <Search client:only="svelte"></Search>
             {!siteConfig.themeColor.fixed && (
-                    <button aria-label="Display Settings" class="btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90" id="display-settings-switch">
-                        <Icon name="material-symbols:palette-outline" class="text-[1.25rem]"></Icon>
+                    <button aria-label="Display Settings" class="btn-nav-icon" id="display-settings-switch">
+                        <Icon name="material-symbols:palette-outline" class="icon-md"></Icon>
                     </button>
             )}
             <LightDarkSwitch client:only="svelte"></LightDarkSwitch>
-            <button aria-label="Menu" name="Nav Menu" class="btn-plain scale-animation rounded-lg w-11 h-11 active:scale-90 md:!hidden" id="nav-menu-switch">
-                <Icon name="material-symbols:menu-rounded" class="text-[1.25rem]"></Icon>
+            <button aria-label="Menu" name="Nav Menu" class="btn-nav-icon md:!hidden" id="nav-menu-switch">
+                <Icon name="material-symbols:menu-rounded" class="icon-md"></Icon>
             </button>
         </div>
         <NavMenuPanel links={links}></NavMenuPanel>
@@ -119,7 +119,6 @@ async function loadPagefind() {
         window.pagefind = pagefind;
 
         document.dispatchEvent(new CustomEvent('pagefindready'));
-        console.log('Pagefind loaded and initialized successfully, event dispatched.');
     } catch (error) {
         console.error('Failed to load Pagefind:', error);
         window.pagefind = {
@@ -127,7 +126,6 @@ async function loadPagefind() {
             options: () => Promise.resolve(),
         };
         document.dispatchEvent(new CustomEvent('pagefindloaderror'));
-        console.log('Pagefind load error, event dispatched.');
     }
 }
 
