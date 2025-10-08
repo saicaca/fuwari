@@ -125,6 +125,11 @@ export default defineConfig({
 						important: (x, y) => AdmonitionComponent(x, y, "important"),
 						caution: (x, y) => AdmonitionComponent(x, y, "caution"),
 						warning: (x, y) => AdmonitionComponent(x, y, "warning"),
+						// the `remarkGithubAdmonitionsToDirectives` plugin generates
+						// `:::info` directives for `> [!IMPORTANT]` and `:::danger`s for `> [!CAUTION]`
+						// make it happy
+						info: (x, y) => AdmonitionComponent(x, y, 'important'),
+						danger: (x, y) => AdmonitionComponent(x, y, 'caution'),
 					},
 				},
 			],
