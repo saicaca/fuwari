@@ -14,6 +14,7 @@ export type SiteConfig = {
 		| "th"
 		| "vi"
 		| "tr"
+		| "fa"
 		| "id";
 
 	themeColor: {
