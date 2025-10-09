@@ -4,12 +4,7 @@ import fs from "fs"
 import path from "path"
 
 function getDate() {
-  const today = new Date()
-  const year = today.getFullYear()
-  const month = String(today.getMonth() + 1).padStart(2, "0")
-  const day = String(today.getDate()).padStart(2, "0")
-
-  return `${year}-${month}-${day}`
+  return new Date().toISOString()
 }
 
 const args = process.argv.slice(2)
