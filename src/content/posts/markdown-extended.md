@@ -20,6 +20,18 @@ Create a GitHub repository card with the code `::github{repo="<owner>/<repo>"}`.
 ::github{repo="saicaca/fuwari"}
 ```
 
+## GitLab Repository Cards
+
+You can also add dynamic cards that show a GitLab repository, on page load, the repository information is pulled from the GitLab API.
+
+::gitlab{repo="gitlab-org/gitlab"}
+
+Create a GitHub repository card with the code `::gitlab{repo="<owner>/<repo>"}`.
+
+```mdx
+::gitlab{repo="gitlab-org/gitlab"}
+```
+
 ## Admonitions
 
 Following types of admonitions are supported: `note` `tip` `important` `warning` `caution`
