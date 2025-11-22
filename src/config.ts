@@ -4,6 +4,7 @@ import type {
 	NavBarConfig,
 	ProfileConfig,
 	SiteConfig,
+	CommentConfig,
 } from "./types/config";
 import { LinkPreset } from "./types/config";
 
@@ -87,4 +88,20 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 	// Note: Some styles (such as background color) are being overridden, see the astro.config.mjs file.
 	// Please select a dark theme, as this blog theme currently only supports dark background color
 	theme: "github-dark",
+};
+
+export const commentConfig: CommentConfig = {
+	enable: true,
+	type: "waline",
+	waline: {
+		serverURL: "https://your-waline-app.vercel.app", // 替换为你的 Waline 服务端地址
+		lang: "zh-CN",
+		pageSize: 10,
+		wordLimit: 0,
+		count: 5,
+		pageview: true,
+		reaction: true,
+		requiredMeta: ["nick", "mail"],
+		whiteList: [],
+	},
 };

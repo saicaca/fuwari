@@ -100,3 +100,21 @@ export type BlogPostData = {
 export type ExpressiveCodeConfig = {
 	theme: string;
 };
+
+export type WalineConfig = {
+	serverURL: string;
+	lang?: string;
+	pageSize?: number;
+	wordLimit?: number;
+	count?: number;
+	pageview?: boolean;
+	reaction?: boolean;
+	requiredMeta?: string[];
+	whiteList?: string[];
+};
+
+export type CommentConfig = {
+	enable: boolean;
+	type: "waline";
+	waline: WalineConfig;
+};

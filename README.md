@@ -26,6 +26,7 @@ A static blog template built with [Astro](https://astro.build).
 - [x] Light / dark mode
 - [x] Customizable theme colors & banner
 - [x] Responsive design
+- [x] Comment system (Waline)
 - [x] Search functionality with [Pagefind](https://pagefind.app/)
 - [x] [Markdown extended features](https://github.com/saicaca/fuwari?tab=readme-ov-file#-markdown-extended-syntax)
 - [x] Table of contents
@@ -87,6 +88,31 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm new-post <filename>` | Create a new post                                   |
 | `pnpm astro ...`           | Run CLI commands like `astro add`, `astro check`    |
 | `pnpm astro --help`        | Get help using the Astro CLI                        |
+
+
+
+## Comment system
+
+This theme supports **Waline**. Configuration is located in `src/config.ts`.
+
+Waline requires a separate backend server.
+
+1. **Deploy Server**: Follow the [Waline Get Started](https://waline.js.org/guide/get-started/) guide to deploy your server on Vercel, Netlify, or Docker.
+2. **Set Secrets**: Configure your database keys (e.g., `LEAN_ID`, `LEAN_KEY` for LeanCloud) in your hosting platform's **Environment Variables** (Settings -> Environment Variables). **Do not put database keys in this theme's code.**
+3. **Connect to Theme**: Get your server URL (e.g., `https://your-waline-app.vercel.app`) and update `src/config.ts`:
+
+   ```typescript
+   // src/config.ts
+   export const commentConfig: CommentConfig = {
+     enable: true,
+     type: 'waline',
+     waline: {
+       serverURL: '[https://your-waline-app.vercel.app](https://your-waline-app.vercel.app)', // <--- Put your Server URL here
+       // ...
+     },
+   }
+
+
 
 ## ✏️ Contributing
 
