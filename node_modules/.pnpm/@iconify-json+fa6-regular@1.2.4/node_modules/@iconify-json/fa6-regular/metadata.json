@@ -1,0 +1,407 @@
+{
+	"categories": {
+		"Accessibility": [
+			"closed-captioning"
+		],
+		"Alert": [
+			"bell",
+			"bell-slash"
+		],
+		"Arrows": [
+			"hand-point-down",
+			"hand-point-left",
+			"hand-point-right",
+			"hand-point-up",
+			"hand-pointer"
+		],
+		"Audio & Video": [
+			"circle",
+			"closed-captioning",
+			"file-audio",
+			"file-video"
+		],
+		"Buildings": [
+			"building",
+			"hospital"
+		],
+		"Business": [
+			"address-book",
+			"address-card",
+			"building",
+			"calendar",
+			"chart-bar",
+			"clipboard",
+			"compass",
+			"copy",
+			"copyright",
+			"envelope",
+			"envelope-open",
+			"file",
+			"folder",
+			"folder-open",
+			"paste",
+			"registered"
+		],
+		"Camping": [
+			"compass",
+			"map"
+		],
+		"Charity": [
+			"handshake",
+			"heart"
+		],
+		"Chat": [
+			"comment",
+			"comment-dots",
+			"comments"
+		],
+		"Chess": [
+			"chess-bishop",
+			"chess-king",
+			"chess-knight",
+			"chess-pawn",
+			"chess-queen",
+			"chess-rook",
+			"square-full"
+		],
+		"Code": [
+			"file",
+			"file-code",
+			"folder",
+			"folder-open",
+			"keyboard",
+			"window-maximize",
+			"window-minimize",
+			"window-restore"
+		],
+		"Communication": [
+			"address-book",
+			"address-card",
+			"bell",
+			"bell-slash",
+			"comment",
+			"comments",
+			"envelope",
+			"envelope-open",
+			"paper-plane"
+		],
+		"Computers": [
+			"keyboard"
+		],
+		"Date & Time": [
+			"bell",
+			"bell-slash",
+			"calendar",
+			"calendar-check",
+			"calendar-minus",
+			"calendar-plus",
+			"clock",
+			"hourglass",
+			"hourglass-half"
+		],
+		"Design": [
+			"clone",
+			"copy",
+			"eye",
+			"eye-slash",
+			"object-group",
+			"object-ungroup",
+			"paste"
+		],
+		"Editors": [
+			"clipboard",
+			"clone",
+			"copy",
+			"file",
+			"paper-plane",
+			"paste"
+		],
+		"Education": [
+			"bell",
+			"bell-slash"
+		],
+		"Energy": [
+			"lightbulb",
+			"sun"
+		],
+		"Files": [
+			"clone",
+			"copy",
+			"file",
+			"file-audio",
+			"file-code",
+			"file-excel",
+			"file-image",
+			"file-pdf",
+			"file-powerpoint",
+			"file-video",
+			"file-word",
+			"folder",
+			"folder-open",
+			"paste"
+		],
+		"Finance": [
+			"credit-card"
+		],
+		"Fitness": [
+			"heart"
+		],
+		"Food": [
+			"lemon"
+		],
+		"Fruits & Vegetables": [
+			"lemon"
+		],
+		"Games": [
+			"chess-bishop",
+			"chess-king",
+			"chess-knight",
+			"chess-pawn",
+			"chess-queen",
+			"chess-rook",
+			"heart"
+		],
+		"Hands": [
+			"hand-lizard",
+			"hand-peace",
+			"hand-point-down",
+			"hand-point-left",
+			"hand-point-right",
+			"hand-point-up",
+			"hand-pointer",
+			"hand-scissors",
+			"hand-spock",
+			"handshake",
+			"thumbs-down",
+			"thumbs-up"
+		],
+		"Health": [
+			"heart",
+			"hospital"
+		],
+		"Hotel": [
+			"snowflake"
+		],
+		"Household": [
+			"bell",
+			"lightbulb",
+			"snowflake"
+		],
+		"Images": [
+			"clone",
+			"eye",
+			"eye-slash",
+			"file-image",
+			"id-badge",
+			"id-card",
+			"image",
+			"images"
+		],
+		"Interfaces": [
+			"bell",
+			"bell-slash",
+			"calendar",
+			"calendar-check",
+			"calendar-minus",
+			"calendar-plus",
+			"circle",
+			"clipboard",
+			"clone",
+			"copy",
+			"envelope",
+			"envelope-open",
+			"eye",
+			"eye-slash",
+			"file",
+			"flag",
+			"folder",
+			"folder-open",
+			"heart",
+			"paste",
+			"star",
+			"star-half",
+			"thumbs-down",
+			"thumbs-up",
+			"user"
+		],
+		"Maps": [
+			"bell",
+			"bell-slash",
+			"bookmark",
+			"building",
+			"eye",
+			"eye-slash",
+			"flag",
+			"heart",
+			"hospital",
+			"image",
+			"images",
+			"lemon",
+			"life-ring",
+			"lightbulb",
+			"map",
+			"newspaper"
+		],
+		"Maritime": [
+			"compass"
+		],
+		"Marketing": [
+			"lightbulb"
+		],
+		"Medical": [
+			"heart",
+			"hospital"
+		],
+		"Music": [
+			"file-audio"
+		],
+		"Objects": [
+			"bell",
+			"bookmark",
+			"building",
+			"calendar",
+			"clipboard",
+			"compass",
+			"copy",
+			"envelope",
+			"envelope-open",
+			"eye",
+			"file",
+			"flag",
+			"futbol",
+			"gem",
+			"heart",
+			"hospital",
+			"hourglass",
+			"image",
+			"images",
+			"keyboard",
+			"lemon",
+			"life-ring",
+			"lightbulb",
+			"map",
+			"moon",
+			"newspaper",
+			"paper-plane",
+			"paste",
+			"snowflake",
+			"star",
+			"sun"
+		],
+		"Payments & Shopping": [
+			"bell",
+			"bookmark",
+			"credit-card",
+			"gem",
+			"handshake",
+			"heart",
+			"star",
+			"thumbs-down",
+			"thumbs-up"
+		],
+		"Political": [
+			"handshake"
+		],
+		"Science Fiction": [
+			"hand-spock",
+			"moon"
+		],
+		"Security": [
+			"eye",
+			"eye-slash",
+			"id-badge",
+			"id-card"
+		],
+		"Shapes": [
+			"bookmark",
+			"calendar",
+			"circle",
+			"comment",
+			"file",
+			"folder",
+			"heart",
+			"square",
+			"star"
+		],
+		"Social": [
+			"bell",
+			"comment",
+			"envelope",
+			"heart",
+			"image",
+			"images",
+			"star",
+			"thumbs-down",
+			"thumbs-up",
+			"user"
+		],
+		"Spinners": [
+			"compass",
+			"life-ring",
+			"snowflake",
+			"sun"
+		],
+		"Sports": [
+			"futbol"
+		],
+		"Status": [
+			"bell",
+			"bell-slash",
+			"calendar",
+			"calendar-check",
+			"calendar-minus",
+			"calendar-plus",
+			"comment",
+			"compass",
+			"eye",
+			"eye-slash",
+			"file",
+			"folder",
+			"folder-open",
+			"lightbulb",
+			"star",
+			"star-half",
+			"thumbs-down",
+			"thumbs-up",
+			"user"
+		],
+		"Summer": [
+			"lemon",
+			"sun"
+		],
+		"Toggle": [
+			"circle",
+			"star",
+			"star-half"
+		],
+		"Travel": [
+			"map"
+		],
+		"Users & People": [
+			"address-book",
+			"address-card",
+			"id-badge",
+			"id-card",
+			"user"
+		],
+		"Vehicles": [
+			"paper-plane"
+		],
+		"Weather": [
+			"moon",
+			"snowflake",
+			"sun"
+		],
+		"Writing": [
+			"bookmark",
+			"envelope",
+			"envelope-open",
+			"file",
+			"folder",
+			"folder-open",
+			"keyboard",
+			"newspaper",
+			"paper-plane"
+		]
+	}
+}

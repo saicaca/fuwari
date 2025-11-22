@@ -1,0 +1,35 @@
+{
+  "name": "zimmerframe",
+  "description": "A tool for walking ASTs",
+  "version": "1.1.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sveltejs/zimmerframe"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./src/walk.js"
+    }
+  },
+  "types": "./types/index.d.ts",
+  "files": [
+    "src",
+    "types"
+  ],
+  "devDependencies": {
+    "@changesets/cli": "^2.29.7",
+    "dts-buddy": "^0.6.2",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "license": "MIT",
+  "scripts": {
+    "changeset:version": "changeset version",
+    "changeset:publish": "changeset publish",
+    "check": "tsc",
+    "test": "vitest --run",
+    "test:watch": "vitest"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "vscode-json-languageservice",
+  "version": "4.1.8",
+  "description": "Language service for JSON",
+  "main": "./lib/umd/jsonLanguageService.js",
+  "typings": "./lib/umd/jsonLanguageService",
+  "module": "./lib/esm/jsonLanguageService.js",
+  "author": "Microsoft Corporation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/vscode-json-languageservice"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Microsoft/vscode-json-languageservice"
+  },
+  "engines": {
+    "npm": ">=7.0.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^8.2.0",
+    "@types/node": "^10.12.21",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
+    "eslint": "^7.18.0",
+    "mocha": "^8.2.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "jsonc-parser": "^3.0.0",
+    "vscode-languageserver-textdocument": "^1.0.1",
+    "vscode-languageserver-types": "^3.16.0",
+    "vscode-nls": "^5.0.0",
+    "vscode-uri": "^3.0.2"
+  },
+  "scripts": {
+    "prepublishOnly": "npm run clean && npm run compile-esm && npm run test && npm run remove-sourcemap-refs",
+    "postpublish": "node ./build/post-publish.js",
+    "compile": "tsc -p ./src",
+    "compile-esm": "tsc -p ./src/tsconfig.esm.json",
+    "clean": "rimraf lib",
+    "remove-sourcemap-refs": "node ./build/remove-sourcemap-refs.js",
+    "watch": "tsc -w -p ./src",
+    "pretest": "npm run compile",
+    "test": "mocha",
+    "posttest": "npm run lint",
+    "coverage": "npx nyc -r lcov npm run test",
+    "lint": "eslint src/**/*.ts",
+    "install-types-next": "npm install vscode-languageserver-types@next -f -S && npm install vscode-languageserver-textdocument@next -f -S",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags",
+    "sample": "npm run compile && node ./lib/umd/example/sample.js"
+  }
+}

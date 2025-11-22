@@ -1,0 +1,42 @@
+{
+  "name": "which-pm-runs",
+  "version": "1.1.0",
+  "description": "Detects what package manager executes the process",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=4"
+  },
+  "repository": "https://github.com/zkochan/packages/tree/main/which-pm-runs",
+  "bugs": {
+    "url": "https://github.com/zkochan/packages/labels/package%3A%20which-pm-runs"
+  },
+  "keywords": [
+    "npm",
+    "pnpm",
+    "yarn",
+    "cnpm"
+  ],
+  "author": "Zoltan Kochan",
+  "license": "MIT",
+  "homepage": "https://github.com/zkochan/packages/tree/main/which-pm-runs#readme",
+  "dependenciesMeta": {
+    "which-pm-runs": {
+      "injected": true
+    }
+  },
+  "devDependencies": {
+    "cnpm": "^7.1.1",
+    "execa": "^5.1.1",
+    "npm": "^8.2.0",
+    "pnpm": "^6.23.6",
+    "tape": "^5.3.2",
+    "which-pm-runs": "file:",
+    "yarn": "^1.22.17"
+  },
+  "scripts": {
+    "test": "tape test"
+  }
+}

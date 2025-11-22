@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html class="ie ie6 ie-lt10 ie-lt9 ie-lt8 ie-lt7 no-js" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7 ie-lt10 ie-lt9 ie-lt8 no-js" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8 ie-lt10 ie-lt9 no-js" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9 ie-lt10 no-js" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width">
+	<title>focus-options-polyfill</title>
+
+	<script src="./index.js"></script>
+
+</head>
+
+<body>
+	<header>
+		<h1>focus-options-polyfill</h1>
+	</header>
+	<article style="height: 2000px; width: 500px; display: inline-block; vertical-align: top;">
+
+		<button type="button" onclick="focusScrollMethod('focusable-button-1')">
+			Click me to focus on the button 1
+		</button>
+		<button type="button" onclick="focusNoScrollMethod('focusable-button-1')">
+			Click me to focus on the button 1 without scrolling
+		</button>
+		
+		<div>
+			<button type="button" onclick="focusScrollMethod('focusable-input-1')">
+				Click me to focus on the input 4
+			</button>
+			<button type="button" onclick="focusNoScrollMethod('focusable-input-1')">
+				Click me to focus on the input 4 without scrolling
+			</button>
+		</div>
+
+		<div class="container">
+			<button type="button" id="focusable-button-1" style="margin-top: 1500px;">Button 1</button>
+
+			<!-- The font size needs to be over 16px to stop zooming on iOS -->
+			<input type="text" id="focusable-input-1" style="margin-top: 1500px; font-size: 24px;">
+		</div>
+
+	</article>
+
+	<article style="height: 500px; width: 500px; display: inline-block; vertical-align: top; overflow: auto;">
+
+		<button type="button" onclick="focusScrollMethod('focusable-button-2')">
+			Click me to focus on the button 2
+		</button>
+		<button type="button" onclick="focusNoScrollMethod('focusable-button-2')">
+			Click me to focus on the button 2 without scrolling
+		</button>
+
+		<div class="container">
+			<button type="button" id="focusable-button-2" style="margin: 600px 0 0 600px; white-space: nowrap">Button 2</button>
+		</div>
+
+	</article>
+
+	<article style="height: 300px; width: 500px; display: inline-block; vertical-align: top; overflow: auto;">
+
+		<button type="button" onclick="focusScrollMethod('focusable-button-3')">
+			Click me to focus on the button 3
+		</button>
+		<button type="button" onclick="focusNoScrollMethod('focusable-button-3')">
+			Click me to focus on the button 3 without scrolling
+		</button>
+
+		<div class="container" style="height: 500px; width: 300px; overflow: auto;">
+			<div class="container" style="margin: 300px 0 0 300px;">
+				<button type="button" id="focusable-button-3" style="margin: 300px 0 0 300px; white-space: nowrap">Button 3</button>
+			</div>
+		</div>
+
+	</article>
+
+	<footer>
+		<p>
+			<small>Created by @calvellido</small>
+		</p>
+	</footer>
+
+	<script>
+		focusScrollMethod = function getFocus(id) {
+			document.getElementById(id).focus({ preventScroll: false });
+		}
+
+		focusNoScrollMethod = function getFocusWithoutScrolling(id) {
+			document.getElementById(id).focus({ preventScroll: true });
+		}
+
+		document.getElementById("focusable-button-1").addEventListener("click", function() {
+			alert("Button 1 clicked!")
+		});
+
+		document.getElementById("focusable-button-2").addEventListener("click", function() {
+			alert("Button 2 clicked!")
+		});
+
+		document.getElementById("focusable-button-3").addEventListener("click", function() {
+			alert("Button 3 clicked!")
+		});
+	</script>
+
+</body>
+</html>

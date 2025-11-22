@@ -1,0 +1,43 @@
+{
+	"name": "volar-service-html",
+	"version": "0.0.62",
+	"description": "Integrate vscode-languageservice-html into Volar",
+	"homepage": "https://github.com/volarjs/services/tree/master/packages/html",
+	"bugs": "https://github.com/volarjs/services/issues",
+	"sideEffects": false,
+	"keywords": [
+		"volar-service"
+	],
+	"license": "MIT",
+	"files": [
+		"**/*.js",
+		"**/*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/volarjs/services.git",
+		"directory": "packages/html"
+	},
+	"author": {
+		"name": "Johnson Chu",
+		"email": "johnsoncodehk@gmail.com",
+		"url": "https://github.com/johnsoncodehk"
+	},
+	"dependencies": {
+		"vscode-html-languageservice": "^5.3.0",
+		"vscode-languageserver-textdocument": "^1.0.11",
+		"vscode-uri": "^3.0.8"
+	},
+	"devDependencies": {
+		"@types/node": "latest"
+	},
+	"peerDependencies": {
+		"@volar/language-service": "~2.4.0"
+	},
+	"peerDependenciesMeta": {
+		"@volar/language-service": {
+			"optional": true
+		}
+	},
+	"gitHead": "f1ddbdc4d9df0772db5a0d46ff8ff64eecc9de02"
+}

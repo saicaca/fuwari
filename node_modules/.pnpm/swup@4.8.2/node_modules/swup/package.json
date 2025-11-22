@@ -1,0 +1,116 @@
+{
+  "name": "swup",
+  "amdName": "Swup",
+  "version": "4.8.2",
+  "description": "Versatile and extensible page transition library for server-rendered websites",
+  "type": "module",
+  "source": "./src/Swup.ts",
+  "main": "./dist/Swup.cjs",
+  "module": "./dist/Swup.module.js",
+  "unpkg": "./dist/Swup.umd.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/Swup.modern.js",
+      "require": "./dist/Swup.cjs"
+    }
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "npm run build:module && npm run build:bundle",
+    "build:module": "BROWSERSLIST_ENV=modern microbundle src/index.ts -f modern,esm,cjs",
+    "build:bundle": "BROWSERSLIST_ENV=production microbundle src/Swup.ts -f umd --external none",
+    "dev": "npm run clean && BROWSERSLIST_ENV=development microbundle src/index.ts -w -f modern",
+    "format": "npx eslint . --fix",
+    "lint": "npm run lint:ts && npm run lint:es",
+    "lint:ts": "tsc --noEmit --skipLibCheck",
+    "lint:es": "npx eslint .",
+    "lint:compat": "npx eslint --config .eslintrc.compat.cjs --no-eslintrc .",
+    "lint:prettier": "prettier 'src/**/*.ts'",
+    "prepublishOnly": "npm run build",
+    "postinstall": "opencollective-postinstall || true",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:ci": "npm run test:unit && npm run test:e2e:ci",
+    "test:unit": "vitest run --config ./tests/config/vitest.config.ts",
+    "test:unit:watch": "vitest --config ./tests/config/vitest.config.ts",
+    "test:e2e": "npx playwright test --config ./tests/config/playwright.config.ts",
+    "test:e2e:dev": "npx playwright test --ui --config ./tests/config/playwright.config.ts",
+    "test:e2e:install": "npx playwright install --with-deps",
+    "test:e2e:instrument": "nyc instrument --compact=false dist tests/fixtures/dist",
+    "test:e2e:serve": "npx serve -n -S -L -p 8274 --config ./tests/config/serve.json",
+    "test:e2e:start": "npm run test:e2e:instrument && npm run test:e2e:serve",
+    "prepare": "husky"
+  },
+  "author": {
+    "name": "Georgy Marchuk",
+    "email": "gmarcuk@gmail.com",
+    "url": "https://gmrchk.com"
+  },
+  "contributors": [
+    {
+      "name": "Philipp Daun",
+      "email": "daun@daun.ltd",
+      "url": "https://philippdaun.net"
+    },
+    {
+      "name": "Rasso Hilber",
+      "email": "mail@rassohilber.com",
+      "url": "https://rassohilber.com"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swup/swup.git"
+  },
+  "homepage": "https://swup.js.org",
+  "keywords": [
+    "css",
+    "page",
+    "transition",
+    "animation"
+  ],
+  "dependencies": {
+    "delegate-it": "^6.0.0",
+    "opencollective-postinstall": "^2.0.2",
+    "path-to-regexp": "^6.2.1"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.18.6",
+    "@playwright/test": "^1.37.1",
+    "@swup/browserslist-config": "^1.0.0",
+    "@swup/prettier-config": "^1.0.0",
+    "@types/dom-view-transitions": "^1.0.2",
+    "@types/jsdom": "^21.1.1",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-compat": "^5.0.0",
+    "eslint-plugin-ecmascript-compat": "^3.2.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^9.0.11",
+    "istanbul-lib-coverage": "^3.2.0",
+    "jsdom": "^25.0.1",
+    "microbundle": "^0.15.0",
+    "nyc": "^17.0.0",
+    "prettier": "^3.1.0",
+    "serve": "^14.2.1",
+    "typed-query-selector": "^2.11.0",
+    "typescript": "^5.2.2",
+    "vitest": "^3.0.9"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/swup"
+  },
+  "browserslist": [
+    "extends @swup/browserslist-config"
+  ],
+  "prettier": "@swup/prettier-config"
+}

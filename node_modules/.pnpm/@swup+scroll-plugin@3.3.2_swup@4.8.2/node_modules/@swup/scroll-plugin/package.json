@@ -1,0 +1,65 @@
+{
+  "name": "@swup/scroll-plugin",
+  "amdName": "SwupScrollPlugin",
+  "version": "3.3.2",
+  "description": "A swup plugin for customizable smooth scrolling",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.modern.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "swup package:build",
+    "dev": "swup package:dev",
+    "lint": "swup package:lint",
+    "format": "swup package:format",
+    "prepublishOnly": "npm run build"
+  },
+  "author": {
+    "name": "Georgy Marchuk",
+    "email": "gmarcuk@gmail.com",
+    "url": "https://gmrchk.com/"
+  },
+  "contributors": [
+    {
+      "name": "Philipp Daun",
+      "email": "daun@daun.ltd",
+      "url": "https://philippdaun.net"
+    },
+    {
+      "name": "Rasso Hilber",
+      "email": "mail@rassohilber.com",
+      "url": "https://rassohilber.com"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swup/scroll-plugin.git"
+  },
+  "dependencies": {
+    "@swup/plugin": "^4.0.0",
+    "scrl": "^2.0.0"
+  },
+  "devDependencies": {
+    "@swup/cli": "^5.0.1"
+  },
+  "peerDependencies": {
+    "swup": "^4.2.0"
+  },
+  "browserslist": [
+    "extends @swup/browserslist-config"
+  ],
+  "prettier": "@swup/prettier-config"
+}

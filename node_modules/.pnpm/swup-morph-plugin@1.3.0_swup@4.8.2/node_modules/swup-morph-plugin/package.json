@@ -1,0 +1,54 @@
+{
+  "name": "swup-morph-plugin",
+  "amdName": "SwupMorphPlugin",
+  "version": "1.3.0",
+  "description": "A swup plugin for morphing dom nodes into the new page",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.modern.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "swup package:build",
+    "dev": "swup package:dev",
+    "lint": "swup package:lint",
+    "format": "swup package:format",
+    "prepublishOnly": "npm run build"
+  },
+  "author": {
+    "name": "Philipp Daun",
+    "email": "post@philippdaun.net",
+    "url": "https://philippdaun.net"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daun/swup-morph-plugin.git"
+  },
+  "dependencies": {
+    "@swup/plugin": "^4.0.0",
+    "morphdom": "^2.7.0"
+  },
+  "devDependencies": {
+    "@swup/cli": "^5.0.1"
+  },
+  "peerDependencies": {
+    "swup": "^4.6.0"
+  },
+  "browserslist": [
+    "extends @swup/browserslist-config"
+  ],
+  "prettier": "@swup/prettier-config"
+}

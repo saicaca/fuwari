@@ -1,0 +1,77 @@
+{
+  "name": "@iconify/svelte",
+  "description": "Iconify icon component for Svelte.",
+  "author": "Vjacheslav Trushkin",
+  "version": "4.2.0",
+  "type": "module",
+  "license": "MIT",
+  "bugs": "https://github.com/iconify/iconify/issues",
+  "homepage": "https://github.com/iconify/iconify",
+  "funding": "https://github.com/sponsors/cyberalien",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iconify/iconify.git",
+    "directory": "components/svelte"
+  },
+  "svelte": "dist/Icon.svelte",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "svelte": "./dist/Icon.svelte",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/Icon.svelte": {
+      "svelte": "./dist/Icon.svelte",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/OfflineIcon.svelte": {
+      "svelte": "./dist/OfflineIcon.svelte",
+      "types": "./dist/offline.d.ts"
+    },
+    "./dist/functions": {
+      "types": "./lib/dist/functions.d.ts",
+      "require": "./lib/dist/functions.cjs",
+      "import": "./lib/dist/functions.js"
+    },
+    "./dist/offline-functions": {
+      "types": "./lib/dist/offline-functions.d.ts",
+      "require": "./lib/dist/offline-functions.cjs",
+      "import": "./lib/dist/offline-functions.js"
+    },
+    "./*": "./*"
+  },
+  "dependencies": {
+    "@iconify/types": "^2.0.0"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.48.1",
+    "@rollup/plugin-node-resolve": "^15.3.1",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@sveltejs/vite-plugin-svelte": "^4.0.4",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/svelte": "^5.2.6",
+    "@tsconfig/svelte": "^5.0.4",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.5",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.29.1",
+    "rollup-plugin-svelte": "^7.2.2",
+    "svelte": "^5.16.1",
+    "svelte-preprocess": "^6.0.3",
+    "vitest": "^2.1.8",
+    "@iconify/core": "^3.1.0",
+    "@iconify/utils": "^2.2.1"
+  },
+  "peerDependencies": {
+    "svelte": ">4.0.0"
+  },
+  "scripts": {
+    "cleanup": "rimraf lib dist",
+    "prebuild": "pnpm run cleanup",
+    "build": "node build",
+    "build:tsc": "tsc -b tsconfig.src.json",
+    "build:bundles": "rollup -c rollup.config.js",
+    "build:api": "node build --only-api",
+    "test": "vitest"
+  }
+}

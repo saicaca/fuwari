@@ -1,0 +1,40 @@
+{
+  "name": "@expressive-code/plugin-frames",
+  "version": "0.41.3",
+  "description": "Frames plugin for Expressive Code. Wraps code blocks in a styled editor or terminal frame with support for titles, multiple tabs and more.",
+  "keywords": [],
+  "author": "Tibor Schiemann",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expressive-code/expressive-code.git",
+    "directory": "packages/@expressive-code/plugin-frames"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@expressive-code/core": "^0.41.3"
+  },
+  "devDependencies": {
+    "@expressive-code/plugin-shiki": "^0.41.3",
+    "@internal/test-utils": "^0.2.34"
+  },
+  "scripts": {
+    "build": "pnpm build-js-modules && tsup ./src/index.ts --format esm --dts --sourcemap --clean",
+    "build-js-modules": "tsm --require=../../../scripts/lib/filter-warnings.cjs ../../../scripts/build-js-module.ts ./src/copy-js-module.ts",
+    "coverage": "vitest run --coverage",
+    "test": "vitest run --reporter verbose",
+    "test-short": "vitest run --reporter basic",
+    "test-watch": "vitest --reporter verbose",
+    "watch": "pnpm build --watch src"
+  }
+}

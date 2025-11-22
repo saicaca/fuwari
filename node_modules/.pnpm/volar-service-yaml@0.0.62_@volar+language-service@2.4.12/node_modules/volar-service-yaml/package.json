@@ -1,0 +1,42 @@
+{
+	"name": "volar-service-yaml",
+	"version": "0.0.62",
+	"description": "Integrate yaml-language-server into Volar",
+	"homepage": "https://github.com/volarjs/services/tree/master/packages/yaml",
+	"bugs": "https://github.com/volarjs/services/issues",
+	"sideEffects": false,
+	"keywords": [
+		"volar-service"
+	],
+	"license": "MIT",
+	"files": [
+		"**/*.js",
+		"**/*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/volarjs/services.git",
+		"directory": "packages/yaml"
+	},
+	"author": {
+		"name": "Remco Haszing",
+		"email": "remcohaszing@gmail.com",
+		"url": "https://github.com/remcohaszing"
+	},
+	"dependencies": {
+		"vscode-uri": "^3.0.8",
+		"yaml-language-server": "~1.15.0"
+	},
+	"devDependencies": {
+		"vscode-languageserver-textdocument": "^1.0.11"
+	},
+	"peerDependencies": {
+		"@volar/language-service": "~2.4.0"
+	},
+	"peerDependenciesMeta": {
+		"@volar/language-service": {
+			"optional": true
+		}
+	},
+	"gitHead": "f1ddbdc4d9df0772db5a0d46ff8ff64eecc9de02"
+}

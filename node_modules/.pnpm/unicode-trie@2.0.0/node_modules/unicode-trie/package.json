@@ -1,0 +1,27 @@
+{
+  "name": "unicode-trie",
+  "version": "2.0.0",
+  "description": "Unicode Trie data structure for fast character metadata lookup, ported from ICU",
+  "devDependencies": {
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1"
+  },
+  "scripts": {
+    "test": "mocha",
+    "coverage": "nyc mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/devongovett/unicode-trie.git"
+  },
+  "author": "Devon Govett <devongovett@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devongovett/unicode-trie/issues"
+  },
+  "homepage": "https://github.com/devongovett/unicode-trie",
+  "dependencies": {
+    "pako": "^0.2.5",
+    "tiny-inflate": "^1.0.0"
+  }
+}

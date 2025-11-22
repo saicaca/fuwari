@@ -1,0 +1,13 @@
+{
+  "name": "@swup/prettier-config",
+  "version": "1.1.0",
+  "description": "Base prettier config for swup related packages.",
+  "main": "index.js",
+  "private": false,
+  "author": "Georgy Marchuk",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swup/prettier-config.git"
+  }
+}

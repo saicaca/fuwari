@@ -1,0 +1,42 @@
+{
+  "name": "deterministic-object-hash",
+  "version": "2.0.2",
+  "description": "A deterministic object hashing algorithm for Node.js.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "npx jest",
+    "build": "npx tsc -b ./",
+    "ts-watch": "npx tsc -b --watch ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbauman3/Deterministic-Object-Hash.git"
+  },
+  "keywords": [
+    "deterministic",
+    "object",
+    "hash",
+    "algorithm"
+  ],
+  "author": "Zane Bauman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zbauman3/Deterministic-Object-Hash/issues"
+  },
+  "homepage": "https://github.com/zbauman3/Deterministic-Object-Hash#readme",
+  "devDependencies": {
+    "@types/base-64": "^1.0.2",
+    "@types/jest": "^27.4.0",
+    "@types/lodash": "^4.14.178",
+    "@types/node": "18.18.9",
+    "jest": "^27.4.7",
+    "lodash": "^4.17.21",
+    "typescript": "^4.5.5"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "base-64": "^1.0.0"
+  }
+}

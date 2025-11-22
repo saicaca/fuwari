@@ -1,0 +1,47 @@
+{
+	"name": "volar-service-prettier",
+	"version": "0.0.62",
+	"description": "Integrate Prettier into Volar",
+	"homepage": "https://github.com/volarjs/services/tree/master/packages/prettier",
+	"bugs": "https://github.com/volarjs/services/issues",
+	"sideEffects": false,
+	"keywords": [
+		"volar-service"
+	],
+	"types": "out/index.d.ts",
+	"license": "MIT",
+	"files": [
+		"**/*.js",
+		"**/*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/volarjs/services.git",
+		"directory": "packages/prettier"
+	},
+	"author": {
+		"name": "Pacharapol Withayasakpunt",
+		"email": "polv@polv.cc",
+		"url": "https://www.polv.cc"
+	},
+	"dependencies": {
+		"vscode-uri": "^3.0.8"
+	},
+	"devDependencies": {
+		"@types/node": "latest",
+		"prettier": "^3.3.2"
+	},
+	"peerDependencies": {
+		"@volar/language-service": "~2.4.0",
+		"prettier": "^2.2 || ^3.0"
+	},
+	"peerDependenciesMeta": {
+		"prettier": {
+			"optional": true
+		},
+		"@volar/language-service": {
+			"optional": true
+		}
+	},
+	"gitHead": "f1ddbdc4d9df0772db5a0d46ff8ff64eecc9de02"
+}

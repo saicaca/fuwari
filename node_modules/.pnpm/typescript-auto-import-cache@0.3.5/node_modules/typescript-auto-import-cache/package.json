@@ -1,0 +1,24 @@
+{
+	"name": "typescript-auto-import-cache",
+	"version": "0.3.5",
+	"main": "out/index.js",
+	"license": "MIT",
+	"files": [
+		"out/**/*.js",
+		"out/**/*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/volarjs/typescript-auto-import-cache.git"
+	},
+	"scripts": {
+		"prepublishOnly": "tsc"
+	},
+	"devDependencies": {
+		"@types/semver": "^7.3.13",
+		"typescript": "latest"
+	},
+	"dependencies": {
+		"semver": "^7.3.8"
+	}
+}

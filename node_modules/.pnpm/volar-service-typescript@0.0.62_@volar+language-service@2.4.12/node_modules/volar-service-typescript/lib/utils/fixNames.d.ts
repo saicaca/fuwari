@@ -1,0 +1,14 @@
+export declare const annotateWithTypeFromJSDoc = "annotateWithTypeFromJSDoc";
+export declare const constructorForDerivedNeedSuperCall = "constructorForDerivedNeedSuperCall";
+export declare const extendsInterfaceBecomesImplements = "extendsInterfaceBecomesImplements";
+export declare const awaitInSyncFunction = "fixAwaitInSyncFunction";
+export declare const classIncorrectlyImplementsInterface = "fixClassIncorrectlyImplementsInterface";
+export declare const classDoesntImplementInheritedAbstractMember = "fixClassDoesntImplementInheritedAbstractMember";
+export declare const unreachableCode = "fixUnreachableCode";
+export declare const unusedIdentifier = "unusedIdentifier";
+export declare const forgottenThisPropertyAccess = "forgottenThisPropertyAccess";
+export declare const spelling = "spelling";
+export declare const fixImport = "import";
+export declare const addMissingAwait = "addMissingAwait";
+export declare const addMissingOverride = "fixOverrideModifier";
+//# sourceMappingURL=fixNames.d.ts.map

@@ -1,0 +1,42 @@
+{
+  "name": "dfa",
+  "version": "1.2.0",
+  "description": "A state machine compiler",
+  "main": "index.js",
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "mocha": "^3.1.0",
+    "pegjs": "^0.10.0",
+    "rollup": "^1.5.0",
+    "rollup-plugin-babel": "^4.0.1",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-local-resolve": "^1.0.7"
+  },
+  "scripts": {
+    "test": "mocha --require @babel/register",
+    "prepublish": "make"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/devongovett/dfa.git"
+  },
+  "keywords": [
+    "state",
+    "machine",
+    "compiler"
+  ],
+  "author": "Devon Govett <devongovett@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devongovett/dfa/issues"
+  },
+  "homepage": "https://github.com/devongovett/dfa#readme",
+  "files": [
+    "index.js",
+    "index.js.map",
+    "compile.js",
+    "compile.js.map"
+  ]
+}

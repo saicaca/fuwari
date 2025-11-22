@@ -1,0 +1,19 @@
+{
+	"name": "typesafe-path",
+	"version": "0.2.2",
+	"main": "index.js",
+	"types": "index.d.ts",
+	"license": "MIT",
+	"files": [
+		"*.js",
+		"*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/johnsoncodehk/typesafe-path.git"
+	},
+	"devDependencies": {
+		"@types/node": "latest",
+		"typescript": "latest"
+	}
+}

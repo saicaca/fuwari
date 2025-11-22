@@ -1,0 +1,54 @@
+{
+  "name": "@swup/plugin",
+  "amdName": "SwupPlugin",
+  "description": "Base class for creating swup plugins",
+  "version": "4.0.0",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.modern.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run build:module && npm run build:bundle",
+    "build:module": "BROWSERSLIST_ENV=modern microbundle -f modern,esm,cjs",
+    "build:bundle": "BROWSERSLIST_ENV=production microbundle -f umd --external none --define process.env.NODE_ENV=production",
+    "dev": "BROWSERSLIST_ENV=development microbundle -f modern -w",
+    "lint": "prettier src/**/*.ts --check",
+    "format": "prettier src/**/*.ts --write",
+    "test": "vitest run --config ./vitest/vitest.config.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Georgy Marchuk",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swup/plugin.git"
+  },
+  "dependencies": {
+    "swup": "^4.0.0"
+  },
+  "devDependencies": {
+    "@swup/browserslist-config": "^1.0.0",
+    "@swup/prettier-config": "^1.0.0",
+    "jsdom": "^22.1.0",
+    "microbundle": "^0.15.1",
+    "prettier": "^3.0.3",
+    "vitest": "^0.33.0"
+  },
+  "browserslist": [
+    "extends @swup/browserslist-config"
+  ],
+  "prettier": "@swup/prettier-config"
+}

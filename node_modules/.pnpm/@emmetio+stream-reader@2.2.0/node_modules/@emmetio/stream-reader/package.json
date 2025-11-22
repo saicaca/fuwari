@@ -1,0 +1,33 @@
+{
+  "name": "@emmetio/stream-reader",
+  "version": "2.2.0",
+  "description": "Reads text as stream",
+  "main": "dist/stream-reader.cjs.js",
+  "module": "dist/stream-reader.es.js",
+  "scripts": {
+    "test": "mocha",
+    "build": "rollup -c",
+    "prepublish": "npm run test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmetio/stream-reader.git"
+  },
+  "keywords": [
+    "emmet",
+    "stream",
+    "reader"
+  ],
+  "author": "Sergey Chikuyonok <serge.che@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emmetio/stream-reader/issues"
+  },
+  "homepage": "https://github.com/emmetio/stream-reader#readme",
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
+    "babel-register": "^6.18.0",
+    "mocha": "^3.2.0",
+    "rollup": "^0.41.1"
+  }
+}

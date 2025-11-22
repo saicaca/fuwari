@@ -1,0 +1,66 @@
+{
+  "name": "retext-latin",
+  "version": "4.0.0",
+  "description": "retext plugin to parse Latin-script prose",
+  "license": "MIT",
+  "keywords": [
+    "concrete",
+    "cst",
+    "language",
+    "latin",
+    "natural",
+    "parse",
+    "plugin",
+    "process",
+    "retext",
+    "retext-plugin",
+    "syntax",
+    "tree",
+    "unified"
+  ],
+  "homepage": "https://github.com/retextjs/retext",
+  "repository": "https://github.com/retextjs/retext/tree/main/packages/retext-latin",
+  "bugs": "https://github.com/retextjs/retext/issues",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
+  },
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+  ],
+  "sideEffects": false,
+  "type": "module",
+  "exports": "./index.js",
+  "files": [
+    "lib/",
+    "index.d.ts",
+    "index.js"
+  ],
+  "dependencies": {
+    "@types/nlcst": "^2.0.0",
+    "parse-latin": "^7.0.0",
+    "unified": "^11.0.0"
+  },
+  "scripts": {},
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "xo": {
+    "overrides": [
+      {
+        "files": [
+          "**/*.ts"
+        ],
+        "rules": {
+          "@typescript-eslint/ban-types": "off",
+          "@typescript-eslint/consistent-type-definitions": "off"
+        }
+      }
+    ],
+    "prettier": true
+  }
+}

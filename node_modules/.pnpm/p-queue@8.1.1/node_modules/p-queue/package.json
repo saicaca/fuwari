@@ -1,0 +1,89 @@
+{
+	"name": "p-queue",
+	"version": "8.1.1",
+	"description": "Promise queue with concurrency control",
+	"license": "MIT",
+	"repository": "sindresorhus/p-queue",
+	"funding": "https://github.com/sponsors/sindresorhus",
+	"type": "module",
+	"exports": {
+		"types": "./dist/index.d.ts",
+		"default": "./dist/index.js"
+	},
+	"sideEffects": false,
+	"engines": {
+		"node": ">=18"
+	},
+	"scripts": {
+		"build": "del-cli dist && tsc",
+		"test": "xo && ava && del-cli dist && tsc && tsd",
+		"bench": "node --import=tsx/esm bench.ts",
+		"prepublishOnly": "del-cli dist && tsc"
+	},
+	"files": [
+		"dist"
+	],
+	"types": "dist/index.d.ts",
+	"keywords": [
+		"promise",
+		"queue",
+		"enqueue",
+		"limit",
+		"limited",
+		"concurrency",
+		"throttle",
+		"throat",
+		"rate",
+		"batch",
+		"ratelimit",
+		"priority",
+		"priorityqueue",
+		"fifo",
+		"job",
+		"task",
+		"async",
+		"await",
+		"promises",
+		"bluebird"
+	],
+	"dependencies": {
+		"eventemitter3": "^5.0.1",
+		"p-timeout": "^6.1.2"
+	},
+	"devDependencies": {
+		"@sindresorhus/tsconfig": "^5.0.0",
+		"@types/benchmark": "^2.1.5",
+		"@types/node": "^20.10.4",
+		"ava": "^5.3.1",
+		"benchmark": "^2.1.4",
+		"del-cli": "^5.1.0",
+		"delay": "^6.0.0",
+		"in-range": "^3.0.0",
+		"p-defer": "^4.0.0",
+		"random-int": "^3.0.0",
+		"time-span": "^5.1.0",
+		"tsd": "^0.29.0",
+		"tsx": "^4.6.2",
+		"typescript": "^5.3.3",
+		"xo": "^0.56.0"
+	},
+	"ava": {
+		"workerThreads": false,
+		"files": [
+			"test/**"
+		],
+		"extensions": {
+			"ts": "module"
+		},
+		"nodeArguments": [
+			"--import=tsx/esm"
+		]
+	},
+	"xo": {
+		"rules": {
+			"@typescript-eslint/member-ordering": "off",
+			"@typescript-eslint/no-floating-promises": "off",
+			"@typescript-eslint/no-invalid-void-type": "off"
+		}
+	}
+}

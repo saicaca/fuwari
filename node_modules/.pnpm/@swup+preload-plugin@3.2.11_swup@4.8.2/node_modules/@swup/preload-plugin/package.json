@@ -1,0 +1,76 @@
+{
+  "name": "@swup/preload-plugin",
+  "amdName": "SwupPreloadPlugin",
+  "version": "3.2.11",
+  "description": "A swup plugin for preloading pages and faster navigation",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.modern.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "swup package:build",
+    "dev": "swup package:dev",
+    "lint": "swup package:lint",
+    "format": "swup package:format",
+    "prepublishOnly": "npm run build",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "vitest run --config ./tests/config/vitest.config.ts",
+    "test:unit:watch": "vitest --config ./tests/config/vitest.config.ts",
+    "test:e2e": "npx playwright test --config ./tests/config/playwright.config.ts",
+    "test:e2e:dev": "npx playwright test --ui --config ./tests/config/playwright.config.ts",
+    "test:e2e:serve": "npx serve -n -S -L -p 8274 --config ./tests/config/serve.json"
+  },
+  "author": {
+    "name": "Georgy Marchuk",
+    "email": "gmarcuk@gmail.com",
+    "url": "https://gmrchk.com/"
+  },
+  "contributors": [
+    {
+      "name": "Philipp Daun",
+      "email": "daun@daun.ltd",
+      "url": "https://philippdaun.net"
+    },
+    {
+      "name": "Rasso Hilber",
+      "email": "mail@rassohilber.com",
+      "url": "https://rassohilber.com"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swup/preload-plugin.git"
+  },
+  "dependencies": {
+    "@swup/plugin": "^4.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.41.1",
+    "@swup/cli": "^5.0.1",
+    "@types/jsdom": "^21.1.4",
+    "jsdom": "^24.0.0",
+    "network-information-types": "^0.1.1",
+    "serve": "^14.2.1",
+    "vitest": "^1.2.2"
+  },
+  "peerDependencies": {
+    "swup": "^4.0.0"
+  },
+  "browserslist": [
+    "extends @swup/browserslist-config"
+  ],
+  "prettier": "@swup/prettier-config"
+}

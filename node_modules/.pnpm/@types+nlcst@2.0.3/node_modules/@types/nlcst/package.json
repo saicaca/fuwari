@@ -1,0 +1,38 @@
+{
+    "name": "@types/nlcst",
+    "version": "2.0.3",
+    "description": "TypeScript definitions for nlcst",
+    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/nlcst",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Titus Wormer",
+            "githubUsername": "wooorm",
+            "url": "https://github.com/wooorm"
+        },
+        {
+            "name": "Christian Murphy",
+            "githubUsername": "ChristianMurphy",
+            "url": "https://github.com/ChristianMurphy"
+        },
+        {
+            "name": "Remco Haszing",
+            "githubUsername": "remcohaszing",
+            "url": "https://github.com/remcohaszing"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/nlcst"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/unist": "*"
+    },
+    "typesPublisherContentHash": "0fa949bca84428c174a30ddfe401eb6dbef19a2e0731309d9e4861bfe8f63540",
+    "typeScriptVersion": "4.5",
+    "nonNpm": true
+}

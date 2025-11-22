@@ -1,0 +1,66 @@
+{
+  "name": "retext-stringify",
+  "version": "4.0.0",
+  "description": "retext plugin to serialize prose",
+  "license": "MIT",
+  "keywords": [
+    "concrete",
+    "cst",
+    "language",
+    "natural",
+    "plugin",
+    "process",
+    "retext",
+    "retext-plugin",
+    "stringify",
+    "syntax",
+    "serialize",
+    "text",
+    "tree",
+    "unified"
+  ],
+  "homepage": "https://github.com/retextjs/retext",
+  "repository": "https://github.com/retextjs/retext/tree/main/packages/retext-stringify",
+  "bugs": "https://github.com/retextjs/retext/issues",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
+  },
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+  ],
+  "sideEffects": false,
+  "type": "module",
+  "exports": "./index.js",
+  "files": [
+    "lib/",
+    "index.d.ts",
+    "index.js"
+  ],
+  "dependencies": {
+    "@types/nlcst": "^2.0.0",
+    "nlcst-to-string": "^4.0.0",
+    "unified": "^11.0.0"
+  },
+  "scripts": {},
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "strict": true,
+    "ignoreCatch": true
+  },
+  "xo": {
+    "overrides": [
+      {
+        "files": [
+          "**/*.ts"
+        ],
+        "rules": {
+          "@typescript-eslint/ban-types": "off"
+        }
+      }
+    ],
+    "prettier": true
+  }
+}

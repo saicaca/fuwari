@@ -1,0 +1,47 @@
+{
+  "name": "remark-directive-rehype",
+  "version": "0.4.2",
+  "description": "Remark plugin to enable Markdown directives to be parsed as HTML.",
+  "keywords": [
+    "remark",
+    "plugin",
+    "remark-plugin",
+    "directive",
+    "remark-directive",
+    "rehype",
+    "unified",
+    "mdast",
+    "hast",
+    "markdown"
+  ],
+  "license": "Unlicense",
+  "homepage": "https://github.com/IGassmann/remark-directive-rehype#readme",
+  "repository": "https://github.com/IGassmann/remark-directive-rehype",
+  "bugs": "https://github.com/IGassmann/remark-directive-rehype/issues",
+  "author": "Igor Gassmann <igor@igassmann.me> (https://igassmann.me)",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepack": "$npm_execpath run build"
+  },
+  "dependencies": {
+    "hastscript": "^7.0.2",
+    "unist-util-map": "^3.1.2"
+  },
+  "devDependencies": {
+    "@types/unist": "^2.0.6",
+    "mdast-util-directive": "^2.1.1",
+    "mdast-util-from-markdown": "^1.0.4",
+    "typescript": "^4.4.4",
+    "unified": "^10.1.0"
+  },
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
+  "packageManager": "yarn@1.22.19"
+}

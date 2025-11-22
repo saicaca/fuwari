@@ -1,0 +1,49 @@
+{
+  "name": "@swup/theme",
+  "amdName": "SwupTheme",
+  "version": "2.1.0",
+  "description": "Base class for creating swup themes",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.modern.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "swup package:build",
+    "dev": "swup package:dev",
+    "lint": "swup package:lint",
+    "format": "swup package:format",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Georgy Marchuk",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swup/theme.git"
+  },
+  "dependencies": {
+    "@swup/plugin": "^4.0.0"
+  },
+  "devDependencies": {
+    "@swup/cli": "^5.0.0"
+  },
+  "peerDependencies": {
+    "swup": "^4.0.0"
+  },
+  "browserslist": [
+    "extends @swup/browserslist-config"
+  ],
+  "prettier": "@swup/prettier-config"
+}

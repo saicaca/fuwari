@@ -1,0 +1,11 @@
+export declare function isIdentStart(c: string): boolean;
+export declare function isIdent(c: string): boolean;
+export declare function isHex(c: string): boolean;
+export declare const identEscapeChars: Record<string, boolean>;
+export declare const stringRenderEscapeChars: Record<string, boolean>;
+export declare const whitespaceChars: Record<string, boolean>;
+export declare const quoteChars: Record<string, boolean>;
+export declare const digitsChars: Record<string, boolean>;
+export declare const maxHexLength = 6;
+export declare function escapeIdentifier(s: string): string;
+export declare function escapeString(s: string): string;

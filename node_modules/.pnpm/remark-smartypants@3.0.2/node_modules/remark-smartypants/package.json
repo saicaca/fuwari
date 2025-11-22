@@ -1,0 +1,60 @@
+{
+  "name": "remark-smartypants",
+  "description": "remark plugin to implement SmartyPants",
+  "version": "3.0.2",
+  "license": "MIT",
+  "files": [
+    "./dist",
+    "!dist/tsconfig.build.tsbuildinfo"
+  ],
+  "exports": "./dist/plugin.js",
+  "types": "./dist/plugin.d.ts",
+  "type": "module",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/silvenon/remark-smartypants.git"
+  },
+  "author": {
+    "name": "Matija Marohnić",
+    "email": "matija.marohnic@gmail.com",
+    "url": "https://silvenon.com"
+  },
+  "homepage": "https://github.com/silvenon/remark-smartypants#readme",
+  "bugs": {
+    "url": "https://github.com/silvenon/remark-smartypants/issues",
+    "email": "matija.marohnic@gmail.com"
+  },
+  "keywords": [
+    "unified",
+    "remark",
+    "remark-plugin",
+    "smartypants",
+    "punctuation",
+    "typography",
+    "smart"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsc --build",
+    "prepublishOnly": "npm test && npm run build"
+  },
+  "dependencies": {
+    "retext": "^9.0.0",
+    "retext-smartypants": "^6.0.0",
+    "unified": "^11.0.4",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/unist": "^3.0.2",
+    "lefthook": "^1.6.10",
+    "prettier": "^3.2.5",
+    "remark": "^15.0.1",
+    "remark-mdx": "^3.0.1",
+    "typescript": "^5.4.5",
+    "unist-util-is": "^6.0.0",
+    "vitest": "^1.5.0"
+  }
+}

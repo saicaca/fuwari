@@ -1,0 +1,74 @@
+{
+  "name": "@swup/fragment-plugin",
+  "amdName": "SwupFragmentPlugin",
+  "version": "1.1.2",
+  "description": "A swup plugin for dynamically replacing containers based on rules",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.modern.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "author": {
+    "name": "Rasso Hilber",
+    "email": "mail@rassohilber.com",
+    "url": "https://rassohilber.com"
+  },
+  "contributors": [
+    {
+      "name": "Philipp Daun",
+      "email": "daun@daun.ltd",
+      "url": "https://philippdaun.net"
+    }
+  ],
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "build": "swup package:build",
+    "dev": "swup package:dev",
+    "lint": "swup package:lint",
+    "format": "swup package:format",
+    "prepublishOnly": "npm run build",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "vitest run --config ./tests/config/vitest.config.ts",
+    "test:unit:watch": "vitest --config ./tests/config/vitest.config.ts",
+    "test:e2e": "npx playwright test --config ./tests/config/playwright.config.ts",
+    "test:e2e:dev": "npx playwright test --ui --config ./tests/config/playwright.config.ts",
+    "test:e2e:serve": "./tests/prepare.js && npx serve -n -S -L -p 8274 --config ./tests/config/serve.json"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swup/fragment-plugin.git"
+  },
+  "dependencies": {
+    "@swup/plugin": "^4.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@swup/cli": "^5.0.2",
+    "@types/jsdom": "^21.1.4",
+    "husky": "^9.0.11",
+    "jsdom": "^22.1.0",
+    "lint-staged": "^15.2.2",
+    "serve": "^14.2.1",
+    "vitest": "^0.34.6"
+  },
+  "peerDependencies": {
+    "swup": "^4.6.0"
+  },
+  "browserslist": [
+    "extends @swup/browserslist-config"
+  ],
+  "prettier": "@swup/prettier-config"
+}

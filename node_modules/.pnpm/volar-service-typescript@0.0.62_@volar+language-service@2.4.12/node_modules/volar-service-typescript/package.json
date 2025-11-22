@@ -1,0 +1,48 @@
+{
+	"name": "volar-service-typescript",
+	"version": "0.0.62",
+	"description": "Integrate TypeScript into Volar",
+	"homepage": "https://github.com/volarjs/services/tree/master/packages/typescript",
+	"bugs": "https://github.com/volarjs/services/issues",
+	"sideEffects": false,
+	"keywords": [
+		"volar-service"
+	],
+	"license": "MIT",
+	"files": [
+		"**/*.js",
+		"**/*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/volarjs/services.git",
+		"directory": "packages/typescript"
+	},
+	"author": {
+		"name": "Johnson Chu",
+		"email": "johnsoncodehk@gmail.com",
+		"url": "https://github.com/johnsoncodehk"
+	},
+	"devDependencies": {
+		"@types/path-browserify": "latest",
+		"@types/semver": "latest",
+		"@volar/typescript": "~2.4.0"
+	},
+	"dependencies": {
+		"path-browserify": "^1.0.1",
+		"semver": "^7.6.2",
+		"typescript-auto-import-cache": "^0.3.3",
+		"vscode-languageserver-textdocument": "^1.0.11",
+		"vscode-nls": "^5.2.0",
+		"vscode-uri": "^3.0.8"
+	},
+	"peerDependencies": {
+		"@volar/language-service": "~2.4.0"
+	},
+	"peerDependenciesMeta": {
+		"@volar/language-service": {
+			"optional": true
+		}
+	},
+	"gitHead": "f1ddbdc4d9df0772db5a0d46ff8ff64eecc9de02"
+}

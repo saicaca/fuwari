@@ -1,0 +1,41 @@
+{
+	"name": "volar-service-typescript-twoslash-queries",
+	"version": "0.0.62",
+	"description": "Integrate TypeScript Twoslash into Volar",
+	"homepage": "https://github.com/volarjs/services/tree/master/packages/typescript-twoslash-queries",
+	"bugs": "https://github.com/volarjs/services/issues",
+	"sideEffects": false,
+	"keywords": [
+		"volar-service"
+	],
+	"license": "MIT",
+	"files": [
+		"**/*.js",
+		"**/*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/volarjs/services.git",
+		"directory": "packages/typescript-twoslash-queries"
+	},
+	"author": {
+		"name": "Johnson Chu",
+		"email": "johnsoncodehk@gmail.com",
+		"url": "https://github.com/johnsoncodehk"
+	},
+	"dependencies": {
+		"vscode-uri": "^3.0.8"
+	},
+	"devDependencies": {
+		"volar-service-typescript": "0.0.62"
+	},
+	"peerDependencies": {
+		"@volar/language-service": "~2.4.0"
+	},
+	"peerDependenciesMeta": {
+		"@volar/language-service": {
+			"optional": true
+		}
+	},
+	"gitHead": "f1ddbdc4d9df0772db5a0d46ff8ff64eecc9de02"
+}

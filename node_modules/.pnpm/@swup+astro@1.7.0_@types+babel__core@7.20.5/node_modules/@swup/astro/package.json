@@ -1,0 +1,70 @@
+{
+  "name": "@swup/astro",
+  "description": "Smooth page transitions, smart preloading and more in Astro",
+  "version": "1.7.0",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "author": {
+    "name": "Philipp Daun",
+    "email": "post@philippdaun.net",
+    "url": "https://philippdaun.net"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swup/astro.git"
+  },
+  "keywords": [
+    "astro",
+    "withastro",
+    "astro-component",
+    "astro-integration",
+    "swup",
+    "animation",
+    "transition",
+    "css",
+    "performance"
+  ],
+  "bugs": "https://github.com/swup/astro/issues",
+  "homepage": "https://swup.js.org",
+  "exports": {
+    ".": "./dist/index.js",
+    "./client": "./dist/client.js",
+    "./client/*": "./dist/client/*.js",
+    "./serialise": "./dist/serialise.js",
+    "./idle": "./dist/idle.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@swup/a11y-plugin": "^5.0.0",
+    "@swup/body-class-plugin": "^3.0.0",
+    "@swup/debug-plugin": "^4.0.0",
+    "@swup/fade-theme": "^2.0.0",
+    "@swup/forms-plugin": "^3.0.0",
+    "@swup/fragment-plugin": "^1.1.2",
+    "@swup/head-plugin": "^2.0.0",
+    "@swup/overlay-theme": "^2.0.0",
+    "@swup/parallel-plugin": "^0.4.0",
+    "@swup/preload-plugin": "^3.0.0",
+    "@swup/progress-plugin": "^3.0.0",
+    "@swup/route-name-plugin": "^4.0.0",
+    "@swup/scripts-plugin": "^2.0.0",
+    "@swup/scroll-plugin": "^3.0.0",
+    "@swup/slide-theme": "^2.0.0",
+    "swup": "^4.0.0",
+    "swup-morph-plugin": "^1.0.0"
+  },
+  "devDependencies": {
+    "astro": "^3.0.0",
+    "typescript": "^5.8.2"
+  }
+}

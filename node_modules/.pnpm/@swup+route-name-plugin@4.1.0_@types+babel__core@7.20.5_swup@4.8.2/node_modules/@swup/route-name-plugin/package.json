@@ -1,0 +1,49 @@
+{
+  "name": "@swup/route-name-plugin",
+  "amdName": "SwupRouteNamePlugin",
+  "version": "4.1.0",
+  "description": "A swup plugin for named routes and route-based animation classes",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.modern.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "swup-plugin build",
+    "dev": "swup-plugin dev",
+    "lint": "swup-plugin lint",
+    "format": "swup-plugin format",
+    "prepublishOnly": "npm run build"
+  },
+  "author": {
+    "name": "Philipp Daun",
+    "email": "daun@daun.ltd",
+    "url": "https://philippdaun.net"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swup/route-name-plugin.git"
+  },
+  "dependencies": {
+    "@swup/plugin": "^3.0.0"
+  },
+  "peerDependencies": {
+    "swup": "^4.0.0"
+  },
+  "browserslist": [
+    "extends @swup/browserslist-config"
+  ],
+  "prettier": "@swup/prettier-config"
+}

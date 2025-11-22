@@ -1,0 +1,35 @@
+{
+  "name": "focus-options-polyfill",
+  "version": "1.6.0",
+  "description": "JavaScript polyfill for the WHATWG spec of focusOptions, that enables a set of options to be passed to the focus method.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/calvellido/focus-options-polyfill.git"
+  },
+  "keywords": [
+    "javascript",
+    "polyfill",
+    "javascript-polyfill",
+    "focus",
+    "options",
+    "focusOptions",
+    "preventScroll",
+    "whatwg",
+    "whatwg-dom",
+    "js"
+  ],
+  "author": "Juan Valencia Calvellido <juanvalencia@calvellido.es> (https://calvellido.es)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/calvellido/focus-options-polyfill/issues"
+  },
+  "homepage": "https://github.com/calvellido/focus-options-polyfill#readme",
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  }
+}

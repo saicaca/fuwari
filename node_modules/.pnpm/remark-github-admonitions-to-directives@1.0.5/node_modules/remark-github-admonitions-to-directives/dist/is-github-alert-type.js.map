@@ -1,0 +1,1 @@
+{"version":3,"file":"is-github-alert-type.js","sourceRoot":"","sources":["../src/is-github-alert-type.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,kBAAkB,GAEnB,MAAM,wBAAwB,CAAC;AAEhC,MAAM,UAAU,iBAAiB,CAAC,IAAa;IAC7C,OAAO,kBAAkB,CAAC,QAAQ,CAAC,IAAuB,CAAC,CAAC;AAC9D,CAAC"}

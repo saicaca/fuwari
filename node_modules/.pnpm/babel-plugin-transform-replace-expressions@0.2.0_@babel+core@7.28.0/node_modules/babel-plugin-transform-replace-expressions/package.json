@@ -1,0 +1,32 @@
+{
+  "name": "babel-plugin-transform-replace-expressions",
+  "version": "0.2.0",
+  "description": "Replace JavaScript expressions with other expressions",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": "jviide/babel-plugin-transform-replace-expressions",
+  "author": "Joachim Viide <jviide@iki.fi>",
+  "keywords": [
+    "babel-plugin"
+  ],
+  "scripts": {
+    "test": "mocha",
+    "lint": "eslint --max-warnings 0 --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "@babel/parser": "^7.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/types": "^7.3.3",
+    "chai": "^4.2.0",
+    "eslint": "^5.14.1",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "mocha": "^6.0.1",
+    "prettier": "^1.16.4"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-0"
+  }
+}

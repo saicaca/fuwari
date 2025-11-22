@@ -1,0 +1,28 @@
+{
+    "name": "@types/fontkit",
+    "version": "2.0.8",
+    "description": "TypeScript definitions for fontkit",
+    "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/fontkit",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Stepan Mikhailiuk",
+            "githubUsername": "stepancar",
+            "url": "https://github.com/stepancar"
+        }
+    ],
+    "main": "",
+    "types": "index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+        "directory": "types/fontkit"
+    },
+    "scripts": {},
+    "dependencies": {
+        "@types/node": "*"
+    },
+    "peerDependencies": {},
+    "typesPublisherContentHash": "faf41bdfceadd3493fe8bc4ffe11af803e3187ac5668828c846fd9be7017c554",
+    "typeScriptVersion": "5.0"
+}

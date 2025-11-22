@@ -1,0 +1,47 @@
+{
+	"name": "vscode-nls",
+	"version": "5.2.0",
+	"description": "NPM module to externalize and localize VSCode extensions",
+	"author": "Microsoft Corporation",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Microsoft/vscode-nls.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Microsoft/vscode-nls/issues"
+	},
+	"main": "./lib/node/main.js",
+	"browser": {
+		"./lib/node/main.js": "./lib/browser/main.js"
+	},
+	"typings": "./lib/common/common.d.ts",
+	"devDependencies": {
+		"@types/mocha": "^9.1.0",
+		"@types/node": "14.14.31",
+		"@typescript-eslint/parser": "^4.28.0",
+		"eslint": "^7.29.0",
+		"mocha": "^9.2.0",
+		"rimraf": "^3.0.2",
+		"typescript": "^4.5.5"
+	},
+	"scripts": {
+		"prepublishOnly": "npm run clean && npm run compile && npm run lint && npm run test",
+		"compile": "tsc -b ./tsconfig.json",
+		"watch": "tsc -b ./tsconfig.json -w",
+		"clean": "rimraf lib",
+		"test": "mocha",
+		"lint": "eslint --config .eslintrc.json ./**/*.ts"
+	},
+	"files": [
+		"lib/common",
+		"lib/browser",
+		"lib/node",
+		"!lib/*/test",
+		"!lib/**/*.tsbuildinfo",
+		"node.js",
+		"node.d.ts",
+		"browser.js",
+		"browser.d.ts"
+	]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "maxmin",
+  "version": "2.1.0",
+  "description": "Get a pretty output of the original, minified, gzipped size of a string or buffer: 130 B → 91 B → 53 B (gzip)",
+  "license": "MIT",
+  "repository": "sindresorhus/maxmin",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "engines": {
+    "node": ">=0.12"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "string",
+    "buffer",
+    "pretty",
+    "color",
+    "gzip",
+    "minified",
+    "min",
+    "max",
+    "diff",
+    "difference"
+  ],
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "figures": "^1.0.1",
+    "gzip-size": "^3.0.0",
+    "pretty-bytes": "^3.0.0"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "xo": "*"
+  }
+}

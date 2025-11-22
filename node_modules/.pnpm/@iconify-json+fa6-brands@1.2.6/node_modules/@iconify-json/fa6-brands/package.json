@@ -1,0 +1,31 @@
+{
+	"name": "@iconify-json/fa6-brands",
+	"description": "Font Awesome 6 Brands icon set in Iconify JSON format",
+	"version": "1.2.6",
+	"iconSetVersion": "6.7.2",
+	"main": "index.js",
+	"module": "index.mjs",
+	"types": "index.d.ts",
+	"homepage": "https://icon-sets.iconify.design/fa6-brands/",
+	"bugs": "https://github.com/iconify/icon-sets/issues",
+	"license": "CC-BY-4.0",
+	"exports": {
+		"./*": "./*",
+		".": {
+			"types": "./index.d.ts",
+			"require": "./index.js",
+			"import": "./index.mjs"
+		},
+		"./icons.json": "./icons.json",
+		"./info.json": "./info.json",
+		"./metadata.json": "./metadata.json"
+	},
+	"iconSet": {
+		"icons": "icons.json",
+		"info": "info.json",
+		"metadata": "metadata.json"
+	},
+	"dependencies": {
+		"@iconify/types": "*"
+	}
+}

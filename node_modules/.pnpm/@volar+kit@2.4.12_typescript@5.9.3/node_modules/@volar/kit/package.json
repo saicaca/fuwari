@@ -1,0 +1,28 @@
+{
+	"name": "@volar/kit",
+	"version": "2.4.12",
+	"license": "MIT",
+	"files": [
+		"**/*.js",
+		"**/*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/volarjs/volar.js.git",
+		"directory": "packages/kit"
+	},
+	"dependencies": {
+		"@volar/language-service": "2.4.12",
+		"@volar/typescript": "2.4.12",
+		"typesafe-path": "^0.2.2",
+		"vscode-languageserver-textdocument": "^1.0.11",
+		"vscode-uri": "^3.0.8"
+	},
+	"devDependencies": {
+		"@types/node": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "*"
+	},
+	"gitHead": "17b9b8a1f522afd1aad1e598d2fd935680d8a8d7"
+}

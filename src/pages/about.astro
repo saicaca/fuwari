@@ -1,25 +1,64 @@
 ---
-
-import { getEntry, render } from "astro:content";
-import Markdown from "@components/misc/Markdown.astro";
-import I18nKey from "../i18n/i18nKey";
-import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
+import { getEntry } from 'astro:content';
+import { i18n } from "../i18n/translation";
+import I18nKey from "../i18n/i18nKey";
+import Markdown from "@components/misc/Markdown.astro";
+import ImageWrapper from "@components/misc/ImageWrapper.astro";
 
-const aboutPost = await getEntry("spec", "about");
+// 读取 src/content/spec/about.md 里的内容
+const aboutPost = await getEntry('spec', 'about');
+const { Content } = await aboutPost.render();
 
-if (!aboutPost) {
-	throw new Error("About page content not found");
-}
-
-const { Content } = await render(aboutPost);
+// --- 这里配置你的友链数据 ---
+const friends = [
+  {
+    name: "Saicaca",
+    desc: "Fuwari 主题作者",
+    avatar: "https://avatars.githubusercontent.com/u/20166790?v=4",
+    link: "https://github.com/saicaca/fuwari"
+  },
+  {
+    name: "示例友链",
+    desc: "这是一个示例描述",
+    avatar: "https://ui-avatars.com/api/?name=User&background=random",
+    link: "#"
+  },
+  // 复制上面的 {...}, 块添加更多
+];
 ---
-<MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)}>
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
-        <div class="card-base z-10 px-9 py-6 relative w-full ">
-            <Markdown class="mt-2">
-                <Content />
-            </Markdown>
+
+<MainGridLayout title="关于我" description="About Me">
+    
+    <div class="card-base p-6 md:p-9 mb-4 relative w-full">
+        <Markdown class="markdown-content">
+            <Content />
+        </Markdown>
+    </div>
+
+    <div class="card-base p-6 md:p-9 mb-4 relative w-full">
+        <div class="flex items-center gap-3 mb-6 text-xl font-bold text-[var(--primary)]">
+            <div class="i-fa-solid-link text-2xl"></div>
+            <span>友情链接</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {friends.map((friend) => (
+                <a href={friend.link} target="_blank" class="group flex items-center gap-4 p-4 rounded-xl border border-[var(--line-divider)] hover:bg-[var(--card-bg-hover)] hover:border-[var(--primary)] transition-all duration-300 decoration-none">
+                    <div class="w-14 h-14 flex-shrink-0 rounded-full overflow-hidden border border-white/20 shadow-sm">
+                        <ImageWrapper src={friend.avatar} alt={friend.name} class="w-full h-full object-cover" />
+                    </div>
+                    <div class="flex flex-col overflow-hidden">
+                        <div class="font-bold text-[var(--primary)] text-lg truncate group-hover:translate-x-1 transition-transform">
+                            {friend.name}
+                        </div>
+                        <div class="text-sm text-black/50 dark:text-white/50 truncate">
+                            {friend.desc}
+                        </div>
+                    </div>
+                </a>
+            ))}
         </div>
     </div>
+
 </MainGridLayout>

@@ -1,0 +1,23 @@
+{
+	"version": 3,
+	"file": "index.d.ts",
+	"names": [
+		"walk",
+		"BaseNode",
+		"NodeOf",
+		"SpecialisedVisitors",
+		"Visitor",
+		"Visitors",
+		"Context"
+	],
+	"sources": [
+		"../src/walk.js",
+		"../src/types.d.ts"
+	],
+	"sourcesContent": [
+		null,
+		null
+	],
+	"mappings": ";iBASgBA,IAAIA;;;MCTfC,QAAQA;;MAERC,MAAMA;;MAENC,mBAAmBA;;;;aAIZC,OAAOA;;aAEPC,QAAQA;;;;kBAIHC,OAAOA",
+	"ignoreList": []
+}

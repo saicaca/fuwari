@@ -1,0 +1,98 @@
+{
+  "name": "fontkit",
+  "version": "2.0.4",
+  "description": "An advanced font engine for Node and the browser",
+  "keywords": [
+    "opentype",
+    "font",
+    "typography",
+    "subset",
+    "emoji",
+    "glyph",
+    "layout"
+  ],
+  "scripts": {
+    "test": "run-s build mocha",
+    "mocha": "mocha",
+    "build": "parcel build",
+    "prepublish": "run-s clean trie:** build",
+    "trie:data": "node src/opentype/shapers/generate-data.js",
+    "trie:use": "node src/opentype/shapers/gen-use.js",
+    "trie:indic": "node src/opentype/shapers/gen-indic.js",
+    "clean": "shx rm -rf src/opentype/shapers/data.trie src/opentype/shapers/use.trie src/opentype/shapers/use.json src/opentype/shapers/indic.trie src/opentype/shapers/indic.json dist",
+    "coverage": "c8 mocha"
+  },
+  "type": "module",
+  "main": "dist/main.cjs",
+  "node-module": "dist/module.mjs",
+  "browser": "dist/browser.cjs",
+  "module": "dist/browser-module.mjs",
+  "source": "src/index.js",
+  "exports": {
+    "node": {
+      "import": "./dist/module.mjs",
+      "require": "./dist/main.cjs"
+    },
+    "import": "./dist/browser-module.mjs",
+    "require": "./dist/browser.cjs"
+  },
+  "targets": {
+    "main": {
+      "source": "src/node.js",
+      "context": "browser",
+      "engines": {
+        "browsers": "chrome >= 70"
+      }
+    },
+    "node-module": {
+      "source": "src/node.js",
+      "isLibrary": true,
+      "includeNodeModules": false,
+      "engines": {
+        "browsers": "chrome >= 70"
+      }
+    },
+    "module": {
+      "source": "src/index.js",
+      "engines": {
+        "browsers": "chrome >= 70"
+      }
+    },
+    "browser": {
+      "source": "src/index.js",
+      "engines": {
+        "browsers": "chrome >= 70"
+      }
+    }
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "author": "Devon Govett <devongovett@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/foliojs/fontkit.git"
+  },
+  "dependencies": {
+    "@swc/helpers": "^0.5.12",
+    "brotli": "^1.3.2",
+    "clone": "^2.1.2",
+    "dfa": "^1.2.0",
+    "fast-deep-equal": "^3.1.3",
+    "restructure": "^3.0.0",
+    "tiny-inflate": "^1.0.3",
+    "unicode-properties": "^1.4.0",
+    "unicode-trie": "^2.0.0"
+  },
+  "devDependencies": {
+    "c8": "^7.11.3",
+    "codepoints": "^1.2.0",
+    "concat-stream": "^2.0.0",
+    "mocha": "^10.0.0",
+    "npm-run-all": "^4.1.5",
+    "parcel": "2.0.0-canary.1713",
+    "shx": "^0.3.4"
+  }
+}

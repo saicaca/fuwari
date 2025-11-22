@@ -1,0 +1,44 @@
+{
+  "name": "@oslojs/encoding",
+  "type": "module",
+  "version": "1.1.0",
+  "description": "Runtime-agnostic library for encoding and decoding data",
+  "files": [
+    "/dist/"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [
+    "auth",
+    "encoding",
+    "hex",
+    "base16",
+    "base32",
+    "base64",
+    "base64url"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oslo-project/encoding"
+  },
+  "author": "pilcrowOnPaper",
+  "license": "MIT",
+  "devDependencies": {
+    "@scure/base": "^1.1.6",
+    "@types/node": "^20.11.25",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "auri": "^2.0.0",
+    "eslint": "^8.51.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+  },
+  "scripts": {
+    "build": "rm -rf dist/* && tsc --project tsconfig.build.json",
+    "format": "prettier -w .",
+    "lint": "eslint src",
+    "test": "vitest run --sequence.concurrent"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "recaptcha-v3",
+  "version": "1.11.3",
+  "keywords": [
+    "captcha",
+    "recaptcha",
+    "recaptcha-v3"
+  ],
+  "bugs": {
+    "url": "https://github.com/AurityLab/recaptcha-v3/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AurityLab/recaptcha-v3"
+  },
+  "license": "Apache-2.0",
+  "author": "AB INNOVISION UG <info@abinnovision.com>",
+  "main": "dist/ReCaptcha.js",
+  "types": "dist/ReCaptcha.d.ts",
+  "files": [
+    "/dist",
+    "/README.md",
+    "/LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "check": "concurrently 'yarn lint:check' 'yarn format:check' 'yarn sort:check'",
+    "demo": "parcel demo/src/index.html",
+    "fix": "concurrently 'yarn lint:fix' 'yarn format:fix' 'yarn sort:fix'",
+    "format:check": "prettier --check '{src/**,demo/**,test/**,.}/*.{ts,js,html}' '**/*.{json,json5,yaml,yml}'",
+    "format:fix": "prettier --write '{src/**,demo/**,test/**,.}/*.{ts,js,html}' '**/*.{json,json5,yaml,yml}'",
+    "_postinstall": "husky install",
+    "lint:check": "eslint '{src/**,demo/**,test/**,.}/*.{js,ts}'",
+    "lint:fix": "eslint --fix '{src/**,demo/**,test/**,.}/*.{js,ts}'",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable",
+    "sort:check": "sort-package-json --check",
+    "sort:fix": "sort-package-json",
+    "test-integration": "vitest run",
+    "test-integration:watch": "vitest watch"
+  },
+  "commitlint": {
+    "extends": [
+      "@abinnovision/commitlint-config"
+    ]
+  },
+  "lint-staged": {
+    "{src/**,demo/**,test/**,.}/*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "{src/**,demo/**,test/**,.}/*.{ts,js,html}": [
+      "prettier --write"
+    ],
+    "**/*.{json,json5,yaml,yml}": [
+      "prettier --write"
+    ],
+    "package.json": [
+      "sort-package-json"
+    ]
+  },
+  "prettier": "@abinnovision/prettier-config",
+  "devDependencies": {
+    "@abinnovision/commitlint-config": "^2.2.0",
+    "@abinnovision/eslint-config-base": "^2.1.0",
+    "@abinnovision/eslint-config-typescript": "^2.1.0",
+    "@abinnovision/prettier-config": "^2.1.0",
+    "@commitlint/cli": "^19.4.0",
+    "@types/eslint": "^9.6.0",
+    "@types/node": "^22.1.0",
+    "@vitest/browser": "^2.0.5",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.8.0",
+    "globals": "^15.9.0",
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.8",
+    "parcel": "^2.12.0",
+    "pinst": "^3.0.0",
+    "playwright": "^1.46.0",
+    "prettier": "^3.3.3",
+    "sort-package-json": "^2.10.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "packageManager": "yarn@4.0.2"
+}

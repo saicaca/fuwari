@@ -1,0 +1,34 @@
+{
+  "name": "@emmetio/stream-reader-utils",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/stream-reader-utils.cjs.js",
+  "module": "dist/stream-reader-utils.es.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "@emmetio/stream-reader": "^2.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.0",
+    "babel-register": "^6.24.0",
+    "mocha": "^3.2.0",
+    "rollup": "^0.41.6",
+    "rollup-watch": "^3.2.2"
+  },
+  "scripts": {
+    "test": "mocha",
+    "build": "rollup -c",
+    "watch": "rollup -wc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmetio/stream-reader-utils.git"
+  },
+  "keywords": [],
+  "author": "Sergey Chikuyonok <serge.che@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emmetio/stream-reader-utils/issues"
+  },
+  "homepage": "https://github.com/emmetio/stream-reader-utils#readme"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "@expressive-code/core",
+  "version": "0.41.3",
+  "description": "A text marking & annotation engine for presenting source code on the web.",
+  "keywords": [],
+  "author": "Tibor Schiemann",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expressive-code/expressive-code.git",
+    "directory": "packages/@expressive-code/core"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./hast": {
+      "types": "./dist/hast.d.ts",
+      "default": "./dist/hast.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "hast": [
+        "dist/hast.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@ctrl/tinycolor": "^4.0.4",
+    "hast-util-select": "^6.0.2",
+    "hast-util-to-html": "^9.0.1",
+    "hast-util-to-text": "^4.0.1",
+    "hastscript": "^9.0.0",
+    "postcss": "^8.4.38",
+    "postcss-nested": "^6.0.1",
+    "unist-util-visit": "^5.0.0",
+    "unist-util-visit-parents": "^6.0.1"
+  },
+  "devDependencies": {
+    "@types/culori": "^2.1.0",
+    "@types/hast": "^3.0.4",
+    "culori": "^4.0.1",
+    "djb2a": "^2.0.0",
+    "hast-util-sanitize": "^5.0.1",
+    "shiki": "^3.2.2",
+    "strip-json-comments": "^5.0.1"
+  },
+  "scripts": {
+    "build": "pnpm build-js-modules && tsup ./src/index.ts ./src/hast.ts --format esm --no-splitting --dts --sourcemap --clean",
+    "build-js-modules": "tsm --require=../../../scripts/lib/filter-warnings.cjs ../../../scripts/build-js-module.ts ./src/internal/tabindex-js-module.ts",
+    "coverage": "vitest run --coverage",
+    "test": "vitest run --reporter verbose",
+    "test-short": "vitest run --reporter basic",
+    "test-watch": "vitest --reporter verbose",
+    "watch": "pnpm build --watch src"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "@expressive-code/plugin-line-numbers",
+  "version": "0.41.3",
+  "description": "Line numbers plugin for Expressive Code, a text marking & annotation engine for presenting source code on the web.",
+  "keywords": [],
+  "author": "Tibor Schiemann",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expressive-code/expressive-code.git",
+    "directory": "packages/@expressive-code/plugin-line-numbers"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@expressive-code/core": "^0.41.3"
+  },
+  "devDependencies": {
+    "@expressive-code/plugin-collapsible-sections": "^0.41.3",
+    "@expressive-code/plugin-frames": "^0.41.3",
+    "@expressive-code/plugin-shiki": "^0.41.3",
+    "@expressive-code/plugin-text-markers": "^0.41.3",
+    "@internal/test-utils": "^0.2.34"
+  },
+  "scripts": {
+    "build": "tsup ./src/index.ts --format esm --dts --sourcemap --clean",
+    "coverage": "vitest run --coverage",
+    "test": "vitest run --reporter verbose",
+    "test-short": "vitest run --reporter basic",
+    "test-watch": "vitest --reporter verbose",
+    "watch": "pnpm build --watch src"
+  }
+}

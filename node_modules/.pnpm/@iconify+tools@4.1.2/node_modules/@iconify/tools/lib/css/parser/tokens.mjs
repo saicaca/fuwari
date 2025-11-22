@@ -1,0 +1,204 @@
+import { styleParseError } from './error.mjs';
+import { findEndOfQuotedString, findEndOfURL } from './strings.mjs';
+import { textTokensToRule, mergeTextTokens, textTokensToSelector } from './text.mjs';
+
+function findTokens(code, tokens) {
+  const list = [];
+  const lc = code.toLowerCase();
+  tokens.forEach((token) => {
+    let index = 0;
+    while (true) {
+      index = lc.indexOf(token, index);
+      if (index === -1) {
+        return;
+      }
+      list.push({
+        token,
+        index
+      });
+      index++;
+    }
+  });
+  list.sort((a, b) => a.index - b.index);
+  return list;
+}
+function getTokens(css) {
+  const items = [];
+  let textQueue = [];
+  let start = 0;
+  let depth = 0;
+  try {
+    const checkRule = (text) => {
+      if (!textQueue.length) {
+        return;
+      }
+      const item = textTokensToRule(textQueue);
+      if (item) {
+        items.push(item);
+        return;
+      }
+      const value = mergeTextTokens(textQueue) + text;
+      if (!value.length) {
+        return;
+      }
+      throw styleParseError("Invalid css rule", css, textQueue[0]?.index);
+    };
+    findTokens(css, ['"', "'", "/*", "{", "}", ";", "url(", "\\"]).forEach(
+      (token) => {
+        if (token.index < start) {
+          return;
+        }
+        switch (token.token) {
+          case "/*": {
+            textQueue.push({
+              type: "chunk",
+              text: css.slice(start, token.index),
+              index: start
+            });
+            start = token.index;
+            const end = css.indexOf("*/", start + 2);
+            if (end === -1) {
+              throw styleParseError(
+                "Missing comment closing statement",
+                css,
+                start
+              );
+            }
+            start = end + 2;
+            break;
+          }
+          case "\\":
+            textQueue.push({
+              type: "chunk",
+              text: css.slice(start, token.index + 2),
+              index: start
+            });
+            start = token.index + 2;
+            break;
+          case "url(": {
+            textQueue.push({
+              type: "chunk",
+              text: css.slice(start, token.index),
+              index: start
+            });
+            start = token.index;
+            const end = findEndOfURL(css, start);
+            if (typeof end !== "number") {
+              throw end;
+            }
+            textQueue.push({
+              type: "url",
+              text: css.slice(start, end),
+              index: start
+            });
+            start = end;
+            break;
+          }
+          case '"':
+          case "'": {
+            textQueue.push({
+              type: "chunk",
+              text: css.slice(start, token.index),
+              index: start
+            });
+            start = token.index;
+            const end = findEndOfQuotedString(
+              css,
+              token.token,
+              start
+            );
+            if (end === null) {
+              throw styleParseError(
+                "Missing closing " + token.token,
+                css,
+                start
+              );
+            }
+            textQueue.push({
+              type: "quoted-string",
+              text: css.slice(start, end),
+              index: start
+            });
+            start = end;
+            break;
+          }
+          case ";": {
+            textQueue.push({
+              type: "chunk",
+              text: css.slice(start, token.index),
+              index: start
+            });
+            checkRule(token.token);
+            start = token.index + 1;
+            textQueue = [];
+            break;
+          }
+          case "{": {
+            textQueue.push({
+              type: "chunk",
+              text: css.slice(start, token.index),
+              index: start
+            });
+            const item = textTokensToSelector(textQueue);
+            if (!item) {
+              throw styleParseError(
+                "Invalid css rule",
+                css,
+                start
+              );
+            }
+            items.push(item);
+            start = token.index + 1;
+            textQueue = [];
+            depth++;
+            break;
+          }
+          case "}": {
+            textQueue.push({
+              type: "chunk",
+              text: css.slice(start, token.index),
+              index: start
+            });
+            checkRule("");
+            items.push({
+              type: "close",
+              index: token.index
+            });
+            if (!depth) {
+              throw styleParseError(
+                "Unexpected }",
+                css,
+                token.index
+              );
+            }
+            depth--;
+            start = token.index + 1;
+            textQueue = [];
+            break;
+          }
+          default:
+            throw new Error(
+              `Forgot to parse token: ${token.token}`
+            );
+        }
+      }
+    );
+    if (depth) {
+      return styleParseError("Missing }", css);
+    }
+    textQueue.push({
+      type: "chunk",
+      text: css.slice(start),
+      index: start
+    });
+    checkRule("");
+  } catch (err) {
+    if (typeof err === "object" && err.type === "style-parse-error") {
+      return err;
+    }
+    throw err;
+  }
+  return items;
+}
+
+export { getTokens };

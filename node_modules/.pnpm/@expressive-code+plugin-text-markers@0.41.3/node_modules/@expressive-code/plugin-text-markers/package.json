@@ -1,0 +1,40 @@
+{
+  "name": "@expressive-code/plugin-text-markers",
+  "version": "0.41.3",
+  "description": "Text marker plugin for Expressive Code, a text marking & annotation engine for presenting source code on the web.",
+  "keywords": [],
+  "author": "Tibor Schiemann",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expressive-code/expressive-code.git",
+    "directory": "packages/@expressive-code/plugin-text-markers"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@expressive-code/core": "^0.41.3"
+  },
+  "devDependencies": {
+    "@expressive-code/plugin-shiki": "^0.41.3",
+    "parse-numeric-range": "^1.3.0",
+    "@internal/test-utils": "^0.2.34"
+  },
+  "scripts": {
+    "build": "tsup ./src/index.ts --format esm --dts --sourcemap --clean",
+    "coverage": "vitest run --coverage",
+    "test": "vitest run --reporter verbose",
+    "test-short": "vitest run --reporter basic",
+    "test-watch": "vitest --reporter verbose",
+    "watch": "pnpm build --watch src"
+  }
+}

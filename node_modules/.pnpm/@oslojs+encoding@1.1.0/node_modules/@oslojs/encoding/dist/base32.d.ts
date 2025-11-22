@@ -1,0 +1,10 @@
+export declare function encodeBase32UpperCase(bytes: Uint8Array): string;
+export declare function encodeBase32UpperCaseNoPadding(bytes: Uint8Array): string;
+export declare function encodeBase32LowerCase(bytes: Uint8Array): string;
+export declare function encodeBase32LowerCaseNoPadding(bytes: Uint8Array): string;
+/** Replaced: Use encodeBase32UpperCase() instead. */
+export declare function encodeBase32(bytes: Uint8Array): string;
+/** Replaced: Use encodeBase32UpperCaseNoPadding() instead. */
+export declare function encodeBase32NoPadding(bytes: Uint8Array): string;
+export declare function decodeBase32(encoded: string): Uint8Array;
+export declare function decodeBase32IgnorePadding(encoded: string): Uint8Array;

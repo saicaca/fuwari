@@ -1,0 +1,49 @@
+{
+  "name": "unicode-properties",
+  "version": "1.4.1",
+  "description": "Provides fast access to unicode character properties",
+  "source": "index.js",
+  "type": "module",
+  "main": "./dist/main.cjs",
+  "module": "./dist/module.mjs",
+  "exports": {
+    "require": "./dist/main.cjs",
+    "import": "./dist/module.mjs"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "base64-js": "^1.3.0",
+    "unicode-trie": "^2.0.0"
+  },
+  "devDependencies": {
+    "codepoints": "^1.3.0",
+    "mocha": "^10.0.0",
+    "parcel": "^2.6.1"
+  },
+  "scripts": {
+    "test": "npm run build && mocha",
+    "build": "node ./generate.js && parcel build",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/devongovett/unicode-properties.git"
+  },
+  "keywords": [
+    "unicode",
+    "metadata",
+    "character",
+    "codepoint"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": "Devon Govett <devongovett@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devongovett/unicode-properties/issues"
+  },
+  "homepage": "https://github.com/devongovett/unicode-properties"
+}

@@ -1,0 +1,81 @@
+{
+	"categories": {
+		"Accessibility": [
+			"accessible-icon"
+		],
+		"Audio & Video": [
+			"youtube"
+		],
+		"Communication": [
+			"bluetooth",
+			"bluetooth-b"
+		],
+		"Currency": [
+			"bitcoin",
+			"btc",
+			"ethereum",
+			"gg",
+			"gg-circle"
+		],
+		"Games": [
+			"playstation",
+			"steam",
+			"steam-symbol",
+			"twitch",
+			"xbox"
+		],
+		"Health": [
+			"accessible-icon"
+		],
+		"Images": [
+			"unsplash"
+		],
+		"Music": [
+			"napster",
+			"soundcloud",
+			"spotify"
+		],
+		"Payments & Shopping": [
+			"alipay",
+			"amazon-pay",
+			"apple-pay",
+			"bitcoin",
+			"btc",
+			"cc-amazon-pay",
+			"cc-amex",
+			"cc-apple-pay",
+			"cc-diners-club",
+			"cc-discover",
+			"cc-jcb",
+			"cc-mastercard",
+			"cc-paypal",
+			"cc-stripe",
+			"cc-visa",
+			"ethereum",
+			"google-pay",
+			"google-wallet",
+			"paypal",
+			"stripe",
+			"stripe-s"
+		],
+		"Science Fiction": [
+			"galactic-republic",
+			"galactic-senate",
+			"jedi-order",
+			"old-republic"
+		],
+		"Tabletop Gaming": [
+			"critical-role",
+			"d-and-d",
+			"d-and-d-beyond",
+			"fantasy-flight-games",
+			"wizards-of-the-coast"
+		],
+		"Users & People": [
+			"accessible-icon"
+		],
+		"Vehicles": [
+			"accessible-icon"
+		]
+	}
+}

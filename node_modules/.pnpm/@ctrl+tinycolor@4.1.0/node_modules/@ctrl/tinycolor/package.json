@@ -1,0 +1,59 @@
+{
+  "name": "@ctrl/tinycolor",
+  "version": "4.1.0",
+  "description": "Fast, small color manipulation and conversion for JavaScript",
+  "author": "Scott Cooper <scttcper@gmail.com>",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "homepage": "https://tinycolor.vercel.app",
+  "repository": "scttcper/tinycolor",
+  "keywords": [
+    "typescript",
+    "color",
+    "manipulation",
+    "tinycolor",
+    "hsa",
+    "rgb"
+  ],
+  "main": "dist/public_api.js",
+  "module": "dist/module/public_api.js",
+  "typings": "dist/public_api.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "demo:build": "npm run build --workspace=demo",
+    "demo:watch": "npm run dev --workspace=demo",
+    "lint": "eslint --ext .js,.ts, .",
+    "lint:fix": "eslint --fix --ext .js,.ts, .",
+    "prepare": "npm run build",
+    "build": "del-cli dist && tsc -p tsconfig.build.json && tsc -p tsconfig.module.json && ts-node build",
+    "docs:build": "typedoc --out demo/dist/docs --hideGenerator --tsconfig tsconfig.build.json src/public_api.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ci": "vitest run --coverage --reporter=default --reporter=junit --outputFile=./junit.xml"
+  },
+  "devDependencies": {
+    "@ctrl/eslint-config": "4.0.14",
+    "@rollup/plugin-terser": "0.4.4",
+    "@types/node": "20.11.5",
+    "@vitest/coverage-v8": "1.2.1",
+    "del-cli": "5.1.0",
+    "rollup": "4.9.5",
+    "ts-node": "10.9.2",
+    "typedoc": "0.25.7",
+    "typescript": "5.3.3",
+    "vitest": "1.2.1"
+  },
+  "release": {
+    "branches": [
+      "master"
+    ]
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}

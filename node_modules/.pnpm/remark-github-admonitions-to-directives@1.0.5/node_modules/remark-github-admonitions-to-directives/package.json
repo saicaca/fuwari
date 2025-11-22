@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "remark-github-admonitions-to-directives",
+  "version": "1.0.5",
+  "description": "A Remark plugin to convert Github style alerts to admonitions directives.",
+  "keywords": [
+    "remark",
+    "remark-plugin",
+    "markdown",
+    "github",
+    "alert",
+    "remark-directive",
+    "docusaurus",
+    "admonitions",
+    "admonition"
+  ],
+  "homepage": "https://github.com/incentro-dc/remark-github-admonitions-to-directives",
+  "bugs": "https://github.com/incentro-dc/remark-github-admonitions-to-directives/issues",
+  "repository": "https://github.com/incentro-dc/remark-github-admonitions-to-directives",
+  "license": "MIT",
+  "author": "Luud Janssen",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "clean": "pnpm run \"/^clean:.*/\"",
+    "clean:build": "rimraf dist",
+    "clean:cache": "rimraf node_modules/.cache",
+    "format": "prettier --write . --cache",
+    "lint": "pnpm run \"/^lint:.*/\"",
+    "lint:prettier": "prettier --check . --cache",
+    "lint:typescript": "tsc --noEmit",
+    "release": "env-cmd release-it",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@types/mdast": "^4.0.0",
+    "mdast-util-directive": "^3.0.0",
+    "unified": "^11.0.0",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^8.0.1",
+    "@tsconfig/strictest": "^2.0.3",
+    "env-cmd": "^10.1.0",
+    "prettier": "^3.1.1",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "prettier-plugin-packagejson": "^2.4.12",
+    "release-it": "^17.1.1",
+    "remark": "^15.0.1",
+    "remark-directive": "^3.0.0",
+    "rimraf": "^5.0.5",
+    "typescript": "~5.2.2",
+    "vitest": "^1.3.1"
+  }
+}

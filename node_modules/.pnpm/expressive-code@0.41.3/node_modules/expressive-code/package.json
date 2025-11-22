@@ -1,0 +1,51 @@
+{
+  "name": "expressive-code",
+  "version": "0.41.3",
+  "description": "A text marking & annotation engine for presenting source code on the web.",
+  "keywords": [],
+  "author": "Tibor Schiemann",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expressive-code/expressive-code.git",
+    "directory": "packages/expressive-code"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./hast": {
+      "types": "./dist/hast.d.ts",
+      "default": "./dist/hast.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "hast": [
+        "dist/hast.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@expressive-code/core": "^0.41.3",
+    "@expressive-code/plugin-frames": "^0.41.3",
+    "@expressive-code/plugin-shiki": "^0.41.3",
+    "@expressive-code/plugin-text-markers": "^0.41.3"
+  },
+  "scripts": {
+    "build": "tsup ./src/index.ts ./src/hast.ts --format esm --dts --sourcemap --clean",
+    "coverage": "vitest run --coverage",
+    "test": "vitest run --reporter verbose",
+    "test-short": "vitest run --reporter basic",
+    "test-watch": "vitest --reporter verbose",
+    "watch": "pnpm build --watch src"
+  }
+}

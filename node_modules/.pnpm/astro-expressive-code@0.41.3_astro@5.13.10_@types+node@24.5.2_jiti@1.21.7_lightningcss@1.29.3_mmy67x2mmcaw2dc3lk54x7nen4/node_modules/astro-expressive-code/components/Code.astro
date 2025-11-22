@@ -1,0 +1,92 @@
+---
+import type { ExpressiveCodeBlockOptions, RehypeExpressiveCodeDocument } from 'rehype-expressive-code'
+import { addClassName, toHtml } from 'rehype-expressive-code/hast'
+import { getPageData } from './page-data'
+import { getRenderer } from './renderer'
+import type { CodeProps as Props } from './types'
+
+function formatMessage(...messageParts: string[]) {
+	return messageParts.map((part) => part.replace(/\s+/g, ' ')).join('\n\n')
+}
+
+async function renderToHtml() {
+	const defaultSlotContent = await Astro.slots.render('default')
+	if (defaultSlotContent?.trim().length) {
+		throw new Error(
+			formatMessage(
+				`Unsupported child content was found inside the component.
+				The code to render must be passed to the \`code\` prop as a string.`,
+				`Please remove the following child content:\n${defaultSlotContent}`
+			)
+		)
+	}
+
+	let { code, lang = '', meta = '', locale, class: className, ...props } = Astro.props
+
+	if (!code || !code.trim().length) {
+		throw new Error('Missing code to render. The `code` prop must be set to a non-empty string.')
+	}
+
+	const pageData = getPageData(Astro.request)
+	// Note: It's important to store the incremented index in a local variable immediately,
+	// as the `pageData` object is shared between all components on the current page
+	// and can be changed by other Code components during the `await` calls below
+	const groupIndex = ++pageData.blockGroupIndex
+
+	const renderer = await getRenderer()
+
+	// Normalize the code coming from the `code` prop
+	const tabWidth = renderer.tabWidth ?? 2
+	if (tabWidth > 0) code = code.replace(/\t/g, ' '.repeat(tabWidth))
+
+	// Build the ExpressiveCodeBlockOptions object that we will pass to the renderer
+	const input: ExpressiveCodeBlockOptions = {
+		code,
+		language: lang,
+		meta,
+		locale,
+		parentDocument: {
+			sourceFilePath: Astro.request.url,
+			positionInDocument: {
+				groupIndex,
+			},
+		},
+		props,
+	}
+
+	// Allow using the same function as `rehype-expressive-code` to auto-detect the locale
+	// if none was provided through the `locale` prop
+	if (!locale && renderer.getBlockLocale) {
+		const file: RehypeExpressiveCodeDocument = {
+			url: Astro.url,
+			// Provide default values for all required properties we don't have access to
+			path: '',
+			cwd: '/',
+			data: {},
+		}
+		input.locale = await renderer.getBlockLocale({ input, file })
+	}
+
+	const { renderedGroupAst } = await renderer.ec.render(input)
+
+	if (renderedGroupAst?.type === 'element') {
+		if (className) {
+			const classNames = className.split(' ')
+			classNames.forEach((className) => addClassName(renderedGroupAst, className))
+		}
+	}
+
+	return toHtml(renderedGroupAst)
+}
+
+let html = ''
+try {
+	html = await renderToHtml()
+} catch (err) {
+	const prefix = `Failed to render a \`<Code>\` component on page ${Astro.request.url}:`
+	const error = err instanceof Error ? err : new Error(String(err))
+	throw new Error(`${prefix}\n\n${error.message}`, { cause: error })
+}
+---
+
+<Fragment set:html={html} />

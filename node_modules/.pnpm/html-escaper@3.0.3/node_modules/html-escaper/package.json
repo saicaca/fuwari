@@ -1,0 +1,47 @@
+{
+  "name": "html-escaper",
+  "version": "3.0.3",
+  "description": "fast and safe way to escape and unescape &<>'\" chars",
+  "main": "./cjs/index.js",
+  "unpkg": "min.js",
+  "scripts": {
+    "build": "npm run cjs && npm run rollup && npm run minify && npm test && npm run size",
+    "cjs": "ascjs esm cjs",
+    "coveralls": "c8 report --reporter=text-lcov | coveralls",
+    "minify": "uglifyjs index.js --comments=/^!/ --compress --mangle -o min.js",
+    "rollup": "rollup --config rollup.config.js",
+    "size": "cat index.js | wc -c;cat min.js | wc -c;gzip -c min.js | wc -c",
+    "test": "c8 node ./test/index.js"
+  },
+  "module": "./esm/index.js",
+  "type": "module",
+  "exports": {
+    "import": "./esm/index.js",
+    "default": "./cjs/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WebReflection/html-escaper.git"
+  },
+  "keywords": [
+    "html",
+    "escape",
+    "encode",
+    "unescape",
+    "decode",
+    "entities"
+  ],
+  "author": "Andrea Giammarchi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WebReflection/html-escaper/issues"
+  },
+  "homepage": "https://github.com/WebReflection/html-escaper",
+  "devDependencies": {
+    "ascjs": "^5.0.1",
+    "c8": "^7.6.0",
+    "coveralls": "^3.1.0",
+    "rollup": "^2.39.0",
+    "uglify-es": "^3.3.9"
+  }
+}

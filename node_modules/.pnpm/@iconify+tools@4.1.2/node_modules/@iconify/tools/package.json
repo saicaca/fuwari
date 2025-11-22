@@ -1,0 +1,559 @@
+{
+  "name": "@iconify/tools",
+  "type": "module",
+  "description": "Collection of functions for cleaning up and parsing SVG for Iconify project",
+  "author": "Vjacheslav Trushkin",
+  "version": "4.1.2",
+  "license": "MIT",
+  "bugs": "https://github.com/iconify/tools/issues",
+  "homepage": "https://github.com/iconify/tools",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/iconify/tools.git"
+  },
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.mjs",
+  "types": "./lib/index.d.ts",
+  "dependencies": {
+    "@iconify/types": "^2.0.0",
+    "@iconify/utils": "^2.3.0",
+    "@types/tar": "^6.1.13",
+    "axios": "^1.8.3",
+    "cheerio": "1.0.0",
+    "domhandler": "^5.0.3",
+    "extract-zip": "^2.0.1",
+    "local-pkg": "^0.5.1",
+    "pathe": "^1.1.2",
+    "svgo": "^3.3.2",
+    "tar": "^6.2.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.17.24",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "jest": "^29.7.0",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
+    "ts-jest": "^29.2.6",
+    "typescript": "^5.8.2",
+    "unbuild": "^2.0.0"
+  },
+  "exports": {
+    "./*": "./*",
+    ".": {
+      "types": "./lib/index.d.ts",
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.mjs"
+    },
+    "./lib/colors/attribs": {
+      "types": "./lib/colors/attribs.d.ts",
+      "require": "./lib/colors/attribs.cjs",
+      "import": "./lib/colors/attribs.mjs"
+    },
+    "./lib/colors/detect": {
+      "types": "./lib/colors/detect.d.ts",
+      "require": "./lib/colors/detect.cjs",
+      "import": "./lib/colors/detect.mjs"
+    },
+    "./lib/colors/parse": {
+      "types": "./lib/colors/parse.d.ts",
+      "require": "./lib/colors/parse.cjs",
+      "import": "./lib/colors/parse.mjs"
+    },
+    "./lib/colors/validate": {
+      "types": "./lib/colors/validate.d.ts",
+      "require": "./lib/colors/validate.cjs",
+      "import": "./lib/colors/validate.mjs"
+    },
+    "./lib/css/parse": {
+      "types": "./lib/css/parse.d.ts",
+      "require": "./lib/css/parse.cjs",
+      "import": "./lib/css/parse.mjs"
+    },
+    "./lib/css/parser/error": {
+      "types": "./lib/css/parser/error.d.ts",
+      "require": "./lib/css/parser/error.cjs",
+      "import": "./lib/css/parser/error.mjs"
+    },
+    "./lib/css/parser/export": {
+      "types": "./lib/css/parser/export.d.ts",
+      "require": "./lib/css/parser/export.cjs",
+      "import": "./lib/css/parser/export.mjs"
+    },
+    "./lib/css/parser/strings": {
+      "types": "./lib/css/parser/strings.d.ts",
+      "require": "./lib/css/parser/strings.cjs",
+      "import": "./lib/css/parser/strings.mjs"
+    },
+    "./lib/css/parser/text": {
+      "types": "./lib/css/parser/text.d.ts",
+      "require": "./lib/css/parser/text.cjs",
+      "import": "./lib/css/parser/text.mjs"
+    },
+    "./lib/css/parser/tokens": {
+      "types": "./lib/css/parser/tokens.d.ts",
+      "require": "./lib/css/parser/tokens.cjs",
+      "import": "./lib/css/parser/tokens.mjs"
+    },
+    "./lib/css/parser/tree": {
+      "types": "./lib/css/parser/tree.d.ts",
+      "require": "./lib/css/parser/tree.cjs",
+      "import": "./lib/css/parser/tree.mjs"
+    },
+    "./lib/css/parser/types": {
+      "types": "./lib/css/parser/types.d.ts",
+      "require": "./lib/css/parser/types.cjs",
+      "import": "./lib/css/parser/types.mjs"
+    },
+    "./lib/download/api/cache": {
+      "types": "./lib/download/api/cache.d.ts",
+      "require": "./lib/download/api/cache.cjs",
+      "import": "./lib/download/api/cache.mjs"
+    },
+    "./lib/download/api/config": {
+      "types": "./lib/download/api/config.d.ts",
+      "require": "./lib/download/api/config.cjs",
+      "import": "./lib/download/api/config.mjs"
+    },
+    "./lib/download/api/download": {
+      "types": "./lib/download/api/download.d.ts",
+      "require": "./lib/download/api/download.cjs",
+      "import": "./lib/download/api/download.mjs"
+    },
+    "./lib/download/api": {
+      "types": "./lib/download/api/index.d.ts",
+      "require": "./lib/download/api/index.cjs",
+      "import": "./lib/download/api/index.mjs"
+    },
+    "./lib/download/api/index": {
+      "types": "./lib/download/api/index.d.ts",
+      "require": "./lib/download/api/index.cjs",
+      "import": "./lib/download/api/index.mjs"
+    },
+    "./lib/download/api/queue": {
+      "types": "./lib/download/api/queue.d.ts",
+      "require": "./lib/download/api/queue.cjs",
+      "import": "./lib/download/api/queue.mjs"
+    },
+    "./lib/download/api/types": {
+      "types": "./lib/download/api/types.d.ts",
+      "require": "./lib/download/api/types.cjs",
+      "import": "./lib/download/api/types.mjs"
+    },
+    "./lib/download/git/branch": {
+      "types": "./lib/download/git/branch.d.ts",
+      "require": "./lib/download/git/branch.cjs",
+      "import": "./lib/download/git/branch.mjs"
+    },
+    "./lib/download/git/hash": {
+      "types": "./lib/download/git/hash.d.ts",
+      "require": "./lib/download/git/hash.cjs",
+      "import": "./lib/download/git/hash.mjs"
+    },
+    "./lib/download/git": {
+      "types": "./lib/download/git/index.d.ts",
+      "require": "./lib/download/git/index.cjs",
+      "import": "./lib/download/git/index.mjs"
+    },
+    "./lib/download/git/index": {
+      "types": "./lib/download/git/index.d.ts",
+      "require": "./lib/download/git/index.cjs",
+      "import": "./lib/download/git/index.mjs"
+    },
+    "./lib/download/git/reset": {
+      "types": "./lib/download/git/reset.d.ts",
+      "require": "./lib/download/git/reset.cjs",
+      "import": "./lib/download/git/reset.mjs"
+    },
+    "./lib/download/github/hash": {
+      "types": "./lib/download/github/hash.d.ts",
+      "require": "./lib/download/github/hash.cjs",
+      "import": "./lib/download/github/hash.mjs"
+    },
+    "./lib/download/github": {
+      "types": "./lib/download/github/index.d.ts",
+      "require": "./lib/download/github/index.cjs",
+      "import": "./lib/download/github/index.mjs"
+    },
+    "./lib/download/github/index": {
+      "types": "./lib/download/github/index.d.ts",
+      "require": "./lib/download/github/index.cjs",
+      "import": "./lib/download/github/index.mjs"
+    },
+    "./lib/download/github/types": {
+      "types": "./lib/download/github/types.d.ts",
+      "require": "./lib/download/github/types.cjs",
+      "import": "./lib/download/github/types.mjs"
+    },
+    "./lib/download/gitlab/hash": {
+      "types": "./lib/download/gitlab/hash.d.ts",
+      "require": "./lib/download/gitlab/hash.cjs",
+      "import": "./lib/download/gitlab/hash.mjs"
+    },
+    "./lib/download/gitlab": {
+      "types": "./lib/download/gitlab/index.d.ts",
+      "require": "./lib/download/gitlab/index.cjs",
+      "import": "./lib/download/gitlab/index.mjs"
+    },
+    "./lib/download/gitlab/index": {
+      "types": "./lib/download/gitlab/index.d.ts",
+      "require": "./lib/download/gitlab/index.cjs",
+      "import": "./lib/download/gitlab/index.mjs"
+    },
+    "./lib/download/gitlab/types": {
+      "types": "./lib/download/gitlab/types.d.ts",
+      "require": "./lib/download/gitlab/types.cjs",
+      "import": "./lib/download/gitlab/types.mjs"
+    },
+    "./lib/download/helpers/untar": {
+      "types": "./lib/download/helpers/untar.d.ts",
+      "require": "./lib/download/helpers/untar.cjs",
+      "import": "./lib/download/helpers/untar.mjs"
+    },
+    "./lib/download/helpers/unzip": {
+      "types": "./lib/download/helpers/unzip.d.ts",
+      "require": "./lib/download/helpers/unzip.cjs",
+      "import": "./lib/download/helpers/unzip.mjs"
+    },
+    "./lib/download": {
+      "types": "./lib/download/index.d.ts",
+      "require": "./lib/download/index.cjs",
+      "import": "./lib/download/index.mjs"
+    },
+    "./lib/download/index": {
+      "types": "./lib/download/index.d.ts",
+      "require": "./lib/download/index.cjs",
+      "import": "./lib/download/index.mjs"
+    },
+    "./lib/download/npm": {
+      "types": "./lib/download/npm/index.d.ts",
+      "require": "./lib/download/npm/index.cjs",
+      "import": "./lib/download/npm/index.mjs"
+    },
+    "./lib/download/npm/index": {
+      "types": "./lib/download/npm/index.d.ts",
+      "require": "./lib/download/npm/index.cjs",
+      "import": "./lib/download/npm/index.mjs"
+    },
+    "./lib/download/npm/types": {
+      "types": "./lib/download/npm/types.d.ts",
+      "require": "./lib/download/npm/types.cjs",
+      "import": "./lib/download/npm/types.mjs"
+    },
+    "./lib/download/npm/version": {
+      "types": "./lib/download/npm/version.d.ts",
+      "require": "./lib/download/npm/version.cjs",
+      "import": "./lib/download/npm/version.mjs"
+    },
+    "./lib/download/types/modified": {
+      "types": "./lib/download/types/modified.d.ts",
+      "require": "./lib/download/types/modified.cjs",
+      "import": "./lib/download/types/modified.mjs"
+    },
+    "./lib/download/types/sources": {
+      "types": "./lib/download/types/sources.d.ts",
+      "require": "./lib/download/types/sources.cjs",
+      "import": "./lib/download/types/sources.mjs"
+    },
+    "./lib/export/directory": {
+      "types": "./lib/export/directory.d.ts",
+      "require": "./lib/export/directory.cjs",
+      "import": "./lib/export/directory.mjs"
+    },
+    "./lib/export/helpers/custom-files": {
+      "types": "./lib/export/helpers/custom-files.d.ts",
+      "require": "./lib/export/helpers/custom-files.cjs",
+      "import": "./lib/export/helpers/custom-files.mjs"
+    },
+    "./lib/export/helpers/prepare": {
+      "types": "./lib/export/helpers/prepare.d.ts",
+      "require": "./lib/export/helpers/prepare.cjs",
+      "import": "./lib/export/helpers/prepare.mjs"
+    },
+    "./lib/export/helpers/types-version": {
+      "types": "./lib/export/helpers/types-version.d.ts",
+      "require": "./lib/export/helpers/types-version.cjs",
+      "import": "./lib/export/helpers/types-version.mjs"
+    },
+    "./lib/export/icon-package": {
+      "types": "./lib/export/icon-package.d.ts",
+      "require": "./lib/export/icon-package.cjs",
+      "import": "./lib/export/icon-package.mjs"
+    },
+    "./lib/export/json-package": {
+      "types": "./lib/export/json-package.d.ts",
+      "require": "./lib/export/json-package.cjs",
+      "import": "./lib/export/json-package.mjs"
+    },
+    "./lib/icon-set": {
+      "types": "./lib/icon-set/index.d.ts",
+      "require": "./lib/icon-set/index.cjs",
+      "import": "./lib/icon-set/index.mjs"
+    },
+    "./lib/icon-set/index": {
+      "types": "./lib/icon-set/index.d.ts",
+      "require": "./lib/icon-set/index.cjs",
+      "import": "./lib/icon-set/index.mjs"
+    },
+    "./lib/icon-set/match": {
+      "types": "./lib/icon-set/match.d.ts",
+      "require": "./lib/icon-set/match.cjs",
+      "import": "./lib/icon-set/match.mjs"
+    },
+    "./lib/icon-set/merge": {
+      "types": "./lib/icon-set/merge.d.ts",
+      "require": "./lib/icon-set/merge.cjs",
+      "import": "./lib/icon-set/merge.mjs"
+    },
+    "./lib/icon-set/modified": {
+      "types": "./lib/icon-set/modified.d.ts",
+      "require": "./lib/icon-set/modified.cjs",
+      "import": "./lib/icon-set/modified.mjs"
+    },
+    "./lib/icon-set/props": {
+      "types": "./lib/icon-set/props.d.ts",
+      "require": "./lib/icon-set/props.cjs",
+      "import": "./lib/icon-set/props.mjs"
+    },
+    "./lib/icon-set/tags": {
+      "types": "./lib/icon-set/tags.d.ts",
+      "require": "./lib/icon-set/tags.cjs",
+      "import": "./lib/icon-set/tags.mjs"
+    },
+    "./lib/icon-set/types": {
+      "types": "./lib/icon-set/types.d.ts",
+      "require": "./lib/icon-set/types.cjs",
+      "import": "./lib/icon-set/types.mjs"
+    },
+    "./lib/import/directory": {
+      "types": "./lib/import/directory.d.ts",
+      "require": "./lib/import/directory.cjs",
+      "import": "./lib/import/directory.mjs"
+    },
+    "./lib/import/figma": {
+      "types": "./lib/import/figma/index.d.ts",
+      "require": "./lib/import/figma/index.cjs",
+      "import": "./lib/import/figma/index.mjs"
+    },
+    "./lib/import/figma/index": {
+      "types": "./lib/import/figma/index.d.ts",
+      "require": "./lib/import/figma/index.cjs",
+      "import": "./lib/import/figma/index.mjs"
+    },
+    "./lib/import/figma/nodes": {
+      "types": "./lib/import/figma/nodes.d.ts",
+      "require": "./lib/import/figma/nodes.cjs",
+      "import": "./lib/import/figma/nodes.mjs"
+    },
+    "./lib/import/figma/query": {
+      "types": "./lib/import/figma/query.d.ts",
+      "require": "./lib/import/figma/query.cjs",
+      "import": "./lib/import/figma/query.mjs"
+    },
+    "./lib/import/figma/types/api": {
+      "types": "./lib/import/figma/types/api.d.ts",
+      "require": "./lib/import/figma/types/api.cjs",
+      "import": "./lib/import/figma/types/api.mjs"
+    },
+    "./lib/import/figma/types/nodes": {
+      "types": "./lib/import/figma/types/nodes.d.ts",
+      "require": "./lib/import/figma/types/nodes.cjs",
+      "import": "./lib/import/figma/types/nodes.mjs"
+    },
+    "./lib/import/figma/types/options": {
+      "types": "./lib/import/figma/types/options.d.ts",
+      "require": "./lib/import/figma/types/options.cjs",
+      "import": "./lib/import/figma/types/options.mjs"
+    },
+    "./lib/import/figma/types/result": {
+      "types": "./lib/import/figma/types/result.d.ts",
+      "require": "./lib/import/figma/types/result.cjs",
+      "import": "./lib/import/figma/types/result.mjs"
+    },
+    "./lib": {
+      "types": "./lib/index.d.ts",
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.mjs"
+    },
+    "./lib/index": {
+      "types": "./lib/index.d.ts",
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.mjs"
+    },
+    "./lib/misc/bump-version": {
+      "types": "./lib/misc/bump-version.d.ts",
+      "require": "./lib/misc/bump-version.cjs",
+      "import": "./lib/misc/bump-version.mjs"
+    },
+    "./lib/misc/cheerio": {
+      "types": "./lib/misc/cheerio.d.ts",
+      "require": "./lib/misc/cheerio.cjs",
+      "import": "./lib/misc/cheerio.mjs"
+    },
+    "./lib/misc/compare-dirs": {
+      "types": "./lib/misc/compare-dirs.d.ts",
+      "require": "./lib/misc/compare-dirs.cjs",
+      "import": "./lib/misc/compare-dirs.mjs"
+    },
+    "./lib/misc/exec": {
+      "types": "./lib/misc/exec.d.ts",
+      "require": "./lib/misc/exec.cjs",
+      "import": "./lib/misc/exec.mjs"
+    },
+    "./lib/misc/keyword": {
+      "types": "./lib/misc/keyword.d.ts",
+      "require": "./lib/misc/keyword.cjs",
+      "import": "./lib/misc/keyword.mjs"
+    },
+    "./lib/misc/scan": {
+      "types": "./lib/misc/scan.d.ts",
+      "require": "./lib/misc/scan.cjs",
+      "import": "./lib/misc/scan.mjs"
+    },
+    "./lib/misc/write-json": {
+      "types": "./lib/misc/write-json.d.ts",
+      "require": "./lib/misc/write-json.cjs",
+      "import": "./lib/misc/write-json.mjs"
+    },
+    "./lib/optimise/figma": {
+      "types": "./lib/optimise/figma.d.ts",
+      "require": "./lib/optimise/figma.cjs",
+      "import": "./lib/optimise/figma.mjs"
+    },
+    "./lib/optimise/flags": {
+      "types": "./lib/optimise/flags.d.ts",
+      "require": "./lib/optimise/flags.cjs",
+      "import": "./lib/optimise/flags.mjs"
+    },
+    "./lib/optimise/global-style": {
+      "types": "./lib/optimise/global-style.d.ts",
+      "require": "./lib/optimise/global-style.cjs",
+      "import": "./lib/optimise/global-style.mjs"
+    },
+    "./lib/optimise/mask": {
+      "types": "./lib/optimise/mask.d.ts",
+      "require": "./lib/optimise/mask.cjs",
+      "import": "./lib/optimise/mask.mjs"
+    },
+    "./lib/optimise/origin": {
+      "types": "./lib/optimise/origin.d.ts",
+      "require": "./lib/optimise/origin.cjs",
+      "import": "./lib/optimise/origin.mjs"
+    },
+    "./lib/optimise/scale": {
+      "types": "./lib/optimise/scale.d.ts",
+      "require": "./lib/optimise/scale.cjs",
+      "import": "./lib/optimise/scale.mjs"
+    },
+    "./lib/optimise/svgo": {
+      "types": "./lib/optimise/svgo.d.ts",
+      "require": "./lib/optimise/svgo.cjs",
+      "import": "./lib/optimise/svgo.mjs"
+    },
+    "./lib/optimise/unwrap": {
+      "types": "./lib/optimise/unwrap.d.ts",
+      "require": "./lib/optimise/unwrap.cjs",
+      "import": "./lib/optimise/unwrap.mjs"
+    },
+    "./lib/svg/analyse": {
+      "types": "./lib/svg/analyse.d.ts",
+      "require": "./lib/svg/analyse.cjs",
+      "import": "./lib/svg/analyse.mjs"
+    },
+    "./lib/svg/analyse/error": {
+      "types": "./lib/svg/analyse/error.d.ts",
+      "require": "./lib/svg/analyse/error.cjs",
+      "import": "./lib/svg/analyse/error.mjs"
+    },
+    "./lib/svg/analyse/types": {
+      "types": "./lib/svg/analyse/types.d.ts",
+      "require": "./lib/svg/analyse/types.cjs",
+      "import": "./lib/svg/analyse/types.mjs"
+    },
+    "./lib/svg/cleanup": {
+      "types": "./lib/svg/cleanup.d.ts",
+      "require": "./lib/svg/cleanup.cjs",
+      "import": "./lib/svg/cleanup.mjs"
+    },
+    "./lib/svg/cleanup/attribs": {
+      "types": "./lib/svg/cleanup/attribs.d.ts",
+      "require": "./lib/svg/cleanup/attribs.cjs",
+      "import": "./lib/svg/cleanup/attribs.mjs"
+    },
+    "./lib/svg/cleanup/bad-tags": {
+      "types": "./lib/svg/cleanup/bad-tags.d.ts",
+      "require": "./lib/svg/cleanup/bad-tags.cjs",
+      "import": "./lib/svg/cleanup/bad-tags.mjs"
+    },
+    "./lib/svg/cleanup/inline-style": {
+      "types": "./lib/svg/cleanup/inline-style.d.ts",
+      "require": "./lib/svg/cleanup/inline-style.cjs",
+      "import": "./lib/svg/cleanup/inline-style.mjs"
+    },
+    "./lib/svg/cleanup/root-style": {
+      "types": "./lib/svg/cleanup/root-style.d.ts",
+      "require": "./lib/svg/cleanup/root-style.cjs",
+      "import": "./lib/svg/cleanup/root-style.mjs"
+    },
+    "./lib/svg/cleanup/root-svg": {
+      "types": "./lib/svg/cleanup/root-svg.d.ts",
+      "require": "./lib/svg/cleanup/root-svg.cjs",
+      "import": "./lib/svg/cleanup/root-svg.mjs"
+    },
+    "./lib/svg/cleanup/svgo-style": {
+      "types": "./lib/svg/cleanup/svgo-style.d.ts",
+      "require": "./lib/svg/cleanup/svgo-style.cjs",
+      "import": "./lib/svg/cleanup/svgo-style.mjs"
+    },
+    "./lib/svg/data/attributes": {
+      "types": "./lib/svg/data/attributes.d.ts",
+      "require": "./lib/svg/data/attributes.cjs",
+      "import": "./lib/svg/data/attributes.mjs"
+    },
+    "./lib/svg/data/tags": {
+      "types": "./lib/svg/data/tags.d.ts",
+      "require": "./lib/svg/data/tags.cjs",
+      "import": "./lib/svg/data/tags.mjs"
+    },
+    "./lib/svg": {
+      "types": "./lib/svg/index.d.ts",
+      "require": "./lib/svg/index.cjs",
+      "import": "./lib/svg/index.mjs"
+    },
+    "./lib/svg/index": {
+      "types": "./lib/svg/index.d.ts",
+      "require": "./lib/svg/index.cjs",
+      "import": "./lib/svg/index.mjs"
+    },
+    "./lib/svg/parse": {
+      "types": "./lib/svg/parse.d.ts",
+      "require": "./lib/svg/parse.cjs",
+      "import": "./lib/svg/parse.mjs"
+    },
+    "./lib/svg/parse-style": {
+      "types": "./lib/svg/parse-style.d.ts",
+      "require": "./lib/svg/parse-style.cjs",
+      "import": "./lib/svg/parse-style.mjs"
+    },
+    "./lib/tests/helpers": {
+      "types": "./lib/tests/helpers.d.ts",
+      "require": "./lib/tests/helpers.cjs",
+      "import": "./lib/tests/helpers.mjs"
+    }
+  },
+  "scripts": {
+    "clean": "rimraf lib tests-compiled tsconfig.tsbuildinfo",
+    "lint": "eslint src/**/*.ts",
+    "prebuild": "npm run lint && npm run clean",
+    "build": "unbuild",
+    "test:jest-cjs": "jest --clearCache --config=jest.config.cjs && jest --runInBand --config=jest.config.cjs",
+    "test:jest-esm": "cross-env NODE_OPTIONS=--experimental-vm-modules TEST_REMOTE=false jest --clearCache --config=jest.config.mjs && cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand --config=jest.config.mjs",
+    "test": "npm run test:jest-cjs && npm run test:jest-esm",
+    "test:ci": "cross-env TEST_REMOTE=false npm run test"
+  }
+}

@@ -1,0 +1,43 @@
+{
+	"name": "volar-service-css",
+	"version": "0.0.62",
+	"description": "Integrate vscode-css-languageservice into Volar",
+	"homepage": "https://github.com/volarjs/services/tree/master/packages/css",
+	"bugs": "https://github.com/volarjs/services/issues",
+	"sideEffects": false,
+	"keywords": [
+		"volar-service"
+	],
+	"license": "MIT",
+	"files": [
+		"**/*.js",
+		"**/*.d.ts"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/volarjs/services.git",
+		"directory": "packages/css"
+	},
+	"author": {
+		"name": "Johnson Chu",
+		"email": "johnsoncodehk@gmail.com",
+		"url": "https://github.com/johnsoncodehk"
+	},
+	"dependencies": {
+		"vscode-css-languageservice": "^6.3.0",
+		"vscode-languageserver-textdocument": "^1.0.11",
+		"vscode-uri": "^3.0.8"
+	},
+	"devDependencies": {
+		"@types/node": "latest"
+	},
+	"peerDependencies": {
+		"@volar/language-service": "~2.4.0"
+	},
+	"peerDependenciesMeta": {
+		"@volar/language-service": {
+			"optional": true
+		}
+	},
+	"gitHead": "f1ddbdc4d9df0772db5a0d46ff8ff64eecc9de02"
+}

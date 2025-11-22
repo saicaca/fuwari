@@ -1,0 +1,33 @@
+{
+  "id": "roboto",
+  "family": "Roboto",
+  "subsets": [
+    "cyrillic",
+    "cyrillic-ext",
+    "greek",
+    "greek-ext",
+    "latin",
+    "latin-ext",
+    "math",
+    "symbols",
+    "vietnamese"
+  ],
+  "weights": [100, 200, 300, 400, 500, 600, 700, 800, 900],
+  "styles": ["italic", "normal"],
+  "defSubset": "latin",
+  "variable": {
+    "ital": {"default": "0", "min": "0", "max": "1", "step": "1"},
+    "wdth": {"default": "100", "min": "75", "max": "100", "step": "0.1"},
+    "wght": {"default": "400", "min": "100", "max": "900", "step": "1"}
+  },
+  "lastModified": "2025-09-08",
+  "version": "v49",
+  "category": "sans-serif",
+  "license": {
+    "type": "OFL-1.1",
+    "url": "https://openfontlicense.org",
+    "attribution": "Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic) Roboto-Italic[wdth,wght].ttf: Copyright 2011 The Roboto Project Authors (https://github.com/googlefonts/roboto-classic)"
+  },
+  "source": "https://github.com/google/fonts",
+  "type": "google"
+}

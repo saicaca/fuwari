@@ -1,0 +1,66 @@
+{
+  "name": "rehype-expressive-code",
+  "version": "0.41.3",
+  "description": "Rehype plugin for Expressive Code, a modular syntax highlighting & annotation engine for presenting source code on the web. Offers full VS Code theme support, editor & terminal frames, copy to clipboard, text markers, collapsible sections, and more.",
+  "keywords": [
+    "code-blocks",
+    "documentation",
+    "expressive-code",
+    "shiki",
+    "syntax-highlighting"
+  ],
+  "author": "Tibor Schiemann",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expressive-code/expressive-code.git",
+    "directory": "packages/rehype-expressive-code"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./hast": {
+      "types": "./dist/hast.d.ts",
+      "default": "./dist/hast.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "hast": [
+        "dist/hast.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "expressive-code": "^0.41.3"
+  },
+  "devDependencies": {
+    "@types/mdast": "^3.0.11",
+    "@types/unist": "^2.0.6",
+    "mdast-util-mdx-jsx": "^3.1.2",
+    "rehype-stringify": "^9.0.3",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
+    "shiki": "^3.2.2",
+    "unified": "^10.1.2",
+    "vfile": "^6.0.1",
+    "@internal/test-utils": "^0.2.34"
+  },
+  "scripts": {
+    "build": "tsup ./src/index.ts ./src/hast.ts --format esm --dts --sourcemap --clean",
+    "coverage": "vitest run --coverage",
+    "test": "vitest run --reporter verbose",
+    "test-short": "vitest run --reporter basic",
+    "test-watch": "vitest --reporter verbose",
+    "watch": "pnpm build --watch src"
+  }
+}

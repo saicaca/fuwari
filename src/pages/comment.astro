@@ -1,0 +1,48 @@
+---
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+// ✅ 修复：使用相对路径，100% 能找到文件，不再报错
+import Comment from "../components/widget/Comment.svelte";
+import { Icon } from "astro-icon/components";
+
+const title = "留言板";
+const description = "欢迎在这里灌水、吐槽、交换友链~";
+---
+
+<MainGridLayout title={title} description={description}>
+    <div class="card-base p-8 md:p-12 mb-4 relative w-full min-h-[600px]">
+        <div class="flex flex-col items-center justify-center mb-10 mt-4 text-center">
+            <div class="w-24 h-24 rounded-full bg-[var(--primary)]/10 flex items-center justify-center mb-6 text-[var(--primary)]">
+                <Icon name="fa6-solid:comments" class="text-5xl" />
+            </div>
+            <h1 class="text-4xl font-bold text-[var(--primary)] mb-4 tracking-wide">{title}</h1>
+            <p class="text-black/50 dark:text-white/50 text-lg max-w-lg leading-relaxed">
+                {description}
+            </p>
+        </div>
+
+        <div class="w-full h-[1px] bg-[var(--line-divider)] mb-10 relative overflow-hidden">
+            <div class="absolute left-0 top-0 h-full w-full bg-gradient-to-r from-transparent via-[var(--primary)] to-transparent opacity-30"></div>
+        </div>
+
+        <div class="animate-fade-up max-w-4xl mx-auto">
+            <Comment client:only="svelte" />
+        </div>
+    </div>
+</MainGridLayout>
+
+<style>
+    /* 添加一个简单的进入动画，显得更高级 */
+    .animate-fade-up {
+        animation: fade-up 0.6s ease-out;
+    }
+    @keyframes fade-up {
+        from { 
+            opacity: 0; 
+            transform: translateY(20px); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+    }
+</style>

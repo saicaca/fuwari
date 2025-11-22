@@ -1,0 +1,24 @@
+{
+  "name": "@swup/browserslist-config",
+  "version": "1.0.1",
+  "description": "Shared browserslist config for swup and plugins",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swup/browserslist-config.git"
+  },
+  "keywords": [
+    "swup",
+    "browserslist",
+    "config"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/swup/browserslist-config/issues"
+  },
+  "homepage": "https://github.com/swup/browserslist-config#readme"
+}

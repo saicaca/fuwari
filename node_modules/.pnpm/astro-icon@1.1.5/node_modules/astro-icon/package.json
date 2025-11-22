@@ -1,0 +1,60 @@
+{
+  "name": "astro-icon",
+  "version": "1.1.5",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./components": "./components/index.ts"
+  },
+  "files": [
+    "components",
+    "dist",
+    "typings"
+  ],
+  "author": {
+    "name": "Nate Moore",
+    "email": "nate@natemoo.re",
+    "url": "https://twitter.com/n_moore"
+  },
+  "keywords": [
+    "astro",
+    "astro-integration",
+    "astro-component",
+    "image",
+    "images",
+    "icon",
+    "icons",
+    "iconify",
+    "optimization"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natemoo-re/astro-icon.git",
+    "directory": "packages/core"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/natemoo-re/astro-icon/issues"
+  },
+  "homepage": "https://github.com/natemoo-re/astro-icon#readme",
+  "dependencies": {
+    "@iconify/tools": "^4.0.5",
+    "@iconify/types": "^2.0.0",
+    "@iconify/utils": "^2.1.30"
+  },
+  "devDependencies": {
+    "@types/node": "^18.18.0",
+    "astro": "^4.0.0",
+    "typescript": "^5.0.4",
+    "vite": "^5.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "pnpm run dev"
+  }
+}

@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"outDir": "lib",
+		"sourceMap": true,
+		"target": "ES5",
+		"declaration": true
+	},
+	"files": [
+		"src/index.ts"
+	]
+}

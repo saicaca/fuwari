@@ -1,0 +1,14 @@
+{
+    "root": true,
+    "env": {
+        "node": true
+    },
+    "extends": [
+        "@vimeo/eslint-config-player/es6",
+        "plugin:ava/recommended"
+    ],
+    "plugins": ["ava"],
+    "rules": {
+        "ava/no-cb-test": "error"
+    }
+}

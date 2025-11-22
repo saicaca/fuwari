@@ -1,0 +1,44 @@
+{
+	"name": "dedent-js",
+	"description": "Remove indentation from multiline strings",
+	"version": "1.0.1",
+	"homepage": "https://github.com/MartinKolarik/dedent-js/",
+	"github": "https://github.com/MartinKolarik/dedent-js/",
+	"main": "lib/index.js",
+	"keywords": [
+		"multiline strings",
+		"template literals",
+		"template strings",
+		"dedent",
+		"deintend",
+		"indentation",
+		"es6",
+		"harmony"
+	],
+	"author": {
+		"name": "Martin Kolárik",
+		"email": "martin@kolarik.sk",
+		"url": "https://kolarik.me"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"chai": "~3.2",
+		"babel": "~5.8",
+		"mocha": "~2.3",
+		"typescript": "~1.6"
+	},
+	"scripts": {
+		"build": "tsc",
+		"test": "babel test/tests.es6 --out-file test/tests.js && mocha test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/MartinKolarik/dedent-js.git"
+	},
+	"bugs": {
+		"url": "https://github.com/MartinKolarik/dedent-js/issues/"
+	},
+	"typescript": {
+		"definition": "./lib/index.d.ts"
+	}
+}

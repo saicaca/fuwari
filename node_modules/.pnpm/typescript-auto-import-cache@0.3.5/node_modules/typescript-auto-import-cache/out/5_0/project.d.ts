@@ -1,0 +1,67 @@
+import type { CompilerOptions, LanguageServiceHost, Program, ModuleResolutionHost, PerformanceEvent, LanguageService } from 'typescript/lib/tsserverlibrary';
+import type { ProjectPackageJsonInfo } from './packageJsonCache';
+import { ProjectService, PackageJsonAutoImportPreference } from './projectService';
+import { createModuleSpecifierCache } from './moduleSpecifierCache';
+import { SymlinkCache } from './symlinkCache';
+import { ExportInfoMap } from './exportInfoMap';
+export type Project = ReturnType<typeof createProject>;
+export interface ProjectOptions {
+    projectService: ProjectService;
+    compilerOptions: CompilerOptions;
+    currentDirectory: string;
+    createModuleSpecifierCache?: typeof createModuleSpecifierCache;
+}
+export declare function createProject(ts: typeof import('typescript/lib/tsserverlibrary'), host: LanguageServiceHost, createLanguageService: (host: LanguageServiceHost) => LanguageService, options: ProjectOptions): {
+    dirty: boolean;
+    hostProject: any;
+    languageServiceEnabled: boolean;
+    languageService: LanguageService | undefined;
+    projectService: {
+        serverMode: import("typescript").LanguageServiceMode;
+        host: import("typescript").System;
+        currentDirectory: any;
+        toCanonicalFileName: any;
+        toPath(fileName: string): any;
+        getExecutingFilePath(): any;
+        getNormalizedAbsolutePath(fileName: string): any;
+        packageJsonCache: import("./packageJsonCache").PackageJsonCache;
+        getPackageJsonsVisibleToFile(fileName: string, rootDir?: string | undefined): readonly ProjectPackageJsonInfo[];
+        includePackageJsonAutoImports(): PackageJsonAutoImportPreference;
+        fileExists(fileName: import("typescript").server.NormalizedPath): boolean;
+    };
+    getCanonicalFileName: any;
+    exportMapCache: ExportInfoMap | undefined;
+    getCachedExportInfoMap(): any;
+    clearCachedExportInfoMap(): void;
+    moduleSpecifierCache: any;
+    getModuleSpecifierCache(): any;
+    compilerOptions: CompilerOptions;
+    getCompilationSettings(): CompilerOptions;
+    getCompilerOptions(): CompilerOptions;
+    program: Program | undefined;
+    getCurrentProgram(): Program | undefined;
+    currentDirectory: any;
+    getCurrentDirectory(): string;
+    symlinks: SymlinkCache | undefined;
+    getSymlinkCache(): SymlinkCache;
+    packageJsonsForAutoImport: Set<string> | undefined;
+    getPackageJsonsForAutoImport(rootDir?: string): readonly ProjectPackageJsonInfo[];
+    getPackageJsonsVisibleToFile(fileName: string, rootDir?: string): readonly ProjectPackageJsonInfo[];
+    getModuleResolutionHostForAutoImportProvider(): ModuleResolutionHost;
+    autoImportProviderHost: false | {
+        getCurrentProgram(): Program | undefined;
+        isEmpty(): boolean;
+        close(): void;
+        markAsDirty(): void;
+    } | undefined;
+    getPackageJsonAutoImportProvider(): Program | undefined;
+    includePackageJsonAutoImports(): PackageJsonAutoImportPreference;
+    close(): void;
+    log(_message: string): void;
+    sendPerformanceEvent(_kind: PerformanceEvent['kind'], _durationMs: number): void;
+    toPath(fileName: string): any;
+    getGlobalTypingsCacheLocation(): undefined;
+    useSourceOfProjectReferenceRedirect(): boolean;
+    onAutoImportProviderSettingsChanged(): void;
+};
+export declare function initProject<P extends Project>(project: P, host: LanguageServiceHost, createLanguageService: (host: LanguageServiceHost) => LanguageService): P;

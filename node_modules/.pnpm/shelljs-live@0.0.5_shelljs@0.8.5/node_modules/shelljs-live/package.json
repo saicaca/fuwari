@@ -1,0 +1,37 @@
+{
+  "name": "shelljs-live",
+  "version": "0.0.5",
+  "repository": "https://github.com/arshaw/shelljs-live.git",
+  "author": "Adam Shaw",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./promise": "./dist/promise.js"
+  },
+  "files": [
+    "dist",
+    "promise.*"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "./test.sh",
+    "ci": "yarn run clean && yarn run build && yarn run test && echo 'Ready for release'"
+  },
+  "peerDependencies": {
+    "shelljs": "^0.8.4"
+  },
+  "dependencies": {
+    "cross-spawn": "^7.0.3"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "^6.0.2",
+    "@types/shelljs": "^0.8.9",
+    "shelljs": "^0.8.4",
+    "typescript": "^4.4.3",
+    "yargs": "^17.1.1"
+  }
+}

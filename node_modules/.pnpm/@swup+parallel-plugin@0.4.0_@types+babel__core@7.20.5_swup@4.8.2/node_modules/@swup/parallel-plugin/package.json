@@ -1,0 +1,57 @@
+{
+  "name": "@swup/parallel-plugin",
+  "amdName": "SwupParallelPlugin",
+  "description": "A swup plugin for animating the previous and next page in parallel",
+  "version": "0.4.0",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
+  "unpkg": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.modern.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "swup-plugin build",
+    "dev": "swup-plugin dev",
+    "lint": "swup-plugin lint",
+    "format": "swup-plugin format",
+    "prepublishOnly": "npm run build"
+  },
+  "author": {
+    "name": "Philipp Daun",
+    "email": "daun@daun.ltd",
+    "url": "https://philippdaun.net"
+  },
+  "contributors": [
+    {
+      "name": "Rasso Hilber",
+      "email": "mail@rassohilber.com",
+      "url": "https://rassohilber.com"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swup/parallel-plugin.git"
+  },
+  "dependencies": {
+    "@swup/plugin": "^3.0.0"
+  },
+  "peerDependencies": {
+    "swup": "^4.6.0"
+  },
+  "browserslist": [
+    "extends @swup/browserslist-config"
+  ],
+  "prettier": "@swup/prettier-config"
+}

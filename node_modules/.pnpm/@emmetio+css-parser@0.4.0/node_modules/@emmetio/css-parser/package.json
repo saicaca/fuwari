@@ -1,0 +1,36 @@
+{
+  "name": "@emmetio/css-parser",
+  "version": "0.4.0",
+  "description": "CSS/LESS/SCSS fast and minimalistic parser",
+  "main": "./dist/css-parser.cjs.js",
+  "module": "./dist/css-parser.es.js",
+  "dependencies": {
+    "@emmetio/stream-reader": "^2.2.0",
+    "@emmetio/stream-reader-utils": "^0.1.0"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "mocha": "^3.2.0",
+    "rollup": "^0.41.6",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-watch": "^3.2.2"
+  },
+  "scripts": {
+    "test": "mocha",
+    "build": "rollup -c",
+    "watch": "rollup -wc",
+    "prepublish": "npm run test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emmetio/css-parser.git"
+  },
+  "keywords": [],
+  "author": "Sergey Chikuyonok <serge.che@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/emmetio/css-parser/issues"
+  },
+  "homepage": "https://github.com/emmetio/css-parser#readme"
+}

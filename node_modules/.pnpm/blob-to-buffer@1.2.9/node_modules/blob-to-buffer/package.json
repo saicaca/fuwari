@@ -1,0 +1,52 @@
+{
+  "name": "blob-to-buffer",
+  "description": "Convert a Blob to a Buffer",
+  "version": "1.2.9",
+  "author": {
+    "name": "Feross Aboukhadijeh",
+    "email": "feross@feross.org",
+    "url": "https://feross.org"
+  },
+  "bugs": {
+    "url": "https://github.com/feross/blob-to-buffer/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "airtap": "^3.0.0",
+    "standard": "*",
+    "tape": "^5.0.1"
+  },
+  "homepage": "https://github.com/feross/blob-to-buffer",
+  "keywords": [
+    "blob",
+    "browserify",
+    "buffer",
+    "convert",
+    "filereader"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/feross/blob-to-buffer.git"
+  },
+  "scripts": {
+    "test": "standard && npm run test-browser",
+    "test-browser": "airtap -- test/*.js",
+    "test-browser-local": "airtap --local -- test/*.js"
+  },
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/feross"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/feross"
+    },
+    {
+      "type": "consulting",
+      "url": "https://feross.org/support"
+    }
+  ]
+}

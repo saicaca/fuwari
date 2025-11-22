@@ -1,0 +1,58 @@
+{
+	"name": "p-limit",
+	"version": "6.2.0",
+	"description": "Run multiple promise-returning & async functions with limited concurrency",
+	"license": "MIT",
+	"repository": "sindresorhus/p-limit",
+	"funding": "https://github.com/sponsors/sindresorhus",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "https://sindresorhus.com"
+	},
+	"type": "module",
+	"exports": {
+		"types": "./index.d.ts",
+		"default": "./index.js"
+	},
+	"sideEffects": false,
+	"engines": {
+		"node": ">=18"
+	},
+	"scripts": {
+		"test": "xo && ava && tsd"
+	},
+	"files": [
+		"index.js",
+		"index.d.ts"
+	],
+	"keywords": [
+		"promise",
+		"limit",
+		"limited",
+		"concurrency",
+		"throttle",
+		"throat",
+		"rate",
+		"batch",
+		"ratelimit",
+		"task",
+		"queue",
+		"async",
+		"await",
+		"promises",
+		"bluebird"
+	],
+	"dependencies": {
+		"yocto-queue": "^1.1.1"
+	},
+	"devDependencies": {
+		"ava": "^6.1.3",
+		"delay": "^6.0.0",
+		"in-range": "^3.0.0",
+		"random-int": "^3.0.0",
+		"time-span": "^5.1.0",
+		"tsd": "^0.31.1",
+		"xo": "^0.58.0"
+	}
+}

@@ -1,0 +1,116 @@
+{
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+  "bugs": "https://github.com/syntax-tree/hast-util-select/issues",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
+  ],
+  "dependencies": {
+    "@types/hast": "^3.0.0",
+    "@types/unist": "^3.0.0",
+    "bcp-47-match": "^2.0.0",
+    "comma-separated-tokens": "^2.0.0",
+    "css-selector-parser": "^3.0.0",
+    "devlop": "^1.0.0",
+    "direction": "^2.0.0",
+    "hast-util-has-property": "^3.0.0",
+    "hast-util-to-string": "^3.0.0",
+    "hast-util-whitespace": "^3.0.0",
+    "nth-check": "^2.0.0",
+    "property-information": "^7.0.0",
+    "space-separated-tokens": "^2.0.0",
+    "unist-util-visit": "^5.0.0",
+    "zwitch": "^2.0.0"
+  },
+  "description": "hast utility for `querySelector`, `querySelectorAll`, and `matches`",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "c8": "^10.0.0",
+    "hastscript": "^9.0.0",
+    "prettier": "^3.0.0",
+    "remark-cli": "^12.0.0",
+    "remark-preset-wooorm": "^11.0.0",
+    "type-coverage": "^2.0.0",
+    "typescript": "^5.0.0",
+    "unist-builder": "^4.0.0",
+    "xo": "^0.60.0"
+  },
+  "exports": "./index.js",
+  "files": [
+    "lib/",
+    "index.d.ts.map",
+    "index.d.ts",
+    "index.js"
+  ],
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
+  },
+  "keywords": [
+    "css",
+    "hast-util",
+    "hast",
+    "html",
+    "match",
+    "matches",
+    "query",
+    "selectall",
+    "selector",
+    "select",
+    "unist",
+    "utility",
+    "util"
+  ],
+  "license": "MIT",
+  "name": "hast-util-select",
+  "prettier": {
+    "bracketSpacing": false,
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "useTabs": false
+  },
+  "remarkConfig": {
+    "plugins": [
+      "remark-preset-wooorm"
+    ]
+  },
+  "repository": "syntax-tree/hast-util-select",
+  "scripts": {
+    "build": "tsc --build --clean && tsc --build && type-coverage",
+    "format": "remark --frail --output --quiet -- . && prettier --log-level warn --write -- . && xo --fix",
+    "prepack": "npm run build && npm run format",
+    "test-api": "node --conditions development test/index.js",
+    "test-coverage": "c8 --100 --reporter lcov npm run test-api",
+    "test": "npm run build && npm run format && npm run test-coverage"
+  },
+  "sideEffects": false,
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "ignoreCatch": true,
+    "strict": true
+  },
+  "type": "module",
+  "version": "6.0.4",
+  "xo": {
+    "overrides": [
+      {
+        "files": [
+          "test/**/*.js"
+        ],
+        "rules": {
+          "import/no-unassigned-import": "off",
+          "max-nested-callbacks": "off",
+          "no-await-in-loop": "off"
+        }
+      }
+    ],
+    "prettier": true,
+    "rules": {
+      "logical-assignment-operators": "off",
+      "max-params": "off",
+      "unicorn/prefer-at": "off"
+    }
+  }
+}

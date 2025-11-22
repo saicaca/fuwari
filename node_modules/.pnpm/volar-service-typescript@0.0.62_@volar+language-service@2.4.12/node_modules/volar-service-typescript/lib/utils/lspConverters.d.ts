@@ -1,0 +1,28 @@
+import type * as vscode from '@volar/language-service';
+import type * as ts from 'typescript';
+import type { TextDocument } from 'vscode-languageserver-textdocument';
+import type { URI } from 'vscode-uri';
+import type { SharedContext } from '../semanticFeatures/types';
+export declare function convertDiagnostic(diag: ts.Diagnostic, document: TextDocument, fileNameToUri: (fileName: string) => URI, getTextDocument: (uri: URI) => TextDocument | undefined): vscode.Diagnostic | undefined;
+export declare function applyCompletionEntryDetails(ts: typeof import('typescript'), item: vscode.CompletionItem, data: ts.CompletionEntryDetails, document: TextDocument, fileNameToUri: (fileName: string) => URI, getTextDocument: (uri: URI) => TextDocument | undefined): void;
+export declare function convertCompletionInfo<T>(ts: typeof import('typescript'), completionContext: ts.CompletionInfo, document: TextDocument, position: vscode.Position, createData: (tsEntry: ts.CompletionEntry) => T): vscode.CompletionList;
+export declare function getLineText(document: TextDocument, line: number): string;
+export declare function convertNavigateToItem(item: ts.NavigateToItem, document: TextDocument): vscode.WorkspaceSymbol;
+export declare function convertInlayHint(hint: ts.InlayHint, document: TextDocument): vscode.InlayHint;
+export declare function convertHighlightSpan(span: ts.HighlightSpan, document: TextDocument): vscode.DocumentHighlight;
+export declare function convertSelectionRange(range: ts.SelectionRange, document: TextDocument): vscode.SelectionRange;
+export declare function convertFileTextChanges(changes: readonly ts.FileTextChanges[], fileNameToUri: (fileName: string) => URI, getTextDocument: (uri: URI) => TextDocument | undefined): vscode.WorkspaceEdit;
+export declare function convertRenameLocations(newText: string, locations: readonly ts.RenameLocation[], fileNameToUri: (fileName: string) => URI, getTextDocument: (uri: URI) => TextDocument | undefined): vscode.WorkspaceEdit;
+export declare function convertQuickInfo(ts: typeof import('typescript'), info: ts.QuickInfo, document: TextDocument, fileNameToUri: (fileName: string) => URI, getTextDocument: (uri: URI) => TextDocument | undefined): vscode.Hover;
+export declare function convertNavTree(item: ts.NavigationTree, document: TextDocument): vscode.DocumentSymbol[];
+export declare function convertOutliningSpan(outliningSpan: ts.OutliningSpan, document: TextDocument): vscode.FoldingRange;
+export declare function convertOutliningSpanKind(kind: ts.OutliningSpanKind): vscode.FoldingRangeKind | undefined;
+export declare function convertTextChange(edit: ts.TextChange, document: TextDocument | undefined): vscode.TextEdit;
+export declare function convertCallHierarchyIncomingCall(item: ts.CallHierarchyIncomingCall, ctx: SharedContext): vscode.CallHierarchyIncomingCall;
+export declare function convertCallHierarchyOutgoingCall(item: ts.CallHierarchyOutgoingCall, fromDocument: TextDocument, ctx: SharedContext): vscode.CallHierarchyOutgoingCall;
+export declare function convertCallHierarchyItem(item: ts.CallHierarchyItem, ctx: SharedContext): vscode.CallHierarchyItem;
+export declare function convertDocumentSpanToLocation(documentSpan: ts.DocumentSpan, ctx: SharedContext): vscode.Location;
+export declare function convertDefinitionInfoAndBoundSpan(info: ts.DefinitionInfoAndBoundSpan, document: TextDocument, ctx: SharedContext): vscode.LocationLink[];
+export declare function convertDocumentSpantoLocationLink(documentSpan: ts.DocumentSpan, ctx: SharedContext): vscode.LocationLink;
+export declare function convertTextSpan(textSpan: ts.TextSpan, document: TextDocument | undefined): vscode.Range;
+//# sourceMappingURL=lspConverters.d.ts.map

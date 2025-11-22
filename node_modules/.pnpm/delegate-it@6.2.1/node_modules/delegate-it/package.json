@@ -1,0 +1,61 @@
+{
+	"name": "delegate-it",
+	"version": "6.2.1",
+	"description": "Lightweight and modern event delegation in the browser",
+	"keywords": [
+		"delegate",
+		"browser",
+		"dom",
+		"live",
+		"selector",
+		"delegation",
+		"chrome",
+		"electron",
+		"firefox",
+		"safari",
+		"event"
+	],
+	"repository": "fregante/delegate-it",
+	"funding": "https://github.com/sponsors/fregante",
+	"license": "MIT",
+	"author": "Federico Brigante <me@fregante.com> (https://fregante.com)",
+	"type": "module",
+	"exports": "./index.js",
+	"main": "./index.js",
+	"types": "./index.d.ts",
+	"files": [
+		"index.js",
+		"index.d.ts",
+		"delegate.js",
+		"delegate.d.ts",
+		"one-event.js",
+		"one-event.d.ts"
+	],
+	"scripts": {
+		"build": "tsc",
+		"prepack": "tsc --sourceMap false",
+		"test": "tsc && xo && vitest run",
+		"watch": "tsc --watch",
+		"watch:test": "vitest"
+	},
+	"xo": {
+		"envs": [
+			"browser"
+		],
+		"rules": {
+			"max-params": "off",
+			"@typescript-eslint/naming-convention": "off"
+		}
+	},
+	"dependencies": {
+		"typed-query-selector": "^2.11.2"
+	},
+	"devDependencies": {
+		"@sindresorhus/tsconfig": "^5.0.0",
+		"@types/jsdom": "^21.1.6",
+		"jsdom": "^24.0.0",
+		"typescript": "^5.4.2",
+		"vitest": "^1.3.1",
+		"xo": "^0.58.0"
+	}
+}

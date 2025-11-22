@@ -1,0 +1,30 @@
+{
+	"prefix": "fa6-regular",
+	"name": "Font Awesome 6 Regular",
+	"total": 163,
+	"version": "6.7.2",
+	"author": {
+		"name": "Dave Gandy",
+		"url": "https://github.com/FortAwesome/Font-Awesome"
+	},
+	"license": {
+		"title": "CC BY 4.0",
+		"spdx": "CC-BY-4.0",
+		"url": "https://creativecommons.org/licenses/by/4.0/"
+	},
+	"samples": [
+		"message",
+		"clock",
+		"folder",
+		"face-surprise",
+		"bookmark",
+		"calendar"
+	],
+	"height": 32,
+	"displayHeight": 16,
+	"category": "Archive / Unmaintained",
+	"tags": [
+		"Precise Shapes"
+	],
+	"palette": false
+}

@@ -1,0 +1,51 @@
+{
+  "name": "overlayscrollbars",
+  "version": "2.12.0",
+  "description": "A javascript scrollbar plugin that hides the native scrollbars, provides custom styleable overlay scrollbars, and preserves the native functionality and feel.",
+  "author": "Rene Haas | KingSora",
+  "license": "MIT",
+  "homepage": "https://kingsora.github.io/OverlayScrollbars",
+  "bugs": "https://github.com/KingSora/OverlayScrollbars/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KingSora/OverlayScrollbars.git",
+    "directory": "packages/overlayscrollbars"
+  },
+  "keywords": [
+    "overlayscrollbars",
+    "custom",
+    "styleable",
+    "scrollbar",
+    "scrollbars",
+    "scroll",
+    "frontend",
+    "browser"
+  ],
+  "main": "overlayscrollbars.cjs.js",
+  "module": "overlayscrollbars.esm.js",
+  "types": "types/overlayscrollbars.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./types/overlayscrollbars.d.mts",
+        "default": "./overlayscrollbars.mjs"
+      },
+      "require": {
+        "types": "./types/overlayscrollbars.d.cts",
+        "default": "./overlayscrollbars.cjs"
+      },
+      "default": {
+        "types": "./types/overlayscrollbars.d.ts",
+        "default": "./overlayscrollbars.cjs.js"
+      }
+    },
+    "./package.json": "./package.json",
+    "./overlayscrollbars.css": "./styles/overlayscrollbars.css",
+    "./styles/overlayscrollbars.css": "./styles/overlayscrollbars.css"
+  },
+  "sideEffects": [
+    "*.css",
+    "*.scss",
+    "*.sass"
+  ]
+}

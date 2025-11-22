@@ -1,0 +1,50 @@
+{
+  "name": "vscode-html-languageservice",
+  "version": "5.3.3",
+  "description": "Language service for HTML",
+  "main": "./lib/umd/htmlLanguageService.js",
+  "typings": "./lib/umd/htmlLanguageService",
+  "module": "./lib/esm/htmlLanguageService.js",
+  "author": "Microsoft Corporation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/vscode-html-languageservice"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Microsoft/vscode-html-languageservice"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.27.0",
+    "@typescript-eslint/parser": "^8.27.0",
+    "@vscode/web-custom-data": "^0.5.0",
+    "eslint": "^9.23.0",
+    "js-beautify": "^1.15.4",
+    "mocha": "^11.1.0",
+    "rimraf": "^6.0.1",
+    "typescript": "5.8.2"
+  },
+  "dependencies": {
+    "@vscode/l10n": "^0.0.18",
+    "vscode-languageserver-textdocument": "^1.0.12",
+    "vscode-languageserver-types": "^3.17.5",
+    "vscode-uri": "^3.1.0"
+  },
+  "scripts": {
+    "prepack": "npm run clean && npm run compile-esm && npm run test && npm run remove-sourcemap-refs",
+    "compile": "tsc -p ./src && npm run copy-jsbeautify",
+    "compile-esm": "tsc -p ./src/tsconfig.esm.json",
+    "watch": "tsc -w -p ./src && npm run copy-jsbeautify",
+    "clean": "rimraf lib",
+    "remove-sourcemap-refs": "node ./build/remove-sourcemap-refs.js",
+    "test": "npm run compile && mocha --timeout 5000 ./lib/umd/test/*.js && npm run lint",
+    "lint": "eslint src/**/*.ts",
+    "install-types-next": "npm i vscode-languageserver-types@next -f -S && npm i vscode-languageserver-textdocument@next -f -S",
+    "copy-jsbeautify": "node ./build/copy-jsbeautify.js",
+    "update-jsbeautify": "npm i js-beautify && node ./build/update-jsbeautify.js",
+    "update-jsbeautify-next": "npm i js-beautify@next && node ./build/update-jsbeautify.js",
+    "update-data": "npm i @vscode/web-custom-data -D && node ./build/generateData.js"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@vscode/emmet-helper",
+  "version": "2.11.0",
+  "description": "Helper to use emmet modules in Visual Studio Code",
+  "main": "./lib/cjs/emmetHelper.js",
+  "module": "./lib/esm/emmetHelper.js",
+  "types": "./lib/cjs/emmetHelper.d.ts",
+  "author": "Microsoft Corporation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/vscode-emmet-helper"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Microsoft/vscode-emmet-helper"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.78.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "emmet": "^2.4.3",
+    "jsonc-parser": "^2.3.0",
+    "vscode-languageserver-textdocument": "^1.0.1",
+    "vscode-languageserver-types": "^3.15.1",
+    "vscode-uri": "^3.0.8"
+  },
+  "scripts": {
+    "watch": "tsc -watch -p ./",
+    "compile": "tsc -p ./",
+    "compile-esm": "tsc -p ./tsconfig.esm.json",
+    "test": "mocha lib/cjs/test"
+  }
+}

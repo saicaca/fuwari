@@ -1,0 +1,25 @@
+{
+  "name": "rollup-plugin-bundle-size",
+  "version": "1.0.3",
+  "description": "Output the size of your bundle",
+  "main": "index.js",
+  "author": "Brad Dougherty <brad@vimeo.com>",
+  "license": "MIT",
+  "repository": "vimeo/rollup-plugin-bundle-size",
+  "bugs": "https://github.com/vimeo/rollup-plugin-bundle-size/issues",
+  "homepage": "https://github.com/vimeo/rollup-plugin-bundle-size",
+  "keywords": [
+    "rollup-plugin"
+  ],
+  "scripts": {
+    "test": "eslint index.js test.js"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "maxmin": "^2.1.0"
+  },
+  "devDependencies": {
+    "@vimeo/eslint-config-player": "^4.0.1",
+    "eslint": "^3.3.1"
+  }
+}

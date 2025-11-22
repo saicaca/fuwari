@@ -1,0 +1,62 @@
+{
+  "name": "@capsizecss/unpack",
+  "version": "2.4.0",
+  "description": "Unpack capsize font metrics from fonts",
+  "keywords": [
+    "capsize",
+    "leading trim",
+    "white space",
+    "baseline",
+    "basekick",
+    "cap height",
+    "typography",
+    "line gap",
+    "leading"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seek-oss/capsize.git",
+    "directory": "packages/unpack"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Michael Taranto",
+    "homepage": "https://github.com/michaeltaranto"
+  },
+  "exports": {
+    ".": {
+      "types": {
+        "import": "./dist/index.d.mts",
+        "require": "./dist/index.d.ts"
+      },
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "blob-to-buffer": "^1.2.8",
+    "cross-fetch": "^3.0.4",
+    "fontkit": "^2.0.2"
+  },
+  "devDependencies": {
+    "@types/blob-to-buffer": "^1.2.0",
+    "@types/fontkit": "^2.0.1",
+    "@types/node": "^20.11.13",
+    "fast-xml-parser": "^4.3.2",
+    "sort-keys": "^5.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "build": "crackle package",
+    "dev": "crackle dev --shim=none",
+    "generate": "tsx scripts/generate-weightings"
+  }
+}

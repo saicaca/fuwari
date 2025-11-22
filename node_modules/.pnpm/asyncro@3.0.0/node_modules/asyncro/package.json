@@ -1,0 +1,43 @@
+{
+  "name": "asyncro",
+  "version": "3.0.0",
+  "description": "Asynchronous Array Utilities (for await)",
+  "main": "dist/asyncro.js",
+  "module": "dist/asyncro.m.js",
+  "source": "src/index.js",
+  "scripts": {
+    "build": "microbundle && npm run -s docs",
+    "prepublish": "npm run -s build && npm t",
+    "transpile": "rollup -c rollup.config.js -m ${npm_package_main}.map -f umd -n $npm_package_name $npm_package_jsnext_main -o $npm_package_main",
+    "docs": "documentation readme src/*.js -q -s API && documentation build src/*.js -f html -o docs",
+    "test": "eslint src test && npm run -s build && ava --verbose",
+    "release": "npm run -s build && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
+  },
+  "eslintConfig": {
+    "extends": "eslint-config-developit"
+  },
+  "repository": "developit/asyncro",
+  "keywords": [
+    "async",
+    "await",
+    "arrays"
+  ],
+  "files": [
+    "src",
+    "dist"
+  ],
+  "author": "Jason Miller <jason@developit.ca>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/developit/asyncro/issues"
+  },
+  "homepage": "https://github.com/developit/asyncro",
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "documentation": "^4.0.0-beta11",
+    "eslint": "^3.19.0",
+    "eslint-config-developit": "^1.1.1",
+    "microbundle": "^0.3.1",
+    "sinon": "^1.17.6"
+  }
+}

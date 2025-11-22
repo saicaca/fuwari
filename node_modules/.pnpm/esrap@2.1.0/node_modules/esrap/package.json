@@ -1,0 +1,56 @@
+{
+  "name": "esrap",
+  "version": "2.1.0",
+  "description": "Parse in reverse",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sveltejs/esrap.git"
+  },
+  "type": "module",
+  "files": [
+    "src",
+    "types"
+  ],
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./languages/ts": {
+      "types": "./types/index.d.ts",
+      "default": "./src/languages/ts/index.js"
+    },
+    "./languages/tsx": {
+      "types": "./types/index.d.ts",
+      "default": "./src/languages/tsx/index.js"
+    }
+  },
+  "types": "./types/index.d.ts",
+  "devDependencies": {
+    "@changesets/cli": "^2.27.11",
+    "@sveltejs/acorn-typescript": "^1.0.5",
+    "@typescript-eslint/types": "^8.2.0",
+    "@vitest/ui": "^2.1.1",
+    "acorn": "^8.15.0",
+    "dts-buddy": "^0.6.2",
+    "prettier": "^3.0.3",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.1",
+    "zimmerframe": "^1.0.0"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@jridgewell/sourcemap-codec": "^1.4.15"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "changeset:version": "changeset version",
+    "changeset:publish": "changeset publish",
+    "check": "tsc",
+    "sandbox": "node test/sandbox/index.js",
+    "test": "vitest --run",
+    "test:ui": "vitest --ui"
+  }
+}

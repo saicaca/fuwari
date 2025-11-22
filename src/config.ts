@@ -9,8 +9,8 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "Fuwari",
-	subtitle: "Demo Site",
+	title: "CiMorns",
+	subtitle: "Blog",
 	lang: "en", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
 		hue: 250, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
@@ -44,36 +44,51 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
+		{
+		name: 'Comment',    // 导航栏显示的文字，也可以写 '留言板'
+		url: '/Comment',       // 对应 src/pages/board.astro
+		external: false,     // 站内链接
+		},
 		LinkPreset.About,
 		{
-			name: "GitHub",
-			url: "https://github.com/saicaca/fuwari", // Internal links should not include the base path, as it is automatically added
-			external: true, // Show an external link icon and will open in a new tab
+		name: 'Memos',
+		url: 'https://memos.mcj.life/timeline',     // Internal links should not include the base path, as it is automatically added
+		external: true,                               // Show an external link icon and will open in a new tab
 		},
 	],
 };
 
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/demo-avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-	name: "Lorem Ipsum",
-	bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+	name: "CiMorsns",
+	bio: "Study AI in WHU.",
 	links: [
 		{
-			name: "Twitter",
-			icon: "fa6-brands:twitter", // Visit https://icones.js.org/ for icon codes
-			// You will need to install the corresponding icon set if it's not already included
-			// `pnpm add @iconify-json/<icon-set-name>`
-			url: "https://twitter.com",
+      name: 'Zhihu',
+      icon: 'fa6-brands:zhihu',       // Visit https://icones.js.org/ for icon codes
+                                        // You will need to install the corresponding icon set if it's not already included
+                                        // `pnpm add @iconify-json/<icon-set-name>`
+      url: 'https://www.zhihu.com/people/bb428a12258de969b757966e35d53f6f',
 		},
 		{
-			name: "Steam",
-			icon: "fa6-brands:steam",
-			url: "https://store.steampowered.com",
+		name: 'Mail',
+		icon: 'fa6-brands:google',
+		url: 'mailto:cimorns@gmail.com',
 		},
 		{
-			name: "GitHub",
-			icon: "fa6-brands:github",
-			url: "https://github.com/saicaca/fuwari",
+		name: 'QQ',
+		icon: 'fa6-brands:qq',
+		url: 'https://res.abeim.cn/api/qq/?qq=676645517',
+		},
+		{
+		name: 'GitHub',
+		icon: 'fa6-brands:github',
+		url: 'https://github.com/cimorn',
+		},
+		{
+		name: 'FaceBook',
+		icon: 'fa6-brands:facebook',
+		url: 'https://www.facebook.com/profile.php?id=61558947317739&mibextid=LQQJ4d',
 		},
 	],
 };
