@@ -1,16 +1,16 @@
 ---
 title: Markdown Extended Features
 published: 2024-05-01
-updated: 2024-11-29
+updated: 2025-11-30
 description: 'Read more about Markdown features in Fuwari'
 image: ''
 tags: [Demo, Example, Markdown, Fuwari]
 category: 'Examples'
-draft: false 
+draft: false
 ---
 
 ## GitHub Repository Cards
-You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API. 
+You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API.
 
 ::github{repo="Fabrizz/MMM-OnSpotify"}
 
@@ -19,6 +19,32 @@ Create a GitHub repository card with the code `::github{repo="<owner>/<repo>"}`.
 ```markdown
 ::github{repo="saicaca/fuwari"}
 ```
+
+## GitLab Repository Cards
+
+You can also add dynamic cards that show a GitLab repository, on page load, the repository information is pulled from the GitLab API.
+
+
+### With GitLab Official Service
+
+To do so, simply fill in the `repo` value with the project owner and repo.
+
+::gitlab{repo="gitlab-org/gitlab"}
+
+<!-- Create a GitHub repository card with the code `::gitlab{repo="<owner>/<repo>"}`. -->
+
+```mdx
+::gitlab{repo="gitlab-org/gitlab"}
+```
+
+### With Third-Party GitLab Service
+
+You would need to spcify third-party gitlab service in the `service` value.
+
+<!-- https://invent.kde.org/utilities/konsole -->
+
+::gitlab{repo="utilities/konsole" service="https://invent.kde.org"}
+
 
 ## Admonitions
 
