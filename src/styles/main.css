@@ -12,7 +12,15 @@
     }
     .expand-animation {
         @apply relative before:ease-out before:transition active:bg-none hover:before:bg-[var(--btn-plain-bg-hover)] active:before:bg-[var(--btn-plain-bg-active)] z-0
-        before:absolute before:rounded-[inherit] before:inset-0 before:scale-[0.85] hover:before:scale-100 before:-z-10
+        before:absolute before:rounded-[inherit] before:inset-0 before:scale-[0.85] hover:before:scale-100 before:-z-10;
+
+        /* Chrome/Blink animation optimization (fix for https://github.com/saicaca/fuwari/issues/137) */
+        will-change: transform;
+
+        /* Safari/WebKit SVG stabilization (fix for https://github.com/saicaca/fuwari/issues/137) */
+        svg {
+            transform: translateZ(0);
+        }
     }
     .link {
         @apply transition rounded-md p-1 -m-1 expand-animation;
