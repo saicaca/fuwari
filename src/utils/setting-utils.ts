@@ -5,7 +5,10 @@ import {
 	LIGHT_MODE,
 } from "@constants/constants.ts";
 import { expressiveCodeConfig } from "@/config";
-import type { LIGHT_DARK_MODE } from "@/types/config";
+import type {
+	LIGHT_DARK_MODE,
+	ThemeObjectOrShikiThemeName,
+} from "@/types/config";
 
 export function getDefaultHue(): number {
 	const fallback = "250";
@@ -27,28 +30,32 @@ export function setHue(hue: number): void {
 	r.style.setProperty("--hue", String(hue));
 }
 
+export function setExpressiveCodeTheme(theme: ThemeObjectOrShikiThemeName) {
+	const themeName = typeof theme === "object" ? theme.name : theme;
+	document.documentElement.setAttribute("data-theme", themeName ?? "");
+}
+
 export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
 	switch (theme) {
 		case LIGHT_MODE:
 			document.documentElement.classList.remove("dark");
+			setExpressiveCodeTheme(expressiveCodeConfig.lightTheme);
 			break;
 		case DARK_MODE:
 			document.documentElement.classList.add("dark");
+			setExpressiveCodeTheme(expressiveCodeConfig.darkTheme);
 			break;
 		case AUTO_MODE:
 			if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
 				document.documentElement.classList.add("dark");
+				setExpressiveCodeTheme(expressiveCodeConfig.darkTheme);
+				document.documentElement.setAttribute("data-theme", "github-dark");
 			} else {
 				document.documentElement.classList.remove("dark");
+				setExpressiveCodeTheme(expressiveCodeConfig.lightTheme);
 			}
 			break;
 	}
-
-	// Set the theme for Expressive Code
-	document.documentElement.setAttribute(
-		"data-theme",
-		expressiveCodeConfig.theme,
-	);
 }
 
 export function setTheme(theme: LIGHT_DARK_MODE): void {
