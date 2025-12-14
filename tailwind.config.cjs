@@ -10,5 +10,11 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    function ({ addVariant }) {
+      addVariant('rtl', 'html[dir="rtl"] &');
+      addVariant('ltr', 'html[dir="ltr"] &');
+    },
+  ],
 }
