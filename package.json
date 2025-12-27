@@ -12,8 +12,7 @@
     "type-check": "tsc --noEmit --isolatedDeclarations",
     "new-post": "node scripts/new-post.js",
     "format": "biome format --write ./src",
-    "lint": "biome check --write ./src",
-    "preinstall": "npx only-allow pnpm"
+    "lint": "biome check --write ./src"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -71,6 +70,5 @@
     "@types/sanitize-html": "^2.16.0",
     "postcss-import": "^16.1.1",
     "postcss-nesting": "^13.0.2"
-  },
-  "packageManager": "pnpm@9.14.4"
+  }
 }
