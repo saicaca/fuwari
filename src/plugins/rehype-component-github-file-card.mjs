@@ -32,7 +32,7 @@ export function GithubFileCardComponent(properties, children) {
 			'Invalid file. ("file" attribute must be set to a repo path like "path/to/file.ext")',
 		);
 
-	const description = properties.description || "No description"
+	const description = properties.description || "No description";
 
 	const repo = properties.repo;
 	const owner = repo.split("/")[0];
@@ -56,7 +56,8 @@ export function GithubFileCardComponent(properties, children) {
 		.join("/");
 	const refQuery = ref === "HEAD" ? "" : `?ref=${encodeURIComponent(ref)}`;
 	const contentsUrl = `https://api.github.com/repos/${repo}/contents/${encodedFilePath}${refQuery}`;
-	const commitRefQuery = ref === "HEAD" ? "" : `&sha=${encodeURIComponent(ref)}`;
+	const commitRefQuery =
+		ref === "HEAD" ? "" : `&sha=${encodeURIComponent(ref)}`;
 	const commitsUrl = `https://api.github.com/repos/${repo}/commits?path=${encodeURIComponent(filePath)}&per_page=1${commitRefQuery}`;
 
 	const cardUuid = `GFC${Math.random().toString(36).slice(-6)}`; // Collisions are not important
@@ -96,11 +97,7 @@ export function GithubFileCardComponent(properties, children) {
 		{ class: "gc-filesize" },
 		"...",
 	);
-	const nUpdated = h(
-		`div#${cardUuid}-updated`,
-		{ class: "gc-updated" },
-		"...",
-	);
+	const nUpdated = h(`div#${cardUuid}-updated`, { class: "gc-updated" }, "...");
 	const nInfoBar = h("div", { class: "gc-infobar" }, [
 		nFileType,
 		nFileSize,
@@ -189,7 +186,7 @@ export function GithubFileCardComponent(properties, children) {
         initGithubFileCard();
       }
     `,
-		);
+	);
 
 	return h(
 		`a#${cardUuid}-card`,
