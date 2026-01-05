@@ -2,7 +2,7 @@ import { h } from "hastscript";
 import { visit } from "unist-util-visit";
 
 export function parseDirectiveNode() {
-	return (tree, { _data }) => {
+	return (tree, _file) => {
 		visit(tree, (node) => {
 			if (
 				node.type === "containerDirective" ||

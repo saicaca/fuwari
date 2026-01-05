@@ -1,0 +1,87 @@
+---
+import type { Category } from "../../utils/content-utils";
+
+interface Props {
+	node: Category;
+	depth?: number;
+	hasExpandableSibling?: boolean;
+}
+
+const { node, depth = 0, hasExpandableSibling = false } = Astro.props;
+const INDENT_PER_LEVEL = 12;
+const indentPx = depth * INDENT_PER_LEVEL;
+const hasChildren = node.children.length > 0;
+---
+
+{hasChildren ? (
+	<div style={`margin-left: ${indentPx}px`}>
+		<details class="category-details">
+			<summary class="w-full h-10 rounded-lg bg-none hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition-all pl-2 hover:pl-3 text-neutral-700 hover:text-[var(--primary)] dark:text-neutral-300 dark:hover:text-[var(--primary)] cursor-pointer list-none flex items-center justify-between">
+				<div class="flex items-center relative mr-2 flex-1">
+					<span class="category-arrow text-[8px] transition-transform inline-block w-4 flex-shrink-0 origin-center flex items-center justify-center">▶</span>
+					<a
+						data-category-link
+						href={node.url}
+						aria-label={`View all posts in the ${node.fullPath} category`}
+						class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis no-underline text-inherit hover:text-[var(--primary)]"
+					>
+						{node.name.trim()}
+					</a>
+				</div>
+				{node.count > 0 && (
+					<div class="transition px-2 h-7 mr-2 min-w-[2rem] rounded-lg text-sm font-bold text-[var(--btn-content)] dark:text-[var(--deep-text)] bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)] flex items-center justify-center">
+						{node.count}
+					</div>
+				)}
+			</summary>
+			<div class="ml-4 mt-1">
+				{node.children.map((child) => (
+					<Astro.self
+						node={child}
+						depth={depth + 1}
+						hasExpandableSibling={node.children.some((n) => n.children.length > 0)}
+					/>
+				))}
+			</div>
+		</details>
+	</div>
+) : (
+	<div style={`margin-left: ${indentPx}px`}>
+		<a href={node.url} aria-label={`View all posts in the ${node.fullPath} category`}>
+			<button class="w-full h-10 rounded-lg bg-none hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition-all pl-2 hover:pl-3 text-neutral-700 hover:text-[var(--primary)] dark:text-neutral-300 dark:hover:text-[var(--primary)]">
+				<div class="flex items-center justify-between relative mr-2">
+					<div class="flex items-center overflow-hidden text-left whitespace-nowrap overflow-ellipsis">
+						{hasExpandableSibling && (
+							<span class="text-[8px] inline-block w-4 flex-shrink-0 origin-center flex items-center justify-center text-neutral-500 dark:text-neutral-500">●</span>
+						)}
+						<span class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis">{node.name.trim()}</span>
+					</div>
+					{node.count > 0 && (
+						<div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold text-[var(--btn-content)] dark:text-[var(--deep-text)] bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)] flex items-center justify-center">
+							{node.count}
+						</div>
+					)}
+				</div>
+			</button>
+		</a>
+	</div>
+)}
+
+<style>
+	.category-details[open] > summary .category-arrow {
+		transform: rotate(90deg);
+	}
+</style>
+
+<script>
+if (typeof window !== "undefined") {
+	window.addEventListener("click", (e) => {
+		const target = e.target as HTMLElement | null;
+		if (!target) return;
+		const link = target.closest("[data-category-link]");
+		if (link) {
+			e.stopPropagation();
+		}
+	});
+}
+</script>

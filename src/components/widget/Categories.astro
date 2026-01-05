@@ -2,10 +2,11 @@
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 import { getCategoryList } from "../../utils/content-utils";
-import ButtonLink from "../control/ButtonLink.astro";
 import WidgetLayout from "./WidgetLayout.astro";
+import CategoryNode from "./CategoryNode.astro";
 
 const categories = await getCategoryList();
+const rootHasExpandable = categories.some((c) => c.children.length > 0);
 
 const COLLAPSED_HEIGHT = "7.5rem";
 const COLLAPSE_THRESHOLD = 5;
@@ -23,13 +24,7 @@ const style = Astro.props.style;
 <WidgetLayout name={i18n(I18nKey.categories)} id="categories" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}
                 class={className} style={style}
 >
-    {categories.map((c) =>
-        <ButtonLink
-            url={c.url}
-            badge={String(c.count)}
-            label={`View all posts in the ${c.name.trim()} category`}
-        >
-            {c.name.trim()}
-        </ButtonLink>
-    )}
+    {categories.map((category) => (
+        <CategoryNode node={category} depth={0} hasExpandableSibling={rootHasExpandable} />
+    ))}
 </WidgetLayout>

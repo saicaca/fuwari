@@ -73,42 +73,99 @@ export async function getTagList(): Promise<Tag[]> {
 }
 
 export type Category = {
-	name: string;
-	count: number;
+	name: string; // current segment name
+	fullPath: string; // joined path like "Java/MouseMacros"
+	count: number; // includes children
 	url: string;
+	children: Category[];
 };
+
+type CategoryNodeInternal = Category & {
+	childrenMap: Map<string, CategoryNodeInternal>;
+};
+
+function createCategoryNode(
+	name: string,
+	fullPath: string,
+): CategoryNodeInternal {
+	return {
+		name,
+		fullPath,
+		count: 0,
+		url: getCategoryUrl(fullPath),
+		children: [],
+		childrenMap: new Map<string, CategoryNodeInternal>(),
+	};
+}
+
+function normalizeCategory(raw: unknown): string {
+	if (!raw) return "";
+	if (typeof raw === "string") return raw.trim();
+	return String(raw).trim();
+}
+
+function addCategoryToTree(
+	root: Map<string, CategoryNodeInternal>,
+	segments: string[],
+	uncategorizedLabel: string,
+) {
+	// If no valid segments, treat as uncategorized
+	if (segments.length === 0) {
+		const key = uncategorizedLabel;
+		const existing = root.get(key) ?? createCategoryNode(key, key);
+		existing.count += 1;
+		root.set(key, existing);
+		return;
+	}
+
+	let currentMap = root;
+	let currentPath = "";
+
+	segments.forEach((segment) => {
+		currentPath = currentPath ? `${currentPath}/${segment}` : segment;
+		let node = currentMap.get(segment);
+		if (!node) {
+			node = createCategoryNode(segment, currentPath);
+			currentMap.set(segment, node);
+		}
+		node.count += 1; // accumulate counts on all levels
+		currentMap = node.childrenMap;
+	});
+}
+
+function mapToSortedCategories(
+	map: Map<string, CategoryNodeInternal>,
+): Category[] {
+	const nodes = Array.from(map.values()).sort((a, b) =>
+		a.name.toLowerCase().localeCompare(b.name.toLowerCase()),
+	);
+
+	return nodes.map((node) => ({
+		name: node.name,
+		fullPath: node.fullPath,
+		count: node.count,
+		url: node.url,
+		children: mapToSortedCategories(node.childrenMap),
+	}));
+}
 
 export async function getCategoryList(): Promise<Category[]> {
 	const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
-	const count: { [key: string]: number } = {};
+
+	const uncategorizedLabel = i18n(I18nKey.uncategorized);
+	const rootMap = new Map<string, CategoryNodeInternal>();
+
 	allBlogPosts.forEach((post: { data: { category: string | null } }) => {
-		if (!post.data.category) {
-			const ucKey = i18n(I18nKey.uncategorized);
-			count[ucKey] = count[ucKey] ? count[ucKey] + 1 : 1;
-			return;
-		}
+		const normalized = normalizeCategory(post.data.category);
+		const segments = normalized
+			.split("/")
+			.map((s) => s.trim())
+			.filter(Boolean);
 
-		const categoryName =
-			typeof post.data.category === "string"
-				? post.data.category.trim()
-				: String(post.data.category).trim();
-
-		count[categoryName] = count[categoryName] ? count[categoryName] + 1 : 1;
+		addCategoryToTree(rootMap, segments, uncategorizedLabel);
 	});
 
-	const lst = Object.keys(count).sort((a, b) => {
-		return a.toLowerCase().localeCompare(b.toLowerCase());
-	});
-
-	const ret: Category[] = [];
-	for (const c of lst) {
-		ret.push({
-			name: c,
-			count: count[c],
-			url: getCategoryUrl(c),
-		});
-	}
-	return ret;
+	return mapToSortedCategories(rootMap);
 }
