@@ -19,6 +19,7 @@ import { defaultFavicons } from "../constants/icon";
 import type { Favicon } from "../types/config";
 import { pathsEqual, url } from "../utils/url-utils";
 import "katex/dist/katex.css";
+import { getCollection } from "astro:content";
 
 interface Props {
 	title?: string;
@@ -29,6 +30,50 @@ interface Props {
 }
 
 let { title, banner, description, lang, setOGTypeArticle } = Astro.props;
+
+let ogImage: string | undefined = undefined;
+
+if (banner && typeof banner === 'string' && banner.trim() !== '') {
+  if (banner.startsWith('http://') || banner.startsWith('https://')) {
+    ogImage = banner;
+  } else {
+    ogImage = new URL(banner, Astro.site || Astro.url.origin).href;
+  }
+}
+
+const slug = Astro.url.pathname.split('/').filter(Boolean).pop();
+
+interface PageData {
+  published?: Date | string;
+  updated?: Date | string;
+  tags?: string[];
+}
+
+let pageData: PageData = {};
+
+try {
+  const allEntries = await getCollection("posts");
+  const entry = allEntries.find(e => e.slug === slug);
+  if (entry) pageData = entry.data as PageData;
+} catch (e) {
+  // No data, silent fail
+}
+
+const formatDate = (date: Date | string | undefined): string | null => {
+  if (!date) return null;
+  if (date instanceof Date) {
+    return date.toISOString().split('T')[0];
+  }
+  if (typeof date === 'string') {
+    return date.split('T')[0];
+  }
+  return null;
+};
+
+const publishedDate = formatDate(pageData.published);
+const updatedDate = formatDate(pageData.updated);
+
+const tags: string[] = pageData.tags || [];
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
@@ -81,23 +126,34 @@ const bannerOffset =
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
+		<meta name="title" content={pageTitle} />
 		<meta name="description" content={description || pageTitle}>
 		<meta name="author" content={profileConfig.name}>
+		<link rel="canonical" href={Astro.url} />
 
 		<meta property="og:site_name" content={siteConfig.title}>
 		<meta property="og:url" content={Astro.url}>
 		<meta property="og:title" content={pageTitle}>
 		<meta property="og:description" content={description || pageTitle}>
 		{setOGTypeArticle ? (
-        <meta property="og:type" content="article" />
-        ) : (
-        <meta property="og:type" content="website" />
-        )}
+		<>
+			<meta property="og:type" content="article" />
+			{tags.map((tag: string) => (
+			<meta property="article:tag" content={tag} />
+			))}
+			{publishedDate && <meta property="article:published_time" content={publishedDate} />}
+			{updatedDate && <meta property="article:modified_time" content={updatedDate} />}
+		</>
+		) : (
+		<meta property="og:type" content="website" />
+		)}
+		{ogImage && <meta property="og:image" content={ogImage} />}
 
 		<meta name="twitter:card" content="summary_large_image">
 		<meta property="twitter:url" content={Astro.url}>
 		<meta name="twitter:title" content={pageTitle}>
 		<meta name="twitter:description" content={description || pageTitle}>
+		{ogImage && <meta property="twitter:image" content={ogImage} />}
 
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
