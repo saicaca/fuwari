@@ -67,6 +67,7 @@ image: /images/cover.jpg
 tags: [Foo, Bar]
 category: Front-end
 draft: false
+unlisted: false #Si es true, se oculta de la lista. Acceso solo vía enlace directo (URL). (Ver Unlisted-Posts_Feature.md para más info)
 ---
 ```
 

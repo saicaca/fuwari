@@ -35,7 +35,7 @@ draft: false
 | `tags`        | The tags of the post.                                                                                                                                                                                       |
 | `category`    | The category of the post.                                                                                                                                                                                   |
 | `draft`        | If this post is still a draft, which won't be displayed.                                                                                                                                                    |
-
+| `unlisted`   | **Hide post from lists.** Access is only possible via a direct URL. (See `Unlisted-Posts_Feature`)
 ## Where to Place the Post Files
 
 

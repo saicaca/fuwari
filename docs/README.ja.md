@@ -67,6 +67,7 @@ image: /images/cover.jpg
 tags: [Foo, Bar]
 category: Front-end
 draft: false
+unlisted: false # trueの場合、一覧には表示されず直リンク(URL)でのみ閲覧 가능(アクセス可能)となります。(詳細は Unlisted-Posts_Feature.md を参照)
 ---
 ```
 

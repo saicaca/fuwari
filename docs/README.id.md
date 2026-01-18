@@ -66,6 +66,7 @@ tags: [Foo, Bar]
 category: Front-end
 draft: false
 lang: id   # Isi hanya jika bahasa postingan berbeda dari bahasa default di `config.ts`
+unlisted: false # Jika disetel ke true, sembunyikan dari daftar dan hanya dapat diakses melalui tautan langsung (URL). (Detail: lihat Unlisted-Posts_Feature.md)
 ---
 ```
 

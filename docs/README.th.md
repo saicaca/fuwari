@@ -48,6 +48,7 @@ tags: [Foo, Bar]
 category: Front-end
 draft: false
 lang: jp      # เขียนค่านี้เมื่อภาษาของโพสต์นั้น ๆ แตกต่างจากภาษาของเว็บไซต์ที่ตั้งค่าไว้ใน `config.ts` เท่านั้น
+unlisted: false # หากตั้งค่าเป็น true จะถูกซ่อนจากรายการและเข้าถึงได้ผ่านลิงก์โดยตรง (URL) เท่านั้น (ดูรายละเอียดที่ Unlisted-Posts_Feature.md)
 ---
 ```
 

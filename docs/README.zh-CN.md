@@ -68,6 +68,7 @@ tags: [Foo, Bar]
 category: Front-end
 draft: false
 lang: jp      # 仅当文章语言与 `config.ts` 中的网站语言不同时需要设置
+unlisted: false # 如果设置为 true，将从列表中隐藏，只能通过直接链接 (URL) 访问。（详情请参阅: Unlisted-Posts_Feature.md）
 ---
 ```
 

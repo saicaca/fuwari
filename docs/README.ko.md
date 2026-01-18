@@ -47,6 +47,8 @@ tags: [Foo, Bar]
 category: Front-end
 draft: false
 lang: jp      # 게시물의 언어가 `config.ts`의 사이트 언어와 다른 경우에만 설정합니다.
+unlisted: false # true 설정 시 목록에서 숨기고 직접 링크(URL)로만 접근 가능 (상세 정보: Unlisted-Posts_Feature.md 참고)
+
 ---
 ```
 ## 🧩 마크다운 확장 구문

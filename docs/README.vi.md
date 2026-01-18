@@ -48,6 +48,7 @@ tags: [Foo, Bar]
 category: Front-end
 draft: false
 lang: jp      # Chỉ đặt nếu ngôn ngữ của bài viết khác với ngôn ngữ của trang web trong `config.ts`
+unlisted: false # Nếu đặt là true, mục này sẽ bị ẩn khỏi danh sách và chỉ có thể truy cập qua liên kết trực tiếp (URL). (Chi tiết: xem Unlisted-Posts_Feature.md)
 ---
 ```
 
