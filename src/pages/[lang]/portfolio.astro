@@ -1,0 +1,148 @@
+---
+import { type CollectionEntry, getCollection, getEntry } from "astro:content";
+import path from "node:path";
+import Markdown from "@components/misc/Markdown.astro";
+import PortfolioCard from "@components/PortfolioCard.astro";
+import {
+	getPostByUrl,
+	getPostLogicalSlug,
+	getPortfolioLang,
+	getSortedPortfolioForLang,
+} from "@utils/content-utils";
+import { getPostUrlBySlug, getStaticAlternates } from "@utils/url-utils";
+import I18nKey from "../../i18n/i18nKey";
+import {
+	DEFAULT_LOCALE,
+	i18n,
+	SUPPORTED_LOCALES,
+} from "../../i18n/translation";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+
+export async function getStaticPaths() {
+	return SUPPORTED_LOCALES.filter((lang) => lang !== DEFAULT_LOCALE).map(
+		(lang) => ({
+			params: { lang },
+		}),
+	);
+}
+
+const { lang } = Astro.params;
+
+// 1. Try to get localized portfolio page (spec collection)
+let portfolioSpec = await getEntry(
+	"spec",
+	`${lang?.toLowerCase()}/portfolio` as any,
+);
+if (!portfolioSpec) {
+	portfolioSpec = await getEntry("spec", "portfolio");
+}
+const { Content } = portfolioSpec
+	? await portfolioSpec.render()
+	: { Content: null };
+const portfolioSpecLang = portfolioSpec ? getPortfolioLang(portfolioSpec) : lang;
+
+const toPlainText = (value: string) =>
+	value
+		.replace(/!\[[^\]]*]\([^)]+\)/g, "")
+		.replace(/\[[^\]]*]\([^)]+\)/g, "")
+		.replace(/[`*_>#-]/g, "")
+		.replace(/\s+/g, " ")
+		.trim();
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "CollectionPage",
+	name: i18n(I18nKey.portfolio, lang),
+	description: toPlainText(portfolioSpec?.body || ""),
+	inLanguage: portfolioSpecLang,
+};
+
+// 2. Load localized portfolio items with fallback
+const portfolioItems = await getSortedPortfolioForLang(lang!);
+
+const PLACEHOLDER_IMAGE = "/assets/images/portfolio-placeholder.png";
+
+// Resolve images, basePaths, and localized URLs
+const resolvedDisplayItems = await Promise.all(
+	portfolioItems.map(async (item) => {
+		let resolvedImage = item.data.image;
+		let resolvedUrl = item.data.url;
+		let resolvedDate = item.data.date;
+		let basePath = "/";
+
+		// 1. Try to find if the URL points to an internal post
+		const post = await getPostByUrl(item.data.url);
+
+		if (post) {
+			// Localize the internal post URL to the current page language
+			resolvedUrl = getPostUrlBySlug(getPostLogicalSlug(post), lang);
+			resolvedDate = post.data.published;
+
+			// Auto-resolve image from post if not explicitly provided
+			if (!resolvedImage && post.data.image) {
+				resolvedImage = post.data.image;
+				const postDir = post.id.includes("/")
+					? post.id.substring(0, post.id.lastIndexOf("/"))
+					: "";
+				basePath = path.join("content/posts", postDir);
+			}
+		} else if (!resolvedImage && item.data.url.startsWith("http")) {
+			// 2. Try external OG image
+			try {
+				const controller = new AbortController();
+				const timeoutId = setTimeout(() => controller.abort(), 3000);
+				const response = await fetch(item.data.url, {
+					signal: controller.signal,
+				});
+				const html = await response.text();
+				const ogMatch =
+					html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/i) ||
+					html.match(/<meta[^>]+content="([^"]+)"[^>]+property="og:image"/i);
+				if (ogMatch?.[1]) {
+					resolvedImage = ogMatch[1];
+				}
+				clearTimeout(timeoutId);
+			} catch (e) {
+				console.error(`Failed to fetch OG image for ${item.data.url}:`, e);
+			}
+		}
+
+		return {
+			...item,
+			lang: getPortfolioLang(item),
+			resolvedImage: resolvedImage || PLACEHOLDER_IMAGE,
+			resolvedUrl: resolvedUrl,
+			resolvedDate: resolvedDate,
+			resolvedBasePath: resolvedImage ? basePath : "/",
+		};
+	}),
+);
+---
+
+<MainGridLayout title={i18n(I18nKey.portfolio, lang)} lang={lang} alternateLinks={getStaticAlternates("/portfolio/")}>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <div class="flex flex-col w-full gap-6">
+        {Content && (
+            <div class="card-base z-10 px-9 py-6 relative w-full rounded-[var(--radius-large)]" lang={portfolioSpecLang}>
+                <Markdown class="mt-2">
+                    <Content />
+                </Markdown>
+            </div>
+        )}
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {resolvedDisplayItems.map((item) => (
+                <PortfolioCard 
+                    title={item.data.title}
+                    description={item.data.description}
+                    image={item.resolvedImage}
+                    basePath={item.resolvedBasePath}
+                    url={item.resolvedUrl}
+                    category={item.data.category}
+                    date={item.resolvedDate}
+                    lang={item.lang}
+                />
+            ))}
+        </div>
+    </div>
+</MainGridLayout>

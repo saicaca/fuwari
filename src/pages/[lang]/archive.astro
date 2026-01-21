@@ -1,0 +1,38 @@
+---
+import { getStaticAlternates } from "@utils/url-utils";
+import ArchivePanel from "../../components/ArchivePanel.svelte";
+import { profileConfig } from "../../config";
+import I18nKey from "../../i18n/i18nKey";
+import {
+	DEFAULT_LOCALE,
+	i18n,
+	SUPPORTED_LOCALES,
+} from "../../i18n/translation";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import { getSortedPostsListForLang } from "../../utils/content-utils";
+
+export async function getStaticPaths() {
+	return SUPPORTED_LOCALES.filter((lang) => lang !== DEFAULT_LOCALE).map(
+		(lang) => ({
+			params: { lang },
+		}),
+	);
+}
+
+const { lang } = Astro.params;
+const sortedPostsList = await getSortedPostsListForLang(lang);
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: profileConfig.name,
+	description: profileConfig.bio || "",
+	sameAs: profileConfig.links.map((link) => link.url),
+	inLanguage: lang,
+};
+---
+
+<MainGridLayout title={i18n(I18nKey.archive, lang)} lang={lang} alternateLinks={getStaticAlternates("/archive/")}>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <ArchivePanel sortedPosts={sortedPostsList} lang={lang} client:only="svelte"></ArchivePanel>
+</MainGridLayout>

@@ -65,7 +65,8 @@
         @apply opacity-0 pointer-events-none
     }
 
-    #toc-inner-wrapper {
+    #toc {
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 2rem, black calc(100% - 2rem), transparent 100%);
         mask-image: linear-gradient(to bottom, transparent 0%, black 2rem, black calc(100% - 2rem), transparent 100%);
     }
 
@@ -109,6 +110,10 @@
     }
     .btn-regular-dark.success {
         @apply bg-[oklch(0.75_0.14_var(--hue))] dark:bg-[oklch(0.75_0.14_var(--hue))]
+    }
+
+    .post-scheduled-hidden {
+        @apply hidden;
     }
 }
 

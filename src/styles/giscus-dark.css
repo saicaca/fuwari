@@ -1,0 +1,95 @@
+main {
+    --color-prettylights-syntax-comment: oklch(0.70 0.03 var(--hue));
+    --color-prettylights-syntax-constant: oklch(0.75 0.10 calc(var(--hue) + 30));
+    --color-prettylights-syntax-entity: oklch(0.75 0.12 calc(var(--hue) + 60));
+    --color-prettylights-syntax-storage-modifier-import: oklch(0.80 0.05 var(--hue));
+    --color-prettylights-syntax-entity-tag: oklch(0.75 0.12 calc(var(--hue) + 120));
+    --color-prettylights-syntax-keyword: oklch(0.75 0.12 calc(var(--hue) - 60));
+    --color-prettylights-syntax-string: oklch(0.75 0.10 calc(var(--hue) + 180));
+    --color-prettylights-syntax-variable: oklch(0.75 0.10 calc(var(--hue) - 30));
+    --color-prettylights-syntax-brackethighlighter-unmatched: oklch(0.70 0.15 0);
+    --color-prettylights-syntax-invalid-illegal-text: white;
+    --color-prettylights-syntax-invalid-illegal-bg: oklch(0.60 0.15 0);
+    --color-prettylights-syntax-carriage-return-text: white;
+    --color-prettylights-syntax-carriage-return-bg: oklch(0.60 0.15 0);
+    --color-prettylights-syntax-string-regexp: oklch(0.75 0.12 calc(var(--hue) + 120));
+    --color-prettylights-syntax-markup-list: oklch(0.75 0.08 calc(var(--hue) + 40));
+    --color-prettylights-syntax-markup-heading: oklch(0.75 0.10 calc(var(--hue) + 30));
+    --color-prettylights-syntax-markup-italic: oklch(0.80 0.05 var(--hue));
+    --color-prettylights-syntax-markup-bold: oklch(0.85 0.05 var(--hue));
+    --color-prettylights-syntax-markup-deleted-text: oklch(0.70 0.15 0);
+    --color-prettylights-syntax-markup-deleted-bg: oklch(0.30 0.05 0);
+    --color-prettylights-syntax-markup-inserted-text: oklch(0.75 0.12 calc(var(--hue) + 120));
+    --color-prettylights-syntax-markup-inserted-bg: oklch(0.30 0.05 calc(var(--hue) + 120));
+    --color-prettylights-syntax-markup-changed-text: oklch(0.75 0.10 calc(var(--hue) - 30));
+    --color-prettylights-syntax-markup-changed-bg: oklch(0.30 0.05 calc(var(--hue) - 30));
+    --color-prettylights-syntax-markup-ignored-text: oklch(0.40 0.02 var(--hue));
+    --color-prettylights-syntax-markup-ignored-bg: oklch(0.75 0.10 calc(var(--hue) + 30));
+    --color-prettylights-syntax-meta-diff-range: oklch(0.75 0.12 calc(var(--hue) + 60));
+    --color-prettylights-syntax-brackethighlighter-angle: oklch(0.70 0.03 var(--hue));
+    --color-prettylights-syntax-sublimelinter-gutter-mark: oklch(0.60 0.03 var(--hue));
+    --color-prettylights-syntax-constant-other-reference-link: oklch(0.75 0.10 calc(var(--hue) + 180));
+
+    --color-btn-text: white;
+    --color-btn-bg: oklch(0.33 0.035 var(--hue));
+    --color-btn-border: rgba(255, 255, 255, 0.1);
+    --color-btn-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    --color-btn-inset-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    --color-btn-hover-bg: oklch(0.38 0.04 var(--hue));
+    --color-btn-hover-border: rgba(255, 255, 255, 0.1);
+    --color-btn-active-bg: oklch(0.43 0.045 var(--hue));
+    --color-btn-active-border: rgba(255, 255, 255, 0.1);
+    --color-btn-selected-bg: oklch(0.43 0.045 var(--hue));
+
+    --color-btn-primary-text: white;
+    --color-btn-primary-bg: oklch(0.75 0.14 var(--hue));
+    --color-btn-primary-border: rgba(0, 0, 0, 0.2);
+    --color-btn-primary-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+    --color-btn-primary-inset-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    --color-btn-primary-hover-bg: oklch(0.70 0.16 var(--hue));
+    --color-btn-primary-hover-border: rgba(0, 0, 0, 0.2);
+    --color-btn-primary-selected-bg: oklch(0.65 0.18 var(--hue));
+    --color-btn-primary-selected-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.3);
+    --color-btn-primary-disabled-text: rgba(255, 255, 255, 0.5);
+    --color-btn-primary-disabled-bg: oklch(0.50 0.08 var(--hue));
+    --color-btn-primary-disabled-border: rgba(0, 0, 0, 0.2);
+
+    --color-action-list-item-default-hover-bg: oklch(0.30 0.035 var(--hue));
+    --color-segmented-control-bg: oklch(0.33 0.035 var(--hue));
+    --color-segmented-control-button-bg: oklch(0.23 0.015 var(--hue));
+    --color-segmented-control-button-selected-border: oklch(0.75 0.14 var(--hue));
+
+    --color-fg-default: white;
+    --color-fg-muted: oklch(0.75 0.03 var(--hue));
+    --color-fg-subtle: oklch(0.70 0.03 var(--hue));
+
+    --color-canvas-default: oklch(0.23 0.015 var(--hue));
+    --color-canvas-overlay: oklch(0.23 0.015 var(--hue));
+    --color-canvas-inset: oklch(0.17 0.015 var(--hue));
+    --color-canvas-subtle: rgba(255, 255, 255, 0.05);
+
+    --color-border-default: rgba(255, 255, 255, 0.1);
+    --color-border-muted: rgba(255, 255, 255, 0.08);
+    --color-neutral-muted: rgba(255, 255, 255, 0.1);
+
+    --color-accent-fg: oklch(0.75 0.14 var(--hue));
+    --color-accent-emphasis: oklch(0.75 0.14 var(--hue));
+    --color-accent-muted: oklch(0.65 0.08 var(--hue), 0.4);
+    --color-accent-subtle: oklch(0.30 0.025 var(--hue));
+
+    --color-success-fg: oklch(0.75 0.14 180);
+    --color-attention-fg: oklch(0.75 0.14 60);
+    --color-attention-muted: oklch(0.65 0.10 60, 0.4);
+    --color-attention-subtle: oklch(0.30 0.025 60);
+    --color-danger-fg: oklch(0.65 0.2 25);
+    --color-danger-muted: oklch(0.65 0.15 0, 0.4);
+    --color-danger-subtle: oklch(0.30 0.025 0);
+
+    --color-primer-shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    --color-scale-gray-1: oklch(0.33 0.035 var(--hue));
+    --color-scale-blue-1: oklch(0.40 0.05 var(--hue));
+
+    --color-social-reaction-bg-hover: oklch(0.38 0.04 var(--hue));
+    --color-social-reaction-bg-reacted-hover: oklch(0.45 0.07 var(--hue));
+}

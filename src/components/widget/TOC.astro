@@ -2,6 +2,7 @@
 import type { MarkdownHeading } from "astro";
 import { siteConfig } from "../../config";
 import { url } from "../../utils/url-utils";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "../../i18n/translation";
 
 interface Props {
 	class?: string;
@@ -16,7 +17,10 @@ for (const heading of headings) {
 }
 
 const className = Astro.props.class;
-const isPostsRoute = Astro.url.pathname.startsWith(url("/posts/"));
+const postsPaths = SUPPORTED_LOCALES.map((locale) => url("/posts/", locale));
+const isPostsRoute = postsPaths.some((path) =>
+	Astro.url.pathname.startsWith(path),
+);
 
 const removeTailingHash = (text: string) => {
 	let lastIndexOfHash = text.lastIndexOf("#");
@@ -42,16 +46,20 @@ const maxLevel = siteConfig.toc.depth;
                         "bg-[var(--toc-badge-bg)] text-[var(--btn-content)]": heading.depth == minDepth,
                         "ml-4": heading.depth == minDepth + 1,
                         "ml-8": heading.depth == minDepth + 2,
+                        "ml-12": heading.depth == minDepth + 3, // For future expansion
                     }
                 ]}
                 >
                     {heading.depth == minDepth && heading1Count++}
                     {heading.depth == minDepth + 1 && <div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div>}
                     {heading.depth == minDepth + 2 && <div class="transition w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10"></div>}
+                    {heading.depth == minDepth + 3 && <div class="transition w-1 h-1 rounded-full bg-black/10 dark:bg-white/15"></div>}
                 </div>
                 <div class:list={["transition text-sm", {
-                    "text-50": heading.depth == minDepth || heading.depth == minDepth + 1,
-                    "text-30": heading.depth == minDepth + 2,
+                    "text-90": heading.depth == minDepth,
+                    "text-75": heading.depth == minDepth + 1,
+                    "text-50": heading.depth == minDepth + 2,
+                    "text-30": heading.depth == minDepth + 3,
                 }]}>{removeTailingHash(heading.text)}</div>
             </a>
     )}

@@ -1,67 +1,170 @@
-{
-  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
-  "frontMatter.framework.id": "astro",
-  "frontMatter.preview.host": "http://localhost:4321",
-  "frontMatter.content.publicFolder": "public",
-  "frontMatter.content.pageFolders": [
-    {
-      "title": "posts",
-      "path": "[[workspace]]/src/content/posts"
-    }
-  ],
-  "frontMatter.taxonomy.contentTypes": [
-    {
-      "name": "default",
-      "pageBundle": true,
-      "previewPath": "'blog'",
-      "filePrefix": null,
-      "clearEmpty": true,
-      "fields": [
-        {
-          "title": "title",
-          "name": "title",
-          "type": "string",
-          "single": true
-        },
-        {
-          "title": "description",
-          "name": "description",
-          "type": "string"
-        },
-        {
-          "title": "published",
-          "name": "published",
-          "type": "datetime",
-          "default": "{{now}}",
-          "isPublishDate": true
-        },
-        {
-          "title": "preview",
-          "name": "image",
-          "type": "image",
-          "isPreviewImage": true
-        },
-        {
-          "title": "tags",
-          "name": "tags",
-          "type": "list"
-        },
-        {
-          "title": "category",
-          "name": "category",
-          "type": "string"
-        },
-        {
-          "title": "draft",
-          "name": "draft",
-          "type": "boolean"
-        },
-        {
-          "title": "language",
-          "name": "language",
-          "type": "string"
-        }
-      ]
-    }
-  ]
+﻿{
+	"$schema": "https://frontmatter.codes/frontmatter.schema.json",
+	"frontMatter.framework.id": "astro",
+	"frontMatter.preview.host": "http://localhost:4321",
+	"frontMatter.content.publicFolder": {
+		"path": "[[workspace]]/src/assets",
+		"relative": true
+	},
+	"frontMatter.preview.trailingSlash": true,
+	"frontMatter.content.pageFolders": [
+		{
+			"title": "posts",
+			"path": "[[workspace]]/src/content/posts",
+			"previewPath": "posts/{{pathToken.relPath}}"
+		},
+		{
+			"title": "portfolio",
+			"path": "[[workspace]]/src/content/portfolio",
+			"previewPath": "portfolio/{{pathToken.relPath}}"
+		},
+		{
+			"title": "spec",
+			"path": "[[workspace]]/src/content/spec",
+			"previewPath": "profile/{{pathToken.relPath}}"
+		}
+	],
+	"frontMatter.taxonomy.alignFilename": true,
+	"frontMatter.taxonomy.contentTypes": [
+		{
+			"name": "posts",
+			"pageBundle": false,
+			"previewPath": "posts/{{pathToken.relPath}}",
+			"filePrefix": null,
+			"clearEmpty": true,
+			"fields": [
+				{
+					"title": "제목",
+					"name": "title",
+					"type": "string",
+					"single": true
+				},
+				{
+					"title": "설명",
+					"name": "description",
+					"type": "string",
+					"default": ""
+				},
+				{
+					"title": "공개일",
+					"name": "published",
+					"type": "datetime",
+					"default": "{{now}}",
+					"isPublishDate": true
+				},
+				{
+					"title": "수정일",
+					"name": "updated",
+					"type": "datetime"
+				},
+				{
+					"title": "썸네일 이미지",
+					"name": "image",
+					"type": "image",
+					"isPreviewImage": true,
+					"default": ""
+				},
+				{
+					"title": "태그",
+					"name": "tags",
+					"type": "list",
+					"default": []
+				},
+				{
+					"title": "카테고리",
+					"name": "category",
+					"type": "categories",
+					"default": []
+				},
+				{
+					"title": "초안",
+					"name": "draft",
+					"type": "boolean",
+					"default": false
+				},
+				{
+					"title": "언어",
+					"name": "lang",
+					"type": "choice",
+					"choices": [
+						"",
+						"ko",
+						"en",
+						"zh-CN",
+						"zh-TW",
+						"ja",
+						"ru",
+						"es",
+						"pt-BR"
+					],
+					"default": ""
+				}
+			]
+		},
+		{
+			"name": "portfolio",
+			"pageBundle": true,
+			"previewPath": "portfolio",
+			"filePrefix": null,
+			"clearEmpty": true,
+			"fields": [
+				{
+					"title": "제목",
+					"name": "title",
+					"type": "string",
+					"single": true
+				},
+				{
+					"title": "설명",
+					"name": "description",
+					"type": "string"
+				},
+				{
+					"title": "썸네일 이미지",
+					"name": "image",
+					"type": "image",
+					"isPreviewImage": true
+				},
+				{
+					"title": "링크",
+					"name": "url",
+					"type": "string"
+				},
+				{
+					"title": "카테고리",
+					"name": "category",
+					"type": "categories",
+					"default": "uncategorized"
+				},
+				{
+					"title": "날짜",
+					"name": "date",
+					"type": "datetime"
+				},
+				{
+					"title": "정렬",
+					"name": "order",
+					"type": "number",
+					"default": 0
+				},
+				{
+					"title": "언어",
+					"name": "lang",
+					"type": "choice",
+					"choices": [
+						"",
+						"ko",
+						"en",
+						"zh-CN",
+						"zh-TW",
+						"ja",
+						"ru",
+						"es",
+						"pt-BR"
+					],
+					"default": ""
+				}
+			]
+		}
+	]
 }

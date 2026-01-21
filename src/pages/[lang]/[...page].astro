@@ -1,0 +1,48 @@
+---
+import { getStaticAlternates } from "@utils/url-utils";
+import Pagination from "../../components/control/Pagination.astro";
+import PostPage from "../../components/PostPage.astro";
+import { profileConfig } from "../../config";
+import { PAGE_SIZE } from "../../constants/constants";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "../../i18n/translation";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import { getSortedPostsForLang } from "../../utils/content-utils";
+
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+	const paths = [];
+	const nonDefaultLocales = SUPPORTED_LOCALES.filter(
+		(lang) => lang !== DEFAULT_LOCALE,
+	);
+
+	for (const lang of nonDefaultLocales) {
+		const posts = await getSortedPostsForLang(lang);
+		const paginated = paginate(posts, {
+			pageSize: PAGE_SIZE,
+			params: { lang },
+		});
+		paths.push(...paginated);
+	}
+	return paths;
+}
+
+const { page } = Astro.props;
+const { lang } = Astro.params;
+const alternateLinks = getStaticAlternates(
+	page.currentPage === 1 ? "/" : `/${page.currentPage}/`,
+);
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: profileConfig.name,
+	description: profileConfig.bio || "",
+	sameAs: profileConfig.links.map((link) => link.url),
+	inLanguage: lang,
+};
+---
+
+<MainGridLayout lang={lang} alternateLinks={alternateLinks}>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <PostPage page={page} lang={lang}></PostPage>
+    <Pagination class="mx-auto onload-animation" page={page} lang={lang} style=`animation-delay: calc(var(--content-delay) + ${(page.data.length)*50}ms)`></Pagination>
+</MainGridLayout>

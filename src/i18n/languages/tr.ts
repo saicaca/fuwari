@@ -7,15 +7,15 @@ export const tr: Translation = {
 	[Key.archive]: "Arşiv",
 	[Key.search]: "Ara",
 
-	[Key.tags]: "Taglar",
-	[Key.categories]: "Katagoriler",
+	[Key.tags]: "Etiketler",
+	[Key.categories]: "Kategoriler",
 	[Key.recentPosts]: "Son Paylaşımlar",
 
 	[Key.comments]: "Yorumlar",
 
 	[Key.untitled]: "Başlıksız",
-	[Key.uncategorized]: "Katagorisiz",
-	[Key.noTags]: "Tag Bulunamadı",
+	[Key.uncategorized]: "Kategorisiz",
+	[Key.noTags]: "Etiket yok",
 
 	[Key.wordCount]: "kelime",
 	[Key.wordsCount]: "kelime",
@@ -33,6 +33,13 @@ export const tr: Translation = {
 	[Key.more]: "Daha Fazla",
 
 	[Key.author]: "Yazar",
-	[Key.publishedAt]: "Yayınlanma:",
+	[Key.publishedAt]: "Yayınlandı",
 	[Key.license]: "Lisans",
+	[Key.unsupportedLang]: "Bu sayfa henüz %s diline çevrilmedi.",
+	[Key.langName]: "Türkçe",
+	[Key.profile]: "Profil",
+	[Key.portfolio]: "Portföy",
+	[Key.notFoundTitle]: "Sayfa bulunamadı",
+	[Key.backToHome]: "Ana sayfaya dön",
+	[Key.updatedSuffix]: "(G\u00FCncellendi)",
 };

@@ -1,0 +1,28 @@
+---
+import { type Category } from "../../utils/content-utils";
+import ButtonLink from "../control/ButtonLink.astro";
+
+interface Props {
+	category: Category;
+}
+
+const { category } = Astro.props;
+---
+
+<div class="category-tree-item">
+    <ButtonLink
+        url={category.url}
+        badge={String(category.count)}
+        label={`View all posts in the ${category.name} category`}
+    >
+        {category.name}
+    </ButtonLink>
+    
+    {category.children.length > 0 && (
+        <div class="ml-4 border-l border-black/5 dark:border-white/5 pl-2">
+            {category.children.map((child) => (
+                <Astro.self category={child} />
+            ))}
+        </div>
+    )}
+</div>

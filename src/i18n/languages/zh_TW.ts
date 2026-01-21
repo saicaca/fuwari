@@ -1,7 +1,7 @@
 import Key from "../i18nKey";
 import type { Translation } from "../translation";
 
-export const zh_TW: Translation = {
+export const zhTW: Translation = {
 	[Key.home]: "首頁",
 	[Key.about]: "關於",
 	[Key.archive]: "彙整",
@@ -35,4 +35,11 @@ export const zh_TW: Translation = {
 	[Key.author]: "作者",
 	[Key.publishedAt]: "發佈於",
 	[Key.license]: "許可協議",
+	[Key.unsupportedLang]: "該頁面尚未翻譯成%s。",
+	[Key.langName]: "繁體中文",
+	[Key.profile]: "簡介",
+	[Key.portfolio]: "作品集",
+	[Key.notFoundTitle]: "找不到頁面",
+	[Key.backToHome]: "返回首頁",
+	[Key.updatedSuffix]: "(\u66F4\u65B0)",
 };

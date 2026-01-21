@@ -1,0 +1,45 @@
+---
+import type { GetStaticPaths } from "astro";
+import { Icon } from "astro-icon/components";
+import I18nKey from "../../i18n/i18nKey";
+import {
+	DEFAULT_LOCALE,
+	i18n,
+	SUPPORTED_LOCALES,
+} from "../../i18n/translation";
+import Layout from "../../layouts/Layout.astro";
+import { url } from "../../utils/url-utils";
+
+export const getStaticPaths = (async () => {
+	return SUPPORTED_LOCALES.map((lang) => ({ params: { lang } }));
+}) satisfies GetStaticPaths;
+
+const { lang } = Astro.params;
+if (!lang || !SUPPORTED_LOCALES.includes(lang as any)) {
+	return Astro.redirect("/404");
+}
+
+const notFoundTitle = i18n(I18nKey.notFoundTitle, lang);
+const backToHome = i18n(I18nKey.backToHome, lang);
+---
+
+<Layout title={notFoundTitle} lang={lang || DEFAULT_LOCALE}>
+	<div class="min-h-screen flex items-center justify-center px-6">
+		<div class="rounded-[var(--radius-large)] overflow-hidden relative w-full max-w-[40rem] h-[20rem]">
+			<div class="card-base z-10 px-9 py-6 relative w-full text-black/75 dark:text-white/75">
+				<div class="flex items-center gap-4">
+					<h1 class="text-[5rem] font-bold">404</h1>
+					<p class="text-[2rem]">{notFoundTitle}</p>
+				</div>
+				<a href={url("/", lang)} class:list={["font-bold overflow-hidden active:scale-95"]}>
+					<div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap text-black/75 dark:text-white/75">
+						<div class="btn-plain transition max-w-fit rounded-2xl h-[3.75rem] px-4 flex items-center justify-start gap-2">
+							{backToHome}
+							<Icon name="material-symbols:chevron-right-rounded" class="text-[1.75rem]" />
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</Layout>

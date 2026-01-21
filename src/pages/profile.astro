@@ -1,0 +1,49 @@
+---
+
+import { getEntry, render } from "astro:content";
+import Markdown from "@components/misc/Markdown.astro";
+import { getStaticAlternates } from "@utils/url-utils";
+import { profileConfig } from "../config";
+import I18nKey from "../i18n/i18nKey";
+import { DEFAULT_LOCALE, i18n } from "../i18n/translation";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+
+const profilePost = await getEntry("spec", "profile");
+
+if (!profilePost) {
+	throw new Error("Profile page content not found");
+}
+
+const { Content } = await render(profilePost);
+
+const toPlainText = (value: string) =>
+	value
+		.replace(/!\[[^\]]*]\([^)]+\)/g, "")
+		.replace(/\[[^\]]*]\([^)]+\)/g, "")
+		.replace(/[`*_>#-]/g, "")
+		.replace(/\s+/g, " ")
+		.trim();
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "ProfilePage",
+	name: i18n(I18nKey.profile),
+	description: toPlainText(profilePost.body || ""),
+	mainEntity: {
+		"@type": "Person",
+		name: profileConfig.name,
+		description: profileConfig.bio || "",
+		sameAs: profileConfig.links.map((link) => link.url),
+	},
+};
+---
+<MainGridLayout title={i18n(I18nKey.profile)} description={i18n(I18nKey.profile)} lang={DEFAULT_LOCALE} alternateLinks={getStaticAlternates("/profile/")}>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+        <div class="card-base z-10 px-9 py-6 relative w-full ">
+            <Markdown class="mt-2">
+                <Content />
+            </Markdown>
+        </div>
+    </div>
+</MainGridLayout>

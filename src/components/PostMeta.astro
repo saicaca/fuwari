@@ -2,15 +2,17 @@
 import { Icon } from "astro-icon/components";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
-import { formatDateToYYYYMMDD } from "../utils/date-utils";
+import { formatDateToYYYYMMDD, getUpdatedDateString } from "../utils/date-utils";
 import { getCategoryUrl, getTagUrl } from "../utils/url-utils";
+import { normalizeCategoryList } from "../utils/category-utils";
 
 interface Props {
 	class: string;
 	published: Date;
 	updated?: Date;
 	tags: string[];
-	category: string | null;
+	category: string | string[] | null;
+	lang?: string;
 	hideTagsForMobile?: boolean;
 	hideUpdateDate?: boolean;
 }
@@ -19,10 +21,17 @@ const {
 	updated,
 	tags,
 	category,
+	lang,
 	hideTagsForMobile = false,
 	hideUpdateDate = false,
 } = Astro.props;
 const className = Astro.props.class;
+const updatedDate = getUpdatedDateString(published, updated);
+const categoryList = normalizeCategoryList(category);
+const displayCategories =
+	categoryList.length > 0
+		? categoryList
+		: [i18n(I18nKey.uncategorized, lang)];
 ---
 
 <div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>
@@ -36,13 +45,15 @@ const className = Astro.props.class;
     </div>
 
     <!-- update date -->
-    {!hideUpdateDate && updated && updated.getTime() !== published.getTime() && (
+    {!hideUpdateDate && updatedDate && (
         <div class="flex items-center">
             <div class="meta-icon"
             >
                 <Icon name="material-symbols:edit-calendar-outline-rounded" class="text-xl"></Icon>
             </div>
-            <span class="text-50 text-sm font-medium">{formatDateToYYYYMMDD(updated)}</span>
+            <span class="text-50 text-sm font-medium">
+                {updatedDate} {i18n(I18nKey.updatedSuffix, lang)}
+            </span>
         </div>
     )}
 
@@ -52,12 +63,17 @@ const className = Astro.props.class;
         >
             <Icon name="material-symbols:book-2-outline-rounded" class="text-xl"></Icon>
         </div>
-        <div class="flex flex-row flex-nowrap items-center">
-            <a href={getCategoryUrl(category)} aria-label={`View all posts in the ${category} category`}
-               class="link-lg transition text-50 text-sm font-medium
-                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
-                {category || i18n(I18nKey.uncategorized)}
-            </a>
+        <div class="flex flex-row flex-wrap items-center">
+            {displayCategories.map((cat, i) => (
+                <div class="flex flex-row flex-nowrap items-center">
+                    {i > 0 && <div class="mx-1.5 text-[var(--meta-divider)] text-sm">/</div>}
+                    <a href={getCategoryUrl(cat, lang)} aria-label={`View all posts in the ${cat} category`}
+                       class="link-lg transition text-50 text-sm font-medium
+                                    hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
+                        {cat}
+                    </a>
+                </div>
+            ))}
         </div>
     </div>
 
@@ -67,16 +83,16 @@ const className = Astro.props.class;
         >
             <Icon name="material-symbols:tag-rounded" class="text-xl"></Icon>
         </div>
-        <div class="flex flex-row flex-nowrap items-center">
+        <div class="flex flex-row flex-wrap items-center">
             {(tags && tags.length > 0) && tags.map((tag, i) => (
                 <div class:list={[{"hidden": i == 0}, "mx-1.5 text-[var(--meta-divider)] text-sm"]}>/</div>
-                <a href={getTagUrl(tag)} aria-label={`View all posts with the ${tag.trim()} tag`}
+                <a href={getTagUrl(tag, lang)} aria-label={`View all posts with the ${tag.trim()} tag`}
                    class="link-lg transition text-50 text-sm font-medium
-                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
+                                 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
                     {tag.trim()}
                 </a>
             ))}
-            {!(tags && tags.length > 0) && <div class="transition text-50 text-sm font-medium">{i18n(I18nKey.noTags)}</div>}
+            {!(tags && tags.length > 0) && <div class="transition text-50 text-sm font-medium">{i18n(I18nKey.noTags, lang)}</div>}
         </div>
     </div>
 </div>

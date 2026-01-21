@@ -1,0 +1,77 @@
+---
+import { Icon } from "astro-icon/components";
+import { formatDateToYYYYMMDD } from "../utils/date-utils";
+import ImageWrapper from "./misc/ImageWrapper.astro";
+
+interface Props {
+	title: string;
+	description: string;
+	image: string;
+	basePath?: string;
+	url: string;
+	category?: string;
+	date?: Date | string;
+	class?: string;
+	lang?: string;
+}
+
+const {
+	title,
+	description,
+	image,
+	basePath = "/",
+	url,
+	category = "Project",
+	date,
+	class: className,
+	lang,
+} = Astro.props;
+
+const isExternal = url.startsWith("http") || url.startsWith("https");
+---
+
+<a href={url} target={isExternal ? "_blank" : "_self"} lang={lang} class:list={["group card-base overflow-hidden rounded-[var(--radius-large)] transition-all duration-300 hover:shadow-xl active:scale-[0.98] w-full aspect-[5/4]", className]}>
+    <div class="grid grid-rows-[5fr_3fr] h-full">
+        <div class="relative w-full h-full overflow-hidden">
+            <!-- Image with zoom effect using ImageWrapper -->
+            <ImageWrapper 
+                src={image} 
+                basePath={basePath}
+                alt={title} 
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                loading="eager"
+                sizes="(min-width: 768px) 50vw, 100vw"
+            />
+            
+            <!-- Top-left Tag -->
+            <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/50 dark:bg-white/20 backdrop-blur-md text-white dark:text-white/90 text-xs font-bold z-20 transition-transform duration-300 group-hover:scale-105">
+                {category}
+            </div>
+
+            <!-- Arrow Icon -->
+            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-[var(--primary)] text-white flex items-center justify-center opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-lg z-20">
+                <Icon name="material-symbols:arrow-outward-rounded" class="text-2xl" />
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-2 px-5 py-4 h-full">
+            <h3 class="text-neutral-900 dark:text-white text-lg font-bold line-clamp-1">
+                {title}
+            </h3>
+            <p class="text-neutral-700 dark:text-white/70 text-sm line-clamp-3">
+                {description}
+            </p>
+            {date && (
+                <div class="mt-auto text-sm text-neutral-600 dark:text-white/60">
+                    {date instanceof Date ? formatDateToYYYYMMDD(date) : date}
+                </div>
+            )}
+        </div>
+    </div>
+</a>
+
+<style>
+    .card-base {
+        background: var(--card-bg);
+    }
+</style>

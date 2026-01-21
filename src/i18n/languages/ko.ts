@@ -35,4 +35,11 @@ export const ko: Translation = {
 	[Key.author]: "저자",
 	[Key.publishedAt]: "게시일",
 	[Key.license]: "라이선스",
+	[Key.unsupportedLang]: "이 페이지는 아직 %s로 번역되지 않았습니다.",
+	[Key.langName]: "한국어",
+	[Key.profile]: "프로필",
+	[Key.portfolio]: "포트폴리오",
+	[Key.notFoundTitle]: "페이지를 찾을 수 없습니다.",
+	[Key.backToHome]: "메인으로 돌아가기",
+	[Key.updatedSuffix]: "(\uAC31\uC2E0)",
 };

@@ -1,13 +1,16 @@
 ---
+import { getStaticAlternates } from "@utils/url-utils";
 import type { GetStaticPaths } from "astro";
 import Pagination from "../components/control/Pagination.astro";
 import PostPage from "../components/PostPage.astro";
+import { profileConfig } from "../config";
 import { PAGE_SIZE } from "../constants/constants";
+import { DEFAULT_LOCALE } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
-import { getSortedPosts } from "../utils/content-utils";
+import { getSortedPostsForLang } from "../utils/content-utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const allBlogPosts = await getSortedPosts();
+	const allBlogPosts = await getSortedPostsForLang(DEFAULT_LOCALE);
 	return paginate(allBlogPosts, { pageSize: PAGE_SIZE });
 }) satisfies GetStaticPaths;
 // https://github.com/withastro/astro/issues/6507#issuecomment-1489916992
@@ -15,9 +18,21 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 
 const len = page.data.length;
+const alternateLinks = getStaticAlternates(
+	page.currentPage === 1 ? "/" : `/${page.currentPage}/`,
+);
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: profileConfig.name,
+	description: profileConfig.bio || "",
+	sameAs: profileConfig.links.map((link) => link.url),
+};
 ---
 
-<MainGridLayout>
-    <PostPage page={page}></PostPage>
-    <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
+<MainGridLayout lang={DEFAULT_LOCALE} alternateLinks={alternateLinks}>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <PostPage page={page} lang={DEFAULT_LOCALE}></PostPage>
+    <Pagination class="mx-auto onload-animation" page={page} lang={DEFAULT_LOCALE} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
 </MainGridLayout>

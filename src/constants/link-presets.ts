@@ -8,11 +8,15 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
 		url: "/",
 	},
 	[LinkPreset.About]: {
-		name: i18n(I18nKey.about),
-		url: "/about/",
+		name: i18n(I18nKey.profile),
+		url: "/profile/",
 	},
 	[LinkPreset.Archive]: {
 		name: i18n(I18nKey.archive),
 		url: "/archive/",
+	},
+	[LinkPreset.Portfolio]: {
+		name: i18n(I18nKey.portfolio),
+		url: "/portfolio/",
 	},
 };

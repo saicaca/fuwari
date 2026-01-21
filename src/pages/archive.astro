@@ -1,14 +1,25 @@
 ---
 import ArchivePanel from "@components/ArchivePanel.svelte";
 import I18nKey from "@i18n/i18nKey";
-import { i18n } from "@i18n/translation";
+import { DEFAULT_LOCALE, i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { getSortedPostsList } from "../utils/content-utils";
+import { getStaticAlternates } from "@utils/url-utils";
+import { profileConfig } from "../config";
+import { getSortedPostsListForLang } from "../utils/content-utils";
 
-const sortedPostsList = await getSortedPostsList();
+const sortedPostsList = await getSortedPostsListForLang(DEFAULT_LOCALE);
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: profileConfig.name,
+	description: profileConfig.bio || "",
+	sameAs: profileConfig.links.map((link) => link.url),
+};
 ---
 
-<MainGridLayout title={i18n(I18nKey.archive)}>
-    <ArchivePanel sortedPosts={sortedPostsList} client:only="svelte"></ArchivePanel>
+<MainGridLayout title={i18n(I18nKey.archive)} lang={DEFAULT_LOCALE} alternateLinks={getStaticAlternates("/archive/")}>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <ArchivePanel sortedPosts={sortedPostsList} lang={DEFAULT_LOCALE} client:only="svelte"></ArchivePanel>
 </MainGridLayout>
 

@@ -1,4 +1,5 @@
 import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants";
+import type * as Giscus from "giscus";
 
 export type SiteConfig = {
 	title: string;
@@ -6,8 +7,8 @@ export type SiteConfig = {
 
 	lang:
 		| "en"
-		| "zh_CN"
-		| "zh_TW"
+		| "zh-CN"
+		| "zh-TW"
 		| "ja"
 		| "ko"
 		| "es"
@@ -24,6 +25,7 @@ export type SiteConfig = {
 		enable: boolean;
 		src: string;
 		position?: "top" | "center" | "bottom";
+		quality?: number | "low" | "mid" | "high";
 		credit: {
 			enable: boolean;
 			text: string;
@@ -32,7 +34,7 @@ export type SiteConfig = {
 	};
 	toc: {
 		enable: boolean;
-		depth: 1 | 2 | 3;
+		depth: 1 | 2 | 3 | 4;
 	};
 
 	favicon: Favicon[];
@@ -48,6 +50,7 @@ export enum LinkPreset {
 	Home = 0,
 	Archive = 1,
 	About = 2,
+	Portfolio = 3,
 }
 
 export type NavBarLink = {
@@ -62,6 +65,7 @@ export type NavBarConfig = {
 
 export type ProfileConfig = {
 	avatar?: string;
+	avatarQuality?: number | "low" | "mid" | "high";
 	name: string;
 	bio?: string;
 	links: {
@@ -86,11 +90,12 @@ export type BlogPostData = {
 	body: string;
 	title: string;
 	published: Date;
+	updated?: Date;
 	description: string;
 	tags: string[];
 	draft?: boolean;
 	image?: string;
-	category?: string;
+	category?: string[];
 	prevTitle?: string;
 	prevSlug?: string;
 	nextTitle?: string;
@@ -99,4 +104,37 @@ export type BlogPostData = {
 
 export type ExpressiveCodeConfig = {
 	theme: string;
+};
+
+export type CommentConfig = {
+	twikoo?: TwikooConfig;
+	disqus?: DisqusConfig;
+	giscus?: GiscusConfig;
+};
+
+type TwikooConfig = {
+	envId: string;
+	region?: string;
+	lang?: string;
+};
+
+type DisqusConfig = {
+	shortname: string;
+};
+
+type GiscusConfig = {
+	repo: Giscus.Repo;
+	host?: string;
+	repoId: string;
+	category: string;
+	categoryId: string;
+	mapping?: Giscus.Mapping;
+	term?: string;
+	strict?: Giscus.BooleanString;
+	reactionsEnabled?: Giscus.BooleanString;
+	emitMetadata?: Giscus.BooleanString;
+	inputPosition?: Giscus.InputPosition;
+	theme?: Giscus.Theme;
+	lang?: Giscus.AvailableLanguage;
+	loading?: Giscus.Loading;
 };

@@ -2,8 +2,9 @@
 
 import { getEntry, render } from "astro:content";
 import Markdown from "@components/misc/Markdown.astro";
+import { getStaticAlternates } from "@utils/url-utils";
 import I18nKey from "../i18n/i18nKey";
-import { i18n } from "../i18n/translation";
+import { DEFAULT_LOCALE, i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 
 const aboutPost = await getEntry("spec", "about");
@@ -14,7 +15,7 @@ if (!aboutPost) {
 
 const { Content } = await render(aboutPost);
 ---
-<MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)}>
+<MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)} lang={DEFAULT_LOCALE} alternateLinks={getStaticAlternates("/about/")}>
     <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
         <div class="card-base z-10 px-9 py-6 relative w-full ">
             <Markdown class="mt-2">

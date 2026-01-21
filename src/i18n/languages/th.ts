@@ -32,7 +32,14 @@ export const th: Translation = {
 
 	[Key.more]: "ดูเพิ่ม",
 
-	[Key.author]: "ผู้เขียน",
+	[Key.author]: "ผู้แต่ง",
 	[Key.publishedAt]: "เผยแพร่เมื่อ",
-	[Key.license]: "สัญญาอนุญาต",
+	[Key.license]: "ใบอนุญาต",
+	[Key.unsupportedLang]: "หน้านี้ยังไม่ได้แปลเป็น %s",
+	[Key.langName]: "ไทย",
+	[Key.profile]: "โปรพิล",
+	[Key.portfolio]: "พอร์ตโฟลิโอ",
+	[Key.notFoundTitle]: "ไม่พบหน้านี้",
+	[Key.backToHome]: "กลับไปหน้าแรก",
+	[Key.updatedSuffix]: "(\u0E2D\u0E31\u0E1B\u0E40\u0E14\u0E15)",
 };

@@ -35,4 +35,11 @@ export const id: Translation = {
 	[Key.author]: "Penulis",
 	[Key.publishedAt]: "Diterbitkan pada",
 	[Key.license]: "Lisensi",
+	[Key.unsupportedLang]: "Halaman ini belum diterjemahkan ke dalam %s.",
+	[Key.langName]: "Bahasa Indonesia",
+	[Key.profile]: "Profil",
+	[Key.portfolio]: "Portofolio",
+	[Key.notFoundTitle]: "Halaman tidak ditemukan",
+	[Key.backToHome]: "Kembali ke beranda",
+	[Key.updatedSuffix]: "(Diperbarui)",
 };

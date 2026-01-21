@@ -1,0 +1,238 @@
+---
+import type { CollectionEntry } from "astro:content";
+import path from "node:path";
+import Comment from "@components/comment/index.astro";
+import License from "@components/misc/License.astro";
+import Markdown from "@components/misc/Markdown.astro";
+import I18nKey from "@i18n/i18nKey";
+import { getKeyToLanguage, getTranslation, i18n } from "@i18n/translation";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import {
+	getPostForLang,
+	getPostLang,
+	getPostLogicalSlug,
+	getPrevNextMapForLang,
+	getRawSortedPosts,
+} from "@utils/content-utils";
+import { getDir, getPostUrlBySlug, url } from "@utils/url-utils";
+import { Icon } from "astro-icon/components";
+import { licenseConfig } from "src/config";
+import ImageWrapper from "../../../components/misc/ImageWrapper.astro";
+import PostMetadata from "../../../components/PostMeta.astro";
+import { profileConfig, siteConfig } from "../../../config";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "../../../i18n/translation";
+import { formatDateToYYYYMMDD, getUpdatedDateString } from "../../../utils/date-utils";
+
+export async function getStaticPaths() {
+	const allPosts = await getRawSortedPosts();
+
+	// Get all unique logical slugs
+	const logicalSlugs = new Set<string>();
+	allPosts.forEach((post: CollectionEntry<"posts">) => {
+		logicalSlugs.add(getPostLogicalSlug(post));
+	});
+
+	const paths = [];
+	const nonDefaultLocales = SUPPORTED_LOCALES.filter(
+		(lang) => lang !== DEFAULT_LOCALE,
+	);
+	const prevNextMapByLang: Record<string, Awaited<
+		ReturnType<typeof getPrevNextMapForLang>
+	>> = {};
+	for (const lang of nonDefaultLocales) {
+		prevNextMapByLang[lang] = await getPrevNextMapForLang(lang);
+	}
+
+	for (const slug of Array.from(logicalSlugs)) {
+		for (const lang of nonDefaultLocales) {
+			let entry = await getPostForLang(slug, lang);
+			if (!entry) {
+				// Fallback to default locale if authorized lang doesn't exist
+				entry = await getPostForLang(slug, DEFAULT_LOCALE);
+			}
+			// If still no entry (unlikely if slug exists), you might check other locales,
+			// but usually having Default as fallback is enough.
+			// Or iterate all `allPosts` to find one with this slug?
+
+			// To be safe, if no Default locale entry exists (e.g. post is ONLY in JA, and we are visiting KO),
+			// we should try to find ANY post with this slug.
+			if (!entry) {
+				const anyEntry = allPosts.find((p) => getPostLogicalSlug(p) === slug);
+				if (anyEntry) entry = anyEntry;
+			}
+
+			if (entry) {
+				paths.push({
+					params: {
+						lang: lang,
+						slug: slug,
+					},
+					props: { entry, lang, prevNext: prevNextMapByLang[lang]?.[slug] },
+				});
+			}
+		}
+	}
+	return paths;
+}
+
+const { entry, lang, prevNext } = Astro.props;
+const { Content, headings } = await entry.render();
+
+const { remarkPluginFrontmatter } = await entry.render();
+
+const resolvePostImageUrl = async (src?: string) => {
+	if (!src) return undefined;
+	if (
+		src.startsWith("http") ||
+		src.startsWith("https") ||
+		src.startsWith("data:")
+	) {
+		return src;
+	}
+	if (src.startsWith("/")) {
+		return new URL(url(src), Astro.site).href;
+	}
+
+	const files = import.meta.glob("../../../**", { import: "default" });
+	const basePath = path.join("content/posts/", getDir(entry.id));
+	const normalizedPath = path
+		.normalize(path.join("../../../", basePath, src))
+		.replace(/\\/g, "/");
+	const file = files[normalizedPath];
+	if (!file) {
+		console.error(
+			`\n[ERROR] OG image file not found: ${normalizedPath.replace("../../", "src/")}`,
+		);
+		return undefined;
+	}
+	const img = (await file()) as { src: string };
+	return new URL(img.src, Astro.site).href;
+};
+
+const ogImage = await resolvePostImageUrl(entry.data.image);
+const updatedDate = getUpdatedDateString(entry.data.published, entry.data.updated);
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	headline: entry.data.title,
+	description: entry.data.description || entry.data.title,
+	keywords: entry.data.tags,
+	author: {
+		"@type": "Person",
+		name: profileConfig.name,
+		url: Astro.site,
+	},
+	datePublished: formatDateToYYYYMMDD(entry.data.published),
+	...(updatedDate ? { dateModified: updatedDate } : {}),
+	inLanguage: getKeyToLanguage(entry.data.lang || siteConfig.lang),
+};
+
+const postLang = getPostLang(entry);
+---
+<MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} lang={lang} fontLang={postLang} setOGTypeArticle={true} headings={headings} ogImage={ogImage}>
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
+        <div id="post-container" lang={postLang} class:list={["card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ",
+            {}
+        ]}>
+            {postLang !== lang && (
+                <div class="w-full rounded-xl bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 px-4 py-3 mb-6 flex items-center gap-2">
+                    <Icon name="material-symbols:warning-rounded" class="text-xl shrink-0" />
+                    <span>{getTranslation(lang)[I18nKey.unsupportedLang].replace('%s', getTranslation(lang)[I18nKey.langName])}</span>
+                </div>
+            )}
+            <!-- word count and reading time -->
+            <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation">
+                {updatedDate && (
+                    <div class="flex flex-row items-center">
+                        <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+                            <Icon name="material-symbols:update-rounded"></Icon>
+                        </div>
+                        <div class="text-sm">
+                            {updatedDate} {i18n(I18nKey.updatedSuffix, lang)}
+                        </div>
+                    </div>
+                )}
+                <div class="flex flex-row items-center">
+                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+                        <Icon name="material-symbols:notes-rounded"></Icon>
+                    </div>
+                    <div class="text-sm">{remarkPluginFrontmatter.words} {" " + i18n(I18nKey.wordsCount, lang)}</div>
+                </div>
+                <div class="flex flex-row items-center">
+                    <div class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+                        <Icon name="material-symbols:schedule-outline-rounded"></Icon>
+                    </div>
+                    <div class="text-sm">
+                        {remarkPluginFrontmatter.minutes} {" " + i18n(remarkPluginFrontmatter.minutes === 1 ? I18nKey.minuteCount : I18nKey.minutesCount, lang)}
+                    </div>
+                </div>
+            </div>
+
+            <!-- title -->
+            <div class="relative onload-animation">
+                <div
+                    data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title"
+                    class="transition w-full block font-bold mb-3
+                    text-3xl md:text-[2.25rem]/[2.75rem]
+                    text-black/90 dark:text-white/90
+                    md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+                    before:absolute before:top-[0.75rem] before:left-[-1.125rem]
+                ">
+                    {entry.data.title}
+                </div>
+            </div>
+
+            <!-- metadata -->
+            <div class="onload-animation">
+                <PostMetadata
+                        class="mb-5"
+                        published={entry.data.published}
+                        updated={entry.data.updated}
+                        tags={entry.data.tags}
+                        category={entry.data.category}
+                        hideUpdateDate={true}
+                        lang={lang}
+                ></PostMetadata>
+                {!entry.data.image && <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>}
+            </div>
+
+            {entry.data.image &&
+                <ImageWrapper id="post-cover" src={entry.data.image} basePath={path.join("content/posts/", getDir(entry.id))} loading="eager" decoding="async" class="mb-8 rounded-xl banner-container onload-animation"/>
+            }
+
+            <Markdown class="mb-6 markdown-content onload-animation">
+                <Content />
+            </Markdown>
+
+            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation" lang={lang}></License>}
+
+        </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
+        <a href={prevNext?.nextSlug ? getPostUrlBySlug(prevNext.nextSlug, lang) : "#"}
+           class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !prevNext?.nextSlug}]}>
+            {prevNext?.nextSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4" >
+                <Icon name="material-symbols:chevron-left-rounded" class="text-[2rem] text-[var(--primary)]" />
+                <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
+                    {prevNext.nextTitle}
+                </div>
+            </div>}
+        </a>
+
+        <a href={prevNext?.prevSlug ? getPostUrlBySlug(prevNext.prevSlug, lang) : "#"}
+           class:list={["w-full font-bold overflow-hidden active:scale-95", {"pointer-events-none": !prevNext?.prevSlug}]}>
+            {prevNext?.prevSlug && <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4">
+                <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
+                    {prevNext.prevTitle}
+                </div>
+                <Icon name="material-symbols:chevron-right-rounded" class="text-[2rem] text-[var(--primary)]" />
+            </div>}
+        </a>
+    </div>
+
+    <Comment post={entry} lang={lang} />
+
+</MainGridLayout>

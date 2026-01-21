@@ -1,0 +1,54 @@
+/* Default font */
+:root {
+  --font-main:
+    'Roboto',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+html,
+body {
+  font-family: var(--font-main);
+}
+
+/* Allow language-scoped containers (e.g. post body) to resolve their own font chain */
+[lang] {
+  font-family: var(--font-main);
+}
+
+/* Korean */
+:root:lang(ko),
+:lang(ko) {
+  --font-main: 'Pretendard', 'Noto Sans KR', 'Noto Sans', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Japanese */
+:root:lang(ja),
+:lang(ja) {
+  --font-main: 'Noto Sans JP', 'Noto Sans', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Simplified Chinese */
+:root:lang(zh-cn),
+:root:lang(zh-CN),
+:lang(zh-cn),
+:lang(zh-CN) {
+  --font-main: 'Noto Sans SC', 'Noto Sans', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Traditional Chinese */
+:root:lang(zh-tw),
+:root:lang(zh-TW),
+:lang(zh-tw),
+:lang(zh-TW) {
+  --font-main: 'Noto Sans TC', 'Noto Sans', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Thai */
+:root:lang(th),
+:lang(th) {
+  --font-main: 'Noto Sans Thai', 'Noto Sans', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
