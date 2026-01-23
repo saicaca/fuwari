@@ -117,5 +117,29 @@
         overflow-x: auto;
         margin: 1em 0;
     }
+
+    table {
+        @apply w-full border-collapse my-4;
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+    }
+
+    th, td {
+        @apply border border-[var(--line-color)] px-3 py-2 text-left;
+        min-width: 120px;
+    }
+
+    th {
+        @apply bg-[var(--btn-regular-bg)] font-semibold text-[var(--btn-content)];
+    }
+
+    td {
+        @apply bg-[var(--card-bg)];
+    }
+
+    tr:nth-child(even) td {
+        @apply bg-[var(--btn-plain-bg-hover)];
+    }
     
 }
