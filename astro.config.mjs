@@ -23,6 +23,8 @@ import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
+import { i18n } from "./src/i18n/translation.ts";
+import I18nKey from "./src/i18n/i18nKey.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -103,6 +105,9 @@ export default defineConfig({
 		sitemap(),
 	],
 	markdown: {
+		remarkRehype: {
+    		footnoteLabel: i18n(I18nKey.footnotes),
+    	},
 		remarkPlugins: [
 			remarkMath,
 			remarkReadingTime,
