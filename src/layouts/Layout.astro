@@ -278,11 +278,13 @@ setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-sw
 
 
 function loadTheme() {
+	// console.error('loadTheme CALLED! Stack:', new Error().stack);
 	const theme = getStoredTheme()
 	setTheme(theme)
 }
 
 function loadHue() {
+	// console.error('loadHue CALLED! Stack:', new Error().stack);
 	setHue(getHue())
 }
 
@@ -363,18 +365,73 @@ function showBanner() {
 	banner.classList.remove('opacity-0', 'scale-105');
 }
 
+const stripOnloadAnimations = () => {
+	let animationsDone = false;
+	try {
+		animationsDone = sessionStorage.getItem('onloadAnimationsDone') === '1';
+	} catch {}
+
+	const animated = document.querySelectorAll('.onload-animation');
+	if (animationsDone) {
+		animated.forEach(el => {
+			if (el instanceof HTMLElement) {
+				el.classList.remove('onload-animation');
+			}
+		});
+		return;
+	}
+
+	let finalized = false;
+	const finalize = () => {
+		if (finalized) return;
+		finalized = true;
+		try {
+			sessionStorage.setItem('onloadAnimationsDone', '1');
+		} catch {}
+		animated.forEach(el => {
+			if (el instanceof HTMLElement) {
+				el.classList.remove('onload-animation');
+			}
+		});
+	};
+
+	animated.forEach(el => {
+		if (!(el instanceof HTMLElement)) return;
+		el.addEventListener('animationend', finalize, { once: true });
+
+		const computed = window.getComputedStyle(el);
+		if (computed.animationDuration === '0s' || computed.animationName === 'none') {
+			finalize();
+		}
+	});
+};
+
+window.stripOnloadAnimations = stripOnloadAnimations;
+
 function init() {
 	// disableAnimation()()		// TODO
 	loadTheme();
 	loadHue();
-	initCustomScrollbar();
 	showBanner();
+
+	// Remove onload animations once they finish to prevent re-triggering
+	stripOnloadAnimations();
+	
+	// Delay initCustomScrollbar to after animations complete
+	setTimeout(() => {
+		initCustomScrollbar();
+	}, 600);
 }
 
 /* Load settings when entering the site */
 init();
 
 const setup = () => {
+	// Debug: Log all Swup events
+	// window.swup.hooks.on('visit:start', (visit) => {
+	// 	console.error('SWUP VISIT START:', visit.to.url, 'Stack:', new Error().stack);
+	// });
+
 	// TODO: temp solution to change the height of the banner
 /*
 	window.swup.hooks.on('animation:out:start', () => {
@@ -404,7 +461,10 @@ const setup = () => {
 			navbar.classList.add('navbar-hidden')
 		}
 	})
-	window.swup.hooks.on('content:replace', initCustomScrollbar)
+	window.swup.hooks.on('content:replace', () => {
+		initCustomScrollbar();
+		stripOnloadAnimations();
+	})
 	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
 		// change banner height immediately when a link is clicked
 		const bodyElement = document.querySelector('body')
