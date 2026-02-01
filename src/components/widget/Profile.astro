@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import BrandIcon from "../misc/BrandIcon.svelte";
 import { profileConfig } from "../../config";
 import { url } from "../../utils/url-utils";
 import ImageWrapper from "../misc/ImageWrapper.astro";
@@ -25,12 +26,12 @@ const config = profileConfig;
         <div class="flex flex-wrap gap-2 justify-center mb-1">
             {config.links.length > 1 && config.links.map(item =>
                     <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
-                        <Icon name={item.icon} class="text-[1.5rem]"></Icon>
+                        <BrandIcon icon={item.icon} class="text-[1.5rem]" client:load></BrandIcon>
                     </a>
             )}
             {config.links.length == 1 && <a rel="me" aria-label={config.links[0].name} href={config.links[0].url} target="_blank"
                                             class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95">
-                <Icon name={config.links[0].icon} class="text-[1.5rem]"></Icon>
+                <BrandIcon icon={config.links[0].icon} class="text-[1.5rem]" client:load></BrandIcon>
                 {config.links[0].name}
             </a>}
         </div>

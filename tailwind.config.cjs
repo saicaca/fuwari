@@ -11,4 +11,7 @@ module.exports = {
     },
   },
   plugins: [require("@tailwindcss/typography")],
+  future: {
+    hoverOnlyWhenSupported: true, // Only add hover styles when supported
+  },
 }

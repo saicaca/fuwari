@@ -84,6 +84,10 @@ const bannerOffset =
 		<meta name="description" content={description || pageTitle}>
 		<meta name="author" content={profileConfig.name}>
 
+		<!-- DNS prefetch for Iconify API to reduce latency -->
+		<link rel="dns-prefetch" href="https://api.iconify.design">
+		<link rel="preconnect" href="https://api.iconify.design" crossorigin>
+
 		<meta property="og:site_name" content={siteConfig.title}>
 		<meta property="og:url" content={Astro.url}>
 		<meta property="og:title" content={pageTitle}>
@@ -130,11 +134,12 @@ const bannerOffset =
 
 			// Load the hue from local storage
 			const hue = localStorage.getItem('hue') || configHue;
-			document.documentElement.style.setProperty('--hue', hue);
 
 			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
 			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
 			offset = offset - offset % 4;
+
+			document.documentElement.style.setProperty('--hue', hue);
 			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
 		</script>
 		<style define:vars={{
@@ -193,6 +198,11 @@ const bannerOffset =
 	}
 }
 </style>
+
+<script>
+// Pre-load specific bundled icons for @iconify/svelte to prevent CDN requests
+import '../utils/preload-icons';
+</script>
 
 <script>
 import 'overlayscrollbars/overlayscrollbars.css';
@@ -410,9 +420,14 @@ const setup = () => {
 		const bodyElement = document.querySelector('body')
 		if (pathsEqual(visit.to.url, url('/'))) {
 			bodyElement!.classList.add('lg:is-home');
+			isHome = true
 		} else {
 			bodyElement!.classList.remove('lg:is-home');
+			isHome = false
 		}
+
+		// Recalculate thresholds with new page state
+		updateThresholds()
 
 		// increase the page height during page transition to prevent the scrolling animation from jumping
 		const heightExtend = document.getElementById('page-height-extend')
@@ -457,103 +472,157 @@ if (window?.swup?.hooks) {
 let backToTopBtn = document.getElementById('back-to-top-btn');
 let toc = document.getElementById('toc-wrapper');
 let navbar = document.getElementById('navbar-wrapper')
+// Cache viewport dimensions and page state to avoid forced reflows
+let viewportHeight = window.innerHeight
+let viewportWidth = window.innerWidth
+let isHome = document.body.classList.contains('lg:is-home')
+let ticking = false
+
+// Pre-calculate thresholds to avoid calculations during scroll
+let bannerHeight = viewportHeight * (BANNER_HEIGHT / 100)
+let navbarThreshold = 0
+function updateThresholds() {
+	bannerHeight = viewportHeight * (BANNER_HEIGHT / 100)
+	const NAVBAR_HEIGHT = 72
+	const MAIN_PANEL_EXCESS_HEIGHT = MAIN_PANEL_OVERLAPS_BANNER_HEIGHT * 16
+	let navbarBannerHeight = BANNER_HEIGHT
+	if (isHome && viewportWidth >= 1024) {
+		navbarBannerHeight = BANNER_HEIGHT_HOME
+	}
+	navbarThreshold = viewportHeight * (navbarBannerHeight / 100) - NAVBAR_HEIGHT - MAIN_PANEL_EXCESS_HEIGHT - 16
+}
+updateThresholds()
+
 function scrollFunction() {
-	let bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100)
+	if (!ticking) {
+		window.requestAnimationFrame(() => {
+			// Single DOM read - all writes happen after
+			const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
 
-	if (backToTopBtn) {
-		if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
-			backToTopBtn.classList.remove('hide')
-		} else {
-			backToTopBtn.classList.add('hide')
-		}
-	}
+			// Batch all DOM writes together
+			if (backToTopBtn) {
+				if (scrollTop > bannerHeight) {
+					backToTopBtn.classList.remove('hide')
+				} else {
+					backToTopBtn.classList.add('hide')
+				}
+			}
 
-	if (bannerEnabled && toc) {
-		if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
-			toc.classList.remove('toc-hide')
-		} else {
-			toc.classList.add('toc-hide')
-		}
-	}
+			if (bannerEnabled && toc) {
+				if (scrollTop > bannerHeight) {
+					toc.classList.remove('toc-hide')
+				} else {
+					toc.classList.add('toc-hide')
+				}
+			}
 
-	if (!bannerEnabled) return
-	if (navbar) {
-		const NAVBAR_HEIGHT = 72
-		const MAIN_PANEL_EXCESS_HEIGHT = MAIN_PANEL_OVERLAPS_BANNER_HEIGHT * 16			// The height the main panel overlaps the banner
+			if (bannerEnabled && navbar) {
+				if (scrollTop >= navbarThreshold) {
+					navbar.classList.add('navbar-hidden')
+				} else {
+					navbar.classList.remove('navbar-hidden')
+				}
+			}
 
-		let bannerHeight = BANNER_HEIGHT
-		if (document.body.classList.contains('lg:is-home') && window.innerWidth >= 1024) {
-			bannerHeight = BANNER_HEIGHT_HOME
-		}
-		let threshold = window.innerHeight * (bannerHeight / 100) - NAVBAR_HEIGHT - MAIN_PANEL_EXCESS_HEIGHT - 16
-		if (document.body.scrollTop >= threshold || document.documentElement.scrollTop >= threshold) {
-			navbar.classList.add('navbar-hidden')
-		} else {
-			navbar.classList.remove('navbar-hidden')
-		}
+			ticking = false
+		})
+		ticking = true
 	}
 }
 window.onscroll = scrollFunction
 
+let resizeTicking = false
 window.onresize = () => {
-	// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
-	let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
-	offset = offset - offset % 4;
-	document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
+	if (!resizeTicking) {
+		window.requestAnimationFrame(() => {
+			// Update cached viewport dimensions
+			viewportHeight = window.innerHeight
+			viewportWidth = window.innerWidth
+
+			// Recalculate thresholds with new viewport dimensions
+			updateThresholds()
+
+			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
+			let offset = Math.floor(viewportHeight * (BANNER_HEIGHT_EXTEND / 100));
+			offset = offset - offset % 4;
+			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
+
+			resizeTicking = false
+		})
+		resizeTicking = true
+	}
 }
 
 </script>
 
 <script>
-import PhotoSwipeLightbox from "photoswipe/lightbox"
-import "photoswipe/style.css"
+let lightbox: any
+let photoSwipeLoaded = false
 
-let lightbox: PhotoSwipeLightbox
-let pswp = import("photoswipe")
+async function createPhotoSwipe() {
+	// Lazy load both PhotoSwipe library and CSS only when needed
+	if (!photoSwipeLoaded) {
+		console.log('Loading PhotoSwipe...');
+		const [PhotoSwipeLightbox] = await Promise.all([
+			import('photoswipe/lightbox').then(m => m.default),
+			import('photoswipe/style.css'),
+			import('photoswipe')
+		]);
+		photoSwipeLoaded = true;
+		console.log('PhotoSwipe loaded');
 
-function createPhotoSwipe() {
-	lightbox = new PhotoSwipeLightbox({
-		gallery: ".custom-md img, #post-cover img",
-		pswpModule: () => pswp,
-		closeSVG: '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M480-424 284-228q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536-480l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480-424Z"/></svg>',
-		zoomSVG: '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M340-540h-40q-17 0-28.5-11.5T260-580q0-17 11.5-28.5T300-620h40v-40q0-17 11.5-28.5T380-700q17 0 28.5 11.5T420-660v40h40q17 0 28.5 11.5T500-580q0 17-11.5 28.5T460-540h-40v40q0 17-11.5 28.5T380-460q-17 0-28.5-11.5T340-500v-40Zm40 220q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l224 224q11 11 11 28t-11 28q-11 11-28 11t-28-11L532-372q-30 24-69 38t-83 14Zm0-80q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>',
-		padding: { top: 20, bottom: 20, left: 20, right: 20 },
-		wheelToZoom: true,
-		arrowPrev: false,
-		arrowNext: false,
-		imageClickAction: 'close',
-		tapAction: 'close',
-		doubleTapAction: 'zoom',
-	})
+		lightbox = new PhotoSwipeLightbox({
+			gallery: ".custom-md img, #post-cover img",
+			pswpModule: () => import('photoswipe'),
+			closeSVG: '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff"><path fill="currentColor" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/></svg>',
+			zoomSVG: '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff"><path fill="currentColor" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14m-1-1.5v-2h-2v-2h2v-2h2v2h2v2h-2v2z"/></svg>',
+			padding: { top: 20, bottom: 20, left: 20, right: 20 },
+			wheelToZoom: true,
+			arrowPrev: false,
+			arrowNext: false,
+			imageClickAction: 'close',
+			tapAction: 'close',
+			doubleTapAction: 'zoom',
+		});
 
-	lightbox.addFilter("domItemData", (itemData, element) => {
-		if (element instanceof HTMLImageElement) {
-			itemData.src = element.src
+		lightbox.addFilter("domItemData", (itemData: any, element: any) => {
+			if (element instanceof HTMLImageElement) {
+				itemData.src = element.src
+				itemData.w = Number(element.naturalWidth || window.innerWidth)
+				itemData.h = Number(element.naturalHeight || window.innerHeight)
+				itemData.msrc = element.src
+			}
+			return itemData
+		});
 
-			itemData.w = Number(element.naturalWidth || window.innerWidth)
-			itemData.h = Number(element.naturalHeight || window.innerHeight)
-
-			itemData.msrc = element.src
-		}
-
-		return itemData
-	})
-
-	lightbox.init()
+		lightbox.init();
+	}
 }
 
 const setup = () => {
-	if (!lightbox) {
+	// Only load PhotoSwipe if there are images in the gallery
+	const hasGalleryImages = document.querySelector('.custom-md img, #post-cover img')
+	if (!lightbox && hasGalleryImages) {
+		console.log('Images found, will load PhotoSwipe');
 		createPhotoSwipe()
+	} else if (!hasGalleryImages) {
+		console.log('PhotoSwipe not needed (no gallery images)');
 	}
+
 	window.swup.hooks.on("page:view", () => {
-		createPhotoSwipe()
+		// Check for images on each page view
+		const hasImages = document.querySelector('.custom-md img, #post-cover img')
+		if (hasImages && !lightbox) {
+			console.log('Images found on page transition, loading PhotoSwipe');
+			createPhotoSwipe()
+		}
 	})
 
 	window.swup.hooks.on(
 		"content:replace",
 		() => {
 			lightbox?.destroy?.()
+			lightbox = null
 		},
 		{ before: true },
 	)
