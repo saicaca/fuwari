@@ -152,6 +152,7 @@ const bannerOffset =
 		  data-overlayscrollbars-initialize
 	>
 		<ConfigCarrier></ConfigCarrier>
+		<div id="swup-progress-bar" class="swup-progress-bar"></div>
 		<slot />
 
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
@@ -164,6 +165,51 @@ const bannerOffset =
 	'banner-height-home': `${BANNER_HEIGHT_HOME}vh`,
 	'banner-height': `${BANNER_HEIGHT}vh`,
 }}>
+/* Swup navigation progress bar */
+.swup-progress-bar {
+	--progress-height: 3px;
+	--progress-duration: 8s;
+	--progress-hue-start: -30deg;
+	--progress-hue-end: 15deg;
+	--progress-glow: 0 0 8px oklch(0.7 0.15 var(--hue) / 0.6);
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: var(--progress-height);
+	background: var(--primary);
+	z-index: 9999;
+	pointer-events: none;
+	width: 0;
+	opacity: 0;
+}
+.swup-progress-bar.is-loading {
+	opacity: 1;
+	animation: swup-progress var(--progress-duration) cubic-bezier(0.2, 0.5, 0, 1) forwards;
+	box-shadow: var(--progress-glow);
+}
+.swup-progress-bar.is-finishing {
+	opacity: 1;
+	width: 100% !important;
+	animation: none;
+	filter: hue-rotate(var(--progress-hue-end));
+	transition: width 0.2s ease-out;
+}
+.swup-progress-bar.is-done {
+	width: 100%;
+	opacity: 0;
+	animation: none;
+	filter: hue-rotate(var(--progress-hue-end));
+	transition: opacity 0.3s ease;
+}
+@keyframes swup-progress {
+	0% { width: 0; filter: hue-rotate(var(--progress-hue-start)); }
+	20% { width: 30%; }
+	50% { width: 60%; }
+	80% { width: 80%; }
+	100% { width: 95%; filter: hue-rotate(var(--progress-hue-end)); }
+}
+
 @tailwind components;
 @layer components {
 	.enable-banner.is-home #banner-wrapper {
@@ -387,6 +433,28 @@ const setup = () => {
 		}
 	})
 */
+	// Progress bar
+	window.swup.hooks.on('visit:start', () => {
+		const bar = document.getElementById('swup-progress-bar');
+		if (!bar) return;
+		bar.classList.remove('is-loading', 'is-finishing', 'is-done');
+		bar.style.width = '0';
+		void bar.offsetWidth; // force reflow to restart animation
+		bar.classList.add('is-loading');
+	});
+	window.swup.hooks.on('visit:end', () => {
+		const bar = document.getElementById('swup-progress-bar');
+		if (!bar) return;
+		// Phase 1: snap to 100%
+		bar.classList.remove('is-loading');
+		bar.classList.add('is-finishing');
+		// Phase 2: fade out after the width transition completes
+		setTimeout(() => {
+			bar.classList.remove('is-finishing');
+			bar.classList.add('is-done');
+		}, 250);
+	});
+
 	window.swup.hooks.on('link:click', () => {
 		// Remove the delay for the first time page load
 		document.documentElement.style.setProperty('--content-delay', '0ms')
