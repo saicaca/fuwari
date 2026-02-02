@@ -19,6 +19,12 @@ let links: NavBarLink[] = navBarConfig.links.map(
 		return item;
 	},
 );
+
+const themeIcons = [
+	{ mode: 'light', icon: 'material-symbols:wb-sunny-outline-rounded' },
+	{ mode: 'dark', icon: 'material-symbols:dark-mode-outline-rounded' },
+	{ mode: 'auto', icon: 'material-symbols:radio-button-partial-outline' }
+];
 ---
 <div id="navbar" class="z-50 onload-animation">
     <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div> <!-- used for onload animation -->
@@ -44,14 +50,41 @@ let links: NavBarLink[] = navBarConfig.links.map(
             })}
         </div>
         <div class="flex">
-            <!--<SearchPanel client:load>-->
-            <Search client:only="svelte"></Search>
+            <!-- Search bar for desktop - instant display with Astro icons -->
+            <div id="search-bar" class="hidden lg:flex transition-all items-center h-11 mr-2 rounded-lg
+                bg-black/[0.04] hover:bg-black/[0.06] focus-within:bg-black/[0.06]
+                dark:bg-white/5 dark:hover:bg-white/10 dark:focus-within:bg-white/10
+            ">
+                <Icon name="material-symbols:search" class="absolute text-[1.25rem] pointer-events-none ml-3 transition my-auto text-black/30 dark:text-white/30" />
+                <input id="search-input-desktop" placeholder="Search"
+                    class="transition-all pl-10 text-sm bg-transparent outline-0
+                    h-full w-40 active:w-60 focus:w-60 text-black/50 dark:text-white/50"
+                />
+            </div>
+
+            <!-- Search toggle button for mobile - instant display -->
+            <button aria-label="Search Panel" id="search-switch"
+                class="btn-plain scale-animation lg:!hidden rounded-lg w-11 h-11 active:scale-90">
+                <Icon name="material-symbols:search" class="text-[1.25rem]" />
+            </button>
+
+            <Search client:idle></Search>
             {!siteConfig.themeColor.fixed && (
                     <button aria-label="Display Settings" class="btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90" id="display-settings-switch">
                         <Icon name="material-symbols:palette-outline" class="text-[1.25rem]"></Icon>
                     </button>
             )}
-            <LightDarkSwitch client:only="svelte"></LightDarkSwitch>
+            <!-- z-50 make the panel higher than other float panels -->
+            <div class="relative z-50" id="theme-switch-wrapper">
+                <button aria-label="Light/Dark Mode" class="relative btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90" id="scheme-switch">
+                    {themeIcons.map(({ mode, icon }) => (
+                        <div class={`absolute theme-icon-${mode}`}>
+                            <Icon name={icon} class="text-[1.25rem]" />
+                        </div>
+                    ))}
+                </button>
+                <LightDarkSwitch client:idle></LightDarkSwitch>
+            </div>
             <button aria-label="Menu" name="Nav Menu" class="btn-plain scale-animation rounded-lg w-11 h-11 active:scale-90 md:!hidden" id="nav-menu-switch">
                 <Icon name="material-symbols:menu-rounded" class="text-[1.25rem]"></Icon>
             </button>
@@ -62,24 +95,8 @@ let links: NavBarLink[] = navBarConfig.links.map(
 </div>
 
 <script>
-function switchTheme() {
-    if (localStorage.theme === 'dark') {
-        document.documentElement.classList.remove('dark');
-        localStorage.theme = 'light';
-    } else {
-        document.documentElement.classList.add('dark');
-        localStorage.theme = 'dark';
-    }
-}
 
 function loadButtonScript() {
-    let switchBtn = document.getElementById("scheme-switch");
-    if (switchBtn) {
-        switchBtn.onclick = function () {
-            switchTheme()
-        };
-    }
-
     let settingBtn = document.getElementById("display-settings-switch");
     if (settingBtn) {
         settingBtn.onclick = function () {
@@ -104,38 +121,13 @@ function loadButtonScript() {
 loadButtonScript();
 </script>
 
-{import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
-async function loadPagefind() {
-    try {
-        const response = await fetch(scriptUrl, { method: 'HEAD' });
-        if (!response.ok) {
-            throw new Error(`Pagefind script not found: ${response.status}`);
-        }
-
-        const pagefind = await import(scriptUrl);
-
-        await pagefind.options({
-            excerptLength: 20
-        });
-
-        window.pagefind = pagefind;
-
-        document.dispatchEvent(new CustomEvent('pagefindready'));
-        console.log('Pagefind loaded and initialized successfully, event dispatched.');
-    } catch (error) {
-        console.error('Failed to load Pagefind:', error);
-        window.pagefind = {
-            search: () => Promise.resolve({ results: [] }),
-            options: () => Promise.resolve(),
-        };
-        document.dispatchEvent(new CustomEvent('pagefindloaderror'));
-        console.log('Pagefind load error, event dispatched.');
+<style>
+    html[data-theme-mode="light"] .theme-icon-dark,
+    html[data-theme-mode="light"] .theme-icon-auto,
+    html[data-theme-mode="dark"] .theme-icon-light,
+    html[data-theme-mode="dark"] .theme-icon-auto,
+    html[data-theme-mode="auto"] .theme-icon-light,
+    html[data-theme-mode="auto"] .theme-icon-dark {
+        display: none;
     }
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadPagefind);
-} else {
-    loadPagefind();
-}
-</script>}
+</style>

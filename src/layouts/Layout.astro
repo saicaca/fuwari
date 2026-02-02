@@ -109,10 +109,18 @@ const bannerOffset =
 			/>
 		))}
 
+		{import.meta.env.PROD && (
+			<link rel="modulepreload" href={url('/pagefind/pagefind.js')} />
+		)}
+
 		<!-- Set the theme before the page is rendered to avoid a flash -->
 		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue}}>
 			// Load the theme from local storage
 			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
+
+			// Set data attribute for theme icon display
+			document.documentElement.setAttribute('data-theme-mode', theme);
+
 			switch (theme) {
 				case LIGHT_MODE:
 					document.documentElement.classList.remove('dark');
@@ -137,6 +145,43 @@ const bannerOffset =
 			offset = offset - offset % 4;
 			document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
 		</script>
+
+		{import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
+		async function loadPagefind() {
+			try {
+				const response = await fetch(scriptUrl, { method: 'HEAD' });
+				if (!response.ok) {
+					throw new Error(`Pagefind script not found: ${response.status}`);
+				}
+
+				const pagefind = await import(scriptUrl);
+
+				await pagefind.options({
+					excerptLength: 20
+				});
+
+				window.pagefind = pagefind;
+
+				document.dispatchEvent(new CustomEvent('pagefindready'));
+				console.log('Pagefind loaded and initialized successfully, event dispatched.');
+			} catch (error) {
+				console.error('Failed to load Pagefind:', error);
+				window.pagefind = {
+					search: () => Promise.resolve({ results: [] }),
+					options: () => Promise.resolve(),
+				};
+				document.dispatchEvent(new CustomEvent('pagefindloaderror'));
+				console.log('Pagefind load error, event dispatched.');
+			}
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', loadPagefind);
+		} else {
+			loadPagefind();
+		}
+		</script>}
+		
 		<style define:vars={{
 			configHue,
 			'page-width': `${PAGE_WIDTH}rem`,

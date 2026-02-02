@@ -1,7 +1,25 @@
 <script lang="ts">
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
-import Icon from "@iconify/svelte";
+import Icon, { addIcon } from "@iconify/svelte";
+import materialIcons from '@iconify-json/material-symbols/icons.json';
+import fa6Icons from '@iconify-json/fa6-solid/icons.json';
+
+// Preload icons to avoid CDN requests
+if (materialIcons.icons['search']) {
+	addIcon('material-symbols:search', {
+		body: materialIcons.icons['search'].body,
+		width: materialIcons.width,
+		height: materialIcons.height
+	});
+}
+if (fa6Icons.icons['chevron-right']) {
+	addIcon('fa6-solid:chevron-right', {
+		body: fa6Icons.icons['chevron-right'].body,
+		width: fa6Icons.width,
+		height: fa6Icons.height
+	});
+}
 import { url } from "@utils/url-utils.ts";
 import { onMount } from "svelte";
 import type { SearchResult } from "@/global";
@@ -123,6 +141,23 @@ onMount(() => {
 			}
 		}, 2000); // Adjust timeout as needed
 	}
+
+	// Wire up the search elements rendered in Navbar.astro
+	const desktopInput = document.getElementById('search-input-desktop') as HTMLInputElement;
+	const mobileButton = document.getElementById('search-switch');
+
+	if (desktopInput) {
+		desktopInput.addEventListener('input', (e) => {
+			keywordDesktop = (e.target as HTMLInputElement).value;
+		});
+		desktopInput.addEventListener('focus', () => {
+			search(keywordDesktop, true);
+		});
+	}
+
+	if (mobileButton) {
+		mobileButton.onclick = togglePanel;
+	}
 });
 
 $: if (initialized && keywordDesktop) {
@@ -137,24 +172,6 @@ $: if (initialized && keywordMobile) {
 	})();
 }
 </script>
-
-<!-- search bar for desktop view -->
-<div id="search-bar" class="hidden lg:flex transition-all items-center h-11 mr-2 rounded-lg
-      bg-black/[0.04] hover:bg-black/[0.06] focus-within:bg-black/[0.06]
-      dark:bg-white/5 dark:hover:bg-white/10 dark:focus-within:bg-white/10
-">
-    <Icon icon="material-symbols:search" class="absolute text-[1.25rem] pointer-events-none ml-3 transition my-auto text-black/30 dark:text-white/30"></Icon>
-    <input placeholder="{i18n(I18nKey.search)}" bind:value={keywordDesktop} on:focus={() => search(keywordDesktop, true)}
-           class="transition-all pl-10 text-sm bg-transparent outline-0
-         h-full w-40 active:w-60 focus:w-60 text-black/50 dark:text-white/50"
-    >
-</div>
-
-<!-- toggle btn for phone/tablet view -->
-<button on:click={togglePanel} aria-label="Search Panel" id="search-switch"
-        class="btn-plain scale-animation lg:!hidden rounded-lg w-11 h-11 active:scale-90">
-    <Icon icon="material-symbols:search" class="text-[1.25rem]"></Icon>
-</button>
 
 <!-- search panel -->
 <div id="search-panel" class="float-panel float-panel-closed search-panel absolute md:w-[30rem]
