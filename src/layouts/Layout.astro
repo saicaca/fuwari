@@ -384,7 +384,12 @@ function disableAnimation() {
 
 const bannerEnabled = !!document.getElementById('banner-wrapper')
 
+// 防止重复注册点击事件
+let clickHandlersRegistered = false;
+
 function setClickOutsideToClose(panel: string, ignores: string[]) {
+	if (clickHandlersRegistered) return;
+
 	document.addEventListener("click", event => {
 		let panelDom = document.getElementById(panel);
 		let tDom = event.target;
@@ -398,9 +403,14 @@ function setClickOutsideToClose(panel: string, ignores: string[]) {
 		panelDom!.classList.add("float-panel-closed");
 	});
 }
-setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
-setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
-setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
+
+// 只注册一次点击事件监听器
+if (!clickHandlersRegistered) {
+	setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
+	setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
+	setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
+	clickHandlersRegistered = true;
+}
 
 
 function loadTheme() {
@@ -564,6 +574,14 @@ const setup = () => {
 		if (heightExtend) {
 			heightExtend.classList.add('hidden')
 		}
+
+		// 重置滚动位置到顶部，避免累积效果
+		window.scrollTo(0, 0);
+
+		// 更新缓存的元素引用
+		backToTopBtn = document.getElementById('back-to-top-btn');
+		toc = document.getElementById('toc-wrapper');
+		navbar = document.getElementById('navbar-wrapper');
 	});
 	window.swup.hooks.on('visit:end', (_visit: {to: {url: string}}) => {
 		setTimeout(() => {
@@ -589,6 +607,11 @@ if (window?.swup?.hooks) {
 let backToTopBtn = document.getElementById('back-to-top-btn');
 let toc = document.getElementById('toc-wrapper');
 let navbar = document.getElementById('navbar-wrapper')
+
+// 防止重复注册事件监听器
+let scrollListenerAdded = false;
+let resizeListenerAdded = false;
+
 function scrollFunction() {
 	let bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100)
 
@@ -625,13 +648,24 @@ function scrollFunction() {
 		}
 	}
 }
-window.onscroll = scrollFunction
 
-window.onresize = () => {
+// 使用 addEventListener 替代 onscroll，防止重复注册
+if (!scrollListenerAdded) {
+	window.addEventListener('scroll', scrollFunction, { passive: true });
+	scrollListenerAdded = true;
+}
+
+function resizeFunction() {
 	// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
 	let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
 	offset = offset - offset % 4;
 	document.documentElement.style.setProperty('--banner-height-extend', `${offset}px`);
+}
+
+// 使用 addEventListener 替代 onresize，防止重复注册
+if (!resizeListenerAdded) {
+	window.addEventListener('resize', resizeFunction, { passive: true });
+	resizeListenerAdded = true;
 }
 
 </script>
@@ -674,21 +708,31 @@ function createPhotoSwipe() {
 	lightbox.init()
 }
 
-const setup = () => {
-	if (!lightbox) {
-		createPhotoSwipe()
-	}
-	window.swup.hooks.on("page:view", () => {
-		createPhotoSwipe()
-	})
+let photoSwipeInitialized = false;
 
-	window.swup.hooks.on(
-		"content:replace",
-		() => {
-			lightbox?.destroy?.()
-		},
-		{ before: true },
-	)
+const setup = () => {
+	if (!photoSwipeInitialized) {
+		createPhotoSwipe()
+		photoSwipeInitialized = true;
+	}
+
+	// 页面切换时不需要重新初始化 PhotoSwipe，它会自动检测新的图片
+	// 只在内容替换后销毁并重建，确保能识别新图片
+	window.swup.hooks.on("content:replace", () => {
+		if (lightbox) {
+			lightbox.destroy();
+		}
+	});
+
+	// 在新页面内容加载后重新初始化
+	window.swup.hooks.on("page:view", () => {
+		if (photoSwipeInitialized) {
+			// 延迟一点确保 DOM 已更新
+			setTimeout(() => {
+				createPhotoSwipe();
+			}, 100);
+		}
+	});
 }
 
 if (window.swup) {
