@@ -2,8 +2,18 @@ import type { APIRoute } from "astro";
 
 const robotsTxt = `
 User-agent: *
-Disallow: /_astro/
+Allow: /
 
+Disallow: /_astro/
+Disallow: /.obsidian/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Crawl-delay to avoid overloading the server
+Crawl-delay: 1
+
+# Sitemap
 Sitemap: ${new URL("sitemap-index.xml", import.meta.env.SITE).href}
 `.trim();
 

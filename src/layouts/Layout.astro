@@ -91,27 +91,55 @@ const uiOpacity =
 		<title>{pageTitle}</title>
 
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description || pageTitle}>
 		<meta name="author" content={profileConfig.name}>
+		<meta name="keywords" content="博客, 技术博客, 编程, 开发, 1zyq1, 个人博客">
 
+		<!-- Canonical URL -->
+		<link rel="canonical" href={Astro.url.href}>
+
+		<!-- Open Graph -->
 		<meta property="og:site_name" content={siteConfig.title}>
 		<meta property="og:url" content={Astro.url}>
 		<meta property="og:title" content={pageTitle}>
 		<meta property="og:description" content={description || pageTitle}>
+		<meta property="og:locale" content={siteLang}>
 		{setOGTypeArticle ? (
         <meta property="og:type" content="article" />
         ) : (
         <meta property="og:type" content="website" />
         )}
 
+		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image">
 		<meta property="twitter:url" content={Astro.url}>
 		<meta name="twitter:title" content={pageTitle}>
 		<meta name="twitter:description" content={description || pageTitle}>
+		<meta name="twitter:creator" content={profileConfig.name}>
 
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+		<!-- 搜索引擎验证 -->
 		<meta name="baidu-site-verification" content="codeva-vSuw8Wg7fg" />
+
+		<!-- JSON-LD 结构化数据 -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			"name": siteConfig.title,
+			"description": siteConfig.subtitle,
+			"url": Astro.url.origin,
+			"author": {
+				"@type": "Person",
+				"name": profileConfig.name,
+				"url": profileConfig.links.find(l => l.url.includes('github'))?.url || ''
+			}
+		})}></script>
+
+		<!-- PWA Manifest -->
+		<link rel="manifest" href="/manifest.json">
+		<meta name="theme-color" content="#3b82f6">
+
 		{favicons.map(favicon => (
 			<link rel="icon"
 				  href={favicon.src.startsWith('/') ? url(favicon.src) : favicon.src}

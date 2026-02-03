@@ -21,8 +21,14 @@ export async function GET(context: APIContext) {
 
 	return rss({
 		title: siteConfig.title,
-		description: siteConfig.subtitle || "No description",
+		description: siteConfig.subtitle || "技术博客与编程分享",
 		site: context.site ?? "https://fuwari.vercel.app",
+		customData: `
+			<language>${siteConfig.lang}</language>
+			<managingEditor>${profileConfig.links.find(l => l.url.includes('github'))?.url || ''} (${profileConfig.name})</managingEditor>
+			<webMaster>${profileConfig.links.find(l => l.url.includes('github'))?.url || ''} (${profileConfig.name})</webMaster>
+			<atom:link href="${context.site}rss.xml" rel="self" type="application/rss+xml"/>
+		`,
 		items: blog.map((post) => {
 			const content =
 				typeof post.body === "string" ? post.body : String(post.body || "");
@@ -35,8 +41,11 @@ export async function GET(context: APIContext) {
 				content: sanitizeHtml(parser.render(cleanedContent), {
 					allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
 				}),
+				customData: `
+					<author>${profileConfig.name}</author>
+					<category>${post.data.category || "技术"}</category>
+				`,
 			};
 		}),
-		customData: `<language>${siteConfig.lang}</language>`,
 	});
 }
