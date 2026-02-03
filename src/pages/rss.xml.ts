@@ -4,7 +4,7 @@ import { url } from "@utils/url-utils";
 import type { APIContext } from "astro";
 import MarkdownIt from "markdown-it";
 import sanitizeHtml from "sanitize-html";
-import { siteConfig } from "@/config";
+import { siteConfig, profileConfig } from "@/config";
 
 const parser = new MarkdownIt();
 
