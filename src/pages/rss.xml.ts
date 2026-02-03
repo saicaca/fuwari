@@ -21,7 +21,7 @@ export async function GET(context: APIContext) {
 
 	return rss({
 		title: siteConfig.title,
-		description: siteConfig.subtitle || "技术博客与编程分享",
+		description: siteConfig.subtitle || "",
 		site: context.site ?? "https://fuwari.vercel.app",
 		customData: `
 			<language>${siteConfig.lang}</language>
