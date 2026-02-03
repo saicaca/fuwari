@@ -27,7 +27,6 @@ export async function GET(context: APIContext) {
 			<language>${siteConfig.lang}</language>
 			<managingEditor>${profileConfig.links.find(l => l.url.includes('github'))?.url || ''} (${profileConfig.name})</managingEditor>
 			<webMaster>${profileConfig.links.find(l => l.url.includes('github'))?.url || ''} (${profileConfig.name})</webMaster>
-			<atom:link href="${context.site}rss.xml" rel="self" type="application/rss+xml"/>
 		`,
 		items: blog.map((post) => {
 			const content =
