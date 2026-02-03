@@ -8,7 +8,7 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "1zyq1 Blog - 技术博客与编程分享",
+	title: "1zyq1 Blog ",
 	subtitle: "分享技术心得、编程经验与个人成长 | Protect What You Love",
 	lang: "zh_CN",
 	themeColor: {
