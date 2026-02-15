@@ -14,7 +14,8 @@ export type SiteConfig = {
 		| "th"
 		| "vi"
 		| "tr"
-		| "id";
+		| "id"
+		| "fr";
 
 	themeColor: {
 		hue: number;
