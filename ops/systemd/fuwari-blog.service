@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/www/wwwroot/fuwari-blog
-EnvironmentFile=/www/wwwroot/fuwari-blog/.env.production
+WorkingDirectory=/www/wwwroot/fuwari-blog/current
+EnvironmentFile=/www/wwwroot/fuwari-blog/shared/.env.production
 Environment=NODE_ENV=production
 Environment=HOST=127.0.0.1
 Environment=PORT=4322

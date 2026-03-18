@@ -102,10 +102,12 @@ ADMIN_PASSWORD=replace-with-a-strong-password
 ADMIN_SESSION_SECRET=replace-with-a-random-secret
 AUTO_PUBLISH_AFTER_IMPORT=1
 PUBLISH_SERVICE_NAME=fuwari-blog-publish.service
+KEEP_RELEASES=5
 ```
 
 注意：
 
-- 工作流同步代码时会排除 `src/content/posts/imported/`，避免覆盖服务器上已导入的文章
-- `.runtime/` 也会保留，避免清空导入历史
-- 不要在服务器上直接修改 `dist/`，下次构建会覆盖
+- GitHub Actions 会在 Runner 上完成 `pnpm install`、`pnpm check`、`pnpm build`
+- 服务器只接收构建好的 release 包，然后切换 `current` 软链接并重启 `fuwari-blog.service`
+- `src/content/posts/imported/`、`public/imported-assets/`、`.runtime/` 会挂到服务器共享目录，避免覆盖已导入文章、资源和历史记录
+- 可以在服务器上用 `fuwari-release list`、`fuwari-release current`、`fuwari-release switch <release-id>` 查看和切换版本

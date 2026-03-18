@@ -4,12 +4,12 @@ After=network.target
 
 [Service]
 Type=oneshot
-WorkingDirectory=/www/wwwroot/fuwari-blog
-EnvironmentFile=/www/wwwroot/fuwari-blog/.env.production
+WorkingDirectory=/www/wwwroot/fuwari-blog/current
+EnvironmentFile=/www/wwwroot/fuwari-blog/shared/.env.production
 Environment=NODE_ENV=production
 Environment=HOME=/root
 Environment=PATH=/usr/local/bin:/usr/bin:/bin
-ExecStart=/bin/bash /www/wwwroot/fuwari-blog/ops/publish-site.sh
+ExecStart=/bin/bash /www/wwwroot/fuwari-blog/current/ops/publish-site.sh
 
 [Install]
 WantedBy=multi-user.target

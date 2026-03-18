@@ -3,8 +3,8 @@ name: Deploy to Server
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: [ "Build and Check" ]
-    types: [ completed ]
+    workflows: ["Build and Check"]
+    types: [completed]
 
 concurrency:
   group: deploy-${{ github.event.workflow_run.head_sha || github.sha }}
@@ -102,33 +102,45 @@ jobs:
       - name: Run check
         run: pnpm check
 
+      - name: Build release
+        run: pnpm build
+
+      - name: Prepare release package
+        run: |
+          SHORT_SHA="${TARGET_REF::7}"
+          RELEASE_ID="$(date -u +%Y%m%d-%H%M%S)-${SHORT_SHA}"
+          ARCHIVE_PATH="${RUNNER_TEMP}/${RELEASE_ID}.tar.gz"
+
+          cat > REVISION <<EOF
+          release_id=${RELEASE_ID}
+          git_sha=${TARGET_REF}
+          git_branch=${TARGET_BRANCH}
+          built_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          source=github-actions
+          workflow_run=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          EOF
+
+          tar \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.astro' \
+            --exclude='.env.production' \
+            --exclude='.runtime' \
+            --exclude='public/imported-assets' \
+            --exclude='src/content/posts/imported' \
+            -czf "${ARCHIVE_PATH}" .
+
+          {
+            echo "RELEASE_ID=${RELEASE_ID}"
+            echo "ARCHIVE_PATH=${ARCHIVE_PATH}"
+          } >> "${GITHUB_ENV}"
+
       - name: Setup SSH key
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
 
-      - name: Sync project files
-        env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
-          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -p "${DEPLOY_PORT}" "${DEPLOY_HOST}" >> ~/.ssh/known_hosts
-          rsync -az --delete \
-            --exclude ".git/" \
-            --exclude ".github/" \
-            --exclude ".astro/" \
-            --exclude "dist/" \
-            --exclude "node_modules/" \
-            --exclude ".runtime/" \
-            --exclude ".env.production" \
-            --exclude "src/content/posts/imported/" \
-            -e "ssh -p ${DEPLOY_PORT}" \
-            ./ "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/"
-
-      - name: Write production env and deploy
+      - name: Upload env and release bundle
         env:
           DEPLOY_ENV_FILE: ${{ secrets.DEPLOY_ENV_FILE }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
@@ -136,6 +148,26 @@ jobs:
           DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
-          ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" "mkdir -p '${DEPLOY_PATH}'"
-          printf '%s\n' "${DEPLOY_ENV_FILE}" | ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" "cat > '${DEPLOY_PATH}/.env.production'"
-          ssh -o ServerAliveInterval=30 -o ServerAliveCountMax=20 -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" "cd '${DEPLOY_PATH}' && bash ops/deploy-server.sh"
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "${DEPLOY_PORT}" "${DEPLOY_HOST}" >> ~/.ssh/known_hosts
+
+          ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "mkdir -p '${DEPLOY_PATH}/incoming' '${DEPLOY_PATH}/shared'"
+
+          printf '%s\n' "${DEPLOY_ENV_FILE}" | \
+            ssh -p "${DEPLOY_PORT}" "${DEPLOY_USER}@${DEPLOY_HOST}" \
+              "cat > '${DEPLOY_PATH}/shared/.env.production'"
+
+          scp -P "${DEPLOY_PORT}" "${ARCHIVE_PATH}" \
+            "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/incoming/${RELEASE_ID}.tar.gz"
+
+      - name: Activate release on server
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        run: |
+          ssh -o ServerAliveInterval=30 -o ServerAliveCountMax=20 -p "${DEPLOY_PORT}" \
+            "${DEPLOY_USER}@${DEPLOY_HOST}" \
+            "APP_DIR='${DEPLOY_PATH}' RELEASE_ID='${RELEASE_ID}' bash -s" < ops/deploy-server.sh
