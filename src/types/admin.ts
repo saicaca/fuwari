@@ -1,8 +1,22 @@
-export type ImportStatus = "new" | "synced" | "updated" | "conflict";
+export type ImportStatus =
+	| "new"
+	| "synced"
+	| "updated"
+	| "conflict"
+	| "local_override";
 
 export type SyncMode = "sync" | "create_only" | "force_overwrite";
 
 export type SlugPolicy = "stable" | "manual" | "title";
+
+export type ImportSyncStrategy = "managed" | "local_override";
+
+export type ProtectedBlockState = "managed" | "broken" | "absent";
+
+export type ImportConflictType =
+	| "slug_occupied"
+	| "batch_duplicate_slug"
+	| "protected_blocks_invalid";
 
 export interface ImportNotebookNode {
 	id: string;
@@ -34,6 +48,7 @@ export interface ImportDocNode {
 	childrenLoaded: boolean;
 	children: ImportDocNode[];
 	status: ImportStatus;
+	syncStrategy?: ImportSyncStrategy;
 }
 
 export type ImportTreeNode = ImportNotebookNode | ImportDocNode;
@@ -98,6 +113,30 @@ export interface ImportPreviewItem {
 	suggestedSlug: string;
 	updatedLabel: string;
 	tags: string[];
+	syncStrategy: ImportSyncStrategy;
+	conflictType?: ImportConflictType;
+	conflictDetail?: ImportConflictDetail;
+	existingTitle?: string;
+	existingDocId?: string;
+	protectedBlockState?: ProtectedBlockState;
+}
+
+export interface ImportConflictReference {
+	docId: string;
+	title: string;
+	hPath: string;
+	targetPath: string;
+}
+
+export interface ImportConflictDetail {
+	type: ImportConflictType;
+	message: string;
+	targetPath: string;
+	existingPath?: string;
+	existingTitle?: string;
+	existingDocId?: string;
+	protectedBlockState?: ProtectedBlockState;
+	relatedDocs?: ImportConflictReference[];
 }
 
 export interface ImportJobResult {
@@ -106,11 +145,58 @@ export interface ImportJobResult {
 	summary: {
 		total: number;
 		newCount: number;
-		syncedCount: number;
 		updatedCount: number;
+		skipCount: number;
 		conflictCount: number;
+		writtenCount: number;
 	};
 	writable: boolean;
+}
+
+export type ImportEditorOrigin = "existing" | "generated" | "draft";
+
+export interface ImportEditorState {
+	docId: string;
+	title: string;
+	notebookName: string;
+	hPath: string;
+	updatedLabel: string;
+	status: ImportStatus;
+	origin: ImportEditorOrigin;
+	targetPath: string;
+	existingPath: string;
+	content: string;
+	syncStrategy: ImportSyncStrategy;
+	conflictDetail: ImportConflictDetail | null;
+	protectedBlockState?: ProtectedBlockState;
+}
+
+export interface ImportEditorResponse {
+	editor: ImportEditorState;
+}
+
+export interface ImportEditorSaveRequest {
+	docId: string;
+	content: string;
+}
+
+export interface ImportDraftRecord {
+	docId: string;
+	content: string;
+	targetPath: string;
+	suggestedSlug: string;
+	updatedAt: string;
+}
+
+export interface ImportConflictResolveRequest {
+	docId: string;
+	action: "takeover_existing" | "restore_managed_sync";
+}
+
+export interface ImportConflictResolveResponse {
+	message: string;
+	status: ImportStatus;
+	editor?: ImportEditorState | null;
 }
 
 export interface ImportHistoryEntry {

@@ -7,7 +7,13 @@ import {
 	writeFile,
 } from "node:fs/promises";
 import path from "node:path";
-import type { ImportDocNode, ImportStatus } from "@/types/admin";
+import type {
+	ImportDocNode,
+	ImportStatus,
+	ImportSyncStrategy,
+} from "@/types/admin";
+import { readImportDraftMap } from "./drafts";
+import { readFrontmatterField } from "./frontmatter";
 import { inspectProtectedBlocks } from "./protected-blocks";
 
 export const POSTS_ROOT = path.join(process.cwd(), "src", "content", "posts");
@@ -21,6 +27,7 @@ export interface LocalImportedPost {
 	title: string;
 	hash: string;
 	updated: string;
+	syncStrategy: ImportSyncStrategy;
 	protectedBlockState: ReturnType<typeof inspectProtectedBlocks>["state"];
 	content: string;
 }
@@ -28,6 +35,7 @@ export interface LocalImportedPost {
 export interface LocalImportIndex {
 	byDocId: Map<string, LocalImportedPost>;
 	byRelativePath: Map<string, LocalImportedPost>;
+	draftsByDocId: Awaited<ReturnType<typeof readImportDraftMap>>;
 }
 
 export interface WriteImportedPostInput {
@@ -54,24 +62,33 @@ function getSlugFromRelativePath(relativePath: string) {
 	return withoutExt;
 }
 
-function parseFrontmatter(source: string) {
-	const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-	return match?.[1] ?? "";
+export function buildImportedRelativePath(slug: string) {
+	return path.posix.join("imported", `${slug}.md`);
 }
 
-function readFrontmatterField(source: string, fieldName: string) {
-	const frontmatter = parseFrontmatter(source);
-	if (!frontmatter) {
-		return "";
-	}
+export function resolveSlugFromContent(
+	content: string,
+	fallbackSlug: string,
+	fallbackRelativePath = "",
+) {
+	const slug =
+		readFrontmatterField(content, "slug") ||
+		(fallbackRelativePath
+			? getSlugFromRelativePath(fallbackRelativePath)
+			: "") ||
+		fallbackSlug;
 
-	const regex = new RegExp(`^${fieldName}:\\s*(.+)$`, "m");
-	const match = frontmatter.match(regex);
-	if (!match) {
-		return "";
-	}
+	return slug.trim() || fallbackSlug;
+}
 
-	return match[1].trim().replace(/^['"]|['"]$/g, "");
+export function resolveTargetPathFromContent(
+	content: string,
+	fallbackSlug: string,
+	fallbackRelativePath = "",
+) {
+	return buildImportedRelativePath(
+		resolveSlugFromContent(content, fallbackSlug, fallbackRelativePath),
+	);
 }
 
 async function walkMarkdownFiles(dirPath: string): Promise<string[]> {
@@ -112,6 +129,7 @@ export async function buildLocalImportIndex(): Promise<LocalImportIndex> {
 	const files = await walkMarkdownFiles(POSTS_ROOT);
 	const byDocId = new Map<string, LocalImportedPost>();
 	const byRelativePath = new Map<string, LocalImportedPost>();
+	const draftsByDocId = await readImportDraftMap();
 
 	for (const filePath of files) {
 		const content = await readFile(filePath, "utf8");
@@ -121,10 +139,16 @@ export async function buildLocalImportIndex(): Promise<LocalImportIndex> {
 			docId,
 			filePath,
 			relativePath,
-			slug: getSlugFromRelativePath(relativePath),
+			slug:
+				readFrontmatterField(content, "slug") ||
+				getSlugFromRelativePath(relativePath),
 			title: readFrontmatterField(content, "title"),
 			hash: readFrontmatterField(content, "siyuanHash"),
 			updated: readFrontmatterField(content, "siyuanUpdated"),
+			syncStrategy:
+				readFrontmatterField(content, "siyuanSyncStrategy") === "local_override"
+					? "local_override"
+					: "managed",
 			protectedBlockState: inspectProtectedBlocks(content).state,
 			content,
 		};
@@ -139,6 +163,7 @@ export async function buildLocalImportIndex(): Promise<LocalImportIndex> {
 	return {
 		byDocId,
 		byRelativePath,
+		draftsByDocId,
 	};
 }
 
@@ -173,7 +198,14 @@ export function resolveImportStatus(
 	const existing = index.byDocId.get(docId);
 
 	if (!existing) {
+		if (index.draftsByDocId.has(docId)) {
+			return "local_override";
+		}
 		return "new";
+	}
+
+	if (existing.syncStrategy === "local_override") {
+		return "local_override";
 	}
 
 	if (existing.protectedBlockState !== "managed") {
