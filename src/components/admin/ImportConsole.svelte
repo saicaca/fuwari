@@ -175,6 +175,7 @@ const sectionLabelClass =
 	"text-[11px] uppercase tracking-[0.28em] text-[#7f796d] dark:text-[#8b9a8f]";
 const metricTileClass =
 	"rounded-[1.35rem] border border-[#ddd7ca] bg-[#fcfbf7] p-4 dark:border-[#29302b] dark:bg-[#111512]";
+const HISTORY_PREVIEW_LIMIT = 4;
 
 const notebooksApiPath = url("/api/admin/siyuan/notebooks/");
 const historyApiPath = url("/api/admin/import/history/");
@@ -198,7 +199,7 @@ let category = "";
 let tagsInput = "";
 let publishedAt = "";
 let slug = "";
-let localBlockNote = "尾部补充说明、相关阅读和 CTA 固定放在 LOCAL 区块。";
+let localBlockNote = "";
 let tagAiLoading = false;
 let tagAiError = "";
 
@@ -219,6 +220,10 @@ let loggingOut = false;
 let historyEntries: ImportHistoryEntry[] = [];
 let activeHistoryJobId: string | null = null;
 let activeHistoryEntry: ImportHistoryEntry | null = null;
+let latestHistoryEntry: ImportHistoryEntry | null = null;
+let visibleHistoryEntries: ImportHistoryEntry[] = [];
+let historyHiddenCount = 0;
+let historyExpanded = false;
 let activityMessage = "";
 let planDirty = false;
 
@@ -1004,6 +1009,7 @@ $: selectedDocs = Object.values(selectedDocsById).sort((a, b) =>
 );
 $: searchActive = query.trim().length >= 2;
 $: latestJob = historyEntries[0]?.job ?? jobs[0] ?? null;
+$: latestHistoryEntry = historyEntries[0] ?? null;
 $: primarySelectedDoc = selectedDocs[0] ?? null;
 $: recommendedTags = Array.from(
 	new Set(selectedDocs.flatMap((node) => node.tags)),
@@ -1041,6 +1047,10 @@ $: activeHistoryEntry =
 		: undefined) ??
 	historyEntries[0] ??
 	null;
+$: historyHiddenCount = Math.max(historyEntries.length - HISTORY_PREVIEW_LIMIT, 0);
+$: visibleHistoryEntries = historyExpanded
+	? historyEntries
+	: historyEntries.slice(0, HISTORY_PREVIEW_LIMIT);
 $: if (activeHistoryEntry) {
 	previewItems = activeHistoryEntry.items;
 	latestSummary = activeHistoryEntry.summary;
@@ -1251,10 +1261,18 @@ $: editorTargetPathPreview = editorState
 							{:else}
 								<div class="space-y-2">
 									{#each searchResults as item}
-										<button
+										<div
+											aria-pressed={isSelected(item, selectedDocsById, activeBranchKeys)}
 											class={`w-full rounded-[1.35rem] border px-4 py-4 text-left transition duration-200 ${isSelected(item, selectedDocsById, activeBranchKeys) ? "border-[#99b3a6] bg-[#eef2ed] dark:border-[#355447] dark:bg-[#151c18]" : "border-[#dfd9cc] bg-[#fcfbf7] hover:border-[#c5cfc8] hover:bg-[#f5f3ed] dark:border-[#29302b] dark:bg-[#111512] dark:hover:border-[#3a4840] dark:hover:bg-[#151917]"}`}
+											role="button"
+											tabindex="0"
 											on:click={() => toggleSelection(item)}
-											type="button"
+											on:keydown={(event) => {
+												if (event.key === "Enter" || event.key === " ") {
+													event.preventDefault();
+													toggleSelection(item);
+												}
+											}}
 										>
 											<div class="flex flex-wrap items-start justify-between gap-3">
 												<div class="min-w-0 flex-1">
@@ -1268,7 +1286,7 @@ $: editorTargetPathPreview = editorState
 													<span class={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs ${statusMeta[item.status].tone}`}><span class={`h-2 w-2 rounded-full ${statusMeta[item.status].dot}`}></span>{statusMeta[item.status].label}</span>
 												</div>
 											</div>
-										</button>
+										</div>
 									{/each}
 								</div>
 							{/if}
@@ -1610,8 +1628,8 @@ $: editorTargetPathPreview = editorState
 
 							<label class="grid gap-2">
 								<span class={sectionLabelClass}>LOCAL 区块备注</span>
-								<textarea bind:value={localBlockNote} class={textareaClass}></textarea>
-								<span class={helperTextClass}>这里只写持久化补充规则，不是单篇正文编辑器。</span>
+								<textarea bind:value={localBlockNote} class={textareaClass} placeholder="留空即可。只有你明确需要批量注入默认 LOCAL 内容时再写。"></textarea>
+								<span class={helperTextClass}>默认留空。这里只是批量导入时给新文章塞一个 LOCAL 默认值，不是正文编辑器。</span>
 							</label>
 
 							<div class={`${surfaceClass} p-4`}>
@@ -1658,8 +1676,8 @@ $: editorTargetPathPreview = editorState
 							<p class={sectionLabelClass}>任务流</p>
 							<h2 class="mt-2 text-2xl font-semibold tracking-[-0.04em] text-[#171918] dark:text-[#f0f4ef]">预演、执行与回执</h2>
 						</div>
-						{#if activeHistoryEntry}
-							<span class={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs ${jobStatusMeta[activeHistoryEntry.job.status].tone}`}><span class={`h-2 w-2 rounded-full ${jobStatusMeta[activeHistoryEntry.job.status].dot}`}></span>{jobStatusMeta[activeHistoryEntry.job.status].label}</span>
+						{#if latestHistoryEntry}
+							<span class={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs ${jobStatusMeta[latestHistoryEntry.job.status].tone}`}><span class={`h-2 w-2 rounded-full ${jobStatusMeta[latestHistoryEntry.job.status].dot}`}></span>{jobStatusMeta[latestHistoryEntry.job.status].label}</span>
 						{:else if latestJob}
 							<span class={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs ${jobStatusMeta[latestJob.status].tone}`}><span class={`h-2 w-2 rounded-full ${jobStatusMeta[latestJob.status].dot}`}></span>{jobStatusMeta[latestJob.status].label}</span>
 						{:else}
@@ -1679,9 +1697,29 @@ $: editorTargetPathPreview = editorState
 								<div class={`mt-4 rounded-[1.2rem] border p-4 text-sm ${planDirty ? "border-[#e4d2b8] bg-[#f7efe3] text-[#7b5622] dark:border-[#4b3720] dark:bg-[#241d15] dark:text-[#d7b37f]" : "border-[#c8d6ce] bg-[#edf2ee] text-[#2f5544] dark:border-[#294034] dark:bg-[#162019] dark:text-[#b0ccbb]"}`}>{activityMessage}</div>
 							{/if}
 
-							{#if latestSummary}
+							{#if latestHistoryEntry}
 								<div class="mt-4 rounded-[1.2rem] border border-[#ddd7ca] bg-[#fcfbf7] p-4 text-sm text-[#5f5a50] dark:border-[#29302b] dark:bg-[#111512] dark:text-[#b9c4ba]">
-									共 {latestSummary.total} 篇，写入 {latestSummary.writtenCount}，新增 {latestSummary.newCount}，更新 {latestSummary.updatedCount}，跳过 {latestSummary.skipCount}，冲突 {latestSummary.conflictCount}。
+									<div class="flex flex-wrap items-start justify-between gap-3">
+										<div class="min-w-0">
+											<p class={sectionLabelClass}>最近结果</p>
+											<div class="mt-2 flex flex-wrap items-center gap-2">
+												<div class="text-base font-semibold tracking-[-0.03em] text-[#171918] dark:text-[#eef2ed]">{latestHistoryEntry.job.label}</div>
+												<span class="rounded-full border border-[#d7d1c4] bg-[#f3f0e7] px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-[#5d584f] dark:border-[#303833] dark:bg-[#1a1f1b] dark:text-[#bac4bb]">{latestHistoryEntry.dryRun ? "dry run" : "执行"}</span>
+												<span class="rounded-full border border-[#d7d1c4] bg-[#fcfbf7] px-3 py-1 text-[11px] text-[#5d584f] dark:border-[#303833] dark:bg-[#111512] dark:text-[#bac4bb]">{syncModeMeta[latestHistoryEntry.syncMode].title}</span>
+											</div>
+											<div class="mt-2 text-sm leading-7 text-[#6f695f] dark:text-[#9ba79d]">{latestHistoryEntry.job.detail}</div>
+										</div>
+										<div class="font-mono text-[11px] uppercase tracking-[0.18em] text-[#8c8578] dark:text-[#8d998f]">{latestHistoryEntry.job.id} · {latestHistoryEntry.job.timestamp}</div>
+									</div>
+
+									<div class="mt-4 flex flex-wrap gap-2">
+										<span class="rounded-full border border-[#d7d1c4] bg-[#fcfbf7] px-3 py-1 text-xs text-[#5d584f] dark:border-[#303833] dark:bg-[#111512] dark:text-[#bac4bb]">共 {latestHistoryEntry.summary.total} 篇</span>
+										<span class="rounded-full border border-[#c8d6ce] bg-[#edf2ee] px-3 py-1 text-xs text-[#2f5544] dark:border-[#294034] dark:bg-[#162019] dark:text-[#b0ccbb]">写入 {latestHistoryEntry.summary.writtenCount}</span>
+										<span class="rounded-full border border-[#d7d1c4] bg-[#fcfbf7] px-3 py-1 text-xs text-[#5d584f] dark:border-[#303833] dark:bg-[#111512] dark:text-[#bac4bb]">新增 {latestHistoryEntry.summary.newCount}</span>
+										<span class="rounded-full border border-[#e4d2b8] bg-[#f7efe3] px-3 py-1 text-xs text-[#7b5622] dark:border-[#4b3720] dark:bg-[#241d15] dark:text-[#d7b37f]">更新 {latestHistoryEntry.summary.updatedCount}</span>
+										<span class="rounded-full border border-[#d7d1c4] bg-[#f3f0e7] px-3 py-1 text-xs text-[#5d584f] dark:border-[#303833] dark:bg-[#1a1f1b] dark:text-[#bac4bb]">跳过 {latestHistoryEntry.summary.skipCount}</span>
+										<span class="rounded-full border border-[#e1caca] bg-[#f6ecec] px-3 py-1 text-xs text-[#7b3f3f] dark:border-[#452a2a] dark:bg-[#241818] dark:text-[#cf9f9f]">冲突 {latestHistoryEntry.summary.conflictCount}</span>
+									</div>
 									{#if !writable}
 										<div class="mt-2 text-xs text-[#9b6b35] dark:text-[#d7b37f]">当前版本只生成预演和执行计划，真实写入器还没接。</div>
 									{/if}
@@ -1691,10 +1729,21 @@ $: editorTargetPathPreview = editorState
 
 						<div>
 							<div class="flex items-center justify-between gap-3">
-								<p class={sectionLabelClass}>历史任务</p>
-								{#if historyEntries.length > 0}
-									<div class="font-mono text-[11px] uppercase tracking-[0.18em] text-[#8c8578] dark:text-[#8d998f]">{historyEntries.length} records</div>
-								{/if}
+								<div>
+									<p class={sectionLabelClass}>历史任务</p>
+									<p class="mt-1 text-xs text-[#6f695f] dark:text-[#9ba79d]">默认只展示最近 {Math.min(historyEntries.length, HISTORY_PREVIEW_LIMIT)} 条，旧记录先收起来，别把右栏挤爆。</p>
+								</div>
+								<div class="flex flex-wrap items-center justify-end gap-2">
+									{#if activeHistoryEntry && latestHistoryEntry && activeHistoryEntry.job.id !== latestHistoryEntry.job.id}
+										<button class={quietButtonClass} on:click={() => selectHistoryEntry(latestHistoryEntry?.job.id ?? null)} type="button">回到最新</button>
+									{/if}
+									{#if historyEntries.length > HISTORY_PREVIEW_LIMIT}
+										<button class={quietButtonClass} on:click={() => (historyExpanded = !historyExpanded)} type="button">{historyExpanded ? "收起旧记录" : `展开其余 ${historyHiddenCount} 条`}</button>
+									{/if}
+									{#if historyEntries.length > 0}
+										<div class="font-mono text-[11px] uppercase tracking-[0.18em] text-[#8c8578] dark:text-[#8d998f]">{historyEntries.length} records</div>
+									{/if}
+								</div>
 							</div>
 
 							<div class="mt-3 space-y-3">
@@ -1713,13 +1762,20 @@ $: editorTargetPathPreview = editorState
 									<div class="rounded-[1.2rem] border border-[#ddd7ca] bg-[#fcfbf7] p-5 text-sm leading-7 text-[#6f695f] dark:border-[#29302b] dark:bg-[#111512] dark:text-[#9ba79d]">还没有任务记录。先跑一次 Dry Run，让系统吐出第一份执行计划。</div>
 								{:else}
 									<div class="space-y-3 lg:max-h-[320px] lg:overflow-y-auto lg:pr-1">
-										{#each historyEntries as entry}
+										{#each visibleHistoryEntries as entry}
 											<button class={`${surfaceClass} w-full p-4 text-left transition duration-200 ${activeHistoryJobId === entry.job.id ? "border-[#99b3a6] bg-[#eef2ed] dark:border-[#355447] dark:bg-[#151c18]" : "hover:border-[#c5cfc8] hover:bg-[#f5f3ed] dark:hover:border-[#3a4840] dark:hover:bg-[#151917]"}`} on:click={() => selectHistoryEntry(entry.job.id)} type="button">
 												<div class="flex items-start justify-between gap-3">
 													<div class="min-w-0">
 														<div class="flex items-center gap-3">
 															<span class={`h-2.5 w-2.5 rounded-full ${jobStatusMeta[entry.job.status].dot}`}></span>
 															<div class="text-sm font-medium text-[#171918] dark:text-[#eef2ed]">{entry.job.label}</div>
+														</div>
+														<div class="mt-2 flex flex-wrap gap-2">
+															<span class="rounded-full border border-[#d7d1c4] bg-[#f3f0e7] px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-[#5d584f] dark:border-[#303833] dark:bg-[#1a1f1b] dark:text-[#bac4bb]">{entry.dryRun ? "dry run" : "执行"}</span>
+															<span class="rounded-full border border-[#d7d1c4] bg-[#fcfbf7] px-3 py-1 text-[11px] text-[#5d584f] dark:border-[#303833] dark:bg-[#111512] dark:text-[#bac4bb]">{syncModeMeta[entry.syncMode].title}</span>
+															{#if latestHistoryEntry && entry.job.id === latestHistoryEntry.job.id}
+																<span class="rounded-full border border-[#c8d6ce] bg-[#edf2ee] px-3 py-1 text-[11px] text-[#2f5544] dark:border-[#294034] dark:bg-[#162019] dark:text-[#b0ccbb]">最新</span>
+															{/if}
 														</div>
 														<div class="mt-2 text-sm leading-7 text-[#6f695f] dark:text-[#9ba79d]">{entry.job.detail}</div>
 													</div>
@@ -1738,7 +1794,12 @@ $: editorTargetPathPreview = editorState
 						{#if previewItems.length > 0}
 							<div class="border-t border-[#e5dfd2] pt-5 dark:border-[#212824]">
 								<div class="flex items-center justify-between gap-3">
-									<p class={sectionLabelClass}>{activeHistoryEntry ? activeHistoryEntry.job.label : "任务明细"}</p>
+									<div>
+										<p class={sectionLabelClass}>{activeHistoryEntry ? activeHistoryEntry.job.label : "任务明细"}</p>
+										{#if activeHistoryEntry && latestHistoryEntry && activeHistoryEntry.job.id !== latestHistoryEntry.job.id}
+											<p class="mt-1 text-xs text-[#6f695f] dark:text-[#9ba79d]">你现在看的不是最新回执，是一条旧记录。</p>
+										{/if}
+									</div>
 									<div class="font-mono text-[11px] uppercase tracking-[0.18em] text-[#8c8578] dark:text-[#8d998f]">{previewItems.length} items</div>
 								</div>
 								<div class="mt-3 space-y-3 lg:max-h-[360px] lg:overflow-y-auto lg:pr-1">
