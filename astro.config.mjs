@@ -107,7 +107,18 @@ export default defineConfig({
 			remarkMath,
 			remarkReadingTime,
 			remarkExcerpt,
-			remarkGithubAdmonitionsToDirectives,
+			[
+				remarkGithubAdmonitionsToDirectives,
+				{
+					mapping: {
+						NOTE: "note",
+						TIP: "tip",
+						IMPORTANT: "important",
+						CAUTION: "caution",
+						WARNING: "warning",
+					},
+				},
+			],
 			remarkDirective,
 			remarkSectionize,
 			parseDirectiveNode,
