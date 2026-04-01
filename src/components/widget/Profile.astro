@@ -8,15 +8,26 @@ const config = profileConfig;
 ---
 <div class="card-base p-3">
     <a aria-label="Go to About Page" href={url('/about/')}
-       class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
-       max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95">
-        <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
-        w-full h-full z-50 flex items-center justify-center">
+       class:list={[
+           "group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3 max-w-[12rem] lg:max-w-none overflow-hidden active:scale-95",
+           config.avatar_isround ? "rounded-full lg:mx-auto aspect-square" : "rounded-xl"
+       ]}>
+        <div class:list={[
+            "absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50 w-full h-full z-50 flex items-center justify-center",
+            config.avatar_isround ? "rounded-full" : "rounded-xl"
+        ]}>
             <Icon name="fa6-regular:address-card"
                   class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl">
             </Icon>
         </div>
-        <ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class="mx-auto lg:w-full h-full lg:mt-0 "></ImageWrapper>
+        <ImageWrapper 
+            src={config.avatar || ""} 
+            alt="Profile Image of the Author" 
+            class:list={[
+                "mx-auto lg:w-full h-full lg:mt-0",
+                config.avatar_isround ? "rounded-full object-cover" : ""
+            ]}
+        ></ImageWrapper>
     </a>
     <div class="px-2">
         <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
@@ -36,4 +47,3 @@ const config = profileConfig;
         </div>
     </div>
 </div>
-
