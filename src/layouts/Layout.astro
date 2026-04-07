@@ -3,8 +3,8 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { profileConfig, siteConfig } from "@/config";
+import ConfigCarrier from "@components/ConfigCarrier.astro";
 import {
 	AUTO_MODE,
 	BANNER_HEIGHT,
@@ -17,7 +17,7 @@ import {
 } from "../constants/constants";
 import { defaultFavicons } from "../constants/icon";
 import type { Favicon } from "../types/config";
-import { pathsEqual, url } from "../utils/url-utils";
+import { url, pathsEqual } from "../utils/url-utils";
 import "katex/dist/katex.css";
 
 interface Props {
@@ -42,8 +42,11 @@ if (!banner || typeof banner !== "string" || banner.trim() === "") {
 	banner = siteConfig.banner.src;
 }
 
-// TODO don't use post cover as banner for now
-banner = siteConfig.banner.src;
+// `banner` is also used for social preview (og:image/twitter:image) so we keep
+// the per-page image when provided by the page/layout.
+const ogImageUrl = banner.startsWith("http")
+	? banner
+	: new URL(banner, Astro.site).toString();
 
 const enableBanner = siteConfig.banner.enable;
 
@@ -93,6 +96,8 @@ const bannerOffset =
         ) : (
         <meta property="og:type" content="website" />
         )}
+		<meta property="og:image" content={ogImageUrl} />
+		<meta name="twitter:image" content={ogImageUrl} />
 
 		<meta name="twitter:card" content="summary_large_image">
 		<meta property="twitter:url" content={Astro.url}>
@@ -305,6 +310,17 @@ function initCustomScrollbar() {
 			autoHideSuspend: false,
 		},
 	});
+	const preElements = document.querySelectorAll('pre');
+	preElements.forEach((ele) => {
+		OverlayScrollbars(ele, {
+			scrollbars: {
+				theme: 'scrollbar-base scrollbar-dark px-2',
+				autoHide: 'leave',
+				autoHideDelay: 500,
+				autoHideSuspend: false
+			}
+		});
+	});
 
 	const katexElements = document.querySelectorAll('.katex-display') as NodeListOf<HTMLElement>;
 
@@ -317,14 +333,14 @@ function initCustomScrollbar() {
 	const processKatexElement = (element: HTMLElement) => {
 		if (!element.parentNode) return;
 		if (element.hasAttribute('data-scrollbar-initialized')) return;
-
+		
 		const container = document.createElement('div');
 		container.className = 'katex-display-container';
 		container.setAttribute('aria-label', 'scrollable container for formulas');
-
+		
 		element.parentNode.insertBefore(container, element);
 		container.appendChild(element);
-
+		
 		OverlayScrollbars(container, {
 			scrollbars: {
 				theme: 'scrollbar-base scrollbar-auto',
@@ -333,7 +349,7 @@ function initCustomScrollbar() {
 				autoHideSuspend: false
 			}
 		});
-
+		
 		element.setAttribute('data-scrollbar-initialized', 'true');
 	};
 
@@ -353,13 +369,13 @@ function initCustomScrollbar() {
 
 function showBanner() {
 	if (!siteConfig.banner.enable) return;
-
+	
 	const banner = document.getElementById('banner');
 	if (!banner) {
 		console.error('Banner element not found');
 		return;
 	}
-
+	
 	banner.classList.remove('opacity-0', 'scale-105');
 }
 
