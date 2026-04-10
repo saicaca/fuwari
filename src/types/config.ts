@@ -34,6 +34,17 @@ export type SiteConfig = {
 		enable: boolean;
 		depth: 1 | 2 | 3;
 	};
+	ui: {
+		glassmorphism: {
+			enable: boolean;
+			blur: number;
+			opacity: number;
+		};
+		backgroundImage: {
+			enable: boolean;
+			url: string;
+		};
+	};
 
 	favicon: Favicon[];
 };

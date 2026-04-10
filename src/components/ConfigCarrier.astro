@@ -3,5 +3,13 @@
 import { siteConfig } from "../config";
 ---
 
-<div id="config-carrier" data-hue={siteConfig.themeColor.hue}>
+<div
+	id="config-carrier"
+	data-hue={siteConfig.themeColor.hue}
+	data-ui-glass={siteConfig.ui.glassmorphism.enable}
+	data-ui-blur={siteConfig.ui.glassmorphism.blur}
+	data-ui-opacity={siteConfig.ui.glassmorphism.opacity}
+	data-bg-enable={siteConfig.ui.backgroundImage.enable}
+	data-bg-url={siteConfig.ui.backgroundImage.url}
+>
 </div>
