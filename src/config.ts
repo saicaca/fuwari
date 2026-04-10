@@ -29,6 +29,17 @@ export const siteConfig: SiteConfig = {
 		enable: true, // Display the table of contents on the right side of the post
 		depth: 2, // Maximum heading depth to show in the table, from 1 to 3
 	},
+	ui: {
+		glassmorphism: {
+			enable: true,
+			blur: 18, // px
+			opacity: 0.72, // 0~1
+		},
+		backgroundImage: {
+			enable: false,
+			url: "https://www.dmoe.cc/random.php",
+		},
+	},
 	favicon: [
 		// Leave this array empty to use the default favicon
 		// {

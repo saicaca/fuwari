@@ -38,6 +38,11 @@ const isHomePage = pathsEqual(Astro.url.pathname, url("/"));
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
 const configHue = siteConfig.themeColor.hue;
+const configGlassEnabled = siteConfig.ui.glassmorphism.enable;
+const configGlassBlur = siteConfig.ui.glassmorphism.blur;
+const configGlassOpacity = siteConfig.ui.glassmorphism.opacity;
+const configBgEnabled = siteConfig.ui.backgroundImage.enable;
+const configBgUrl = siteConfig.ui.backgroundImage.url;
 if (!banner || typeof banner !== "string" || banner.trim() === "") {
 	banner = siteConfig.banner.src;
 }
@@ -110,7 +115,7 @@ const bannerOffset =
 		))}
 
 		<!-- Set the theme before the page is rendered to avoid a flash -->
-		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue}}>
+		<script is:inline define:vars={{DEFAULT_THEME, LIGHT_MODE, DARK_MODE, AUTO_MODE, BANNER_HEIGHT_EXTEND, PAGE_WIDTH, configHue, configGlassEnabled, configGlassBlur, configGlassOpacity, configBgEnabled, configBgUrl}}>
 			// Load the theme from local storage
 			const theme = localStorage.getItem('theme') || DEFAULT_THEME;
 			switch (theme) {
@@ -131,6 +136,17 @@ const bannerOffset =
 			// Load the hue from local storage
 			const hue = localStorage.getItem('hue') || configHue;
 			document.documentElement.style.setProperty('--hue', hue);
+
+			const uiGlassEnabled = localStorage.getItem('ui_glass_enabled') ?? String(configGlassEnabled);
+			const uiGlassBlur = localStorage.getItem('ui_glass_blur') || String(configGlassBlur);
+			const uiGlassOpacity = localStorage.getItem('ui_glass_opacity') || String(configGlassOpacity);
+			const uiBgEnabled = localStorage.getItem('ui_bg_enabled') ?? String(configBgEnabled);
+
+			document.documentElement.classList.toggle('ui-glass-enabled', uiGlassEnabled === 'true');
+			document.documentElement.classList.toggle('bg-image-enabled', uiBgEnabled === 'true');
+			document.documentElement.style.setProperty('--ui-glass-blur', `${uiGlassBlur}px`);
+			document.documentElement.style.setProperty('--ui-glass-opacity', uiGlassOpacity);
+			document.documentElement.style.setProperty('--bg-image-url', `url("${configBgUrl}")`);
 
 			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
 			let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
@@ -192,6 +208,21 @@ const bannerOffset =
 		@apply opacity-0 -translate-y-16
 	}
 }
+
+html.bg-image-enabled body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	background-image: var(--bg-image-url);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	opacity: 0.24;
+	transform: scale(1.04);
+	filter: blur(0.5px);
+	pointer-events: none;
+}
 </style>
 
 <script>
@@ -202,7 +233,13 @@ import {
 	// SizeObserverPlugin,
 	// ClickScrollPlugin
 } from 'overlayscrollbars';
-import {getHue, getStoredTheme, setHue, setTheme} from "../utils/setting-utils";
+import {
+	getHue,
+	getStoredTheme,
+	loadVisualSettings,
+	setHue,
+	setTheme,
+} from "../utils/setting-utils";
 import {pathsEqual, url} from "../utils/url-utils";
 import {
 	BANNER_HEIGHT,
@@ -367,6 +404,7 @@ function init() {
 	// disableAnimation()()		// TODO
 	loadTheme();
 	loadHue();
+	loadVisualSettings();
 	initCustomScrollbar();
 	showBanner();
 }

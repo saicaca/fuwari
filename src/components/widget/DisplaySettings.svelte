@@ -2,10 +2,26 @@
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
-import { getDefaultHue, getHue, setHue } from "@utils/setting-utils";
+import {
+	getBackgroundEnabled,
+	getDefaultHue,
+	getGlassBlur,
+	getGlassEnabled,
+	getGlassOpacity,
+	getHue,
+	setBackgroundEnabled,
+	setGlassBlur,
+	setGlassEnabled,
+	setGlassOpacity,
+	setHue,
+} from "@utils/setting-utils";
 
 let hue = getHue();
 const defaultHue = getDefaultHue();
+let glassEnabled = getGlassEnabled();
+let glassBlur = getGlassBlur();
+let glassOpacity = getGlassOpacity();
+let backgroundEnabled = getBackgroundEnabled();
 
 function resetHue() {
 	hue = getDefaultHue();
@@ -14,6 +30,11 @@ function resetHue() {
 $: if (hue || hue === 0) {
 	setHue(hue);
 }
+
+$: setGlassEnabled(glassEnabled);
+$: setGlassBlur(glassBlur);
+$: setGlassOpacity(glassOpacity);
+$: setBackgroundEnabled(backgroundEnabled);
 </script>
 
 <div id="display-setting" class="float-panel float-panel-closed absolute transition-all w-80 right-4 px-4 py-4">
@@ -40,6 +61,28 @@ $: if (hue || hue === 0) {
     <div class="w-full h-6 px-1 bg-[oklch(0.80_0.10_0)] dark:bg-[oklch(0.70_0.10_0)] rounded select-none">
         <input aria-label={i18n(I18nKey.themeColor)} type="range" min="0" max="360" bind:value={hue}
                class="slider" id="colorSlider" step="5" style="width: 100%">
+    </div>
+
+    <div class="mt-4 pt-3 border-t border-black/10 dark:border-white/10 space-y-3">
+        <label class="setting-row">
+            <span>毛玻璃</span>
+            <input type="checkbox" bind:checked={glassEnabled} />
+        </label>
+
+        <label class="setting-row">
+            <span>背景图</span>
+            <input type="checkbox" bind:checked={backgroundEnabled} />
+        </label>
+
+        <div class="space-y-1">
+            <div class="setting-label">模糊强度: {glassBlur}px</div>
+            <input type="range" min="0" max="36" step="1" bind:value={glassBlur} class="slider w-full" />
+        </div>
+
+        <div class="space-y-1">
+            <div class="setting-label">透明度: {Math.round(glassOpacity * 100)}%</div>
+            <input type="range" min="0.35" max="1" step="0.01" bind:value={glassOpacity} class="slider w-full" />
+        </div>
     </div>
 </div>
 
@@ -89,5 +132,22 @@ $: if (hue || hue === 0) {
             background rgba(255, 255, 255, 0.8)
           &:active
             background rgba(255, 255, 255, 0.6)
+
+    .setting-row
+      display flex
+      justify-content space-between
+      align-items center
+      color var(--deep-text)
+      .dark &
+        color rgba(255,255,255,0.85)
+      input
+        width 1rem
+        height 1rem
+
+    .setting-label
+      font-size 0.85rem
+      color rgba(0, 0, 0, 0.6)
+      .dark &
+        color rgba(255, 255, 255, 0.7)
 
 </style>
