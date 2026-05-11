@@ -12,7 +12,10 @@ import rehypeComponents from "rehype-components"; /* Render the custom directive
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import remarkDirective from "remark-directive"; /* Handle directives */
-import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
+import remarkGithubAdmonitionsToDirectives, {
+	DEFAULT_MAPPING,
+	GithubAlertType,
+} from "remark-github-admonitions-to-directives";
 import remarkMath from "remark-math";
 import remarkSectionize from "remark-sectionize";
 import { expressiveCodeConfig } from "./src/config.ts";
@@ -107,7 +110,16 @@ export default defineConfig({
 			remarkMath,
 			remarkReadingTime,
 			remarkExcerpt,
-			remarkGithubAdmonitionsToDirectives,
+			[
+				remarkGithubAdmonitionsToDirectives,
+				{
+					mapping: {
+						...DEFAULT_MAPPING,
+						[GithubAlertType.IMPORTANT]: "important",
+						[GithubAlertType.CAUTION]: "caution",
+					},
+				},
+			],
 			remarkDirective,
 			remarkSectionize,
 			parseDirectiveNode,
