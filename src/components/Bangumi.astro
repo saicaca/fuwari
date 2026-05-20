@@ -1,0 +1,145 @@
+---
+import { Icon } from "astro-icon/components";
+import { BangumiConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import type { BangumiItem } from "@/utils/bangumi";
+import "../styles/bangumi.css";
+
+interface Props {
+	items: BangumiItem[];
+	errorMessage?: string;
+}
+
+const pageTitleKey =
+	BangumiConfig.type === 2 ? I18nKey.bangumiDrama : I18nKey.bangumi;
+const pageDescriptionKey =
+	BangumiConfig.type === 2
+		? I18nKey.bangumiDramaDescription
+		: I18nKey.bangumiDescription;
+const pageTitle = i18n(pageTitleKey);
+const pageDescription =
+	BangumiConfig.type === 2
+		? i18n(I18nKey.bangumiDramaDescription)
+		: i18n(I18nKey.bangumiDescription);
+
+const { items: bangumiList, errorMessage = "" } = Astro.props;
+
+const formatCount = (value?: number) => {
+	if (!value) return "0";
+	if (value >= 100000000) return `${(value / 100000000).toFixed(1)}亿`;
+	if (value >= 10000) return `${(value / 10000).toFixed(1)}万`;
+	return String(value);
+};
+
+const getBangumiUrl = (item: BangumiItem) =>
+	item.url || `https://www.bilibili.com/bangumi/play/ss${item.season_id}`;
+---
+
+<div class="bangumi-page bangumi-page-root">
+	<section class="bangumi-page-hero card-base">
+		<h1 class="bangumi-page-title text-90" data-i18n-key={pageTitleKey}>
+			{pageTitle}
+		</h1>
+		<p class="bangumi-page-description text-50" data-i18n-key={pageDescriptionKey}>
+			{pageDescription}
+		</p>
+	</section>
+
+	{
+		!BangumiConfig.enable && (
+			<section class="bangumi-state card-base text-50" data-i18n-key={I18nKey.bangumiDisabled}>
+				{i18n(I18nKey.bangumiDisabled)}
+			</section>
+		)
+	}
+
+	{
+		BangumiConfig.enable && errorMessage && (
+			<section class="bangumi-state card-base text-50">
+				<span data-i18n-key={I18nKey.bangumiLoadFailed}>
+					{i18n(I18nKey.bangumiLoadFailed)}
+				</span>
+				{errorMessage}
+			</section>
+		)
+	}
+
+	{
+		BangumiConfig.enable && !errorMessage && bangumiList.length === 0 && (
+			<section class="bangumi-state card-base text-50" data-i18n-key={I18nKey.bangumiEmpty}>
+				{i18n(I18nKey.bangumiEmpty)}
+			</section>
+		)
+	}
+
+	{
+		BangumiConfig.enable && !errorMessage && bangumiList.length > 0 && (
+			<section class="bangumi-list">
+				{bangumiList.map((item, index) => (
+					<a
+						class="bangumi-card card-base text-90 onload-animation"
+						href={getBangumiUrl(item)}
+						target="_blank"
+						rel="noopener noreferrer"
+						style={`animation-delay: calc(var(--content-delay) + ${index * 50}ms);`}
+					>
+						<div class="bangumi-cover-wrap">
+							<img
+								class="bangumi-cover"
+								src={item.cover}
+								alt={item.title}
+								loading="lazy"
+								referrerpolicy="no-referrer"
+							/>
+							{item.badge && <span class="bangumi-badge">{item.badge}</span>}
+						</div>
+
+						<div class="bangumi-content">
+							<div class="bangumi-header">
+								<h2 class="bangumi-name">{item.title}</h2>
+								<Icon
+									class="bangumi-enter"
+									name="material-symbols:chevron-right-rounded"
+								/>
+							</div>
+
+							<div class="bangumi-meta text-50">
+								{item.season_type_name && <span>{item.season_type_name}</span>}
+								{item.publish?.pub_time_show && (
+									<span>{item.publish.pub_time_show}</span>
+								)}
+								{item.rating?.score && <span>{item.rating.score.toFixed(1)} 分</span>}
+							</div>
+
+							{item.evaluate && <p class="bangumi-summary text-75">{item.evaluate}</p>}
+
+							<div class="bangumi-footer text-50">
+								{item.new_ep?.index_show && (
+									<span class="bangumi-progress">{item.new_ep.index_show}</span>
+								)}
+								{item.progress && <span>{item.progress}</span>}
+								{item.stat?.follow !== undefined && (
+									<span>
+										{formatCount(item.stat.follow)}{" "}
+										<span data-i18n-key={I18nKey.bangumiFollow}>
+											{i18n(I18nKey.bangumiFollow)}
+										</span>
+									</span>
+								)}
+								{item.stat?.view !== undefined && (
+									<span>
+										{formatCount(item.stat.view)}{" "}
+										<span data-i18n-key={I18nKey.bangumiPlay}>
+											{i18n(I18nKey.bangumiPlay)}
+										</span>
+									</span>
+								)}
+							</div>
+						</div>
+					</a>
+				))}
+			</section>
+		)
+	}
+</div>

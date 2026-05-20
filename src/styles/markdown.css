@@ -1,3 +1,5 @@
+@reference "./tailwind-reference.css";
+
 .custom-md {
     h1 {
         @apply text-3xl;
@@ -5,22 +7,29 @@
 
     h1, h2, h3, h4, h5, h6 {
         .anchor {
-            @apply transition -m-0.5 ml-[0.2ch] p-0.5 select-none opacity-0 no-underline !important;
+            @apply transition -m-0.5 ml-[0.2ch] p-0.5 select-none opacity-0 no-underline;
+            text-decoration: none !important;
 
             .anchor-icon {
-                @apply mx-[0.45ch] !important;
+                @apply mx-[0.45ch];
+                margin-left: 0.45ch !important;
+                margin-right: 0.45ch !important;
             }
         }
 
         &:hover {
             .anchor {
-                @apply opacity-100 !important;
+                @apply opacity-100;
+                opacity: 1 !important;
             }
         }
     }
 
     a:not(.no-styling) {
-        @apply relative bg-none link font-medium text-[var(--primary)]
+        @apply relative bg-none transition rounded-md p-1 -m-1 font-medium text-[var(--primary)]
+        before:ease-out before:transition active:bg-none hover:before:bg-[var(--btn-plain-bg-hover)]
+        active:before:bg-[var(--btn-plain-bg-active)] z-0 before:absolute before:rounded-[inherit]
+        before:inset-0 before:scale-[0.85] hover:before:scale-100 before:-z-10
         underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4;
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
@@ -61,7 +70,13 @@
 
     .copy-btn {
         all: initial;
-        @apply btn-regular-dark opacity-0 shadow-lg shadow-black/50 absolute active:scale-90 h-8 w-8 top-3 right-3 text-sm rounded-lg transition-all ease-in-out z-20 cursor-pointer;
+        @apply flex items-center justify-center
+        bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))]
+        active:bg-[oklch(0.55_0.01_var(--hue))]
+        dark:bg-[oklch(0.30_0.02_var(--hue))] dark:hover:bg-[oklch(0.35_0.03_var(--hue))]
+        dark:active:bg-[oklch(0.40_0.03_var(--hue))]
+        opacity-0 shadow-lg shadow-black/50 absolute active:scale-90 h-8 w-8 top-3 right-3
+        text-sm rounded-lg transition-all ease-in-out z-20 cursor-pointer;
     }
     .frame:hover .copy-btn {
         opacity: 1;

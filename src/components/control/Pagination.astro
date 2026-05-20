@@ -7,9 +7,10 @@ interface Props {
 	page: Page;
 	class?: string;
 	style?: string;
+	basePath?: string;
 }
 
-const { page, style } = Astro.props;
+const { page, style, basePath = "/" } = Astro.props;
 
 const HIDDEN = -1;
 
@@ -46,15 +47,23 @@ if (r === page.lastPage - 2) pages.push(page.lastPage - 1);
 if (r < page.lastPage) pages.push(page.lastPage);
 
 const getPageUrl = (p: number) => {
-	if (p === 1) return "/";
-	return `/${p}/`;
+	const normalizedBase = basePath.endsWith("/") ? basePath : `${basePath}/`;
+	if (p === 1) return normalizedBase;
+	return `${normalizedBase}${p}/`;
 };
+
+const prevUrl =
+	page.currentPage > 1 ? url(getPageUrl(page.currentPage - 1)) : undefined;
+const nextUrl =
+	page.currentPage < page.lastPage
+		? url(getPageUrl(page.currentPage + 1))
+		: undefined;
 ---
 
 <div class:list={[className, "flex flex-row gap-3 justify-center"]} style={style}>
-    <a href={page.url.prev || ""} aria-label={page.url.prev ? "Previous Page" : null}
+    <a href={prevUrl || ""} aria-label={prevUrl ? "Previous Page" : null}
        class:list={["btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11",
-           {"disabled": page.url.prev == undefined}
+           {"disabled": prevUrl == undefined}
        ]}
     >
         <Icon name="material-symbols:chevron-left-rounded" class="text-[1.75rem]"></Icon>
@@ -74,9 +83,9 @@ const getPageUrl = (p: number) => {
             >{p}</a>
         })}
     </div>
-    <a href={page.url.next || ""} aria-label={page.url.next ? "Next Page" : null}
+    <a href={nextUrl || ""} aria-label={nextUrl ? "Next Page" : null}
        class:list={["btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11",
-           {"disabled": page.url.next == undefined}
+           {"disabled": nextUrl == undefined}
        ]}
     >
         <Icon name="material-symbols:chevron-right-rounded" class="text-[1.75rem]"></Icon>

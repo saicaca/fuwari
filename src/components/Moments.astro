@@ -1,0 +1,123 @@
+---
+import { Icon } from "astro-icon/components";
+import { MomentsConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import type { FeedResult, MomentItem } from "@/utils/moments";
+import "../styles/moments.css";
+
+interface Props {
+	items: MomentItem[];
+	errors?: FeedResult[];
+}
+
+const formatDate = (date?: Date) => {
+	if (!date) return "";
+	return date.toLocaleDateString("zh-CN", {
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+	});
+};
+
+const { items: moments, errors = [] } = Astro.props;
+---
+
+<div class="moments-page moments-page-root">
+	<section class="moments-page-hero card-base">
+		<h1 class="moments-page-title text-90" data-i18n-key={I18nKey.moments}>
+			{i18n(I18nKey.moments)}
+		</h1>
+		<p class="moments-page-description text-50" data-i18n-key={I18nKey.momentsDescription}>
+			{i18n(I18nKey.momentsDescription)}
+		</p>
+	</section>
+
+	{
+		!MomentsConfig.enable && (
+			<section class="moments-state card-base text-50" data-i18n-key={I18nKey.momentsDisabled}>
+				{i18n(I18nKey.momentsDisabled)}
+			</section>
+		)
+	}
+
+	{
+		MomentsConfig.enable && MomentsConfig.sources.length === 0 && (
+			<section class="moments-state card-base text-50">
+				<span data-i18n-key={I18nKey.momentsNoSources}>
+					{i18n(I18nKey.momentsNoSources)}
+				</span>
+			</section>
+		)
+	}
+
+	{
+		MomentsConfig.enable && errors.length > 0 && (
+			<section class="moments-state card-base text-50">
+				{errors.map((result) => (
+					<p>
+						{result.source.name}{" "}
+						<span data-i18n-key={I18nKey.momentsLoadFailed}>
+							{i18n(I18nKey.momentsLoadFailed)}
+						</span>
+						{result.error}
+					</p>
+				))}
+			</section>
+		)
+	}
+
+	{
+		MomentsConfig.enable &&
+			MomentsConfig.sources.length > 0 &&
+			moments.length === 0 && (
+				<section class="moments-state card-base text-50" data-i18n-key={I18nKey.momentsEmpty}>
+					{i18n(I18nKey.momentsEmpty)}
+				</section>
+			)
+	}
+
+	{
+		MomentsConfig.enable && moments.length > 0 && (
+			<section class="moments-list">
+				{moments.map((item, index) => (
+					<a
+						class="moments-card card-base text-90 onload-animation"
+						href={item.link}
+						target="_blank"
+						rel="noopener noreferrer"
+						style={`animation-delay: calc(var(--content-delay) + ${index * 50}ms);`}
+					>
+						<div class="moments-avatar">
+							{item.source.avatar ? (
+								<img src={item.source.avatar} alt={item.source.name} loading="lazy" />
+							) : (
+								<Icon name="material-symbols:rss-feed-rounded" />
+							)}
+						</div>
+						<div class="moments-content">
+							<div class="moments-meta text-50">
+								<span>{item.source.name}</span>
+								<span>
+									{item.published ? (
+										formatDate(item.published)
+									) : (
+										<span data-i18n-key={I18nKey.momentsUnknownTime}>
+											{i18n(I18nKey.momentsUnknownTime)}
+										</span>
+									)}
+								</span>
+							</div>
+							<h2>{item.title}</h2>
+							{item.summary && <p class="text-75">{item.summary}</p>}
+						</div>
+						<Icon
+							class="moments-enter"
+							name="material-symbols:chevron-right-rounded"
+						/>
+					</a>
+				))}
+			</section>
+		)
+	}
+</div>

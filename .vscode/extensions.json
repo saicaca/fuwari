@@ -1,3 +1,4 @@
 {
-  "recommendations": ["biomejs.biome", "astro-build.astro-vscode"]
+  "recommendations": ["astro-build.astro-vscode", "unifiedjs.vscode-mdx"],
+  "unwantedRecommendations": []
 }

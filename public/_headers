@@ -1,0 +1,11 @@
+/rss.xml
+  Content-Type: text/xml; charset=utf-8
+
+/rss.xsl
+  Content-Type: text/xsl; charset=utf-8
+
+/*/rss.xml
+  Content-Type: text/xml; charset=utf-8
+
+/*/rss.xsl
+  Content-Type: text/xsl; charset=utf-8

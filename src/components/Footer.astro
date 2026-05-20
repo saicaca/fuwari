@@ -1,6 +1,8 @@
 ---
 
 import { profileConfig } from "../config";
+import I18nKey from "../i18n/i18nKey";
+import { i18n } from "../i18n/translation";
 import { url } from "../utils/url-utils";
 
 const currentYear = new Date().getFullYear();
@@ -11,11 +13,13 @@ const currentYear = new Date().getFullYear();
 <!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">-->
 <div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6">
     <div class="transition text-50 text-sm text-center">
-        &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
+        &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. <span data-i18n-key={I18nKey.allRightsReserved}>{i18n(I18nKey.allRightsReserved)}</span> /
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('rss.xml')}>RSS</a> /
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>Sitemap</a><br>
-        Powered by
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap.xml')}>Sitemap</a><br>
+        <span data-i18n-key={I18nKey.poweredBy}>{i18n(I18nKey.poweredBy)}</span>
         <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a><br>
+        <span data-i18n-key={I18nKey.siteSource}>{i18n(I18nKey.siteSource)}</span>
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/zjhcx/zjhcx.github.io">GitHub</a>
     </div>
 </div>

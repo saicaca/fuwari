@@ -1,0 +1,415 @@
+{
+    "code": 0,
+    "message": "OK",
+    "ttl": 1,
+    "data": {
+        "info": {
+            "id": 3926367060,
+            "fid": 39263670,
+            "mid": 3546871542843760,
+            "attr": 22,
+            "title": "Furry",
+            "cover": "http://i1.hdslb.com/bfs/archive/a8f2cb147b60a7e11d71f1c43a555e5fb0a7ed06.jpg",
+            "upper": {
+                "mid": 3546871542843760,
+                "name": "Unity_exe",
+                "face": "https://i1.hdslb.com/bfs/face/015e582a37278cbe79b490baaec1be82d844fb0a.jpg",
+                "followed": false,
+                "vip_type": 0,
+                "vip_statue": 0
+            },
+            "cover_type": 2,
+            "cnt_info": {
+                "collect": 0,
+                "play": 0,
+                "thumb_up": 0,
+                "share": 0
+            },
+            "type": 11,
+            "intro": "",
+            "ctime": 1771912500,
+            "mtime": 1771912500,
+            "state": 0,
+            "fav_state": 0,
+            "like_state": 0,
+            "media_count": 10,
+            "is_top": false,
+            "is_kid_playlist": false,
+            "kid_playlist_desc": ""
+        },
+        "medias": [
+            {
+                "id": 116537813893807,
+                "type": 2,
+                "title": "用彩铅画出来的兽，怎么样？",
+                "cover": "http://i1.hdslb.com/bfs/archive/a8f2cb147b60a7e11d71f1c43a555e5fb0a7ed06.jpg",
+                "intro": "明天继续画画哦",
+                "page": 1,
+                "duration": 85,
+                "upper": {
+                    "mid": 591962153,
+                    "name": "徐白岭",
+                    "face": "https://i2.hdslb.com/bfs/face/c165b2ef35198cc4dcd0e7b9d1b8313f7113d388.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 212,
+                    "play": 1769,
+                    "danmaku": 2,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "1769"
+                },
+                "link": "bilibili://video/116537813893807",
+                "ctime": 1778226138,
+                "pubtime": 1778226138,
+                "fav_time": 1778248568,
+                "bv_id": "BV191dgBoEsb",
+                "bvid": "BV191dgBoEsb",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 38182782764
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875469210760?page_type=3\u0026oid=116537813893807\u0026otype=2"
+            },
+            {
+                "id": 116459095267105,
+                "type": 2,
+                "title": "是的孩子们，夏天到了，所以画了冬天",
+                "cover": "http://i2.hdslb.com/bfs/archive/72893241263b5c8d703b8fe8fe9f04757b7d4ff6.jpg",
+                "intro": "-",
+                "page": 1,
+                "duration": 169,
+                "upper": {
+                    "mid": 3546836329565056,
+                    "name": "Minyi蓝莓酱",
+                    "face": "https://i1.hdslb.com/bfs/face/9b622aa93617bee63cefb14a7b23d066793b0208.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 791,
+                    "play": 8404,
+                    "danmaku": 4,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "8404"
+                },
+                "link": "bilibili://video/116459095267105",
+                "ctime": 1777024814,
+                "pubtime": 1777024814,
+                "fav_time": 1777978504,
+                "bv_id": "BV1bVo5BFEWP",
+                "bvid": "BV1bVo5BFEWP",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 37781768282
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875469210760?page_type=3\u0026oid=116459095267105\u0026otype=2"
+            },
+            {
+                "id": 965959761,
+                "type": 2,
+                "title": "出发！去云幽岛跨年啦～",
+                "cover": "http://i1.hdslb.com/bfs/archive/0424e59ef6beccac70f9a8e934337b37de793755.jpg",
+                "intro": "-",
+                "page": 1,
+                "duration": 106,
+                "upper": {
+                    "mid": 1974184523,
+                    "name": "四耳浅辰",
+                    "face": "https://i2.hdslb.com/bfs/face/4e844ad95e80cca71ee721a3db8f2a18fddc0ef5.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 2908,
+                    "play": 87725,
+                    "danmaku": 106,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "8.8万"
+                },
+                "link": "bilibili://video/965959761",
+                "ctime": 1704530754,
+                "pubtime": 1704535200,
+                "fav_time": 1777820566,
+                "bv_id": "BV1jW4y1N7eZ",
+                "bvid": "BV1jW4y1N7eZ",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 1396399762
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875469210760?page_type=3\u0026oid=965959761\u0026otype=2"
+            },
+            {
+                "id": 116066994888373,
+                "type": 2,
+                "title": "FurryAI画展《噪唤兽灵宴》第一届",
+                "cover": "http://i0.hdslb.com/bfs/archive/ae162a6c761f209d61556427beab2a97ffa27c28.jpg",
+                "intro": "至此\n第一届《噪唤兽灵宴》圆满结束。\n感谢各位的投稿，我从你们的作品中看见了许多心血和努力。\n祝大家在2026年，顺风顺水你就受着，家人健康你就受着，天降横财你就受着！\n剪辑：UP主\n主持人：柒狸仔",
+                "page": 1,
+                "duration": 332,
+                "upper": {
+                    "mid": 678492291,
+                    "name": "百解不得其解",
+                    "face": "https://i0.hdslb.com/bfs/face/cf1ac7a141242a726ff26aa6a7d17b3420c91998.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 621,
+                    "play": 5244,
+                    "danmaku": 1,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "5244"
+                },
+                "link": "bilibili://video/116066994888373",
+                "ctime": 1771041987,
+                "pubtime": 1771041987,
+                "fav_time": 1772178040,
+                "bv_id": "BV1ytcpzxE9w",
+                "bvid": "BV1ytcpzxE9w",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 36051553549
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875469210760?page_type=3\u0026oid=116066994888373\u0026otype=2"
+            },
+            {
+                "id": 116139355016993,
+                "type": 2,
+                "title": "听说有接近700万人看过这些福瑞兽剧⚡⚡",
+                "cover": "http://i2.hdslb.com/bfs/archive/c9f8035924a8267e2f7485ef3139a4032801a570.jpg",
+                "intro": "如果有大大不喜欢，可以联系删除",
+                "page": 1,
+                "duration": 16,
+                "upper": {
+                    "mid": 347412914,
+                    "name": "众兽逐梦-VISIONARY",
+                    "face": "https://i2.hdslb.com/bfs/face/2e36b82f59bf50f93c97d759bbff01401d9c57a7.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 2917,
+                    "play": 35244,
+                    "danmaku": 15,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "3.5万"
+                },
+                "link": "bilibili://video/116139355016993",
+                "ctime": 1772145963,
+                "pubtime": 1772145963,
+                "fav_time": 1772168672,
+                "bv_id": "BV1b7A2zME7F",
+                "bvid": "BV1b7A2zME7F",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 36314222334
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875469210760?page_type=3\u0026oid=116139355016993\u0026otype=2"
+            },
+            {
+                "id": 116123617988559,
+                "type": 2,
+                "title": "【furry动漫】《执掌错误的兽太》第一集：我去，不早说！【B站AI创作大赛-开放赛道】",
+                "cover": "http://i1.hdslb.com/bfs/archive/013774aeb831811dd3417afa9b615d084811601c.jpg",
+                "intro": "做了六天花了两千元肝出来的QAQ",
+                "page": 1,
+                "duration": 726,
+                "upper": {
+                    "mid": 3546382877068138,
+                    "name": "大魔王米迦尔",
+                    "face": "https://i1.hdslb.com/bfs/face/225757a8c6f8659b92239f7caf876a0644f688d6.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 3356,
+                    "play": 70418,
+                    "danmaku": 240,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "7万"
+                },
+                "link": "bilibili://video/116123617988559",
+                "ctime": 1771906000,
+                "pubtime": 1771906339,
+                "fav_time": 1772067292,
+                "bv_id": "BV1VbfCBbEa4",
+                "bvid": "BV1VbfCBbEa4",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 36248685807
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875469210760?page_type=3\u0026oid=116123617988559\u0026otype=2"
+            },
+            {
+                "id": 116100348053715,
+                "type": 2,
+                "title": "【furry动漫】《关于我穿越到兽星这档事》第二集 第一站：方舟市",
+                "cover": "http://i2.hdslb.com/bfs/archive/ea0f8ee943fe6e1e5d16726e072ce8a177a8d0b5.jpg",
+                "intro": "-",
+                "page": 1,
+                "duration": 85,
+                "upper": {
+                    "mid": 1037637333,
+                    "name": "逸云Eewin",
+                    "face": "https://i0.hdslb.com/bfs/face/048c043c0c0c347bbecb5e71a17fc39e43f99f92.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 1207,
+                    "play": 9734,
+                    "danmaku": 2,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "9734"
+                },
+                "link": "bilibili://video/116100348053715",
+                "ctime": 1771550932,
+                "pubtime": 1771550940,
+                "fav_time": 1771998313,
+                "bv_id": "BV1mNZzBvE3Q",
+                "bvid": "BV1mNZzBvE3Q",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 36169387950
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875469210760?page_type=3\u0026oid=116100348053715\u0026otype=2"
+            },
+            {
+                "id": 116080349546270,
+                "type": 2,
+                "title": "【furry动漫】《关于我穿越到兽星这档事》 第一集 初醒·兽星",
+                "cover": "http://i1.hdslb.com/bfs/archive/3ce94d23653abe2b19d67869e0848e63b41f6250.jpg",
+                "intro": "-",
+                "page": 1,
+                "duration": 118,
+                "upper": {
+                    "mid": 1037637333,
+                    "name": "逸云Eewin",
+                    "face": "https://i0.hdslb.com/bfs/face/048c043c0c0c347bbecb5e71a17fc39e43f99f92.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 691,
+                    "play": 7188,
+                    "danmaku": 3,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "7188"
+                },
+                "link": "bilibili://video/116080349546270",
+                "ctime": 1771245599,
+                "pubtime": 1771245608,
+                "fav_time": 1771998255,
+                "bv_id": "BV1xLZuBjExT",
+                "bvid": "BV1xLZuBjExT",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 36215326694
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875469210760?page_type=3\u0026oid=116080349546270\u0026otype=2"
+            },
+            {
+                "id": 116120312940743,
+                "type": 2,
+                "title": "0成本一分钟学会自制福瑞4K60帧动态壁纸，不来看看嘛",
+                "cover": "http://i2.hdslb.com/bfs/archive/c6037d6926a5c34469373f3acd85942e0ae8ec89.jpg",
+                "intro": "这个视频的发布我想了很久 如果被骂了我以后都想不接单了",
+                "page": 1,
+                "duration": 163,
+                "upper": {
+                    "mid": 3546753087310115,
+                    "name": "柏-哲",
+                    "face": "https://i2.hdslb.com/bfs/face/27983c39bab0501f7913f1a7384e75ecdaee506c.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 1707,
+                    "play": 9624,
+                    "danmaku": 6,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "9624"
+                },
+                "link": "bilibili://video/116120312940743",
+                "ctime": 1771855559,
+                "pubtime": 1771855623,
+                "fav_time": 1771912526,
+                "bv_id": "BV16KfzBZE9Z",
+                "bvid": "BV16KfzBZE9Z",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 36238396500
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875469210760?page_type=3\u0026oid=116120312940743\u0026otype=2"
+            },
+            {
+                "id": 116084023820962,
+                "type": 2,
+                "title": "【福瑞绘画】分享一下绘画过程，再写个五福临门",
+                "cover": "http://i2.hdslb.com/bfs/archive/15fdc39422f08ea49e05b926790fb8e68cf12808.jpg",
+                "intro": "我接着画画了",
+                "page": 1,
+                "duration": 203,
+                "upper": {
+                    "mid": 591962153,
+                    "name": "徐白岭",
+                    "face": "https://i2.hdslb.com/bfs/face/c165b2ef35198cc4dcd0e7b9d1b8313f7113d388.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 3968,
+                    "play": 26308,
+                    "danmaku": 5,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "2.6万"
+                },
+                "link": "bilibili://video/116084023820962",
+                "ctime": 1771301860,
+                "pubtime": 1771301860,
+                "fav_time": 1771912508,
+                "bv_id": "BV1bfZVBYE52",
+                "bvid": "BV1bfZVBYE52",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 36117154187
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875469210760?page_type=3\u0026oid=116084023820962\u0026otype=2"
+            }
+        ],
+        "has_more": false,
+        "ttl": 1778585322
+    }
+}

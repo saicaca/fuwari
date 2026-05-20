@@ -26,6 +26,16 @@ Template blog statis yang dibangun dengan [Astro](https://astro.build).
 - [x] [Fitur markdown tambahan](#-markdown-sintaks-ekstensi)
 - [x] Daftar isi (Table of Contents)
 - [x] RSS feed
+- [x] Tautan teman
+- [x] Halaman bangumi Bilibili
+- [x] Halaman mengikuti Bilibili
+- [x] Halaman penggemar Bilibili
+- [x] Halaman dinamika Bilibili
+- [x] Halaman favorit Bilibili
+- [x] Halaman momen
+- [x] Halaman musik
+- [x] Pemutar musik sidebar
+- [x] Dukungan i18n (Bahasa Inggris, Jepang, Tionghoa, Korea, Spanyol, Thailand, Vietnam, dan Indonesia)
 
 ## 🚀 Memulai
 

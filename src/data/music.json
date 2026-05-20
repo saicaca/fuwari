@@ -1,0 +1,25 @@
+{
+    "songs": [
+        {
+            "title": "稻香 - AI天禄&辟邪",
+            "artist": "AI天禄&辟邪",
+            "up_name": "紫狐狸阿绫",
+            "artist_home": "https://space.bilibili.com/94815650",
+            "album": "有兽焉AI唱歌",
+            "time": "3:44",
+            "cover": "https://i1.hdslb.com/bfs/archive/369539ccf70699273b690c29055ccef992ef783f.jpg@672w_378h_1c.webp",
+            "v_url": "https://www.bilibili.com/video/BV1B96pYiEYy/",
+            "url": "/music/27622901344-1-30280.mp4",
+            "lrc": "/music/27622901344-1-30280.lrc"
+        },
+        {
+            "title": "千本樱",
+            "artist": "初音未来",
+            "album": "千本樱",
+            "time": "4:04",
+            "cover": "https://i1.hdslb.com/bfs/archive/d2003cf57978aa71231fc6ce2ff9a0b2a1119c89.jpg@672w_378h_1c.webp",
+            "v_url": "https://www.bilibili.com/video/BV1sM4y1V7x1/",
+            "url": "/music/395437261-1-30280.mp4"
+        }
+    ]
+}

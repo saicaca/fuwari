@@ -11,6 +11,7 @@ declare global {
 				}>;
 			}>;
 		};
+		__fuwariCopyButtonBound?: boolean;
 	}
 }
 

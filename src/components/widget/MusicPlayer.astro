@@ -1,0 +1,35 @@
+---
+import { MusicConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import { url } from "@/utils/url-utils";
+import { getMusicItems } from "@/utils/music";
+import MusicPlayerWidget from "./MusicPlayer.svelte";
+import WidgetLayout from "./WidgetLayout.astro";
+
+interface Props {
+	class?: string;
+	style?: string;
+}
+
+const className = Astro.props.class;
+const style = Astro.props.style;
+const { items } = await getMusicItems();
+const tracks = MusicConfig.enable ? items : [];
+---
+
+{
+	MusicConfig.enable && (
+		<WidgetLayout
+			name={i18n(I18nKey.music)}
+			i18nKey={I18nKey.music}
+			id="sidebar-music"
+			class={className}
+			style={style}
+		>
+			<div class="px-1 pb-1">
+				<MusicPlayerWidget client:load tracks={tracks} musicPageUrl={url("/music/")} />
+			</div>
+		</WidgetLayout>
+	)
+}

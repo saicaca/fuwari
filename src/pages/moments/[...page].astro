@@ -1,0 +1,39 @@
+---
+import Pagination from "@components/control/Pagination.astro";
+import MomentsComponent from "@components/Moments.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import type { GetStaticPaths } from "astro";
+import { MomentsConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import { getMomentsFeedResults, getSortedMoments } from "@/utils/moments";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const feedResults = await getMomentsFeedResults();
+	const moments = getSortedMoments(feedResults);
+	const errors = feedResults.filter((result) => result.error);
+	return paginate(moments, {
+		pageSize: Math.max(MomentsConfig.pageSize, 1),
+		params: { page: undefined },
+		props: { errors },
+	});
+}) satisfies GetStaticPaths;
+
+const { page, errors } = Astro.props;
+const showPagination =
+	!MomentsConfig.hidePaginationWhenSinglePage || page.lastPage > 1;
+---
+
+<MainGridLayout title={i18n(I18nKey.moments)} description={i18n(I18nKey.momentsDescription)}>
+	<MomentsComponent items={page.data} errors={errors} />
+	{
+		showPagination && (
+			<Pagination
+				class="mx-auto mt-4 onload-animation"
+				page={page}
+				basePath="/moments/"
+				style={`animation-delay: calc(var(--content-delay) + ${page.data.length * 50}ms)`}
+			/>
+		)
+	}
+</MainGridLayout>

@@ -1,0 +1,44 @@
+{
+	"code": 0,
+	"message": "OK",
+	"ttl": 1,
+	"data": {
+		"count": 3,
+		"list": [
+			{
+				"id": 3888540960,
+				"fid": 38885409,
+				"mid": 3546871542843760,
+				"attr": 22,
+				"title": "鬼畜",
+				"fav_state": 0,
+				"media_count": 1,
+				"is_kid_playlist": false,
+				"kid_playlist_desc": ""
+			},
+			{
+				"id": 3926367060,
+				"fid": 39263670,
+				"mid": 3546871542843760,
+				"attr": 22,
+				"title": "Furry",
+				"fav_state": 0,
+				"media_count": 10,
+				"is_kid_playlist": false,
+				"kid_playlist_desc": ""
+			},
+			{
+				"id": 3974342660,
+				"fid": 39743426,
+				"mid": 3546871542843760,
+				"attr": 22,
+				"title": "画!画!教!程!",
+				"fav_state": 0,
+				"media_count": 6,
+				"is_kid_playlist": false,
+				"kid_playlist_desc": ""
+			}
+		],
+		"season": null
+	}
+}

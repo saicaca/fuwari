@@ -1,0 +1,37 @@
+---
+import Pagination from "@components/control/Pagination.astro";
+import DynamicComponent from "@components/Dynamic.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import type { GetStaticPaths } from "astro";
+import { DynamicConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import { getDynamicItems } from "@/utils/dynamic";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const { items, errorMessage } = await getDynamicItems();
+	return paginate(items, {
+		pageSize: Math.max(DynamicConfig.pageSize, 1),
+		params: { page: undefined },
+		props: { errorMessage },
+	});
+}) satisfies GetStaticPaths;
+
+const { page, errorMessage } = Astro.props;
+const showPagination =
+	!DynamicConfig.hidePaginationWhenSinglePage || page.lastPage > 1;
+---
+
+<MainGridLayout title={i18n(I18nKey.dynamic)} description={i18n(I18nKey.dynamicDescription)}>
+	<DynamicComponent items={page.data} errorMessage={errorMessage} />
+	{
+		showPagination && (
+			<Pagination
+				class="mx-auto mt-6 onload-animation"
+				page={page}
+				basePath="/dynamic/"
+				style={`animation-delay: calc(var(--content-delay) + ${page.data.length * 50}ms)`}
+			/>
+		)
+	}
+</MainGridLayout>

@@ -1,0 +1,119 @@
+---
+import { Icon } from "astro-icon/components";
+import authIconSvg from "@/assets/svg/auth-icon.svg?raw";
+import { FansConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import { type FanItem, getFanUrl } from "@/utils/fans";
+import "../styles/follows.css";
+
+interface Props {
+	items: FanItem[];
+	errorMessage?: string;
+}
+
+const { items: fans, errorMessage = "" } = Astro.props;
+
+const getVerifyText = (item: FanItem) =>
+	item.official_verify?.desc || i18n(I18nKey.followsOfficial);
+const getVerifyType = (item: FanItem) => item.official_verify?.type;
+const hasOfficialVerify = (item: FanItem) =>
+	getVerifyType(item) === 0 || getVerifyType(item) === 1;
+const getVerifyColor = (item: FanItem) =>
+	getVerifyType(item) === 0 ? "#FFCC00" : "#40C5F1";
+const getVipType = (item: FanItem) => item.vip?.type ?? item.vip?.vipType ?? 0;
+const getVipLabelPath = (item: FanItem) => item.vip?.label?.path || "";
+const hasVipLabel = (item: FanItem) =>
+	getVipType(item) !== 0 && Boolean(getVipLabelPath(item));
+---
+
+<div class="follows-page follows-page-root">
+	<section class="follows-page-hero card-base">
+		<h1 class="follows-page-title text-90" data-i18n-key={I18nKey.fans}>
+			{i18n(I18nKey.fans)}
+		</h1>
+		<p class="follows-page-description text-50" data-i18n-key={I18nKey.fansDescription}>
+			{i18n(I18nKey.fansDescription)}
+		</p>
+	</section>
+
+	{
+		!FansConfig.enable && (
+			<section class="follows-state card-base text-50" data-i18n-key={I18nKey.fansDisabled}>
+				{i18n(I18nKey.fansDisabled)}
+			</section>
+		)
+	}
+
+	{
+		FansConfig.enable && errorMessage && (
+			<section class="follows-state card-base text-50">
+				<span data-i18n-key={I18nKey.fansLoadFailed}>
+					{i18n(I18nKey.fansLoadFailed)}
+				</span>
+				{errorMessage}
+			</section>
+		)
+	}
+
+	{
+		FansConfig.enable && !errorMessage && fans.length === 0 && (
+			<section class="follows-state card-base text-50" data-i18n-key={I18nKey.fansEmpty}>
+				{i18n(I18nKey.fansEmpty)}
+			</section>
+		)
+	}
+
+	{
+		FansConfig.enable && !errorMessage && fans.length > 0 && (
+			<section class="follows-list">
+				{fans.map((item, index) => (
+					<a
+						class="follows-card card-base text-90"
+						href={getFanUrl(item)}
+						target="_blank"
+						rel="noopener noreferrer"
+						style={`animation-delay: calc(var(--content-delay) + ${index * 50}ms)`}
+					>
+						<div class="follows-avatar-wrap">
+							<img class="follows-avatar" src={item.face} alt={item.uname} loading="lazy" referrerpolicy="no-referrer" />
+							{hasOfficialVerify(item) && (
+								<span
+									class="follows-auth-icon"
+									style={`--auth-color: ${getVerifyColor(item)}`}
+									title={getVerifyText(item)}
+									aria-label={getVerifyText(item)}
+									role="img"
+									set:html={authIconSvg}
+								/>
+							)}
+						</div>
+						<div class="follows-content">
+							<div class="follows-header">
+								<div class="follows-name-line">
+									<h2 class="follows-name" style={item.vip?.nickname_color ? `color: ${item.vip.nickname_color}` : undefined}>
+										{item.uname}
+									</h2>
+									{hasVipLabel(item) && (
+										<img
+											class="follows-vip-label"
+											src={getVipLabelPath(item)}
+											alt={item.vip?.label?.text || i18n(I18nKey.followsVip)}
+											loading="lazy"
+											referrerpolicy="no-referrer"
+										/>
+									)}
+								</div>
+								<Icon
+									class="follows-enter"
+									name="material-symbols:chevron-right-rounded"
+								/>
+							</div>
+							<p class="follows-sign text-50">{item.sign || "..."}</p>
+						</div>
+					</a>
+				))}
+			</section>
+		)
+	}
+</div>

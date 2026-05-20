@@ -1,1 +1,40 @@
-{}
+{
+	"headers": [
+		{
+			"source": "/rss.xml",
+			"headers": [
+				{
+					"key": "Content-Type",
+					"value": "text/xml; charset=utf-8"
+				}
+			]
+		},
+		{
+			"source": "/rss.xsl",
+			"headers": [
+				{
+					"key": "Content-Type",
+					"value": "text/xsl; charset=utf-8"
+				}
+			]
+		},
+		{
+			"source": "/:base*/rss.xml",
+			"headers": [
+				{
+					"key": "Content-Type",
+					"value": "text/xml; charset=utf-8"
+				}
+			]
+		},
+		{
+			"source": "/:base*/rss.xsl",
+			"headers": [
+				{
+					"key": "Content-Type",
+					"value": "text/xsl; charset=utf-8"
+				}
+			]
+		}
+	]
+}

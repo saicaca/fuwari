@@ -1,0 +1,326 @@
+---
+import { Icon } from "astro-icon/components";
+import {
+	BangumiConfig,
+	DynamicConfig,
+	FansConfig,
+	FavoritesConfig,
+	FollowsConfig,
+	MusicConfig,
+	MomentsConfig,
+} from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import { url } from "@/utils/url-utils";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+
+const bangumiTitleKey =
+	BangumiConfig.type === 2 ? I18nKey.bangumiDrama : I18nKey.bangumi;
+const bangumiDescriptionKey =
+	BangumiConfig.type === 2
+		? I18nKey.bangumiDramaOtherDescription
+		: I18nKey.bangumiOtherDescription;
+const bangumiTitle = i18n(bangumiTitleKey);
+const bangumiDescription =
+	BangumiConfig.type === 2
+		? i18n(I18nKey.bangumiDramaOtherDescription)
+		: i18n(I18nKey.bangumiOtherDescription);
+---
+
+<MainGridLayout title={i18n(I18nKey.other)} description={i18n(I18nKey.otherDescription)}>
+	<div class="other-page">
+		<section class="other-hero card-base">
+			<h1 class="other-title text-90" data-i18n-key={I18nKey.other}>
+				{i18n(I18nKey.other)}
+			</h1>
+			<p class="other-description text-50" data-i18n-key={I18nKey.otherDescription}>
+				{i18n(I18nKey.otherDescription)}
+			</p>
+		</section>
+
+		<section class="other-list">
+			{
+				MomentsConfig.enable && (
+					<a class="other-card card-base text-90" href={url("/moments/")}>
+						<div class="other-card-icon">
+							<Icon name="material-symbols:rss-feed-rounded" />
+						</div>
+						<div class="other-card-content">
+							<h2 data-i18n-key={I18nKey.moments}>{i18n(I18nKey.moments)}</h2>
+							<p class="text-50" data-i18n-key={I18nKey.momentsOtherDescription}>
+								{i18n(I18nKey.momentsOtherDescription)}
+							</p>
+						</div>
+						<Icon
+							class="other-card-enter"
+							name="material-symbols:chevron-right-rounded"
+						/>
+					</a>
+				)
+			}
+
+			{
+				BangumiConfig.enable && (
+					<a class="other-card card-base text-90" href={url("/bangumi/")}>
+						<div class="other-card-icon">
+							<Icon name="fa6-brands:bilibili" />
+						</div>
+						<div class="other-card-content">
+							<h2 data-i18n-key={bangumiTitleKey}>{bangumiTitle}</h2>
+							<p class="text-50" data-i18n-key={bangumiDescriptionKey}>
+								{bangumiDescription}
+							</p>
+						</div>
+						<Icon
+							class="other-card-enter"
+							name="material-symbols:chevron-right-rounded"
+						/>
+					</a>
+				)
+			}
+
+			{
+				MusicConfig.enable && (
+					<a class="other-card card-base text-90" href={url("/music/")}>
+						<div class="other-card-icon">
+							<Icon name="material-symbols:music-note-rounded" />
+						</div>
+						<div class="other-card-content">
+							<h2 data-i18n-key={I18nKey.music}>{i18n(I18nKey.music)}</h2>
+							<p class="text-50" data-i18n-key={I18nKey.musicOtherDescription}>
+								{i18n(I18nKey.musicOtherDescription)}
+							</p>
+						</div>
+						<Icon
+							class="other-card-enter"
+							name="material-symbols:chevron-right-rounded"
+						/>
+					</a>
+				)
+			}
+
+			{
+				FollowsConfig.enable && (
+					<a class="other-card card-base text-90" href={url("/follows/")}>
+						<div class="other-card-icon">
+							<Icon name="fa6-brands:bilibili" />
+						</div>
+						<div class="other-card-content">
+							<h2 data-i18n-key={I18nKey.follows}>{i18n(I18nKey.follows)}</h2>
+							<p class="text-50" data-i18n-key={I18nKey.followsOtherDescription}>
+								{i18n(I18nKey.followsOtherDescription)}
+							</p>
+						</div>
+						<Icon
+							class="other-card-enter"
+							name="material-symbols:chevron-right-rounded"
+						/>
+					</a>
+				)
+			}
+
+			{
+				FansConfig.enable && (
+					<a class="other-card card-base text-90" href={url("/fans/")}>
+						<div class="other-card-icon">
+							<Icon name="fa6-brands:bilibili" />
+						</div>
+						<div class="other-card-content">
+							<h2 data-i18n-key={I18nKey.fans}>{i18n(I18nKey.fans)}</h2>
+							<p class="text-50" data-i18n-key={I18nKey.fansOtherDescription}>
+								{i18n(I18nKey.fansOtherDescription)}
+							</p>
+						</div>
+						<Icon
+							class="other-card-enter"
+							name="material-symbols:chevron-right-rounded"
+						/>
+					</a>
+				)
+			}
+
+			{
+				DynamicConfig.enable && (
+					<a class="other-card card-base text-90" href={url("/dynamic/")}>
+						<div class="other-card-icon">
+							<Icon name="fa6-brands:bilibili" />
+						</div>
+						<div class="other-card-content">
+							<h2 data-i18n-key={I18nKey.dynamic}>{i18n(I18nKey.dynamic)}</h2>
+							<p class="text-50" data-i18n-key={I18nKey.dynamicOtherDescription}>
+								{i18n(I18nKey.dynamicOtherDescription)}
+							</p>
+						</div>
+						<Icon
+							class="other-card-enter"
+							name="material-symbols:chevron-right-rounded"
+						/>
+					</a>
+				)
+			}
+
+			{
+				FavoritesConfig.enable && (
+					<a class="other-card card-base text-90" href={url("/favs/")}>
+						<div class="other-card-icon">
+							<Icon name="fa6-brands:bilibili" />
+						</div>
+						<div class="other-card-content">
+							<h2 data-i18n-key={I18nKey.favs}>{i18n(I18nKey.favs)}</h2>
+							<p class="text-50" data-i18n-key={I18nKey.favsOtherDescription}>
+								{i18n(I18nKey.favsOtherDescription)}
+							</p>
+						</div>
+						<Icon
+							class="other-card-enter"
+							name="material-symbols:chevron-right-rounded"
+						/>
+					</a>
+				)
+			}
+		</section>
+	</div>
+</MainGridLayout>
+
+<style>
+	.other-page {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.other-hero {
+		padding: 1.6rem;
+	}
+
+	.other-title {
+		margin: 0 0 0.5rem;
+		font-size: 2rem;
+		font-weight: 700;
+	}
+
+	.other-description {
+		margin: 0;
+	}
+
+	.other-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		gap: 1rem;
+	}
+
+	.other-card {
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		min-height: 96px;
+		padding: 1rem;
+		text-decoration: none;
+		transition:
+			transform 0.25s ease,
+			box-shadow 0.25s ease,
+			border-color 0.25s ease;
+	}
+
+	.other-card::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background:
+			radial-gradient(
+				circle at top left,
+				rgba(var(--primary), 0.18),
+				transparent 45%
+			),
+			linear-gradient(135deg, rgba(var(--primary), 0.08), transparent 55%);
+		opacity: 0;
+		transition: opacity 0.25s ease;
+	}
+
+	.other-card:hover {
+		transform: translateY(-4px);
+		border-color: rgba(var(--primary), 0.45);
+		box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+	}
+
+	.other-card:hover::before {
+		opacity: 1;
+	}
+
+	.other-card-icon {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex: 0 0 auto;
+		align-items: center;
+		justify-content: center;
+		width: 58px;
+		height: 58px;
+		border-radius: 50%;
+		background: linear-gradient(
+			135deg,
+			rgba(var(--primary), 0.9),
+			rgba(var(--primary), 0.25)
+		);
+		color: white;
+		font-size: 1.65rem;
+	}
+
+	.other-card-content {
+		position: relative;
+		z-index: 1;
+		min-width: 0;
+		flex: 1;
+	}
+
+	.other-card-content h2 {
+		margin: 0 0 0.35rem;
+		font-size: 1.05rem;
+		font-weight: 700;
+	}
+
+	.other-card-content p {
+		margin: 0;
+		font-size: 0.9rem;
+		line-height: 1.45;
+	}
+
+	.other-card-enter {
+		position: relative;
+		z-index: 1;
+		flex: 0 0 auto;
+		width: 2rem;
+		height: 2rem;
+		color: rgb(var(--primary));
+		opacity: 0;
+		transform: translateX(-0.25rem);
+		transition:
+			opacity 0.25s ease,
+			transform 0.25s ease;
+	}
+
+	.other-card:hover .other-card-enter {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	@media (max-width: 640px) {
+		.other-hero {
+			padding: 1.25rem;
+		}
+
+		.other-list {
+			grid-template-columns: 1fr;
+		}
+
+		.other-card {
+			min-height: 88px;
+		}
+
+		.other-card-icon {
+			width: 52px;
+			height: 52px;
+		}
+	}
+</style>

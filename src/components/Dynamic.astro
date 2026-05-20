@@ -1,0 +1,128 @@
+---
+import { Icon } from "astro-icon/components";
+import { DynamicConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import {
+	type DynamicItem,
+	getDynamicBadge,
+	getDynamicCover,
+	getDynamicText,
+	getDynamicTitle,
+	getDynamicUrl,
+} from "@/utils/dynamic";
+import "../styles/dynamic.css";
+
+interface Props {
+	items: DynamicItem[];
+	errorMessage?: string;
+}
+
+const { items: dynamicItems, errorMessage = "" } = Astro.props;
+
+const getAuthor = (item: DynamicItem) => item.modules?.module_author;
+const getStatCount = (count: number | undefined) => count ?? 0;
+---
+
+<div class="dynamic-page dynamic-page-root">
+	<section class="dynamic-page-hero card-base">
+		<h1 class="dynamic-page-title text-90" data-i18n-key={I18nKey.dynamic}>
+			{i18n(I18nKey.dynamic)}
+		</h1>
+		<p class="dynamic-page-description text-50" data-i18n-key={I18nKey.dynamicDescription}>
+			{i18n(I18nKey.dynamicDescription)}
+		</p>
+	</section>
+
+	{
+		!DynamicConfig.enable && (
+			<section class="dynamic-state card-base text-50" data-i18n-key={I18nKey.dynamicDisabled}>
+				{i18n(I18nKey.dynamicDisabled)}
+			</section>
+		)
+	}
+
+	{
+		DynamicConfig.enable && errorMessage && (
+			<section class="dynamic-state card-base text-50">
+				<span data-i18n-key={I18nKey.dynamicLoadFailed}>
+					{i18n(I18nKey.dynamicLoadFailed)}
+				</span>
+				{errorMessage}
+			</section>
+		)
+	}
+
+	{
+		DynamicConfig.enable && !errorMessage && dynamicItems.length === 0 && (
+			<section class="dynamic-state card-base text-50" data-i18n-key={I18nKey.dynamicEmpty}>
+				{i18n(I18nKey.dynamicEmpty)}
+			</section>
+		)
+	}
+
+	{
+		DynamicConfig.enable && !errorMessage && dynamicItems.length > 0 && (
+			<section class="dynamic-list">
+				{dynamicItems.map((item, index) => {
+					const author = getAuthor(item);
+					const cover = getDynamicCover(item);
+					const text = getDynamicText(item);
+					const stats = item.modules?.module_stat;
+					return (
+						<a
+							class="dynamic-card card-base text-90"
+							href={getDynamicUrl(item)}
+							target="_blank"
+							rel="noopener noreferrer"
+							style={`animation-delay: calc(var(--content-delay) + ${index * 50}ms)`}
+						>
+							{cover && (
+								<div class="dynamic-cover">
+									<img src={cover} alt={getDynamicTitle(item)} loading="lazy" referrerpolicy="no-referrer" />
+									<span class="dynamic-badge">{getDynamicBadge(item)}</span>
+								</div>
+							)}
+							<div class="dynamic-content">
+								<div class="dynamic-meta">
+									{author?.face && (
+										<img
+											class="dynamic-avatar"
+											src={author.face}
+											alt={author.name || ""}
+											loading="lazy"
+											referrerpolicy="no-referrer"
+										/>
+									)}
+									<div class="dynamic-author">
+										<p class="dynamic-author-name">{author?.name || "Bilibili"}</p>
+										<p class="dynamic-time text-50">
+											{author?.pub_action ? `${author.pub_action} · ` : ""}
+											{author?.pub_time || ""}
+										</p>
+									</div>
+								</div>
+								<h2 class="dynamic-title">{getDynamicTitle(item)}</h2>
+								{text && <p class="dynamic-text text-50">{text}</p>}
+								<div class="dynamic-stats text-50">
+									<span title={i18n(I18nKey.dynamicStatForward)}>
+										<Icon name="material-symbols:share-outline" />
+										{getStatCount(stats?.forward?.count)}
+									</span>
+									<span title={i18n(I18nKey.dynamicStatComment)}>
+										<Icon name="material-symbols:mode-comment-outline" />
+										{getStatCount(stats?.comment?.count)}
+									</span>
+									<span title={i18n(I18nKey.dynamicStatLike)}>
+										<Icon name="material-symbols:thumb-up-outline" />
+										{getStatCount(stats?.like?.count)}
+									</span>
+								</div>
+							</div>
+						</a>
+					);
+				})}
+			</section>
+		)
+	}
+</div>

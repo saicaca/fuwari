@@ -1,0 +1,49 @@
+---
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import { linksConfig } from "@/config";
+import "../styles/links.css";
+---
+
+<div class="links-page links-page-root">
+	<section class="links-page-hero card-base">
+		<h1 class="links-page-title text-90" data-i18n-key={I18nKey.links}>
+			{i18n(I18nKey.links)}
+		</h1>
+		<p class="links-page-description text-50" data-i18n-key={I18nKey.linksDescription}>
+			{i18n(I18nKey.linksDescription)}
+		</p>
+	</section>
+
+	<section class="links-page-grid links-grid">
+		{
+			linksConfig.map((friend) => (
+				<a
+					class="friend-card friend-link-card card-base text-90"
+					href={friend.url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<div class="friend-card-avatar-wrap avatar-wrap">
+						<img
+							class="friend-card-avatar"
+							src={friend.avatar}
+							alt={friend.name}
+							loading="lazy"
+						/>
+					</div>
+
+					<div class="friend-card-content friend-info">
+						<h2 class="friend-card-name">{friend.name}</h2>
+						<p
+							class="friend-card-description text-50"
+							data-i18n-key={friend.descI18nKey}
+						>
+							{friend.descI18nKey ? i18n(friend.descI18nKey) : friend.desc}
+						</p>
+					</div>
+				</a>
+			))
+		}
+	</section>
+</div>

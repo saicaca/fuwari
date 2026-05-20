@@ -1,0 +1,14 @@
+---
+import MainGridLayout from '../layouts/MainGridLayout.astro'
+---
+
+<MainGridLayout title="文件列表" description="文件列表">
+    <iframe src="https://zfl.pages.dev/" class="files-iframe" loading="lazy"></iframe>
+</MainGridLayout>
+<style>
+  .files-iframe {
+    width: 100%;
+    height: 630px;
+    border: none;   /* 去掉默认边框 */
+  }
+</style>

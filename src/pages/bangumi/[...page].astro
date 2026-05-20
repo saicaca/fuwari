@@ -1,0 +1,45 @@
+---
+import BangumiComponent from "@components/Bangumi.astro";
+import Pagination from "@components/control/Pagination.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import type { GetStaticPaths } from "astro";
+import { BangumiConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import { getBangumiItems } from "@/utils/bangumi";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const { items, errorMessage } = await getBangumiItems();
+	return paginate(items, {
+		pageSize: Math.max(BangumiConfig.pageSize, 1),
+		params: { page: undefined },
+		props: { errorMessage },
+	});
+}) satisfies GetStaticPaths;
+
+const { page, errorMessage } = Astro.props;
+const pageTitle = i18n(
+	BangumiConfig.type === 2 ? I18nKey.bangumiDrama : I18nKey.bangumi,
+);
+const pageDescription = i18n(
+	BangumiConfig.type === 2
+		? I18nKey.bangumiDramaDescription
+		: I18nKey.bangumiDescription,
+);
+const showPagination =
+	!BangumiConfig.hidePaginationWhenSinglePage || page.lastPage > 1;
+---
+
+<MainGridLayout title={pageTitle} description={pageDescription}>
+	<BangumiComponent items={page.data} errorMessage={errorMessage} />
+	{
+		showPagination && (
+			<Pagination
+				class="mx-auto onload-animation"
+				page={page}
+				basePath="/bangumi/"
+				style={`animation-delay: calc(var(--content-delay) + ${page.data.length * 50}ms)`}
+			/>
+		)
+	}
+</MainGridLayout>

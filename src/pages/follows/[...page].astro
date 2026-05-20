@@ -1,0 +1,37 @@
+---
+import Pagination from "@components/control/Pagination.astro";
+import FollowsComponent from "@components/Follows.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import type { GetStaticPaths } from "astro";
+import { FollowsConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import { getFollowItems } from "@/utils/follows";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const { items, errorMessage } = await getFollowItems();
+	return paginate(items, {
+		pageSize: Math.max(FollowsConfig.pageSize, 1),
+		params: { page: undefined },
+		props: { errorMessage },
+	});
+}) satisfies GetStaticPaths;
+
+const { page, errorMessage } = Astro.props;
+const showPagination =
+	!FollowsConfig.hidePaginationWhenSinglePage || page.lastPage > 1;
+---
+
+<MainGridLayout title={i18n(I18nKey.follows)} description={i18n(I18nKey.followsDescription)}>
+	<FollowsComponent items={page.data} errorMessage={errorMessage} />
+	{
+		showPagination && (
+			<Pagination
+				class="mx-auto mt-6 onload-animation"
+				page={page}
+				basePath="/follows/"
+				style={`animation-delay: calc(var(--content-delay) + ${page.data.length * 50}ms)`}
+			/>
+		)
+	}
+</MainGridLayout>

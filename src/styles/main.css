@@ -1,27 +1,62 @@
-@tailwind components;
+@reference "./tailwind-reference.css";
 
 @layer components {
     .card-base {
         @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition;
+        /*border: 1px solid var(--card-border);*/
+        box-shadow: var(--card-shadow);
+        /*-webkit-backdrop-filter: saturate(1.2) blur(var(--card-backdrop-blur));*/
+        /*backdrop-filter: saturate(1.2) blur(var(--card-backdrop-blur));*/
     }
     h1, h2, h3, h4, h5, h6, p, a, span, li, ul, ol, blockquote, code, pre, table, th, td, strong {
         @apply transition;
     }
-    .card-shadow {
+    /*.card-shadow {
         @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)]
+    }*/
+    .expand-animation,
+    .link,
+    .link-lg,
+    .btn-plain.scale-animation {
+        position: relative;
+        z-index: 0;
     }
-    .expand-animation {
-        @apply relative before:ease-out before:transition active:bg-none hover:before:bg-[var(--btn-plain-bg-hover)] active:before:bg-[var(--btn-plain-bg-active)] z-0
-        before:absolute before:rounded-[inherit] before:inset-0 before:scale-[0.85] hover:before:scale-100 before:-z-10
+    .expand-animation::before,
+    .link::before,
+    .link-lg::before,
+    .btn-plain.scale-animation::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -10;
+        border-radius: inherit;
+        scale: 0.85;
+        transition: all 150ms ease-out;
+    }
+    .expand-animation:hover::before,
+    .link:hover::before,
+    .link-lg:hover::before,
+    .btn-plain.scale-animation:hover::before {
+        scale: 1;
+        background: var(--btn-plain-bg-hover);
+    }
+    .expand-animation:active::before,
+    .link:active::before,
+    .link-lg:active::before,
+    .btn-plain.scale-animation:active::before {
+        background: var(--btn-plain-bg-active);
     }
     .link {
-        @apply transition rounded-md p-1 -m-1 expand-animation;
+        @apply transition rounded-md p-1 -m-1;
     }
     .link-lg {
-        @apply transition rounded-md p-1.5 -m-1.5 expand-animation;
+        @apply transition rounded-md p-1.5 -m-1.5;
     }
     .float-panel {
-        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none
+        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--float-panel-bg)] transition shadow-xl dark:shadow-none;
+        /*border: 1px solid var(--card-border);
+        -webkit-backdrop-filter: saturate(1.2) blur(var(--card-backdrop-blur));
+        backdrop-filter: saturate(1.2) blur(var(--card-backdrop-blur));*/
     }
     .float-panel-closed {
         @apply -translate-y-1 opacity-0 pointer-events-none
@@ -44,7 +79,6 @@
             @apply hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
         }
         &.scale-animation {
-            @apply expand-animation;
             &.current-theme-btn {
                 @apply before:scale-100 before:opacity-100 before:bg-[var(--btn-plain-bg-hover)] text-[var(--primary)]
             }

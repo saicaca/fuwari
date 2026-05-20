@@ -16,6 +16,17 @@ Un tema estático para blogs construido con [Astro](https://astro.build).
 - [ ] Comentarios
 - [x] Buscador
 - [x] TOC (Tabla de Contenidos)
+- [x] Fuente RSS
+- [x] Enlaces de amigos
+- [x] Página de animes de Bilibili
+- [x] Página de seguidos de Bilibili
+- [x] Página de fans de Bilibili
+- [x] Página de dinámicas de Bilibili
+- [x] Página de favoritos de Bilibili
+- [x] Página de momentos
+- [x] Página de música
+- [x] Reproductor de música en la barra lateral
+- [x] Soporte i18n (inglés, japonés, chino, coreano, español, tailandés, vietnamita e indonesio)
 
 ## 👀 requiere
 

@@ -1,12 +1,21 @@
+@reference "./tailwind-reference.css";
+
 .pswp__button {
-    @apply transition bg-black/40 hover:bg-black/50 active:bg-black/60 flex items-center justify-center mr-0 w-12 h-12 !important;
+    @apply transition bg-black/40 hover:bg-black/50 active:bg-black/60 flex items-center justify-center mr-0 w-12 h-12;
+    margin-right: 0 !important;
+    width: 3rem !important;
+    height: 3rem !important;
 }
 .pswp__button--zoom, .pswp__button--close {
-    @apply mt-4 rounded-xl active:scale-90 !important;
+    @apply mt-4 rounded-xl active:scale-90;
+    margin-top: 1rem !important;
+    border-radius: 0.75rem !important;
 }
 .pswp__button--zoom {
-    @apply mr-2.5 !important;
+    @apply mr-2.5;
+    margin-right: 0.625rem !important;
 }
 .pswp__button--close {
-    @apply mr-4 !important;
+    @apply mr-4;
+    margin-right: 1rem !important;
 }

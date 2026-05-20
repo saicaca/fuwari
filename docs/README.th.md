@@ -17,6 +17,16 @@
 - [x] [คุณสมบัติเพิ่มเติมสำหรับมาร์กดาวน์](https://github.com/saicaca/fuwari/blob/main/docs/README.th.md#-markdown-extended-syntax)
 - [x] สารบัญ
 - [x] RSS feed
+- [x] หน้าลิงก์เพื่อน
+- [x] หน้าอนิเมะ Bilibili
+- [x] หน้ารายการติดตาม Bilibili
+- [x] หน้าแฟนคลับ Bilibili
+- [x] หน้าฟีดไดนามิก Bilibili
+- [x] หน้ารายการโปรด Bilibili
+- [x] หน้า Moments
+- [x] หน้าดนตรี
+- [x] เครื่องเล่นเพลงบนแถบด้านข้าง
+- [x] รองรับ i18n (อังกฤษ ญี่ปุ่น จีน เกาหลี สเปน ไทย เวียดนาม และอินโดนีเซีย)
 
 ## 🚀 เริ่มต้นใช้งาน
 

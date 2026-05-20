@@ -17,6 +17,16 @@
 - [x] [Markdown 확장 기능](https://github.com/saicaca/fuwari?tab=readme-ov-file#-markdown-extended-syntax)
 - [x] 목차
 - [x] RSS 피드
+- [x] 친구 링크
+- [x] Bilibili 방영작 페이지
+- [x] Bilibili 팔로우 페이지
+- [x] Bilibili 팬 페이지
+- [x] Bilibili 동적 페이지
+- [x] Bilibili 즐겨찾기 페이지
+- [x] 모멘트 페이지
+- [x] 음악 페이지
+- [x] 사이드바 음악 플레이어
+- [x] i18n 지원(영어, 일본어, 중국어, 한국어, 스페인어, 태국어, 베트남어, 인도네시아어)
 
 ## 🚀 시작하기
 1. 블로그 저장소를 생성하세요:

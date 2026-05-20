@@ -17,6 +17,16 @@ Một mẫu blog tĩnh được xây bằng [Astro](https://astro.build).
 - [x] [Có các tính năng mở rộng của Markdown](https://github.com/saicaca/fuwari?tab=readme-ov-file#-markdown-extended-syntax)
 - [x] Có mục lục
 - [x] Nguồn cấp dữ liệu RSS
+- [x] Trang liên kết bạn bè
+- [x] Trang bangumi Bilibili
+- [x] Trang theo dõi Bilibili
+- [x] Trang người hâm mộ Bilibili
+- [x] Trang động thái Bilibili
+- [x] Trang yêu thích Bilibili
+- [x] Trang khoảnh khắc
+- [x] Trang âm nhạc
+- [x] Trình phát nhạc ở thanh bên
+- [x] Hỗ trợ i18n (tiếng Anh, tiếng Nhật, tiếng Trung, tiếng Hàn, tiếng Tây Ban Nha, tiếng Thái, tiếng Việt và tiếng Indonesia)
 
 ## 🚀 Bắt đầu
 

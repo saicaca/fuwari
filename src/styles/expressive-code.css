@@ -1,3 +1,5 @@
+@reference "./tailwind-reference.css";
+
 .expressive-code {
     .frame {
         @apply !shadow-none;

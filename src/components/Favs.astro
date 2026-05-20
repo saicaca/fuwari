@@ -1,0 +1,98 @@
+---
+import { FavoritesConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import {
+	type FavoriteFolder,
+	formatFavoriteCount,
+	getFavoriteFolderUrl,
+} from "@/utils/favorites";
+import { url } from "@/utils/url-utils";
+import "../styles/favorites.css";
+
+interface Props {
+	items: FavoriteFolder[];
+	errorMessage?: string;
+}
+
+const { items: folders, errorMessage = "" } = Astro.props;
+---
+
+<div class="favorites-page favorites-page-root">
+	<section class="favorites-page-hero card-base">
+		<h1 class="favorites-page-title text-90" data-i18n-key={I18nKey.favs}>
+			{i18n(I18nKey.favs)}
+		</h1>
+		<p class="favorites-page-description text-50" data-i18n-key={I18nKey.favsDescription}>
+			{i18n(I18nKey.favsDescription)}
+		</p>
+	</section>
+
+	{
+		!FavoritesConfig.enable && (
+			<section class="favorites-state card-base text-50" data-i18n-key={I18nKey.favsDisabled}>
+				{i18n(I18nKey.favsDisabled)}
+			</section>
+		)
+	}
+
+	{
+		FavoritesConfig.enable && errorMessage && (
+			<section class="favorites-state card-base text-50">
+				<span data-i18n-key={I18nKey.favsLoadFailed}>
+					{i18n(I18nKey.favsLoadFailed)}
+				</span>
+				{errorMessage}
+			</section>
+		)
+	}
+
+	{
+		FavoritesConfig.enable && !errorMessage && folders.length === 0 && (
+			<section class="favorites-state card-base text-50" data-i18n-key={I18nKey.favsEmpty}>
+				{i18n(I18nKey.favsEmpty)}
+			</section>
+		)
+	}
+
+	{
+		FavoritesConfig.enable && !errorMessage && folders.length > 0 && (
+			<section class="favorites-list">
+				{folders.map((folder, index) => (
+					<a
+						class="favorites-card card-base text-90"
+						href={url(getFavoriteFolderUrl(folder))}
+						style={`animation-delay: calc(var(--content-delay) + ${index * 50}ms)`}
+					>
+						<div class="favorites-cover">
+							{
+								folder.cover && (
+									<img
+										src={folder.cover}
+										alt={folder.title}
+										loading="lazy"
+										referrerpolicy="no-referrer"
+									/>
+								)
+							}
+							<span class="favorites-cover-badge">
+								{formatFavoriteCount(folder.media_count)} {i18n(I18nKey.favsMediaCount)}
+							</span>
+						</div>
+						<div class="favorites-content">
+							<h2 class="favorites-title">{folder.title}</h2>
+							{folder.intro && <p class="favorites-intro text-50">{folder.intro}</p>}
+							<div class="favorites-meta text-50">
+								{folder.upper?.name && (
+									<span>
+										{i18n(I18nKey.favsOwner)}: {folder.upper.name}
+									</span>
+								)}
+							</div>
+						</div>
+					</a>
+				))}
+			</section>
+		)
+	}
+</div>

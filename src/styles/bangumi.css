@@ -1,0 +1,214 @@
+.bangumi-page-root {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.bangumi-page-hero {
+	padding: 1.6rem;
+}
+
+.bangumi-page-title {
+	margin: 0 0 0.5rem;
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.bangumi-page-description {
+	margin: 0;
+}
+
+.bangumi-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.bangumi-card {
+	position: relative;
+	display: grid;
+	grid-template-columns: 132px minmax(0, 1fr);
+	gap: 1.25rem;
+	min-height: 188px;
+	padding: 1rem;
+	text-decoration: none;
+	overflow: hidden;
+	transition:
+		transform 0.25s ease,
+		box-shadow 0.25s ease,
+		border-color 0.25s ease;
+}
+
+.bangumi-card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(
+			circle at top left,
+			rgba(var(--primary), 0.16),
+			transparent 42%
+		),
+		linear-gradient(135deg, rgba(var(--primary), 0.08), transparent 58%);
+	opacity: 0;
+	transition: opacity 0.25s ease;
+}
+
+.bangumi-card:hover {
+	transform: translateY(-4px);
+	border-color: rgba(var(--primary), 0.45);
+	box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+}
+
+.bangumi-card:hover::before {
+	opacity: 1;
+}
+
+.bangumi-cover-wrap {
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+	border-radius: 0.75rem;
+	background: var(--card-bg);
+	aspect-ratio: 3 / 4;
+}
+
+.bangumi-cover {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.25s ease;
+}
+
+.bangumi-card:hover .bangumi-cover {
+	transform: scale(1.04);
+}
+
+.bangumi-badge {
+	position: absolute;
+	top: 0.55rem;
+	left: 0.55rem;
+	padding: 0.15rem 0.45rem;
+	border-radius: 999px;
+	background: rgba(var(--primary), 0.9);
+	color: white;
+	font-size: 0.75rem;
+	font-weight: 700;
+}
+
+.bangumi-content {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	min-width: 0;
+	flex-direction: column;
+	gap: 0.65rem;
+	padding: 0.15rem 0;
+}
+
+.bangumi-header {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+}
+
+.bangumi-name {
+	flex: 1;
+	min-width: 0;
+	margin: 0;
+	font-size: 1.35rem;
+	font-weight: 700;
+	line-height: 1.35;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.bangumi-enter {
+	flex: 0 0 auto;
+	width: 2rem;
+	height: 2rem;
+	color: rgb(var(--primary));
+	opacity: 0;
+	transform: translateX(-0.25rem);
+	transition:
+		opacity 0.25s ease,
+		transform 0.25s ease;
+}
+
+.bangumi-card:hover .bangumi-enter {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.bangumi-meta,
+.bangumi-footer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem 0.75rem;
+	font-size: 0.88rem;
+}
+
+.bangumi-meta span,
+.bangumi-footer span {
+	position: relative;
+}
+
+.bangumi-meta span + span::before,
+.bangumi-footer span + span::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: -0.42rem;
+	width: 3px;
+	height: 3px;
+	border-radius: 50%;
+	background: currentColor;
+	opacity: 0.45;
+	transform: translateY(-50%);
+}
+
+.bangumi-summary {
+	margin: 0;
+	line-height: 1.65;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.bangumi-progress {
+	font-weight: 700;
+	color: rgb(var(--primary));
+}
+
+.bangumi-state {
+	padding: 1.25rem 1.5rem;
+}
+
+@media (max-width: 640px) {
+	.bangumi-page-hero {
+		padding: 1.25rem;
+	}
+
+	.bangumi-card {
+		grid-template-columns: 96px minmax(0, 1fr);
+		gap: 0.9rem;
+		min-height: 148px;
+		padding: 0.85rem;
+	}
+
+	.bangumi-name {
+		font-size: 1.05rem;
+	}
+
+	.bangumi-summary {
+		-webkit-line-clamp: 2;
+		font-size: 0.9rem;
+	}
+
+	.bangumi-enter {
+		display: none;
+	}
+}

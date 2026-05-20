@@ -1,0 +1,113 @@
+---
+import { FavoritesConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import {
+	type FavoriteFolder,
+	type FavoriteMedia,
+	formatFavoriteCount,
+	formatFavoriteDuration,
+	getFavoriteMediaUrl,
+} from "@/utils/favorites";
+import "../styles/favorites.css";
+
+interface Props {
+	folder: FavoriteFolder | null;
+	items: FavoriteMedia[];
+	errorMessage?: string;
+}
+
+const { folder, items, errorMessage = "" } = Astro.props;
+---
+
+<div class="favorites-page favorites-page-root">
+	<section class="favorites-page-hero card-base">
+		<h1 class="favorites-page-title text-90">{folder?.title || i18n(I18nKey.favs)}</h1>
+		<p class="favorites-page-description text-50">
+			{folder?.intro || i18n(I18nKey.favsDescription)}
+		</p>
+	</section>
+
+	{
+		!FavoritesConfig.enable && (
+			<section class="favorites-state card-base text-50" data-i18n-key={I18nKey.favsDisabled}>
+				{i18n(I18nKey.favsDisabled)}
+			</section>
+		)
+	}
+
+	{
+		FavoritesConfig.enable && errorMessage && (
+			<section class="favorites-state card-base text-50">
+				<span data-i18n-key={I18nKey.favsLoadFailed}>
+					{i18n(I18nKey.favsLoadFailed)}
+				</span>
+				{errorMessage}
+			</section>
+		)
+	}
+
+	{
+		FavoritesConfig.enable && !errorMessage && items.length === 0 && (
+			<section class="favorites-state card-base text-50" data-i18n-key={I18nKey.favResourcesEmpty}>
+				{i18n(I18nKey.favResourcesEmpty)}
+			</section>
+		)
+	}
+
+	{
+		FavoritesConfig.enable && !errorMessage && items.length > 0 && (
+			<section class="favorites-list">
+				{items.map((media, index) => (
+					<a
+						class="fav-resource-card card-base text-90"
+						href={getFavoriteMediaUrl(media)}
+						target="_blank"
+						rel="noopener noreferrer"
+						style={`animation-delay: calc(var(--content-delay) + ${index * 50}ms)`}
+					>
+						<div class="fav-resource-cover">
+							{
+								media.cover ? (
+									<img
+										src={media.cover}
+										alt={media.title}
+										loading="lazy"
+										referrerpolicy="no-referrer"
+									/>
+								) : (
+									<div class="fav-resource-placeholder" />
+								)
+							}
+							{formatFavoriteDuration(media.duration) && (
+								<span class="fav-resource-duration">
+									{formatFavoriteDuration(media.duration)}
+								</span>
+							)}
+						</div>
+						<div class="fav-resource-content">
+							<h2 class="fav-resource-title">{media.title}</h2>
+							{media.intro && <p class="fav-resource-intro text-50">{media.intro}</p>}
+							<div class="fav-resource-meta text-50">
+								{media.upper?.name && (
+									<span>
+										{i18n(I18nKey.favsOwner)}: {media.upper.name}
+									</span>
+								)}
+								<span>
+									{i18n(I18nKey.favStatPlay)}: {formatFavoriteCount(media.cnt_info?.play)}
+								</span>
+								<span>
+									{i18n(I18nKey.favStatCollect)}: {formatFavoriteCount(media.cnt_info?.collect)}
+								</span>
+								<span>
+									{i18n(I18nKey.favStatDanmaku)}: {formatFavoriteCount(media.cnt_info?.danmaku)}
+								</span>
+							</div>
+						</div>
+					</a>
+				))}
+			</section>
+		)
+	}
+</div>

@@ -1,0 +1,20 @@
+---
+import MusicPlayer from "@components/MusicPlayer.svelte";
+import { MusicConfig } from "@/config";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getMusicItems } from "@utils/music";
+
+const { items, errorMessage } = await getMusicItems();
+---
+
+<MainGridLayout title={i18n(I18nKey.music)} description={i18n(I18nKey.musicDescription)}>
+	<MusicPlayer
+		client:load
+		tracks={items}
+		enabled={MusicConfig.enable}
+		errorMessage={errorMessage}
+		initialVolume={MusicConfig.defaultVolume}
+	/>
+</MainGridLayout>

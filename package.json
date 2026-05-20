@@ -1,7 +1,7 @@
 {
   "name": "fuwari",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -19,8 +19,7 @@
     "@astrojs/check": "^0.9.6",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/svelte": "7.2.3",
-    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/svelte": "^8.0.4",
     "@expressive-code/core": "^0.41.4",
     "@expressive-code/plugin-collapsible-sections": "^0.41.4",
     "@expressive-code/plugin-line-numbers": "^0.41.4",
@@ -32,15 +31,15 @@
     "@iconify-json/material-symbols": "^1.2.50",
     "@iconify/svelte": "^4.2.0",
     "@swup/astro": "^1.7.0",
+    "@tailwindcss/vite": "^4.1.14",
     "@tailwindcss/typography": "^0.5.19",
-    "astro": "5.13.10",
+    "astro": "^6.3.3",
     "astro-expressive-code": "^0.41.4",
     "astro-icon": "^1.1.5",
     "hastscript": "^9.0.1",
     "katex": "^0.16.27",
     "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",
-    "overlayscrollbars": "^2.12.0",
     "pagefind": "^1.4.0",
     "photoswipe": "^5.4.4",
     "reading-time": "^1.5.0",
@@ -57,20 +56,18 @@
     "sharp": "^0.34.5",
     "stylus": "^0.64.0",
     "svelte": "^5.39.8",
-    "tailwindcss": "^3.4.19",
+    "tailwindcss": "^4.1.14",
     "typescript": "^5.9.3",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.6",
     "@biomejs/biome": "2.2.5",
-    "@rollup/plugin-yaml": "^4.1.2",
     "@types/hast": "^3.0.4",
     "@types/markdown-it": "^14.1.2",
     "@types/mdast": "^4.0.4",
     "@types/sanitize-html": "^2.16.0",
-    "postcss-import": "^16.1.1",
-    "postcss-nesting": "^13.0.2"
+    "rollup": "^4.53.3"
   },
   "packageManager": "pnpm@9.14.4"
 }

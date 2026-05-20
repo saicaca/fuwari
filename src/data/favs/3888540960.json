@@ -1,0 +1,82 @@
+{
+    "code": 0,
+    "message": "OK",
+    "ttl": 1,
+    "data": {
+        "info": {
+            "id": 3888540960,
+            "fid": 38885409,
+            "mid": 3546871542843760,
+            "attr": 22,
+            "title": "鬼畜",
+            "cover": "http://i0.hdslb.com/bfs/archive/c42c115b046b081430f6f3743751591eccd43ed3.jpg",
+            "upper": {
+                "mid": 3546871542843760,
+                "name": "Unity_exe",
+                "face": "https://i1.hdslb.com/bfs/face/015e582a37278cbe79b490baaec1be82d844fb0a.jpg",
+                "followed": false,
+                "vip_type": 0,
+                "vip_statue": 0
+            },
+            "cover_type": 2,
+            "cnt_info": {
+                "collect": 0,
+                "play": 0,
+                "thumb_up": 0,
+                "share": 0
+            },
+            "type": 11,
+            "intro": "",
+            "ctime": 1776861911,
+            "mtime": 1776861911,
+            "state": 0,
+            "fav_state": 0,
+            "like_state": 0,
+            "media_count": 1,
+            "is_top": false,
+            "is_kid_playlist": false,
+            "kid_playlist_desc": ""
+        },
+        "medias": [
+            {
+                "id": 395300311,
+                "type": 2,
+                "title": "《阳 光 开 朗 小 破 站》",
+                "cover": "http://i0.hdslb.com/bfs/archive/c42c115b046b081430f6f3743751591eccd43ed3.jpg",
+                "intro": "我倒要看看还有多久才会凉？\n——————————\n制作：爱狂三的星总\nBGM：阳光开朗大男孩（本家BV1z341187Y9）\n混音@秋名山上的切莫  \n封面背景图提供@采紫葳的凌霄子  \n——————————\n想看更多视频就三连关注吧！",
+                "page": 1,
+                "duration": 157,
+                "upper": {
+                    "mid": 29382783,
+                    "name": "爱狂三的星总",
+                    "face": "https://i0.hdslb.com/bfs/face/e9cb715dcbd3521f6a8bcd9b3e92e272544b5f5d.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 10285,
+                    "play": 363280,
+                    "danmaku": 717,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "36.3万"
+                },
+                "link": "bilibili://video/395300311",
+                "ctime": 1677642949,
+                "pubtime": 1677661200,
+                "fav_time": 1776861912,
+                "bv_id": "BV1ko4y1a7Cb",
+                "bvid": "BV1ko4y1a7Cb",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 1032646968
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875431384660?page_type=3\u0026oid=395300311\u0026otype=2"
+            }
+        ],
+        "has_more": false,
+        "ttl": 1778586702
+    }
+}

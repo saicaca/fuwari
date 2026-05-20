@@ -1,0 +1,131 @@
+.links-page-root {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.links-page-hero {
+	padding: 1.6rem;
+}
+
+.links-page-title {
+	margin: 0 0 0.5rem;
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.links-page-description {
+	margin: 0;
+}
+
+.links-page-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 1rem;
+}
+
+.friend-link-card {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	min-height: 96px;
+	padding: 1rem;
+	text-decoration: none;
+	transition:
+		transform 0.25s ease,
+		box-shadow 0.25s ease,
+		border-color 0.25s ease;
+}
+
+.friend-link-card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(
+			circle at top left,
+			rgba(var(--primary), 0.18),
+			transparent 45%
+		),
+		linear-gradient(135deg, rgba(var(--primary), 0.08), transparent 55%);
+	opacity: 0;
+	transition: opacity 0.25s ease;
+}
+
+.friend-link-card:hover {
+	transform: translateY(-4px);
+	border-color: rgba(var(--primary), 0.45);
+	box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+}
+
+.friend-link-card:hover::before {
+	opacity: 1;
+}
+
+.friend-card-avatar-wrap {
+	position: relative;
+	z-index: 1;
+	flex: 0 0 auto;
+	width: 58px;
+	height: 58px;
+	padding: 3px;
+	border-radius: 50%;
+	background: linear-gradient(
+		135deg,
+		rgba(var(--primary), 0.9),
+		rgba(var(--primary), 0.25)
+	);
+}
+
+.friend-card-avatar {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background: var(--card-bg);
+	object-fit: cover;
+}
+
+.friend-card-content {
+	position: relative;
+	z-index: 1;
+	min-width: 0;
+}
+
+.friend-card-name {
+	margin: 0 0 0.35rem;
+	font-size: 1.05rem;
+	font-weight: 700;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.friend-card-description {
+	margin: 0;
+	font-size: 0.9rem;
+	line-height: 1.45;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+@media (max-width: 640px) {
+	.links-page-hero {
+		padding: 1.25rem;
+	}
+
+	.links-page-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.friend-link-card {
+		min-height: 88px;
+	}
+
+	.friend-card-avatar-wrap {
+		width: 52px;
+		height: 52px;
+	}
+}

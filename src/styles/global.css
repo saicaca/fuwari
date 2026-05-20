@@ -1,0 +1,22 @@
+@import "./tailwind-reference.css";
+
+@import "./main.css";
+@import "./markdown.css";
+@import "./transition.css";
+@import "./expressive-code.css";
+@import "./photoswipe.css";
+
+html {
+	min-height: 100%;
+	background-image: var(--page-bg-image, none);
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+body {
+	min-height: 100vh;
+	background: transparent;
+	font-family: var(--font-sans);
+}

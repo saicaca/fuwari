@@ -10,6 +10,17 @@ A static blog template built with [Astro](https://astro.build).
 
 ![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
 
+> Secondary development notice
+>
+> This project is based on the original [saicaca/fuwari](https://github.com/saicaca/fuwari) and has been extended for custom use.
+>
+> Main changes in this fork:
+> - Added friend link support
+> - Added Bilibili bangumi / follow / fans / dynamic / favorite pages
+> - Added moments page
+> - Added music page and sidebar music player
+> - Added broader i18n support and related localization improvements
+
 🌏 README in
 [**中文**](https://github.com/saicaca/fuwari/blob/main/docs/README.zh-CN.md) /
 [**日本語**](https://github.com/saicaca/fuwari/blob/main/docs/README.ja.md) /
@@ -30,6 +41,16 @@ A static blog template built with [Astro](https://astro.build).
 - [x] [Markdown extended features](https://github.com/saicaca/fuwari?tab=readme-ov-file#-markdown-extended-syntax)
 - [x] Table of contents
 - [x] RSS feed
+- [x] Friend link
+- [x] Bilibili bangumi page
+- [x] Bilibili follow page
+- [x] Bilibili fans page
+- [x] Bilibili dynamic page
+- [x] Bilibili favorite page
+- [x] Moments page
+- [x] Music page
+- [x] Sidebar music player
+- [x] I18n support (English, Japanese, Chinese, Korean, Spanish, Thai, Vietnamese, Indonesian) 
 
 ## 🚀 Getting Started
 

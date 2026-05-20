@@ -1,4 +1,5 @@
 import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants";
+import type I18nKey from "@i18n/i18nKey";
 
 export type SiteConfig = {
 	title: string;
@@ -48,16 +49,112 @@ export enum LinkPreset {
 	Home = 0,
 	Archive = 1,
 	About = 2,
+	Links = 3,
+	Bangumi = 4,
+	Music = 5,
+	Moments = 6,
+	Follows = 7,
+	Fans = 8,
+	Dynamic = 9,
+	Favorites = 10,
 }
 
 export type NavBarLink = {
 	name: string;
 	url: string;
 	external?: boolean;
+	i18nKey?: I18nKey;
 };
 
 export type NavBarConfig = {
 	links: (NavBarLink | LinkPreset)[];
+};
+
+export type FriendLink = {
+	name: string;
+	url: string;
+	avatar: string;
+	desc: string;
+	descI18nKey?: I18nKey;
+};
+
+export type BangumiConfig = {
+	enable: boolean;
+	source: "json" | "api";
+	uid: string | number;
+	type: 1 | 2;
+	pn: number;
+	ps: number;
+	jsonPath: string;
+	pageSize: number;
+	hidePaginationWhenSinglePage: boolean;
+};
+
+export type MusicConfig = {
+	enable: boolean;
+	source: "json" | "api";
+	jsonPath: string;
+	apiUrl?: string;
+	defaultVolume: number;
+};
+
+export type MomentsFeedSource = {
+	name: string;
+	url: string;
+	homepage?: string;
+	avatar?: string;
+};
+
+export type MomentsConfig = {
+	enable: boolean;
+	limit: number;
+	pageSize: number;
+	hidePaginationWhenSinglePage: boolean;
+	sources: MomentsFeedSource[];
+};
+
+export type FollowsConfig = {
+	enable: boolean;
+	source: "json" | "api";
+	uid: string | number;
+	pn: number;
+	ps: number;
+	jsonPath: string;
+	pageSize: number;
+	hidePaginationWhenSinglePage: boolean;
+};
+
+export type FansConfig = {
+	enable: boolean;
+	source: "json" | "api";
+	uid: string | number;
+	pn: number;
+	ps: number;
+	jsonPath: string;
+	pageSize: number;
+	hidePaginationWhenSinglePage: boolean;
+};
+
+export type DynamicConfig = {
+	enable: boolean;
+	source: "json" | "api";
+	uid: string | number;
+	jsonPath: string;
+	pageSize: number;
+	hidePaginationWhenSinglePage: boolean;
+};
+
+export type FavoritesConfig = {
+	enable: boolean;
+	uid: string | number;
+	listSource: "json" | "api";
+	listJsonPath: string;
+	detailSource: "json" | "api";
+	detailJsonDir: string;
+	foldersPageSize: number;
+	resourcesPageSize: number;
+	apiPageSize: number;
+	hidePaginationWhenSinglePage: boolean;
 };
 
 export type ProfileConfig = {

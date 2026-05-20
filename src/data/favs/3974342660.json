@@ -1,0 +1,267 @@
+{
+    "code": 0,
+    "message": "OK",
+    "ttl": 1,
+    "data": {
+        "info": {
+            "id": 3974342660,
+            "fid": 39743426,
+            "mid": 3546871542843760,
+            "attr": 22,
+            "title": "画!画!教!程!",
+            "cover": "http://i2.hdslb.com/bfs/archive/aa916f4b7199fac4bc53fe2242c3371adbf581c2.jpg",
+            "upper": {
+                "mid": 3546871542843760,
+                "name": "Unity_exe",
+                "face": "https://i1.hdslb.com/bfs/face/015e582a37278cbe79b490baaec1be82d844fb0a.jpg",
+                "followed": false,
+                "vip_type": 0,
+                "vip_statue": 0
+            },
+            "cover_type": 2,
+            "cnt_info": {
+                "collect": 0,
+                "play": 0,
+                "thumb_up": 0,
+                "share": 0
+            },
+            "type": 11,
+            "intro": "",
+            "ctime": 1771840250,
+            "mtime": 1771840250,
+            "state": 0,
+            "fav_state": 0,
+            "like_state": 0,
+            "media_count": 6,
+            "is_top": false,
+            "is_kid_playlist": false,
+            "kid_playlist_desc": ""
+        },
+        "medias": [
+            {
+                "id": 114617409867479,
+                "type": 2,
+                "title": "6分钟教会你画兽设！全身+涂色",
+                "cover": "http://i2.hdslb.com/bfs/archive/aa916f4b7199fac4bc53fe2242c3371adbf581c2.jpg",
+                "intro": "超简单的哦，你只需要动手就行",
+                "page": 1,
+                "duration": 382,
+                "upper": {
+                    "mid": 591962153,
+                    "name": "徐白岭",
+                    "face": "https://i2.hdslb.com/bfs/face/c165b2ef35198cc4dcd0e7b9d1b8313f7113d388.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 1817,
+                    "play": 18858,
+                    "danmaku": 79,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "1.9万"
+                },
+                "link": "bilibili://video/114617409867479",
+                "ctime": 1748923326,
+                "pubtime": 1748923326,
+                "fav_time": 1776520854,
+                "bv_id": "BV1dN7tzeE6K",
+                "bvid": "BV1dN7tzeE6K",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 30295657444
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875517186360?page_type=3\u0026oid=114617409867479\u0026otype=2"
+            },
+            {
+                "id": 116124775683472,
+                "type": 2,
+                "title": "【兽绘教程】基础向福瑞绘画教程( •̀ ω •́ )✧",
+                "cover": "http://i2.hdslb.com/bfs/archive/8a59012aea24990d400fefef9465ae6daa3babc2.jpg",
+                "intro": "-",
+                "page": 1,
+                "duration": 3097,
+                "upper": {
+                    "mid": 1883263693,
+                    "name": "冰鹿泽",
+                    "face": "https://i1.hdslb.com/bfs/face/25bc971f96bb6da245768ceb27a230f21e3fb69a.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 2251,
+                    "play": 10769,
+                    "danmaku": 13,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "1.1万"
+                },
+                "link": "bilibili://video/116124775683472",
+                "ctime": 1771923803,
+                "pubtime": 1771923803,
+                "fav_time": 1772099419,
+                "bv_id": "BV1k7f1ByEkR",
+                "bvid": "BV1k7f1ByEkR",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 36251437262
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875517186360?page_type=3\u0026oid=116124775683472\u0026otype=2"
+            },
+            {
+                "id": 116005506455746,
+                "type": 2,
+                "title": "兽耳教程",
+                "cover": "http://i0.hdslb.com/bfs/archive/feb3b6217e0fc20a82e09da5160b827d566f46a2.jpg",
+                "intro": "-",
+                "page": 1,
+                "duration": 48,
+                "upper": {
+                    "mid": 3690982801410495,
+                    "name": "哈基汪sm",
+                    "face": "https://i0.hdslb.com/bfs/face/6e9462a7de75dd09d6d6e326f005a587ec2d4b67.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 3195,
+                    "play": 8424,
+                    "danmaku": 4,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "8424"
+                },
+                "link": "bilibili://video/116005506455746",
+                "ctime": 1770103746,
+                "pubtime": 1770103757,
+                "fav_time": 1772070143,
+                "bv_id": "BV1EdFVzpEoy",
+                "bvid": "BV1EdFVzpEoy",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 35790716954
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875517186360?page_type=3\u0026oid=116005506455746\u0026otype=2"
+            },
+            {
+                "id": 116008224298244,
+                "type": 2,
+                "title": "【绘画干货】怎么画双人动态｜人类+兽人通用，新手零翻车",
+                "cover": "http://i0.hdslb.com/bfs/archive/bc783a6bc41e548557f0554e10f9aa5eb1255a04.jpg",
+                "intro": "",
+                "page": 1,
+                "duration": 190,
+                "upper": {
+                    "mid": 362267277,
+                    "name": "牧木匠",
+                    "face": "https://i0.hdslb.com/bfs/face/62e92cffb136723125ae0b9c5a43cb242a018448.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 8401,
+                    "play": 83199,
+                    "danmaku": 22,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "8.3万"
+                },
+                "link": "bilibili://video/116008224298244",
+                "ctime": 1770145039,
+                "pubtime": 1770973200,
+                "fav_time": 1772067610,
+                "bv_id": "BV1ZJfXBxE2H",
+                "bvid": "BV1ZJfXBxE2H",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 35803234589
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875517186360?page_type=3\u0026oid=116008224298244\u0026otype=2"
+            },
+            {
+                "id": 116000439669385,
+                "type": 2,
+                "title": "兽爪教程",
+                "cover": "http://i0.hdslb.com/bfs/archive/f88a46180fe8a39f5a4552e74bfc9b1a3811f95d.jpg",
+                "intro": "-",
+                "page": 1,
+                "duration": 46,
+                "upper": {
+                    "mid": 3690982801410495,
+                    "name": "哈基汪sm",
+                    "face": "https://i0.hdslb.com/bfs/face/6e9462a7de75dd09d6d6e326f005a587ec2d4b67.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 8547,
+                    "play": 35397,
+                    "danmaku": 42,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "3.5万"
+                },
+                "link": "bilibili://video/116000439669385",
+                "ctime": 1770026378,
+                "pubtime": 1770026399,
+                "fav_time": 1771840265,
+                "bv_id": "BV1V3FNznEXF",
+                "bvid": "BV1V3FNznEXF",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 35772302585
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875517186360?page_type=3\u0026oid=116000439669385\u0026otype=2"
+            },
+            {
+                "id": 113674211565486,
+                "type": 2,
+                "title": "【furry手绘】教你四种兽头画法",
+                "cover": "http://i1.hdslb.com/bfs/archive/dcf4d1677da18a58c8e4c53fa71f0c97737a9ebb.jpg",
+                "intro": "隔壁小孩都学会了╰(*´︶`*)╯",
+                "page": 1,
+                "duration": 378,
+                "upper": {
+                    "mid": 591962153,
+                    "name": "徐白岭",
+                    "face": "https://i2.hdslb.com/bfs/face/c165b2ef35198cc4dcd0e7b9d1b8313f7113d388.jpg",
+                    "jump_link": ""
+                },
+                "attr": 0,
+                "cnt_info": {
+                    "collect": 26872,
+                    "play": 263099,
+                    "danmaku": 386,
+                    "vt": 0,
+                    "play_switch": 0,
+                    "reply": 0,
+                    "view_text_1": "26.3万"
+                },
+                "link": "bilibili://video/113674211565486",
+                "ctime": 1734531833,
+                "pubtime": 1734531833,
+                "fav_time": 1771840259,
+                "bv_id": "BV1ShkAYqEEc",
+                "bvid": "BV1ShkAYqEEc",
+                "season": null,
+                "ogv": null,
+                "ugc": {
+                    "first_cid": 27408338628
+                },
+                "media_list_link": "bilibili://music/playlist/playpage/3546875517186360?page_type=3\u0026oid=113674211565486\u0026otype=2"
+            }
+        ],
+        "has_more": false,
+        "ttl": 1778587513
+    }
+}

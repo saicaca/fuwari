@@ -1,0 +1,68 @@
+---
+import Pagination from "@components/control/Pagination.astro";
+import FavResourcesComponent from "@components/FavResources.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import type { GetStaticPaths } from "astro";
+import { FavoritesConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import {
+	type FavoriteFolder,
+	type FavoriteMedia,
+	getFavoriteFolders,
+	getFavoriteResources,
+} from "@/utils/favorites";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const { items: folders } = await getFavoriteFolders();
+	const paths = [];
+
+	for (const folder of folders) {
+		const result = await getFavoriteResources(String(folder.id));
+		paths.push(
+			...paginate(result.items, {
+				pageSize: Math.max(FavoritesConfig.resourcesPageSize, 1),
+				params: {
+					mediaId: String(folder.id),
+					page: undefined,
+				},
+				props: {
+					errorMessage: result.errorMessage,
+					folder: result.folder ?? folder,
+				},
+			}),
+		);
+	}
+
+	return paths;
+}) satisfies GetStaticPaths;
+
+const {
+	page,
+	errorMessage,
+	folder,
+}: {
+	page: { data: FavoriteMedia[]; lastPage: number };
+	errorMessage: string;
+	folder: FavoriteFolder | null;
+} = Astro.props;
+
+const showPagination =
+	!FavoritesConfig.hidePaginationWhenSinglePage || page.lastPage > 1;
+const pageTitle = folder?.title || i18n(I18nKey.favs);
+const pageDescription = folder?.intro || i18n(I18nKey.favsDescription);
+---
+
+<MainGridLayout title={pageTitle} description={pageDescription}>
+	<FavResourcesComponent folder={folder} items={page.data} errorMessage={errorMessage} />
+	{
+		showPagination && (
+			<Pagination
+				class="mx-auto mt-6 onload-animation"
+				page={page}
+				basePath={`/fav/${folder?.id ?? Astro.params.mediaId}/`}
+				style={`animation-delay: calc(var(--content-delay) + ${page.data.length * 50}ms)`}
+			/>
+		)
+	}
+</MainGridLayout>
