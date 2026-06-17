@@ -112,7 +112,7 @@
     }
 }
 
-.custom-md img, #post-cover img {
+.custom-md img:not([class*='carousel']), #post-cover img {
     @apply cursor-zoom-in
 }
 
