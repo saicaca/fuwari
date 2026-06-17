@@ -1,6 +1,7 @@
 ---
 title: Custom components
 published: 2022-07-01
+description: Rehype-powered components designed to extend the functionality of the markdown blog files.
 tags: [Markdown, Blogging, Demo]
 category: Component
 draft: true
@@ -8,7 +9,7 @@ draft: true
 
 
 :::note
-These are custom-built, rehype-powered components designed to extend the functionality of our markdown blog files.
+These are custom-built, rehype-powered components designed to extend the functionality of the markdown blog files.
 :::
 
 

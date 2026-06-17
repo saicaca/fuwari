@@ -142,13 +142,10 @@ onDestroy(() => {
 {#if images.length > 0}
 	<div class="flex flex-col gap-4 w-full items-center my-8 not-prose">
 		<!-- Main Display Image -->
-		<!-- biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> -->
-		<!-- svelte-ignore a11y_click_events_have_key_events -->
-		<!-- svelte-ignore event_directive_deprecated -->
-		<div
+		<button
 			class="relative w-full overflow-hidden rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 group select-none"
-			on:click={() => openPhotoSwipe(inlineIndex)}
-			role="button"
+			onclick={() => openPhotoSwipe(inlineIndex)}
+			type="button"
 			tabindex="0"
 		>
 			<img
@@ -157,7 +154,6 @@ onDestroy(() => {
 				alt={images[inlineIndex].alt}
 				class="w-full h-auto object-contain max-h-[70vh] mx-auto transition-transform duration-500 carouselImg"
 			/>
-			<!-- Hover Overlay -->
 			<div
 				class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100"
 			>
@@ -175,7 +171,7 @@ onDestroy(() => {
 					{inlineIndex + 1} / {images.length}
 				</div>
 			{/if}
-		</div>
+		</button>
 
 		<!-- Inline Thumbnails -->
 		{#if images.length > 1}
@@ -183,13 +179,12 @@ onDestroy(() => {
 				class="flex gap-2 overflow-x-auto w-full max-w-full justify-start md:justify-center scrollbar-hide py-1 px-1"
 			>
 				{#each images as img, i}
-					<!-- svelte-ignore event_directive_deprecated -->
 					<button
 						class="relative h-16 w-24 shrink-0 overflow-hidden rounded-lg border-2 transition-all {i ===
 						inlineIndex
 							? 'border-primary ring-2 ring-primary/20 opacity-100 scale-105'
 							: 'border-transparent opacity-50 hover:opacity-100'}"
-						on:click={(e) => {
+						onclick={(e) => {
 							e.stopPropagation();
 							inlineIndex = i;
 						}}
