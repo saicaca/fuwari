@@ -9,6 +9,7 @@ const sortedPostsList = await getSortedPostsList();
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)}>
+    <!-- @ts-expect-error ts(9013) - (temporary solutions) -->
     <ArchivePanel sortedPosts={sortedPostsList} client:only="svelte"></ArchivePanel>
 </MainGridLayout>
 

@@ -1,3 +1,8 @@
+import type {
+	InferEntrySchema,
+	RenderedContent,
+	RenderResult,
+} from "astro:content";
 import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants";
 
 export type SiteConfig = {
@@ -99,4 +104,15 @@ export type BlogPostData = {
 
 export type ExpressiveCodeConfig = {
 	theme: string;
+};
+
+export type GetSortedPosts = {
+	id: string;
+	render(): Promise<RenderResult>;
+	slug: string;
+	body: string;
+	collection: "posts";
+	data: InferEntrySchema<"posts">;
+	rendered?: RenderedContent;
+	filePath?: string;
 };
