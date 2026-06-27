@@ -1,9 +1,11 @@
 /**
  * Based on the discussion at https://github.com/expressive-code/expressive-code/issues/153#issuecomment-2282218684
  */
+
+import type { ExpressiveCodePlugin } from "@expressive-code/core";
 import { definePlugin } from "@expressive-code/core";
 
-export function pluginLanguageBadge() {
+export function pluginLanguageBadge(): ExpressiveCodePlugin {
 	return definePlugin({
 		name: "Language Badge",
 		// @ts-expect-error

@@ -1,0 +1,47 @@
+#!/bin/sh
+
+INTERRUPTED=false
+STASHED=false
+
+project_checks() {
+  pnpm check && pnpm type-check
+}
+
+restore_stash() {
+  if [ "$STASHED" = "true" ]; then
+    if [ "$INTERRUPTED" = "true" ]; then
+      printf "\n[Husky] Pre-push hook was interrupted! Restoring uncommitted file/s from stash...\n"
+    else
+      printf "[Husky] Restoring uncommitted file/s from stash...\n"
+    fi
+
+    git stash pop --quiet
+    STASHED=false
+  fi
+}
+
+# restore stashed files on exit pre-push hook
+trap 'restore_stash' EXIT
+
+# prevent stage loss if pre-push hook is interrupted
+trap 'INTERRUPTED="true"; exit 1' INT TERM
+
+if [ -n "$(git status --porcelain)" ]; then
+  printf "[Husky] uncommitted file/s detected. Stashing them temporarily to run pre-push checks...\n"
+  git stash push --include-untracked --quiet --message "husky-pre-push-temporary-stash"
+  STASHED="true"
+fi
+
+printf "[Husky] Running verification on commit that will be pushed...\n"
+if project_checks; then
+  STATUS=0
+else
+  STATUS=$?
+fi
+
+if [ $STATUS -ne 0 ]; then
+  printf "[Husky] Push aborted due to failed verification on commit that will be pushed. Please fix the issues and try again.\n"
+  exit 1
+fi
+
+printf "[Husky] Verification passed. Continuing push process...\n"

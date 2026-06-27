@@ -1,0 +1,7 @@
+#!/bin/sh
+
+printf "[Husky] Running lint-staged...\n"
+
+pnpm lint-staged
+
+printf "[Husky] Lint-staged completed successfully.\n"
