@@ -51,3 +51,46 @@ html.is-animating .transition-swup-fade {
 #post-container :nth-child(5) { animation-delay: calc(var(--content-delay) + 250ms) }
 #post-container :nth-child(6) { animation-delay: calc(var(--content-delay) + 325ms) }
 
+/* --------------------------------------------------------------------------
+   4. Navigation Progress Bar
+   -------------------------------------------------------------------------- */
+
+#progress-bar {
+    --progress-height: 3px;
+    --progress-duration: 8s;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: var(--progress-height);
+    z-index: 9999;
+    pointer-events: none;
+    background: var(--primary);
+    box-shadow: 0 0 8px color-mix(in oklch, var(--primary) 60%, transparent);
+    opacity: 0;
+}
+
+@keyframes progress-loading {
+    0% { width: 0; }
+    100% { width: 95%; }
+}
+
+#progress-bar.loading {
+    opacity: 1;
+    width: 0;
+    animation: progress-loading var(--progress-duration) cubic-bezier(0.1, 0.05, 0.1, 1) forwards;
+}
+
+#progress-bar.finishing {
+    animation: none;
+    width: 100%;
+    opacity: 1;
+    transition: width 200ms ease-out;
+}
+
+#progress-bar.done {
+    width: 100%;
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+}
