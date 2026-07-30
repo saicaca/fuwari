@@ -151,7 +151,8 @@ const bannerOffset =
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
 		  data-overlayscrollbars-initialize
 	>
-		<ConfigCarrier></ConfigCarrier>
+		<div id="progress-bar"></div>
+		<ConfigCarrier/>
 		<slot />
 
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
@@ -406,6 +407,13 @@ const setup = () => {
 	})
 	window.swup.hooks.on('content:replace', initCustomScrollbar)
 	window.swup.hooks.on('visit:start', (visit: {to: {url: string}}) => {
+		const progressBar = document.getElementById("progress-bar");
+			if (progressBar) {
+				progressBar.classList.remove("finishing", "done");
+				// Force reflow so the animation restarts cleanly
+				void progressBar.offsetWidth;
+				progressBar.classList.add("loading");
+			}
 		// change banner height immediately when a link is clicked
 		const bodyElement = document.querySelector('body')
 		if (pathsEqual(visit.to.url, url('/'))) {
@@ -434,6 +442,18 @@ const setup = () => {
 		}
 	});
 	window.swup.hooks.on('visit:end', (_visit: {to: {url: string}}) => {
+		const progressBar = document.getElementById("progress-bar");
+			if (progressBar) {
+				progressBar.classList.remove("loading");
+				progressBar.classList.add("finishing");
+				setTimeout(() => {
+					progressBar.classList.remove("finishing");
+					progressBar.classList.add("done");
+					setTimeout(() => {
+						progressBar.classList.remove("done");
+					}, 300);
+				}, 200);
+			}
 		setTimeout(() => {
 			const heightExtend = document.getElementById('page-height-extend')
 			if (heightExtend) {
