@@ -48,6 +48,7 @@ A static blog template built with [Astro](https://astro.build).
 3. Edit the config file `src/config.ts` to customize your blog.
 4. Run `pnpm new-post <filename>` to create a new post and edit it in `src/content/posts/`.
 5. Deploy your blog to Vercel, Netlify, GitHub Pages, etc. following [the guides](https://docs.astro.build/en/guides/deploy/). You need to edit the site configuration in `astro.config.mjs` before deployment.
+    - To deploy on Wasmer Edge, import your repository at `https://wasmer.io/apps/create?github=<owner>%2F<repo>`, or try this template first: [![Deploy to Wasmer](https://img.shields.io/badge/Deploy%20to-Wasmer-171717?logo=wasmer&logoColor=white)](https://wasmer.io/apps/create?github=saicaca%2Ffuwari)
 
 ## 📝 Frontmatter of Posts
 
