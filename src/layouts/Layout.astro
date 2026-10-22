@@ -50,8 +50,10 @@ const enableBanner = siteConfig.banner.enable;
 let pageTitle: string;
 if (title) {
 	pageTitle = `${title} - ${siteConfig.title}`;
-} else {
+} else if(siteConfig.subtitle) {
 	pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`;
+} else {
+	pageTitle = siteConfig.title;
 }
 
 const favicons: Favicon[] =
