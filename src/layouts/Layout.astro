@@ -276,6 +276,38 @@ setClickOutsideToClose("display-setting", ["display-setting", "display-settings-
 setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
 setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
 
+/*
+ * A closed float panel is only faded out (.float-panel-closed), so its controls
+ * stay in the sequential focus order even though they are invisible. `inert`
+ * takes the whole subtree out of focus, hit-testing and the accessibility tree
+ * without changing display or visibility, so the open/close transition and the
+ * click-outside handling above keep working as before.
+ * The closed class is the single source of truth and is toggled from several
+ * places, so the attribute is mirrored from it instead of being set by hand.
+ */
+const floatPanelIds = ["display-setting", "nav-menu-panel", "search-panel", "light-dark-panel"];
+
+function syncFloatPanelInert() {
+	for (const id of floatPanelIds) {
+		const panel = document.getElementById(id);
+		if (!panel) continue;
+		if (panel.classList.contains("float-panel-closed")) {
+			panel.setAttribute("inert", "");
+		} else {
+			panel.removeAttribute("inert");
+		}
+	}
+}
+
+syncFloatPanelInert();
+// Panels rendered with client:only are mounted after this script runs.
+new MutationObserver(syncFloatPanelInert).observe(document.body, {
+	subtree: true,
+	childList: true,
+	attributes: true,
+	attributeFilter: ["class"],
+});
+
 
 function loadTheme() {
 	const theme = getStoredTheme()
