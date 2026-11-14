@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
 import tailwind from "@astrojs/tailwind";
@@ -23,6 +25,10 @@ import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
+
+const pagefindVersion = JSON.parse(
+	fs.readFileSync(path.resolve("node_modules/pagefind/package.json"), "utf8"),
+).version;
 
 // https://astro.build/config
 export default defineConfig({
@@ -154,6 +160,9 @@ export default defineConfig({
 		],
 	},
 	vite: {
+		define: {
+			__PAGEFIND_VERSION__: JSON.stringify(pagefindVersion),
+		},
 		build: {
 			rollupOptions: {
 				onwarn(warning, warn) {

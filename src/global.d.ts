@@ -1,6 +1,8 @@
 import type { AstroIntegration } from "@swup/astro";
 
 declare global {
+	const __PAGEFIND_VERSION__: string;
+
 	interface Window {
 		// type from '@swup/astro' is incorrect
 		swup: AstroIntegration;
