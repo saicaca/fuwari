@@ -1,10 +1,11 @@
 ---
-title: 无桌面 Linux 服务器部署 Magpie：SSH 反向隧道联动本机 Mac 聚合与双通道接入实战
+title: 都什么年代了还在用 CC Switch？无桌面服务器部署 Magpie，直连与 Mac 反向隧道双通道实战
 published: 2026-11-22
 description: 记录在无可视化桌面的远程 Linux GPU 服务器上部署 Magpie（TUI + Serve）的完整实战：从「本机聚合优先」调整为「直连中转优先 + Mac Magpie 反向隧道互补回退」，涵盖模型列表精细化裁剪、接入 Codex 与 Claude Code、Screen 常驻以及对比 CC Switch 后台机制的深度排查。
 tags: [magpie, claude-code, codex, ssh, linux, ai, tooling]
 category: 环境与系统
 draft: false
+aigc: Gemini 4 Neon
 device: Linux
 ---
 

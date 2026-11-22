@@ -1,10 +1,11 @@
 ---
-title: 从 Docker Desktop 到 Apple Container，最后落脚 OrbStack：一次 Mac 本地容器无损迁移实战
+title: 逃离 Docker Desktop、尝鲜 Apple Container，最后我全迁回了 OrbStack
 published: 2026-11-22
 description: 记录一次把 macOS 本机 Apple Container 里的 4 个项目（5 个容器）无损迁到 OrbStack 的实操复盘，覆盖 :latest 标签漂移、APFS 大小写坑、回收 12.55 GB 空间以及清理 Docker Desktop 历史残留的避坑细节。
 tags: [macos, orbstack, apple-container, docker, devops]
 category: 环境与系统
 draft: false
+aigc: Gemini 4 Neon
 device: MacBook Pro
 ---
 
