@@ -2,7 +2,7 @@
 title: 服务器环境配置指南
 published: 2026-06-12
 updated: 2026-09-17
-description: 在无 root 权限的 Linux 服务器上，从零搭建命令行与 Python 开发环境，并使用 rclone 将本机 SFTP 目录挂载为普通目录。
+description: "分享一套在无 root 权限 Linux 服务器上的开荒流程：从用户态编译 zsh、配置 p10k 和 micromamba，到用 rclone 挂载本机 SFTP 目录与规范 Git 提交。"
 tags: [linux, env-setup, micromamba, zsh, oh-my-zsh, p10k, shell, rclone, sftp, fuse]
 category: 环境与系统
 draft: false
@@ -10,29 +10,29 @@ device: Linux
 aigc: Claude Code
 ---
 
-这套流程用于初始化没有 root 权限的 Linux 服务器。目标是在用户目录中完成 Shell、Python、项目目录和远程文件挂载配置，不依赖系统管理员安装软件。
+每次拿到一台没有 root 权限的新 Linux 服务器，最头疼的就是从零把趁手的工具链搬上去，又不想动不动去找管理员帮忙装软件。折腾过几次之后，我把整套「用户态开荒流程」整理了下来，全程只在自己家目录下动手，完全不碰 `sudo`。
 
-主要内容包括：
+这套流程涵盖我平时上线新机器最常用的几件事：
 
-- Shell 环境初始化与 `zsh` 编译安装
+- Shell 环境初始化与用户态 `zsh` 编译安装
 - `oh-my-zsh` 配置与 `Powerlevel10k` 主题
 - `micromamba` 部署与初始化
-- 个人共享目录与项目工作区建立
-- 使用 `rclone` 将本机 SFTP 目录挂载为 FUSE 目录
+- 个人共享目录与项目工作区规划
+- 用 `rclone` 把本机 SFTP 目录挂载成普通 FUSE 目录
 - Python 环境创建
 - pip 国内镜像配置
 
-以下步骤均无需 `sudo` 或 root 权限，仅在用户目录下操作。
+再强调一句，下面每一步都不需要 `sudo` 或 root 权限，放心在用户目录下照着跑就行。
 
 ---
 
-## 1. Shell 环境升级：编译安装 zsh
+## 1. 给 Shell 升个级：用户态编译安装 zsh
 
-大部分 Linux 服务器预装的是 `bash`，但如果你习惯 `zsh` 的补全和主题生态，建议自行编译一份用户态 `zsh`。
+大多数 Linux 服务器默认只给了 `bash`，但如果你平时习惯了 `zsh` 的补全和主题生态，花几分钟自己编译一份用户态 `zsh` 绝对值回票价。
 
 ### 1.1 准备编译依赖
 
-由于没有 root 权限，需要借助 `micromamba` 创建临时环境来提供编译工具链：
+没有 root 权限没法直接 `apt` 或 `yum` 装依赖，这里取个巧：先拉一个独立的 `micromamba` 二进制，建个临时的 `make` 环境把 `make` 和 `ncurses` 备齐：
 
 ```bash
 # 下载 micromamba 二进制（详见下一节）
@@ -45,6 +45,8 @@ chmod +x .local/micromamba/micromamba
 
 ### 1.2 下载并解压 zsh 源码
 
+把 `zsh 5.9.1` 的源码包拉下来解压进目录：
+
 ```bash
 # 下载 zsh 源码包
 wget https://sourceforge.net/projects/zsh/files/zsh/5.9.1/zsh-5.9.1.tar.xz/download -O zsh-5.9.1.tar.xz
@@ -54,7 +56,7 @@ cd zsh-5.9.1
 
 ### 1.3 配置与编译
 
-设置编译环境变量，让编译器找到 `micromamba` 环境中安装的 `ncurses` 库：
+关键一步是把刚才 `micromamba` 环境里的 `ncurses` 头文件和库路径喂给编译器，同时加上 `-Wl,-rpath` 确保运行时也能找到动态库：
 
 ```bash
 ENV_PATH="$HOME/.local/micromamba/envs/make"
@@ -70,9 +72,11 @@ make distclean || rm -f config.cache
 make && make install
 ```
 
-编译完成后，`zsh` 会被安装到 `$HOME/.local/zsh` 下。
+编译跑完，`zsh` 就稳稳装进 `$HOME/.local/zsh` 了。
 
 ### 1.4 切换默认 Shell
+
+把路径加进 `PATH` 确认能找到之后，试着用 `chsh` 把默认登录 Shell 切过去：
 
 ```bash
 # 确认 zsh 路径
@@ -91,23 +95,23 @@ chsh -s "$HOME/.local/zsh/bin/zsh"
 >
 > 若 `chsh` 不可用，可在 `~/.bash_profile` 末尾添加 `exec $HOME/.local/zsh/bin/zsh`，每次登录时自动进入 `zsh`。
 
-### 1.5 安装 oh-my-zsh 与 Powerlevel10k 主题
+### 1.5 装上 oh-my-zsh 和 Powerlevel10k 主题
 
-[oh-my-zsh](https://ohmyz.sh) 是 zsh 最流行的配置框架，提供丰富的主题和插件生态。[Powerlevel10k](https://github.com/romkatv/powerlevel10k)（p10k）是一款高性能的 oh-my-zsh 主题，提供清晰的信息展示和便捷的配置向导。
+有了 `zsh`，顺手把 [oh-my-zsh](https://ohmyz.sh) 和 [Powerlevel10k](https://github.com/romkatv/powerlevel10k)（简称 p10k）配齐。oh-my-zsh 的插件和主题生态非常省心，而 p10k 响应极快，信息展示直观，交互式配置向导也很好上手。
 
 #### 1.5.1 安装 oh-my-zsh
 
-通过 curl 一键安装：
+直接用官方脚本一键安装：
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-安装脚本会自动备份已有的 `~/.zshrc` 并生成一份新的默认配置。
+脚本会自动备份原有的 `~/.zshrc`，再生成一份新的默认配置，不用担心把旧配置覆盖没了。
 
 #### 1.5.2 安装 Powerlevel10k 主题
 
-将 p10k 主题克隆到 oh-my-zsh 的自定义主题目录下：
+把 p10k 浅克隆到 oh-my-zsh 的自定义主题目录：
 
 ```bash
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
@@ -116,7 +120,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
 
 #### 1.5.3 启用主题
 
-编辑 `~/.zshrc`，将主题设置为 `powerlevel10k/powerlevel10k`：
+打开 `~/.zshrc`，把默认的主题改成 `powerlevel10k/powerlevel10k`：
 
 ```bash
 # 修改前
@@ -126,21 +130,21 @@ ZSH_THEME="robbyrussell"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 ```
 
-#### 1.5.4 运行配置向导
+#### 1.5.4 过一遍配置向导
 
-重新加载 `~/.zshrc` 或新开一个终端标签页，p10k 会自动启动交互式配置向导：
+重新加载 `~/.zshrc` 或者新开一个终端标签页，p10k 会自动弹出交互式配置向导：
 
 ```bash
 source ~/.zshrc
 ```
 
-配置向导会依次询问：
+向导会一步步让你选自己喜欢的样子：
 - **字体**：是否安装 Meslo Nerd Font（推荐安装，否则部分图标显示异常）
 - **样式**：经典、纯净、彩虹、瘦线等多种样式可选
 - **提示符元素**：选择要显示的信息（时间、电池、Python 虚拟环境、git 状态等）
 - **间距与换行**：单行或双行提示符
 
-配置完成后，p10k 会自动生成 `~/.p10k.zsh` 文件，后续可通过 `p10k configure` 随时重新运行向导。
+选完会自动生成 `~/.p10k.zsh`。以后想换风格，随时执行 `p10k configure` 就能重新走一遍向导。
 
 > [!TIP]
 > 如果终端连接后图标显示为乱码或方框，说明缺少 Nerd Font。可以在本地终端（如 iTerm2、Windows Terminal）中下载安装 [Meslo Nerd Font](https://github.com/romkatv/powerlevel10k/#fonts)，并将终端字体设置为 `MesloLGS NF`。
@@ -150,11 +154,13 @@ source ~/.zshrc
 
 ---
 
-## 2. 安装 Micromamba
+## 2. 部署 Micromamba
 
-`micromamba` 是 `conda` 的 C++ 重实现，静态链接、启动速度快、无环境嵌套问题，非常适合在无 root 权限的环境下管理 Python 版本和包。
+相比传统 `conda`，`micromamba` 是用 C++ 重写的静态链接版本，启动飞快，还没有恼人的环境嵌套问题，在无 root 权限的服务器上用来管 Python 环境特别趁手。
 
 ### 2.1 下载与安装
+
+如果前面编译 `zsh` 时还没下载，这里直接拉一份最新二进制放到 `.local/micromamba`：
 
 ```bash
 curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj .local/micromamba
@@ -163,29 +169,33 @@ chmod +x .local/micromamba/micromamba
 
 ### 2.2 初始化 Shell
 
+按你实际使用的 Shell 选对应的初始化命令：
+
 ```bash
 ./.local/micromamba/micromamba shell init -s bash
 # 如果使用 zsh，替换为：
 ./.local/micromamba/micromamba shell init -s zsh
 ```
 
-初始化完成后，重新加载 shell 配置文件或重新登录即可使用 `micromamba` 命令。
+跑完之后 `source` 一下配置文件或者重新登录，`micromamba` 命令就可以直接用了。
 
 ### 2.3 验证安装
+
+敲一句环境列表看看反馈：
 
 ```bash
 micromamba env list
 ```
 
-如果正确输出了环境列表（即使为空），说明安装成功。
+只要能正常打印出环境列表（哪怕里面还是空的），就说明部署没问题了。
 
 ---
 
-## 3. 建立目录结构
+## 3. 规划目录结构
 
-### 3.1 服务器摸底
+### 3.1 先摸清服务器家底
 
-在新服务器上，先确认磁盘容量、配额和共享目录情况：
+一上来别急着往家目录里猛塞大文件。我习惯先跑三条命令摸一下磁盘挂载、用户配额和所属用户组：
 
 ```bash
 df -h                          # 查看磁盘挂载与容量
@@ -193,11 +203,13 @@ quota -v                       # 查看用户配额
 groups                         # 查看所属组
 ```
 
-### 3.2 创建个人工作目录
+### 3.2 建立个人工作目录
 
-根据共享存储的布局，建议建立标准化的个人目录结构。
+摸清共享存储的位置后，建议先按用途把个人目录规整好。
 
 > 这样做的目的是将自己的文件（代码、数据、模型、产出）存放在**干净的独立目录**中，与 `~/.cache`、shell 配置文件、micromamba 环境等系统/工具生成的文件彻底分离。这样无论是备份、迁移还是清理缓存，都不会误伤自己的数据。
+
+我常用的目录划分长这样：
 
 ```
 /share/<group_name>/<username>/
@@ -207,7 +219,7 @@ groups                         # 查看所属组
 └── Projects/     # 项目工作区
 ```
 
-创建命令（按实际情况修改组名）：
+直接一条命令建出来（记得把 `your-group` 换成你的实际组名）：
 
 ```bash
 GROUP_NAME="your-group"
@@ -216,21 +228,23 @@ SHARE_BASE="/share/${GROUP_NAME}/${USER_NAME}"
 mkdir -p "${SHARE_BASE}"/{Datasets,Models,Outputs,Projects}
 ```
 
-### 3.3 创建项目工作区
+### 3.3 建一个日常项目工作区
+
+顺手在本地家目录下也建好项目工作区：
 
 ```bash
 mkdir -p ~/Projects/work1
 ```
 
-建议将工作区与共享目录配合使用，项目产出可以软链接或直接存放到共享目录中，便于团队协作。
+平时可以把本地工作区和共享目录配合着用，比如把大的实验产出软链接或者直接落到共享目录里，方便和同组的人协作。
 
-### 3.4 使用 rclone 挂载本机 SFTP 目录
+### 3.4 用 rclone 把本机 SFTP 目录挂载为普通目录
 
-有些程序不能正确跟随符号链接，或者要求目标必须表现为普通目录。此时可以让 `rclone` 通过本机的 SSH/SFTP 读取实际工作目录，再将它挂载到另一个位置。程序看到的是一个普通的 FUSE 目录，而不是符号链接。
+有时候会碰到比较挑剔的程序：它要么不认符号链接，要么硬性要求目标路径必须是一个普通目录。我遇到过这个坑，最后的解法是用 `rclone` 通过本机的 SSH/SFTP 去读实际工作目录，再把它挂载成另一个路径下的普通 FUSE 目录——这样对上层程序来说它就是一个实打实的普通文件夹，不再是软链接。
 
-这样做的主要目的是把当前希望通过网页查看的内容统一挂载到一个固定目录，再由 OpenList 等外部服务挂载并提供网页浏览，而不必移动或复制原始文件。
+我这么折腾的主要目的，是把想通过网页浏览的内容统一挂到一个固定目录里，再交给 OpenList 这类外部服务对外提供网页访问，既不用搬家也不用多复制一份文件。
 
-以下示例假设服务器的目录结构为：
+下面假设服务器上的目录结构是这样的：
 
 ```text
 /sdc/home/<username>/<username>/
@@ -238,19 +252,19 @@ mkdir -p ~/Projects/work1
 └── Pan/w1/           # FUSE 挂载点
 ```
 
-示例中的用户名从 `$USER` 获取，不需要在命令或文章中写入真实账号。
+示例里统一从 `$USER` 拿用户名，避免把真实账号写死在命令或文档里。
 
-#### 前置条件
+#### 先检查前置条件
 
-此方案不需要 root 权限，但需要：
+这个方案同样不需要 root 权限，但得先确认这几项条件都满足：
 
 - `$HOME/bin/rclone` 已安装且可执行；
 - 系统提供 `fusermount3`；
 - 本机 `sshd` 正在运行；
 - `~/.ssh/id_ed25519` 可以免密登录 `localhost`；
-- 挂载点存在且为空。
+- 挂载点目录存在且是空的。
 
-可以先验证依赖和本机 SSH：
+先跑三条命令把依赖和本机 SSH 连通性验一遍：
 
 ```bash
 command -v "$HOME/bin/rclone"
@@ -260,6 +274,8 @@ ssh -i "$HOME/.ssh/id_ed25519" localhost true
 
 #### 定义脱敏路径变量
 
+先把源目录和挂载点收进环境变量：
+
 ```bash
 USER_NAME="${USER:?当前 shell 未设置 USER}"
 USER_ROOT="/sdc/home/${USER_NAME}/${USER_NAME}"
@@ -267,7 +283,7 @@ SOURCE_DIR="${USER_ROOT}/ai-workspace/w1"
 MOUNT_DIR="${USER_ROOT}/Pan/w1"
 ```
 
-先确认实际目录存在，再创建空挂载点：
+动手挂载前，先确认源目录确实存在，再把挂载点建出来并确保里面是空的：
 
 ```bash
 test -d "$SOURCE_DIR"
@@ -281,7 +297,7 @@ fi
 
 #### 执行挂载
 
-`rclone` 的按需 SFTP remote 使用双斜杠表示远端绝对路径。下面先移除 `SOURCE_DIR` 开头的 `/`，再显式拼接 `//`：
+这里有个小细节：`rclone` 的按需 SFTP remote 需要用双斜杠 `//` 来表示远端绝对路径。所以下面先剥掉 `SOURCE_DIR` 开头的 `/`，再手动拼上 `//`：
 
 ```bash
 REMOTE=":sftp,host=localhost,user=${USER_NAME},key_file=${HOME}/.ssh/id_ed25519,known_hosts_file=none://${SOURCE_DIR#/}"
@@ -294,26 +310,26 @@ LOG_FILE="$(dirname "$MOUNT_DIR")/.rclone-w1.log"
   --log-level INFO
 ```
 
-这里的 `known_hosts_file=none` 会跳过 localhost 的主机密钥校验，仅适合明确连接本机回环 SSH 的场景。如果改为连接其他主机，应配置并校验 `known_hosts`，不要沿用这个选项。
+注意这里的 `known_hosts_file=none` 会跳过 `localhost` 的主机密钥校验，只适合明确连本机回环 SSH 的场景；如果哪天你要拿它连别的机器，一定要老老实实配好并校验 `known_hosts`，千万别直接照搬这个选项。
 
-检查挂载是否成功：
+挂完跑两条命令确认一下状态：
 
 ```bash
 mountpoint "$MOUNT_DIR"
 findmnt -T "$MOUNT_DIR"
 ```
 
-成功后，访问 `Pan/w1` 实际会通过本机 SFTP 读写 `ai-workspace/w1`。
+确认无误后，读写 `Pan/w1` 背后实际就会通过本机 SFTP 直接落到 `ai-workspace/w1`。
 
-#### 卸载
+#### 需要时怎么卸载
 
-正常卸载：
+正常卸载直接用 `fusermount3`：
 
 ```bash
 fusermount3 -u "$MOUNT_DIR"
 ```
 
-如果提示设备忙，先关闭终端、编辑器、训练任务等正在访问该目录的程序，再重新卸载。必要时可以延迟卸载：
+如果提示设备忙，先查一下是不是有终端、编辑器或者训练脚本正占着这个目录，把它们退掉再卸。实在腾不出来时，也可以用延迟卸载：
 
 ```bash
 fusermount3 -uz "$MOUNT_DIR"
@@ -326,15 +342,17 @@ fusermount3 -uz "$MOUNT_DIR"
 
 ## 4. 创建 Python 环境
 
-### 4.1 基础 Python 环境
+### 4.1 先建一个基础 Python 3.10 环境
 
-创建一个通用 Python 3.10 环境：
+工具链都就位后，建一个日常通用的 Python 3.10 环境打底：
 
 ```bash
 micromamba create -n py10 python=3.10
 ```
 
-### 4.2 环境管理常用命令
+### 4.2 顺手记一下常用管理命令
+
+平时切环境、装包、清环境基本就这几句：
 
 ```bash
 micromamba env list                    # 列出所有环境
@@ -346,11 +364,13 @@ micromamba install -n py10 <package>   # 安装包
 
 ---
 
-## 5. 配置 pip 国内镜像
+## 5. 给 pip 配上国内镜像
 
-在国内网络环境下，配置 pip 镜像源可以显著提升包下载速度。
+在国内网络环境下，不换源装个大一点的包能等到怀疑人生，顺手把清华源配上是刚需。
 
 ### 5.1 写入配置文件
+
+直接把配置落盘到 `~/.config/pip/pip.conf`：
 
 ```bash
 mkdir -p ~/.config/pip
@@ -361,19 +381,21 @@ trusted-host = pypi.tuna.tsinghua.edu.cn
 EOF
 ```
 
-### 5.2 验证配置
+### 5.2 验证一下是否生效
+
+用刚建好的 `py10` 环境查一遍 pip 配置：
 
 ```bash
 micromamba run -n py10 python -m pip config list
 ```
 
-输出中应包含 `index-url` 指向清华源，即配置生效。
+输出里能看到 `index-url` 已经指向清华源，就搞定了。
 
 ---
 
-## 6. 启动配置文件整理
+## 6. 顺手理一下启动配置文件
 
-初始化过程中需要调整以下 shell 配置文件，确保每次登录环境正确：
+整套折腾下来，容易乱的地方往往是几个 Shell 启动文件。为了保证每次重新登录环境都能正常拉起，这里把它们各自的职责列出来对照一下：
 
 | 文件 | 用途 |
 |------|------|
@@ -381,15 +403,17 @@ micromamba run -n py10 python -m pip config list
 | `~/.bash_profile` | bash 登录时读取的配置文件 |
 | `~/.zshrc` | zsh 的配置文件 |
 
-建议将 `micromamba` 的初始化代码、环境变量（如 `PATH`、`LD_LIBRARY_PATH`）统一写入对应 shell 的配置文件中。
+建议把 `micromamba` 的初始化脚本，以及 `PATH`、`LD_LIBRARY_PATH` 这类环境变量统一收拢到你实际使用的 Shell 配置文件里，后续排查会轻松很多。
 
 ---
 
-## 7. 配置 Git 提交模板
+## 7. 配一个 Git 提交模板
 
-在服务器上进行开发时，经常需要提交代码。配置一个标准化的提交信息模板可以让每次 `git commit` 时都有结构化的提示，避免遗漏关键信息。
+在服务器上写实验代码时，提交一多很容易只写个模糊的 commit message，过两天自己都忘了改了啥。给 Git 配一个结构化的提交模板，每次 `git commit` 都会自动带上提示，省得漏记上下文。
 
 ### 7.1 创建模板文件
+
+把下面这个三段式模板写进 `~/.git-commit-template.txt`：
 
 ```bash
 cat > ~/.git-commit-template.txt << 'EOF'
@@ -407,7 +431,7 @@ cat > ~/.git-commit-template.txt << 'EOF'
 EOF
 ```
 
-模板分为三个区域：
+三个区块各自负责一块信息：
 
 | 区域 | 用途 |
 |------|------|
@@ -415,7 +439,9 @@ EOF
 | `**todo:**` | 待完成的待办项，使用 `- []` 标记 |
 | `**fixed:**` | 本次提交修复的问题或完成的事项 |
 
-### 7.2 配置 Git 使用模板
+### 7.2 让 Git 启用这份模板
+
+执行下面这句设为全局默认：
 
 ```bash
 git config --global commit.template ~/.git-commit-template.txt
@@ -424,9 +450,9 @@ git config --global commit.template ~/.git-commit-template.txt
 > [!TIP]
 > 如果希望只对特定项目生效，去掉 `--global`，在对应仓库目录下执行 `git config commit.template ~/.git-commit-template.txt` 即可。
 
-### 7.3 效果
+### 7.3 实际提交时的效果
 
-配置完成后，每次执行 `git commit`（不带 `-m`）时，编辑器会自动打开并预填充模板：
+配好以后，只要执行不带 `-m` 的 `git commit`，编辑器就会自动把模板填好等你写：
 
 ```
 
@@ -442,13 +468,13 @@ git config --global commit.template ~/.git-commit-template.txt
 
 ```
 
-只需在对应位置填写内容即可。使用 `-m` 参数时模板不会生效，适用于简单的一次性提交。
+按区块往里填就行。如果只是随手做个简单提交，直接用 `git commit -m` 依然会跳过模板，不影响效率。
 
 ---
 
-## 初始化结果确认
+## 跑完收尾检查
 
-逐项执行以下检查，确认初始化结果：
+整套环境搭完后，我通常会按下面这份清单快速过一遍，确认没有漏项：
 
 - [x] 用户态 `micromamba` 已安装，可管理 Python 环境
 - [x] `zsh` 已编译安装并设为默认登录 shell
@@ -458,4 +484,4 @@ git config --global commit.template ~/.git-commit-template.txt
 - [x] pip 已配置清华镜像源
 - [x] Git 提交模板已配置（note/todo/fixed 三段式）
 
-这些项目全部通过后，环境即可用于数据集管理、模型下载和实验脚本开发。后续升级仍应保持工具安装在用户目录中，避免与系统包管理器混用。
+这几项全绿之后，这台新服务器基本就可以直接投入干活——下数据集、拉模型、跑实验脚本都会顺手很多。以后升级工具时也记得继续坚持放在用户目录下，别和系统包管理器混着用，省得惹出版本冲突。

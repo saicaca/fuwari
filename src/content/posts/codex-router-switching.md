@@ -1,30 +1,30 @@
 ---
 title: 远程服务器 Codex 使用本地 AiMaMi 中转服务指南
 published: 2026-07-18
-description: 在远程服务器配置 Codex，通过 SSH 反向隧道使用本地 AiMaMi 中转服务，并在官方模型与智能路由之间安全切换。
+description: 分享我在远程服务器上让 Codex 通过 SSH 反向隧道连接本地 AiMaMi 中转服务，并在官方模型与智能路由之间安全切换的实操方案。
 tags: [codex, ai, shell, ssh, tooling]
 category: 环境与系统
 draft: false
 aigc: Codex
 ---
 
-我的实际场景是：Codex 运行在远程服务器上，而 AiMaMi 中转服务运行在本地电脑。为了让服务器上的 Codex 使用本地中转，需要先通过 SSH 反向隧道连接两端，再在服务器上配置 Provider 和模型切换方式。
+先交代一下我自己的使用场景：平时跑开发时，Codex 在远程服务器上运行，而 AiMaMi 中转服务跑在本地电脑上。想让远端的 Codex 顺畅用上本地中转，得先把两端用 SSH 反向隧道打通，再去服务器上把 Provider 和切换机制理顺。
 
-完成后，远程服务器上的 Codex 既可以使用官方模型，也可以按需切换到本地 AiMaMi 智能路由，不必每次手工修改 `~/.codex/config.toml`。
+配好之后，远程服务器上的 Codex 既可以直连官方模型，也能随时切到本地的 AiMaMi 智能路由，彻底省掉每次手工改 `~/.codex/config.toml` 的麻烦。
 
-以 AiMaMi 智能路由为例，可以选择两条路线：
+以 AiMaMi 智能路由为例，实际折腾下来我总结了两条路线：
 
-1. 使用 Codex Profile，在启动 CLI 时选择配置层；
-2. 使用 Shell 脚本，原地启用或禁用全局配置块，并按需关闭 `app-server` 使配置生效。
+1. 直接用 Codex 原生 Profile，在启动 CLI 时按需叠加配置层；
+2. 写一个轻量 Shell 脚本，原地开关全局配置块，并在需要时重启 `app-server` 让配置立刻生效。
 
-两条路线解决的是同一个问题，但适用范围不同：Profile 更干净，适合 CLI；脚本会修改全局配置，更适合 Codex 桌面 App 或常驻 `app-server`。
+两条路线瞄准的是同一个需求，但适用场景不太一样：Profile 更干净、互不干扰，适合主要在终端用 CLI 的场景；开关脚本直接改全局配置，更适合 Codex 桌面 App 或者常驻 `app-server` 的用法。
 
 > [!WARNING]
 > 不要使用 `cc-switch-cli` 切换本文涉及的 Codex 配置。它可能改写或接管配置状态，导致不同 Codex 进程读取到不一致的配置，最终出现会话不同步。本文只使用 Codex 原生 Profile 或定向开关脚本；会话记录同步则单独使用 `codex-provider-sync`。
 
-## 配置结构与切换边界
+## 先理清配置结构与切换边界
 
-智能路由的开关配置位于 `~/.codex/config.toml` 顶部：
+打开 `~/.codex/config.toml` 可以看到，智能路由的开关配置位于文件顶部：
 
 ```toml
 # >>> aimami-relay codex-router top start (DO NOT EDIT MANUALLY)
@@ -36,7 +36,7 @@ model_catalog_json = "/sdc/home/<username>/.codex/model-catalogs/codex_router_ca
 # <<< aimami-relay codex-router top end
 ```
 
-具体的自定义 Provider 可以继续放在公共配置中：
+至于自定义 Provider 本身的定义，完全可以留在公共配置区域里不动：
 
 ```toml
 [model_providers.aimai1]
@@ -47,17 +47,17 @@ requires_openai_auth = true
 supports_websockets = false
 ```
 
-这里要区分两类配置：
+动手改之前，先分清这两块配置的职责会省很多事：
 
-- `[model_providers.aimai1]` 只是定义 Provider，可以长期保留；
-- 顶层的 `model_provider` 和 `model_catalog_json` 决定本次使用哪个 Provider 和模型目录，是实际需要切换的部分。
+- `[model_providers.aimai1]` 只是声明一个可用的 Provider，放着长期保留就行；
+- 真正决定这次会话走哪条路、看到哪些模型菜单的，是顶层的 `model_provider` 和 `model_catalog_json`——它们才是切换时要动的部分。
 
 > [!IMPORTANT]
 > `config.toml` 是 TOML 文件，不是 Shell 脚本。`model_catalog_json = "$HOME/..."` 或 `model_catalog_json = "$CODEX_HOME/..."` 通常不会展开环境变量，应填写真实绝对路径。
 
-## 在本机单独运行 SSH 反向转发
+## 在本机单独起一条 SSH 反向隧道
 
-在服务器上的 Codex 访问本地 AiMaMi 路由之前，需要把服务器的 `127.0.0.1:25123` 反向转发到本机的 `127.0.0.1:25817`：
+在让服务器上的 Codex 连本地 AiMaMi 之前，得先把服务器的 `127.0.0.1:25123` 反向转发回本机的 `127.0.0.1:25817`，流量走向很直观：
 
 ```text
 服务器 Codex
@@ -67,13 +67,13 @@ SSH 反向隧道
 本机 AiMaMi：127.0.0.1:25817
 ```
 
-当前环境无法依赖 SSH Config 自动建立这条转发，因此更推荐在运行 AiMaMi 的本机单独打开一个终端，直接执行：
+因为在我当前的环境里没法靠 SSH Config 自动把这条转发拉起来，最稳妥的做法是在运行 AiMaMi 的本机单独开一个终端，直接手动起隧道：
 
 ```bash
 ssh -N -R 127.0.0.1:25123:127.0.0.1:25817 服务器
 ```
 
-参数含义如下：
+几个参数的作用分别是：
 
 - `-N`：只建立隧道，不在服务器执行远程命令；
 - `-R`：创建反向端口转发；
@@ -81,61 +81,61 @@ ssh -N -R 127.0.0.1:25123:127.0.0.1:25817 服务器
 - `127.0.0.1:25817`：本机 AiMaMi 服务地址；
 - `服务器`：SSH 主机名、别名或 `user@host`。
 
-这个终端只负责维持隧道，不要关闭，也不需要在其中执行其他命令。终端断开或 SSH 进程退出后，反向转发会立即失效；此时服务器上的 Codex 也就无法继续访问本地 AiMaMi。需要恢复时，重新打开一个终端并再次运行该命令即可。
+这个终端就专门挂在后台维持隧道，别关掉，也别在里面干别的。一旦终端断开或者 SSH 进程退了，反向转发就会立刻失效，服务器上的 Codex 也就连不上本地 AiMaMi 了。真断了也不用慌，重新开个终端再跑一遍上面的命令就能恢复。
 
 > [!NOTE]
 > 我当前无法通过 `~/.ssh/config` 中的 `RemoteForward` 正常使用这条隧道，所以本文不再把 SSH Config 作为可用方案。主机地址、用户名、密钥等常规连接信息仍可由 SSH Config 提供，但反向转发本身使用命令行中的 `-R` 显式创建。
 
-如果服务器上的 AiMaMi Provider 通过该反向隧道连接本机，对应地址应使用：
+注意区分访问地址：服务器上的 AiMaMi Provider 走的是反向隧道，所以 `base_url` 要指向服务器本机映射出来的端口：
 
 ```toml
 base_url = "http://127.0.0.1:25123/codex/router/v1"
 ```
 
-本机直接访问 AiMaMi 时则使用：
+如果是在本机直接访问 AiMaMi，那么地址对应本机服务端口：
 
 ```toml
 base_url = "http://127.0.0.1:25817/codex/router/v1"
 ```
 
-建立隧道之后，再从下面两种 Codex 配置切换方案中选择一种。
+隧道打通以后，就可以按自己的使用习惯，从下面两套切换方案里挑一套来用了。
 
-## 方案 A：使用 Codex Profile
+## 方案 A：使用 Codex Profile（适合 CLI）
 
-### Profile 如何工作
+### Profile 是怎么叠加生效的
 
-Profile 是 Codex 启动时加载的配置覆盖层。执行：
+Profile 本质上是 Codex 启动时加载的一层配置覆盖。当你执行：
 
 ```bash
 codex --profile aimami-router
 ```
 
-Codex 会先读取：
+Codex 会先读主配置：
 
 ```text
 ~/.codex/config.toml
 ```
 
-再叠加：
+然后再把对应 Profile 的配置叠加上去：
 
 ```text
 ~/.codex/aimami-router.config.toml
 ```
 
-因此，公共配置保留在主配置中，只有存在差异的字段才需要写进 Profile。
+所以思路很明确：所有公共配置留在主配置里，只有存在差异的字段才拆到各自的 Profile 文件里。
 
-从 Codex 0.134.0 开始，每个 Profile 应使用独立文件，并通过 `--profile` 指定，不再推荐写成 `config.toml` 中的 `[profiles.xxx]` 表，也不能通过顶层 `profile = "xxx"` 自动选择。
+这里有个版本变化需要注意：从 Codex 0.134.0 开始，每个 Profile 都要写成独立文件并用 `--profile` 显式指定，官方不再推荐把它们塞在 `config.toml` 的 `[profiles.xxx]` 表里，也不支持靠顶层 `profile = "xxx"` 自动选中。
 
-### 调整主配置
+### 清理主配置
 
-从 `~/.codex/config.toml` 顶部移除以下两个选择项：
+先把 `~/.codex/config.toml` 顶部的这两个选择项去掉：
 
 ```toml
 model_provider = "aimai1"
 model_catalog_json = "/sdc/home/<username>/.codex/model-catalogs/codex_router_catalog.json"
 ```
 
-Provider 定义仍然保留：
+下面的 Provider 定义照旧留着就行：
 
 ```toml
 [model_providers.aimai1]
@@ -146,11 +146,11 @@ requires_openai_auth = true
 supports_websockets = false
 ```
 
-这样主配置只保存公共设置，不再强制所有 Codex 实例经过智能路由。
+这么改完，主配置就只管公共项，不会强行把所有 Codex 实例都绑死在智能路由上了。
 
-### 创建官方模型 Profile
+### 新建官方模型 Profile
 
-创建 `~/.codex/official.config.toml`：
+创建 `~/.codex/official.config.toml`，指定直连官方 Provider：
 
 ```toml
 model_provider = "openai"
@@ -158,21 +158,21 @@ model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 ```
 
-交互式启动：
+平时交互式启动直接带参数：
 
 ```bash
 codex --profile official
 ```
 
-非交互任务也可以使用相同 Profile：
+跑 `codex exec` 这类非交互任务时也完全一样：
 
 ```bash
 codex exec --profile official "检查当前代码改动"
 ```
 
-### 创建智能路由 Profile
+### 新建智能路由 Profile
 
-创建 `~/.codex/aimami-router.config.toml`：
+接着创建 `~/.codex/aimami-router.config.toml`，把智能路由和自定义模型目录写进去：
 
 ```toml
 model_provider = "aimai1"
@@ -181,60 +181,60 @@ model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 ```
 
-启动方式相同：
+启动方式同样很直观：
 
 ```bash
 codex --profile aimami-router
 codex exec --profile aimami-router "检查当前代码改动"
 ```
 
-### 添加便捷别名
+### 顺手加两个 Shell 别名
 
-可以在 `~/.bashrc` 或 `~/.zshrc` 中加入：
+每次敲一长串 `--profile` 肯定嫌烦，建议在 `~/.bashrc` 或 `~/.zshrc` 里补两行别名：
 
 ```bash
 alias codex-official='codex --profile official'
 alias codex-router='codex --profile aimami-router'
 ```
 
-以后直接执行：
+之后想走哪条路，直接敲简短命令就行：
 
 ```bash
 codex-official
 codex-router
 ```
 
-### Profile 的优缺点
+### 这套方案的优缺点
 
-优点：
+实际用下来，Profile 方案的优点很明显：
 
-- 不需要反复修改主配置；
-- 不同终端可以同时运行不同 Profile；
-- 切换只影响新启动的 Codex 进程；
-- 适合 CLI 和 `codex exec` 自动化任务。
+- 不用反复改动全局主配置；
+- 可以同时开两个终端，各自跑不同的 Profile 互不打架；
+- 切换只作用于新拉起的 Codex 进程；
+- 非常适合日常 CLI 交互和 `codex exec` 自动化脚本。
 
-限制：
+当然它也有使用边界：
 
-- Profile 是 CLI 启动参数，不等于修改桌面 App 的全局配置；
-- 已经运行的 Codex 进程不会自动切换；
-- 每次启动必须指定 `--profile`，或者使用别名封装。
+- Profile 是 CLI 启动参数，并不会改写桌面 App 读取的全局配置；
+- 已经跑起来的 Codex 进程不会中途自动切换；
+- 每次启动都得带上 `--profile`，或者靠上面配好的别名来省事。
 
-## 方案 B：使用脚本切换全局配置
+## 方案 B：用 Shell 脚本原地切换全局配置
 
-如果主要使用 Codex 桌面 App，或者希望所有新会话统一切换到同一条路由，可以直接修改全局 `config.toml`。
+如果你主要用 Codex 桌面 App，或者就是想一键把所有新会话统一切到某条路由，那直接操作全局 `config.toml` 会更痛快。
 
-这里不删除配置块，而是给块内有效 TOML 行添加专用注释：
+为了不破坏原文件结构，我的做法不是直接删掉那段配置，而是给标记块里的有效 TOML 行加上一条专用注释前缀：
 
 ```toml
 # aimami-router-disabled: model_provider = "aimai1"
 # aimami-router-disabled: model_catalog_json = "/sdc/home/<username>/.codex/model-catalogs/codex_router_catalog.json"
 ```
 
-重新开启时，脚本只移除 `# aimami-router-disabled: ` 前缀。原有说明注释、块标记和块外配置都不会被修改。
+等要重新开启时，脚本只剥掉 `# aimami-router-disabled: ` 这个前缀，原本的说明注释、块起止标记和块外的其他配置都会原封不动地留着。
 
 ### 完整 Linux 脚本
 
-将下面的内容保存为 `~/codex-switch.sh`：
+把下面这段脚本直接保存为 `~/codex-switch.sh`：
 
 ```sh
 #!/bin/sh
@@ -399,13 +399,15 @@ else
 fi
 ```
 
-添加执行权限：
+保存后别忘了加上可执行权限：
 
 ```bash
 chmod +x ~/codex-switch.sh
 ```
 
-### 使用方法
+### 日常怎么用
+
+平时查状态和切换就这几条命令：
 
 ```bash
 # 查看当前状态
@@ -417,13 +419,13 @@ chmod +x ~/codex-switch.sh
 ~/codex-switch.sh toggle
 ```
 
-修改后，脚本会询问是否结束当前用户的 Codex `app-server`：
+每次改完配置，脚本都会贴心地问一句要不要顺手结束当前用户的 Codex `app-server`：
 
 ```text
 是否关闭 Codex app-server 以使配置生效？[y/N]
 ```
 
-在自动化脚本中，可以使用 `-y` 跳过确认：
+如果是在自动化流程里调用，不想卡在交互提示上，直接传 `-y` 跳过确认：
 
 ```bash
 ~/codex-switch.sh -y on
@@ -431,64 +433,66 @@ chmod +x ~/codex-switch.sh
 ~/codex-switch.sh -y toggle
 ```
 
-实际执行的结束命令是：
+背后实际用来停服务的命令是这句：
 
 ```bash
 pkill -u "$(id -u)" -TERM -f '[c]odex.*app-server'
 ```
 
-它只匹配当前用户的 Codex `app-server`，并发送 `TERM` 信号。当前会话可能因此中断，所以执行前应保存尚未完成的工作。
+它限定了只匹配当前用户的 Codex `app-server` 进程并发送 `TERM` 信号。不过停掉服务可能会导致正在跑的会话中断，执行前记得把没做完的工作先保存好。
 
-如需操作其他配置文件，可以临时指定：
+如果你手头有不止一份配置文件，也可以通过环境变量临时指定目标路径：
 
 ```bash
 AIMAMI_CODEX_CONFIG=/path/to/config.toml ~/codex-switch.sh status
 ```
 
-### 脚本的安全边界
+### 脚本里做了哪些安全兜底
 
-脚本包含几项保护：
+为了防止脚本把 `config.toml` 改坏，写的时候专门加了这几道防线：
 
-- 起止标记必须各出现一次且顺序正确；
-- 不允许块内同时出现启用和禁用的配置行；
-- 使用同目录临时文件生成结果，再原子替换原配置；
-- 保留原配置文件权限；
-- 只处理标记块内的有效 TOML 行；
-- `status` 不修改配置，也不结束服务；
-- 重复执行同一状态不会再次修改文件或结束服务。
+- 起止标记必须各出现一次且先后顺序正确；
+- 块内如果同时混着启用和禁用的配置行，直接报错中止；
+- 先在同目录写临时文件，再原子替换原配置；
+- 完整保留原配置文件的权限位；
+- 只碰标记块里面的有效 TOML 行，块外和普通注释一概不动；
+- 执行 `status` 是纯只读检查，既不改文件也不停服务；
+- 目标状态跟当前一致时直接跳过，不会重复写文件或误杀服务。
 
 > [!NOTE]
 > 该版本使用 GNU `stat -c`，面向 Linux，不兼容 macOS/BSD。
 
-## 同步会话记录
+## 单独处理会话记录同步
 
-Provider 配置切换与会话记录同步是两个独立操作：
+把 Provider 切换和会话记录同步拆开来看，整个链路会清晰得多：
 
-- 配置切换：使用 Codex Profile 或 `codex-switch.sh`；
-- 记录同步：使用 `codex-provider-sync`；
-- 不要使用 `cc-switch-cli` 代替上述任一流程。
+- 配置切换：交给 Codex Profile 或 `codex-switch.sh`；
+- 记录同步：交给 `codex-provider-sync`；
+- 切记不要图省事用 `cc-switch-cli` 去替代上面任何一步。
 
-首次使用时，通过 npm 从 GitHub 全局安装：
+第一次用时，通过 npm 直接从 GitHub 全局装一下 `codex-provider-sync`：
 
 ```bash
 npm install -g git+https://github.com/Dailin521/codex-provider-sync.git
 ```
 
-需要同步记录时执行：
+之后需要同步记录时，跑一句就行：
 
 ```bash
 codex-provider sync
 ```
 
-推荐的完整顺序是：
+我平时顺手走下来的完整顺序是这样的：
 
-1. 使用 `codex --profile ...` 启动所需 Profile，或者用 `codex-switch.sh` 切换全局配置；
-2. 如果使用脚本方案，按提示关闭旧的 `app-server`，再重新启动 Codex；
-3. 执行 `codex-provider sync` 同步会话记录。
+1. 用 `codex --profile ...` 启动需要的 Profile，或者用 `codex-switch.sh` 切好全局配置；
+2. 如果走的是脚本方案，按提示把旧的 `app-server` 关掉，再重新启动 Codex；
+3. 最后跑一遍 `codex-provider sync` 把会话记录同步齐。
 
-这样可以让配置切换和记录同步各自使用专门工具，避免其他切换器额外改写 Codex 状态。
+让配置切换和记录同步各司其职，能有效避开第三方切换器偷偷改写 Codex 状态带来的各种怪毛病。
 
-## 如何选择
+## 两个方案怎么选
+
+如果你拿不准该选哪一套，可以直接对照下面这张表：
 
 | 使用场景 | 推荐方案 | 原因 |
 | --- | --- | --- |
@@ -499,11 +503,11 @@ codex-provider sync
 | 希望所有新会话统一切换 | 开关脚本 | 直接改变全局 `config.toml` |
 | 无人值守切换并刷新服务 | 开关脚本配合 `-y` | 可修改配置并结束旧 `app-server` |
 
-主要使用 CLI 时优先选择 Profile；主要依赖桌面 App 或常驻服务时，使用脚本更直接。
+简单来说，主力在终端用 CLI 就优先选 Profile；重度依赖桌面 App 或常驻服务的话，开关脚本用起来更顺手。
 
-## 最终目录结构
+## 配完后的目录结构
 
-采用 Profile 方案时：
+走 Profile 方案时，`~/.codex/` 目录大概长这样：
 
 ```text
 ~/.codex/
@@ -514,7 +518,7 @@ codex-provider sync
     └── codex_router_catalog.json
 ```
 
-采用脚本方案时：
+走开关脚本方案时，文件会更精简一些：
 
 ```text
 ~/.codex/

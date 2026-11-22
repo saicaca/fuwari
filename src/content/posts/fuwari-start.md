@@ -1,21 +1,24 @@
 ---
 title: 从这里开始
 published: 2024-05-01
-description: 用于记录 Fuwari 博客基础配置与使用方式的草稿模板。
+description: 整理 Fuwari 博客本地调试、构建发布与独立页面扩展的常用备忘，并附带一份 Markdown 语法渲染测试样板。
 tags: [demo, markdown]
 category: module
 draft: true
 device: Windows
 ---
-这是一份 Fuwari 本地使用草稿，同时保留 Markdown 语法作为渲染测试。更完整的模板说明见 [参考教程](https://2x.nz/posts/fuwari/)。
 
-## 本地运行
+这篇是自留的 Fuwari 快速上手备忘草稿，记录日常本地调试、构建推送和扩展独立页面的几个高频操作，后半部分顺带保留了一套完整的 Markdown 语法样板方便随时自检排版。想看更系统的主题搭建流程，可以直接参考这份 [参考教程](https://2x.nz/posts/fuwari/)。
+
+## 本地运行与发布流程
+
+平时写新文章或调样式时，先在本地把开发服务器跑起来实时预览：
 
 ```shell
 pnpm dev
 ```
 
-确认构建通过后再提交并推送：
+改完准备上线前，习惯先跑一遍完整构建，确认没有语法或打包报错后再提交推送：
 
 ```shell
 pnpm build
@@ -24,7 +27,13 @@ git push
 
 ## 创建独立页面
 
-在 `src/content/spec/` 中创建 Markdown 文件时，默认使用通用 Markdown 页面渲染。需要自定义布局时，在 `src/pages/[spec].astro` 中排除对应 slug，再以 `src/pages/about.astro` 为基础创建独立页面。
+如果想给博客加一些非文章类的独立页面（比如个人介绍、友链等），直接往 `src/content/spec/` 目录下放 Markdown 文件，Fuwari 默认会走通用的 Markdown 页面模板来渲染。
+
+要是某个页面需要更自由的自定义布局，可以按两步来扩展：先在 `src/pages/[spec].astro` 中排除掉对应的 slug，再参照 `src/pages/about.astro` 的结构单独新建一个页面文件即可。
+
+---
+
+以下内容保留为 Markdown 基础语法渲染测试样板，便于日常检查排版样式：
 
 # An h1 header
 
