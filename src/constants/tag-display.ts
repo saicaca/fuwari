@@ -90,6 +90,10 @@ export const tagDisplayMap: Record<string, string> = {
 	astro: "Astro",
 	mihomo: "Mihomo",
 	p10k: "Powerlevel10k",
+	docker: "Docker",
+	orbstack: "OrbStack",
+	"apple-container": "Apple Container",
+	devops: "DevOps",
 };
 
 /**

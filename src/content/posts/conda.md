@@ -1,13 +1,14 @@
 ---
 title: Python 环境配置
 published: 2025-08-08
-description: 通过视频和简要选型说明，了解 Miniconda、conda-forge 与 mamba 的适用场景。
+description: 分享一段 Python 环境配置视频，顺便聊聊 Miniconda、conda-forge、mamba 和 micromamba 各自的适用场景。
 tags: [conda, python, env-setup]
 category: 环境与系统
 draft: false
 device: Windows
 ---
-这篇短文保留一段 Python 环境配置视频，并补充工具选择结论。需要在无 root 服务器上部署时，可改用体积更小的 `micromamba`。
+
+这篇短文主要留存一段 Python 环境配置的视频，顺带记一下我自己用下来的工具选型思路。如果你刚好要在没有 root 权限的服务器上折腾环境，可以直接跳过大块头，改用体积更小的 `micromamba`。
 
 ## 介绍视频
 
@@ -18,8 +19,10 @@ device: Windows
     </iframe>
 </div>
 
-## 选择建议
+## 我的选择建议
 
-1. 需要完整 Conda 体验时使用 `Miniconda`，代价是安装和环境求解相对较重。
-2. 已经使用 `conda-forge` 时，可以用 `mamba` 加快依赖求解。
-3. 无 root 权限或希望减少安装体积时，优先考虑 `micromamba`。
+几个工具定位其实挺清晰的，按自己的使用环境对号入座就行：
+
+1. 想省心获得完整的 Conda 体验，直接上 `Miniconda` 就好，代价就是安装包和依赖求解过程相对重一些。
+2. 如果平时已经在用 `conda-forge` 频道，不妨配合 `mamba` 来明显提速依赖求解。
+3. 碰到没有 root 权限的机器，或者单纯不想占太多磁盘空间，优先选 `micromamba`。

@@ -1,19 +1,20 @@
 ---
 title: Expressive Code 效果示例
 published: 2024-04-10
-description: 展示 Expressive Code 的语法高亮、编辑器框架、行标记、折行、折叠和行号效果。
+description: 分享并回归测试 Fuwari 中 Expressive Code 的常用能力，涵盖语法高亮、ANSI 色彩、编辑器框架、行标记、折行、折叠与行号效果。
 tags: [demo, markdown, expressive-code]
 category: Examples
 draft: true
 device: Windows
 ---
-本页集中展示 [Expressive Code](https://expressive-code.com/) 的渲染效果，用于调整主题或插件后回归检查。示例保留官方语法，便于与文档逐项对照。
+
+写技术文章离不开代码块，Fuwari 集成了 [Expressive Code](https://expressive-code.com/) 来负责代码渲染。这页把它的几项核心特性集中收在一起，平时换完代码主题或升级插件后，顺手刷一遍就能做完整的回归检查；下面的示例结构基本保持官方原样，方便和官方文档逐项对照排查。
 
 ## Expressive Code
 
 ### Syntax Highlighting
 
-[Syntax Highlighting](https://expressive-code.com/key-features/syntax-highlighting/)
+基础语法高亮和终端 ANSI 转义序列渲染，更多参数可参考 [Syntax Highlighting](https://expressive-code.com/key-features/syntax-highlighting/)：
 
 #### Regular syntax highlighting
 
@@ -42,7 +43,7 @@ Text formatting: [1mBold[0m [2mDimmed[0m [3mItalic[0m [4mUnderline[0m
 
 ### Editor & Terminal Frames
 
-[Editor &amp; Terminal Frames](https://expressive-code.com/key-features/frames/)
+代码编辑器标签栏和终端窗口外框样式，用来区分源码文件与命令行操作很直观，详见 [Editor &amp; Terminal Frames](https://expressive-code.com/key-features/frames/)：
 
 #### Code editor frames
 
@@ -85,7 +86,7 @@ New-Alias tail Watch-Tail
 
 ### Text & Line Markers
 
-[Text &amp; Line Markers](https://expressive-code.com/key-features/text-markers/)
+支持整行高亮、增删 diff 标记、行内关键词标记以及带标签的注释高亮，写代码改动说明时特别好用，详见 [Text &amp; Line Markers](https://expressive-code.com/key-features/text-markers/)：
 
 #### Marking full lines & line ranges
 
@@ -214,7 +215,7 @@ function demo() {
 
 ### Word Wrap
 
-[Word Wrap](https://expressive-code.com/key-features/word-wrap/)
+长代码行的自动折行开关与折行缩进保留测试，详见 [Word Wrap](https://expressive-code.com/key-features/word-wrap/)：
 
 #### Configuring word wrap per block
 
@@ -254,7 +255,7 @@ function getLongString() {
 
 ## Collapsible Sections
 
-[Collapsible Sections](https://expressive-code.com/plugins/collapsible-sections/)
+遇到较长的样板代码时，可以把次要片段折叠起来突出核心逻辑，详见 [Collapsible Sections](https://expressive-code.com/plugins/collapsible-sections/)：
 
 ```js
 // All this boilerplate setup code will be collapsed
@@ -285,7 +286,7 @@ engine.shutdown({ reason: 'End of example boilerplate code' })
 
 ## Line Numbers
 
-[Line Numbers](https://expressive-code.com/plugins/line-numbers/)
+按代码块开关行号显示以及自定义起始行号的效果测试，详见 [Line Numbers](https://expressive-code.com/plugins/line-numbers/)：
 
 ### Displaying line numbers per block
 

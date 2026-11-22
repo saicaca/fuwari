@@ -9,7 +9,9 @@ device: Windows
 
 # 草稿状态
 
-这篇文章设置了 `draft: true`，生产构建时不会出现在公开页面中。内容确认完成后，将 frontmatter 中的 `draft` 改为 `false`：
+写长文或者还在搭框架的时候，通常不想让半成品直接出现在线上列表里。Fuwari 支持在文章头部的 frontmatter 里加上 `draft: true`，这样本地预览可以照常调试，但生产构建时会自动把它排除在所有公开页面之外。
+
+等正文、配图和排版都核对稳妥准备发布时，只需要把 frontmatter 中的 `draft` 改成 `false` 即可：
 
 ```markdown
 ---

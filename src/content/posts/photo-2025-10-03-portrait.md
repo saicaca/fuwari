@@ -1,13 +1,16 @@
 ---
 title: 2025-10-03 人像摄影集
 published: 2025-10-03
-description: 2025 年 10 月 3 日人像摄影记录，按原始画幅展示自然光线与现场氛围。
+description: 整理分享 2025 年 10 月 3 日的一组人像摄影记录，以原始画幅瀑布流还原自然光线与现场氛围。
 tags: [photography, photo-set]
 category: 摄影
 draft: false
 hide: true
 device: Windows
 ---
+
+这里整理了 2025 年 10 月 3 日拍摄的一组人像记录，保留了当时的自然光线与现场氛围。页面沿用按原始画幅自适应排布的瀑布流样式，避免强制裁切画面，把每张照片原有的横竖构图完整呈现出来。
+
 <style>
     .mid-container {
         display: flex;
