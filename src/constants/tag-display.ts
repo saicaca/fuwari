@@ -46,6 +46,7 @@ export const tagDisplayMap: Record<string, string> = {
 
 	// ── 工具 / 工程化 ──
 	tooling: "工程化",
+	magpie: "Magpie",
 	"claude-code": "Claude Code",
 	codex: "Codex",
 	ai: "AI",
